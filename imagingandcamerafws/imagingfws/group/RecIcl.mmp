@@ -1,0 +1,52 @@
+// Copyright (c) 2003-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// recicl.mdl Image file format mime type recognizer for the EMime framework
+// 
+//
+
+/**
+ @file
+*/
+
+target recicl.dll
+targettype plugin
+UID		0x10009d8d 0x101F7C0B 
+
+CAPABILITY 	ProtServ TrustedUI
+VENDORID 0x70000001
+
+userinclude	../src/Recognizer
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+userinclude		../ImageDisplay/src
+userinclude		../src
+
+sourcepath	../src/Recognizer
+source          RecIcl.cpp
+
+library		euser.lib apmime.lib
+library		imageconversion.lib
+library		imagedisplay.lib
+
+start resource 101F7C0B.rss
+target recicl.rsc
+end
+
+START WINS
+	baseaddress	0x4F300000
+END
+
+
+SMPSAFE

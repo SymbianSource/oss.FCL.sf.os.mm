@@ -1,0 +1,17 @@
+EXPORTS
+	?ConstructL@CJPEGExifDecoder@@IAEXXZ @ 1 NONAME ; void CJPEGExifDecoder::ConstructL(void)
+	?ConstructL@CJPEGExifEncoder@@IAEXXZ @ 2 NONAME ; void CJPEGExifEncoder::ConstructL(void)
+	?ExifMetadata@CBody@CJPEGExifDecoder@@QAEPAVMExifMetadata@@XZ @ 3 NONAME ; class MExifMetadata * CJPEGExifDecoder::CBody::ExifMetadata(void)
+	?ExifMetadata@CBody@CJPEGExifEncoder@@QAEPAVMExifMetadata@@XZ @ 4 NONAME ; class MExifMetadata * CJPEGExifEncoder::CBody::ExifMetadata(void)
+	?ExifMetadata@CJPEGExifDecoder@@QAEPAVMExifMetadata@@XZ @ 5 NONAME ; class MExifMetadata * CJPEGExifDecoder::ExifMetadata(void)
+	?ExifMetadata@CJPEGExifEncoder@@QAEPAVMExifMetadata@@XZ @ 6 NONAME ; class MExifMetadata * CJPEGExifEncoder::ExifMetadata(void)
+	?ExifMetadata@CJPEGExifTransformExtension@@UAEPAVMExifMetadata@@XZ @ 7 NONAME ; class MExifMetadata * CJPEGExifTransformExtension::ExifMetadata(void)
+	?NewL@CBody@CJPEGExifDecoder@@SAPAV12@AAV2@@Z @ 8 NONAME ; class CJPEGExifDecoder::CBody * CJPEGExifDecoder::CBody::NewL(class CJPEGExifDecoder &)
+	?NewL@CBody@CJPEGExifEncoder@@SAPAV12@AAV2@@Z @ 9 NONAME ; class CJPEGExifEncoder::CBody * CJPEGExifEncoder::CBody::NewL(class CJPEGExifEncoder &)
+	?NewL@CJPEGExifDecoder@@SAPAV1@XZ @ 10 NONAME ; class CJPEGExifDecoder * CJPEGExifDecoder::NewL(void)
+	?NewL@CJPEGExifEncoder@@SAPAV1@XZ @ 11 NONAME ; class CJPEGExifEncoder * CJPEGExifEncoder::NewL(void)
+	??0CJPEGExifDecoder@@IAE@XZ @ 12 NONAME ; CJPEGExifDecoder::CJPEGExifDecoder(void)
+	??0CJPEGExifEncoder@@IAE@XZ @ 13 NONAME ; CJPEGExifEncoder::CJPEGExifEncoder(void)
+	??1CJPEGExifDecoder@@UAE@XZ @ 14 NONAME ; CJPEGExifDecoder::~CJPEGExifDecoder(void)
+	??1CJPEGExifEncoder@@UAE@XZ @ 15 NONAME ; CJPEGExifEncoder::~CJPEGExifEncoder(void)
+

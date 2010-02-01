@@ -1,0 +1,133 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __IMAGECONVERSIONTEST_IBY__
+#define __IMAGECONVERSIONTEST_IBY__
+
+file=ABI_DIR\DEBUG_DIR\TImage.exe						TImage.exe
+file=ABI_DIR\DEBUG_DIR\TFailImage.exe					TFailImage.exe
+
+file=ABI_DIR\BUILD_DIR\TImageViewer.app			System\Apps\TImageViewer\TImageViewer.app
+data=ZSYSTEM\APPS\TImageViewer\TImageViewer.rsc		System\Apps\TImageViewer\TImageViewer.rsc
+data=ZSYSTEM\APPS\TImageViewer\TImageViewer.aif		System\Apps\TImageViewer\TImageViewer.aif
+
+#include "TImageDisplay.iby"
+
+data=EPOCROOT##epoc32\data\c\TImage\bmp1bpp_1.bmp        \TImage\bmp1bpp_1.bmp
+data=EPOCROOT##epoc32\data\c\TImage\bmp24bpp_2.bmp       \TImage\bmp24bpp_2.bmp
+data=EPOCROOT##epoc32\data\c\TImage\bmp4bpp_4.bmp        \TImage\bmp4bpp_4.bmp
+data=EPOCROOT##epoc32\data\c\TImage\bmp8bpp_8.bmp        \TImage\bmp8bpp_8.bmp
+data=EPOCROOT##epoc32\data\c\TImage\bmprle4_1.bmp        \TImage\bmprle4_1.bmp
+data=EPOCROOT##epoc32\data\c\TImage\bmprle8_2.bmp        \TImage\bmprle8_2.bmp
+data=EPOCROOT##epoc32\data\c\TImage\bmpOffset_1.bmp      \TImage\bmpOffset_1.bmp
+data=EPOCROOT##epoc32\data\c\TImage\icoepoc.ico          \TImage\icoepoc.ico
+data=EPOCROOT##epoc32\data\c\TImage\icoiexplore.ico      \TImage\icoiexplore.ico
+data=EPOCROOT##epoc32\data\c\TImage\jfif10_4.jpg         \TImage\jfif10_4.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfif100_8.jpg        \TImage\jfif100_8.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfif30_1.jpg         \TImage\jfif30_1.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfif420_2.jpg        \TImage\jfif420_2.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfif422_4.jpg        \TImage\jfif422_4.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfif444_8.jpg        \TImage\jfif444_8.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfif60_1.jpg         \TImage\jfif60_1.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfifMono_2.jpg       \TImage\jfifMono_2.jpg
+data=EPOCROOT##epoc32\data\c\TImage\jfifProg_4.jpg       \TImage\jfifProg_4.jpg
+data=EPOCROOT##epoc32\data\c\TImage\qvga_jfif_thumb.jpg  \TImage\qvga_jfif_thumb.jpg
+data=EPOCROOT##epoc32\data\c\TImage\qvga_exif_thumb.jpg  \TImage\qvga_exif_thumb.jpg
+data=EPOCROOT##epoc32\data\c\TImage\mbm12bpp_8.mbm       \TImage\mbm12bpp_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm16bpp_1.mbm       \TImage\mbm16bpp_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm1bpp_2.mbm        \TImage\mbm1bpp_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm24bpp_4.mbm       \TImage\mbm24bpp_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm2bpp_8.mbm        \TImage\mbm2bpp_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm4bppc_1.mbm       \TImage\mbm4bppc_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm4bppm_2.mbm       \TImage\mbm4bppm_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm8bppc_4.mbm       \TImage\mbm8bppc_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm8bppm_8.mbm       \TImage\mbm8bppm_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\mbm32bpp_1.mbm       \TImage\mbm32bpp_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\office.png      	 \TImage\office.png
+data=EPOCROOT##epoc32\data\c\TImage\problem.png      	 \TImage\problem.png
+data=EPOCROOT##epoc32\data\c\TImage\png1_1.png           \TImage\png1_1.png
+data=EPOCROOT##epoc32\data\c\TImage\png2_2.png           \TImage\png2_2.png
+data=EPOCROOT##epoc32\data\c\TImage\pngs3_4.png          \TImage\pngs3_4.png
+data=EPOCROOT##epoc32\data\c\TImage\pngs4_8.png          \TImage\pngs4_8.png
+data=EPOCROOT##epoc32\data\c\TImage\tif1_1.tif           \TImage\tif1_1.tif
+data=EPOCROOT##epoc32\data\c\TImage\tif2_2.tif           \TImage\tif2_2.tif
+data=EPOCROOT##epoc32\data\c\TImage\tif3_4.tif           \TImage\tif3_4.tif
+data=EPOCROOT##epoc32\data\c\TImage\imagevid_8.mbm       \TImage\imagevid_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\trans_1.gif          \TImage\trans_1.gif
+data=EPOCROOT##epoc32\data\c\TImage\wmf1_2.wmf           \TImage\wmf1_2.wmf
+data=EPOCROOT##epoc32\data\c\TImage\wmf2_4.wmf           \TImage\wmf2_4.wmf
+data=EPOCROOT##epoc32\data\c\TImage\wmf3_8.wmf           \TImage\wmf3_8.wmf
+data=EPOCROOT##epoc32\data\c\TImage\wmf4_1.wmf           \TImage\wmf4_1.wmf
+data=EPOCROOT##epoc32\data\c\TImage\wmf5_2.wmf           \TImage\wmf5_2.wmf
+data=EPOCROOT##epoc32\data\c\TImage\wmf6_4.wmf           \TImage\wmf6_4.wmf
+
+data=EPOCROOT##epoc32\data\c\TImage\Anon\otabitmap     	       \TImage\Anon\otabitmap
+data=EPOCROOT##epoc32\data\c\TImage\Anon\otabitmap.mbm         \TImage\Anon\otabitmap.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Anon\wirelessbitmap        \TImage\Anon\wirelessbitmap
+data=EPOCROOT##epoc32\data\c\TImage\Anon\wirelessbitmap.mbm    \TImage\Anon\wirelessbitmap.mbm
+
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmp1bpp_1.mbm    \TImage\Ref\bmp1bpp_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmp24bpp_2.mbm   \TImage\Ref\bmp24bpp_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmp4bpp_4.mbm    \TImage\Ref\bmp4bpp_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmp8bpp_8.mbm    \TImage\Ref\bmp8bpp_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmprle4_1.mbm    \TImage\Ref\bmprle4_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmprle8_2.mbm    \TImage\Ref\bmprle8_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\bmpOffset_1.mbm  \TImage\Ref\bmpOffset_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\icoepoc.mbm      \TImage\Ref\icoepoc.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\icoiexplore.mbm  \TImage\Ref\icoiexplore.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif10_4.mbm     \TImage\Ref\jfif10_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif100_8.mbm    \TImage\Ref\jfif100_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif30_1.mbm     \TImage\Ref\jfif30_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif420_2.mbm    \TImage\Ref\jfif420_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif422_4.mbm    \TImage\Ref\jfif422_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif444_8.mbm    \TImage\Ref\jfif444_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfif60_1.mbm     \TImage\Ref\jfif60_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfifMono_2.mbm   \TImage\Ref\jfifMono_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\jfifProg_4.mbm   \TImage\Ref\jfifProg_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm12bpp_8.mbm   \TImage\Ref\mbm12bpp_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm16bpp_1.mbm   \TImage\Ref\mbm16bpp_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm1bpp_2.mbm    \TImage\Ref\mbm1bpp_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm24bpp_4.mbm   \TImage\Ref\mbm24bpp_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm2bpp_8.mbm    \TImage\Ref\mbm2bpp_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm4bppc_1.mbm   \TImage\Ref\mbm4bppc_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm4bppm_2.mbm   \TImage\Ref\mbm4bppm_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm8bppc_4.mbm   \TImage\Ref\mbm8bppc_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm8bppm_8.mbm   \TImage\Ref\mbm8bppm_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\mbm32bpp_1.mbm   \TImage\Ref\mbm32bpp_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\office.mbm       \TImage\Ref\office.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\problem.mbm      \TImage\Ref\problem.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\png1_1.mbm       \TImage\Ref\png1_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\png2_2.mbm       \TImage\Ref\png2_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\png3_4.mbm       \TImage\Ref\png3_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\png4_8.mbm       \TImage\Ref\png4_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\tif1_1.mbm       \TImage\Ref\tif1_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\tif2_2.mbm       \TImage\Ref\tif2_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\tif3_4.mbm       \TImage\Ref\tif3_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\imagevid_8.mbm   \Timage\Ref\imagevid_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\trans_1.mbm      \TImage\Ref\trans_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\wmf1_2.mbm       \TImage\Ref\wmf1_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\wmf2_4.mbm       \TImage\Ref\wmf2_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\wmf3_8.mbm       \TImage\Ref\wmf3_8.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\wmf4_1.mbm       \TImage\Ref\wmf4_1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\wmf5_2.mbm       \TImage\Ref\wmf5_2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\wmf6_4.mbm       \TImage\Ref\wmf6_4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\scaled0.mbm    	 \TImage\Ref\scaled0.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\scaled1.mbm    	 \TImage\Ref\scaled1.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\scaled2.mbm    	 \TImage\Ref\scaled2.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\scaled3.mbm    	 \TImage\Ref\scaled3.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\scaled4.mbm    	 \TImage\Ref\scaled4.mbm
+data=EPOCROOT##epoc32\data\c\TImage\Ref\scaled5.mbm    	 \TImage\Ref\scaled5.mbm
+
+#endif

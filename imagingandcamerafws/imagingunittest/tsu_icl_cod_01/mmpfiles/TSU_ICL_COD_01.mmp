@@ -1,0 +1,56 @@
+
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+TARGET        	tsu_icl_cod_01.dll
+CAPABILITY ALL -TCB
+TARGETTYPE    	dll
+UID           	0x1000008d 0x101F45FD
+VENDORID 0x70000001
+
+SOURCEPATH    ../src
+SOURCE        ICLCodecTestSuite.cpp
+SOURCE        ICLCodecTestStep.cpp
+SOURCE		  TestExtra.cpp
+SOURCEPATH	  ../TImage
+SOURCE		  TImage.cpp
+
+USERINCLUDE	  ../src	
+USERINCLUDE   ../TImage
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY euser.lib  
+LIBRARY testframeworkclient.lib 
+LIBRARY imageconversion.lib  
+LIBRARY efsrv.lib
+LIBRARY fbscli.lib
+LIBRARY ecom.lib
+LIBRARY dptest.lib
+LIBRARY exifutility.lib
+LIBRARY jpegexifplugin.lib
+LIBRARY jpegimageframeplugin.lib
+
+#ifdef EABI
+DEFFILE TSU_ICL_COD_01.DEF
+#endif
+
+#ifdef WINSCW
+DEFFILE TSU_ICL_COD_01.def
+#endif
+
+NOSTRICTDEF
+
+SMPSAFE

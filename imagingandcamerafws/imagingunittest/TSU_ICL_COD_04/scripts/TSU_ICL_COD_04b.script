@@ -1,0 +1,85 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// ICL Codec Testing Scripts
+// 
+//
+
+PRINT Run all the ICL codec tests 
+PRINT 
+
+LOAD_SUITE TSU_ICL_COD_04.dll
+
+// DEF093013: Transform() of a big jpeg fails with KErrNoMemory
+//! @SYMTestCaseID MM-ICL-COD-U-3043-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3043-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+// DEF092988: T: Aspect ratio of scaled image is maintained evenif iMaintainAspectRatio=EFalse
+//! @SYMTestCaseID MM-ICL-COD-U-3044-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3044-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3106-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3106-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3107-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3107-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3108-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3108-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3109-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3109-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3110-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3110-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3111-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3111-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3112-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3112-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3113-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3113-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3114-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3114-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3115-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3115-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+

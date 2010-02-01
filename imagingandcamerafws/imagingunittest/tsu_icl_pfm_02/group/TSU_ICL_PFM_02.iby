@@ -1,0 +1,30 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __TSU_ICL_PFM_02_IBY__
+#define __TSU_ICL_PFM_02_IBY__
+
+file=ABI_DIR\DEBUG_DIR\tsu_icl_pfm_02.dll 			 System\Libs\tsu_icl_pfm_02.dll 
+
+REM Scripts
+
+data=EPOCROOT##epoc32\data\c\TSU_ICL_PFM_02.script   		 \TSU_ICL_PFM_02.script
+
+REM test files
+data=EPOCROOT##epoc32\data\c\tsu_icl_pfm_02\png-16M.png      \tsu_icl_pfm_02\png-16M.png
+data=EPOCROOT##epoc32\data\c\tsu_icl_pfm_02\png-16MA.png     \tsu_icl_pfm_02\png-16MA.png
+
+#endif __TSU_ICL_PFM_02_IBY__
+

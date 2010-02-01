@@ -1,0 +1,83 @@
+// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef TSI_MMF_VCLNTAVI_IBY
+#define TSI_MMF_VCLNTAVI_IBY
+
+// debug build
+
+file=ABI_DIR\BUILD_DIR\tsi_mmf_vclntavi.dll 	System\Libs\tsi_mmf_vclntavi.dll
+
+// include regardless if using gce or not
+#ifndef SAMPLEGRAPHICSURFACE_DLL
+file=ABI_DIR\BUILD_DIR\samplegraphicsurface.dll sys\bin\samplegraphicsurface.dll
+ECOM_PLUGIN(10285C4A.dll, 10285C4A.rsc)
+#define SAMPLEGRAPHICSURFACE_DLL
+#endif // SAMPLEGRAPHICSURFACE_DLL
+
+
+//ini
+data=EPOCROOT##epoc32\data\c\vclntavi\video_avi.ini             \vclntavi\video_avi.ini
+
+//scripts
+#ifdef SYMBIAN_VARIABLE_BITRATE_CODEC
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play.script       \vclntavi\tsi_mmf_vclntavi_play.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_rec.script        \vclntavi\tsi_mmf_vclntavi_rec.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_alloc.script      \vclntavi\tsi_mmf_vclntavi_alloc.script
+
+
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play_priority.script       \vclntavi\tsi_mmf_vclntavi_play_priority.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_rec_priority.script        \vclntavi\tsi_mmf_vclntavi_rec_priority.script
+
+
+#endif
+
+// Scripts for VCLNT APR
+#ifndef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr.script       \vclntavi\tsi_mmf_vclntavi_apr.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr_alloc.script      \vclntavi\tsi_mmf_vclntavi_apr_alloc.script
+#endif // SYMBIAN_MULTIMEDIA_A3FDEVSOUND
+
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play_secdisp.script	\vclntavi\tsi_mmf_vclntavi_play_secdisp.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_par_audio.script        \vclntavi\tsi_mmf_vclntavi_par_audio.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_dummy_controller.script \vclntavi\tsi_mmf_vclntavi_dummy_controller.script
+
+// Graphics surface tests
+#ifdef SYMBIAN_GRAPHICS_USE_GCE
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_surf.script      	\vclntavi\tsi_mmf_vclntavi_surf.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_surf_oldavi.script   \vclntavi\tsi_mmf_vclntavi_surf_oldavi.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play_bc.script       \vclntavi\tsi_mmf_vclntavi_play_bc.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_alloc_bc.script      \vclntavi\tsi_mmf_vclntavi_alloc_bc.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr_bc.script       	\vclntavi\tsi_mmf_vclntavi_apr_bc.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr_alloc_bc.script  \vclntavi\tsi_mmf_vclntavi_apr_alloc_bc.script
+
+// Old BC controller
+#include <vclntavi.iby>
+#else
+// Do not run this test unless you've compiled MMF with #define SYMBIAN_BUILD_GCE
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_surf_noGCE.script      \vclntavi\tsi_mmf_vclntavi_surf_noGCE.script
+#endif // SYMBIAN_GRAPHICS_USE_GCE
+
+#ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles.script       \vclntavi\tsi_mmf_vclntavi_subtitles.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_udeb.script  \vclntavi\tsi_mmf_vclntavi_subtitles_udeb.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_urel.script  \vclntavi\tsi_mmf_vclntavi_subtitles_urel.script
+data=EPOCROOT##epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_alloc.script \vclntavi\tsi_mmf_vclntavi_subtitles_alloc.script
+#endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+
+//data files
+//exported using copydatatocf.bat and usbldr.pm, so removed from iby file
+
+#endif //TSI_MMF_VCLNTAVI_IBY

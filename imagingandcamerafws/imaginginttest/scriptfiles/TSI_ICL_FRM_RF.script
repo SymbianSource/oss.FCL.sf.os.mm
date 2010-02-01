@@ -1,0 +1,113 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSI_ICL_FRM_00_RFILE.script
+// 
+//
+
+PRINT Testing for Image Converter
+//
+PRINT 
+
+//MULTITHREAD
+
+//
+LOAD_SUITE TSI_ICL_FRM_00.dll
+
+//MS 3.4 File Handles API
+//Positive tests
+//Read a JPEG,not specifying file type. Decode and verify JPEG.
+//! @SYMTestCaseID MM-ICL-FRM-I-0701-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0701-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Read a JPEG,specifying MIME type. Decode and verify JPEG.
+//! @SYMTestCaseID MM-ICL-FRM-I-0702-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0702-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Read a OTA, specifying image type. Decode and verify OTA.
+//! @SYMTestCaseID MM-ICL-FRM-I-0703-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0703-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Read a WBMP, specifying the Decoder UID. Decode and verify WBMP.
+//! @SYMTestCaseID MM-ICL-FRM-I-0704-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0704-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode an image from bitmap to a file, not specifying the file type.
+//! @SYMTestCaseID MM-ICL-FRM-I-0705-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0705-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode an image from bitmap to a file, given the MIME Type
+//! @SYMTestCaseID MM-ICL-FRM-I-0706-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0706-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode an image from bitmap to a file, given the Image Type
+//! @SYMTestCaseID MM-ICL-FRM-I-0707-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0707-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode an image from bitmap to a file, given the Encoder UID.
+//! @SYMTestCaseID MM-ICL-FRM-I-0708-CP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-0708-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Negative tests
+//Read, decode and verify JPEG, with an invalid MIME Type.
+//! @SYMTestCaseID MM-ICL-FRM-I-1701-HP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1701-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Read, decode and verify JPEG, with an invalid Image Type.
+//! @SYMTestCaseID MM-ICL-FRM-I-1702-HP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1702-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Decode a file containing text data.
+//! @SYMTestCaseID MM-ICL-FRM-I-1703-HP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1703-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+
+//Encode an image from bitmap to a file, specifying an invalid MIME type.
+//! @SYMTestCaseID MM-ICL-FRM-I-1704-HP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1704-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode an image from bitmap to a file, specifying an invalid image type.
+//! @SYMTestCaseID MM-ICL-FRM-I-1705-HP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1705-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode to a jpg file containing text data.
+//! @SYMTestCaseID MM-ICL-FRM-I-1706-HP
+
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1706-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE

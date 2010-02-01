@@ -1,0 +1,4 @@
+del c:\tsi_a3f_devsound_aac\*.*
+del c:\omxil\testfiles\*.*
+del c:\omxil\*.*
+del c:\*.*

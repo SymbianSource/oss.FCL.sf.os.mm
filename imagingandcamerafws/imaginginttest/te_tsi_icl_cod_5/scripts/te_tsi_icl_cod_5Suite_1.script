@@ -1,0 +1,898 @@
+//
+// Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+//
+PRINT Run all te_tsi_icl_cod_5_1 Suite Tests
+
+LOAD_SUITE te_tsi_icl_cod_5Suite
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0001 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0001
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 8BITGRAYSCALEALPHA_INTERLACED_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0001 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0002 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0002
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 8BITGRAYSCALEALPHA_INTERLACED_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0002 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0003 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0003
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 16BITGRAYSCALEALPHA_INTERLACED_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0003 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0004 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0004
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 16BITGRAYSCALEALPHA_INTERLACED_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0004 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0005 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0005
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU, 16MA and 16MAP) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA/16MAP destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITRGBCOLOURALPHA_NOBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0005 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0006 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0006
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU, 16MA and 16MAP) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA/16MAP destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITRGBCOLOURALPHA_NOBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0006 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0007 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0007
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 48BITRGBCOLOURALPHA_NOBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0007 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0008 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0008
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 48BITRGBCOLOURALPHA_NOBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0008 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0009 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0009
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 8BITGRAYSCALEALPHA_BLKBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0009 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0010 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0010
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 8BITGRAYSCALEALPHA_BLKBGCHNK_MASKDECODE 
+END_TESTCASE  MM-TSI-ICL-COD-05-0010 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0011 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0011
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 16BITGRAYSCALEALPHA_BLKBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0011 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0012 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0012
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 16BITGRAYSCALEALPHA_BLKBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0012 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0013 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0013
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU, 16MA and 16MAP) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA/16MAP destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITRGBCOLOURALPHA_WHTEBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0013 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0014
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0014
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU, 16MA and 16MAP) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA/16MAP destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+ 
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITRGBCOLOURALPHA_WHTEBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0014 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0015 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0015
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 48BITRGBCOLOURALPHA_WHTEBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0015 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0016 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0016
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 48BITRGBCOLOURALPHA_WHTEBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0016 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0017
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0017
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+ 
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 12BITGRAYSCALE_TRANSPARENT_BLKBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0017 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0018
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0018
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+ 
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 12BITGRAYSCALE_TRANSPARENT_BLKBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0018 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0019 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0019
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 48BITCOLOUR_TRANSPARENT_BLUBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0019 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0020 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0020
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 48BITCOLOUR_TRANSPARENT_BLUBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0020 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0021 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0021
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITCOLOUR_TRANSPARENT_BLKBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0021 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0022
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0022
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+ 
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITCOLOUR_TRANSPARENT_BLUBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0022 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0023 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0023
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITCOLOUR_TRANSPARENT_NOBGCHNK_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0023 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0024 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0024
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini 24BITCOLOUR_TRANSPARENT_NOBGCHNK_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0024 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0025 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0025
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_1BPP_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0025 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0026 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0026
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_1BPP_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0026 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0027 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0027
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_2BPPGRAYSCALE_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0027 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0028 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0028
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_2BPPGRAYSCALE_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0028 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0029 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0029
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_4BPPGRAYSCALE_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0029 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0030
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0030
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_4BPPGRAYSCALE_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0030 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0031 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0031
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_8BPPGRAYSCALE_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0031 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0032 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0032
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_8BPPGRAYSCALE_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0032 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0033 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0033
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_16BPPGRAYSCALE_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0033 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0034 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0034
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_16BPPGRAYSCALE_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0034 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0035 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0035
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU, 16MA and 16MAP) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA/16MAP destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_24BPPCOLOUR_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0035 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0036
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0036
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU, 16MA and 16MAP) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA/16MAP destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+ 
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_24BPPCOLOUR_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0036 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0037 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0037
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_48BPPCOLOUR_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0037 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0038 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0038
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a mask CFbsBitmap and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded files to the reference files.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_51Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_48BPPCOLOUR_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0038 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0039
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0039
+//!@SYMTestCaseDesc		Positive: Decode a single frame source image into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded file to the reference file.
+//!						5. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+ 
+RUN_TEST_STEP 100 te_tsi_icl_cod_5Suite tsi_icl_cod_50Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini RGBONLY_1BPPCOLOURPALATTED_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0039 
+
+PRINT Complate_te_tsi_icl_cod_5_1_Tests

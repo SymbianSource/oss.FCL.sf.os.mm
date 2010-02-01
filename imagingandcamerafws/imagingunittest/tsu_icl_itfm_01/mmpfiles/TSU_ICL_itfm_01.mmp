@@ -1,0 +1,44 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSU_ICL_ImageTransform_01.mmp
+// 
+//
+
+TARGET        	tsu_icl_itfm_01.dll
+CAPABILITY NONE
+TARGETTYPE    	dll
+UID           	0x1000008d 0x101F7C28
+VENDORID 0x70000001
+
+USERINCLUDE	../src
+USERINCLUDE	../../inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	../src
+SOURCE		TestSuiteImageTransform.cpp
+SOURCE		TestStepImageTransform.cpp
+
+LIBRARY   euser.lib
+LIBRARY   fbscli.lib
+//LIBRARY   gdi.lib
+LIBRARY   efsrv.lib
+LIBRARY   testframeworkclient.lib
+LIBRARY   imagetransform.lib
+LIBRARY   testtransformerext.lib
+LIBRARY   ecom.lib
+LIBRARY	  bitgdi.lib
+
+
+SMPSAFE

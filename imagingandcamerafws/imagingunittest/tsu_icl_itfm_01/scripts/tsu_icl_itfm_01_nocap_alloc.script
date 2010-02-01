@@ -1,0 +1,34 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSU_ICL_itfm_01_alloc
+// 
+//
+
+PRINT Run all the itfm unit alloc tests 
+PRINT 
+
+//
+LOAD_SUITE TSU_ICL_itfm_01.dll
+
+
+//! @SYMTestCaseID MM-ICL-ITFM-U-0100-HP
+
+RUN_TEST_STEP 360000, TSU_ICL_itfm_01, MM-ICL-ITFM-U-0100-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-ITFM-U-0101-HP
+
+RUN_TEST_STEP 360000, TSU_ICL_itfm_01, MM-ICL-ITFM-U-0101-HP
+TEST_COMPLETE 
+

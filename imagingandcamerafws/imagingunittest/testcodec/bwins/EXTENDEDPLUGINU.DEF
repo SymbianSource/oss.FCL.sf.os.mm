@@ -1,0 +1,26 @@
+EXPORTS
+	?AsyncResult@CExtendedDecoder@@QBEHXZ @ 1 NONAME ; int CExtendedDecoder::AsyncResult(void) const
+	?AsyncResult@CExtendedEncoder@@QBEHXZ @ 2 NONAME ; int CExtendedEncoder::AsyncResult(void) const
+	?CustomAsync@CExtendedDecoder@@QAEXPAVTRequestStatus@@H@Z @ 3 NONAME ; void CExtendedDecoder::CustomAsync(class TRequestStatus *, int)
+	?CustomAsync@CExtendedEncoder@@QAEXPAVTRequestStatus@@H@Z @ 4 NONAME ; void CExtendedEncoder::CustomAsync(class TRequestStatus *, int)
+	?CustomSyncL@CExtendedDecoder@@QAEXH@Z @ 5 NONAME ; void CExtendedDecoder::CustomSyncL(int)
+	?CustomSyncL@CExtendedEncoder@@QAEXH@Z @ 6 NONAME ; void CExtendedEncoder::CustomSyncL(int)
+	?DoConvert@CExtendedDecoderPlugin@@MAEXXZ @ 7 NONAME ; void CExtendedDecoderPlugin::DoConvert(void)
+	?DoConvert@CExtendedEncoderPlugin@@MAEXXZ @ 8 NONAME ; void CExtendedEncoderPlugin::DoConvert(void)
+	?DoCustomAsync@CExtendedDecoder@@QBEHXZ @ 9 NONAME ; int CExtendedDecoder::DoCustomAsync(void) const
+	?DoCustomAsync@CExtendedEncoder@@QBEHXZ @ 10 NONAME ; int CExtendedEncoder::DoCustomAsync(void) const
+	?HandleCustomSyncL@CExtendedDecoderPlugin@@MAEXH@Z @ 11 NONAME ; void CExtendedDecoderPlugin::HandleCustomSyncL(int)
+	?HandleCustomSyncL@CExtendedEncoderPlugin@@MAEXH@Z @ 12 NONAME ; void CExtendedEncoderPlugin::HandleCustomSyncL(int)
+	?InitCustomAsyncL@CExtendedDecoderPlugin@@MAEXH@Z @ 13 NONAME ; void CExtendedDecoderPlugin::InitCustomAsyncL(int)
+	?InitCustomAsyncL@CExtendedEncoderPlugin@@MAEXH@Z @ 14 NONAME ; void CExtendedEncoderPlugin::InitCustomAsyncL(int)
+	?NewL@CExtendedDecoder@@SAPAV1@XZ @ 15 NONAME ; class CExtendedDecoder * CExtendedDecoder::NewL(void)
+	?NewL@CExtendedEncoder@@SAPAV1@XZ @ 16 NONAME ; class CExtendedEncoder * CExtendedEncoder::NewL(void)
+	?NotifyComplete@CExtendedDecoderPlugin@@MAEXXZ @ 17 NONAME ; void CExtendedDecoderPlugin::NotifyComplete(void)
+	?NotifyComplete@CExtendedEncoderPlugin@@MAEXXZ @ 18 NONAME ; void CExtendedEncoderPlugin::NotifyComplete(void)
+	?SyncResult@CExtendedDecoder@@QBEHXZ @ 19 NONAME ; int CExtendedDecoder::SyncResult(void) const
+	?SyncResult@CExtendedEncoder@@QBEHXZ @ 20 NONAME ; int CExtendedEncoder::SyncResult(void) const
+	?UsingThread@CExtendedDecoder@@QBEHXZ @ 21 NONAME ; int CExtendedDecoder::UsingThread(void) const
+	?UsingThread@CExtendedDecoderPlugin@@QBEHXZ @ 22 NONAME ; int CExtendedDecoderPlugin::UsingThread(void) const
+	?UsingThread@CExtendedEncoder@@QBEHXZ @ 23 NONAME ; int CExtendedEncoder::UsingThread(void) const
+	?UsingThread@CExtendedEncoderPlugin@@QBEHXZ @ 24 NONAME ; int CExtendedEncoderPlugin::UsingThread(void) const
+

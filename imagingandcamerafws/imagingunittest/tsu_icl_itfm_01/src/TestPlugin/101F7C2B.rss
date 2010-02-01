@@ -1,0 +1,64 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the image transform test plugin
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include <icl/imagetransform.hrh>
+#include "TestTransformer.hrh"
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KUidTransformDllJpegTestPlugin;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KUidTransformInterface;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidTransformImplementationJpegTestPlugin;
+					version_no = 1;
+					display_name = "mbm Scaler";
+					default_data = {0x37, 0x0, 0x0, 0x10, 0x42, 0x0, 0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x39, 0x64, 0x39, 0x47};
+					// version, flags, ImageTypeUid ImageSubTypeUid FileSuffixNum, FileSuffix, MimeTypeNum, MimeType
+					// 1, 0000, 0x101F45D8 (KImageTypeJPGUid) 0x00000000 1 .jpg 1 image/jpeg
+					opaque_data = {1, 0x00, 0x00, 0x10, 0x1F, 0x45, 0xCC, 0, 0, 0, 0, 1, 0x2E, 0x6D, 0x62, 0x6D, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x78, 0x2D, 0x65, 0x70, 0x6F, 0x63, 0x2D, 0x6D, 0x62, 0x6D, 0x0D};
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = KUidTransformInterface;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidTransformImplementationPngTestPlugin;
+					version_no = 1;
+					display_name = "PNG Scaler";
+					default_data = {0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A};
+					// 1 0x0002 0x101F45C9 0x00000000 1 .png 1 image/png
+					// (SetSourceRectL() supported
+					opaque_data = {1, 0x00, 0x02, 0x10, 0x1F, 0x45, 0xC9, 0, 0, 0, 0, 1, 0x2E, 0x70, 0x6E, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x70, 0x6E, 0x67, 0x0D};
+					}
+				};
+			}
+
+		};
+	}
+

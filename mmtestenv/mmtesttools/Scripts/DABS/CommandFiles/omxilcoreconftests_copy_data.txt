@@ -1,0 +1,11 @@
+md c:\omxil\
+md c:\omxil\test\
+md c:\omxil\aacdecoder\
+md c:\omxil\common\
+md c:\omxil\pcmrenderer\
+
+
+copy E:\unittest\omxil\test\*.*          c:\omxil\test\
+copy E:\unittest\omxil\aacdecoder\*.*    c:\omxil\aacdecoder\
+copy E:\unittest\omxil\common\*.*        c:\omxil\common\
+copy E:\unittest\omxil\pcmrenderer\*.*   c:\omxil\pcmrenderer\

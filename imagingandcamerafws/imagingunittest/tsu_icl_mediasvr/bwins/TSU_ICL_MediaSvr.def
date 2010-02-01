@@ -1,0 +1,4 @@
+EXPORTS
+; NEW:
+	?NewTestSuiteMediaSvrL@@YAPAVCTestSuiteMediaSvr@@XZ @ 1 NONAME ; class CTestSuiteMediaSvr * __cdecl NewTestSuiteMediaSvrL(void)
+

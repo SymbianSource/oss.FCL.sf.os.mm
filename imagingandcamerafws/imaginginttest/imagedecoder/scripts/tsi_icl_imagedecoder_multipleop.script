@@ -1,0 +1,151 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageDecoder.xls
+// 
+//
+
+
+PRINT Test result log for tsi_icl_imagedecoder_multipleop.script
+LOAD_SUITE tsi_icl_imagedecoder.dll
+
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0010-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0010-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0020-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0020-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0030-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0030-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0040-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0040-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0050-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0050-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0060-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0060-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0070-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0070-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0080-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0080-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0090-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0090-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0100-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0100-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0110-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0110-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0120-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0120-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0130-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0130-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0140-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0140-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0150-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0150-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0160-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0160-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0170-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0170-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0180-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0180-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0190-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0190-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0200-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0200-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0210-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0210-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0220-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0220-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0230-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0230-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0240-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0240-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0250-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0250-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE
+//! @SYMTestCaseID MM-ICL-DEC-MUOP-I-0260-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-MUOP-I-0260-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+TEST_COMPLETE

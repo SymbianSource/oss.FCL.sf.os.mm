@@ -1,0 +1,13 @@
+EXPORTS
+	_Z20NewTSUMmTsthSuite21Lv @ 1 NONAME
+	_ZTI14CConsoleReader @ 2 NONAME ; #<TI>#
+	_ZTI14CServerConsole @ 3 NONAME ; #<TI>#
+	_ZTI16RTSUMmTsthStep21 @ 4 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU2101 @ 5 NONAME ; #<TI>#
+	_ZTI17CTSUMmTsthSuite21 @ 6 NONAME ; #<TI>#
+	_ZTV14CConsoleReader @ 7 NONAME ; #<VT>#
+	_ZTV14CServerConsole @ 8 NONAME ; #<VT>#
+	_ZTV16RTSUMmTsthStep21 @ 9 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU2101 @ 10 NONAME ; #<VT>#
+	_ZTV17CTSUMmTsthSuite21 @ 11 NONAME ; #<VT>#
+

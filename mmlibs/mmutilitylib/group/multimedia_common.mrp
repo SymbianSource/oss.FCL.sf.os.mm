@@ -1,0 +1,18 @@
+#multimedia_common.mrp
+#
+#Copyright (c) 2005-2009 Symbian Ltd.  All rights reserved.
+#
+
+component	multimedia_common
+
+source	\sf\os\mm\mmlibs\mmutilitylib
+
+binary	\sf\os\mm\mmlibs\mmutilitylib\group	all
+
+exports	\sf\os\mm\mmlibs\mmutilitylib\group
+
+notes_source	\component_defs\release.src
+
+
+ipr D 
+

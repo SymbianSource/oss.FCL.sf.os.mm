@@ -1,0 +1,48 @@
+//
+// Copyright (c) 2008 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+LOAD_SUITE TSU_OMXIL_DUMMYCONTENTPIPE.dll
+
+#Req. under test REQ8336
+# 
+
+//-------------------------------------//
+// Dummy Content Pipe                  //
+//-------------------------------------//
+
+// Create and destroy dummy content pipe
+//! @SYMTestCaseID MM-OMXIL-DUMMYCONTENTPIPE-U-0001
+
+RUN_TEST_STEP -1 TSU_OMXIL_DUMMYCONTENTPIPE MM-OMXIL-DUMMYCONTENTPIPE-U-0001
+TEST_COMPLETE
+
+// Call Create() and Close() on a content pipe
+//! @SYMTestCaseID MM-OMXIL-DUMMYCONTENTPIPE-U-0002
+
+RUN_TEST_STEP -1 TSU_OMXIL_DUMMYCONTENTPIPE MM-OMXIL-DUMMYCONTENTPIPE-U-0002
+TEST_COMPLETE
+
+// Call SetPosition and GetPosition() on the dummy content pipe 1
+//! @SYMTestCaseID MM-OMXIL-DUMMYCONTENTPIPE-U-0003
+
+RUN_TEST_STEP -1 TSU_OMXIL_DUMMYCONTENTPIPE MM-OMXIL-DUMMYCONTENTPIPE-U-0003
+TEST_COMPLETE
+
+// Call SetPosition and GetPosition() on the dummy content pipe 2
+//! @SYMTestCaseID MM-OMXIL-DUMMYCONTENTPIPE-U-0004
+
+RUN_TEST_STEP -1 TSU_OMXIL_DUMMYCONTENTPIPE MM-OMXIL-DUMMYCONTENTPIPE-U-0004
+TEST_COMPLETE

@@ -1,0 +1,62 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#include "../../../../../imagingandcamerafws/imagingfws/BitmapTransform/inc/BitmTrans/BitmTransUids.hrh"
+
+/**
+@file
+
+@SYMPurpose BitmapTransformsRefPlugin.dll Scaling and rotation reference plugin
+*/
+//MACRO		__SCALING_PROFILING // Enable profiling
+//MACRO		ROTATION_PROFILING // Enable profiling
+
+TARGET		bitmaptransformsrefplugin.dll
+CAPABILITY ALL -TCB
+TARGETTYPE 	PLUGIN
+
+UID	0x10009D8D   KUidBitmapTransformsRefDll
+VENDORID 0x70000001
+
+SOURCEPATH	../../src/refplugin
+SOURCE	    BitmapRotationPlugin.cpp
+SOURCE      BitmapScalerPlugin.cpp
+SOURCE		Bitmaprefpluginmain.cpp
+
+USERINCLUDE	../../../../../imagingandcamerafws/imagingfws/BitmapTransform/inc
+USERINCLUDE	../../src/refplugin
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+START RESOURCE 	1020708A.rss
+TARGET bitmaptransformsrefplugin.rsc
+END
+
+LIBRARY	euser.lib
+LIBRARY	fbscli.lib
+LIBRARY	bitgdi.lib
+LIBRARY bitmaptransforms.lib // used for bitmap converter
+LIBRARY	gdi.lib
+
+START	WINS
+BASEADDRESS	0x4F600000
+END
+#ifdef EABI
+// this is used to ensure ARM instructions are enabled for this module
+ALWAYS_BUILD_AS_ARM
+// This will cause the  executable to be compiled using 32-bit ARM instructions rather than 16-bit THUMB instructions
+OPTION ARMCC -Otime
+#endif
+
+SMPSAFE

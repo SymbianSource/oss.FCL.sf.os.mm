@@ -1,0 +1,90 @@
+/*
+* Copyright (c) 2007 Nokia Corporation and/or its subsidiary(-ies).
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of "Eclipse Public License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.eclipse.org/legal/epl-v10.html".
+*
+* Initial Contributors:
+* Nokia Corporation - initial contribution.
+*
+* Contributors:
+*
+* Description:
+*
+*/
+
+
+
+#ifndef ICLCodecs_IBY
+#define ICLCodecs_IBY
+
+#include <ezlib.iby> 		// for PNG codec
+
+REM BMP Plugin for Image Conversion Library
+
+ECOM_PLUGIN(bmpcodec.dll,101f45ae.rsc)
+
+data=ZRESOURCE\ICL\101F45AE_extra.rsc 			Resource\ICL\101F45AE_extra.rsc
+
+REM GIF Plugin for Image Conversion Library
+
+ECOM_PLUGIN(gifcodec.dll,101f45b1.rsc)
+
+data=ZRESOURCE\ICL\101F45B1_extra.rsc 			Resource\ICL\101F45B1_extra.rsc
+
+REM ICO Plugin for Image Conversion Library
+
+ECOM_PLUGIN(icocodec.dll,101f45d3.rsc)
+
+data=ZRESOURCE\ICL\101F45D3_extra.rsc 			Resource\ICL\101F45D3_extra.rsc
+
+REM JPEG Plugin for Image Conversion Library
+
+ECOM_PLUGIN(jpegcodec.dll,101f45d6.rsc)
+
+data=ZRESOURCE\ICL\101F45D6_extra.rsc 			Resource\ICL\101F45D6_extra.rsc
+
+REM JEPG YUV Decoder
+#include "JpegYuvDecoder.iby"
+
+REM MBM Plugin for Image Conversion Library
+
+ECOM_PLUGIN(mbmcodec.dll,101f45ca.rsc)
+
+data=ZRESOURCE\ICL\101F45CA_extra.rsc 			Resource\ICL\101F45CA_extra.rsc
+
+REM OTA Plugin for Image Conversion Library
+
+ECOM_PLUGIN(otacodec.dll,101f45d0.rsc)
+
+data=ZRESOURCE\ICL\101F45D0_extra.rsc 			Resource\ICL\101F45D0_extra.rsc
+
+REM WBMP Plugin for Image Conversion Library
+
+ECOM_PLUGIN(wbmpcodec.dll,101f45cd.rsc)
+
+data=ZRESOURCE\ICL\101F45CD_extra.rsc 			Resource\ICL\101F45CD_extra.rsc
+
+REM TIFF Plugin for Image Conversion Library
+
+ECOM_PLUGIN(tiffcodec.dll,101f45c0.rsc)
+
+data=ZRESOURCE\ICL\101F45C0_extra.rsc 			Resource\ICL\101F45C0_extra.rsc
+
+REM PNG Plugin for Image Conversion Library
+
+ECOM_PLUGIN(pngcodec.dll,101f45c7.rsc)
+
+data=ZRESOURCE\ICL\101F45C7_extra.rsc 			Resource\ICL\101F45C7_extra.rsc
+
+REM WMF Plugin for Image Conversion Library
+
+ECOM_PLUGIN(wmfcodec.dll,101f45b5.rsc)
+
+data=ZRESOURCE\ICL\101F45B5_extra.rsc 			Resource\ICL\101F45B5_extra.rsc
+
+
+#endif ICLCodecs_IBY
+

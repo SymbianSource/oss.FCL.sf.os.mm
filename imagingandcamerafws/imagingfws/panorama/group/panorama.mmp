@@ -1,0 +1,52 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#include <panorama/panoramauids.hrh>
+
+TARGET		panorama.dll
+CAPABILITY ALL -TCB
+TARGETTYPE	DLL
+
+UID	0x10000008   KUidPanoramaImageLibrary
+VENDORID 0x70000001
+
+SOURCEPATH		../src
+source          panorama.cpp
+source 			panoramaimpl.cpp
+
+USERINCLUDE		../inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY			euser.lib
+LIBRARY			estor.lib
+LIBRARY			efsrv.lib
+LIBRARY         ecom.lib
+LIBRARY	        mmcommonutils.lib
+LIBRARY		  fbscli.lib
+
+#ifdef EABI
+DEFFILE panorama.def
+#endif
+
+#ifdef WINSCW
+DEFFILE panorama.def
+#endif
+
+START	WINS
+BASEADDRESS	0x4F700000
+END
+
+SMPSAFE

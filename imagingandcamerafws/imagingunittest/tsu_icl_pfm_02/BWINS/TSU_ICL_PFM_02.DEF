@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuiteIclPerformanceL@@YAPAVCTestSuiteIclPerformance@@XZ @ 1 NONAME ; class CTestSuiteIclPerformance * NewTestSuiteIclPerformanceL(void)
+

@@ -1,0 +1,11 @@
+EXPORTS
+	_Z27NewTestSuiteIclPerformanceLv @ 1 NONAME
+	_ZTI15CActiveListener @ 2 NONAME ; #<TI>#
+	_ZTI16CMmIclPfmTest001 @ 3 NONAME ; #<TI>#
+	_ZTI23CTestStepIclPerformance @ 4 NONAME ; #<TI>#
+	_ZTI24CTestSuiteIclPerformance @ 5 NONAME ; #<TI>#
+	_ZTV15CActiveListener @ 6 NONAME ; #<VT>#
+	_ZTV16CMmIclPfmTest001 @ 7 NONAME ; #<VT>#
+	_ZTV23CTestStepIclPerformance @ 8 NONAME ; #<VT>#
+	_ZTV24CTestSuiteIclPerformance @ 9 NONAME ; #<VT>#
+

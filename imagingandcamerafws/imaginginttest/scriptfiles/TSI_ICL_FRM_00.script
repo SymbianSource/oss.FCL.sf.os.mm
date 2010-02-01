@@ -1,0 +1,425 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT Testing for Image Converter
+//
+PRINT 
+
+//MULTITHREAD
+
+//
+LOAD_SUITE TSI_ICL_FRM_00.dll
+
+          //---------Read, decode, verify JPEG
+//! @SYMTestCaseID MM-ICL-FRM-I-0001-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0001-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //-------------Read, decode, verify GIF
+//! @SYMTestCaseID MM-ICL-FRM-I-0002-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0002-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //-------------Read, decode, verify BMP
+//! @SYMTestCaseID MM-ICL-FRM-I-0003-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0003-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //------------Read, decode, verify MBM
+//! @SYMTestCaseID MM-ICL-FRM-I-0004-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0004-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //------------Read, decode, verify OTA
+//! @SYMTestCaseID MM-ICL-FRM-I-0005-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0005-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //------------Read, decode, verify WBMP
+//! @SYMTestCaseID MM-ICL-FRM-I-0006-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0006-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //-------------Read, decode, verify PNG
+//! @SYMTestCaseID MM-ICL-FRM-I-0007-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0007-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //--------------Read, decode, verify TIFF
+//! @SYMTestCaseID MM-ICL-FRM-I-0008-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0008-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //--------------Read, decode, verify WMF
+//! @SYMTestCaseID MM-ICL-FRM-I-0009-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0009-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+      //---------------Read, decode, verify ICO
+//! @SYMTestCaseID MM-ICL-FRM-I-0010-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0010-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //--------------Encode and verify JPEG
+//! @SYMTestCaseID MM-ICL-FRM-I-0011-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0011-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //---------------Encode and verify Gif
+//! @SYMTestCaseID MM-ICL-FRM-I-0012-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0012-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //---------------Encode and verify BMP
+//! @SYMTestCaseID MM-ICL-FRM-I-0013-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0013-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //----------------Encode and verify Mbm
+//! @SYMTestCaseID MM-ICL-FRM-I-0014-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0014-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //---------------Encode an image from memory to file
+//! @SYMTestCaseID MM-ICL-FRM-I-0015-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0015-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //----------------Read and decode an image from a descriptor
+//! @SYMTestCaseID MM-ICL-FRM-I-0016-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0016-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //--------------Read and decode an image incrementally
+//! @SYMTestCaseID MM-ICL-FRM-I-0017-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0017-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //--------------Read and try to decode corrupted WMF
+//! @SYMTestCaseID MM-ICL-FRM-I-0020-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0020-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //--------------List available MIME types
+//! @SYMTestCaseID MM-ICL-FRM-I-0101-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0101-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //----------------List available decoders
+//! @SYMTestCaseID MM-ICL-FRM-I-0102-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0102-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //----------------List available encoders MIME types 
+//! @SYMTestCaseID MM-ICL-FRM-I-0103-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0103-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+          //----------------List available encoders
+//! @SYMTestCaseID MM-ICL-FRM-I-0104-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0104-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //----------------Enquire MIME type of an unopened image
+//! @SYMTestCaseID MM-ICL-FRM-I-0105-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0105-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //--------------Enquire UID of a loaded decoder
+//! @SYMTestCaseID MM-ICL-FRM-I-0106-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0106-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //---------------Enquire UID of a loaded encoder
+//! @SYMTestCaseID MM-ICL-FRM-I-0107-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0107-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+           //---------------Request number of frames from a loaded image
+//! @SYMTestCaseID MM-ICL-FRM-I-0109-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0109-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+          //---------------Request frame information for frames in a loaded image
+//! @SYMTestCaseID MM-ICL-FRM-I-0110-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0110-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+              //---------------Request decode options for frames in a loaded image
+//! @SYMTestCaseID MM-ICL-FRM-I-0111-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0111-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //----------------Request frame information for frames in an animated GIF
+//! @SYMTestCaseID MM-ICL-FRM-I-0112-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0112-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+         //----------------Encode an image specifying extra encode parameters
+//! @SYMTestCaseID MM-ICL-FRM-I-0113-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0113-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //---------------Open image and retrieve embedded image comments
+//! @SYMTestCaseID MM-ICL-FRM-I-0114-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0114-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //---------------Open image and retrieve embedded frame comments
+//! @SYMTestCaseID MM-ICL-FRM-I-0115-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0115-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //---------------// encode an image from memory to a file using all default params
+//! @SYMTestCaseID MM-ICL-FRM-I-0200-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0200-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //---------------// PDEF117879: ICL unable to load MBM (12bpp compressed and not word aligned)
+//! @SYMTestCaseID MM-ICL-FRM-I-0300-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0300-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//********************************************************
+//---------------------negative testing-------------------
+
+        //--------------Request an encode for usupported image format
+//! @SYMTestCaseID MM-ICL-FRM-I-0501-CP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0501-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+    //---------------Request an encode for supported image format but usupported 
+    //conversion type
+//! @SYMTestCaseID MM-ICL-FRM-I-0502-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0502-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //--------------Request load and encode of corrupt image
+//! @SYMTestCaseID MM-ICL-FRM-I-0503-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0503-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //--------------Request load and decode of image from which content type cannot be identified
+//! @SYMTestCaseID MM-ICL-FRM-I-0504-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0504-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //---------------Request load of non-existent image 
+//! @SYMTestCaseID MM-ICL-FRM-I-0505-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0505-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+        //Request incremental load and decode of an image, then break the connection
+        //before completion
+//! @SYMTestCaseID MM-ICL-FRM-I-0506-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0506-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+       //Request incremental load and decode 
+       //of an image, then delete the image at the server 
+       //before completion
+//! @SYMTestCaseID MM-ICL-FRM-I-0507-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0507-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+                //---------List available encoders/decoders where no plugin are available
+//! @SYMTestCaseID MM-ICL-FRM-I-0509-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0509-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+                //----------List MIME types / UIDs for encodes/decoders where no plugins are available
+//! @SYMTestCaseID MM-ICL-FRM-I-0510-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0510-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+                //--------------Request a load and decode/encode  from a corrupt plugin 
+//! @SYMTestCaseID MM-ICL-FRM-I-0511-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0511-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+                //------------Attempt to encode something which is not a CFbsBitmap
+//! @SYMTestCaseID MM-ICL-FRM-I-0512-LP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0512-LP \ICL\TSI_ICL_FRM_00.ini 
+TEST_COMPLETE
+
+                //------------Request frame data where no frame is loaded
+//! @SYMTestCaseID MM-ICL-FRM-I-0513-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0513-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+
+//------------DRM tests
+//------------FileNewL with intent, specifying mime type
+//! @SYMTestCaseID MM-ICL-FRM-I-0600-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0600-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------FileNewL with intent, not specifying mime type
+//! @SYMTestCaseID MM-ICL-FRM-I-0601-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0601-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------FileNewL with intent, specifying mime type
+//! @SYMTestCaseID MM-ICL-FRM-I-0602-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0602-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------FileNewL with intent, not specifying mime type
+//! @SYMTestCaseID MM-ICL-FRM-I-0603-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0603-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Protected file with rights count (fileNewL with MIME type)
+//! @SYMTestCaseID MM-ICL-FRM-I-0604-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0604-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Protected file with rights count (fileNewL with MIME type)
+//! @SYMTestCaseID MM-ICL-FRM-I-0605-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0605-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Protected file with agent specifying MIME type
+//! @SYMTestCaseID MM-ICL-FRM-I-0606-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0606-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Test of GetMimeTypeL with agent specifying MIME type
+//! @SYMTestCaseID MM-ICL-FRM-I-0607-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0607-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Load Protected File, specifying only filename
+//! @SYMTestCaseID MM-ICL-FRM-I-0608-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0608-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Load Protected File, specifying mimetype
+//! @SYMTestCaseID MM-ICL-FRM-I-0609-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0609-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Load Protected File, specifying imageTypeUid
+//! @SYMTestCaseID MM-ICL-FRM-I-0610-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0610-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Load Protected File, specifying decoderUid
+//! @SYMTestCaseID MM-ICL-FRM-I-0611-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0611-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Read, Decode, and Verify PPM with specifying PPM1 plugin Uid
+//! @SYMTestCaseID MM-ICL-FRM-I-0612-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0612-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Read, Decode, and Verify PPM with specifying PPM2 plugin Uid
+//! @SYMTestCaseID MM-ICL-FRM-I-0613-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0613-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Read, Decode, and Verify PPM with specifying file name only
+//! @SYMTestCaseID MM-ICL-FRM-I-0614-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0614-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Encode, and Verify PPM with specifying PPM1 plugin Uid 
+//! @SYMTestCaseID MM-ICL-FRM-I-0615-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0615-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Encode, and Verify PPM with specifying PPM2 plugin Uid 
+//! @SYMTestCaseID MM-ICL-FRM-I-0616-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0616-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//------------Encode, and Verify PPM with specifying file name
+//! @SYMTestCaseID MM-ICL-FRM-I-0617-HP
+
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0617-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//-----Try decoding using a destination created through CreateExtendedBitmap
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-1130-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Try Encoding using extended bitmap target
+RUN_TEST_STEP -1 TSI_ICL_FRM_00 MM-ICL-FRM-I-0700-CP
+TEST_COMPLETE
+

@@ -1,0 +1,94 @@
+// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+target mngimagedisplay.dll
+CAPABILITY ALL -TCB
+targettype plugin
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID 0x10009D8D 0x101F7C51
+VENDORID 0x70000001
+
+//MACRO STRICT_MNG_LC		// by enabling would mean rejecting images which are not LC ones
+//MACRO WRONG_MAGN_HACK		// some images have got wrong length of X and Y magn methods (2 instead 1 byte)
+MACRO WRONG_TERM_HACK		// some images have got TERM length of 10 bytes, but Termination_action!=3, PNG/MNG CS editor does that
+MACRO DISABLE_LOGGING		// force logging to be disabled even for _DEBUG
+
+//#define ENABLE_PNG_LAYER_PROFILING // enables single PNG layer rendering profiling
+#ifdef ENABLE_PNG_LAYER_PROFILING
+MACRO ENABLE_PNG_LAYER_PROFILE 
+#endif
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+USERINCLUDE		../../plugins/mng ../../../codecs/PNGCodec
+
+SOURCEPATH		../../plugins/mng 
+SOURCE			MngImageDisplayProxy.cpp
+SOURCE			MngImageDisplay.cpp
+
+SOURCE			Crc32.cpp
+SOURCE			MngChunks.cpp
+SOURCE			MngReadStream.cpp
+SOURCE			MngPlayer.cpp
+SOURCE			MngRenderer.cpp
+SOURCE			MngPanic.cpp
+SOURCE			MngObjects.cpp
+SOURCE			ChunkProcessor.cpp
+SOURCE			MngProcessor.cpp
+SOURCE			PngProcessor.cpp
+SOURCE			PngLayer.cpp
+SOURCE			PixelConsumer.cpp
+SOURCE			MngMagnFilter.cpp
+
+SOURCE			MngIclDecoder.cpp
+SOURCE			MngReadCodec.cpp
+SOURCE			MngDecodeConstruct.cpp
+
+start resource 101F7C51.rss
+target mngimagedisplay.rsc
+end
+
+START RESOURCE 101F7C51_extra.rss
+targetpath resource/icl
+header
+END
+
+LIBRARY		euser.lib
+LIBRARY		caf.lib
+LIBRARY		efsrv.lib
+LIBRARY		fbscli.lib
+LIBRARY		gdi.lib
+LIBRARY		imagedisplay.lib
+LIBRARY		ecom.lib
+LIBRARY		bitmaptransforms.lib
+LIBRARY		imageconversion.lib
+LIBRARY		bafl.lib
+
+#ifdef ENABLE_PNG_LAYER_PROFILING
+LIBRARY		hal.lib
+#endif
+START	WINS
+BASEADDRESS	0x4F700000
+END
+
+#ifdef EABI
+// this is used to ensure "best perfomance" compilation options
+ALWAYS_BUILD_AS_ARM
+OPTION ARMCC -Otime
+OPTION_REPLACE ARMCC -O2 -O3
+#endif
+
+SMPSAFE

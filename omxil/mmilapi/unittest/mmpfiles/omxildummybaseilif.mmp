@@ -1,0 +1,50 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#include		"../inc/iltestuids.hrh"
+
+TARGET			omxildummybaseilif.dll 
+TARGETTYPE		dll
+
+CAPABILITY		All -TCB
+
+UID			KSharedLibraryUidDefine KUidOmxILDummyBaseMILIFPluginDll 
+VENDORID		0x70000001
+
+
+SOURCEPATH		../../refomxil/src/omxilgenericilif
+SOURCE			omxilgenericilifbodyimpl.cpp
+SOURCE			omxilcoreutils.cpp
+SOURCEPATH		../test_plugins/omxildummybaseilif
+SOURCE			omxildummybaseilif.cpp
+SOURCE			omxildummybaseilifbody.cpp
+SOURCE			omxildummybaseportilif.cpp
+
+USERINCLUDE     	../test_plugins/omxildummybaseilif		
+USERINCLUDE		../inc									
+USERINCLUDE		../../refomxil/inc				
+USERINCLUDE		../../ilif/inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY			euser.lib
+LIBRARY			ecom.lib
+LIBRARY			mmfserverbaseclasses.lib 
+LIBRARY			omxilcoreclient.lib
+
+
+NOSTRICTDEF
+
+SMPSAFE

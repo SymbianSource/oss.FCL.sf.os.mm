@@ -1,0 +1,35 @@
+EXPORTS
+	_Z20NewTSUMmTsthSuite11Lv @ 1 NONAME
+	_ZTI12CTestIniData @ 2 NONAME ; #<TI>#
+	_ZTI16RTSUMmTsthStep11 @ 3 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU1101 @ 4 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU1102 @ 5 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU1103 @ 6 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU1104 @ 7 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU1105 @ 8 NONAME ; #<TI>#
+	_ZTI16RTestMmTsthU1111 @ 9 NONAME ; #<TI>#
+	_ZTI17CTSUMmTsthSuite11 @ 10 NONAME ; #<TI>#
+	_ZTI20RTestStepVirtualStub @ 11 NONAME ; #<TI>#
+	_ZTI21CTestSuiteVirtualStub @ 12 NONAME ; #<TI>#
+	_ZTI29TIntegrationTestLog16Overflow @ 13 NONAME ; #<TI>#
+	_ZTI9CTestStep @ 14 NONAME ; #<TI>#
+	_ZTI9RTestStep @ 15 NONAME ; #<TI>#
+	_ZTV12CTestIniData @ 16 NONAME ; #<VT>#
+	_ZTV16RTSUMmTsthStep11 @ 17 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU1101 @ 18 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU1102 @ 19 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU1103 @ 20 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU1104 @ 21 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU1105 @ 22 NONAME ; #<VT>#
+	_ZTV16RTestMmTsthU1111 @ 23 NONAME ; #<VT>#
+	_ZTV17CTSUMmTsthSuite11 @ 24 NONAME ; #<VT>#
+	_ZTV20RTestStepVirtualStub @ 25 NONAME ; #<VT>#
+	_ZTV21CTestSuiteVirtualStub @ 26 NONAME ; #<VT>#
+	_ZTV29TIntegrationTestLog16Overflow @ 27 NONAME ; #<VT>#
+	_ZTV9CTestStep @ 28 NONAME ; #<VT>#
+	_ZTV9RTestStep @ 29 NONAME ; #<VT>#
+	_ZTI14RAsyncTestStep @ 30 NONAME
+	_ZTI4CLog @ 31 NONAME
+	_ZTV14RAsyncTestStep @ 32 NONAME
+	_ZTV4CLog @ 33 NONAME
+

@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuiteL@@YAPAVCTestSuite_OMXIL_DummyContentPipe@@XZ @ 1 NONAME ; class CTestSuite_OMXIL_DummyContentPipe * NewTestSuiteL(void)
+

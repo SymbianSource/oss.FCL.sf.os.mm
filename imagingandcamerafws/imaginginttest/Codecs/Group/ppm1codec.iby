@@ -1,0 +1,29 @@
+/*
+* Copyright (c) 2001-2007 Nokia Corporation and/or its subsidiary(-ies).
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of "Eclipse Public License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.eclipse.org/legal/epl-v10.html".
+*
+* Initial Contributors:
+* Nokia Corporation - initial contribution.
+*
+* Contributors:
+*
+* Description:
+*
+*/
+
+
+#ifndef __Ppm1Codec_IBY__
+#define __Ppm1Codec_IBY__
+
+REM PPM1 Plugin for Image Conversion Library
+
+ECOM_PLUGIN(PPM1Codec.dll, 101F45F1.rsc)
+
+data=ZRESOURCE\ICL\101F45F1_extra.rsc	Resource\ICL\101F45F1_extra.rsc
+
+#endif // __Ppm1Codec_IBY__
+

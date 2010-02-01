@@ -1,0 +1,15 @@
+EXPORTS
+	_Z28NewTestSuite_TSI_ICL_FRM_00Lv @ 1 NONAME
+	_ZTI15CRightsDatabase @ 2 NONAME ; #<TI>#
+	_ZTI19CTest_MM_ICL_FRM_CP @ 3 NONAME ; #<TI>#
+	_ZTI20CTestActiveScheduler @ 4 NONAME ; #<TI>#
+	_ZTI23CTestNegativeConversion @ 5 NONAME ; #<TI>#
+	_ZTI23CTestPositiveConversion @ 6 NONAME ; #<TI>#
+	_ZTI25CTestSuite_TSI_ICL_FRM_00 @ 7 NONAME ; #<TI>#
+	_ZTV15CRightsDatabase @ 8 NONAME ; #<VT>#
+	_ZTV19CTest_MM_ICL_FRM_CP @ 9 NONAME ; #<VT>#
+	_ZTV20CTestActiveScheduler @ 10 NONAME ; #<VT>#
+	_ZTV23CTestNegativeConversion @ 11 NONAME ; #<VT>#
+	_ZTV23CTestPositiveConversion @ 12 NONAME ; #<VT>#
+	_ZTV25CTestSuite_TSI_ICL_FRM_00 @ 13 NONAME ; #<VT>#
+

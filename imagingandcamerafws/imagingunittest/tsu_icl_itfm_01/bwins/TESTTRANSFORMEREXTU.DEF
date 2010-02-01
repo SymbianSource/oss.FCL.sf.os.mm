@@ -1,0 +1,6 @@
+EXPORTS
+	??0CTestTransformerExtension@@QAE@PAVCTestTransformerBase@@@Z @ 1 NONAME ; public: __thiscall CTestTransformerExtension::CTestTransformerExtension(class CTestTransformerBase *)
+	?PreserveImageData@CTestTransformerExtension@@QBEHXZ @ 2 NONAME ; public: int __thiscall CTestTransformerExtension::PreserveImageData(void)const 
+	?Uid@CTestTransformerExtension@@UBE?BVTUid@@XZ @ 3 NONAME ; public: virtual class TUid const  __thiscall CTestTransformerExtension::Uid(void)const 
+	?NewL@CTestTransformerExtension@@SAPAV1@PAVCTestTransformerBase@@@Z @ 4 NONAME ; public: static class CTestTransformerExtension * __cdecl CTestTransformerExtension::NewL(class CTestTransformerBase *)
+

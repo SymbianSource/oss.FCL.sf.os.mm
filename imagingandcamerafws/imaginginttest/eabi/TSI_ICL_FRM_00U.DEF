@@ -1,0 +1,41 @@
+EXPORTS
+	_Z28NewTestSuite_TSI_ICL_FRM_00Lv @ 1 NONAME
+	_ZTI15CRightsDatabase @ 2 NONAME ; #<TI>#
+	_ZTI19CTest_MM_ICL_FRM_CP @ 3 NONAME ; #<TI>#
+	_ZTI20CTestActiveScheduler @ 4 NONAME ; #<TI>#
+	_ZTI23CTestNegativeConversion @ 5 NONAME ; #<TI>#
+	_ZTI23CTestPositiveConversion @ 6 NONAME ; #<TI>#
+	_ZTI25CTestSuite_TSI_ICL_FRM_00 @ 7 NONAME ; #<TI>#
+	_ZTV15CRightsDatabase @ 8 NONAME ; #<VT>#
+	_ZTV19CTest_MM_ICL_FRM_CP @ 9 NONAME ; #<VT>#
+	_ZTV20CTestActiveScheduler @ 10 NONAME ; #<VT>#
+	_ZTV23CTestNegativeConversion @ 11 NONAME ; #<VT>#
+	_ZTV23CTestPositiveConversion @ 12 NONAME ; #<VT>#
+	_ZTV25CTestSuite_TSI_ICL_FRM_00 @ 13 NONAME ; #<VT>#
+	_ZTI26CTestNegativeConversionNew @ 14 NONAME ; #<TI>#
+	_ZTI26CTestPositiveConversionNew @ 15 NONAME ; #<TI>#
+	_ZTV26CTestNegativeConversionNew @ 16 NONAME ; #<VT>#
+	_ZTV26CTestPositiveConversionNew @ 17 NONAME ; #<VT>#
+	_ZTI23CTestImageDecFileSource @ 18 NONAME ; #<TI>#
+	_ZTI29CTestImageDecFileHandleSource @ 19 NONAME ; #<TI>#
+	_ZTV23CTestImageDecFileSource @ 20 NONAME ; #<VT>#
+	_ZTV29CTestImageDecFileHandleSource @ 21 NONAME ; #<VT>#
+	_ZTI29CTestImageDecDrmEnableAgentUI @ 22 NONAME ; #<TI>#
+	_ZTV29CTestImageDecDrmEnableAgentUI @ 23 NONAME ; #<VT>#
+	_ZTI19CTestCSGetPluginUID @ 24 NONAME ; #<TI>#
+	_ZTI19CTestConvertYUVDesc @ 25 NONAME ; #<TI>#
+	_ZTI21CTestConvertYUVRChunk @ 26 NONAME ; #<TI>#
+	_ZTI25CTestCSYUVDecoderNegative @ 27 NONAME ; #<TI>#
+	_ZTI25CTestCSYUVEncoderNegative @ 28 NONAME ; #<TI>#
+	_ZTI27CTestCSEncodeYUVExtraParams @ 29 NONAME ; #<TI>#
+	_ZTI29CTestCSGetSupportedYUVFormats @ 30 NONAME ; #<TI>#
+	_ZTV19CTestCSGetPluginUID @ 31 NONAME ; #<VT>#
+	_ZTV19CTestConvertYUVDesc @ 32 NONAME ; #<VT>#
+	_ZTV21CTestConvertYUVRChunk @ 33 NONAME ; #<VT>#
+	_ZTV25CTestCSYUVDecoderNegative @ 34 NONAME ; #<VT>#
+	_ZTV25CTestCSYUVEncoderNegative @ 35 NONAME ; #<VT>#
+	_ZTV27CTestCSEncodeYUVExtraParams @ 36 NONAME ; #<VT>#
+	_ZTV29CTestCSGetSupportedYUVFormats @ 37 NONAME ; #<VT>#
+	_ZTI37CTestImageDecFileSourceExtendedBitmap @ 38 NONAME
+	_ZTV37CTestImageDecFileSourceExtendedBitmap @ 39 NONAME
+

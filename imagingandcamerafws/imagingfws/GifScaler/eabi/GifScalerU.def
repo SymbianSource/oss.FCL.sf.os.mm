@@ -1,0 +1,11 @@
+EXPORTS
+	_ZN10CGifScaler14ThresholdScaleEP14TRequestStatusR10CFbsBitmapR8CPalettehi @ 1 NONAME
+	_ZN10CGifScaler4NewLER10CFbsBitmapNS_8TOptionsE @ 2 NONAME
+	_ZN10CGifScaler4NewLER10CFbsBitmapS1_NS_8TOptionsE @ 3 NONAME
+	_ZN10CGifScaler5ScaleEP14TRequestStatusR10CFbsBitmapR8CPalettei @ 4 NONAME
+	_ZN10CGifScaler6CancelEv @ 5 NONAME
+	_ZN10CGifScalerD0Ev @ 6 NONAME
+	_ZN10CGifScalerD1Ev @ 7 NONAME
+	_ZN10CGifScalerD2Ev @ 8 NONAME
+	_ZTI10CGifScaler @ 9 NONAME ; #<TI>#
+	_ZTV10CGifScaler @ 10 NONAME ; #<VT>#

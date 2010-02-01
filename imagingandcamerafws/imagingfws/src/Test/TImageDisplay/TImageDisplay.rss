@@ -1,0 +1,599 @@
+// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+NAME TIDS
+
+#include <techview/eikon.rh>
+
+#include "TImageDisplay.hrh"
+
+#include <techview/eikon.rsg>
+
+RESOURCE RSS_SIGNATURE { }
+
+RESOURCE TBUF { buf=""; }
+
+RESOURCE EIK_APP_INFO
+	{
+	menubar=r_video_menubar;
+	hotkeys=r_video_hotkeys;
+	}
+
+RESOURCE HOTKEYS r_video_hotkeys
+	{
+	control=
+		{
+		HOTKEY { command=EVideoCmdSaveAs; key='a'; },
+		HOTKEY { command=EVideoCmdBackgroundColor; key='b'; },
+		HOTKEY { command=EVideoCmdDisplayMode; key='d'; },
+		HOTKEY { command=EVideoCmdScalingQuality; key='s'; },
+		HOTKEY { command=EEikCmdExit; key='e'; },
+		HOTKEY { command=EVideoCmdExtractFrame; key='f'; },
+		HOTKEY { command=EVideoCmdFrameInfo; key='i'; },
+		HOTKEY { command=EVideoCmdMask; key='k'; },
+		HOTKEY { command=EVideoCmdZoomIn; key='m'; },
+		HOTKEY { command=EVideoCmdOpenFile; key='o'; },
+		HOTKEY { command=EVideoCmdPause; key='p'; },
+		HOTKEY { command=EVideoCmdPlay; key='l'; },
+		HOTKEY { command=EVideoCmdRotateClockwise; key='q'; },
+		HOTKEY { command=EVideoCmdRefresh; key='r'; },
+		HOTKEY { command=EVideoCmdDecodeThumbnail; key='t'; },
+		HOTKEY { command=EVideoCmdToggleFrameDump; key='u'; },
+		HOTKEY { command=EVideoCmdFlipVertical; key='v'; },
+		HOTKEY { command=EVideoCmdFlipHorizontal; key='h'; },
+		HOTKEY { command=EVideoCmdClipRectParams; key='c'; }
+		};
+	shift_control=
+		{
+		HOTKEY { command=EVideoCmdAutoRotate; key='a';},
+		HOTKEY { command=EVideoCmdZoomOut; key='m'; },
+		HOTKEY { command=EVideoCmdResetZoom; key='r'; },
+		HOTKEY { command=EVideoCmdRotateAntiClockwise; key='q'; },
+		HOTKEY { command=EVideoCmdMaxReduction; key='t'; },
+		HOTKEY { command=EVideoCmdPauseAfterEachFrame; key='p'; }
+		};
+	}
+
+RESOURCE MENU_BAR r_video_menubar
+	{
+	titles=
+		{
+		MENU_TITLE { menu_pane=r_video_file_menu; txt="File"; },
+		MENU_TITLE { menu_pane=r_video_view_menu; txt="View"; },
+		MENU_TITLE { menu_pane=r_video_clip_menu; txt="Image"; },
+		MENU_TITLE { menu_pane=r_options_menu; txt="Setup"; }
+		};
+	}
+
+RESOURCE MENU_PANE r_video_file_menu
+	{
+	items=
+		{
+		MENU_ITEM { command=EVideoCmdOpenFile; txt="Open file…"; },
+		MENU_ITEM { command=EVideoCmdDrmParams; txt="Set DRM params…"; },
+		MENU_ITEM { command=EVideoCmdOpenFolder; txt="Open folder…"; flags=EEikMenuItemSeparatorAfter;},
+		//MENU_ITEM { command=EVideoCmdSaveAs; txt="Save as…"; flags=EEikMenuItemSeparatorAfter; },
+		MENU_ITEM { command=EEikCmdExit; txt="Close"; }
+		};
+	}
+
+RESOURCE MENU_PANE r_video_view_menu
+	{
+	items=
+		{
+		MENU_ITEM { command=EVideoCmdDecodeThumbnail; txt="Decode thumbnail"; flags=EEikMenuItemCheckBox;},
+		MENU_ITEM { command=EVideoCmdZoomIn; txt="Zoom in"; },
+		MENU_ITEM { command=EVideoCmdZoomOut; txt="Zoom out"; },
+		MENU_ITEM { command=EVideoCmdResetZoom; txt="Original size"; },
+		MENU_ITEM { command=EVideoCmdRotateClockwise; txt="Rotate clockwise"; flags=EEikMenuItemCheckBox;},
+		MENU_ITEM { command=EVideoCmdRotateAntiClockwise; txt="Rotate anti-clockwise"; flags=EEikMenuItemCheckBox;},
+		MENU_ITEM { command=EVideoCmdFlipVertical; txt="Flip Vertical"; flags=EEikMenuItemCheckBox;},
+		MENU_ITEM { command=EVideoCmdFlipHorizontal; txt="Flip Horizontal"; flags=EEikMenuItemCheckBox;},
+		MENU_ITEM { command=EVideoCmdAutoRotate; txt="Auto Rotation"; flags=EEikMenuItemCheckBox;}
+		};
+	}
+
+RESOURCE MENU_PANE r_video_clip_menu
+	{
+	items=
+		{
+		MENU_ITEM { command=EVideoCmdPlay; txt="Play"; },
+		MENU_ITEM { command=EVideoCmdPause; txt="Pause"; },
+		MENU_ITEM { command=EVideoCmdRefresh; txt="Restart"; flags=EEikMenuItemSeparatorAfter; },
+		MENU_ITEM { command=EVideoCmdToggleFrameDump; txt="Dump frames to c:\\temp\\"; flags=EEikMenuItemCheckBox;},
+		MENU_ITEM { command=EVideoCmdPauseAfterEachFrame; txt="Pause after frame"; flags=EEikMenuItemCheckBox|EEikMenuItemSeparatorAfter; },
+		MENU_ITEM { command=EVideoCmdFrameInfo; txt="Image Information…"; }
+		//MENU_ITEM { command=EVideoCmdExtractFrame; txt="Extract frame…"; }
+		};
+	}
+
+RESOURCE MENU_PANE r_options_menu
+	{
+	items=
+		{
+		MENU_ITEM { command=EVideoCmdMask; txt="Toggle mask"; flags=EEikMenuItemSeparatorAfter;},
+		MENU_ITEM { command=EVideoCmdDisplayMode; txt="Display mode…"; },
+		MENU_ITEM { command=EVideoCmdScalingQuality; txt="Scaling quality…"; },
+		MENU_ITEM { command=EVideoCmdBackgroundColor; txt="Background color…"; },
+		MENU_ITEM { command=EVideoCmdClipRectParams; txt="Clip rect setup…"; },
+		MENU_ITEM { command=EVideoCmdMaxReduction; txt="Set Max. reduction…"; }
+		};
+	}
+
+RESOURCE DIALOG r_video_display_mode_dialog
+	{
+    title="Set display mode";
+    flags=EEikDialogFlagWait;
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+		DLG_LINE
+			{
+			prompt="Display mode";
+            type=EEikCtChoiceList;
+			id=EVideoIdDisplayMode;
+			control=CHOICELIST { array_id=r_video_display_mode_array; };
+			}
+		};
+	}
+
+RESOURCE DIALOG r_video_background_color_dialog
+	{
+    title="Set background color";
+    flags=EEikDialogFlagWait;
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+        DLG_LINE
+            {
+			type=EEikCtCheckBox;
+            prompt="Override background color";
+			id=EVideoIdOverrideBackgroundColor;
+            },
+		DLG_LINE
+			{
+			prompt="Use color";
+            type=EEikCtChoiceList;
+			id=EVideoIdBackgroundColor;
+			control=CHOICELIST { array_id=r_video_background_color_array; };
+			}
+		};
+	}
+
+RESOURCE DIALOG r_video_frame_dialog
+	{
+    title="Set current frame";
+    flags=EEikDialogFlagWait;
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+		DLG_LINE
+			{
+			prompt="Number of frames";
+            type=EEikCtNumberEditor;
+			id=EVideoIdNumberOfFrames;
+			control=NUMBER_EDITOR
+				{
+				min=0;
+				max=999999;
+				};
+			},
+		DLG_LINE
+			{
+			prompt="Current frame number";
+            type=EEikCtNumberEditor;
+			id=EVideoIdCurrentFrameNumber;
+			control=NUMBER_EDITOR
+				{
+				min=0;
+				max=999999;
+				};
+			}
+		};
+	}
+
+RESOURCE ARRAY r_video_display_mode_array
+	{
+	items=
+		{
+		LBUF { txt="EGray2"; },
+		LBUF { txt="EGray4"; },
+		LBUF { txt="EGray16"; },
+		LBUF { txt="EGray256"; },
+		LBUF { txt="EColor16"; },
+		LBUF { txt="EColor256"; },
+		LBUF { txt="EColor4K"; },
+		LBUF { txt="EColor64K"; },
+		LBUF { txt="EColor16M"; },
+		LBUF { txt="EColor16MU"; }
+		};
+	}
+
+RESOURCE ARRAY r_video_full_display_mode_array // same order as TDisplayMode
+	{
+	items=
+		{
+		LBUF { txt="ENone"; },
+		LBUF { txt="EGray2"; },
+		LBUF { txt="EGray4"; },
+		LBUF { txt="EGray16"; },
+		LBUF { txt="EGray256"; },
+		LBUF { txt="EColor16"; },
+		LBUF { txt="EColor256"; },
+		LBUF { txt="EColor64K"; },
+		LBUF { txt="EColor16M"; },
+		LBUF { txt="ERgb"; },
+		LBUF { txt="EColor4K"; },
+		LBUF { txt="EColor16MU"; }
+		};
+	}
+
+RESOURCE ARRAY r_video_background_color_array
+	{
+	items=
+		{
+		LBUF { txt="Black"; },
+		LBUF { txt="Dark Gray"; },
+		LBUF { txt="Dark Red"; },
+		LBUF { txt="Dark Yellow"; },
+		LBUF { txt="Dark Green"; },
+		LBUF { txt="Red"; },
+		LBUF { txt="Yellow"; },
+		LBUF { txt="Green"; },
+		LBUF { txt="Magenta"; },
+		LBUF { txt="Blue"; },
+		LBUF { txt="Cyan"; },
+		LBUF { txt="Dark Magenta"; },
+		LBUF { txt="Dark Blue"; },
+		LBUF { txt="Dark Cyan"; },
+		LBUF { txt="Gray"; },
+		LBUF { txt="White"; }
+		};
+	}
+
+RESOURCE DIALOG r_video_file_saveas_dialog
+    {
+    flags=EEikDialogFlagWait;
+    title="Save as";
+    buttons=r_video_format_browse_cancel_ok_buttons;
+    items=
+        {
+        DLG_LINE
+            {
+            prompt="Name";
+            type=EEikCtFileNameEd;
+            id=EEikCidFileNameEd;
+            control=FILENAMEEDITOR {};
+            },
+        DLG_LINE
+            {
+            prompt="Folder";
+            type=EEikCtFolderNameSel;
+            id=EEikCidFolderNameSel;
+            control=FOLDERNAMESELECTOR {};
+            },
+        DLG_LINE
+            {
+            prompt="Disk";
+            type=EEikCtDriveNameSel;
+            id=EEikCidDriveNameSel;
+            control=DRIVENAMESELECTOR {};
+            },
+        DLG_LINE
+            {
+			type=EEikCtCheckBox;
+            prompt="Use new file";
+			id=EEikCidUseNewFileChbx;
+            },
+        DLG_LINE
+            {
+			prompt="Format";
+            type=EEikCtLabel;
+			id=EVideoIdSaveAsFormat;
+			control=LABEL { txt="Compuserve gif"; }; // Longest possible choice
+            }
+        };
+    }
+
+RESOURCE DLG_BUTTONS r_video_format_browse_cancel_ok_buttons
+    {
+    buttons=
+		{
+		DLG_BUTTON { id=EVideoBidFormat; button=CMBUT {txt="Format…";}; hotkey='F'; },
+		DLG_BUTTON { id=EEikBidBrowse; button=CMBUT {txt="Browse…";}; hotkey='B'; },
+		DLG_BUTTON { id=EEikBidCancel; button=CMBUT {txt="Cancel";}; hotkey=EEikBidCancel; flags=0;},
+		DLG_BUTTON { id=EEikBidOk; button=CMBUT {txt="OK";}; hotkey=EEikBidOk; flags=0; }
+		};
+    }
+
+RESOURCE ARRAY r_scaling_quality_array
+	{
+	items=
+		{
+		LBUF { txt="Low (fast)"; },
+		LBUF { txt="Medium"; },
+		LBUF { txt="High (slow)"; }
+		};
+	}
+
+RESOURCE DIALOG r_scaling_quality_dialog
+    {
+    flags=EEikDialogFlagWait;
+    title="Scaling quality";
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+        DLG_LINE
+            {
+            type=EEikCtChoiceList;
+            prompt="Colour";
+			id=EImageScalingQuality;
+            control=CHOICELIST { array_id=r_scaling_quality_array; };
+            }
+		};
+	}
+
+RESOURCE DIALOG r_drm_content_params_dialog
+    {
+    flags=EEikDialogFlagWait;
+    title="DRM Content Id";
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+        DLG_LINE
+            {
+            type=EEikCtEdwin;
+            control=EDWIN {lines=1; width=15;};
+			id=EImageDrmContentId;
+            }
+		};
+	}
+
+RESOURCE DIALOG r_image_max_reduction_factor
+    {
+    flags=EEikDialogFlagWait;
+    title="Maximum reduction factor";
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+        DLG_LINE
+            {
+			type=EEikCtNumberEditor;
+			prompt="Maxi. reduction";
+			id=EImageMaxAllowedReduction;
+			control=
+			NUMBER_EDITOR
+				{
+				min=0;
+				max=3;
+				};
+            }
+		};
+	}
+
+RESOURCE DIALOG r_image_clip_rect_dialog
+    {
+    flags=EEikDialogFlagWait;
+    title="Clip rect params";
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+        DLG_LINE
+            {
+			type=EEikCtCheckBox;
+            prompt="Use clip rect";
+			id=EImageUseClipRect;
+            },
+        DLG_LINE
+            {
+			type=EEikCtNumberEditor;
+			prompt="Top-left X";
+			id=EImageClipRectTlx;
+			control=
+			NUMBER_EDITOR
+				{
+				min=0;
+				max=327680;
+				};
+            },
+        DLG_LINE
+            {
+			type=EEikCtNumberEditor;
+			prompt="Top-left Y";
+			id=EImageClipRectTly;
+			control=
+			NUMBER_EDITOR
+				{
+				min=0;
+				max=327680;
+				};
+            },
+        DLG_LINE
+            {
+			type=EEikCtNumberEditor;
+			prompt="Bottom-right X";
+			id=EImageClipRectBrx;
+			control=
+			NUMBER_EDITOR
+				{
+				min=0;
+				max=327680;
+				};
+            },
+        DLG_LINE
+            {
+			type=EEikCtNumberEditor;
+			prompt="Bottom-right Y";
+			id=EImageClipRectBry;
+			control=
+			NUMBER_EDITOR
+				{
+				min=0;
+				max=327680;
+				};
+            }
+		};
+	}
+
+RESOURCE DIALOG r_video_file_format_dialog
+    {
+    flags=EEikDialogFlagWait;
+    title="File format";
+    buttons=R_EIK_BUTTONS_CANCEL_OK;
+    items=
+        {
+        DLG_LINE
+            {
+            type=EEikCtChoiceList;
+            prompt="Type";
+			id=EVideoIdFileFormatType;
+            control=CHOICELIST {};
+            },
+        DLG_LINE
+            {
+            type=EEikCtChoiceList;
+            prompt="Format";
+			id=EVideoIdFileFormatBpp;
+            control=CHOICELIST { array_id=r_video_file_format_bpp_array; };
+            },
+        DLG_LINE
+            {
+            type=EEikCtChoiceList;
+            prompt="Colour";
+			id=EVideoIdFileFormatColor;
+            control=CHOICELIST { array_id=r_video_file_format_color_array; };
+            },
+        DLG_LINE
+            {
+			type=EEikCtNumberEditor;
+			prompt="Quality";
+			id=EVideoIdFileFormatFactor;
+			control=
+			NUMBER_EDITOR
+				{
+				min=1;
+				max=100;
+				};
+            },
+        DLG_LINE
+            {
+            type=EEikCtChoiceList;
+            prompt="Sampling";
+			id=EVideoIdFileFormatSampling;
+            control=CHOICELIST { array_id=r_video_file_format_sampling_array; };
+            },
+		DLG_LINE
+			{
+			type=EEikCtChoiceList;
+			prompt="Compression";
+			id=EVideoIdFileFormatCompression;
+			control=CHOICELIST { array_id=r_video_file_format_compression_array; };
+			}
+        };
+    }
+
+RESOURCE ARRAY r_video_file_format_bpp_array
+	{
+	items=
+		{
+		LBUF { txt="1"; },
+		LBUF { txt="2"; },
+		LBUF { txt="4"; },
+		LBUF { txt="8"; },
+		LBUF { txt="12"; },
+		LBUF { txt="16"; },
+		LBUF { txt="24"; },
+		LBUF { txt="32"; }
+		};
+	}
+
+RESOURCE ARRAY r_video_file_format_color_array
+	{
+	items=
+		{
+		LBUF { txt="No"; },
+		LBUF { txt="Yes"; }
+		};
+	}
+
+RESOURCE ARRAY r_video_file_format_sampling_array
+	{
+	items=
+		{
+		LBUF { txt="4:4:4"; },
+		LBUF { txt="4:2:2"; },
+		LBUF { txt="4:2:0"; }
+		};
+	}
+
+RESOURCE ARRAY r_video_file_format_compression_array
+	{
+	items=
+		{
+		LBUF { txt="Default"; },
+		LBUF { txt="No compression"; },
+		LBUF { txt="Best speed"; },
+		LBUF { txt="Best compression"; }
+		};
+	}
+
+RESOURCE TBUF r_video_server_starting { buf="Server starting..."; }
+RESOURCE TBUF r_video_server_started { buf="Server started"; }
+RESOURCE TBUF r_video_server_failed { buf="Server failed to start (%S)"; }
+RESOURCE TBUF r_video_file_format_bmp { buf="Windows bmp"; }
+RESOURCE TBUF r_video_file_format_gif { buf="Compuserve gif"; }
+RESOURCE TBUF r_video_file_format_jpeg { buf="Jpeg (jfif)"; }
+RESOURCE TBUF r_video_file_format_mbm { buf="Symbian mbm"; }
+RESOURCE TBUF r_video_file_format_png { buf="PNG"; }
+RESOURCE TBUF r_video_file_format_custom { buf="Custom format"; }
+
+RESOURCE TBUF r_video_select_folder { buf="Select folder to open"; }
+RESOURCE TBUF r_video_open_ota { buf="Open OTA file"; }
+RESOURCE TBUF r_video_open_wbmp { buf="Open WBMP file"; }
+
+RESOURCE TBUF r_video_empty_folder { buf ="Empty folder"; }
+
+RESOURCE TBUF r_video_unknown { buf = "unknown command"; }
+
+
+RESOURCE ARRAY r_properties_lines
+	{
+	items=
+		{
+	    DLG_LINE
+		    {
+			type=EEikCtEdwin;
+			control=EDWIN {lines=10; flags=EEikEdwinReadOnly | EEikEdwinNoAutoSelection; width=15;};
+			id=EFramePropertiesPage;
+	        }
+		};
+	}
+
+
+RESOURCE ARRAY r_video_info_pages
+	{
+	items = 
+		{
+		PAGE {text="Properties"; lines=r_properties_lines;}
+		};
+	}
+
+RESOURCE DIALOG r_video_info_dialog
+    {
+    flags=EEikDialogFlagWait;
+    title="Image information";
+    buttons=R_EIK_BUTTONS_CONTINUE;
+	pages=r_video_info_pages;
+    }

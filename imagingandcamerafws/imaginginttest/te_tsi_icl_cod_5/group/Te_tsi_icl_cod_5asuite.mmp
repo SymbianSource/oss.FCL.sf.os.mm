@@ -1,0 +1,41 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+TARGET		te_tsi_icl_cod_5asuite.exe
+TARGETTYPE	exe
+UID		0x1000007A 0x10285D38
+
+SOURCEPATH		../src
+SOURCE			Te_tsi_icl_cod_5aSuiteServer.cpp
+SOURCE			Te_tsi_icl_cod_5SuiteStepBase.cpp
+SOURCE			tsi_icl_cod_50aStep.cpp
+SOURCE			tsi_icl_cod_51aStep.cpp
+
+USERINCLUDE		../src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY		euser.lib
+LIBRARY		testexecuteutils.lib 
+LIBRARY		testexecutelogclient.lib 
+
+LIBRARY		efsrv.lib 
+LIBRARY		imageconversion.lib
+LIBRARY		gdi.lib
+LIBRARY		fbscli.lib
+LIBRARY		ecom.lib
+
+
+SMPSAFE

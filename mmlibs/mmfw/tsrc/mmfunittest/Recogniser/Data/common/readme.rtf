@@ -1,0 +1,158 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq1\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;}
+\viewkind4\uc1\pard\cf1\lang2057\b\f0\fs20 Contents\par
+\b0 1. \tab Purpose and Scope of Document\par
+2. \tab Build Tools Summary\par
+3. \tab Build Location\par
+4. \tab Build Scripts Location\par
+5. \tab Codelines and Components Built\par
+6. \tab Mainline Download\par
+7. \tab Automatic Test Execution\par
+8.\tab Commdb\par
+9.\tab Post-Build Checks\par
+10.\tab Logs\par
+11. \tab Manual Builds\par
+12. \tab Open Issues\par
+\par
+\b\par
+1. Purpose and Scope of Document\par
+\b0 This document is a Browsing-specific supplement to the Automated Build Description document that is available on Perforce in //EPOC/development/networkingintegration/documentation/...\par
+\par
+This document contains details on:\par
+- The location of the Browsing build machine \par
+- Which Browsing components get built and tested\par
+- The location of build and test logs\par
+- How to configure the builds\par
+- How to do manual builds\par
+- Issues still to be resolved\par
+\par
+This document does not aim to describe how to set up the automated build scripts from scratch as this is already well documented in the Automated Build Description document mentioned above.\par
+\par
+\par
+\b 2. Build Tools Summary\b0\par
+The build tools described within this document were developed by the Networking Team and then customised for our own use. In short, the build tools provide the following functionality:\par
+- Building for Hurricane, Typhoon and Jetstream (or any other OS release)\par
+- Automatic execution of test harnesses (including on hardware)\par
+- Leavescan tests\par
+- Lint tests\par
+- IPR checking i.e. checks for missing Distribution.Policy files\par
+- C-Cover tests\par
+- Word search i.e. searches code for words that shouldn't be there such as 'to do', 'hack' etc.\par
+- BC checking\par
+\par
+\par
+\b 3. Build Location\par
+\b0 The automated builds and testing for the Browsing components are done on lon-httpbld01. All members of the Browsing team have been given Administration rights on this machine. The machine has three subst'd drives (J:, K: and L:) which are the build drives for Hurricane, Typhoon and Jetstream respectively. \par
+\par
+The build and test logs for all OS variants are automatically copied from these subst'd drives to the BuildLogs directory on D: drive upon completion.\par
+\par
+\par
+\b 4. Build Scripts Location\par
+\b0 The generic i.e. non Browsing-specific, build scripts are stored on Perforce in the following location\par
+//EPOC/development/networkingintegration/buildscripts/...\par
+\par
+The Browsing-specific scripts are stored under:\par
+//EPOC/development/networkingintegration/buildscripts/projects/browsing/...\par
+\par
+A Perforce client named lon-httpbld01_scripts has been created on the build machine and this has a client view of the build scripts. As part of the automated build, the latest build scripts are synced down from Perforce to the D: drive and then copied to the appropriate drive before the build begins e.g. all the generic scripts as well as the browsing-specific scripts for Typhoon get copied from D: to the root of K: drive. To support this functionality it is necessary that autobuild.cmd and copy_files.cmd are first of all synced from Perforce (//EPOC/development/networkingintegration/buildscripts/projects/browsing/...) to the root of the C: drive.\par
+\par
+A number of additional scripts and utilities are also required, details of which can be found in the Automated Build Description document.\par
+\par
+\par
+\b 5. Codelines and Components Built\b0\par
+Currently the HTTP main and test code and the InetProtUtil main and test code are built on the Hurricane Dev branch, the Typhoon Dev branch and both the Jetstream Dev and Jetstream Integ branches. In addition, the Recognisers code is built on the Hurricane Dev and Jetstream Integ branches.\par
+\par
+The codelines that are built are:\par
+Hurricane - //EPOC/development/7.0/generic/application-protocols/http/...\par
+\tab\tab //EPOC/development/7.0/generic/application-protocols/inetprotutil/...\tab\tab\tab\tab\tab\tab\tab //EPOC/development/7.0/generic/application-protocols/recognisers/...\par
+\par
+Typhoon - \tab //EPOC/development/gt149/http/...\par
+\tab     \tab //EPOC/development/gt149/inetprotutil/...\par
+\par
+Jetstream - //EPOC/development/gt0141/http/...\par
+\tab\tab //EPOC/development/gt0141/inetprotutil/...\par
+\tab\tab //EPOC/development/gt0141/recognisers/...\par
+\tab\tab //EPOC/development/http/...\par
+\tab\tab //EPOC/development/generic/inetprotutil/...\par
+\par
+The above client specs are specified in the BuildSpecifications.pm file for each separate OS release under //EPOC/development/networkingintegration/buildscripts/projects/browsing/...\par
+\par
+On the build machine a Perforce client spec has been created named lon-httpbld01_newbld that has no root specified and an empty client view. The BuildSpecifications.pm file will automatically set the root (using the BUILDDRIVE variable) and client view (using the client spec specified in the BuildSpecifications.pm file) as appropriate.\par
+\par
+The automated builds are started each weekday evening at 7pm. This time can be altered within the Scheduled Tasks application in Windows Control Panel by modifying the time at which C:\\autobuild.cmd is called. \par
+\par
+The autobuild.cmd file contains details on which BuildSpecifications are executed. For example, the following extract from the Browsing autobuild.cmd file shows that the Typhoon builds are done on the K: drive, the TypDev BuildSpecification is used, the code is built for WINS, WINSCW and ARM4, the code isn't re-synced for WINSCW and ARM4 builds and only the WINS code is tested.\par
+\par
+\tab\tab REM Setup the drive where the Typhoon builds are executed.\par
+\tab\tab set BUILDDRIVE=k:\par
+\par
+\tab\tab REM ========================================================\par
+\tab\tab\par
+\tab\tab REM Following runs wins, winscw and arm4 builds on Typhoon Development branch\par
+\tab\tab call k:\\new_buildscript -v wins -s TypDev\par
+\tab\tab call k:\\new_buildscript -v winscw -s TypDev /NoClean /NoTest\par
+\tab\tab call k:\\new_buildscript -v arm4 -s TypDev /NoClean /NoTest\par
+\par
+\par
+\b 6. Mainline Download\par
+\b0 The latest mainline zips are automatically copied over from loncoredev02 as part of the automated build procedure. Loncoredev02 contains all the required files for all OS variants. It is the responsibility of the administrator(s) of loncoredev02 to ensure that the most recent zips are available on the machine.\par
+\par
+\par
+\b 7. Automatic Test Execution\b0\par
+The test harnesses to be run automatically are specified within the new_tests.txt file for each separate OS release in //EPOC/development/networkingintegration/buildscripts/projects/browsing/...\par
+New_tests.txt also specifies the log file to write to, any pre- or post-test commands to run and which commdb file to use. A timeout value can also be specified so that if a particular test harness hangs, its execution can be ended after a certain amount of time.\par
+\par
+\par
+\b 8. Commdb\b0\par
+As mentioned in the previous section, it is possible to specify commands in the New_tests.txt file to be run before running a test. One such command is create_commdb.cmd which creates a commdb file suitable for that particular OS release. This command is dependent on there being a suitable ced.cfg or cdbv3.dat file for each OS release on the D: drive of the build machine (the files are stored in folders named commdbHurricane, commdbTyphoon, etc.)\par
+\par
+\par
+\b 9. Post-Build Checks\par
+\b0 A number of post-build checks can automatically be done as part of the build process, including running Leavescan, Lint, doing an IPR check and searching for words that should not be found in source code. The particular checks that are done are specified within the BuildSpecifications.pm file for each OS release. The results of these checks are included with the build and test logs.\par
+\par
+\par
+\b 10. Logs\par
+\b0 On completion of the build, all the logs are copied over from the build drives to the BuildLogs folder on the D: drive on lon-httpbld01. A perl script is then run in this folder which produces a HTML index page for all the builds allowing easy access to build and test logs as well as Lint, Leavescan results etc. The BuildLogs directory has been shared and therefore is accessible over the network.\par
+\par
+\par
+\b 11. Manual Builds\par
+\b0 It's also possible to do a 'manual' build which may be useful if, for example, a minor change is made to the code and you'd like to see immediately if the code still builds and the tests pass. This procedure is described in detail in section 6.2 of the Automated Build Description document but in summary the steps to follow to do a manual build are:\par
+\par
+- Change to the root of the drive you want to build on e.g. K:\\ for a Typhoon build\par
+- Set the BUILDDRIVE value by typing in the following from the command prompt\par
+\tab\tab set BUILDDRIVE=\i driveletter\i0 : e.g. set BUILDDRIVE=k: for Typhoon\par
+- Call the New_buildscript command file with the relevant arguments\par
+\tab\tab e.g. New_buildscript -v winscw -s TypDev\par
+\par
+\par
+\b 12. Open Issues\par
+\b0 SSL Tests - At the moment, both the T_Http and T_HttpOnline test harnesses do not complete as they will hang during the SSL tests due to the need for user input to either accept or reject the server certificate. There are two available workarounds to this - either we obtain the correct certificates so that we no longer get prompted or, if this is not possible, move the SSL tests to separate ini files so that they do not have to be run as part of the automated build and test procedure.\par
+\par
+WSP Tests - WSP tests cannot be run over NT RAS. Not sure how to workaround this problem. Could connect a modem to the build machine to allow dial-up access to a WAP Gateway. But doing this uses up one of the serial ports on the PC. How will this affect the ability to test using NT RAS as this needs two serial ports? Probably could do NT RAS between two separate machines.\par
+\par
+Build Warnings - Still get warnings during the 'reallyclean' stage of the build due to string table 'feature' but these are not really warnings and the script should ignore them. Have emailed Steve Butler (scripts author) about this issue.\par
+\par
+Test Failures - Due to the inconsistant way in which RTEST is used within the HTTP test code, a number of our tests are logged as 'Passed' even though they have in fact failed. This is because the automated test scripts look for 'RTEST: Success' and 'RTEST: Failed' within the test logs to determine whether the test has passed or not. However, within the HTTP test code we use 'RTEST: Success' to signify that the test has completed irrespective of whether a failure was discovered during the test. There are two possible solutions - firstly, the scripts can be modified to just look for 'fail' within the log file (Steve Butler is currently investigating the feasability of this option) or the other option is we call RTest:Printf() from within our test code and print 'RTEST: Failed' when a test fails. The longer term solution is to make our test code more consistant and ensure we use RTEST in the 'correct' way.\par
+\par
+Publishing Logs - Currently build and test logs are copied to d:\\BuildLogs on lon-httpbld01. Ideally in the future, all the teams in C&M will publish their build results on a single webserver so that they are visible to all.\par
+\par
+Archiving & Maintenance - How many build logs are kept? Are they automatically deleted after a certain number of days?\par
+\par
+Mainline Download - The mainline zips are copied over from loncoredev02. However, we have no control over this machine and therefore it may be desirable in the future for there to be 'Mainline store' machine within the Browsing team. As well as giving us more control it will also reduce network traffic as a number of other teams are also using loncoredev02 to download mainlines.\par
+\b\par
+\b0 Commdb - At the moment there are 3 folders on the D: drive named commdbHuricane, commdbTyphoon and commdbJetstream that contain a ced.fg or cdbv3.dat file for that particular OS release. These files are used by the create_commdb.cmd command executed prior to running the tests. The files are not stored on Perforce and no check is made to ensure they are up-to-date and therefore this is not the most desirable solution.\b\par
+\par
+\b0 Zephyr - Need new BuildSpecification. Trivial task.\par
+\par
+Wap-browser and CHF - Extend existing BuildSpecifications. Trivial task.\par
+\par
+Hardware Testing - Haven't tried this.\par
+\par
+BC Checking - Haven't tried this.\par
+\par
+C-Cover - Haven't tried this.\par
+\par
+Detailed Logs - Before starting tests, create directory epoc32\\wins\\c\\logs\\http, after completing tests copy logs directory to somewhere where they will not be deleted after build is completed (as this is default behaviour).\par
+\lang1033\b\par
+}
+ 

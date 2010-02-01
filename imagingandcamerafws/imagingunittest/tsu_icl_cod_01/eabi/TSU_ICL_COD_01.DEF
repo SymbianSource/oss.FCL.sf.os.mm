@@ -1,0 +1,9 @@
+EXPORTS
+	_Z13NewTestSuiteLv @ 1 NONAME
+	_ZTI12CCancelTimer @ 2 NONAME ; #<TI>#
+	_ZTI13RICLCodecStep @ 3 NONAME ; #<TI>#
+	_ZTI14CICLCodecSuite @ 4 NONAME ; #<TI>#
+	_ZTV12CCancelTimer @ 5 NONAME ; #<VT>#
+	_ZTV13RICLCodecStep @ 6 NONAME ; #<VT>#
+	_ZTV14CICLCodecSuite @ 7 NONAME ; #<VT>#
+

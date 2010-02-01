@@ -1,0 +1,667 @@
+EXPORTS
+	_ZN10TFrameInfo18SetFrameDataOffsetEi @ 1 NONAME
+	_ZN10TFrameInfo20SetCurrentDataOffsetEi @ 2 NONAME
+	_ZN10TFrameInfo20SetCurrentFrameStateENS_15TFrameInfoStateE @ 3 NONAME
+	_ZN11TGifCommentC1Ev @ 4 NONAME
+	_ZN11TGifCommentC2Ev @ 5 NONAME
+	_ZN11TGifLZWInfoC1Ev @ 6 NONAME
+	_ZN11TGifLZWInfoC2Ev @ 7 NONAME
+	_ZN11TJpegQTableC1Ev @ 8 NONAME
+	_ZN11TJpegQTableC2Ev @ 9 NONAME
+	_ZN12TJpegCommentC1Ev @ 10 NONAME
+	_ZN12TJpegCommentC2Ev @ 11 NONAME
+	_ZN13CImageDecoder11CustomAsyncEP14TRequestStatusi @ 12 NONAME
+	_ZN13CImageDecoder11CustomSyncLEi @ 13 NONAME
+	_ZN13CImageDecoder13GetFileTypesLER13RPointerArrayI22CFileExtensionMIMETypeE @ 14 NONAME
+	_ZN13CImageDecoder13SetImageTypeLEi @ 15 NONAME
+	_ZN13CImageDecoder14GetImageTypesLER13RPointerArrayI21CImageTypeDescriptionE @ 16 NONAME
+	_ZN13CImageDecoder15ContinueConvertEP14TRequestStatus @ 17 NONAME
+	_ZN13CImageDecoder16GetMimeTypeDataLERK6TDesC8R5TDes8 @ 18 NONAME
+	_ZN13CImageDecoder16GetMimeTypeFileLER3RFsRK7TDesC16R5TDes8 @ 19 NONAME
+	_ZN13CImageDecoder16ReservedVirtual1Ev @ 20 NONAME
+	_ZN13CImageDecoder16ReservedVirtual2Ev @ 21 NONAME
+	_ZN13CImageDecoder16ReservedVirtual3Ev @ 22 NONAME
+	_ZN13CImageDecoder16ReservedVirtual4Ev @ 23 NONAME
+	_ZN13CImageDecoder16SetAgentPropertyEN13ContentAccess14TAgentPropertyEi @ 24 NONAME
+	_ZN13CImageDecoder17FrameInfoStringsLEi @ 25 NONAME
+	_ZN13CImageDecoder17GetImageSubTypesLE4TUidR13RPointerArrayI21CImageTypeDescriptionE @ 26 NONAME
+	_ZN13CImageDecoder18FrameInfoStringsLCEi @ 27 NONAME
+	_ZN13CImageDecoder25ContinueProcessingHeaderLEv @ 28 NONAME
+	_ZN13CImageDecoder29GetImplementationInformationLE4TUid @ 29 NONAME
+	_ZN13CImageDecoder6CancelEv @ 30 NONAME
+	_ZN13CImageDecoder7ConvertEP14TRequestStatusR10CFbsBitmapS3_i @ 31 NONAME
+	_ZN13CImageDecoder7ConvertEP14TRequestStatusR10CFbsBitmapi @ 32 NONAME
+	_ZN13CImageDecoder8DataNewLER3RFsRK6TDesC8NS_8TOptionsE4TUidS6_S6_ @ 33 NONAME
+	_ZN13CImageDecoder8DataNewLER3RFsRK6TDesC8S4_NS_8TOptionsE @ 34 NONAME
+	_ZN13CImageDecoder8FileNewLER3RFsRK7TDesC16N13ContentAccess7TIntentENS_8TOptionsE4TUidS8_S8_ @ 35 NONAME
+	_ZN13CImageDecoder8FileNewLER3RFsRK7TDesC16NS_8TOptionsE4TUidS6_S6_ @ 36 NONAME
+	_ZN13CImageDecoder8FileNewLER3RFsRK7TDesC16RK6TDesC8N13ContentAccess7TIntentENS_8TOptionsE @ 37 NONAME
+	_ZN13CImageDecoder8FileNewLER3RFsRK7TDesC16RK6TDesC8NS_8TOptionsE @ 38 NONAME
+	_ZN13CImageDecoder8FileNewLER3RFsRK9TMMSourceNS_8TOptionsE4TUidS6_S6_ @ 39 NONAME
+	_ZN13CImageDecoder8FileNewLER3RFsRK9TMMSourceRK6TDesC8NS_8TOptionsE @ 40 NONAME
+	_ZN13CImageDecoder8FileNewLER5RFileN13ContentAccess7TIntentENS_8TOptionsE4TUidS5_S5_ @ 41 NONAME
+	_ZN13CImageDecoder8FileNewLER5RFileRK6TDesC8N13ContentAccess7TIntentENS_8TOptionsE @ 42 NONAME
+	_ZN13CImageDecoderC1Ev @ 43 NONAME
+	_ZN13CImageDecoderC2Ev @ 44 NONAME
+	_ZN13CImageDecoderD0Ev @ 45 NONAME
+	_ZN13CImageDecoderD1Ev @ 46 NONAME
+	_ZN13CImageDecoderD2Ev @ 47 NONAME
+	_ZN13CImageEncoder11CustomAsyncEP14TRequestStatusi @ 48 NONAME
+	_ZN13CImageEncoder11CustomSyncLEi @ 49 NONAME
+	_ZN13CImageEncoder12SetThumbnailEi @ 50 NONAME
+	_ZN13CImageEncoder13GetFileTypesLER13RPointerArrayI22CFileExtensionMIMETypeE @ 51 NONAME
+	_ZN13CImageEncoder14GetImageTypesLER13RPointerArrayI21CImageTypeDescriptionE @ 52 NONAME
+	_ZN13CImageEncoder16ReservedVirtual1Ev @ 53 NONAME
+	_ZN13CImageEncoder16ReservedVirtual2Ev @ 54 NONAME
+	_ZN13CImageEncoder16ReservedVirtual3Ev @ 55 NONAME
+	_ZN13CImageEncoder16ReservedVirtual4Ev @ 56 NONAME
+	_ZN13CImageEncoder17GetImageSubTypesLE4TUidR13RPointerArrayI21CImageTypeDescriptionE @ 57 NONAME
+	_ZN13CImageEncoder6CancelEv @ 58 NONAME
+	_ZN13CImageEncoder7ConvertEP14TRequestStatusRK10CFbsBitmapPK15CFrameImageData @ 59 NONAME
+	_ZN13CImageEncoder8DataNewLERP6HBufC8NS_8TOptionsE4TUidS4_S4_ @ 60 NONAME
+	_ZN13CImageEncoder8DataNewLERP6HBufC8RK6TDesC8NS_8TOptionsE @ 61 NONAME
+	_ZN13CImageEncoder8FileNewLER3RFsRK7TDesC16NS_8TOptionsE4TUidS6_S6_ @ 62 NONAME
+	_ZN13CImageEncoder8FileNewLER3RFsRK7TDesC16RK6TDesC8NS_8TOptionsE @ 63 NONAME
+	_ZN13CImageEncoder8FileNewLER5RFileNS_8TOptionsE4TUidS3_S3_ @ 64 NONAME
+	_ZN13CImageEncoder8FileNewLER5RFileRK6TDesC8NS_8TOptionsE @ 65 NONAME
+	_ZN13CImageEncoderC1Ev @ 66 NONAME
+	_ZN13CImageEncoderC2Ev @ 67 NONAME
+	_ZN13CImageEncoderD0Ev @ 68 NONAME
+	_ZN13CImageEncoderD1Ev @ 69 NONAME
+	_ZN13CImageEncoderD2Ev @ 70 NONAME
+	_ZN13TBmpImageDataC1Ev @ 71 NONAME
+	_ZN13TBmpImageDataC2Ev @ 72 NONAME
+	_ZN14CErrorDiffuser4NewLEv @ 73 NONAME
+	_ZN14TGifColorTableC1Ev @ 74 NONAME
+	_ZN14TGifColorTableC2Ev @ 75 NONAME
+	_ZN14TJpegImageDataC1Ev @ 76 NONAME
+	_ZN14TJpegImageDataC2Ev @ 77 NONAME
+	_ZN14TMbmDecodeDataC1Ev @ 78 NONAME
+	_ZN14TMbmDecodeDataC2Ev @ 79 NONAME
+	_ZN14TMbmEncodeDataC1Ev @ 80 NONAME
+	_ZN14TMbmEncodeDataC2Ev @ 81 NONAME
+	_ZN14TPngEncodeDataC1Ev @ 82 NONAME
+	_ZN14TPngEncodeDataC2Ev @ 83 NONAME
+	_ZN14TTiffImageDataC1Ev @ 84 NONAME
+	_ZN14TTiffImageDataC2Ev @ 85 NONAME
+	_ZN15CFrameImageData10Reserved_1Ev @ 86 NONAME
+	_ZN15CFrameImageData10Reserved_2Ev @ 87 NONAME
+	_ZN15CFrameImageData10Reserved_3Ev @ 88 NONAME
+	_ZN15CFrameImageData10Reserved_4Ev @ 89 NONAME
+	_ZN15CFrameImageData12GetFrameDataEi @ 90 NONAME
+	_ZN15CFrameImageData12GetImageDataEi @ 91 NONAME
+	_ZN15CFrameImageData15AppendFrameDataEPK15TFrameDataBlock @ 92 NONAME
+	_ZN15CFrameImageData15AppendImageDataEPK15TImageDataBlock @ 93 NONAME
+	_ZN15CFrameImageData15InsertFrameDataEPK15TFrameDataBlocki @ 94 NONAME
+	_ZN15CFrameImageData15InsertImageDataEPK15TImageDataBlocki @ 95 NONAME
+	_ZN15CFrameImageData15RemoveFrameDataEi @ 96 NONAME
+	_ZN15CFrameImageData15RemoveImageDataEi @ 97 NONAME
+	_ZN15CFrameImageData17AppendImageBufferEPK6HBufC8 @ 98 NONAME
+	_ZN15CFrameImageData4NewLER15CImageDataArrayi @ 99 NONAME
+	_ZN15CFrameImageData4NewLEv @ 100 NONAME
+	_ZN15CFrameImageDataD0Ev @ 101 NONAME
+	_ZN15CFrameImageDataD1Ev @ 102 NONAME
+	_ZN15CFrameImageDataD2Ev @ 103 NONAME
+	_ZN15CImageProcessor16ReservedVirtual1Ev @ 104 NONAME
+	_ZN15CImageProcessor16ReservedVirtual2Ev @ 105 NONAME
+	_ZN15CImageProcessor16ReservedVirtual3Ev @ 106 NONAME
+	_ZN15CImageProcessor16ReservedVirtual4Ev @ 107 NONAME
+	_ZN15CImageReadCodec10ConstructLEv @ 108 NONAME
+	_ZN15CImageReadCodec12ClearBitmapLER10CFbsBitmap4TRgb @ 109 NONAME
+	_ZN15CImageReadCodec15InitFrameHeaderER10TFrameInfoR15CFrameImageData @ 110 NONAME
+	_ZN15CImageReadCodec16ReservedVirtual1Ev @ 111 NONAME
+	_ZN15CImageReadCodec16ReservedVirtual2Ev @ 112 NONAME
+	_ZN15CImageReadCodec16ReservedVirtual3Ev @ 113 NONAME
+	_ZN15CImageReadCodec16ReservedVirtual4Ev @ 114 NONAME
+	_ZN15CImageReadCodec18GetNewDataPositionERiS0_ @ 115 NONAME
+	_ZN15CImageReadCodec19ProcessFrameHeaderLER8TBufPtr8 @ 116 NONAME
+	_ZN15CImageReadCodec8CompleteEv @ 117 NONAME
+	_ZN15CImageReadCodecC2Ev @ 118 NONAME
+	_ZN15CImageReadCodecD0Ev @ 119 NONAME
+	_ZN15CImageReadCodecD1Ev @ 120 NONAME
+	_ZN15CImageReadCodecD2Ev @ 121 NONAME
+	_ZN15TBmpCompressionC1Ev @ 122 NONAME
+	_ZN15TBmpCompressionC2Ev @ 123 NONAME
+	_ZN15TColorConvertor4NewLE12TDisplayMode @ 124 NONAME
+	_ZN15TFrameDataBlockC2E4TUid @ 125 NONAME
+	_ZN15TImageDataBlockC2E4TUid @ 126 NONAME
+	_ZN16CImageWriteCodec10ConstructLEv @ 127 NONAME
+	_ZN16CImageWriteCodec10InitFrameLER8TBufPtr8RK10CFbsBitmap @ 128 NONAME
+	_ZN16CImageWriteCodec16ReservedVirtual1Ev @ 129 NONAME
+	_ZN16CImageWriteCodec16ReservedVirtual2Ev @ 130 NONAME
+	_ZN16CImageWriteCodec16ReservedVirtual3Ev @ 131 NONAME
+	_ZN16CImageWriteCodec16ReservedVirtual4Ev @ 132 NONAME
+	_ZN16CImageWriteCodec9SetSourceEPK10CFbsBitmap @ 133 NONAME
+	_ZN16CImageWriteCodecC2Ev @ 134 NONAME
+	_ZN16CImageWriteCodecD0Ev @ 135 NONAME
+	_ZN16CImageWriteCodecD1Ev @ 136 NONAME
+	_ZN16CImageWriteCodecD2Ev @ 137 NONAME
+	_ZN16TGifImageControlC1Ev @ 138 NONAME
+	_ZN16TGifImageControlC2Ev @ 139 NONAME
+	_ZN16TImageBitmapUtil10SetBitmapLEP10CFbsBitmap @ 140 NONAME
+	_ZN16TImageBitmapUtil3EndEv @ 141 NONAME
+	_ZN16TImageBitmapUtil5BeginERK6TPoint @ 142 NONAME
+	_ZN16TImageBitmapUtil5BeginEv @ 143 NONAME
+	_ZN16TImageBitmapUtil6SetPosERK6TPoint @ 144 NONAME
+	_ZN16TImageBitmapUtil8SetPixelEm @ 145 NONAME
+	_ZN16TImageBitmapUtil9SetPixelsEPmi @ 146 NONAME
+	_ZN16TImageBitmapUtilC1Ev @ 147 NONAME
+	_ZN16TImageBitmapUtilC2Ev @ 148 NONAME
+	_ZN17CFrameInfoStrings10SetFormatLERK7TDesC16 @ 149 NONAME
+	_ZN17CFrameInfoStrings11SetDecoderLERK7TDesC16 @ 150 NONAME
+	_ZN17CFrameInfoStrings11SetDetailsLERK7TDesC16 @ 151 NONAME
+	_ZN17CFrameInfoStrings14SetDimensionsLERK7TDesC16 @ 152 NONAME
+	_ZN17CFrameInfoStrings4NewLEv @ 153 NONAME
+	_ZN17CFrameInfoStrings5NewLCEv @ 154 NONAME
+	_ZN17CFrameInfoStrings9SetDepthLERK7TDesC16 @ 155 NONAME
+	_ZN17CFrameInfoStringsD0Ev @ 156 NONAME
+	_ZN17CFrameInfoStringsD1Ev @ 157 NONAME
+	_ZN17CFrameInfoStringsD2Ev @ 158 NONAME
+	_ZN18CIclRecognizerUtil12GetMimeTypeLERK6TDesC8RK7TDesC16R5TDes8 @ 159 NONAME
+	_ZN18CIclRecognizerUtil4NewLEv @ 160 NONAME
+	_ZN19CImageDecoderPlugin10SourceDataEv @ 161 NONAME
+	_ZN19CImageDecoderPlugin11SetPositionEi @ 162 NONAME
+	_ZN19CImageDecoderPlugin12InitConvertLEv @ 163 NONAME
+	_ZN19CImageDecoderPlugin12SelfCompleteEi @ 164 NONAME
+	_ZN19CImageDecoderPlugin12SetImageInfoERK10TFrameInfo @ 165 NONAME
+	_ZN19CImageDecoderPlugin13SetDataLengthEi @ 166 NONAME
+	_ZN19CImageDecoderPlugin14NotifyCompleteEv @ 167 NONAME
+	_ZN19CImageDecoderPlugin14SetSelfPendingEv @ 168 NONAME
+	_ZN19CImageDecoderPlugin15AppendImageDataEPK15TImageDataBlock @ 169 NONAME
+	_ZN19CImageDecoderPlugin15InsertImageDataEPK15TImageDataBlocki @ 170 NONAME
+	_ZN19CImageDecoderPlugin15RemoveImageDataEi @ 171 NONAME
+	_ZN19CImageDecoderPlugin15RequestCompleteEi @ 172 NONAME
+	_ZN19CImageDecoderPlugin16InitCustomAsyncLEi @ 173 NONAME
+	_ZN19CImageDecoderPlugin16ReservedVirtual1Ev @ 174 NONAME
+	_ZN19CImageDecoderPlugin13GetExtensionLE4TUidRP19MImageConvExtension @ 175 NONAME
+	_ZN19CImageDecoderPlugin16SetClippingRectLEPK5TRect @ 176 NONAME
+	_ZN19CImageDecoderPlugin18GetDestinationSizeER5TSizei @ 177 NONAME
+	_ZN19CImageDecoderPlugin16SetStartPositionEi @ 178 NONAME
+	_ZN19CImageDecoderPlugin16SetThumbnailDataEP6HBufC8 @ 179 NONAME
+	_ZN19CImageDecoderPlugin17HandleCustomSyncLEi @ 180 NONAME
+	_ZN19CImageDecoderPlugin17ReadFrameHeadersLEv @ 181 NONAME
+	_ZN19CImageDecoderPlugin17SetImageReadCodecEP15CImageReadCodec @ 182 NONAME
+	_ZN19CImageDecoderPlugin20EnableMaskGenerationEv @ 183 NONAME
+	_ZN19CImageDecoderPlugin21AppendImageDataBufferEPK6HBufC8 @ 184 NONAME
+	_ZN19CImageDecoderPlugin22NotifyImageTypeChangeLEi @ 185 NONAME
+	_ZN19CImageDecoderPlugin23PrepareForProcessFrameLEv @ 186 NONAME
+	_ZN19CImageDecoderPlugin24HandleProcessFrameResultEi11TFrameState @ 187 NONAME
+	_ZN19CImageDecoderPlugin7CleanupEv @ 188 NONAME
+	_ZN19CImageDecoderPlugin9DoConvertEv @ 189 NONAME
+	_ZN19CImageDecoderPlugin9ReadDataLEiR6TPtrC8i @ 190 NONAME
+	_ZN19CImageDecoderPluginC2Ev @ 191 NONAME
+	_ZN19CImageDecoderPluginD0Ev @ 192 NONAME
+	_ZN19CImageDecoderPluginD1Ev @ 193 NONAME
+	_ZN19CImageDecoderPluginD2Ev @ 194 NONAME
+	_ZN19CImageEncoderPlugin10WriteDataLEiRK6TDesC8 @ 195 NONAME
+	_ZN19CImageEncoderPlugin12InitConvertLEv @ 196 NONAME
+	_ZN19CImageEncoderPlugin12SelfCompleteEi @ 197 NONAME
+	_ZN19CImageEncoderPlugin12SetThumbnailEi @ 198 NONAME
+	_ZN19CImageEncoderPlugin14FinishConvertLEv @ 199 NONAME
+	_ZN19CImageEncoderPlugin14NotifyCompleteEv @ 200 NONAME
+	_ZN19CImageEncoderPlugin14SetSelfPendingEv @ 201 NONAME
+	_ZN19CImageEncoderPlugin14WriteExifDataLERP14TRequestStatus @ 202 NONAME
+	_ZN19CImageEncoderPlugin15DestinationDataEv @ 203 NONAME
+	_ZN19CImageEncoderPlugin15RequestCompleteEi @ 204 NONAME
+	_ZN19CImageEncoderPlugin15WriteThumbnailLEv @ 205 NONAME
+	_ZN19CImageEncoderPlugin16InitCustomAsyncLEi @ 206 NONAME
+	_ZN19CImageEncoderPlugin16ReservedVirtual1Ev @ 207 NONAME
+	_ZN19CImageEncoderPlugin16ReservedVirtual2Ev @ 208 NONAME
+	_ZN19CImageEncoderPlugin16ReservedVirtual3Ev @ 209 NONAME
+	_ZN19CImageEncoderPlugin13GetExtensionLE4TUidRP19MImageConvExtension @ 210 NONAME
+	_ZN19CImageEncoderPlugin17HandleCustomSyncLEi @ 211 NONAME
+	_ZN19CImageEncoderPlugin24HandleProcessFrameResultEi11TFrameState @ 212 NONAME
+	_ZN19CImageEncoderPlugin7CleanupEv @ 213 NONAME
+	_ZN19CImageEncoderPlugin9DoConvertEv @ 214 NONAME
+	_ZN19CImageEncoderPluginC2Ev @ 215 NONAME
+	_ZN19CImageEncoderPluginD0Ev @ 216 NONAME
+	_ZN19CImageEncoderPluginD1Ev @ 217 NONAME
+	_ZN19CImageEncoderPluginD2Ev @ 218 NONAME
+	_ZN19TGifBackgroundColorC1Ev @ 219 NONAME
+	_ZN19TGifBackgroundColorC2Ev @ 220 NONAME
+	_ZN19TGifImageDescriptorC1Ev @ 221 NONAME
+	_ZN19TGifImageDescriptorC2Ev @ 222 NONAME
+	_ZN21CBufferedImageDecoder11AppendDataLERK6TDesC8 @ 223 NONAME
+	_ZN21CBufferedImageDecoder13ContinueOpenLEv @ 224 NONAME
+	_ZN21CBufferedImageDecoder15ContinueConvertEP14TRequestStatus @ 225 NONAME
+	_ZN21CBufferedImageDecoder17FrameInfoStringsLEi @ 226 NONAME
+	_ZN21CBufferedImageDecoder18FrameInfoStringsLCEi @ 227 NONAME
+	_ZN21CBufferedImageDecoder25ContinueProcessingHeaderLEv @ 228 NONAME
+	_ZN21CBufferedImageDecoder4NewLER3RFs @ 229 NONAME
+	_ZN21CBufferedImageDecoder5OpenLERK6TDesC8N13CImageDecoder8TOptionsE4TUidS5_S5_ @ 230 NONAME
+	_ZN21CBufferedImageDecoder5OpenLERK6TDesC8S2_N13CImageDecoder8TOptionsE @ 231 NONAME
+	_ZN21CBufferedImageDecoder5ResetEv @ 232 NONAME
+	_ZN21CBufferedImageDecoder6CancelEv @ 233 NONAME
+	_ZN21CBufferedImageDecoder7ConvertEP14TRequestStatusR10CFbsBitmapS3_i @ 234 NONAME
+	_ZN21CBufferedImageDecoder7ConvertEP14TRequestStatusR10CFbsBitmapi @ 235 NONAME
+	_ZN21CBufferedImageDecoderD0Ev @ 236 NONAME
+	_ZN21CBufferedImageDecoderD1Ev @ 237 NONAME
+	_ZN21CBufferedImageDecoderD2Ev @ 238 NONAME
+	_ZN21CImageDecodeConstruct10ConstructLEv @ 239 NONAME
+	_ZN21CImageDecodeConstruct16ReservedVirtual1Ev @ 240 NONAME
+	_ZN21CImageDecodeConstruct16ReservedVirtual2Ev @ 241 NONAME
+	_ZN21CImageDecodeConstruct16ReservedVirtual3Ev @ 242 NONAME
+	_ZN21CImageDecodeConstruct16ReservedVirtual4Ev @ 243 NONAME
+	_ZN21CImageDecodeConstructC2Ev @ 244 NONAME
+	_ZN21CImageDecodeConstructD0Ev @ 245 NONAME
+	_ZN21CImageDecodeConstructD1Ev @ 246 NONAME
+	_ZN21CImageDecodeConstructD2Ev @ 247 NONAME
+	_ZN21CImageEncodeConstruct10ConstructLEv @ 248 NONAME
+	_ZN21CImageEncodeConstruct16ReservedVirtual1Ev @ 249 NONAME
+	_ZN21CImageEncodeConstruct16ReservedVirtual2Ev @ 250 NONAME
+	_ZN21CImageEncodeConstruct16ReservedVirtual3Ev @ 251 NONAME
+	_ZN21CImageEncodeConstruct16ReservedVirtual4Ev @ 252 NONAME
+	_ZN21CImageEncodeConstructC2Ev @ 253 NONAME
+	_ZN21CImageEncodeConstructD0Ev @ 254 NONAME
+	_ZN21CImageEncodeConstructD1Ev @ 255 NONAME
+	_ZN21CImageEncodeConstructD2Ev @ 256 NONAME
+	_ZN21CImageTypeDescriptionD0Ev @ 257 NONAME
+	_ZN21CImageTypeDescriptionD1Ev @ 258 NONAME
+	_ZN21CImageTypeDescriptionD2Ev @ 259 NONAME
+	_ZN21ImageProcessorUtility15ReductionFactorERK5TSizeS2_ @ 260 NONAME
+	_ZN21ImageProcessorUtility18NewImageProcessorLERK10CFbsBitmapRK5TSize12TDisplayModei @ 261 NONAME
+	_ZN21ImageProcessorUtility18NewImageProcessorLERK10CFbsBitmapi12TDisplayModei @ 262 NONAME
+	_ZN22CFileExtensionMIMETypeD0Ev @ 263 NONAME
+	_ZN22CFileExtensionMIMETypeD1Ev @ 264 NONAME
+	_ZN22CFileExtensionMIMETypeD2Ev @ 265 NONAME
+	_ZN24CImageProcessorReadCodec10ConstructLEv @ 266 NONAME
+	_ZN24CImageProcessorReadCodec17SetImageProcessorEP15CImageProcessor @ 267 NONAME
+	_ZN24CImageProcessorReadCodec3PosEv @ 268 NONAME
+	_ZN24CImageProcessorReadCodec6SetPosERK6TPoint @ 269 NONAME
+	_ZN24CImageProcessorReadCodecC2Ev @ 270 NONAME
+	_ZN24CImageProcessorReadCodecD0Ev @ 271 NONAME
+	_ZN24CImageProcessorReadCodecD1Ev @ 272 NONAME
+	_ZN24CImageProcessorReadCodecD2Ev @ 273 NONAME
+	_ZN28CImageMaskProcessorReadCodec10ConstructLEv @ 274 NONAME
+	_ZN28CImageMaskProcessorReadCodec16SetMaskProcessorEP15CImageProcessor @ 275 NONAME
+	_ZN28CImageMaskProcessorReadCodecC2Ev @ 276 NONAME
+	_ZN28CImageMaskProcessorReadCodecD0Ev @ 277 NONAME
+	_ZN28CImageMaskProcessorReadCodecD1Ev @ 278 NONAME
+	_ZN28CImageMaskProcessorReadCodecD2Ev @ 279 NONAME
+	_ZN30CImplementationInformationType5DriveEv @ 280 NONAME
+	_ZN30CImplementationInformationTypeD0Ev @ 281 NONAME
+	_ZN30CImplementationInformationTypeD1Ev @ 282 NONAME
+	_ZN30CImplementationInformationTypeD2Ev @ 283 NONAME
+	_ZNK10TFrameInfo15FrameDataOffsetEv @ 284 NONAME
+	_ZNK10TFrameInfo17CurrentDataOffsetEv @ 285 NONAME
+	_ZNK10TFrameInfo17CurrentFrameStateEv @ 286 NONAME
+	_ZNK13CImageDecoder10FrameCountEv @ 287 NONAME
+	_ZNK13CImageDecoder11ReducedSizeERK5TSizeiRS0_ @ 288 NONAME
+	_ZNK13CImageDecoder13FrameCommentLEii @ 289 NONAME
+	_ZNK13CImageDecoder13ImageCommentLEi @ 290 NONAME
+	_ZNK13CImageDecoder15ReductionFactorERK5TSizeS2_ @ 291 NONAME
+	_ZNK13CImageDecoder17ImplementationUidEv @ 292 NONAME
+	_ZNK13CImageDecoder21NumberOfFrameCommentsEi @ 293 NONAME
+	_ZNK13CImageDecoder21NumberOfImageCommentsEv @ 294 NONAME
+	_ZNK13CImageDecoder31IsImageHeaderProcessingCompleteEv @ 295 NONAME
+	_ZNK13CImageDecoder6PluginEv @ 296 NONAME
+	_ZNK13CImageDecoder9FrameDataEi @ 297 NONAME
+	_ZNK13CImageDecoder9FrameInfoEi @ 298 NONAME
+	_ZNK13CImageDecoder9ImageTypeEiR4TUidS1_ @ 299 NONAME
+	_ZNK13CImageEncoder17ImplementationUidEv @ 300 NONAME
+	_ZNK13CImageEncoder6PluginEv @ 301 NONAME
+	_ZNK15CFrameImageData12GetFrameDataEi @ 302 NONAME
+	_ZNK15CFrameImageData12GetImageDataEi @ 303 NONAME
+	_ZNK15CFrameImageData14FrameDataCountEv @ 304 NONAME
+	_ZNK15CFrameImageData14ImageDataCountEv @ 305 NONAME
+	_ZNK15CFrameImageData6AllocLEv @ 306 NONAME
+	_ZNK15CImageReadCodec11ReducedSizeERK5TSizeiRS0_ @ 307 NONAME
+	_ZNK15CImageReadCodec12CurrentFrameEv @ 308 NONAME
+	_ZNK15CImageReadCodec15ReductionFactorERK5TSizeS2_ @ 309 NONAME
+	_ZNK15TFrameDataBlock8DataTypeEv @ 310 NONAME
+	_ZNK15TImageDataBlock8DataTypeEv @ 311 NONAME
+	_ZNK16CImageWriteCodec6SourceEv @ 312 NONAME
+	_ZNK17CFrameInfoStrings10DimensionsEv @ 313 NONAME
+	_ZNK17CFrameInfoStrings5CountEv @ 314 NONAME
+	_ZNK17CFrameInfoStrings5DepthEv @ 315 NONAME
+	_ZNK17CFrameInfoStrings6FormatEv @ 316 NONAME
+	_ZNK17CFrameInfoStrings6StringEi @ 317 NONAME
+	_ZNK17CFrameInfoStrings7DecoderEv @ 318 NONAME
+	_ZNK17CFrameInfoStrings7DetailsEv @ 319 NONAME
+	_ZNK19CImageDecoderPlugin10AmInThreadEv @ 320 NONAME
+	_ZNK19CImageDecoderPlugin10DataLengthEv @ 321 NONAME
+	_ZNK19CImageDecoderPlugin11DestinationEv @ 322 NONAME
+	_ZNK19CImageDecoderPlugin11ShouldAbortEv @ 323 NONAME
+	_ZNK19CImageDecoderPlugin12SourceLengthEv @ 324 NONAME
+	_ZNK19CImageDecoderPlugin13FrameCommentLEii @ 325 NONAME
+	_ZNK19CImageDecoderPlugin13ImageCommentLEi @ 326 NONAME
+	_ZNK19CImageDecoderPlugin13StartPositionEv @ 327 NONAME
+	_ZNK19CImageDecoderPlugin14FrameBlockSizeEi @ 328 NONAME
+	_ZNK19CImageDecoderPlugin14ImageDataCountEv @ 329 NONAME
+	_ZNK19CImageDecoderPlugin14ImageReadCodecEv @ 330 NONAME
+	_ZNK19CImageDecoderPlugin14NumberOfFramesEv @ 331 NONAME
+	_ZNK19CImageDecoderPlugin15DestinationMaskEv @ 332 NONAME
+	_ZNK19CImageDecoderPlugin16ValidDestinationEv @ 333 NONAME
+	_ZNK19CImageDecoderPlugin20FrameHeaderBlockSizeEi @ 334 NONAME
+	_ZNK19CImageDecoderPlugin20ValidDestinationMaskEv @ 335 NONAME
+	_ZNK19CImageDecoderPlugin21NumberOfFrameCommentsEi @ 336 NONAME
+	_ZNK19CImageDecoderPlugin21NumberOfImageCommentsEv @ 337 NONAME
+	_ZNK19CImageDecoderPlugin23OpenExtraResourceFileLCER3RFs4TUidR13RResourceFile @ 338 NONAME
+	_ZNK19CImageDecoderPlugin31IsImageHeaderProcessingCompleteEv @ 339 NONAME
+	_ZNK19CImageDecoderPlugin8PositionEv @ 340 NONAME
+	_ZNK19CImageDecoderPlugin9FrameDataEi @ 341 NONAME
+	_ZNK19CImageDecoderPlugin9FrameInfoEi @ 342 NONAME
+	_ZNK19CImageDecoderPlugin9ImageDataEi @ 343 NONAME
+	_ZNK19CImageDecoderPlugin9ImageInfoEv @ 344 NONAME
+	_ZNK19CImageEncoderPlugin10AmInThreadEv @ 345 NONAME
+	_ZNK19CImageEncoderPlugin11ShouldAbortEv @ 346 NONAME
+	_ZNK19CImageEncoderPlugin11ValidSourceEv @ 347 NONAME
+	_ZNK19CImageEncoderPlugin13StartPositionEv @ 348 NONAME
+	_ZNK19CImageEncoderPlugin15ImageWriteCodecEv @ 349 NONAME
+	_ZNK19CImageEncoderPlugin17CurrentImageSizeLEv @ 350 NONAME
+	_ZNK19CImageEncoderPlugin18SetImageWriteCodecEP16CImageWriteCodec @ 351 NONAME
+	_ZNK19CImageEncoderPlugin28FrameInfoOverallSizeInPixelsEv @ 352 NONAME
+	_ZNK19CImageEncoderPlugin6SourceEv @ 353 NONAME
+	_ZNK19CImageEncoderPlugin8PositionEv @ 354 NONAME
+	_ZNK19TImageParameterData10IsFilenameEv @ 355 NONAME
+	_ZNK19TImageParameterData13SourceDataPtrEv @ 356 NONAME
+	_ZNK19TImageParameterData17SourceFilenamePtrEv @ 357 NONAME
+	_ZNK21CBufferedImageDecoder10FrameCountEv @ 358 NONAME
+	_ZNK21CBufferedImageDecoder12ValidDecoderEv @ 359 NONAME
+	_ZNK21CBufferedImageDecoder13FrameCommentLEii @ 360 NONAME
+	_ZNK21CBufferedImageDecoder13ImageCommentLEi @ 361 NONAME
+	_ZNK21CBufferedImageDecoder17ImplementationUidEv @ 362 NONAME
+	_ZNK21CBufferedImageDecoder21NumberOfFrameCommentsEi @ 363 NONAME
+	_ZNK21CBufferedImageDecoder21NumberOfImageCommentsEv @ 364 NONAME
+	_ZNK21CBufferedImageDecoder31IsImageHeaderProcessingCompleteEv @ 365 NONAME
+	_ZNK21CBufferedImageDecoder9FrameDataEi @ 366 NONAME
+	_ZNK21CBufferedImageDecoder9FrameInfoEi @ 367 NONAME
+	_ZNK21CImageDecodeConstruct11NewDecoderLEv @ 368 NONAME
+	_ZNK21CImageDecodeConstruct13RequestThreadEv @ 369 NONAME
+	_ZNK21CImageDecodeConstruct17ImplementationUidEv @ 370 NONAME
+	_ZNK21CImageEncodeConstruct11NewEncoderLEv @ 371 NONAME
+	_ZNK21CImageEncodeConstruct13RequestThreadEv @ 372 NONAME
+	_ZNK21CImageEncodeConstruct17ImplementationUidEv @ 373 NONAME
+	_ZNK21CImageTypeDescription11DescriptionEv @ 374 NONAME
+	_ZNK21CImageTypeDescription7SubTypeEv @ 375 NONAME
+	_ZNK21CImageTypeDescription9ImageTypeEv @ 376 NONAME
+	_ZNK22CFileExtensionMIMEType11DisplayNameEv @ 377 NONAME
+	_ZNK22CFileExtensionMIMEType12ImageSubTypeEv @ 378 NONAME
+	_ZNK22CFileExtensionMIMEType13FileExtensionEv @ 379 NONAME
+	_ZNK22CFileExtensionMIMEType17ImplementationUidEv @ 380 NONAME
+	_ZNK22CFileExtensionMIMEType8MIMETypeEv @ 381 NONAME
+	_ZNK22CFileExtensionMIMEType9ImageTypeEv @ 382 NONAME
+	_ZNK24CImageProcessorReadCodec14ImageProcessorEv @ 383 NONAME
+	_ZNK24CImageProcessorReadCodec3PosEv @ 384 NONAME
+	_ZNK28CImageMaskProcessorReadCodec13MaskProcessorEv @ 385 NONAME
+	_ZNK30CImplementationInformationType10OpaqueDataEv @ 386 NONAME
+	_ZNK30CImplementationInformationType11DisplayNameEv @ 387 NONAME
+	_ZNK30CImplementationInformationType17ImplementationUidEv @ 388 NONAME
+	_ZNK30CImplementationInformationType7VersionEv @ 389 NONAME
+	_ZNK30CImplementationInformationType8DataTypeEv @ 390 NONAME
+	_ZTI11TGifComment @ 391 NONAME ; #<TI>#
+	_ZTI11TGifLZWInfo @ 392 NONAME ; #<TI>#
+	_ZTI11TJpegQTable @ 393 NONAME ; #<TI>#
+	_ZTI12TJpegComment @ 394 NONAME ; #<TI>#
+	_ZTI13CImageDecoder @ 395 NONAME ; #<TI>#
+	_ZTI13CImageEncoder @ 396 NONAME ; #<TI>#
+	_ZTI13TBmpImageData @ 397 NONAME ; #<TI>#
+	_ZTI14TGifColorTable @ 398 NONAME ; #<TI>#
+	_ZTI14TJpegImageData @ 399 NONAME ; #<TI>#
+	_ZTI14TMbmDecodeData @ 400 NONAME ; #<TI>#
+	_ZTI14TMbmEncodeData @ 401 NONAME ; #<TI>#
+	_ZTI14TPngEncodeData @ 402 NONAME ; #<TI>#
+	_ZTI14TTiffImageData @ 403 NONAME ; #<TI>#
+	_ZTI15CFrameImageData @ 404 NONAME ; #<TI>#
+	_ZTI15CImageProcessor @ 405 NONAME ; #<TI>#
+	_ZTI15CImageReadCodec @ 406 NONAME ; #<TI>#
+	_ZTI15TBmpCompression @ 407 NONAME ; #<TI>#
+	_ZTI16CImageWriteCodec @ 408 NONAME ; #<TI>#
+	_ZTI16TGifImageControl @ 409 NONAME ; #<TI>#
+	_ZTI17CFrameInfoStrings @ 410 NONAME ; #<TI>#
+	_ZTI19CImageDecoderPlugin @ 411 NONAME ; #<TI>#
+	_ZTI19CImageEncoderPlugin @ 412 NONAME ; #<TI>#
+	_ZTI19TGifBackgroundColor @ 413 NONAME ; #<TI>#
+	_ZTI19TGifImageDescriptor @ 414 NONAME ; #<TI>#
+	_ZTI21CBufferedImageDecoder @ 415 NONAME ; #<TI>#
+	_ZTI21CImageDecodeConstruct @ 416 NONAME ; #<TI>#
+	_ZTI21CImageEncodeConstruct @ 417 NONAME ; #<TI>#
+	_ZTI21CImageTypeDescription @ 418 NONAME ; #<TI>#
+	_ZTI22CFileExtensionMIMEType @ 419 NONAME ; #<TI>#
+	_ZTI24CImageProcessorReadCodec @ 420 NONAME ; #<TI>#
+	_ZTI28CImageMaskProcessorReadCodec @ 421 NONAME ; #<TI>#
+	_ZTI30CImplementationInformationType @ 422 NONAME ; #<TI>#
+	_ZTV11TGifComment @ 423 NONAME ; #<VT>#
+	_ZTV11TGifLZWInfo @ 424 NONAME ; #<VT>#
+	_ZTV11TJpegQTable @ 425 NONAME ; #<VT>#
+	_ZTV12TJpegComment @ 426 NONAME ; #<VT>#
+	_ZTV13CImageDecoder @ 427 NONAME ; #<VT>#
+	_ZTV13CImageEncoder @ 428 NONAME ; #<VT>#
+	_ZTV13TBmpImageData @ 429 NONAME ; #<VT>#
+	_ZTV14TGifColorTable @ 430 NONAME ; #<VT>#
+	_ZTV14TJpegImageData @ 431 NONAME ; #<VT>#
+	_ZTV14TMbmDecodeData @ 432 NONAME ; #<VT>#
+	_ZTV14TMbmEncodeData @ 433 NONAME ; #<VT>#
+	_ZTV14TPngEncodeData @ 434 NONAME ; #<VT>#
+	_ZTV14TTiffImageData @ 435 NONAME ; #<VT>#
+	_ZTV15CFrameImageData @ 436 NONAME ; #<VT>#
+	_ZTV15CImageProcessor @ 437 NONAME ; #<VT>#
+	_ZTV15CImageReadCodec @ 438 NONAME ; #<VT>#
+	_ZTV15TBmpCompression @ 439 NONAME ; #<VT>#
+	_ZTV16CImageWriteCodec @ 440 NONAME ; #<VT>#
+	_ZTV16TGifImageControl @ 441 NONAME ; #<VT>#
+	_ZTV17CFrameInfoStrings @ 442 NONAME ; #<VT>#
+	_ZTV19CImageDecoderPlugin @ 443 NONAME ; #<VT>#
+	_ZTV19CImageEncoderPlugin @ 444 NONAME ; #<VT>#
+	_ZTV19TGifBackgroundColor @ 445 NONAME ; #<VT>#
+	_ZTV19TGifImageDescriptor @ 446 NONAME ; #<VT>#
+	_ZTV21CBufferedImageDecoder @ 447 NONAME ; #<VT>#
+	_ZTV21CImageDecodeConstruct @ 448 NONAME ; #<VT>#
+	_ZTV21CImageEncodeConstruct @ 449 NONAME ; #<VT>#
+	_ZTV21CImageTypeDescription @ 450 NONAME ; #<VT>#
+	_ZTV22CFileExtensionMIMEType @ 451 NONAME ; #<VT>#
+	_ZTV24CImageProcessorReadCodec @ 452 NONAME ; #<VT>#
+	_ZTV28CImageMaskProcessorReadCodec @ 453 NONAME ; #<VT>#
+	_ZTV30CImplementationInformationType @ 454 NONAME ; #<VT>#
+	_ZN19CImageEncoderPlugin21WriteDataPositionIncLEiRK6TDesC8 @ 455 NONAME
+	_ZN22CFileExtensionMIMEType5NewLCERK6TDesC8S2_RK7TDesC164TUidS6_S6_ @ 456 NONAME
+	_ZN11CImageFrame15SetFrameFormatLERK16TFrameFormatBase @ 457 NONAME
+	_ZN11CImageFrame15SetFrameLayoutLERK16TFrameLayoutBase @ 458 NONAME
+	_ZN11CImageFrame20SetFrameSizeInPixelsERK5TSize @ 459 NONAME
+	_ZN11CImageFrame4DataEv @ 460 NONAME
+	_ZN11CImageFrame4NewLEPK6RChunkii @ 461 NONAME
+	_ZN11CImageFrame4NewLEPK6RChunkiiRK5TSizeRK16TFrameFormatBaseRK16TFrameLayoutBase @ 462 NONAME
+	_ZN11CImageFrame4NewLERK5TDes8i @ 463 NONAME
+	_ZN11CImageFrame4NewLERK5TDes8iRK5TSizeRK16TFrameFormatBaseRK16TFrameLayoutBase @ 464 NONAME
+	_ZN11CImageFrame9DataChunkEv @ 465 NONAME
+	_ZN11CImageFrameC1Ev @ 466 NONAME
+	_ZN11CImageFrameC2Ev @ 467 NONAME
+	_ZN11CImageFrameD0Ev @ 468 NONAME
+	_ZN11CImageFrameD1Ev @ 469 NONAME
+	_ZN11CImageFrameD2Ev @ 470 NONAME
+	_ZN12TFrameFormat14SetColourSpaceE4TUid @ 471 NONAME
+	_ZN12TFrameFormatC1E4TUid @ 472 NONAME
+	_ZN12TFrameFormatC2E4TUid @ 473 NONAME
+	_ZN12TFrameLayout13SetScanLengthEii @ 474 NONAME
+	_ZN12TFrameLayout16SetCurrentLengthEii @ 475 NONAME
+	_ZN12TFrameLayout8SetStartEii @ 476 NONAME
+	_ZN12TFrameLayout9SetLengthEii @ 477 NONAME
+	_ZN12TFrameLayoutC1Ei @ 478 NONAME
+	_ZN12TFrameLayoutC2Ei @ 479 NONAME
+	_ZN16TFrameFormatBaseC2E4TUid @ 480 NONAME
+	_ZN16TFrameLayoutBaseC2E4TUid @ 481 NONAME
+	_ZN19CImageDecoderPlugin12RequestInitLEi @ 482 NONAME
+	_ZN19CImageEncoderPlugin12RequestInitLEv @ 483 NONAME
+	_ZNK11CImageFrame10DataOffsetEv @ 484 NONAME
+	_ZNK11CImageFrame11FrameFormatEv @ 485 NONAME
+	_ZNK11CImageFrame11FrameLayoutEv @ 486 NONAME
+	_ZNK11CImageFrame13MaxBufferSizeEv @ 487 NONAME
+	_ZNK11CImageFrame17FrameSizeInPixelsEv @ 488 NONAME
+	_ZNK11CImageFrame4DataEv @ 489 NONAME
+	_ZNK11CImageFrame5CBody13MaxBufferSizeEv @ 490 NONAME ABSENT
+	_ZNK11CImageFrame7IsChunkEv @ 491 NONAME
+	_ZNK12TFrameFormat10DuplicateLEv @ 492 NONAME
+	_ZNK12TFrameFormat10FormatCodeEv @ 493 NONAME
+	_ZNK12TFrameFormat11ColourSpaceEv @ 494 NONAME
+	_ZNK12TFrameFormat8SamplingEv @ 495 NONAME
+	_ZNK12TFrameLayout10DuplicateLEv @ 496 NONAME
+	_ZNK12TFrameLayout10ScanLengthEi @ 497 NONAME
+	_ZNK12TFrameLayout13CurrentLengthEi @ 498 NONAME
+	_ZNK12TFrameLayout5StartEi @ 499 NONAME
+	_ZNK12TFrameLayout6LengthEi @ 500 NONAME
+	_ZNK12TFrameLayout6PlanesEv @ 501 NONAME
+	_ZNK16TFrameFormatBase4TypeEv @ 502 NONAME
+	_ZNK16TFrameLayoutBase4TypeEv @ 503 NONAME
+	_ZTI11CImageFrame @ 504 NONAME ; #<TI>#
+	_ZTI12TFrameFormat @ 505 NONAME ; #<TI>#
+	_ZTI12TFrameLayout @ 506 NONAME ; #<TI>#
+	_ZTI16TFrameFormatBase @ 507 NONAME ; #<TI>#
+	_ZTI16TFrameLayoutBase @ 508 NONAME ; #<TI>#
+	_ZTV11CImageFrame @ 509 NONAME ; #<VT>#
+	_ZTV12TFrameFormat @ 510 NONAME ; #<VT>#
+	_ZTV12TFrameLayout @ 511 NONAME ; #<VT>#
+	_ZTV16TFrameFormatBase @ 512 NONAME ; #<VT>#
+	_ZTV16TFrameLayoutBase @ 513 NONAME ; #<VT>#
+	_ZN11CImageFrame10ConstructLEPK6RChunkii @ 514 NONAME
+	_ZN11CImageFrame10ConstructLEPK6RChunkiiRK5TSizeRK16TFrameFormatBaseRK16TFrameLayoutBase @ 515 NONAME
+	_ZN11CImageFrame10ConstructLERK5TDes8i @ 516 NONAME
+	_ZN11CImageFrame10ConstructLERK5TDes8iRK5TSizeRK16TFrameFormatBaseRK16TFrameLayoutBase @ 517 NONAME
+	_ZN11CImageFrame9Reserved1Ev @ 518 NONAME
+	_ZN11CImageFrame9Reserved2Ev @ 519 NONAME
+	_ZN11CImageFrame9Reserved3Ev @ 520 NONAME
+	_ZN11CImageFrame9Reserved4Ev @ 521 NONAME
+	_ZN16TFrameFormatBase9Reserved1Ev @ 522 NONAME
+	_ZN16TFrameFormatBase9Reserved2Ev @ 523 NONAME
+	_ZN16TFrameFormatBase9Reserved3Ev @ 524 NONAME
+	_ZN16TFrameFormatBase9Reserved4Ev @ 525 NONAME
+	_ZN16TFrameLayoutBase9Reserved1Ev @ 526 NONAME
+	_ZN16TFrameLayoutBase9Reserved2Ev @ 527 NONAME
+	_ZN16TFrameLayoutBase9Reserved3Ev @ 528 NONAME
+	_ZN16TFrameLayoutBase9Reserved4Ev @ 529 NONAME
+	_ZNK19CImageDecoderPlugin14DecoderOptionsEv @ 530 NONAME
+	_ZN13CImageDecoder24SetDecoderThreadPriorityE15TThreadPriority @ 531 NONAME
+	_ZN13CImageEncoder24SetEncoderThreadPriorityE15TThreadPriority @ 532 NONAME
+	_ZN13CImageDecoder20GetPluginPropertiesLE4TUidR6RArrayIS0_E @ 533 NONAME
+	_ZN13CImageDecoder28GetInterfaceImplementationsLEPK4TUidiR6RArrayIS0_E @ 534 NONAME
+	_ZN13CImageDecoder28GetInterfaceImplementationsLERK6RArrayI4TUidERS2_ @ 535 NONAME
+	_ZN13CImageEncoder20GetPluginPropertiesLE4TUidR6RArrayIS0_E @ 536 NONAME
+	_ZN13CImageEncoder28GetInterfaceImplementationsLEPK4TUidiR6RArrayIS0_E @ 537 NONAME
+	_ZN13CImageEncoder28GetInterfaceImplementationsLERK6RArrayI4TUidERS2_ @ 538 NONAME
+	_ZNK19CImageEncoderPlugin14EncoderOptionsEv @ 539 NONAME
+	_ZN18TGifLoopIterationsC1Ev @ 540 NONAME
+	_ZN18TGifLoopIterationsC2Ev @ 541 NONAME
+	_ZTI18TGifLoopIterations @ 542 NONAME
+	_ZTV18TGifLoopIterations @ 543 NONAME
+	_ZN11TScalerCapsC1Eiii @ 544 NONAME
+	_ZN11TScalerCapsC1Ev @ 545 NONAME
+	_ZN11TScalerCapsC2Eiii @ 546 NONAME
+	_ZN11TScalerCapsC2Ev @ 547 NONAME
+	_ZN13CImageDecoder10OperationLEv @ 548 NONAME
+	_ZN13CImageDecoder14BlockStreamerLEv @ 549 NONAME
+	_ZN13CImageDecoder16SetClippingRectLEPK5TRect @ 550 NONAME
+	_ZN13CImageDecoder18GetDestinationSizeER5TSizei @ 551 NONAME
+	_ZN13CImageDecoder7PrepareEP14TRequestStatus @ 552 NONAME
+	_ZN13CImageDecoder7ScalerLEv @ 553 NONAME
+	_ZN13CImageEncoder10OperationLEv @ 554 NONAME
+	_ZN13CImageEncoder14BlockStreamerLEv @ 555 NONAME
+	_ZN13CImageEncoder7PrepareEP14TRequestStatus @ 556 NONAME
+	_ZN16TImageConvScaler11SetScalingLERK5TSizeNS_14TScalerQualityEi @ 557 NONAME
+	_ZN16TImageConvScaler11SetScalingLEiNS_14TScalerQualityE @ 558 NONAME
+	_ZN16TImageConvScalerC1Ev @ 559 NONAME
+	_ZN16TImageConvScalerC2Ev @ 560 NONAME
+	_ZN17TDecodeStreamCapsC1EiRK5TSizeiiNS_11TNavigationE @ 561 NONAME
+	_ZN17TDecodeStreamCapsC1Ev @ 562 NONAME
+	_ZN17TDecodeStreamCapsC2EiRK5TSizeiiNS_11TNavigationE @ 563 NONAME
+	_ZN17TDecodeStreamCapsC2Ev @ 564 NONAME
+	_ZN17TEncodeStreamCapsC1EiRK5TSizeiNS_11TNavigationE @ 565 NONAME
+	_ZN17TEncodeStreamCapsC1Ev @ 566 NONAME
+	_ZN17TEncodeStreamCapsC2EiRK5TSizeiNS_11TNavigationE @ 567 NONAME
+	_ZN17TEncodeStreamCapsC2Ev @ 568 NONAME
+	_ZN19TImageConvOperation13AddOperationLENS_10TOperationE @ 569 NONAME
+	_ZN19TImageConvOperation19ClearOperationStackEv @ 570 NONAME
+	_ZN19TImageConvOperationC1Ev @ 571 NONAME
+	_ZN19TImageConvOperationC2Ev @ 572 NONAME
+	_ZN21ImageProcessorUtility27NewImageProcessorExtensionLERK10CFbsBitmapi12TDisplayModei @ 573 NONAME
+	_ZN23CPluginExtensionManager12ClippingRectEv @ 574 NONAME
+	_ZN23CPluginExtensionManager13GetExtensionLE4TUidRP19MImageConvExtension @ 575 NONAME
+	_ZN23CPluginExtensionManager16SetClippingRectLEPK5TRectRK13RPointerArrayI10TFrameInfoE @ 576 NONAME
+	_ZN23CPluginExtensionManager18GetDestinationSizeER5TSize @ 577 NONAME
+	_ZN23CPluginExtensionManager19ResetCodecExtensionEP19MReadCodecExtension @ 578 NONAME
+	_ZN23CPluginExtensionManager22TransferExtensionDataLEP24CImageProcessorExtension @ 579 NONAME
+	_ZN23CPluginExtensionManager36ConvertScalingCoeffToReductionFactorEi @ 580 NONAME
+	_ZN23CPluginExtensionManager4NewLEP19MReadCodecExtension @ 581 NONAME
+	_ZN23CPluginExtensionManagerD0Ev @ 582 NONAME
+	_ZN23CPluginExtensionManagerD1Ev @ 583 NONAME
+	_ZN23CPluginExtensionManagerD2Ev @ 584 NONAME
+	_ZN24CImageProcessorExtension10SetScalingERK5TSize @ 585 NONAME
+	_ZN24CImageProcessorExtension10SetScalingEi @ 586 NONAME
+	_ZN24CImageProcessorExtension12SetOperationE17TTransformOptions @ 587 NONAME
+	_ZN24CImageProcessorExtension15SetClippingRectERK5TRect @ 588 NONAME
+	_ZN24CImageProcessorExtension29SetInitialScanlineSkipPaddingEi @ 589 NONAME
+	_ZN24CImageProcessorExtensionC2Ev @ 590 NONAME
+	_ZN24CImageProcessorExtensionD0Ev @ 591 NONAME
+	_ZN24CImageProcessorExtensionD1Ev @ 592 NONAME
+	_ZN24CImageProcessorExtensionD2Ev @ 593 NONAME
+	_ZN24TImageConvStreamedDecode10InitFrameLE4TUidiN17TDecodeStreamCaps11TNavigationE @ 594 NONAME
+	_ZN24TImageConvStreamedDecode13GetNextBlocksER14TRequestStatusR11CImageFrameiRiS4_ @ 595 NONAME
+	_ZN24TImageConvStreamedDecode9GetBlocksER14TRequestStatusR11CImageFrameiiRi @ 596 NONAME
+	_ZN24TImageConvStreamedDecodeC1Ev @ 597 NONAME
+	_ZN24TImageConvStreamedDecodeC2Ev @ 598 NONAME
+	_ZN24TImageConvStreamedEncode10InitFrameLE4TUidiRK5TSizeS3_N17TEncodeStreamCaps11TNavigationEPK15CFrameImageData @ 599 NONAME
+	_ZN24TImageConvStreamedEncode12AppendBlocksER14TRequestStatusRK11CImageFramei @ 600 NONAME
+	_ZN24TImageConvStreamedEncode8CompleteER14TRequestStatus @ 601 NONAME
+	_ZN24TImageConvStreamedEncode9AddBlocksER14TRequestStatusRK11CImageFrameRKi @ 602 NONAME
+	_ZN24TImageConvStreamedEncodeC1Ev @ 603 NONAME
+	_ZN24TImageConvStreamedEncodeC2Ev @ 604 NONAME
+	_ZN33CImageProcessorReadCodecExtension10ConstructLEv @ 605 NONAME
+	_ZN33CImageProcessorReadCodecExtensionC2Ev @ 606 NONAME
+	_ZN33CImageProcessorReadCodecExtensionD0Ev @ 607 NONAME
+	_ZN33CImageProcessorReadCodecExtensionD1Ev @ 608 NONAME
+	_ZN33CImageProcessorReadCodecExtensionD2Ev @ 609 NONAME
+	_ZN37CImageMaskProcessorReadCodecExtension10ConstructLEv @ 610 NONAME
+	_ZN37CImageMaskProcessorReadCodecExtensionC2Ev @ 611 NONAME
+	_ZN37CImageMaskProcessorReadCodecExtensionD0Ev @ 612 NONAME
+	_ZN37CImageMaskProcessorReadCodecExtensionD1Ev @ 613 NONAME
+	_ZN37CImageMaskProcessorReadCodecExtensionD2Ev @ 614 NONAME
+	_ZNK11TScalerCaps15MaxUpscaleLimitEv @ 615 NONAME
+	_ZNK11TScalerCaps17MaxDownscaleLimitEv @ 616 NONAME
+	_ZNK11TScalerCaps21PowerOfTwoScalingOnlyEv @ 617 NONAME
+	_ZNK11TScalerCaps23MustPreserveAspectRatioEv @ 618 NONAME
+	_ZNK11TScalerCaps4SizeEv @ 619 NONAME
+	_ZNK11TScalerCaps7VersionEv @ 620 NONAME
+	_ZNK16TImageConvScaler15GetCapabilitiesER11TScalerCaps @ 621 NONAME
+	_ZNK17TDecodeStreamCaps10NavigationEv @ 622 NONAME
+	_ZNK17TDecodeStreamCaps18StreamSizeInBlocksEv @ 623 NONAME
+	_ZNK17TDecodeStreamCaps19MaxBlocksPerRequestEv @ 624 NONAME
+	_ZNK17TDecodeStreamCaps20MinBlockSizeInPixelsEv @ 625 NONAME
+	_ZNK17TDecodeStreamCaps23OptimalBlocksPerRequestEv @ 626 NONAME
+	_ZNK17TDecodeStreamCaps4SizeEv @ 627 NONAME
+	_ZNK17TDecodeStreamCaps7VersionEv @ 628 NONAME
+	_ZNK17TEncodeStreamCaps10NavigationEv @ 629 NONAME
+	_ZNK17TEncodeStreamCaps19MaxBlocksPerRequestEv @ 630 NONAME
+	_ZNK17TEncodeStreamCaps20MinBlockSizeInPixelsEv @ 631 NONAME
+	_ZNK17TEncodeStreamCaps23OptimalBlocksPerRequestEv @ 632 NONAME
+	_ZNK17TEncodeStreamCaps4SizeEv @ 633 NONAME
+	_ZNK17TEncodeStreamCaps7VersionEv @ 634 NONAME
+	_ZNK19TImageConvOperation12CapabilitiesEv @ 635 NONAME
+	_ZNK23CPluginExtensionManager16GetScalerQualityERN16TImageConvScaler14TScalerQualityE @ 636 NONAME
+	_ZNK23CPluginExtensionManager17DimensionsSwappedEv @ 637 NONAME
+	_ZNK23CPluginExtensionManager20GetScalerDesiredSizeER5TSize @ 638 NONAME
+	_ZNK23CPluginExtensionManager21GetScalingCoefficientERiPK5TSize @ 639 NONAME
+	_ZNK23CPluginExtensionManager24ScalerExtensionRequestedEv @ 640 NONAME
+	_ZNK23CPluginExtensionManager25ScalerMaintainAspectRatioEv @ 641 NONAME
+	_ZNK23CPluginExtensionManager27OperationExtensionRequestedEv @ 642 NONAME
+	_ZNK23CPluginExtensionManager30ClippingRectExtensionRequestedEv @ 643 NONAME
+	_ZNK23CPluginExtensionManager9OperationEv @ 644 NONAME
+	_ZNK24TImageConvStreamedDecode13GetBufferSizeE4TUidR5TSizei @ 645 NONAME
+	_ZNK24TImageConvStreamedDecode15GetCapabilitiesE4TUidiR17TDecodeStreamCaps @ 646 NONAME
+	_ZNK24TImageConvStreamedDecode20GetSupportedFormatsLER6RArrayI4TUidERS1_ @ 647 NONAME
+	_ZNK24TImageConvStreamedEncode15GetCapabilitiesE4TUidR17TEncodeStreamCaps @ 648 NONAME
+	_ZNK24TImageConvStreamedEncode20GetSupportedFormatsLER6RArrayI4TUidERS1_ @ 649 NONAME
+	_ZNK33CImageProcessorReadCodecExtension14GetReducedSizeERK5TSizeiRS0_ @ 650 NONAME
+	_ZNK33CImageProcessorReadCodecExtension18ScalingCoefficientERK5TSizeS2_ @ 651 NONAME
+	_ZNK37CImageMaskProcessorReadCodecExtension14GetReducedSizeERK5TSizeiRS0_ @ 652 NONAME
+	_ZNK37CImageMaskProcessorReadCodecExtension18ScalingCoefficientERK5TSizeS2_ @ 653 NONAME
+	_ZTI24CImageProcessorExtension @ 654 NONAME
+	_ZTI33CImageProcessorReadCodecExtension @ 655 NONAME
+	_ZTI37CImageMaskProcessorReadCodecExtension @ 656 NONAME
+	_ZTV24CImageProcessorExtension @ 657 NONAME
+	_ZTV33CImageProcessorReadCodecExtension @ 658 NONAME
+	_ZTV37CImageMaskProcessorReadCodecExtension @ 659 NONAME
+	_ZThn12_NK33CImageProcessorReadCodecExtension14GetReducedSizeERK5TSizeiRS0_ @ 660 NONAME
+	_ZThn12_NK33CImageProcessorReadCodecExtension18ScalingCoefficientERK5TSizeS2_ @ 661 NONAME
+	_ZThn16_NK37CImageMaskProcessorReadCodecExtension14GetReducedSizeERK5TSizeiRS0_ @ 662 NONAME
+	_ZThn16_NK37CImageMaskProcessorReadCodecExtension18ScalingCoefficientERK5TSizeS2_ @ 663 NONAME
+	_ZN23CPluginExtensionManager29CreateExtensionForAutoRotateLEv @ 664 NONAME
+	_ZNK23CPluginExtensionManager10OperationLEt @ 665 NONAME
+

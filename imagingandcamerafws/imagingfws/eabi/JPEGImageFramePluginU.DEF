@@ -1,0 +1,49 @@
+EXPORTS
+	_ZN22CJPEGImageFrameDecoder12ConvertFrameEP14TRequestStatusR11CImageFrame @ 1 NONAME
+	_ZN22CJPEGImageFrameDecoder12ConvertFrameEP14TRequestStatusR11CImageFramei @ 2 NONAME
+	_ZN22CJPEGImageFrameDecoder21RecommendedBufferSizeE4TUidRi @ 3 NONAME
+	_ZN22CJPEGImageFrameDecoder21RecommendedBufferSizeERi @ 4 NONAME
+	_ZN22CJPEGImageFrameDecoder4NewLEv @ 5 NONAME
+	_ZN22CJPEGImageFrameDecoderC1Ev @ 6 NONAME
+	_ZN22CJPEGImageFrameDecoderC2Ev @ 7 NONAME
+	_ZN22CJPEGImageFrameDecoderD0Ev @ 8 NONAME
+	_ZN22CJPEGImageFrameDecoderD1Ev @ 9 NONAME
+	_ZN22CJPEGImageFrameDecoderD2Ev @ 10 NONAME
+	_ZN22CJPEGImageFrameEncoder12ConvertFrameEP14TRequestStatusRK11CImageFrame @ 11 NONAME
+	_ZN22CJPEGImageFrameEncoder12ConvertFrameEP14TRequestStatusRK11CImageFramePK15CFrameImageData @ 12 NONAME
+	_ZN22CJPEGImageFrameEncoder4NewLEv @ 13 NONAME
+	_ZN22CJPEGImageFrameEncoderC1Ev @ 14 NONAME
+	_ZN22CJPEGImageFrameEncoderC2Ev @ 15 NONAME
+	_ZN22CJPEGImageFrameEncoderD0Ev @ 16 NONAME
+	_ZN22CJPEGImageFrameEncoderD1Ev @ 17 NONAME
+	_ZN22CJPEGImageFrameEncoderD2Ev @ 18 NONAME
+	_ZN28CJPEGImageFrameDecoderPlugin13DstImageFrameEv @ 19 NONAME
+	_ZN28CJPEGImageFrameDecoderPlugin24SetRecommendedBufferSizeEi @ 20 NONAME
+	_ZN28CJPEGImageFrameDecoderPlugin9Reserved1Ev @ 21 NONAME
+	_ZN28CJPEGImageFrameDecoderPlugin9Reserved2Ev @ 22 NONAME
+	_ZN28CJPEGImageFrameDecoderPlugin9Reserved3Ev @ 23 NONAME
+	_ZN28CJPEGImageFrameDecoderPluginC2Ev @ 24 NONAME
+	_ZN28CJPEGImageFrameDecoderPluginD0Ev @ 25 NONAME
+	_ZN28CJPEGImageFrameDecoderPluginD1Ev @ 26 NONAME
+	_ZN28CJPEGImageFrameDecoderPluginD2Ev @ 27 NONAME
+	_ZN28CJPEGImageFrameEncoderPlugin9Reserved1Ev @ 28 NONAME
+	_ZN28CJPEGImageFrameEncoderPlugin9Reserved2Ev @ 29 NONAME
+	_ZN28CJPEGImageFrameEncoderPlugin9Reserved3Ev @ 30 NONAME
+	_ZN28CJPEGImageFrameEncoderPluginC2Ev @ 31 NONAME
+	_ZN28CJPEGImageFrameEncoderPluginD0Ev @ 32 NONAME
+	_ZN28CJPEGImageFrameEncoderPluginD1Ev @ 33 NONAME
+	_ZN28CJPEGImageFrameEncoderPluginD2Ev @ 34 NONAME
+	_ZNK28CJPEGImageFrameDecoderPlugin10FormatCodeEv @ 35 NONAME
+	_ZNK28CJPEGImageFrameDecoderPlugin11FrameNumberEv @ 36 NONAME
+	_ZNK28CJPEGImageFrameEncoderPlugin13SrcImageFrameEv @ 37 NONAME
+	_ZNK28CJPEGImageFrameEncoderPlugin14FrameImageDataEv @ 38 NONAME
+	_ZTI22CJPEGImageFrameDecoder @ 39 NONAME ; #<TI>#
+	_ZTI22CJPEGImageFrameEncoder @ 40 NONAME ; #<TI>#
+	_ZTI28CJPEGImageFrameDecoderPlugin @ 41 NONAME ; #<TI>#
+	_ZTI28CJPEGImageFrameEncoderPlugin @ 42 NONAME ; #<TI>#
+	_ZTV22CJPEGImageFrameDecoder @ 43 NONAME ; #<VT>#
+	_ZTV22CJPEGImageFrameEncoder @ 44 NONAME ; #<VT>#
+	_ZTV28CJPEGImageFrameDecoderPlugin @ 45 NONAME ; #<VT>#
+	_ZTV28CJPEGImageFrameEncoderPlugin @ 46 NONAME ; #<VT>#
+	_ZN22CJPEGImageFrameDecoder20ContinueConvertFrameEP14TRequestStatus @ 47 NONAME
+

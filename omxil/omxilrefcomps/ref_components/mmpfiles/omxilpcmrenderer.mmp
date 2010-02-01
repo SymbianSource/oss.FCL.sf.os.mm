@@ -1,0 +1,55 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// @file                   omxilpcmrenderer.dll
+// @SYMPurpose
+// 
+//
+
+#include                "../audio/pcmrenderer/src/omxilpcmrenderer.hrh"
+
+TARGET                  omxilpcmrenderer.dll
+CAPABILITY              ALL -TCB
+TARGETTYPE              plugin
+UID                     0x10009D8D KUidSymbianOmxILPcmRendererDll
+VENDORID                0x70000001
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+USERINCLUDE             ../audio/pcmrenderer/src
+USERINCLUDE             ../../../omxilcomponentcommon/src/common
+USERINCLUDE		../audio/pcmrenderer/inc
+USERINCLUDE		../../../../../mm/mmdevicefw/mdf/src/audio/mdasoundadapter
+
+
+SOURCEPATH              ../audio/pcmrenderer/src
+SOURCE			omxilpcmrenderer.cpp
+SOURCE			omxilpcmrendererapb0port.cpp
+SOURCE                  omxilpcmrendererprocessingfunction.cpp
+SOURCE			omxilpcmrendererconfigmanager.cpp
+
+RESOURCE		omxilpcmrenderer.rss
+
+LIBRARY                 euser.lib
+LIBRARY		       	ecom.lib
+LIBRARY		       	omxilcomponentcommon.lib
+STATICLIBRARY 	        omxilcomponentif.lib
+
+#ifdef SYMBIAN_MDF_SHAREDCHUNK_SOUNDDRIVER
+LIBRARY			mdasoundadapter.lib
+#endif
+
+// Uncomment to activate debug tracing in this module
+MACRO                   _OMXIL_PCMRENDERER_DEBUG_TRACING_ON
+
+SMPSAFE

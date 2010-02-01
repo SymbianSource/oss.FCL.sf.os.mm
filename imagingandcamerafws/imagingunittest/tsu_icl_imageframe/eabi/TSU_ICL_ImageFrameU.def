@@ -1,0 +1,41 @@
+EXPORTS
+	_Z13NewTestSuiteLv @ 1 NONAME
+	_ZTI11RFormatTest @ 2 NONAME ; #<TI>#
+	_ZTI15RImageFrameClip @ 3 NONAME ; #<TI>#
+	_ZTI15RImageFrameTest @ 4 NONAME ; #<TI>#
+	_ZTI16RYuvMonoProcDesc @ 5 NONAME ; #<TI>#
+	_ZTI17RYuvMonoProcChunk @ 6 NONAME ; #<TI>#
+	_ZTI18RImageFrameDecDesc @ 7 NONAME ; #<TI>#
+	_ZTI18RImageFrameEncDesc @ 8 NONAME ; #<TI>#
+	_ZTI18RYuv420PlnProcDesc @ 9 NONAME ; #<TI>#
+	_ZTI19RImageFrameDecChunk @ 10 NONAME ; #<TI>#
+	_ZTI19RImageFrameEncChunk @ 11 NONAME ; #<TI>#
+	_ZTI19RYuv420PlnProcChunk @ 12 NONAME ; #<TI>#
+	_ZTI19RYuv422IntlProcDesc @ 13 NONAME ; #<TI>#
+	_ZTI20CTestSuiteImageFrame @ 14 NONAME ; #<TI>#
+	_ZTI20RYuv422IntlProcChunk @ 15 NONAME ; #<TI>#
+	_ZTI21RYuv420PlnRevProcDesc @ 16 NONAME ; #<TI>#
+	_ZTI22RYuv420PlnRevProcChunk @ 17 NONAME ; #<TI>#
+	_ZTI23CJpgImageFrameProcessor @ 18 NONAME ; #<TI>#
+	_ZTI25RImageFrameDescMultiFrame @ 19 NONAME ; #<TI>#
+	_ZTI27RImageFrameRChunkMultiFrame @ 20 NONAME ; #<TI>#
+	_ZTV11RFormatTest @ 21 NONAME ; #<VT>#
+	_ZTV15RImageFrameClip @ 22 NONAME ; #<VT>#
+	_ZTV15RImageFrameTest @ 23 NONAME ; #<VT>#
+	_ZTV16RYuvMonoProcDesc @ 24 NONAME ; #<VT>#
+	_ZTV17RYuvMonoProcChunk @ 25 NONAME ; #<VT>#
+	_ZTV18RImageFrameDecDesc @ 26 NONAME ; #<VT>#
+	_ZTV18RImageFrameEncDesc @ 27 NONAME ; #<VT>#
+	_ZTV18RYuv420PlnProcDesc @ 28 NONAME ; #<VT>#
+	_ZTV19RImageFrameDecChunk @ 29 NONAME ; #<VT>#
+	_ZTV19RImageFrameEncChunk @ 30 NONAME ; #<VT>#
+	_ZTV19RYuv420PlnProcChunk @ 31 NONAME ; #<VT>#
+	_ZTV19RYuv422IntlProcDesc @ 32 NONAME ; #<VT>#
+	_ZTV20CTestSuiteImageFrame @ 33 NONAME ; #<VT>#
+	_ZTV20RYuv422IntlProcChunk @ 34 NONAME ; #<VT>#
+	_ZTV21RYuv420PlnRevProcDesc @ 35 NONAME ; #<VT>#
+	_ZTV22RYuv420PlnRevProcChunk @ 36 NONAME ; #<VT>#
+	_ZTV23CJpgImageFrameProcessor @ 37 NONAME ; #<VT>#
+	_ZTV25RImageFrameDescMultiFrame @ 38 NONAME ; #<VT>#
+	_ZTV27RImageFrameRChunkMultiFrame @ 39 NONAME ; #<VT>#
+

@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuiteBitmapTransformsL@@YAPAVCTestSuiteBitmapTransforms@@XZ @ 1 NONAME ; class CTestSuiteBitmapTransforms * __cdecl NewTestSuiteBitmapTransformsL(void)
+

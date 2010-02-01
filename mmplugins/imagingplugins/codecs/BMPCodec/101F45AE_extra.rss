@@ -1,0 +1,35 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Extra resource file for the BMP Bitmap Decoder Implementation
+// 
+//
+
+STRUCT DECODER_INFO
+	{
+	LTEXT	decoder_name;
+	LTEXT	image_format;
+	LTEXT	image_dimensions;
+	LTEXT	image_depth[];
+	LTEXT	image_details[];
+	}
+
+RESOURCE DECODER_INFO theDecoderInfo
+	{
+	decoder_name = "Decoder: Bmp decoder V1.0";
+	image_format = "Format: Bmp";
+	image_dimensions = "Dimensions: %dx%d pixels";
+	image_depth = { "Depth: %dbpp b&w", "Depth: %dbpp colour"};
+	image_details = {"Details: Uncompressed", "Details: Run length encoded"};
+	}
+

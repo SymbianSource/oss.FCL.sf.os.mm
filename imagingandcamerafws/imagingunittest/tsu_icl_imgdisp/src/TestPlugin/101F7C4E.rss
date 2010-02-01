@@ -1,0 +1,47 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// 1A1F7C2B.rss
+// Registry file for the image transform test plugin
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include <icl/imagedisplay.hrh>
+#include "TestImageDisplay.hrh"
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KUidImageDisplayTestPluginDll;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KUidDisplayInterface;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidImageDisplayTestPluginImplUid;
+					version_no = 1;
+					display_name = "Test ImgDisplay";
+					default_data = {0x20, 0x69, 0x6d, 0x67, 0x64, 0x69, 0x73, 0x70}; // " imgdisp"
+					// version, flags, ImageTypeUid ImageSubTypeUid FileSuffixNum, FileSuffix, MimeTypeNum, MimeType
+					// 1, 0001, 0x101F7C4E (KImageTypeIdpUid) 0x00000000 1 .idp 1 image/imgdisp
+					opaque_data = {1, 0x00, 0x01, 0x10, 0x1F, 0x7c, 0x4e, 0, 0, 0, 0, 1, 0x2E, 0x69, 0x64, 0x70, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x69, 0x6d, 0x67, 0x64, 0x69, 0x73, 0x70, 0x0D};
+					}
+				};
+			}
+		};
+	}
+

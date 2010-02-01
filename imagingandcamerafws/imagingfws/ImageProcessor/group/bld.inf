@@ -1,0 +1,53 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// ImageProcessor Image Processor Framework
+// 
+//
+
+/**
+ @file
+*/
+
+PRJ_EXPORTS
+../inc/imageprocessor.h			SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessor.h)
+../inc/imageprocessorobserver.h		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessorobserver.h)
+../inc/imageprocessoreffect.h		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessoreffect.h)
+
+../inc/imageprocessorplugin.h		SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessorplugin.h)
+../inc/imageprocessorpluginobserver.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessorpluginobserver.h)
+../inc/imageprocessorplugineffect.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessorplugineffect.h)
+../inc/imageprocessorpreview.h		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessorpreview.h)
+../inc/imageprocessorpreviewintf.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessorpreviewintf.h)
+../inc/imageprocessoroverlay.h		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessoroverlay.h)
+../inc/imageprocessoroverlayintf.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessoroverlayintf.h)
+../inc/imageprocessorprogressinfo.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessorprogressinfo.h)	
+../inc/imageprocessorprogressinfointf.h SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessorprogressinfointf.h)
+../inc/imageprocessorinputinfo.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessorinputinfo.h)	
+../inc/imageprocessorinputinfointf.h 	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessorinputinfointf.h)
+../inc/imageprocessoroutputinfo.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(imageprocessor/imageprocessoroutputinfo.h)	
+../inc/imageprocessoroutputinfointf.h 	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(imageprocessor/imageprocessoroutputinfointf.h)
+
+../inc/imageprocessor_uids.hrh 	/epoc32/include/imageprocessor/imageprocessor_uids.hrh
+
+imageprocessor.iby  /epoc32/rom/include/imageprocessor.iby
+
+PRJ_TESTEXPORTS
+
+PRJ_MMPFILES
+../group/imageprocessor.mmp
+
+PRJ_TESTMMPFILES
+
+
+

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!DOCTYPE SystemDefinition SYSTEM "sysdef_1_4_0.dtd" [
+  <!ENTITY layer_real_source_path "sf/os/mm" >
+]> 
+
+<SystemDefinition name="avdomainosext" schema="1.4.0">
+	<systemModel>
+  <!-- Common file for prebuild layers-->
+  	<layer name="os_layer">
+			<module name="mm">
+				<unit unitID="mm" mrp="" bldFile="&layer_real_source_path;/group" name="mm" />
+			</module>
+			<module name="">
+				<unit unitID="AudioEqualizerUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/AudioEqualizerUtility/group" filter="!dfs_build" name="AudioEqualizerUtility" />
+				<unit unitID="EnvironmentalReverbUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/EnvironmentalReverbUtility/group" filter="!dfs_build" name="EnvironmentalReverbUtility" />
+				<unit unitID="StereoWideningUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/StereoWideningUtility/group" filter="!dfs_build" name="StereoWideningUtility" />
+			</module>
+			<module name="">
+				<unit unitID="AacEncoderPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AacEncoderPlugin/group" filter="!sf_build" name="AacEncoderPlugin" />
+			</module>
+			<module name="">
+				<unit unitID="AmrNbCodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AmrNbCodecPlugin/group" filter="!sf_build" name="AmrNbCodecPlugin" />
+			</module>
+			<module name="">
+				<unit unitID="AmrWbCodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AmrWbCodecPlugin/group" filter="!sf_build" name="AmrWbCodecPlugin" />
+			</module>
+			<module name="">
+				<unit unitID="EAacPlusCodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusCodecPlugin/group" filter="!sf_build" name="EAacPlusCodecPlugin" />
+			</module>
+			<module name="">
+				<unit unitID="EAacPlusUtil" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusUtil/group" filter="!sf_build" name="EAacPlusUtil" />
+			</module>
+			<module name="">
+				<unit unitID="MP3CodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/MP3CodecPlugin/group" filter="!sf_build" name="MP3CodecPlugin" />
+			</module>
+			<module name="">
+				<unit unitID="WMADecoderPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/WMADecoderPlugin/group" filter="!sf_build" name="WMADecoderPlugin" />
+			</module>
+			<module name="">
+				<unit unitID="ARM_MDF_Decoders" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/group" filter="!sf_build" name="ARM_MDF_Decoders" />
+			</module>
+    </layer>    
+
+        <layer name="arm9e_layer"> 
+                            <module name=""> 
+                                    <unit unitID="EAacPlusCodecPlugin_arm9e" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusCodecPlugin/group" filter="!sf_build" name="EAacPlusCodecPlugin_arm9e" /> 
+                            </module> 
+        </layer>     
+
+  	<layer name="bldmelast_layer">
+			<module name="">
+				<unit unitID="EAacPlusCodecPlugin_arm9e_2" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusCodecPlugin/group" filter="!sf_build" name="EAacPlusCodecPlugin_arm9e_2" />
+			</module>
+    </layer>    
+
+
+  	<layer name="api_test_layer">
+			<module name="mm_tsrc">
+				<unit unitID="mm_tsrc" name="mm_tsrc" bldFile="&layer_real_source_path;/tsrc/group" mrp="" />
+			</module>
+    </layer>   
+
+
+  	<layer name="module_test_layer">
+			<module name="nga_mdf_tsrc">
+				<unit unitID="nga_mdf_tsrc" name="nga_mdf_tsrc" bldFile="&layer_real_source_path;/mdfdevvideoextensions/nga_mdf_postprocessor/tsrc/StifNgaMdfPoPTest/group" mrp="" />
+			</module>
+    </layer>   
+
+
+  	<layer name="pref_test_layer">
+			<module name="mm_tsrc_group">
+				<unit unitID="mm_tsrc_group" name="mm_tsrc_group" bldFile="&layer_real_source_path;/tsrc/group" mrp="" filter="TA_MM" />
+			</module>
+			<module name="nga_mdf_tsrc_group">
+				<unit unitID="nga_mdf_tsrc_group" name="nga_mdf_tsrc_group" bldFile="&layer_real_source_path;/mdfdevvideoextensions/nga_mdf_postprocessor/tsrc/StifNgaMdfPoPTest/group" mrp="" filter="TA_NGA_MDF_POSTPROCESSOR" />
+			</module>
+    </layer>    
+
+ 
+  	<layer name="os_mm_layer">
+			<module name="mm_group">
+				<unit unitID="mm_group" mrp="" bldFile="&layer_real_source_path;/group" name="mm_group" />
+			</module>
+			<module name="">
+				<unit unitID="AudioEqualizerUtility_group" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/AudioEqualizerUtility/group" filter="!dfs_build" name="AudioEqualizerUtility_group" />
+				<unit unitID="EnvironmentalReverbUtility_group" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/EnvironmentalReverbUtility/group" filter="!dfs_build" name="EnvironmentalReverbUtility_group" />
+				<unit unitID="StereoWideningUtility_group" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/StereoWideningUtility/group" filter="!dfs_build" name="StereoWideningUtility_group" />
+			</module>
+			<module name="">
+				<unit unitID="AacEncoderPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AacEncoderPlugin/group" filter="!sf_build" name="AacEncoderPlugin_group" />
+			</module>
+			<module name="">
+				<unit unitID="AmrNbCodecPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AmrNbCodecPlugin/group" filter="!sf_build" name="AmrNbCodecPlugin_group" />
+			</module>
+			<module name="">
+				<unit unitID="AmrWbCodecPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AmrWbCodecPlugin/group" filter="!sf_build" name="AmrWbCodecPlugin_group" />
+			</module>
+			<module name="">
+				<unit unitID="EAacPlusCodecPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusCodecPlugin/group" filter="!sf_build" name="EAacPlusCodecPlugin_group" />
+			</module>
+			<module name="">
+				<unit unitID="EAacPlusUtil_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusUtil/group" filter="!sf_build" name="EAacPlusUtil_group" />
+			</module>
+			<module name="">
+				<unit unitID="MP3CodecPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/MP3CodecPlugin/group" filter="!sf_build" name="MP3CodecPlugin_group" />
+			</module>
+			<module name="">
+				<unit unitID="WMADecoderPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/WMADecoderPlugin/group" filter="!sf_build" name="WMADecoderPlugin_group" />
+			</module>
+			<module name="">
+				<unit unitID="ARM_MDF_Decoders_group" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/group" filter="!sf_build" name="ARM_MDF_Decoders_group" />
+			</module>
+    </layer>    
+  </systemModel>
+</SystemDefinition>

@@ -1,0 +1,8 @@
+EXPORTS
+	??1CGifScaler@@UAE@XZ @ 1 NONAME ; public: virtual __thiscall CGifScaler::~CGifScaler(void)
+	?Cancel@CGifScaler@@QAEXXZ @ 2 NONAME ; public: void __thiscall CGifScaler::Cancel(void)
+	?NewL@CGifScaler@@SAPAV1@AAVCFbsBitmap@@0W4TOptions@1@@Z @ 3 NONAME ; public: static class CGifScaler * __cdecl CGifScaler::NewL(class CFbsBitmap &,class CFbsBitmap &,enum CGifScaler::TOptions)
+	?NewL@CGifScaler@@SAPAV1@AAVCFbsBitmap@@W4TOptions@1@@Z @ 4 NONAME ; public: static class CGifScaler * __cdecl CGifScaler::NewL(class CFbsBitmap &,enum CGifScaler::TOptions)
+	?Scale@CGifScaler@@QAEXPAVTRequestStatus@@AAVCFbsBitmap@@AAVCPalette@@H@Z @ 5 NONAME ; public: void __thiscall CGifScaler::Scale(class TRequestStatus *,class CFbsBitmap &,class CPalette &,int)
+	?ThresholdScale@CGifScaler@@QAEXPAVTRequestStatus@@AAVCFbsBitmap@@AAVCPalette@@EH@Z @ 6 NONAME ; public: void __thiscall CGifScaler::ThresholdScale(class TRequestStatus *,class CFbsBitmap &,class CPalette &,unsigned char,int)
+

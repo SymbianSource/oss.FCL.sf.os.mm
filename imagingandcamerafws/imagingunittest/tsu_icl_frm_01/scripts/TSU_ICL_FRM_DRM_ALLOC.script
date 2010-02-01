@@ -1,0 +1,35 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Alloc unit tests for PREQ777.
+// 
+//
+
+LOAD_SUITE TSU_ICL_FRM_01.DLL
+
+### Positive Testing ###
+//! @SYMTestCaseID MM-ICL-FRM-U-6003-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6003-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-6007-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6007-HP
+TEST_COMPLETE
+
+// DEF090885: Rights can be cosumed prior to successful decoding of an image
+//! @SYMTestCaseID MM-ICL-FRM-U-7107-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7107-HP
+TEST_COMPLETE

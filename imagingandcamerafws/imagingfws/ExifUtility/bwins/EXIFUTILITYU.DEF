@@ -1,0 +1,128 @@
+EXPORTS
+	??0TExifReaderUtility@@QAE@PAVMExifMetadataReader@@@Z @ 1 NONAME ; TExifReaderUtility::TExifReaderUtility(class MExifMetadataReader *)
+	??0TExifWriterUtility@@QAE@PAVMExifMetadataWriter@@@Z @ 2 NONAME ; TExifWriterUtility::TExifWriterUtility(class MExifMetadataWriter *)
+	?GetColorSpace@TExifReaderUtility@@QBEHAAG@Z @ 3 NONAME ; int TExifReaderUtility::GetColorSpace(unsigned short &) const
+	?GetComponentsConfiguration@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 4 NONAME ; int TExifReaderUtility::GetComponentsConfiguration(class HBufC8 * &) const
+	?GetDateTime@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 5 NONAME ; int TExifReaderUtility::GetDateTime(class HBufC8 * &) const
+	?GetDateTimeDigitized@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 6 NONAME ; int TExifReaderUtility::GetDateTimeDigitized(class HBufC8 * &) const
+	?GetDateTimeOriginal@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 7 NONAME ; int TExifReaderUtility::GetDateTimeOriginal(class HBufC8 * &) const
+	?GetExifVersion@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 8 NONAME ; int TExifReaderUtility::GetExifVersion(class HBufC8 * &) const
+	?GetFlashPixVersion@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 9 NONAME ; int TExifReaderUtility::GetFlashPixVersion(class HBufC8 * &) const
+	?GetInteroperabilityIndex@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 10 NONAME ; int TExifReaderUtility::GetInteroperabilityIndex(class HBufC8 * &) const
+	?GetInteroperabilityVersion@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 11 NONAME ; int TExifReaderUtility::GetInteroperabilityVersion(class HBufC8 * &) const
+	?GetMake@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 12 NONAME ; int TExifReaderUtility::GetMake(class HBufC8 * &) const
+	?GetModel@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 13 NONAME ; int TExifReaderUtility::GetModel(class HBufC8 * &) const
+	?GetOrientation@TExifReaderUtility@@QBEHAAG@Z @ 14 NONAME ; int TExifReaderUtility::GetOrientation(unsigned short &) const
+	?GetPixelXDimension@TExifReaderUtility@@QBEHAAH@Z @ 15 NONAME ; int TExifReaderUtility::GetPixelXDimension(int &) const
+	?GetPixelYDimension@TExifReaderUtility@@QBEHAAH@Z @ 16 NONAME ; int TExifReaderUtility::GetPixelYDimension(int &) const
+	?GetResolutionUnit@TExifReaderUtility@@QBEHAAG@Z @ 17 NONAME ; int TExifReaderUtility::GetResolutionUnit(unsigned short &) const
+	?GetThumbCompression@TExifReaderUtility@@QBEHAAG@Z @ 18 NONAME ; int TExifReaderUtility::GetThumbCompression(unsigned short &) const
+	?GetThumbOrientation@TExifReaderUtility@@QBEHAAG@Z @ 19 NONAME ; int TExifReaderUtility::GetThumbOrientation(unsigned short &) const
+	?GetThumbResolutionUnit@TExifReaderUtility@@QBEHAAG@Z @ 20 NONAME ; int TExifReaderUtility::GetThumbResolutionUnit(unsigned short &) const
+	?GetThumbXResolution@TExifReaderUtility@@QBEHAAH0@Z @ 21 NONAME ; int TExifReaderUtility::GetThumbXResolution(int &, int &) const
+	?GetThumbYResolution@TExifReaderUtility@@QBEHAAH0@Z @ 22 NONAME ; int TExifReaderUtility::GetThumbYResolution(int &, int &) const
+	?GetXResolution@TExifReaderUtility@@QBEHAAH0@Z @ 23 NONAME ; int TExifReaderUtility::GetXResolution(int &, int &) const
+	?GetYCbCrPositioning@TExifReaderUtility@@QBEHAAG@Z @ 24 NONAME ; int TExifReaderUtility::GetYCbCrPositioning(unsigned short &) const
+	?GetYResolution@TExifReaderUtility@@QBEHAAH0@Z @ 25 NONAME ; int TExifReaderUtility::GetYResolution(int &, int &) const
+	?SetColorSpace@TExifWriterUtility@@QAEHH@Z @ 26 NONAME ; int TExifWriterUtility::SetColorSpace(int)
+	?SetComponentsConfiguration@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 27 NONAME ; int TExifWriterUtility::SetComponentsConfiguration(class HBufC8 *)
+	?SetDateTime@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 28 NONAME ; int TExifWriterUtility::SetDateTime(class HBufC8 *)
+	?SetDateTimeDigitized@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 29 NONAME ; int TExifWriterUtility::SetDateTimeDigitized(class HBufC8 *)
+	?SetDateTimeOriginal@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 30 NONAME ; int TExifWriterUtility::SetDateTimeOriginal(class HBufC8 *)
+	?SetExifVersion@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 31 NONAME ; int TExifWriterUtility::SetExifVersion(class HBufC8 *)
+	?SetFlashPixVersion@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 32 NONAME ; int TExifWriterUtility::SetFlashPixVersion(class HBufC8 *)
+	?SetInteroperabilityIndex@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 33 NONAME ; int TExifWriterUtility::SetInteroperabilityIndex(class HBufC8 *)
+	?SetInteroperabilityVersion@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 34 NONAME ; int TExifWriterUtility::SetInteroperabilityVersion(class HBufC8 *)
+	?SetMake@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 35 NONAME ; int TExifWriterUtility::SetMake(class HBufC8 *)
+	?SetModel@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 36 NONAME ; int TExifWriterUtility::SetModel(class HBufC8 *)
+	?SetOrientation@TExifWriterUtility@@QAEHH@Z @ 37 NONAME ; int TExifWriterUtility::SetOrientation(int)
+	?SetPixelXDimension@TExifWriterUtility@@QAEHH@Z @ 38 NONAME ; int TExifWriterUtility::SetPixelXDimension(int)
+	?SetPixelYDimension@TExifWriterUtility@@QAEHH@Z @ 39 NONAME ; int TExifWriterUtility::SetPixelYDimension(int)
+	?SetResolutionUnit@TExifWriterUtility@@QAEHH@Z @ 40 NONAME ; int TExifWriterUtility::SetResolutionUnit(int)
+	?SetThumbCompression@TExifWriterUtility@@QAEHH@Z @ 41 NONAME ; int TExifWriterUtility::SetThumbCompression(int)
+	?SetThumbOrientation@TExifWriterUtility@@QAEHH@Z @ 42 NONAME ; int TExifWriterUtility::SetThumbOrientation(int)
+	?SetThumbResolutionUnit@TExifWriterUtility@@QAEHH@Z @ 43 NONAME ; int TExifWriterUtility::SetThumbResolutionUnit(int)
+	?SetThumbXResolution@TExifWriterUtility@@QAEHHH@Z @ 44 NONAME ; int TExifWriterUtility::SetThumbXResolution(int, int)
+	?SetThumbYResolution@TExifWriterUtility@@QAEHHH@Z @ 45 NONAME ; int TExifWriterUtility::SetThumbYResolution(int, int)
+	?SetXResolution@TExifWriterUtility@@QAEHHH@Z @ 46 NONAME ; int TExifWriterUtility::SetXResolution(int, int)
+	?SetYCbCrPositioning@TExifWriterUtility@@QAEHH@Z @ 47 NONAME ; int TExifWriterUtility::SetYCbCrPositioning(int)
+	?SetYResolution@TExifWriterUtility@@QAEHHH@Z @ 48 NONAME ; int TExifWriterUtility::SetYResolution(int, int)
+	?GetCopyright@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 49 NONAME ; int TExifReaderUtility::GetCopyright(class HBufC8 * &) const
+	?GetFlash@TExifReaderUtility@@QBEHAAG@Z @ 50 NONAME ; int TExifReaderUtility::GetFlash(unsigned short &) const
+	?GetFocalLength@TExifReaderUtility@@QBEHAAH0@Z @ 51 NONAME ; int TExifReaderUtility::GetFocalLength(int &, int &) const
+	?GetGpsAltitude@TExifReaderUtility@@QBEHAAH0@Z @ 52 NONAME ; int TExifReaderUtility::GetGpsAltitude(int &, int &) const
+	?GetGpsAltitudeRef@TExifReaderUtility@@QBEHAAE@Z @ 53 NONAME ; int TExifReaderUtility::GetGpsAltitudeRef(unsigned char &) const
+	?GetGpsAreaInformation@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 54 NONAME ; int TExifReaderUtility::GetGpsAreaInformation(class HBufC8 * &) const
+	?GetGpsDateStamp@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 55 NONAME ; int TExifReaderUtility::GetGpsDateStamp(class HBufC8 * &) const
+	?GetGpsDestBearing@TExifReaderUtility@@QBEHAAH0@Z @ 56 NONAME ; int TExifReaderUtility::GetGpsDestBearing(int &, int &) const
+	?GetGpsDestBearingRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 57 NONAME ; int TExifReaderUtility::GetGpsDestBearingRef(class HBufC8 * &) const
+	?GetGpsDestDistance@TExifReaderUtility@@QBEHAAH0@Z @ 58 NONAME ; int TExifReaderUtility::GetGpsDestDistance(int &, int &) const
+	?GetGpsDestDistanceRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 59 NONAME ; int TExifReaderUtility::GetGpsDestDistanceRef(class HBufC8 * &) const
+	?GetGpsDestLatitude@TExifReaderUtility@@QBEHAAH00000@Z @ 60 NONAME ; int TExifReaderUtility::GetGpsDestLatitude(int &, int &, int &, int &, int &, int &) const
+	?GetGpsDestLatitudeRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 61 NONAME ; int TExifReaderUtility::GetGpsDestLatitudeRef(class HBufC8 * &) const
+	?GetGpsDestLongitude@TExifReaderUtility@@QBEHAAH00000@Z @ 62 NONAME ; int TExifReaderUtility::GetGpsDestLongitude(int &, int &, int &, int &, int &, int &) const
+	?GetGpsDestLongitudeRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 63 NONAME ; int TExifReaderUtility::GetGpsDestLongitudeRef(class HBufC8 * &) const
+	?GetGpsDifferential@TExifReaderUtility@@QBEHAAG@Z @ 64 NONAME ; int TExifReaderUtility::GetGpsDifferential(unsigned short &) const
+	?GetGpsDop@TExifReaderUtility@@QBEHAAH0@Z @ 65 NONAME ; int TExifReaderUtility::GetGpsDop(int &, int &) const
+	?GetGpsImgDirection@TExifReaderUtility@@QBEHAAH0@Z @ 66 NONAME ; int TExifReaderUtility::GetGpsImgDirection(int &, int &) const
+	?GetGpsImgDirectionRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 67 NONAME ; int TExifReaderUtility::GetGpsImgDirectionRef(class HBufC8 * &) const
+	?GetGpsLatitude@TExifReaderUtility@@QBEHAAH00000@Z @ 68 NONAME ; int TExifReaderUtility::GetGpsLatitude(int &, int &, int &, int &, int &, int &) const
+	?GetGpsLatitudeRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 69 NONAME ; int TExifReaderUtility::GetGpsLatitudeRef(class HBufC8 * &) const
+	?GetGpsLongitude@TExifReaderUtility@@QBEHAAH00000@Z @ 70 NONAME ; int TExifReaderUtility::GetGpsLongitude(int &, int &, int &, int &, int &, int &) const
+	?GetGpsLongitudeRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 71 NONAME ; int TExifReaderUtility::GetGpsLongitudeRef(class HBufC8 * &) const
+	?GetGpsMapDatum@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 72 NONAME ; int TExifReaderUtility::GetGpsMapDatum(class HBufC8 * &) const
+	?GetGpsMeasureMode@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 73 NONAME ; int TExifReaderUtility::GetGpsMeasureMode(class HBufC8 * &) const
+	?GetGpsProcessingMethod@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 74 NONAME ; int TExifReaderUtility::GetGpsProcessingMethod(class HBufC8 * &) const
+	?GetGpsSatellites@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 75 NONAME ; int TExifReaderUtility::GetGpsSatellites(class HBufC8 * &) const
+	?GetGpsSpeed@TExifReaderUtility@@QBEHAAH0@Z @ 76 NONAME ; int TExifReaderUtility::GetGpsSpeed(int &, int &) const
+	?GetGpsSpeedRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 77 NONAME ; int TExifReaderUtility::GetGpsSpeedRef(class HBufC8 * &) const
+	?GetGpsStatus@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 78 NONAME ; int TExifReaderUtility::GetGpsStatus(class HBufC8 * &) const
+	?GetGpsTimeStamp@TExifReaderUtility@@QBEHAAH00000@Z @ 79 NONAME ; int TExifReaderUtility::GetGpsTimeStamp(int &, int &, int &, int &, int &, int &) const
+	?GetGpsTrack@TExifReaderUtility@@QBEHAAH0@Z @ 80 NONAME ; int TExifReaderUtility::GetGpsTrack(int &, int &) const
+	?GetGpsTrackRef@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 81 NONAME ; int TExifReaderUtility::GetGpsTrackRef(class HBufC8 * &) const
+	?GetGpsVersionId@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 82 NONAME ; int TExifReaderUtility::GetGpsVersionId(class HBufC8 * &) const
+	?GetImageDescription@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 83 NONAME ; int TExifReaderUtility::GetImageDescription(class HBufC8 * &) const
+	?GetJpegInterchangeFormatLength@TExifReaderUtility@@QBEHAAH@Z @ 84 NONAME ; int TExifReaderUtility::GetJpegInterchangeFormatLength(int &) const
+	?GetMakerNote@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 85 NONAME ; int TExifReaderUtility::GetMakerNote(class HBufC8 * &) const
+	?GetShutterSpeedValue@TExifReaderUtility@@QBEHAAH0@Z @ 86 NONAME ; int TExifReaderUtility::GetShutterSpeedValue(int &, int &) const
+	?GetUserComment@TExifReaderUtility@@QBEHAAPAVHBufC8@@@Z @ 87 NONAME ; int TExifReaderUtility::GetUserComment(class HBufC8 * &) const
+	?SetCopyright@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 88 NONAME ; int TExifWriterUtility::SetCopyright(class HBufC8 *)
+	?SetFlash@TExifWriterUtility@@QAEHG@Z @ 89 NONAME ; int TExifWriterUtility::SetFlash(unsigned short)
+	?SetFocalLength@TExifWriterUtility@@QAEHHH@Z @ 90 NONAME ; int TExifWriterUtility::SetFocalLength(int, int)
+	?SetGpsAltitude@TExifWriterUtility@@QAEHHH@Z @ 91 NONAME ; int TExifWriterUtility::SetGpsAltitude(int, int)
+	?SetGpsAltitudeRef@TExifWriterUtility@@QAEHE@Z @ 92 NONAME ; int TExifWriterUtility::SetGpsAltitudeRef(unsigned char)
+	?SetGpsAreaInformation@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 93 NONAME ; int TExifWriterUtility::SetGpsAreaInformation(class HBufC8 *)
+	?SetGpsDateStamp@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 94 NONAME ; int TExifWriterUtility::SetGpsDateStamp(class HBufC8 *)
+	?SetGpsDestBearing@TExifWriterUtility@@QAEHHH@Z @ 95 NONAME ; int TExifWriterUtility::SetGpsDestBearing(int, int)
+	?SetGpsDestBearingRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 96 NONAME ; int TExifWriterUtility::SetGpsDestBearingRef(class HBufC8 *)
+	?SetGpsDestDistance@TExifWriterUtility@@QAEHHH@Z @ 97 NONAME ; int TExifWriterUtility::SetGpsDestDistance(int, int)
+	?SetGpsDestDistanceRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 98 NONAME ; int TExifWriterUtility::SetGpsDestDistanceRef(class HBufC8 *)
+	?SetGpsDestLatitude@TExifWriterUtility@@QAEHHHHHHH@Z @ 99 NONAME ; int TExifWriterUtility::SetGpsDestLatitude(int, int, int, int, int, int)
+	?SetGpsDestLatitudeRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 100 NONAME ; int TExifWriterUtility::SetGpsDestLatitudeRef(class HBufC8 *)
+	?SetGpsDestLongitude@TExifWriterUtility@@QAEHHHHHHH@Z @ 101 NONAME ; int TExifWriterUtility::SetGpsDestLongitude(int, int, int, int, int, int)
+	?SetGpsDestLongitudeRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 102 NONAME ; int TExifWriterUtility::SetGpsDestLongitudeRef(class HBufC8 *)
+	?SetGpsDifferential@TExifWriterUtility@@QAEHG@Z @ 103 NONAME ; int TExifWriterUtility::SetGpsDifferential(unsigned short)
+	?SetGpsDop@TExifWriterUtility@@QAEHHH@Z @ 104 NONAME ; int TExifWriterUtility::SetGpsDop(int, int)
+	?SetGpsImgDirection@TExifWriterUtility@@QAEHHH@Z @ 105 NONAME ; int TExifWriterUtility::SetGpsImgDirection(int, int)
+	?SetGpsImgDirectionRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 106 NONAME ; int TExifWriterUtility::SetGpsImgDirectionRef(class HBufC8 *)
+	?SetGpsLatitude@TExifWriterUtility@@QAEHHHHHHH@Z @ 107 NONAME ; int TExifWriterUtility::SetGpsLatitude(int, int, int, int, int, int)
+	?SetGpsLatitudeRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 108 NONAME ; int TExifWriterUtility::SetGpsLatitudeRef(class HBufC8 *)
+	?SetGpsLongitude@TExifWriterUtility@@QAEHHHHHHH@Z @ 109 NONAME ; int TExifWriterUtility::SetGpsLongitude(int, int, int, int, int, int)
+	?SetGpsLongitudeRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 110 NONAME ; int TExifWriterUtility::SetGpsLongitudeRef(class HBufC8 *)
+	?SetGpsMapDatum@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 111 NONAME ; int TExifWriterUtility::SetGpsMapDatum(class HBufC8 *)
+	?SetGpsMeasureMode@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 112 NONAME ; int TExifWriterUtility::SetGpsMeasureMode(class HBufC8 *)
+	?SetGpsProcessingMethod@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 113 NONAME ; int TExifWriterUtility::SetGpsProcessingMethod(class HBufC8 *)
+	?SetGpsSatellites@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 114 NONAME ; int TExifWriterUtility::SetGpsSatellites(class HBufC8 *)
+	?SetGpsSpeed@TExifWriterUtility@@QAEHHH@Z @ 115 NONAME ; int TExifWriterUtility::SetGpsSpeed(int, int)
+	?SetGpsSpeedRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 116 NONAME ; int TExifWriterUtility::SetGpsSpeedRef(class HBufC8 *)
+	?SetGpsStatus@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 117 NONAME ; int TExifWriterUtility::SetGpsStatus(class HBufC8 *)
+	?SetGpsTimeStamp@TExifWriterUtility@@QAEHHHHHHH@Z @ 118 NONAME ; int TExifWriterUtility::SetGpsTimeStamp(int, int, int, int, int, int)
+	?SetGpsTrack@TExifWriterUtility@@QAEHHH@Z @ 119 NONAME ; int TExifWriterUtility::SetGpsTrack(int, int)
+	?SetGpsTrackRef@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 120 NONAME ; int TExifWriterUtility::SetGpsTrackRef(class HBufC8 *)
+	?SetGpsVersionId@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 121 NONAME ; int TExifWriterUtility::SetGpsVersionId(class HBufC8 *)
+	?SetImageDescription@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 122 NONAME ; int TExifWriterUtility::SetImageDescription(class HBufC8 *)
+	?SetMakerNote@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 123 NONAME ; int TExifWriterUtility::SetMakerNote(class HBufC8 *)
+	?SetShutterSpeedValue@TExifWriterUtility@@QAEHHH@Z @ 124 NONAME ; int TExifWriterUtility::SetShutterSpeedValue(int, int)
+	?SetUserComment@TExifWriterUtility@@QAEHPAVHBufC8@@@Z @ 125 NONAME ; int TExifWriterUtility::SetUserComment(class HBufC8 *)
+	?GetJpegInterchangeFormatLength@TExifReaderUtility@@QBEHAAI@Z @ 126 NONAME ; int TExifReaderUtility::GetJpegInterchangeFormatLength(unsigned int &) const
+

@@ -1,0 +1,10 @@
+del c:\omxil\testfiles\*.*
+
+md e:\logs\
+md e:\logs\testresults\
+md e:\logs\testresults\omxil\
+
+copy c:\logs\testresults\omxil\*.htm e:\logs\testresults\omxil\
+del c:\logs\testresults\omxil\*.htm
+
+del c:\omxil\testfiles\*.*

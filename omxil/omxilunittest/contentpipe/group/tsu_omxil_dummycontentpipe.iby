@@ -1,0 +1,28 @@
+// 
+// tsu_omxil_dummycontentpipe.iby
+
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef TSU_OMXIL_DUMMYCONTENTPIPE_IBY
+#define TSU_OMXIL_DUMMYCONTENTPIPE_IBY
+
+// OMX IL Components Unit tests
+file=ABI_DIR\BUILD_DIR\tsu_omxil_dummycontentpipe.dll    System\Libs\tsu_omxil_dummycontentpipe.dll
+
+// Scripts
+data=EPOCROOT##epoc32\data\c\omxil\tsu_omxil_dummycontentpipe.script        	\omxil\tsu_omxil_dummycontentpipe.script
+
+#endif // TSU_OMXIL_DUMMYCONTENTPIPE_IBY

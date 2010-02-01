@@ -1,0 +1,8 @@
+md e:\logs\
+md e:\logs\testresults\
+md e:\logs\testresults\omxil\
+
+md c:\omxil\
+md c:\omxil\testfiles\
+
+copy E:\unittest\omxil\testfiles\*.* c:\omxil\testfiles\

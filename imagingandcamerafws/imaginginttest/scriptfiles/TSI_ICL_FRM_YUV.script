@@ -1,0 +1,188 @@
+@file TSI_ICL_FRM_YUV.script
+// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT Testing for YUV Image Encoder
+//
+PRINT 
+
+//MULTITHREAD
+
+//
+LOAD_SUITE TSI_ICL_FRM_00.dll
+
+//********** PREQ 747 - YUV Encoder Positive tests **********
+//Encode a YUV RChunk to a JPEG descriptor.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1001-CP
+//!@SYMTestCaseDesc           Decode a  JPEG file to YUV RChunk and again encode the YUV RChunk to a JPEG descriptor.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Rchunk 3. Encode the YUV RChunk to JPEG descriptor specifying UID 4. Verify if resultant
+//! JPEG descriptor matches the  original JPEG file.
+//!@SYMTestExpectedResults    *aRequestStatus = KErrNone.  aDestinationData and reference JPEG are bitwise identical.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1001-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode a YUV RChunk to a JPEG file.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1002-CP
+//!@SYMTestCaseDesc           Decode a  JPEG file to YUV RChunk and again encode the YUV RChunk to a JPEG file.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Rchunk 3. Encode the YUV Rchunk to JPEG File 4. Verify if resultant JPEG File matches
+//! the original JPEG File
+//!@SYMTestExpectedResults    *aRequestStatus = KErrNone.  aDestinationData and reference JPEG are bitwise identical.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1002-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode a YUV Descriptor to a JPEG descriptor.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1003-CP
+//!@SYMTestCaseDesc           Decode a JPEG file to YUV Descriptor and  encode the YUV Descriptor to a JPEG File.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Descriptor 3. Encode the YUV Descriptor to JPEG descriptor specifying UID 4. Verify
+//! if resultant JPEG descriptor matches the  original JPEG file.
+//!@SYMTestExpectedResults    *aRequestStatus = KErrNone.  aDestinationData and reference JPEG are bitwise identical.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1003-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode a YUV Descriptor to a JPEG file.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1004-CP
+//!@SYMTestCaseDesc           Decode a JPEG file to YUV Descriptor and  encode the YUV Descriptor to a JPEG file.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Desciptor 3. Encode the YUV Descriptor to JPEG file specifying UID 4. Verify if resultant
+//! JPEG file matches the  original JPEG file.
+//!@SYMTestExpectedResults    *aRequestStatus = KErrNone.  aDestinationData and reference JPEG are bitwise identical.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1004-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Encode YUV RChunk data to JPEG specifying extra encode parameters
+//!@SYMTestCaseID             MM-ICL-FRM-I-1005-LP
+//!@SYMTestCaseDesc           Encode YUV RChunk data to JPEG seting destination image format specific data by using CFrameImageData
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           4
+//!@SYMTestActions            1. Encode to YUV Rchunk 3. Encode the YUV RChunk to JPEG descriptor  4. Verify if resultant JPEG descriptor matches the
+//!  original JPEG file.
+//!@SYMTestExpectedResults    *aRequestStatus = KErrNone.  aDestinationData and reference JPEG are bitwise identical.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1005-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Load YUVJPEG Encoder Plug-in, and enquire its UID.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1006-LP
+//!@SYMTestCaseDesc           Load YUVJPEG Encoder Plug-in, and enquire its UID. Also Load the YUV Enhaced Decoder Plug-in and enquire its UID.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           4
+//!@SYMTestActions            Query UID of the YUVJPEG encoder, decoder . Verify the returned value against encoder's/decoders's  known UID
+//!@SYMTestExpectedResults    UID returned matches known UID of encoder
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1006-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Load YUVJPEG Encoder Plug-in, and enquire the list of YUV Formats supported..
+//!@SYMTestCaseID             MM-ICL-FRM-I-1007-LP
+//!@SYMTestCaseDesc           Load YUVJPEG Encoder Plug-in, and enquire the list of YUV Formats supported. Also Load the YUV Enhaced Decoder Plug-in and
+//! enquire the list of supported image formats.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           4
+//!@SYMTestActions            List the supported YUV Formats of the YUVJPEG encoder/decoder, verify the returned list with the known list.
+//!@SYMTestExpectedResults    The list of supported formats returned by the API, should match the known list of supported formats.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1007-LP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+
+//********** PREQ 747 - YUV Encoder Negative tests **********
+
+//Case MM-ICL-FRM-I-1111-CP is removed.
+
+//Request an encode from YUV to JPEG specifying a supported image format but unsupported frame format
+//!@SYMTestCaseID             MM-ICL-FRM-I-1112-CP
+//!@SYMTestCaseDesc           Request an encode from YUV to JPEG specifying a supported image format but unsupported frame format
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            From a CVisualFrame in memory, request an encode to an unsupported frame format. Verify error code is returned indicating
+//! the encoder does not support this format.
+//!@SYMTestExpectedResults    Convert() returns;  *aRequestStatus contains an error - KErrNotSupported.  Original TYuvFormat unchanged. No encoded version
+//! produced.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1112-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Check encode with a valid YUV file, but corrupt RChunk data
+//!@SYMTestCaseID             MM-ICL-FRM-I-1113-CP
+//!@SYMTestCaseDesc           Check encode with a valid YUV file, but corrupt RChunk data
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            From the YUV file, create a TDes. Corrupt the TDes, by adding / deleting some data. Cast the TDesC to CRChunkFrame. Request
+//! encode to JPEG specifying UID, and verify the error returned.
+//!@SYMTestExpectedResults    The Expected Error is KErrNotFound on executing CImageEncoder::FileNewL.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1113-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Check encode with a valid YUV file, but corrupt descriptor data
+//!@SYMTestCaseID             MM-ICL-FRM-I-1114-CP
+//!@SYMTestCaseDesc           Check encode with a valid YUV file, but corrupt descriptor data
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           1
+//!@SYMTestActions            From the YUV file, create a TDes. Corrupt the TDes, by adding / deleting some data. Cast the TDesC to CDescriptorFrame.
+//! Request encode to JPEG specifying UID, and verify the error returned.
+//!@SYMTestExpectedResults    The Expected Error is KErrNotSupported / KErrNotFound on executing CImageEncoder::FileNewL.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1114-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+
+//Cases MM-ICL-FRM-I-1115-CP and MM-ICL-FRM-I-1116-CP are removed.
+
+//Request a decode from JPEG to an unsupported YUV image format.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1117-CP
+//!@SYMTestCaseDesc           Request a decode from JPEG to an unsupported YUV image format.
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a JPEG file for Input 2. Decode to an unsupported YUV Format 3. Check if the Error code returned is KErrNotSuppo
+//!rted.
+//!@SYMTestExpectedResults    Convert() returns;  *aRequestStatus contains an error - KErrNotSupported.  Original JPEG unchanged. No decoded version p
+//!roduced.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1117-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Check decode with a corrupt JPEG  file to YUV.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1118-CP
+//!@SYMTestCaseDesc           Check decode with a corrupt JPEG  file to YUV.
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a corrupt JPEG file for Input 2. Attempt to Decode to YUV Format 3. Check if the Error code returned is KErrCorr
+//!upt.
+//!@SYMTestExpectedResults    Convert() returns;  *aRequestStatus contains an error - KErrCorrupt.  Original JPEG unchanged. No decoded version produc
+//!ed.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1118-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Check decode with a  corrupt JPEG  descriptor to YUV.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1119-CP
+//!@SYMTestCaseDesc           Check decode with a  corrupt JPEG  descriptor to YUV.
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a corrupt JPEG descriptor for Input 2. Attempt to Decode to YUV Format 3. Check if the Error code returned is KE
+//!rrCorrupt.
+//!@SYMTestExpectedResults    Convert() returns;  *aRequestStatus contains an error - KErrCorrupt.  Original JPEG unchanged. No decoded version produc
+//!ed.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1119-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Attempt to encode a GIF to YUV.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1120-CP
+//!@SYMTestCaseDesc           Attempt to decode a GIF to YUV.
+//!@SYMTestPriority           1
+//!@SYMTestActions            1. Open a GIF file for Input 2. Attempt to load a GIF to YUV decoder 3. Check if the Error code returned is KErrNotSuppo
+//!rted.
+//!@SYMTestExpectedResults    Convert() returns;  *aRequestStatus contains an error - KErrNotSupported.  Original JPEG unchanged. No decoded version p
+//!roduced.
+RUN_TEST_STEP 360000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1120-CP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+

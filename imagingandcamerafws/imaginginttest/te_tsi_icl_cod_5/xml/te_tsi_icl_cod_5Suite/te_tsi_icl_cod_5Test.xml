@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecuteTest>
+  <name>te_tsi_icl_cod_5Test</name>
+  <timeout>10000</timeout>
+  <testScripts>
+    <script>
+      <hostPath>\te_tsi_icl_cod_5\scripts\te_tsi_icl_cod_5Suite.script</hostPath>
+      <devicePath>c:\te_tsi_icl_cod_5Suite.script</devicePath>
+    </script>
+  </testScripts>
+  <testServers>
+    <server>te_tsi_icl_cod_5Suite</server>
+  </testServers>
+  <dependencies>
+    <data>
+      <hostPath>\te_tsi_icl_cod_5\testdata\te_tsi_icl_cod_5Suite.ini</hostPath>
+      <devicePath>c:\testdata\configs\te_tsi_icl_cod_5Suite.ini</devicePath>
+    </data>
+  </dependencies>
+</testExecuteTest>

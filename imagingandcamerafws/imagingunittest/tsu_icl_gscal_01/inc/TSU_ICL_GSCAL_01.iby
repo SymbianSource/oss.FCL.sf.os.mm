@@ -1,0 +1,26 @@
+// Copyright (c) 2003-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __TSU_MMF_GSCAL_IBY__
+#define __TSU_MMF_GSCAL_IBY__
+
+// debug build
+file=ABI_DIR\BUILD_DIR\TSU_ICL_GSCAL_01.dll 	System\Libs\TSU_ICL_GSCAL_01.dll
+
+data=EPOCROOT##epoc32\data\c\TSU_ICL_GSCAL_01.script           \TSU_ICL_GSCAL_01.script
+data=EPOCROOT##epoc32\data\c\TSU_ICL_GSCAL_01_ALLOC.script     \TSU_ICL_GSCAL_01_ALLOC.script
+data=EPOCROOT##epoc32\data\c\TSU_ICL_GSCAL_01_Panic.script     \TSU_ICL_GSCAL_01_Panic.script
+
+#endif

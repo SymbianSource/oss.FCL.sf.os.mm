@@ -1,0 +1,32 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSU_ICL_EXIFIMGDISP_01_PANIC
+// 
+//
+
+PRINT Run all the ExifImageDisplay panic tests 
+PRINT 
+
+//
+LOAD_SUITE tsu_icl_GenIclImgDisp_01.dll
+
+//! @SYMTestCaseID MM-ICL-EXIFIMGDISP-U-0501-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_GENICLIMGDISP_01, MM-ICL-EXIFIMGDISP-U-0501-HP ,ExifImageDisplay, 1
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-EXIFIMGDISP-U-0502-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_GENICLIMGDISP_01, MM-ICL-EXIFIMGDISP-U-0502-HP ,ExifImageDisplay, 2
+TEST_COMPLETE 

@@ -1,0 +1,33 @@
+/*
+* Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of "Eclipse Public License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.eclipse.org/legal/epl-v10.html".
+*
+* Initial Contributors:
+* Nokia Corporation - initial contribution.
+*
+* Contributors:
+*
+* Description:
+*
+*/
+
+#ifndef __TE_TSI_ICL_COD_5_SUITE_IBY__
+#define __TE_TSI_ICL_COD_5_SUITE_IBY__
+
+#include <testexecute.iby>
+
+file=ABI_DIR\BUILD_DIR\te_tsi_icl_cod_5Suite.exe				sys\bin\te_tsi_icl_cod_5Suite.exe
+file=ABI_DIR\DEBUG_DIR\te_tsi_icl_cod_5aSuite.exe				sys\bin\te_tsi_icl_cod_5aSuite.exe
+data=EPOCROOT##epoc32\data\c\testdata\configs\te_tsi_icl_cod_5Suite.ini		\testdata\configs\te_tsi_icl_cod_5Suite.ini
+data=EPOCROOT##epoc32\data\c\testdata\scripts\te_tsi_icl_cod_5Suite_1.script	\testdata\scripts\te_tsi_icl_cod_5Suite_1.Script
+data=EPOCROOT##epoc32\data\c\testdata\scripts\te_tsi_icl_cod_5Suite_2.script	\testdata\scripts\te_tsi_icl_cod_5Suite_2.Script
+data=EPOCROOT##epoc32\data\c\testdata\scripts\te_tsi_icl_cod_5Suite_3.script	\testdata\scripts\te_tsi_icl_cod_5Suite_3.Script
+data=EPOCROOT##epoc32\data\c\testdata\scripts\te_tsi_icl_cod_5aSuite.script	\testdata\scripts\te_tsi_icl_cod_5aSuite.Script
+data=EPOCROOT##epoc32\data\c\testdata\scripts\te_tsi_icl_cod_5suite_mng_1.script	\testdata\scripts\te_tsi_icl_cod_5suite_mng_1.Script
+data=EPOCROOT##epoc32\data\c\testdata\scripts\te_tsi_icl_cod_5suite_mng_2.script	\testdata\scripts\te_tsi_icl_cod_5suite_mng_2.Script
+
+#endif

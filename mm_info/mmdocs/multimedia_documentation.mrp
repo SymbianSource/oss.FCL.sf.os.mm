@@ -1,0 +1,9 @@
+component	multimedia_documentation
+
+source	\sf\os\mm\mm_info\mmdocs
+
+notes_source	\component_defs\release.src
+
+ipr D
+ipr T	\sf\os\mm\mm_info\mmdocs\Test_Design
+ipr T	\sf\os\mm\mm_info\mmdocs\Test_Specs

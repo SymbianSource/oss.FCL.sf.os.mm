@@ -1,0 +1,167 @@
+EXPORTS
+	?AngleL@TEffectRotation@ImageProcessor@@QBEMXZ @ 1 NONAME ; float ImageProcessor::TEffectRotation::AngleL(void) const
+	?AngleL@TOverlay@ImageProcessor@@QBEMXZ @ 2 NONAME ; float ImageProcessor::TOverlay::AngleL(void) const
+	?ApplyOperationL@CImgProcessor@ImageProcessor@@QAEXW4TOperation@12@@Z @ 3 NONAME ; void ImageProcessor::CImgProcessor::ApplyOperationL(enum ImageProcessor::CImgProcessor::TOperation)
+	?BackgroundColorL@CImgProcessor@ImageProcessor@@QBE?AVTRgb@@XZ @ 4 NONAME ; class TRgb ImageProcessor::CImgProcessor::BackgroundColorL(void) const
+	?BeginL@TEffect@ImageProcessor@@QAEXXZ @ 5 NONAME ; void ImageProcessor::TEffect::BeginL(void)
+	?BeginL@TOverlay@ImageProcessor@@QAEXXZ @ 6 NONAME ; void ImageProcessor::TOverlay::BeginL(void)
+	?BitsPerPixelL@TInputInfo@ImageProcessor@@QBEKXZ @ 7 NONAME ; unsigned long ImageProcessor::TInputInfo::BitsPerPixelL(void) const
+	?BlackLevelL@TEffectLevels@ImageProcessor@@QBEMXZ @ 8 NONAME ; float ImageProcessor::TEffectLevels::BlackLevelL(void) const
+	?BlueLevelL@TEffectRgbColorAdjust@ImageProcessor@@QBEMXZ @ 9 NONAME ; float ImageProcessor::TEffectRgbColorAdjust::BlueLevelL(void) const
+	?CalculatePixelBufferSizeL@CImgProcessor@ImageProcessor@@QBEHVTSize@@ABVTUid@@K@Z @ 10 NONAME ; int ImageProcessor::CImgProcessor::CalculatePixelBufferSizeL(class TSize, class TUid const &, unsigned long) const
+	?CalculatePixelBufferSizeL@CImgProcessor@ImageProcessor@@QBEHVTSize@@W4TDisplayMode@@K@Z @ 11 NONAME ; int ImageProcessor::CImgProcessor::CalculatePixelBufferSizeL(class TSize, enum TDisplayMode, unsigned long) const
+	?CanRedoL@CImgProcessor@ImageProcessor@@QBEHXZ @ 12 NONAME ; int ImageProcessor::CImgProcessor::CanRedoL(void) const
+	?CanUndoL@CImgProcessor@ImageProcessor@@QBEHXZ @ 13 NONAME ; int ImageProcessor::CImgProcessor::CanUndoL(void) const
+	?Cancel@CImgProcessor@ImageProcessor@@QAEXXZ @ 14 NONAME ; void ImageProcessor::CImgProcessor::Cancel(void)
+	?Cancel@TPreview@ImageProcessor@@QAEXXZ @ 15 NONAME ; void ImageProcessor::TPreview::Cancel(void)
+	?CanvasAreaL@TPreview@ImageProcessor@@QBE?AVTRect@@XZ @ 16 NONAME ; class TRect ImageProcessor::TPreview::CanvasAreaL(void) const
+	?CanvasToCurrentCoordL@TPreview@ImageProcessor@@QBEXABVTPoint@@AAV3@@Z @ 17 NONAME ; void ImageProcessor::TPreview::CanvasToCurrentCoordL(class TPoint const &, class TPoint &) const
+	?ChrominanceStrengthL@TEffectColorization@ImageProcessor@@QBEHXZ @ 18 NONAME ; int ImageProcessor::TEffectColorization::ChrominanceStrengthL(void) const
+	?ConvertFileExtensionToUidL@CImgProcessor@ImageProcessor@@QBEXABVTDesC16@@AAVTUid@@1@Z @ 19 NONAME ; void ImageProcessor::CImgProcessor::ConvertFileExtensionToUidL(class TDesC16 const &, class TUid &, class TUid &) const
+	?ConvertMimeTypeToUidL@CImgProcessor@ImageProcessor@@QBEXABVTDesC8@@AAVTUid@@1@Z @ 20 NONAME ; void ImageProcessor::CImgProcessor::ConvertMimeTypeToUidL(class TDesC8 const &, class TUid &, class TUid &) const
+	?ConvertUidToFileExtensionL@CImgProcessor@ImageProcessor@@QBEXAAVTDes16@@ABVTUid@@1@Z @ 21 NONAME ; void ImageProcessor::CImgProcessor::ConvertUidToFileExtensionL(class TDes16 &, class TUid const &, class TUid const &) const
+	?ConvertUidToMimeTypeL@CImgProcessor@ImageProcessor@@QBEXAAVTDes8@@ABVTUid@@1@Z @ 22 NONAME ; void ImageProcessor::CImgProcessor::ConvertUidToMimeTypeL(class TDes8 &, class TUid const &, class TUid const &) const
+	?CreateInputL@CImgProcessor@ImageProcessor@@QAEXAAVCFbsBitmap@@@Z @ 23 NONAME ; void ImageProcessor::CImgProcessor::CreateInputL(class CFbsBitmap &)
+	?CreateInputL@CImgProcessor@ImageProcessor@@QAEXAAVCImageFrame@@@Z @ 24 NONAME ; void ImageProcessor::CImgProcessor::CreateInputL(class CImageFrame &)
+	?CreateInputL@CImgProcessor@ImageProcessor@@QAEXABVTSize@@ABVTRgb@@@Z @ 25 NONAME ; void ImageProcessor::CImgProcessor::CreateInputL(class TSize const &, class TRgb const &)
+	?CreateOutputL@TPreview@ImageProcessor@@QAEPAVCImageFrame@@ABVTSize@@ABVTFrameFormatBase@@ABVTFrameLayoutBase@@@Z @ 26 NONAME ; class CImageFrame * ImageProcessor::TPreview::CreateOutputL(class TSize const &, class TFrameFormatBase const &, class TFrameLayoutBase const &)
+	?CurrentIterationL@TProgressInfo@ImageProcessor@@QBEHXZ @ 27 NONAME ; int ImageProcessor::TProgressInfo::CurrentIterationL(void) const
+	?CurrentSizeL@CImgProcessor@ImageProcessor@@QBE?AVTSize@@XZ @ 28 NONAME ; class TSize ImageProcessor::CImgProcessor::CurrentSizeL(void) const
+	?DisplayModeL@TInputInfo@ImageProcessor@@QBE?AW4TDisplayMode@@XZ @ 29 NONAME ; enum TDisplayMode ImageProcessor::TInputInfo::DisplayModeL(void) const
+	?DistinctEdgesL@TEffectCartoon@ImageProcessor@@QBEHXZ @ 30 NONAME ; int ImageProcessor::TEffectCartoon::DistinctEdgesL(void) const
+	?EffectL@CImgProcessor@ImageProcessor@@QAEPAVTEffect@2@VTUid@@@Z @ 31 NONAME ; class ImageProcessor::TEffect * ImageProcessor::CImgProcessor::EffectL(class TUid)
+	?EndL@TEffect@ImageProcessor@@QAEXXZ @ 32 NONAME ; void ImageProcessor::TEffect::EndL(void)
+	?EndL@TOverlay@ImageProcessor@@QAEXXZ @ 33 NONAME ; void ImageProcessor::TOverlay::EndL(void)
+	?Extension@CImgProcessor@ImageProcessor@@QAEPAXVTUid@@@Z @ 34 NONAME ; void * ImageProcessor::CImgProcessor::Extension(class TUid)
+	?Extension@TEffect@ImageProcessor@@QAEPAXVTUid@@@Z @ 35 NONAME ; void * ImageProcessor::TEffect::Extension(class TUid)
+	?Extension@TProgressInfo@ImageProcessor@@QBEPAXVTUid@@@Z @ 36 NONAME ; void * ImageProcessor::TProgressInfo::Extension(class TUid) const
+	?FormatL@TInputInfo@ImageProcessor@@QBEXAAVTUid@@0@Z @ 37 NONAME ; void ImageProcessor::TInputInfo::FormatL(class TUid &, class TUid &) const
+	?GetPanLevelSettings@TPreview@ImageProcessor@@QAEXAAM0@Z @ 38 NONAME ; void ImageProcessor::TPreview::GetPanLevelSettings(float &, float &)
+	?GetScaleL@TOverlay@ImageProcessor@@QBEXAAM0@Z @ 39 NONAME ; void ImageProcessor::TOverlay::GetScaleL(float &, float &) const
+	?GetZoomLevelSettings@TPreview@ImageProcessor@@QAEXAAM0@Z @ 40 NONAME ; void ImageProcessor::TPreview::GetZoomLevelSettings(float &, float &)
+	?GrayLevelL@TEffectLevels@ImageProcessor@@QBEMXZ @ 41 NONAME ; float ImageProcessor::TEffectLevels::GrayLevelL(void) const
+	?GreenLevelL@TEffectRgbColorAdjust@ImageProcessor@@QBEMXZ @ 42 NONAME ; float ImageProcessor::TEffectRgbColorAdjust::GreenLevelL(void) const
+	?HasAlphaL@TInputInfo@ImageProcessor@@QBEHXZ @ 43 NONAME ; int ImageProcessor::TInputInfo::HasAlphaL(void) const
+	?ImageFrameFormatL@TInputInfo@ImageProcessor@@QBE?AVTUid@@XZ @ 44 NONAME ; class TUid ImageProcessor::TInputInfo::ImageFrameFormatL(void) const
+	?InitializeL@CImgProcessor@ImageProcessor@@QAEXXZ @ 45 NONAME ; void ImageProcessor::CImgProcessor::InitializeL(void)
+	?InitializeL@CImgProcessor@ImageProcessor@@QAEX_K@Z @ 46 NONAME ; void ImageProcessor::CImgProcessor::InitializeL(unsigned long long)
+	?InitializeL@TPreview@ImageProcessor@@QAEXXZ @ 47 NONAME ; void ImageProcessor::TPreview::InitializeL(void)
+	?InputInfoL@CImgProcessor@ImageProcessor@@QAEPAVTInputInfo@2@XZ @ 48 NONAME ; class ImageProcessor::TInputInfo * ImageProcessor::CImgProcessor::InputInfoL(void)
+	?InputType@TEffect@ImageProcessor@@QBE?AW4TEffectInputType@12@XZ @ 49 NONAME ; enum ImageProcessor::TEffect::TEffectInputType ImageProcessor::TEffect::InputType(void) const
+	?InputUpdatedL@CImgProcessor@ImageProcessor@@QAEXXZ @ 50 NONAME ; void ImageProcessor::CImgProcessor::InputUpdatedL(void)
+	?IsInterlacedL@TInputInfo@ImageProcessor@@QBEHXZ @ 51 NONAME ; int ImageProcessor::TInputInfo::IsInterlacedL(void) const
+	?IsProgressiveL@TInputInfo@ImageProcessor@@QBEHXZ @ 52 NONAME ; int ImageProcessor::TInputInfo::IsProgressiveL(void) const
+	?LevelL@TEffect@ImageProcessor@@QBEXAAH@Z @ 53 NONAME ; void ImageProcessor::TEffect::LevelL(int &) const
+	?LevelL@TEffect@ImageProcessor@@QBEXAAM@Z @ 54 NONAME ; void ImageProcessor::TEffect::LevelL(float &) const
+	?LevelSettings@TEffect@ImageProcessor@@QBEXAAH00@Z @ 55 NONAME ; void ImageProcessor::TEffect::LevelSettings(int &, int &, int &) const
+	?LevelSettings@TEffect@ImageProcessor@@QBEXAAM00@Z @ 56 NONAME ; void ImageProcessor::TEffect::LevelSettings(float &, float &, float &) const
+	?LuminanceStrengthL@TEffectColorization@ImageProcessor@@QBEHXZ @ 57 NONAME ; int ImageProcessor::TEffectColorization::LuminanceStrengthL(void) const
+	?NewL@CImgProcessor@ImageProcessor@@SAPAV12@AAVRFs@@AAVMImgProcessorObserver@2@VTUid@@@Z @ 58 NONAME ; class ImageProcessor::CImgProcessor * ImageProcessor::CImgProcessor::NewL(class RFs &, class ImageProcessor::MImgProcessorObserver &, class TUid)
+	?NumberOfIterationsL@TProgressInfo@ImageProcessor@@QBEHXZ @ 59 NONAME ; int ImageProcessor::TProgressInfo::NumberOfIterationsL(void) const
+	?Operation@TGeometricalOperation@ImageProcessor@@QBE?AW4TOperation@CImgProcessor@2@XZ @ 60 NONAME ; enum ImageProcessor::CImgProcessor::TOperation ImageProcessor::TGeometricalOperation::Operation(void) const
+	?Options@CImgProcessor@ImageProcessor@@QBE_KXZ @ 61 NONAME ; unsigned long long ImageProcessor::CImgProcessor::Options(void) const
+	?OutputInfoL@CImgProcessor@ImageProcessor@@QAEPAVTOutputInfo@2@XZ @ 62 NONAME ; class ImageProcessor::TOutputInfo * ImageProcessor::CImgProcessor::OutputInfoL(void)
+	?OverlayL@CImgProcessor@ImageProcessor@@QAEPAVTOverlay@2@XZ @ 63 NONAME ; class ImageProcessor::TOverlay * ImageProcessor::CImgProcessor::OverlayL(void)
+	?PanL@TPreview@ImageProcessor@@QBEXAAM0@Z @ 64 NONAME ; void ImageProcessor::TPreview::PanL(float &, float &) const
+	?PositionL@TOverlay@ImageProcessor@@QBE?AVTPoint@@XZ @ 65 NONAME ; class TPoint ImageProcessor::TOverlay::PositionL(void) const
+	?PreviewId@TPreview@ImageProcessor@@QBEHXZ @ 66 NONAME ; int ImageProcessor::TPreview::PreviewId(void) const
+	?PreviewL@CImgProcessor@ImageProcessor@@QAEPAVTPreview@2@H@Z @ 67 NONAME ; class ImageProcessor::TPreview * ImageProcessor::CImgProcessor::PreviewL(int)
+	?PreviewToCurrentCoordL@TPreview@ImageProcessor@@QBEXABVTPoint@@AAV3@@Z @ 68 NONAME ; void ImageProcessor::TPreview::PreviewToCurrentCoordL(class TPoint const &, class TPoint &) const
+	?ProcessL@CImgProcessor@ImageProcessor@@QAEXABVTSize@@H@Z @ 69 NONAME ; void ImageProcessor::CImgProcessor::ProcessL(class TSize const &, int)
+	?ProcessL@CImgProcessor@ImageProcessor@@QAEXXZ @ 70 NONAME ; void ImageProcessor::CImgProcessor::ProcessL(void)
+	?ProgressInfoL@CImgProcessor@ImageProcessor@@QAEPAVTProgressInfo@2@XZ @ 71 NONAME ; class ImageProcessor::TProgressInfo * ImageProcessor::CImgProcessor::ProgressInfoL(void)
+	?RectL@TEffectBlur@ImageProcessor@@QBE?AVTRect@@XZ @ 72 NONAME ; class TRect ImageProcessor::TEffectBlur::RectL(void) const
+	?RedLevelL@TEffectRgbColorAdjust@ImageProcessor@@QBEMXZ @ 73 NONAME ; float ImageProcessor::TEffectRgbColorAdjust::RedLevelL(void) const
+	?RedoAllL@CImgProcessor@ImageProcessor@@QAEXXZ @ 74 NONAME ; void ImageProcessor::CImgProcessor::RedoAllL(void)
+	?RedoL@CImgProcessor@ImageProcessor@@QAEXXZ @ 75 NONAME ; void ImageProcessor::CImgProcessor::RedoL(void)
+	?ReferenceColorL@TEffectColorization@ImageProcessor@@QBE?AVTRgb@@XZ @ 76 NONAME ; class TRgb ImageProcessor::TEffectColorization::ReferenceColorL(void) const
+	?ReferenceWhiteColorL@TEffectWhiteBalance@ImageProcessor@@QBE?AVTRgb@@XZ @ 77 NONAME ; class TRgb ImageProcessor::TEffectWhiteBalance::ReferenceWhiteColorL(void) const
+	?RenderL@TPreview@ImageProcessor@@QAEXXZ @ 78 NONAME ; void ImageProcessor::TPreview::RenderL(void)
+	?ResetL@CImgProcessor@ImageProcessor@@QAEXXZ @ 79 NONAME ; void ImageProcessor::CImgProcessor::ResetL(void)
+	?ResetL@TEffect@ImageProcessor@@QAEXXZ @ 80 NONAME ; void ImageProcessor::TEffect::ResetL(void)
+	?ResetL@TOverlay@ImageProcessor@@QAEXXZ @ 81 NONAME ; void ImageProcessor::TOverlay::ResetL(void)
+	?ResetL@TPreview@ImageProcessor@@QAEXXZ @ 82 NONAME ; void ImageProcessor::TPreview::ResetL(void)
+	?SamplingL@TInputInfo@ImageProcessor@@QBE?AVTUid@@XZ @ 83 NONAME ; class TUid ImageProcessor::TInputInfo::SamplingL(void) const
+	?ScaleModeL@TEffectRotation@ImageProcessor@@QBE?AW4TRotationScaleMode@12@XZ @ 84 NONAME ; enum ImageProcessor::TEffectRotation::TRotationScaleMode ImageProcessor::TEffectRotation::ScaleModeL(void) const
+	?SetBackgroundColorL@CImgProcessor@ImageProcessor@@QAEXABVTRgb@@@Z @ 85 NONAME ; void ImageProcessor::CImgProcessor::SetBackgroundColorL(class TRgb const &)
+	?SetColorizationL@TEffectColorization@ImageProcessor@@QAEXVTRgb@@HH@Z @ 86 NONAME ; void ImageProcessor::TEffectColorization::SetColorizationL(class TRgb, int, int)
+	?SetDistinctEdgesL@TEffectCartoon@ImageProcessor@@QAEXH@Z @ 87 NONAME ; void ImageProcessor::TEffectCartoon::SetDistinctEdgesL(int)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXAAVRFile@@ABVTUid@@1@Z @ 88 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class RFile &, class TUid const &, class TUid const &)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXAAVTMMSource@@ABVTUid@@1@Z @ 89 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class TMMSource &, class TUid const &, class TUid const &)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXABVCFbsBitmap@@PBV3@@Z @ 90 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class CFbsBitmap const &, class CFbsBitmap const *)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXABVCImageFrame@@@Z @ 91 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class CImageFrame const &)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXABVTDesC16@@ABVTUid@@1@Z @ 92 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class TDesC16 const &, class TUid const &, class TUid const &)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXABVTDesC8@@ABVTUid@@1@Z @ 93 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class TDesC8 const &, class TUid const &, class TUid const &)
+	?SetInputL@TEffectBorder@ImageProcessor@@QAEXABVCFbsBitmap@@@Z @ 94 NONAME ; void ImageProcessor::TEffectBorder::SetInputL(class CFbsBitmap const &)
+	?SetInputL@TEffectBorder@ImageProcessor@@QAEXABVTDesC16@@@Z @ 95 NONAME ; void ImageProcessor::TEffectBorder::SetInputL(class TDesC16 const &)
+	?SetInputL@TEffectBorder@ImageProcessor@@QAEXABVTDesC8@@@Z @ 96 NONAME ; void ImageProcessor::TEffectBorder::SetInputL(class TDesC8 const &)
+	?SetInputL@TEffectCustomTransformation@ImageProcessor@@QAEXABVTDesC16@@@Z @ 97 NONAME ; void ImageProcessor::TEffectCustomTransformation::SetInputL(class TDesC16 const &)
+	?SetInputL@TEffectCustomTransformation@ImageProcessor@@QAEXABVTDesC8@@@Z @ 98 NONAME ; void ImageProcessor::TEffectCustomTransformation::SetInputL(class TDesC8 const &)
+	?SetInputL@TOverlay@ImageProcessor@@QAEXAAVRFile@@ABVTUid@@1@Z @ 99 NONAME ; void ImageProcessor::TOverlay::SetInputL(class RFile &, class TUid const &, class TUid const &)
+	?SetInputL@TOverlay@ImageProcessor@@QAEXAAVTMMSource@@ABVTUid@@1@Z @ 100 NONAME ; void ImageProcessor::TOverlay::SetInputL(class TMMSource &, class TUid const &, class TUid const &)
+	?SetInputL@TOverlay@ImageProcessor@@QAEXABVCFbsBitmap@@PBV3@@Z @ 101 NONAME ; void ImageProcessor::TOverlay::SetInputL(class CFbsBitmap const &, class CFbsBitmap const *)
+	?SetInputL@TOverlay@ImageProcessor@@QAEXABVCImageFrame@@@Z @ 102 NONAME ; void ImageProcessor::TOverlay::SetInputL(class CImageFrame const &)
+	?SetInputL@TOverlay@ImageProcessor@@QAEXABVTDesC16@@ABVTUid@@1@Z @ 103 NONAME ; void ImageProcessor::TOverlay::SetInputL(class TDesC16 const &, class TUid const &, class TUid const &)
+	?SetInputL@TOverlay@ImageProcessor@@QAEXABVTDesC8@@ABVTUid@@1@Z @ 104 NONAME ; void ImageProcessor::TOverlay::SetInputL(class TDesC8 const &, class TUid const &, class TUid const &)
+	?SetInputRectL@CImgProcessor@ImageProcessor@@QAEXABVTRect@@@Z @ 105 NONAME ; void ImageProcessor::CImgProcessor::SetInputRectL(class TRect const &)
+	?SetJpegQualityL@TOutputInfo@ImageProcessor@@QAEXAAM@Z @ 106 NONAME ; void ImageProcessor::TOutputInfo::SetJpegQualityL(float &)
+	?SetL@TOverlay@ImageProcessor@@QAEXABVTSize@@ABVTPoint@@M@Z @ 107 NONAME ; void ImageProcessor::TOverlay::SetL(class TSize const &, class TPoint const &, float)
+	?SetL@TOverlay@ImageProcessor@@QAEXMMABVTPoint@@M@Z @ 108 NONAME ; void ImageProcessor::TOverlay::SetL(float, float, class TPoint const &, float)
+	?SetLevelL@TEffect@ImageProcessor@@QAEXH@Z @ 109 NONAME ; void ImageProcessor::TEffect::SetLevelL(int)
+	?SetLevelL@TEffect@ImageProcessor@@QAEXM@Z @ 110 NONAME ; void ImageProcessor::TEffect::SetLevelL(float)
+	?SetOperationL@TGeometricalOperation@ImageProcessor@@QAEXW4TOperation@CImgProcessor@2@@Z @ 111 NONAME ; void ImageProcessor::TGeometricalOperation::SetOperationL(enum ImageProcessor::CImgProcessor::TOperation)
+	?SetOptionsL@CImgProcessor@ImageProcessor@@QAEX_K@Z @ 112 NONAME ; void ImageProcessor::CImgProcessor::SetOptionsL(unsigned long long)
+	?SetOutputL@CImgProcessor@ImageProcessor@@QAEXAAVCFbsBitmap@@PAV3@@Z @ 113 NONAME ; void ImageProcessor::CImgProcessor::SetOutputL(class CFbsBitmap &, class CFbsBitmap *)
+	?SetOutputL@CImgProcessor@ImageProcessor@@QAEXAAVCImageFrame@@@Z @ 114 NONAME ; void ImageProcessor::CImgProcessor::SetOutputL(class CImageFrame &)
+	?SetOutputL@CImgProcessor@ImageProcessor@@QAEXAAVRBuf8@@ABVTUid@@1@Z @ 115 NONAME ; void ImageProcessor::CImgProcessor::SetOutputL(class RBuf8 &, class TUid const &, class TUid const &)
+	?SetOutputL@CImgProcessor@ImageProcessor@@QAEXAAVRFile@@ABVTUid@@1@Z @ 116 NONAME ; void ImageProcessor::CImgProcessor::SetOutputL(class RFile &, class TUid const &, class TUid const &)
+	?SetOutputL@CImgProcessor@ImageProcessor@@QAEXABVTDesC16@@ABVTUid@@1@Z @ 117 NONAME ; void ImageProcessor::CImgProcessor::SetOutputL(class TDesC16 const &, class TUid const &, class TUid const &)
+	?SetOutputL@TPreview@ImageProcessor@@QAEXAAVCFbsBitmap@@@Z @ 118 NONAME ; void ImageProcessor::TPreview::SetOutputL(class CFbsBitmap &)
+	?SetOutputL@TPreview@ImageProcessor@@QAEXAAVCImageFrame@@@Z @ 119 NONAME ; void ImageProcessor::TPreview::SetOutputL(class CImageFrame &)
+	?SetPanL@TPreview@ImageProcessor@@QAEXMM@Z @ 120 NONAME ; void ImageProcessor::TPreview::SetPanL(float, float)
+	?SetPreviewId@TPreview@ImageProcessor@@QAEXH@Z @ 121 NONAME ; void ImageProcessor::TPreview::SetPreviewId(int)
+	?SetRGBLevelL@TEffectRgbColorAdjust@ImageProcessor@@QAEXMMM@Z @ 122 NONAME ; void ImageProcessor::TEffectRgbColorAdjust::SetRGBLevelL(float, float, float)
+	?SetRectL@TEffectBlur@ImageProcessor@@QAEXVTRect@@@Z @ 123 NONAME ; void ImageProcessor::TEffectBlur::SetRectL(class TRect)
+	?SetRotationL@TEffectRotation@ImageProcessor@@QAEXW4TRotationScaleMode@12@M@Z @ 124 NONAME ; void ImageProcessor::TEffectRotation::SetRotationL(enum ImageProcessor::TEffectRotation::TRotationScaleMode, float)
+	?SetSamplingL@TOutputInfo@ImageProcessor@@QAEXAAVTUid@@@Z @ 125 NONAME ; void ImageProcessor::TOutputInfo::SetSamplingL(class TUid &)
+	?SetSketchModeL@TEffectSketch@ImageProcessor@@QAEXW4TSketchMode@12@@Z @ 126 NONAME ; void ImageProcessor::TEffectSketch::SetSketchModeL(enum ImageProcessor::TEffectSketch::TSketchMode)
+	?SetSpotLightOrientationL@TEffectSpotLight@ImageProcessor@@QAEXABVTPoint@@KM@Z @ 127 NONAME ; void ImageProcessor::TEffectSpotLight::SetSpotLightOrientationL(class TPoint const &, unsigned long, float)
+	?SetStampLevelL@TEffectStamp@ImageProcessor@@QAEXHH@Z @ 128 NONAME ; void ImageProcessor::TEffectStamp::SetStampLevelL(int, int)
+	?SetWGBLevelL@TEffectLevels@ImageProcessor@@QAEXMMM@Z @ 129 NONAME ; void ImageProcessor::TEffectLevels::SetWGBLevelL(float, float, float)
+	?SetWhiteBalanceL@TEffectWhiteBalance@ImageProcessor@@QAEXW4TWhiteBalanceMode@12@VTRgb@@@Z @ 130 NONAME ; void ImageProcessor::TEffectWhiteBalance::SetWhiteBalanceL(enum ImageProcessor::TEffectWhiteBalance::TWhiteBalanceMode, class TRgb)
+	?SetZoomL@TPreview@ImageProcessor@@QAEXM@Z @ 131 NONAME ; void ImageProcessor::TPreview::SetZoomL(float)
+	?SizeL@TInputInfo@ImageProcessor@@QBE?AVTSize@@XZ @ 132 NONAME ; class TSize ImageProcessor::TInputInfo::SizeL(void) const
+	?SizeL@TOverlay@ImageProcessor@@QBE?AVTSize@@XZ @ 133 NONAME ; class TSize ImageProcessor::TOverlay::SizeL(void) const
+	?SizeL@TPreview@ImageProcessor@@QBE?AVTSize@@XZ @ 134 NONAME ; class TSize ImageProcessor::TPreview::SizeL(void) const
+	?SketchModeL@TEffectSketch@ImageProcessor@@QBE?AW4TSketchMode@12@XZ @ 135 NONAME ; enum ImageProcessor::TEffectSketch::TSketchMode ImageProcessor::TEffectSketch::SketchModeL(void) const
+	?SmoothnessLevelL@TEffectStamp@ImageProcessor@@QBEHXZ @ 136 NONAME ; int ImageProcessor::TEffectStamp::SmoothnessLevelL(void) const
+	?SpotLightOrientationL@TEffectSpotLight@ImageProcessor@@QBEXAAVTPoint@@AAKAAM@Z @ 137 NONAME ; void ImageProcessor::TEffectSpotLight::SpotLightOrientationL(class TPoint &, unsigned long &, float &) const
+	?State@CImgProcessor@ImageProcessor@@QBE?AW4TState@12@XZ @ 138 NONAME ; enum ImageProcessor::CImgProcessor::TState ImageProcessor::CImgProcessor::State(void) const
+	?State@TPreview@ImageProcessor@@QBE?AW4TState@12@XZ @ 139 NONAME ; enum ImageProcessor::TPreview::TState ImageProcessor::TPreview::State(void) const
+	?SupportedEffectsL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 140 NONAME ; void ImageProcessor::CImgProcessor::SupportedEffectsL(class RArray<class TUid> &) const
+	?SupportedImageFrameFormatsL@TPreview@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 141 NONAME ; void ImageProcessor::TPreview::SupportedImageFrameFormatsL(class RArray<class TUid> &) const
+	?SupportedInputDisplayModesL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@W4TDisplayMode@@@@@Z @ 142 NONAME ; void ImageProcessor::CImgProcessor::SupportedInputDisplayModesL(class RArray<enum TDisplayMode> &) const
+	?SupportedInputDisplayModesL@TOverlay@ImageProcessor@@QBEXAAV?$RArray@W4TDisplayMode@@@@@Z @ 143 NONAME ; void ImageProcessor::TOverlay::SupportedInputDisplayModesL(class RArray<enum TDisplayMode> &) const
+	?SupportedInputFormatsL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 144 NONAME ; void ImageProcessor::CImgProcessor::SupportedInputFormatsL(class RArray<class TUid> &) const
+	?SupportedInputFormatsL@TOverlay@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 145 NONAME ; void ImageProcessor::TOverlay::SupportedInputFormatsL(class RArray<class TUid> &) const
+	?SupportedInputImageFrameFormatsL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 146 NONAME ; void ImageProcessor::CImgProcessor::SupportedInputImageFrameFormatsL(class RArray<class TUid> &) const
+	?SupportedInputImageFrameFormatsL@TOverlay@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 147 NONAME ; void ImageProcessor::TOverlay::SupportedInputImageFrameFormatsL(class RArray<class TUid> &) const
+	?SupportedInputSubFormatsL@CImgProcessor@ImageProcessor@@QBEXVTUid@@AAV?$RArray@VTUid@@@@@Z @ 148 NONAME ; void ImageProcessor::CImgProcessor::SupportedInputSubFormatsL(class TUid, class RArray<class TUid> &) const
+	?SupportedInputSubFormatsL@TOverlay@ImageProcessor@@QBEXVTUid@@AAV?$RArray@VTUid@@@@@Z @ 149 NONAME ; void ImageProcessor::TOverlay::SupportedInputSubFormatsL(class TUid, class RArray<class TUid> &) const
+	?SupportedOperations@CImgProcessor@ImageProcessor@@QBEIXZ @ 150 NONAME ; unsigned int ImageProcessor::CImgProcessor::SupportedOperations(void) const
+	?SupportedOptions@CImgProcessor@ImageProcessor@@QBE_KXZ @ 151 NONAME ; unsigned long long ImageProcessor::CImgProcessor::SupportedOptions(void) const
+	?SupportedOutputDisplayModesL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@W4TDisplayMode@@@@@Z @ 152 NONAME ; void ImageProcessor::CImgProcessor::SupportedOutputDisplayModesL(class RArray<enum TDisplayMode> &) const
+	?SupportedOutputDisplayModesL@TPreview@ImageProcessor@@QBEXAAV?$RArray@W4TDisplayMode@@@@@Z @ 153 NONAME ; void ImageProcessor::TPreview::SupportedOutputDisplayModesL(class RArray<enum TDisplayMode> &) const
+	?SupportedOutputFormatsL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 154 NONAME ; void ImageProcessor::CImgProcessor::SupportedOutputFormatsL(class RArray<class TUid> &) const
+	?SupportedOutputImageFrameFormatsL@CImgProcessor@ImageProcessor@@QBEXAAV?$RArray@VTUid@@@@@Z @ 155 NONAME ; void ImageProcessor::CImgProcessor::SupportedOutputImageFrameFormatsL(class RArray<class TUid> &) const
+	?SupportedOutputSubFormatsL@CImgProcessor@ImageProcessor@@QBEXVTUid@@AAV?$RArray@VTUid@@@@@Z @ 156 NONAME ; void ImageProcessor::CImgProcessor::SupportedOutputSubFormatsL(class TUid, class RArray<class TUid> &) const
+	?ThresholdLevelL@TEffectStamp@ImageProcessor@@QBEHXZ @ 157 NONAME ; int ImageProcessor::TEffectStamp::ThresholdLevelL(void) const
+	?UndoAllL@CImgProcessor@ImageProcessor@@QAEXXZ @ 158 NONAME ; void ImageProcessor::CImgProcessor::UndoAllL(void)
+	?UndoL@CImgProcessor@ImageProcessor@@QAEXXZ @ 159 NONAME ; void ImageProcessor::CImgProcessor::UndoL(void)
+	?UninitializeL@TPreview@ImageProcessor@@QAEXXZ @ 160 NONAME ; void ImageProcessor::TPreview::UninitializeL(void)
+	?WhiteBalanceModeL@TEffectWhiteBalance@ImageProcessor@@QBE?AW4TWhiteBalanceMode@12@XZ @ 161 NONAME ; enum ImageProcessor::TEffectWhiteBalance::TWhiteBalanceMode ImageProcessor::TEffectWhiteBalance::WhiteBalanceModeL(void) const
+	?WhiteLevelL@TEffectLevels@ImageProcessor@@QBEMXZ @ 162 NONAME ; float ImageProcessor::TEffectLevels::WhiteLevelL(void) const
+	?ZoomL@TPreview@ImageProcessor@@QBEMXZ @ 163 NONAME ; float ImageProcessor::TPreview::ZoomL(void) const
+	??1CImgProcessor@ImageProcessor@@UAE@XZ @ 164 NONAME ; ImageProcessor::CImgProcessor::~CImgProcessor(void)
+	?SetInputL@CImgProcessor@ImageProcessor@@QAEXAAVCImagePanorama@@@Z @ 165 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class CImagePanorama &)
+

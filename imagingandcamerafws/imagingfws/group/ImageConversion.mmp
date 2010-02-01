@@ -1,0 +1,105 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// imageconversion.dll Image conversion library
+// 
+//
+
+/**
+ @file
+*/
+
+
+//#define SYMBIAN_CAF_V2 SYMBIAN_CAF_V2
+
+// MACRO __ICL_PROFILING 
+		// enable profiling statements - for use with TProfImage
+
+// GetMimeTypeFileL() and GetMimeTypeDataL() are thorough
+// ie they don't just match on header data, they attempt to create a decoder
+MACRO	__GET_MIME_TYPE_THOROUGH
+
+// enables ansynchronous writing of encoder buffers
+// that would increase encoding performance by about 30% when writing 
+// to a high latency media such as MMC card.  Note that synchronous
+// writes do not currently work with the framework extension stream encode.
+MACRO SYMBIAN_ENABLE_ENCODER_ASYNC_WRITES
+
+TARGET		imageconversion.dll
+CAPABILITY  ALL -TCB
+TARGETTYPE	DLL
+
+UID	        0x101F45AC  0x101F45AD
+VENDORID    0x70000001
+
+SOURCEPATH	../src
+SOURCE		ImageClientApi.cpp
+SOURCE		ImageConversionPriv.cpp
+SOURCE		BufferedImageConversion.cpp
+SOURCE		ImageData.cpp
+SOURCE		ImageClientMain.cpp
+SOURCE		ImageConvResolvrUtils.cpp
+SOURCE		ImageResolverAPI.cpp
+SOURCE		ImageConstruct.cpp
+SOURCE		ImagePlugin.cpp
+SOURCE		ImageCodecBody.cpp
+SOURCE		ImageRelay.cpp
+SOURCE		ImageStraightRelay.cpp
+SOURCE		GenThreadRelay.cpp
+SOURCE		ThreadRelay.cpp
+SOURCE		Reciclutil.cpp
+SOURCE		Reciclutilbody.cpp
+SOURCE		imageframe.cpp
+SOURCE		imageframebody.cpp
+SOURCE      	asyncfilewriter.cpp
+
+SOURCE		ImageProcessorUtil.cpp
+SOURCE		ImageBitmapUtil.cpp
+SOURCE		imageconversionextension.cpp
+SOURCE		iclextproxystubutil.cpp
+SOURCE		fwextensionparams.cpp
+SOURCE		pluginextensionmanager.cpp
+
+USERINCLUDE	../inc
+USERINCLUDE	../src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+STATICLIBRARY	imageprocessorperf.lib
+LIBRARY	ecom.lib
+LIBRARY	euser.lib
+LIBRARY	efsrv.lib
+LIBRARY	gdi.lib
+LIBRARY	fbscli.lib
+LIBRARY	bitgdi.lib
+LIBRARY estor.lib
+LIBRARY bafl.lib
+LIBRARY caf.lib
+
+LIBRARY mmcommon.lib
+
+#ifdef EABI
+DEFFILE ImageConversion.def
+#endif
+
+#ifdef WINSCW
+DEFFILE IMAGECONVERSION.DEF
+#endif
+
+START	WINS
+BASEADDRESS	0x4F600000
+END
+
+
+
+SMPSAFE

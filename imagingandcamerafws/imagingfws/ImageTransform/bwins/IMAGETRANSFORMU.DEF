@@ -1,0 +1,66 @@
+EXPORTS
+	??0CImageTransformPlugin@@IAE@XZ @ 1 NONAME ; protected: __thiscall CImageTransformPlugin::CImageTransformPlugin(void)
+	??1CImageTransform@@UAE@XZ @ 2 NONAME ; public: virtual __thiscall CImageTransform::~CImageTransform(void)
+	??1CImageTransformPlugin@@UAE@XZ @ 3 NONAME ; public: virtual __thiscall CImageTransformPlugin::~CImageTransformPlugin(void)
+	?CancelTransform@CImageTransform@@QAEXXZ @ 4 NONAME ; public: void __thiscall CImageTransform::CancelTransform(void)
+	?ClearSourceRect@CImageTransform@@QAEXXZ @ 5 NONAME ; public: void __thiscall CImageTransform::ClearSourceRect(void)
+	?DestData@CImageTransformPlugin@@IBEAAPAVHBufC8@@XZ @ 6 NONAME ; protected: class HBufC8 * & __thiscall CImageTransformPlugin::DestData(void)const 
+	?DestFilename@CImageTransformPlugin@@IBEABVTDesC16@@XZ @ 7 NONAME ; protected: class TDesC16 const & __thiscall CImageTransformPlugin::DestFilename(void)const 
+	?DestinationSizeInPixels@CImageTransformPlugin@@IBEABVTSize@@XZ @ 8 NONAME ; protected: class TSize const & __thiscall CImageTransformPlugin::DestinationSizeInPixels(void)const 
+	?Extension@CImageTransform@@QBEPAVCImageTransformPluginExtension@@XZ @ 9 NONAME ; public: class CImageTransformPluginExtension * __thiscall CImageTransform::Extension(void)const 
+	?Extension@CImageTransformPlugin@@MBEPAVCImageTransformPluginExtension@@XZ @ 10 NONAME ; protected: virtual class CImageTransformPluginExtension * __thiscall CImageTransformPlugin::Extension(void)const 
+	?DestIsFilename@CImageTransformPlugin@@IBEHXZ @ 11 NONAME ; protected: int __thiscall CImageTransformPlugin::DestIsFilename(void)const 
+	?SourceIsFilename@CImageTransformPlugin@@IBEHXZ @ 12 NONAME ; protected: int __thiscall CImageTransformPlugin::SourceIsFilename(void)const 
+	?MaintainAspectRatio@CImageTransformPlugin@@IBEHXZ @ 13 NONAME ; protected: int __thiscall CImageTransformPlugin::MaintainAspectRatio(void)const 
+	?NewL@CImageTransform@@SAPAV1@AAVRFs@@@Z @ 14 NONAME ; public: static class CImageTransform * __cdecl CImageTransform::NewL(class RFs &)
+	?NewL@CImageTransformPlugin@@CAPAV1@VTUid@@AAVCImageTransformFramework@@@Z @ 15 NONAME ; private: static class CImageTransformPlugin * __cdecl CImageTransformPlugin::NewL(class TUid,class CImageTransformFramework &)
+	?Options@CImageTransformPlugin@@IBEIXZ @ 16 NONAME ; unsigned int CImageTransformPlugin::Options(void) const
+	?ReservedVirtual1@CImageTransformPlugin@@EAEXXZ @ 17 NONAME ; private: virtual void __thiscall CImageTransformPlugin::ReservedVirtual1(void)
+	?ReservedVirtual2@CImageTransformPlugin@@EAEXXZ @ 18 NONAME ; private: virtual void __thiscall CImageTransformPlugin::ReservedVirtual2(void)
+	?ReservedVirtual3@CImageTransformPlugin@@EAEXXZ @ 19 NONAME ; private: virtual void __thiscall CImageTransformPlugin::ReservedVirtual3(void)
+	?Extension@CImageTransformPlugin@@UBEPAVCImageTransformPluginExtension@@VTUid@@AAH@Z @ 20 NONAME ; class CImageTransformPluginExtension * CImageTransformPlugin::Extension(class TUid, int &) const
+	?Reset@CImageTransform@@QAEXXZ @ 21 NONAME ; public: void __thiscall CImageTransform::Reset(void)
+	?SetDestDataL@CImageTransform@@QAEXAAPAVHBufC8@@@Z @ 22 NONAME ; public: void __thiscall CImageTransform::SetDestDataL(class HBufC8 * &)
+	?SetDestFilenameL@CImageTransform@@QAEXABVTDesC16@@@Z @ 23 NONAME ; public: void __thiscall CImageTransform::SetDestFilenameL(class TDesC16 const &)
+	?SetDestSizeInPixelsL@CImageTransform@@QAEXABVTSize@@H@Z @ 24 NONAME ; public: void __thiscall CImageTransform::SetDestSizeInPixelsL(class TSize const &,int)
+	?SetOptionsL@CImageTransform@@QAEXI@Z @ 25 NONAME ; public: void __thiscall CImageTransform::SetOptionsL(unsigned int)
+	?SetPluginUidL@CImageTransform@@QAEXVTUid@@@Z @ 26 NONAME ; public: void __thiscall CImageTransform::SetPluginUidL(class TUid)
+	?SetSourceDataL@CImageTransform@@QAEXABVTDesC8@@@Z @ 27 NONAME ; public: void __thiscall CImageTransform::SetSourceDataL(class TDesC8 const &)
+	?SetSourceFilenameL@CImageTransform@@QAEXABVTDesC16@@@Z @ 28 NONAME ; public: void __thiscall CImageTransform::SetSourceFilenameL(class TDesC16 const &)
+	?SetSourceImageTypeL@CImageTransform@@QAEXVTUid@@0@Z @ 29 NONAME ; public: void __thiscall CImageTransform::SetSourceImageTypeL(class TUid,class TUid)
+	?SetSourceMimeTypeL@CImageTransform@@QAEXABVTDesC8@@@Z @ 30 NONAME ; public: void __thiscall CImageTransform::SetSourceMimeTypeL(class TDesC8 const &)
+	?SetSourceRect@CImageTransform@@QAEXABVTRect@@@Z @ 31 NONAME ; public: void __thiscall CImageTransform::SetSourceRect(class TRect const &)
+	?SetupL@CImageTransform@@QAEXXZ @ 32 NONAME ; public: void __thiscall CImageTransform::SetupL(void)
+	?SourceData@CImageTransformPlugin@@IBEABVTDesC8@@XZ @ 33 NONAME ; protected: class TDesC8 const & __thiscall CImageTransformPlugin::SourceData(void)const 
+	?SourceFilename@CImageTransformPlugin@@IBEABVTDesC16@@XZ @ 34 NONAME ; protected: class TDesC16 const & __thiscall CImageTransformPlugin::SourceFilename(void)const 
+	?SourceImageSubType@CImageTransformPlugin@@IBE?BVTUid@@XZ @ 35 NONAME ; protected: class TUid const  __thiscall CImageTransformPlugin::SourceImageSubType(void)const 
+	?SourceImageType@CImageTransformPlugin@@IBE?BVTUid@@XZ @ 36 NONAME ; protected: class TUid const  __thiscall CImageTransformPlugin::SourceImageType(void)const 
+	?SourceMimeType@CImageTransformPlugin@@IBEABVTDesC8@@XZ @ 37 NONAME ; protected: class TDesC8 const & __thiscall CImageTransformPlugin::SourceMimeType(void)const 
+	?SourceRect@CImageTransformPlugin@@IBEHAAVTRect@@@Z @ 38 NONAME ; protected: int __thiscall CImageTransformPlugin::SourceRect(class TRect &)const 
+	?Transform@CImageTransform@@QAEXAAVTRequestStatus@@@Z @ 39 NONAME ; public: void __thiscall CImageTransform::Transform(class TRequestStatus &)
+	?PreserveImageData@CImageTransformPlugin@@IBEHXZ @ 40 NONAME ; protected: int __thiscall CImageTransformPlugin::PreserveImageData(void)const 
+	?SetPreserveImageData@CImageTransform@@QAEXH@Z @ 41 NONAME ; public: void __thiscall CImageTransform::SetPreserveImageData(int)
+	?DestIsData@CImageTransformPlugin@@IBEHXZ @ 42 NONAME ; int CImageTransformPlugin::DestIsData(void) const
+	?SourceIsData@CImageTransformPlugin@@IBEHXZ @ 43 NONAME ; int CImageTransformPlugin::SourceIsData(void) const
+	?ReservedVirtual1@CImageTransformPluginExtension@@EAEXXZ @ 44 NONAME ; void CImageTransformPluginExtension::ReservedVirtual1(void)
+	?ReservedVirtual2@CImageTransformPluginExtension@@EAEXXZ @ 45 NONAME ; void CImageTransformPluginExtension::ReservedVirtual2(void)
+	?ReservedVirtual3@CImageTransformPluginExtension@@EAEXXZ @ 46 NONAME ; void CImageTransformPluginExtension::ReservedVirtual3(void)
+	?ReservedVirtual4@CImageTransformPluginExtension@@EAEXXZ @ 47 NONAME ; void CImageTransformPluginExtension::ReservedVirtual4(void)
+	?Extension@CImageTransform@@QBEPAVCImageTransformPluginExtension@@VTUid@@AAH@Z @ 48 NONAME ; class CImageTransformPluginExtension * CImageTransform::Extension(class TUid, int &) const
+	?ReservedVirtual5@CSqueezeTransformExtension@@EAEXXZ @ 49 NONAME ; void CSqueezeTransformExtension::ReservedVirtual5(void)
+	?SetAdvancedSqueezeModeL@CSqueezeTransformExtension@@QAEXPAVTAdvancedSqueezeParams@@@Z @ 50 NONAME ; void CSqueezeTransformExtension::SetAdvancedSqueezeModeL(class TAdvancedSqueezeParams *)
+	?SetDestSizeInBytes@CSqueezeTransformExtension@@QAEXI@Z @ 51 NONAME ; void CSqueezeTransformExtension::SetDestSizeInBytes(unsigned int)
+	??0TAdvancedSqueezeParams@@QAE@XZ @ 52 NONAME ; TAdvancedSqueezeParams::TAdvancedSqueezeParams(void)
+	?ReservedVirtual5@COrientationTransformExtension@@EAEXXZ @ 53 NONAME ; void COrientationTransformExtension::ReservedVirtual5(void)
+	?ReservedVirtual5@COverlayTransformExtension@@EAEXXZ @ 54 NONAME ; void COverlayTransformExtension::ReservedVirtual5(void)
+	?SetOrientationL@COrientationTransformExtension@@QAEXW4TOrientation@1@@Z @ 55 NONAME ; void COrientationTransformExtension::SetOrientationL(enum COrientationTransformExtension::TOrientation)
+	?SetOverlayDataL@COverlayTransformExtension@@QAEXABVTDesC8@@ABVTUid@@@Z @ 56 NONAME ; void COverlayTransformExtension::SetOverlayDataL(class TDesC8 const &, class TUid const &)
+	?SetOverlayFileL@COverlayTransformExtension@@QAEXABVTDesC16@@ABVTUid@@@Z @ 57 NONAME ; void COverlayTransformExtension::SetOverlayFileL(class TDesC16 const &, class TUid const &)
+	?SetOverlayImageL@COverlayTransformExtension@@QAEXABVCFbsBitmap@@@Z @ 58 NONAME ; void COverlayTransformExtension::SetOverlayImageL(class CFbsBitmap const &)
+	?SetOverlayImageL@COverlayTransformExtension@@QAEXABVCImageFrame@@@Z @ 59 NONAME ; void COverlayTransformExtension::SetOverlayImageL(class CImageFrame const &)
+	?SetPosition@COverlayTransformExtension@@QAEXABVTPoint@@@Z @ 60 NONAME ; void COverlayTransformExtension::SetPosition(class TPoint const &)
+	?SetTransformationsL@CImageTransform@@QAEXI@Z @ 61 NONAME ; void CImageTransform::SetTransformationsL(unsigned int)
+	?SetTransparencyLevelL@COverlayTransformExtension@@QAEXI@Z @ 62 NONAME ; void COverlayTransformExtension::SetTransparencyLevelL(unsigned int)
+	?SupportedOverlayInputFormatsL@COverlayTransformExtension@@QBEXAAV?$RArray@VTUid@@@@@Z @ 63 NONAME ; void COverlayTransformExtension::SupportedOverlayInputFormatsL(class RArray<class TUid> &) const
+	?SupportedOverlayInputSubFormatsL@COverlayTransformExtension@@QBEXVTUid@@AAV?$RArray@VTUid@@@@@Z @ 64 NONAME ; void COverlayTransformExtension::SupportedOverlayInputSubFormatsL(class TUid, class RArray<class TUid> &) const
+

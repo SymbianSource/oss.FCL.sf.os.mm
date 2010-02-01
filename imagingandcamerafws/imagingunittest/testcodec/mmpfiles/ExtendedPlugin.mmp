@@ -1,0 +1,34 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+TARGET		extendedplugin.dll
+CAPABILITY ALL -TCB
+TARGETTYPE	DLL
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID	0x10009D8D 0x101F7C02
+VENDORID 0x70000001
+
+USERINCLUDE	../inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	../src
+SOURCE		ExtendedPlugin.cpp
+
+LIBRARY	euser.lib
+LIBRARY	imageconversion.lib
+
+SMPSAFE

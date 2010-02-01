@@ -1,0 +1,48 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Creation Date 11/12/2002
+// TSU_ICL_BTRANS_01_ALLOC 09/11/2007
+// 
+//
+
+PRINT Run all the bitmap transform alloc tests 
+PRINT 
+
+LOAD_SUITE TSU_ICL_BTRANS_01.dll
+
+//! @SYMTestCaseID MM-ICL-BTRANS-U-011-HP
+
+RUN_TEST_STEP -1 TSU_ICL_BTRANS_01, MM-ICL-BTRANS-U-011-HP
+TEST_COMPLETE                   
+
+//
+//! @SYMTestCaseID MM-ICL-BTRANS-U-032-HP
+
+RUN_TEST_STEP -1, TSU_ICL_BTRANS_01, MM-ICL-BTRANS-U-032-HP
+TEST_COMPLETE 
+
+//
+//! @SYMTestCaseID MM-ICL-BTRANS-U-033-HP
+
+RUN_TEST_STEP -1, TSU_ICL_BTRANS_01, MM-ICL-BTRANS-U-033-HP
+TEST_COMPLETE 
+
+//PDEF113923: BitmapScalerPlugin.cpp : Leaking memory
+//It's not an alloc test.
+//But for memory leak test purpose, need to be run in debug mode.
+//So this test is being put in the alloc script.
+//! @SYMTestCaseID MM-ICL-BTRANS-U-305-HP
+
+RUN_TEST_STEP -1, TSU_ICL_BTRANS_01, MM-ICL-BTRANS-U-305-HP
+TEST_COMPLETE 

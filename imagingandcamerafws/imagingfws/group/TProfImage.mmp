@@ -1,0 +1,53 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// MACRO __BYPASS_CONTINUE_CONVERT 
+// if set don't use CImageDecoder::ContinueConvert
+// 
+//
+
+MACRO __ICL_PROFILING 
+		// enable profiling statements
+
+TARGET			TProfImage.exe
+CAPABILITY ALL -TCB
+TARGETTYPE		exe
+
+USERINCLUDE		../src/Test/TImage
+USERINCLUDE		../src/Test/TImage/Support
+
+SOURCEPATH		../src/Test/TImage
+SOURCE			TProfImage.cpp
+SOURCE			TImage.cpp
+
+SOURCEPATH		../src/Test/TImage/Support
+SOURCE			TestExtra.cpp
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY	euser.lib
+LIBRARY	fbscli.lib
+LIBRARY efsrv.lib
+LIBRARY	ImageConversion.lib
+LIBRARY hal.lib
+LIBRARY	ecom.lib
+
+EPOCHEAPSIZE 0x1000 0x100000
+
+START WINS
+	BASEADDRESS	0x4F260000
+END
+
+VENDORID 0x70000001
+
+SMPSAFE

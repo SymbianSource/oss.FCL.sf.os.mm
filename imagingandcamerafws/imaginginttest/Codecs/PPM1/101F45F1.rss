@@ -1,0 +1,130 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the PPM example 1
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include "PPM1Uids.hrh"
+#include <icl/icl_uids.hrh>		// for KDecoderInterfaceUidValue, etc
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+
+#define CR 0x0D
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KPpm1DecoderDllUidValue;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KPpm1DecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "PPM";
+					default_data = {0x50, 0x3F}; // "P?" - internally will match P3 and P6
+					opaque_data =
+								{	0x02, 
+									0, 0, // main codec
+									0x10, 0x1F, 0x45, 0xF7,	// KImageTypePpmUid
+									0, 0, 0, 0, // image-subtype
+									0, 0, 0, 0, // class UID
+									1, 
+									0x2E, 0x70, 0x70, 0x6D, 0x0D, // .ppm
+									1,
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 
+									0x78, 0x2D, 0x70, 0x6F, 0x72, 0x74,
+									0x61, 0x62, 0x6C, 0x65, 0x2D, 0x70,
+									0x69, 0x78, 0x6D, 0x61, 0x70, 0x0D // image/x-portable-pixmap
+								};
+					},
+				
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KPpm1DecoderRAWImplementationUidValue;
+					version_no = 1;
+					display_name = "PPM";
+					default_data = {0x50, 0x36}; // "P6" - internally will match P6 for RAW
+					opaque_data =
+								{	0x02, 
+									0, 1, // sub-codec
+									0x10, 0x1F, 0x45, 0xF7,	// KImageTypePpmUid
+									0, 0, 0, 0, // image-subtype
+									0, 0, 0, 0, // class UID
+									1, 
+									0x2E, 0x70, 0x70, 0x6D, 0x0D, // .ppm
+									1,
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 
+									0x78, 0x2D, 0x70, 0x6F, 0x72, 0x74,
+									0x61, 0x62, 0x6C, 0x65, 0x2D, 0x70,
+									0x69, 0x78, 0x6D, 0x61, 0x70, 0x0D, // image/x-portable-pixmap
+									2,
+									0x10, 0x28, 0x33, 0xD8, // KUidICLExtension
+									0x00, 0x00, 0x3D, 0x00  // Extensions: Crop | Rotation | MirrorHA | MirrorVA | Scaling
+								};
+					},
+					
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KPpm1DecoderASCIIImplementationUidValue;
+					version_no = 1;
+					display_name = "PPM";
+					default_data = {0x50, 0x33}; // "P3" - internally will match P3 for ASCII
+					opaque_data =
+								{	0x02, 
+									0, 1, // sub-codec
+									0x10, 0x1F, 0x45, 0xF7,	// KImageTypePpmUid
+									0, 0, 0, 0, // image-subtype
+									0, 0, 0, 0, // class UID
+									1, 
+									0x2E, 0x70, 0x70, 0x6D, 0x0D, // .ppm
+									1,
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 
+									0x78, 0x2D, 0x70, 0x6F, 0x72, 0x74,
+									0x61, 0x62, 0x6C, 0x65, 0x2D, 0x70,
+									0x69, 0x78, 0x6D, 0x61, 0x70, 0x0D // image/x-portable-pixmap
+									
+									// No extension support
+								};
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = KEncoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KPpm1EncoderImplementationUidValud;
+					version_no = 1;
+					display_name = "PPM";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {0x00, 0x10, 0x1F, 0x45, 0xF7, 0, 0, 0, 0, 1, 0x2E, 0x70, 0x70, 0x6D, CR, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x78, 0x2D, 0x70, 0x6F, 0x72, 0x74, 0x61, 0x62, 0x6C, 0x65, 0x2D, 0x70, 0x69, 0x78, 0x6D, 0x61, 0x70, CR};
+					// 0 0x101F45F7 0x00000000 1 .ppm 1 image/x-portable-pixmap
+					}
+				};
+			}
+		};
+
+	}
+
+

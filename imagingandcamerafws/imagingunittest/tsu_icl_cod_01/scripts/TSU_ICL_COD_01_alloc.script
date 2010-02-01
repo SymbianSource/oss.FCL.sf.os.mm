@@ -1,0 +1,157 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// ICL Codec Alloc Testing Scripts
+// 
+//
+
+PRINT Run all the ICL codec alloc tests 
+
+LOAD_SUITE TSU_ICL_COD_01.dll
+
+// Decode with alloc fail (Image5) tests
+
+//! @SYMTestCaseID MM-ICL-COD-U-0051-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0051-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0052-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0052-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0053-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0053-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0054-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0054-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0055-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0055-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-0056-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0056-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE  
+
+//! @SYMTestCaseID MM-ICL-COD-U-0057-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0057-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0058-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0058-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+// Encode with alloc fail (Image7) tests
+
+//! @SYMTestCaseID MM-ICL-COD-U-0071-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0071-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0074-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0074-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0075-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0075-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-0076-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-0076-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+// Decode with mime types with alloc fail (Image5) tests
+
+//! @SYMTestCaseID MM-ICL-COD-U-00c1-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00c1-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00c2-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00c2-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+// Streamed decode with alloc fail (Image13) tests
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d1-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d1-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d2-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d2-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d3-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d3-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d4-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d4-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d5-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d5-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d6-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d6-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d7-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d7-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-00d8-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-00d8-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+// Streamed decode via descriptor with alloc fail (Image14) test
+
+//! @SYMTestCaseID MM-ICL-COD-U-01a1-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-01a1-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-COD-U-01e1-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-01e1-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 
+
+// Decode with alloc fail (Image5) tests with thread
+
+//! @SYMTestCaseID MM-ICL-COD-U-1051-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-1051-HP, TSU_ICL_COD_01.ini 
+TEST_COMPLETE 

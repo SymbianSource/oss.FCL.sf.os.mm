@@ -1,0 +1,51 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+target tsu_icl_imgdisp_01.dll
+CAPABILITY ALL -TCB
+targettype dll
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID 0x10009D8D 0x10207084
+VENDORID 0x70000001
+
+MW_LAYER_SYSTEMINCLUDE_SYMBIAN  // Middleware Macro used to link against "apgcli.h" which is exported by AppArc
+
+USERINCLUDE		../src ../src/TestPlugin 
+
+SOURCEPATH		../src
+SOURCE		TestStepImageDisplay.cpp
+SOURCE		TestSuiteImageDisplay.cpp
+
+LIBRARY		euser.lib
+
+LIBRARY		efsrv.lib
+LIBRARY		fbscli.lib
+LIBRARY		imagedisplay.lib
+LIBRARY		testframeworkclient.lib 
+LIBRARY		ecom.lib
+LIBRARY		mmcommon.lib
+LIBRARY     apgrfx.lib
+LIBRARY     apmime.lib
+LIBRARY 	imageconversion.lib
+
+DEFFILE TSU_ICL_ImgDisp_01.def
+
+#ifdef EABI
+NOEXPORTLIBRARY
+#endif
+
+
+SMPSAFE

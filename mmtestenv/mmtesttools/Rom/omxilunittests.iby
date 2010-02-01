@@ -1,0 +1,33 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef OMXILUNITTESTS_IBY
+#define OMXILUNITTESTS_IBY
+
+#include <coreconf.iby>
+#include <tsu_omxil_components.iby>
+#include <tsu_omxil_dummycontentpipe.iby>
+#include <omxildummycontentpipe.iby>
+#include <omxildummycontentpipe2.iby>
+#include <omxildummyloader.iby>
+#include <omxildummycomponents.iby>
+#include <milifunittests.iby>
+
+data=EPOCROOT##epoc32\data\c\runomxilcomppcmrendererunittests.bat	runomxilcomppcmrendererunittests.bat
+data=EPOCROOT##epoc32\data\c\runomxilcontentpipeunittests.bat		runomxilcontentpipeunittests.bat
+data=EPOCROOT##epoc32\data\c\runomxilcoreconftests.bat			runomxilcoreconftests.bat
+data=EPOCROOT##epoc32\data\c\runmilifunittests.bat 			runmilifunittests.bat
+
+#endif // OMXILUNITTESTS_IBY

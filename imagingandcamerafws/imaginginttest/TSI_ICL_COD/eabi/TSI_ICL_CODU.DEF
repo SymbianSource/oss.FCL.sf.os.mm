@@ -1,0 +1,7 @@
+EXPORTS
+	_Z13NewTestSuiteLv @ 1 NONAME
+	_ZTI11RIclCodStep @ 2 NONAME ; #<TI>#
+	_ZTI15CTsiIclCodSuite @ 3 NONAME ; #<TI>#
+	_ZTV11RIclCodStep @ 4 NONAME ; #<VT>#
+	_ZTV15CTsiIclCodSuite @ 5 NONAME ; #<VT>#
+

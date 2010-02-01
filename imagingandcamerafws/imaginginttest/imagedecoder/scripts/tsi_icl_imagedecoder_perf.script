@@ -1,0 +1,164 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageDecoder.xls
+// 
+//
+
+
+PRINT Test result log for tsi_icl_imagedecoder_perf.script
+LOAD_SUITE tsi_icl_imagedecoder.dll
+
+DELAY 1000
+
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0100-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0100-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0110-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0110-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0120-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0120-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0130-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0130-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0140-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0140-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0150-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0150-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0160-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0160-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0170-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0170-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0180-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0180-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0200-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0200-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0210-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0210-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0220-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0220-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0300-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0300-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0310-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0310-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0320-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0320-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0330-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0330-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0340-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0340-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0350-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0350-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0400-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0400-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0410-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0410-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0420-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0420-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0500-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0500-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0510-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0510-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0520-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0520-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0700-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0700-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0710-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0710-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0720-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0720-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-PERF-I-0730-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-PERF-I-0730-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+TEST_COMPLETE

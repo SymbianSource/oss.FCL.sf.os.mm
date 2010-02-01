@@ -1,0 +1,57 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#include <imageprocessor/imageprocessor_uids.hrh>
+
+/**
+@file
+
+@SYMPurpose imageprocessor.dll Image Processor Framework
+*/
+TARGET		imageprocessor.dll
+TARGETTYPE	dll
+CAPABILITY	ALL -TCB
+UID		0x1000008d KImageProcessorDllUidValue 
+
+SOURCEPATH	../src
+SOURCE		imageprocessor.cpp
+SOURCE		imageprocessorimpl.cpp
+SOURCE		imageprocessorcallback.cpp
+SOURCE		imageprocessoreffect.cpp
+SOURCE		imageprocessorpreview.cpp
+SOURCE		imageprocessoroverlay.cpp
+SOURCE		imageprocessorprogressinfo.cpp
+SOURCE		imageprocessorinputinfo.cpp
+SOURCE		imageprocessoroutputinfo.cpp 
+SOURCE		imageprocessormain.cpp
+
+USERINCLUDE	../inc
+USERINCLUDE	../src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY		euser.lib
+LIBRARY		ecom.lib
+LIBRARY		imageconversion.lib
+LIBRARY		caf.lib
+LIBRARY		mmcommon.lib
+LIBRARY		fbscli.lib
+LIBRARY	    mmcommonutils.lib
+
+DEFFILE		imageprocessor.def
+NOSTRICTDEF
+
+
+SMPSAFE
