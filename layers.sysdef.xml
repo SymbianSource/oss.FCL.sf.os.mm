@@ -39,6 +39,9 @@
 			<module name="">
 				<unit unitID="ARM_MDF_Decoders" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/group" filter="!sf_build" name="ARM_MDF_Decoders" />
 			</module>
+			<module name="">
+				<unit unitID="Utilities" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/Utilities/group" filter="sf_build" name="Utilities" />
+			</module>
     </layer>    
 
         <layer name="arm9e_layer"> 
@@ -110,6 +113,9 @@
 			</module>
 			<module name="">
 				<unit unitID="ARM_MDF_Decoders_group" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/group" filter="!sf_build" name="ARM_MDF_Decoders_group" />
+			</module>
+			<module name="">
+				<unit unitID="Utilities_group" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/Utilities/group" filter="sf_build" name="Utilities_group" />
 			</module>
     </layer>    
   </systemModel>

@@ -21,7 +21,7 @@
 
 
 #include <ecom/registryinfo.rh>
-#include <mmf/devvideo/devvideopluginInterfaceuids.hrh>
+#include <mmf/devvideo/devvideoplugininterfaceuids.hrh>
 #include "NGAPostProcHwDevice_UID.hrh"
 
 RESOURCE REGISTRY_INFO theInfo
