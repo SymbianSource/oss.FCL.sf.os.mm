@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -16,48 +16,62 @@
 #include "mediaclientvideodisplaybody.h"
 #include "mediaclientvideotrace.h"
 #include <surfaceeventhandler.h>
+#include <mmf/plugin/mmfmediaclientextdisplayinterface.hrh>
+#include <e32cmn.h>
+#include <ecom/ecom.h>
 
-CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::NewL(TInt aDisplayId)
+CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::NewL(TInt aDisplayId, TBool aExtDisplaySwitchingControl)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::NewL +++"));
-	CMediaClientVideoDisplayBody* self = new (ELeave) CMediaClientVideoDisplayBody(aDisplayId);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::NewL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::NewL - aDisplayId %d", aDisplayId);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::NewL - aExtDisplaySwitchingControl %d", aExtDisplaySwitchingControl);
+    
+    CMediaClientVideoDisplayBody* self = new (ELeave) CMediaClientVideoDisplayBody(aDisplayId);
 	CleanupStack::PushL(self);
-	self->ConstructL();
+	self->ConstructL(aExtDisplaySwitchingControl);
 	CleanupStack::Pop(self);
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::NewL ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::NewL ---");
 	return self;
 	}
 
 CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::NewL(TInt aDisplayId, const TSurfaceId& aSurfaceId,
-		const TRect& aCropRect, TVideoAspectRatio aAspectRatio)
+		const TRect& aCropRect, TVideoAspectRatio aAspectRatio, TBool aExtDisplaySwitchingControl)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::NewL +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::NewL +++");
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::NewL - aDisplayId %d", aDisplayId);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::NewL - aSurfaceId 0x%X,0x%X,0x%X,0x%X", aSurfaceId.iInternal[0], aSurfaceId.iInternal[1], aSurfaceId.iInternal[2], aSurfaceId.iInternal[3]);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::NewL - aCropRect %d,%d - %d,%d", aCropRect.iTl.iX, aCropRect.iTl.iY, aCropRect.iBr.iX, aCropRect.iBr.iY);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::NewL - aAspectRatio %d/%d", aAspectRatio.iNumerator, aAspectRatio.iDenominator);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::NewL - aExtDisplaySwitchingControl %d", aExtDisplaySwitchingControl);
+
 	if(aSurfaceId.IsNull())
 		{
 		User::Leave(KErrArgument);
 		}
 	CMediaClientVideoDisplayBody* self = new(ELeave) CMediaClientVideoDisplayBody(aDisplayId, aSurfaceId, aCropRect, aAspectRatio);
 	CleanupStack::PushL(self);
-	self->ConstructL();
+	self->ConstructL(aExtDisplaySwitchingControl);
 	CleanupStack::Pop();
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::NewL ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::NewL ---");
 	return self;
 	}
 
-void CMediaClientVideoDisplayBody::ConstructL()
+void CMediaClientVideoDisplayBody::ConstructL(TBool aExtDisplaySwitchingControl)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::ConstructL +++"));
-	
-	iExtDisplaySwitchingSupported = CExtDisplayConnectionProviderInterface::ExternalDisplaySupportedL();
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::ConstructL +++");
+
+	SetWindowArrayPtr2Client();
+
+	CreateExtDisplayPluginL();
 	
 	// Try and enable display switching by default. If this leaves then do so quietly.
 	// Either the client has no scheduler installed or the device does not support external
 	// switching (i.e. no plugin was found) 
-	TRAPD(err, SetExternalDisplaySwitchingL(ETrue));
+	TRAPD(err, SetExternalDisplaySwitchingL(aExtDisplaySwitchingControl));
 	err = err; // remove compile warning
-	DEBUG_PRINT2(_L("CMediaClientVideoDisplayBody::ConstructL SetExternalDisplaySwitchingL returned with %d"), err);
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ConstructL SetExternalDisplaySwitchingL returned with %d", err);
 	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::ConstructL ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::ConstructL ---");
 	}
 
 CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody(TInt aDisplayId, const TSurfaceId& aSurfaceId,
@@ -67,33 +81,38 @@ CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody(TInt aDisplayId, cons
 	iCropRect(aCropRect),
 	iAspectRatio(aAspectRatio)
 	{	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody +++");
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody ---");
 	}
 
 CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody(TInt aDisplayId) :
 	iDisplayId(aDisplayId)
 	{	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody +++");
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::CMediaClientVideoDisplayBody ---");
 	}
 
 CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody()
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody +++");
 
+	// remove for whichever array is current
 	RemoveBackgroundSurface(ETrue);
-		
-	iWindows.Close();	
-	delete iExtDisplayConnectionProvider;
+
+	iClientWindows.Close();	
+    iExtDisplayWindows.Close(); 
+
+	delete iExtDisplayHandler;
+	RemoveExtDisplayPlugin();
 	REComSession::FinalClose();
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody ---"));
+	
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody ---");
 	}
 
 void CMediaClientVideoDisplayBody::AddDisplayL(MMMFSurfaceEventHandler& aEventHandler)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::AddDisplayL +++"));
-	if (iEventHandler != NULL)
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::AddDisplayL +++");
+	if (iEventHandler)
 		{
 		User::Leave(KErrInUse);
 		}
@@ -104,15 +123,24 @@ void CMediaClientVideoDisplayBody::AddDisplayL(MMMFSurfaceEventHandler& aEventHa
 		{
 		iEventHandler->MmsehSurfaceCreated(iDisplayId, iSurfaceId, iCropRect, iAspectRatio);
 		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::AddDisplayL ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::AddDisplayL ---");
 	}
 	
 void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow, const TRect& aClipRect, const TRect& aCropRegion, const TRect& aVideoExtent, 
 															TReal32 aScaleWidth, TReal32 aScaleHeight, TVideoRotation aRotation, 
 															TAutoScaleType aAutoScaleType, TInt aHorizPos, TInt aVertPos, RWindow* aWindow2)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::AddDisplayWindowL +++"));
-	TInt pos = iWindows.Find(aWindow->WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::AddDisplayWindowL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL - aWindow WsHandle 0x%X", aWindow->WsHandle());
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::AddDisplayWindowL - aClipRect %d,%d - %d,%d", aClipRect.iTl.iX, aClipRect.iTl.iY, aClipRect.iBr.iX, aClipRect.iBr.iY);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::AddDisplayWindowL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::AddDisplayWindowL - aVideoExtent %d,%d - %d,%d", aVideoExtent.iTl.iX, aVideoExtent.iTl.iY, aVideoExtent.iBr.iX, aVideoExtent.iBr.iY);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::AddDisplayWindowL - aScaleWidth %f, aScaleHeight %f", aScaleWidth, aScaleHeight);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL - aRotation %d", aRotation);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL - aAutoScaleType %d", aAutoScaleType);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::AddDisplayWindowL - aHorizPos %d, aVertPos %d", aHorizPos, aVertPos);
+
+	TInt pos = iClientWindows.Find(aWindow->WsHandle(), TWindowData::CompareByWsHandle);
 	
 	if (pos != KErrNotFound)
 		{
@@ -120,67 +148,83 @@ void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow,
 		}
 	
 	TWindowData winData(aWindow, aClipRect, aVideoExtent, aScaleWidth, aScaleHeight, aRotation, aAutoScaleType, aHorizPos, aVertPos, aWindow2);
-	iWindows.AppendL(winData);
+	iClientWindows.AppendL(winData);
 	
 	iCropRegion = aCropRegion;
 	
 	if (IsSurfaceCreated())
 		{
-        if(iExtDisplaySwitchingSupported && iClientRequestedExtDisplaySwitching)
+		// first client window just added
+        if((iClientWindows.Count() == 1) && iClientRequestedExtDisplaySwitching)
             {
-            CreateExtDisplayConnProvAndRemoveSurfaceL(EFalse);
+            if(iExtDisplayConnected)
+                {
+                TRAPD(err, CreateExtDisplayHandlerL());
+                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL CreateExtDisplayHandlerL error %d", err);
+                if(err == KErrNone)
+                    {
+                    SetWindowArrayPtr2Ext();
+                    User::LeaveIfError(RedrawWindows(aCropRegion));
+                    }
+                }
             }
         
-        if(!iExtDisplayConnected)
+        if(!iExtDisplayConnected || !iExtDisplayHandler)
             {
             User::LeaveIfError(SetBackgroundSurface(winData, aCropRegion));
             }
 		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::AddDisplayWindowL ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::AddDisplayWindowL ---");
 	}
 
 void CMediaClientVideoDisplayBody::RemoveDisplay()
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveDisplay +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveDisplay +++");
 	iEventHandler = NULL;
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveDisplay ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveDisplay ---");
 	}	
 
 TInt CMediaClientVideoDisplayBody::RemoveDisplayWindow(const RWindowBase& aWindow)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveDisplayWindow +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveDisplayWindow +++");
+	TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	
 	if (pos >= 0)
 		{
-		if (IsSurfaceCreated())
+		if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
 			{
-			iWindows[pos].iWindow->RemoveBackgroundSurface(ETrue);
-
-			// Make sure all window rendering has completed before proceeding
-			RWsSession* ws = iWindows[pos].iWindow->Session();
-			if (ws)
-				{
-				ws->Finish();
-				}
+			iClientWindows[pos].iWindow->RemoveBackgroundSurface(ETrue);
+            // Make sure all window rendering has completed before proceeding
+            RWsSession* ws = iClientWindows[pos].iWindow->Session();
+            if (ws)
+              {
+              ws->Finish();
+              }
 			}
-		iWindows.Remove(pos);
+		iClientWindows.Remove(pos);
 		
-		if(iWindows.Count() == 0)
+		if(iClientWindows.Count() == 0 && iExtDisplayConnected && iExtDisplayHandler)
 		    {
-		    RemoveExtDisplayConnProv();
+		    RemoveBackgroundSurface(ETrue);
+		    SetWindowArrayPtr2Client();
+		    RemoveExtDisplayHandler();
 		    }
 		}
 	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveDisplayWindow ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveDisplayWindow ---");
 	return pos;
 	}
 
 
 TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, const TRect& aCropRect, TVideoAspectRatio aAspectRatio, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SurfaceCreated +++"));
-	TBool emitEvent = EFalse;
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceCreated +++");
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aSurfaceId 0x%X,0x%X,0x%X,0x%X", aSurfaceId.iInternal[0], aSurfaceId.iInternal[1], aSurfaceId.iInternal[2], aSurfaceId.iInternal[3]);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aCropRect %d,%d - %d,%d", aCropRect.iTl.iX, aCropRect.iTl.iY, aCropRect.iBr.iX, aCropRect.iBr.iY);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SurfaceCreated - aAspectRatio %d/%d", aAspectRatio.iNumerator, aAspectRatio.iDenominator);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    TBool emitEvent = EFalse;
 	if((iSurfaceId != aSurfaceId) && (!aSurfaceId.IsNull()))
 		{
 		emitEvent = ETrue;
@@ -197,52 +241,54 @@ TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, 
 		}
 
 	TInt err = KErrNone;
-    if(iExtDisplaySwitchingSupported && iClientRequestedExtDisplaySwitching)
+    if((iClientWindows.Count() > 0) && iClientRequestedExtDisplaySwitching)
         {
-        TRAP(err, CreateExtDisplayConnProvAndRemoveSurfaceL(EFalse));
+        if(iExtDisplayConnected && !iExtDisplayHandler)
+            {
+            TRAP(err, CreateExtDisplayHandlerL());
+            DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SurfaceCreated CreateExtDisplayHandlerL error %d", err);
+            if(err == KErrNone)
+                {
+                SetWindowArrayPtr2Ext();
+                }
+            }
         }
     
-    if(!iExtDisplayConnected)
-        {
-        err = RedrawWindows(aCropRegion);
-        }
+    err = RedrawWindows(aCropRegion);
     
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SurfaceCreated ---"));
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceCreated ---");
 	return err;
 	}
 
 void CMediaClientVideoDisplayBody::RemoveBackgroundSurface(TBool aTriggerRedraw)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveBackgroundSurface +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveBackgroundSurface +++");
 	if (IsSurfaceCreated())
 		{
-		TInt count = iWindows.Count();
-	
 		RWsSession* ws = NULL;
+		TInt count = iWindowsArrayPtr->Count();
+	
 		for (TInt i = 0; i < count; ++i)
 			{
-			iWindows[i].iWindow->RemoveBackgroundSurface(aTriggerRedraw);
-			// Make sure all window rendering has completed before proceeding
-			ws = iWindows[i].iWindow->Session();
-			if (ws)
-				{
-				ws->Finish();
-				}
+			(*iWindowsArrayPtr)[i].iWindow->RemoveBackgroundSurface(aTriggerRedraw);
+            // Make sure all window rendering has completed before proceeding
+            ws = (*iWindowsArrayPtr)[i].iWindow->Session();
+            if (ws)
+                {
+                ws->Finish();
+                }
 			}
 		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveBackgroundSurface ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveBackgroundSurface ---");
 	}
 
 void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
     {
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveSurface +++"));
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveSurface +++");
     if (IsSurfaceCreated())
         {
-        if(!iExtDisplayConnected)
-            {
-            RemoveBackgroundSurface(ETrue);
-            }
-        
+        RemoveBackgroundSurface(ETrue);
+
         if (iEventHandler  && aControllerEvent)
             {
             iEventHandler->MmsehRemoveSurface(iSurfaceId);
@@ -250,16 +296,24 @@ void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
 
         iSurfaceId = TSurfaceId::CreateNullId();
 
-        RemoveExtDisplayConnProv();
+        if(iExtDisplayConnected && iExtDisplayHandler)
+            {
+            SetWindowArrayPtr2Client();
+            RemoveExtDisplayHandler();
+            }
         }
     
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveSurface ---"));
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveSurface ---");
     }
 
 TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aSurfaceId, const TRect& aCropRect, TVideoAspectRatio aAspectRatio)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SurfaceParametersChanged +++"));
-	if (!IsSurfaceCreated())
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged +++");
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aSurfaceId 0x%X,0x%X,0x%X,0x%X", aSurfaceId.iInternal[0], aSurfaceId.iInternal[1], aSurfaceId.iInternal[2], aSurfaceId.iInternal[3]);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aCropRect %d,%d - %d,%d", aCropRect.iTl.iX, aCropRect.iTl.iY, aCropRect.iBr.iX, aCropRect.iBr.iY);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SurfaceCreated - aAspectRatio %d/%d", aAspectRatio.iNumerator, aAspectRatio.iDenominator);
+
+    if (!IsSurfaceCreated())
 		{
 		return KErrNotSupported;
 		}
@@ -277,24 +331,26 @@ TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aS
 		iEventHandler->MmsehSurfaceParametersChanged(iSurfaceId, iCropRect, iAspectRatio);
 		}
 
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SurfaceParametersChanged ---"));
+	RedrawWindows(iCropRegion);
+	
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged ---");
 	return KErrNone;
 	}
 	
 TInt CMediaClientVideoDisplayBody::RedrawWindows(const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RedrawWindows +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RedrawWindows +++");
 	TInt err = KErrNone;	
 
 	iCropRegion = aCropRegion;
 	
 	if(IsSurfaceCreated())
 		{
-		TInt count = iWindows.Count();
+		TInt count = iWindowsArrayPtr->Count();
 	
 		for (TInt i = 0; i < count; ++i)
 			{
-			err = SetBackgroundSurface(iWindows[i], aCropRegion);
+			err = SetBackgroundSurface((*iWindowsArrayPtr)[i], aCropRegion);
 		
 			if (err != KErrNone)
 				{
@@ -303,60 +359,90 @@ TInt CMediaClientVideoDisplayBody::RedrawWindows(const TRect& aCropRegion)
 			}
 		}
 		
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RedrawWindows ---"));
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::RedrawWindows --- return with %d", err);
 	return err;
 	}
 
+void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, TInt aPos)
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateCropRegionL +++");
+
+    TRect prevCropRegion(iCropRegion);
+    iCropRegion = aCropRegion;
+    
+    if (IsSurfaceCreated())
+        {
+        if(prevCropRegion == aCropRegion)
+            {
+            if(!iExtDisplayConnected || !iExtDisplayHandler)
+                {
+                User::LeaveIfError(SetBackgroundSurface(iClientWindows[aPos], aCropRegion));
+                }
+            }
+        else
+            {
+            User::LeaveIfError(RedrawWindows(aCropRegion));
+            }
+        }
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateCropRegionL ---");    
+    }
+
 void CMediaClientVideoDisplayBody::SetAutoScaleL(const RWindowBase& aWindow, TAutoScaleType aScaleType, TInt aHorizPos, TInt aVertPos, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetAutoScaleL +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetAutoScaleL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetAutoScaleL - aScaleType %d", aScaleType);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetAutoScaleL - aHorizPos %d, aVertPos %d", aHorizPos, aVertPos);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetAutoScaleL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
-	iWindows[pos].iAutoScaleType = aScaleType;
-	iWindows[pos].iHorizPos = aHorizPos;
-	iWindows[pos].iVertPos = aVertPos;
-	iCropRegion = aCropRegion;
+	iClientWindows[pos].iAutoScaleType = aScaleType;
+	iClientWindows[pos].iHorizPos = aHorizPos;
+	iClientWindows[pos].iVertPos = aVertPos;
+
+	UpdateCropRegionL(aCropRegion, pos);
 	
-	if (IsSurfaceCreated() && !iExtDisplayConnected)
-		{
-		User::LeaveIfError(SetBackgroundSurface(iWindows[pos], aCropRegion));
-		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetAutoScaleL ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL ---");
 	}
 	
 
 void CMediaClientVideoDisplayBody::SetRotationL(const RWindowBase& aWindow, TVideoRotation aRotation, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetRotationL +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetRotationL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetRotationL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetRotationL - aRotation %d", aRotation);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetRotationL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
-	iWindows[pos].iRotation = aRotation;
-	iCropRegion = aCropRegion;
-	
-    if (IsSurfaceCreated() && !iExtDisplayConnected)
-		{
-		User::LeaveIfError(SetBackgroundSurface(iWindows[pos], aCropRegion));
-		}
-	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetRotationL ---"));
+	iClientWindows[pos].iRotation = aRotation;
+
+    UpdateCropRegionL(aCropRegion, pos);
+
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetRotationL ---");
 	}
 
 TVideoRotation CMediaClientVideoDisplayBody::RotationL(const RWindowBase& aWindow)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RotationL +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RotationL +++");
+	TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RotationL ---"));
-	return iWindows[pos].iRotation;
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RotationL ---");
+	return iClientWindows[pos].iRotation;
 	}
 
 void CMediaClientVideoDisplayBody::SetScaleFactorL(const RWindowBase& aWindow, TReal32 aWidthPercentage, TReal32 aHeightPercentage, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetScaleFactorL +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetScaleFactorL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetScaleFactorL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetScaleFactorL - aWidthPercentage %f, aHeightPercentage %f", aWidthPercentage, aHeightPercentage);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetScaleFactorL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
 	if (aWidthPercentage <= 0.0 || aHeightPercentage <= 0.0)
@@ -364,137 +450,171 @@ void CMediaClientVideoDisplayBody::SetScaleFactorL(const RWindowBase& aWindow, T
 		User::Leave(KErrArgument);
 		}
 
+	iClientWindows[pos].iScaleWidth = aWidthPercentage;
+	iClientWindows[pos].iScaleHeight = aHeightPercentage;
+	iClientWindows[pos].iAutoScaleType = EAutoScaleNone;
 	
-	iWindows[pos].iScaleWidth = aWidthPercentage;
-	iWindows[pos].iScaleHeight = aHeightPercentage;
-	iWindows[pos].iAutoScaleType = EAutoScaleNone;
-	iCropRegion = aCropRegion;
+    UpdateCropRegionL(aCropRegion, pos);
 	
-    if (IsSurfaceCreated() && !iExtDisplayConnected)
-		{
-		User::LeaveIfError(SetBackgroundSurface(iWindows[pos], aCropRegion));
-		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetScaleFactorL ---"));
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetScaleFactorL ---");
 	}
 	
 void CMediaClientVideoDisplayBody::GetScaleFactorL(const RWindowBase& aWindow, TReal32& aWidthPercentage, TReal32& aHeightPercentage)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::GetScaleFactorL +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::GetScaleFactorL +++");
+	TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
-	aWidthPercentage = iWindows[pos].iScaleWidth;
-	aHeightPercentage = iWindows[pos].iScaleHeight;
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::GetScaleFactorL ---"));
+	aWidthPercentage = iClientWindows[pos].iScaleWidth;
+	aHeightPercentage = iClientWindows[pos].iScaleHeight;
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::GetScaleFactorL ---");
 	}
 
 void CMediaClientVideoDisplayBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt aHorizPos, TInt aVertPos, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetAutoScaleL +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetAutoScaleL - aScaleType %d", aScaleType);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetAutoScaleL - aHorizPos %d, aVertPos %d", aHorizPos, aVertPos);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetAutoScaleL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
 	
+    TRect prevCropRegion(iCropRegion);
 	iCropRegion = aCropRegion;
-	TInt count = iWindows.Count();
+	TInt count = iClientWindows.Count();
 	
 	for (TInt i = 0; i < count; ++i)
 		{
-		iWindows[i].iAutoScaleType = aScaleType;
-		iWindows[i].iHorizPos = aHorizPos;
-		iWindows[i].iVertPos = aVertPos;
-	    if (IsSurfaceCreated() && !iExtDisplayConnected)
+		iClientWindows[i].iAutoScaleType = aScaleType;
+		iClientWindows[i].iHorizPos = aHorizPos;
+		iClientWindows[i].iVertPos = aVertPos;
+	    if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
 			{
-			User::LeaveIfError(SetBackgroundSurface(iWindows[i], aCropRegion));
+			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetAutoScaleL ---"));
+	
+	if (IsSurfaceCreated() && iExtDisplayConnected && iExtDisplayHandler && (aCropRegion != prevCropRegion))
+        {
+        User::LeaveIfError(RedrawWindows(aCropRegion));
+        }
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL ---");
 	}
 
 
 void CMediaClientVideoDisplayBody::SetRotationL(TVideoRotation aRotation, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetRotationL +++"));
-	iCropRegion = aCropRegion;
-	TInt count = iWindows.Count();
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetRotationL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetRotationL - aRotation %d", aRotation);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetRotationL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    TRect prevCropRegion(iCropRegion);
+    iCropRegion = aCropRegion;
+	TInt count = iClientWindows.Count();
 	
 	for (TInt i = 0; i < count; ++i)
 		{
-		iWindows[i].iRotation = aRotation;
-	    if (IsSurfaceCreated() && !iExtDisplayConnected)
+		iClientWindows[i].iRotation = aRotation;
+        if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
 			{
-			User::LeaveIfError(SetBackgroundSurface(iWindows[i], aCropRegion));
+			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetRotationL ---"));
+	
+    if (IsSurfaceCreated() && iExtDisplayConnected && iExtDisplayHandler && (aCropRegion != prevCropRegion))
+        {
+        User::LeaveIfError(RedrawWindows(aCropRegion));
+        }
+	   
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetRotationL ---");
 	}
 		
 void CMediaClientVideoDisplayBody::SetScaleFactorL(TReal32 aWidthPercentage, TReal32 aHeightPercentage, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetScaleFactorL +++"));
-	if (aWidthPercentage <= 0.0 || aHeightPercentage <= 0.0)
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetScaleFactorL +++");
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetScaleFactorL - aWidthPercentage %f, aHeightPercentage %f", aWidthPercentage, aHeightPercentage);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetScaleFactorL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    if (aWidthPercentage <= 0.0 || aHeightPercentage <= 0.0)
 		{
 		User::Leave(KErrArgument);
 		}
 	
+    TRect prevCropRegion(iCropRegion);
 	iCropRegion = aCropRegion;
-	TInt count = iWindows.Count();
+	TInt count = iClientWindows.Count();
 	
 	for (TInt i = 0; i < count; ++i)
 		{
-		iWindows[i].iScaleWidth = aWidthPercentage;
-		iWindows[i].iScaleHeight = aHeightPercentage;
-		iWindows[i].iAutoScaleType = EAutoScaleNone;
-	    if (IsSurfaceCreated() && !iExtDisplayConnected)
+		iClientWindows[i].iScaleWidth = aWidthPercentage;
+		iClientWindows[i].iScaleHeight = aHeightPercentage;
+		iClientWindows[i].iAutoScaleType = EAutoScaleNone;
+        if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
 			{
-			User::LeaveIfError(SetBackgroundSurface(iWindows[i], aCropRegion));
+			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetScaleFactorL ---"));
+	
+    if (IsSurfaceCreated() && iExtDisplayConnected && iExtDisplayHandler && (aCropRegion != prevCropRegion))
+        {
+        User::LeaveIfError(RedrawWindows(aCropRegion));
+        }
+	   
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetScaleFactorL ---");
 	}
 
 void CMediaClientVideoDisplayBody::SetWindowClipRectL(const RWindowBase& aWindow, const TRect& aWindowClipRect, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetWindowClipRectL +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowClipRectL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetWindowClipRectL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetWindowClipRectL - aWindowClipRect %d,%d - %d,%d", aWindowClipRect.iTl.iX, aWindowClipRect.iTl.iY, aWindowClipRect.iBr.iX, aWindowClipRect.iBr.iY);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetWindowClipRectL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
 	
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
-	iWindows[pos].iClipRect = aWindowClipRect;
-	iCropRegion = aCropRegion;
-	
-    if (IsSurfaceCreated() && !iExtDisplayConnected)
-		{
-		User::LeaveIfError(SetBackgroundSurface(iWindows[pos], aCropRegion));
-		}
-	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetWindowClipRectL ---"));
+	iClientWindows[pos].iClipRect = aWindowClipRect;
+
+    UpdateCropRegionL(aCropRegion, pos);
+
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowClipRectL ---");
 	}
 	
 void CMediaClientVideoDisplayBody::SetVideoExtentL(const RWindowBase& aWindow, const TRect& aVideoExtent, const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetVideoExtentL +++"));
-	TInt pos = iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetVideoExtentL +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetVideoExtentL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetVideoExtentL - aVideoExtent %d,%d - %d,%d", aVideoExtent.iTl.iX, aVideoExtent.iTl.iY, aVideoExtent.iBr.iX, aVideoExtent.iBr.iY);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetVideoExtentL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
+
+    TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
 	
-	iWindows[pos].iVideoExtent = aVideoExtent;
-	iCropRegion = aCropRegion;
-	
-    if (IsSurfaceCreated() && !iExtDisplayConnected)
-		{
-		User::LeaveIfError(SetBackgroundSurface(iWindows[pos], aCropRegion));
-		}
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetVideoExtentL ---"));
+	iClientWindows[pos].iVideoExtent = aVideoExtent;
+
+    UpdateCropRegionL(aCropRegion, pos);
+    
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetVideoExtentL ---");
 	}
 	
 TBool CMediaClientVideoDisplayBody::HasWindows() const
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::HasWindows +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::HasWindows ---"));
-	return (iWindows.Count() > 0);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::HasWindows +++");
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::HasWindows --- return %d", (iClientWindows.Count() > 0));
+	return (iClientWindows.Count() > 0);
 	}
 	
 TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData,  
 									const TRect& aCropRegion)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetBackgroundSurface +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetBackgroundSurface +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface - iWindow WsHandle 0x%X", aWindowData.iWindow->WsHandle());
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - iWindow abs pos %d,%d - width %d, height %d", aWindowData.iWindow->AbsPosition().iX, aWindowData.iWindow->AbsPosition().iY, aWindowData.iWindow->Size().iWidth, aWindowData.iWindow->Size().iHeight);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - iClipRect %d,%d - %d,%d", aWindowData.iClipRect.iTl.iX, aWindowData.iClipRect.iTl.iY, aWindowData.iClipRect.iBr.iX, aWindowData.iClipRect.iBr.iY);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - iVideoExtent %d,%d - %d,%d", aWindowData.iVideoExtent.iTl.iX, aWindowData.iVideoExtent.iTl.iY, aWindowData.iVideoExtent.iBr.iX, aWindowData.iVideoExtent.iBr.iY);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetBackgroundSurface - iScaleWidth %f, iScaleHeight %f", aWindowData.iScaleWidth, aWindowData.iScaleHeight);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface - iRotation %d", aWindowData.iRotation);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface - iAutoScaleType %d", aWindowData.iAutoScaleType);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetBackgroundSurface - iHorizPos %d, iVertPos %d", aWindowData.iHorizPos, aWindowData.iVertPos);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
 	
 	// required as this private function is called directly from external friend class
 	iCropRegion = aCropRegion;
@@ -509,39 +629,11 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
     // Viewport is 0 size, don't show any video
     if (viewport.Width() <= 0 || viewport.Height() <= 0)
         {
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface --- Returned with error %d", KErrArgument);
         return KErrArgument;
         }
 
-	TRect extent;
-	CalculateExtentAndViewport(aWindowData, extent, viewport);
-	
-	aWindowData.iSurfaceConfig.SetViewport(viewport);
-	aWindowData.iSurfaceConfig.SetExtent(extent);
-	aWindowData.iSurfaceConfig.SetOrientation(ConvertRotation(aWindowData.iRotation));
-	
-	aWindowData.iSurfaceConfig.SetSurfaceId(iSurfaceId);
-	
-	// Get the rectangle that bounds the crop rectangle and the viewport.  This should be
-	// the same as the crop rectangle as long as the viewport does not go outside this area.
-	TRect rect(iCropRect);
-	rect.BoundingRect(viewport);
-	TInt err = KErrNone;
-	
-	// Check if the viewport and extent can be displayed as a background surface. The viewport 
-	// is valid if it is within the crop rectangle and is not empty.  The extent is valid if 
-	// it is not empty. 
-	if (rect == iCropRect && !viewport.IsEmpty() && !extent.IsEmpty())
-		{
-		err = aWindowData.iWindow->SetBackgroundSurface(aWindowData.iSurfaceConfig, ETrue);
-		}
-
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetBackgroundSurface ---"));
-	return err;
-	}
-
-void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData& aWindowData, TRect& aExtent, TRect& aViewport)
-    {
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CalculateExtentAndViewport +++"));
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - viewport1 %d,%d - %d,%d", viewport.iTl.iX, viewport.iTl.iY, viewport.iBr.iX, viewport.iBr.iY);
 
     TRect videoExtent(aWindowData.iVideoExtent);
     
@@ -552,14 +644,14 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
         {
         case EVideoRotationNone:
         case EVideoRotationClockwise180:
-            inputWidth = static_cast<TReal32>(aViewport.Width());
-            inputHeight = static_cast<TReal32>(aViewport.Height());
+            inputWidth = static_cast<TReal32>(viewport.Width());
+            inputHeight = static_cast<TReal32>(viewport.Height());
             pixelAspectRatio = static_cast<TReal32>(iAspectRatio.iNumerator) / iAspectRatio.iDenominator;
             break;
         case EVideoRotationClockwise90:
         case EVideoRotationClockwise270:
-            inputWidth = static_cast<TReal32>(aViewport.Height());
-            inputHeight = static_cast<TReal32>(aViewport.Width());
+            inputWidth = static_cast<TReal32>(viewport.Height());
+            inputHeight = static_cast<TReal32>(viewport.Width());
             pixelAspectRatio = static_cast<TReal32>(iAspectRatio.iDenominator) / iAspectRatio.iNumerator;
             break;
         default:
@@ -567,14 +659,17 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
             User::Invariant();
             break;
         }
-        
+    
     TReal32 viewportAspect = pixelAspectRatio * inputWidth / inputHeight;
     TReal32 vidextAspect = static_cast<TReal32>(videoExtent.Width()) / static_cast<TReal32>(videoExtent.Height());
     
+    DEBUG_PRINTF4("CMediaClientVideoDisplayBody::SetBackgroundSurface - inputWidth %f, inputHeight %f, PAR %f", inputWidth, inputHeight, pixelAspectRatio);
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetBackgroundSurface - viewportAspect %f, vidextAspect %f", viewportAspect, vidextAspect);
+
     // Set the extent to the display area in the window.  The final height and with is to 
     // be changed by deltaHeight and deltaWidth respectively.
-    aExtent = videoExtent;
-    
+    TRect extent(videoExtent);
+
     TInt deltaHeight = 0;
     TInt deltaWidth = 0;
     
@@ -583,12 +678,12 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
         if (viewportAspect > vidextAspect)
             {
             // Shrink height to get the correct aspect ratio
-            deltaHeight = (TInt) (aExtent.Width() / viewportAspect - aExtent.Height());
+            deltaHeight = (TInt) (extent.Width() / viewportAspect - extent.Height());
             }
         else
             {
             // Shrink width to get the correct aspect ratio
-            deltaWidth = (TInt) (aExtent.Height() * viewportAspect - aExtent.Width());
+            deltaWidth = (TInt) (extent.Height() * viewportAspect - extent.Width());
             }
         }
     else if (aWindowData.iAutoScaleType == EAutoScaleClip)
@@ -596,12 +691,12 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
         if (viewportAspect > vidextAspect)
             {
             // Expand width to get the correct aspect ratio
-            deltaWidth = (TInt) (aExtent.Height() * viewportAspect - aExtent.Width());
+            deltaWidth = (TInt) (extent.Height() * viewportAspect - extent.Width());
             }
         else
             {
             // Expand height to get the correct aspect ratio
-            deltaHeight = (TInt) (aExtent.Width() / viewportAspect - aExtent.Height());
+            deltaHeight = (TInt) (extent.Width() / viewportAspect - extent.Height());
             }
         }
     else if (aWindowData.iAutoScaleType == EAutoScaleStretch)
@@ -624,23 +719,25 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
         deltaWidth = (TInt) (inputWidth * aWindowData.iScaleWidth * 0.01 - videoExtent.Width());
         }
     
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetBackgroundSurface - deltaWidth %d, deltaHeight %d", deltaWidth, deltaHeight);
+
     // Change the width of the extent in the proper directions and propertions.
     switch (aWindowData.iHorizPos)
         {
     case EHorizontalAlignCenter:
-        aExtent.iTl.iX -= deltaWidth / 2;
-        aExtent.iBr.iX += deltaWidth / 2;
+        extent.iTl.iX -= deltaWidth / 2;
+        extent.iBr.iX += deltaWidth / 2;
         break;
     case EHorizontalAlignLeft:
-        aExtent.iBr.iX += deltaWidth;
+        extent.iBr.iX += deltaWidth;
         break;
     case EHorizontalAlignRight:
-        aExtent.iTl.iX -= deltaWidth;
+        extent.iTl.iX -= deltaWidth;
         break;
     default:
-        TInt width = aExtent.Width() + deltaWidth;
-        aExtent.iTl.iX += aWindowData.iHorizPos;
-        aExtent.iBr.iX = aExtent.iTl.iX + width;
+        TInt width = extent.Width() + deltaWidth;
+        extent.iTl.iX += aWindowData.iHorizPos;
+        extent.iBr.iX = extent.iTl.iX + width;
         break;
         }
     
@@ -648,22 +745,24 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
     switch (aWindowData.iVertPos)
         {
     case EVerticalAlignCenter:
-        aExtent.iTl.iY -= deltaHeight / 2;
-        aExtent.iBr.iY += deltaHeight / 2;
+        extent.iTl.iY -= deltaHeight / 2;
+        extent.iBr.iY += deltaHeight / 2;
         break;
     case EVerticalAlignTop:
-        aExtent.iBr.iY += deltaHeight;
+        extent.iBr.iY += deltaHeight;
         break;
     case EVerticalAlignBottom:
-        aExtent.iTl.iY -= deltaHeight;
+        extent.iTl.iY -= deltaHeight;
         break;
     default:
-        TInt height = aExtent.Height() + deltaHeight;
-        aExtent.iTl.iY += aWindowData.iVertPos;
-        aExtent.iBr.iY = aExtent.iTl.iY + height;
+        TInt height = extent.Height() + deltaHeight;
+        extent.iTl.iY += aWindowData.iVertPos;
+        extent.iBr.iY = extent.iTl.iY + height;
         break;
         }
         
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - extent1 %d,%d - %d,%d", extent.iTl.iX, extent.iTl.iY, extent.iBr.iX, extent.iBr.iY);
+
     // The video should not be displayed outside the intended video extent or clipping rectangle.  
     // The extent already has the correct size and position for displaying the entire viewport.  
     // The viewport is clipped such that the video is not moved/distorted when we take the extent 
@@ -672,137 +771,180 @@ void CMediaClientVideoDisplayBody::CalculateExtentAndViewport(const TWindowData&
     TRect viewableArea(videoExtent);
     viewableArea.Intersection(aWindowData.iClipRect);
     
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - viewableArea %d,%d - %d,%d", viewableArea.iTl.iX, viewableArea.iTl.iY, viewableArea.iBr.iX, viewableArea.iBr.iY);
+
     // Number of pixels (in window coordinates) to be clipped on the right, bottom, top and left sides of
     // the video.
-    TInt dr = Max(0, aExtent.iBr.iX - viewableArea.iBr.iX);
-    TInt db = Max(0, aExtent.iBr.iY - viewableArea.iBr.iY);
-    TInt dt = Max(0, viewableArea.iTl.iY - aExtent.iTl.iY);
-    TInt dl = Max(0, viewableArea.iTl.iX - aExtent.iTl.iX);
+    TInt dr = Max(0, extent.iBr.iX - viewableArea.iBr.iX);
+    TInt db = Max(0, extent.iBr.iY - viewableArea.iBr.iY);
+    TInt dt = Max(0, viewableArea.iTl.iY - extent.iTl.iY);
+    TInt dl = Max(0, viewableArea.iTl.iX - extent.iTl.iX);
     
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - dr %d, db %d, dt %d, dl %d", dr, db, dt, dl);
+
     // Calculate the number of pixels in the video per window pixel in both x and y directions.
     TReal32 wRatio = 0.0f; 
     TReal32 hRatio = 0.0f;
-    
+
     // Make sure we don't divide by 0
-    if (aExtent.Width() != 0)
+    if (extent.Width() != 0)
         {
-        wRatio = inputWidth / static_cast<TReal32>(aExtent.Width());
+        wRatio = inputWidth / static_cast<TReal32>(extent.Width());
         }
     
-    if (aExtent.Height() != 0)
+    if (extent.Height() != 0)
         {
-        hRatio = inputHeight / static_cast<TReal32>(aExtent.Height());
+        hRatio = inputHeight / static_cast<TReal32>(extent.Height());
         }
     
+    DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetBackgroundSurface - wRatio %f, hRatio %f", wRatio, hRatio);
+
     // Clip the viewport 
     switch (aWindowData.iRotation)
-        {
-        case EVideoRotationNone:
-            aViewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(dr));
-            aViewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(db));
-            aViewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(dl));
-            aViewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(dt));
-            break;
-        case EVideoRotationClockwise180:
-            aViewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(dl));
-            aViewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(dt));
-            aViewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(dr));
-            aViewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(db));
-            break;
-        case EVideoRotationClockwise90:
-            aViewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(db));
-            aViewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(dl));
-            aViewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(dt));
-            aViewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(dr));
-            break;
-        case EVideoRotationClockwise270:
-            aViewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(dt));
-            aViewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(dr));
-            aViewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(db));
-            aViewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(dl));
-            break;
-        default:
-            // Should never get to default unless there's been some programming error.
-            User::Invariant();
-            break;
-        }
+    {
+    case EVideoRotationNone:
+        viewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(dr));
+        viewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(db));
+        viewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(dl));
+        viewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(dt));
+        break;
+    case EVideoRotationClockwise180:
+        viewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(dl));
+        viewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(dt));
+        viewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(dr));
+        viewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(db));
+        break;
+    case EVideoRotationClockwise90:
+        viewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(db));
+        viewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(dl));
+        viewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(dt));
+        viewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(dr));
+        break;
+    case EVideoRotationClockwise270:
+        viewport.iBr.iX -= (TInt) (wRatio * static_cast<TReal32>(dt));
+        viewport.iBr.iY -= (TInt) (hRatio * static_cast<TReal32>(dr));
+        viewport.iTl.iX += (TInt) (wRatio * static_cast<TReal32>(db));
+        viewport.iTl.iY += (TInt) (hRatio * static_cast<TReal32>(dl));
+        break;
+    default:
+        // Should never get to default unless there's been some programming error.
+        User::Invariant();
+        break;
+    }
     
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - viewport2 %d,%d - %d,%d", viewport.iTl.iX, viewport.iTl.iY, viewport.iBr.iX, viewport.iBr.iY);
+
     // Clip the extent.
-    aExtent.Intersection(viewableArea);
+    extent.Intersection(viewableArea);
     
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CalculateExtentAndViewport ---"));
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - extent2 %d,%d - %d,%d", extent.iTl.iX, extent.iTl.iY, extent.iBr.iX, extent.iBr.iY);
+
+    aWindowData.iSurfaceConfig.SetViewport(viewport);
+    aWindowData.iSurfaceConfig.SetExtent(extent);
+    aWindowData.iSurfaceConfig.SetOrientation(ConvertRotation(aWindowData.iRotation));
+    
+    aWindowData.iSurfaceConfig.SetSurfaceId(iSurfaceId);
+    
+    // Get the rectangle that bounds the crop rectangle and the viewport.  This should be
+    // the same as the crop rectangle as long as the viewport does not go outside this area.
+    TRect rect(iCropRect);
+    rect.BoundingRect(viewport);
+    TInt err = KErrNone;
+    
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - rect %d,%d - %d,%d", rect.iTl.iX, rect.iTl.iY, rect.iBr.iX, rect.iBr.iY);
+
+    // Check if the viewport and extent can be displayed as a background surface. The viewport 
+    // is valid if it is within the crop rectangle and is not empty.  The extent is valid if 
+    // it is not empty. 
+    if (rect == iCropRect && !viewport.IsEmpty() && !extent.IsEmpty())
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetBackgroundSurface - Calling SetBackgroundSurface");
+        err = aWindowData.iWindow->SetBackgroundSurface(aWindowData.iSurfaceConfig, ETrue);
+        }
+
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface --- err %d", err);
+    return err;
     }
 
 TBool CMediaClientVideoDisplayBody::IsUsed() const
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::IsUsed +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::IsUsed ---"));
-	return (iEventHandler != NULL || iWindows.Count() > 0);
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::IsUsed +++");
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::IsUsed --- return %d", (iEventHandler || iClientWindows.Count() > 0));
+	return (iEventHandler || iClientWindows.Count() > 0);
 	}
 	
 
 TBool CMediaClientVideoDisplayBody::IsSurfaceCreated() const
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::IsSurfaceCreated +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::IsSurfaceCreated ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::IsSurfaceCreated +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::IsSurfaceCreated --- return %d", !(iSurfaceId.IsNull()));
 	return !(iSurfaceId.IsNull());
 	}
 		
 TInt CMediaClientVideoDisplayBody::DisplayId() const
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::DisplayId +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::DisplayId ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::DisplayId +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::DisplayId --- return %d", iDisplayId);
 	return iDisplayId;
 	}
 	
 TInt CMediaClientVideoDisplayBody::CompareByDisplay(const TInt* aDisplayId, const CMediaClientVideoDisplayBody& aDisplay)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CompareByDisplay +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CompareByDisplay ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::CompareByDisplay +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::CompareByDisplay --- return %d", (*aDisplayId - aDisplay.DisplayId()));
 	return (*aDisplayId - aDisplay.DisplayId());
 	}
 		
 TInt CMediaClientVideoDisplayBody::Compare(const CMediaClientVideoDisplayBody& aLeft, const CMediaClientVideoDisplayBody& aRight)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::Compare +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::Compare ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::Compare +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::Compare --- return %d", (aLeft.DisplayId() - aRight.DisplayId()));
 	return (aLeft.DisplayId() - aRight.DisplayId());
 	}
 	
 CFbsBitGc::TGraphicsOrientation CMediaClientVideoDisplayBody::ConvertRotation(TVideoRotation aRotation)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::ConvertRotation +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::ConvertRotation ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::ConvertRotation +++");
+	
+	CFbsBitGc::TGraphicsOrientation orientation;
+	
 	switch(aRotation)
 		{
 		case EVideoRotationNone:
-			return CFbsBitGc::EGraphicsOrientationNormal;
+		    orientation = CFbsBitGc::EGraphicsOrientationNormal;
+		    break;
 		case EVideoRotationClockwise90:
-			return CFbsBitGc::EGraphicsOrientationRotated270;
+		    orientation = CFbsBitGc::EGraphicsOrientationRotated270;
+		    break;
 		case EVideoRotationClockwise180:
-			return CFbsBitGc::EGraphicsOrientationRotated180;
+		    orientation = CFbsBitGc::EGraphicsOrientationRotated180;
+		    break;
 		case EVideoRotationClockwise270:
-			return CFbsBitGc::EGraphicsOrientationRotated90;
+		    orientation = CFbsBitGc::EGraphicsOrientationRotated90;
+		    break;
 		default:
 			// Should never get to default unless there's been some programming error.
 			User::Invariant();
 			// This is never reached, just to keep the compiler happy
-			return CFbsBitGc::EGraphicsOrientationNormal;
+			orientation = CFbsBitGc::EGraphicsOrientationNormal;
 		}
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ConvertRotation --- return %d", orientation);	
+    return orientation;
 	}
 
 CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::FindDisplayWithWindowL(const RPointerArray<CMediaClientVideoDisplayBody>& aDisplays, const RWindowBase& aWindow)
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::FindDisplayWithWindowL +++"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::FindDisplayWithWindowL +++");
 	TInt count = aDisplays.Count();
 	
 	for (TInt i = 0; i < count; ++i)
 		{
 		CMediaClientVideoDisplayBody* display = aDisplays[i];
 	
-		if (display->iWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle) != KErrNotFound)
+		if (display->iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle) != KErrNotFound)
 			{
-			DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::FindDisplayWithWindowL ---"));
+			DEBUG_PRINTF2("CMediaClientVideoDisplayBody::FindDisplayWithWindowL window found at position ", i);
+			DEBUG_PRINTF("CMediaClientVideoDisplayBody::FindDisplayWithWindowL ---");
 			return display;	
 			}
 		}
@@ -813,87 +955,14 @@ CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::FindDisplayWithWindo
 	
 RArray<CMediaClientVideoDisplayBody::TWindowData>& CMediaClientVideoDisplayBody::Windows()
 	{
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::Windows +++"));
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::Windows ---"));
-	return iWindows;	
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::Windows +++");
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::Windows ---");
+	return iClientWindows;	
 	}
-
-void CMediaClientVideoDisplayBody::MedcpcExtDisplayCalculateExtentAndViewportL(TRect& aExtent, TRect& aViewport, TRect& aExternalDisplayRect)
-    {
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::MedcpcExtDisplayCalculateExtentAndViewportL +++"));
-    
-    TWindowData windowData;
-    windowData.iVideoExtent = aExternalDisplayRect;
-    windowData.iRotation = EVideoRotationNone;
-    windowData.iAutoScaleType = EAutoScaleBestFit;
-    windowData.iHorizPos = EHorizontalAlignCenter;
-    windowData.iVertPos = EVerticalAlignCenter;
-    windowData.iClipRect = aExternalDisplayRect;
-    
-    aViewport = iCropRect;
-    // Viewport is 0 size, don't show any video
-    if (aViewport.Width() <= 0 || aViewport.Height() <= 0)
-        {
-        User::Leave(KErrArgument);
-        }
-    
-    CalculateExtentAndViewport(windowData, aExtent, aViewport);
-    
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::MedcpcExtDisplayCalculateExtentAndViewportL ---"));
-    }
-
-void CMediaClientVideoDisplayBody::CreateExtDisplayConnProvAndRemoveSurfaceL(TBool aRemoveBackgroundSurface)
-    {
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CreateExtDisplayConnProvAndRemoveSurfaceL +++"));
-
-    if((iExtDisplayConnectionProvider == NULL) && (iWindows.Count() > 0))
-        {
-        iExtDisplayConnectionProvider = CExtDisplayConnectionProviderInterface::NewL(*this, iSurfaceId);
-        iExtDisplayConnected = iExtDisplayConnectionProvider->ExtDisplayConnectedL();
-        
-        if(iExtDisplayConnected && aRemoveBackgroundSurface)
-            {
-            RemoveBackgroundSurface(ETrue);
-            }
-        }
-
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::CreateExtDisplayConnProvAndRemoveSurfaceL ---"));
-    }
-   
-void CMediaClientVideoDisplayBody::RemoveExtDisplayConnProvAndRedrawL()
-    {
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveExtDisplayConnProvAndRedrawL +++"));
-
-    if(iExtDisplayConnectionProvider != NULL)
-        {
-        delete iExtDisplayConnectionProvider;
-        REComSession::FinalClose();
-        iExtDisplayConnectionProvider = NULL;
-        iExtDisplayConnected = EFalse;
-        User::LeaveIfError(RedrawWindows(iCropRegion));
-        }
-
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveExtDisplayConnProvAndRedrawL ---"));
-    }
-
-void CMediaClientVideoDisplayBody::RemoveExtDisplayConnProv()
-    {
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveExtDisplayConnProv +++"));
-
-    if(iExtDisplayConnectionProvider != NULL)
-        {
-        delete iExtDisplayConnectionProvider;
-        REComSession::FinalClose();
-        iExtDisplayConnectionProvider = NULL;
-        iExtDisplayConnected = EFalse;
-        }
-
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::RemoveExtDisplayConnProv ---"));
-    }
 
 void CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL(TBool aControl)
     {
-    DEBUG_PRINT2(_L("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL +++ aControl=%d"), aControl);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL +++ aControl=%d", aControl);
 
     // not supported
     if(!iExtDisplaySwitchingSupported)
@@ -902,7 +971,7 @@ void CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL(TBool aControl)
         }
     
     // need active scheduler installed
-    if(CActiveScheduler::Current() == NULL)
+    if(!CActiveScheduler::Current())
         {
         User::Leave(KErrNotReady);
         }
@@ -911,48 +980,159 @@ void CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL(TBool aControl)
         {
         iClientRequestedExtDisplaySwitching = aControl;
         
-        if(IsSurfaceCreated())
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL SurfaceCreated %d", IsSurfaceCreated());
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL Client window count %d", iClientWindows.Count());
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL External Display Connected %d", iExtDisplayConnected);          
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL Client Requested Ext Display Switching %d", iClientRequestedExtDisplaySwitching);          
+        
+        if(IsSurfaceCreated() && (iClientWindows.Count() > 0) && iExtDisplayConnected)
             {
             if(iClientRequestedExtDisplaySwitching)
                 {
-                CreateExtDisplayConnProvAndRemoveSurfaceL(ETrue);
+                TRAPD(err, CreateExtDisplayHandlerL());
+                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL CreateExtDisplayHandlerL error %d", err);
+                if(err == KErrNone)
+                    {
+                    RemoveBackgroundSurface(ETrue);
+                    SetWindowArrayPtr2Ext();
+                    RedrawWindows(iCropRegion);
+                    }
                 }
-            else
+            else if(iExtDisplayHandler)
                 {
-                RemoveExtDisplayConnProvAndRedrawL();
+                RemoveBackgroundSurface(ETrue);
+                RemoveExtDisplayHandler();
+                SetWindowArrayPtr2Client();
+                RedrawWindows(iCropRegion);
                 }
-            }
-        else
-            {
-            DEBUG_PRINT(_L("No Surface exists"));
             }
         }
     
-    DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL ---"));
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL ---");
     }
 
 void CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected)
 	{
-	DEBUG_PRINT2(_L("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected +++ aExtDisplayConnected=%d"), aExtDisplayConnected);
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected +++ aExtDisplayConnected=%d", aExtDisplayConnected);
 	
 	if(iExtDisplayConnected != aExtDisplayConnected)
 	    {
 	    iExtDisplayConnected = aExtDisplayConnected;
-	    if(iExtDisplayConnected)
-	        {
-	        RemoveBackgroundSurface(ETrue);
-	        }
-	    else
-	        {
-	        // ignore error - no need to tell provider - but lets log it in case it fails
-	        TInt err = RedrawWindows(iCropRegion);
-	        DEBUG_PRINT2(_L("RedrawWindows returned with %d"), err);
-	        }
+
+        if(IsSurfaceCreated() && (iClientWindows.Count() > 0) && iClientRequestedExtDisplaySwitching)
+            {
+            if(iExtDisplayConnected)
+                {
+                TRAPD(err, CreateExtDisplayHandlerL());
+                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected CreateExtDisplayHandlerL error %d", err);
+                if(err == KErrNone)
+                    {
+                    RemoveBackgroundSurface(ETrue);
+                    SetWindowArrayPtr2Ext();
+                    RedrawWindows(iCropRegion);
+                    }
+                }
+            else if(iExtDisplayHandler)
+                {
+                RemoveBackgroundSurface(ETrue);
+                RemoveExtDisplayHandler();
+                SetWindowArrayPtr2Client();
+                RedrawWindows(iCropRegion);
+                }
+            }
 	    }
 	else
 	    {
-	    DEBUG_PRINT(_L("No change in ext display connection status"));
+	    DEBUG_PRINTF("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected No change in ext display connection status");
 	    }
 	
-	DEBUG_PRINT(_L("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected ---"));
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected ---");
 	}
+
+void CMediaClientVideoDisplayBody::SetWindowArrayPtr2Client()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Client +++");
+
+    iWindowsArrayPtr = &iClientWindows;
+
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Client ---");
+    }
+
+void CMediaClientVideoDisplayBody::SetWindowArrayPtr2Ext()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Ext +++");
+
+    iWindowsArrayPtr = &iExtDisplayWindows;
+
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Ext ---");
+    }
+
+void CMediaClientVideoDisplayBody::CreateExtDisplayHandlerL()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::CreateExtDisplayHandlerL +++");
+
+    CMediaClientExtDisplayHandler* extDisplayHandler = CMediaClientExtDisplayHandler::NewL(iExtDisplayConnectionProvider->ExtDisplayId());
+    CleanupStack::PushL(extDisplayHandler);
+    
+    TWindowData windowData;
+    windowData.iWindow = extDisplayHandler->Window();
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::CreateExtDisplayHandlerL - iWindow WsHandle 0x%X", windowData.iWindow->WsHandle());
+    
+    TRect externalDisplayRect(TPoint(0, 0), extDisplayHandler->DisplaySizeInPixels());
+    windowData.iClipRect = externalDisplayRect;
+    windowData.iVideoExtent = externalDisplayRect;
+    // windowData.iScaleWidth not required for EAutoScaleBestFit
+    // windowData.iScaleHeight not required for EAutoScaleBestFit
+    windowData.iRotation = EVideoRotationNone;
+    windowData.iAutoScaleType = EAutoScaleBestFit;
+    windowData.iHorizPos = EHorizontalAlignCenter;
+    windowData.iVertPos = EVerticalAlignCenter;
+    // windowData.iWindow2 not used        
+    
+    iExtDisplayWindows.AppendL(windowData);
+    CleanupStack::Pop(extDisplayHandler);
+    iExtDisplayHandler = extDisplayHandler;
+    
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::CreateExtDisplayHandlerL ---");
+    }
+
+void CMediaClientVideoDisplayBody::RemoveExtDisplayHandler()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveExtDisplayHandler +++");
+
+    delete iExtDisplayHandler;
+    iExtDisplayHandler = NULL;
+    iExtDisplayWindows.Reset();
+
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveExtDisplayHandler ---");
+    }
+
+void CMediaClientVideoDisplayBody::CreateExtDisplayPluginL()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::CreateExtDisplayPluginL +++");
+    
+    iExtDisplayConnectionProvider = CExtDisplayConnectionProviderInterface::NewL();
+    
+    if(iExtDisplayConnectionProvider)
+        {
+        iExtDisplaySwitchingSupported = ETrue;
+        iExtDisplayConnectionProvider->SetExtDisplayConnectionProviderCallback(*this);
+        iExtDisplayConnected = iExtDisplayConnectionProvider->ExtDisplayConnected();
+        }
+
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::CreateExtDisplayPluginL ---");
+    }
+
+void CMediaClientVideoDisplayBody::RemoveExtDisplayPlugin()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveExtDisplayPlugin +++");
+    
+    if(iExtDisplaySwitchingSupported)
+        {
+        delete iExtDisplayConnectionProvider;
+        iExtDisplayConnectionProvider = NULL;
+        iExtDisplaySwitchingSupported = EFalse;
+        iExtDisplayConnected = EFalse;
+        }    
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveExtDisplayPlugin ---");
+    }

@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -10242,3 +10242,87 @@ TVerdict RTestStep_5107::DoTestStepL()
     return EPass;
     }
 
+//AKAL-7YHLPR : Crash found in Themes Thread.
+RTestStep_5108::RTestStep_5108(CTestSuite* aSuite)
+    {
+    iSuite = aSuite;
+    iTestStepName = _L("MM-ICL-COD-U-5108-HP");
+    }
+
+
+void RTestStep_5108::Close()
+    {
+    delete iScheduler;
+    iScheduler = NULL;
+    iFs.Close();
+    RFbsSession::Disconnect();
+    }
+
+
+RTestStep_5108* RTestStep_5108::NewL(CTestSuite* aSuite)
+    {
+    if (!aSuite)
+        {
+        User::Leave(KErrArgument);        
+        }
+    return new(ELeave) RTestStep_5108(aSuite);
+    }
+
+
+TVerdict RTestStep_5108::OpenL()
+    {
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFs.Connect());
+
+    iScheduler = new(ELeave) CActiveScheduler();
+    CActiveScheduler::Install(iScheduler);
+    
+    return EPass;
+    }
+
+
+/*
+ * Test added for AKAL-7YHLPR : Crash found in Themes Thread.
+ * The test is to check the possible memory corruption on decoding a test Gif image. The gif image has transparency
+ * color index of 128. Decode option is Fast decode and with EColor64k. With these combination, the memory corruption 
+ * happens. The test decodes all the frames in the image.
+ * If memory corruption happens, the test will panic and fail. No panic means the problem is fixed, and the test passes.
+ * The test also fails if all frames are not decoded successfully. 
+ */
+TVerdict RTestStep_5108::DoTestStepL()
+    {
+    INFO_PRINTF1(_L("AKAL-7YHLPR : Crash found in Themes Thread."));
+    INFO_PRINTF1(_L("Test checks for memory corruption on decoding Gif image with Tranparency index = 128, with EColor64K and in Fast decode mode"));
+    _LIT(KGifTranpIdx128, "c:\\tsu_icl_cod_03\\secret.gif");
+    CImageDecoder* decoder = NULL;
+    //create decoder with Fast decode 
+    decoder = CImageDecoder::FileNewL(iFs, KGifTranpIdx128, CImageDecoder::EPreferFastDecode);
+    CleanupStack::PushL(decoder);
+    CFbsBitmap* bitmap = new (ELeave) CFbsBitmap;
+    //bitmap with EColor64K
+    TInt err = bitmap->Create(TSize(0,0), EColor64K);
+    CleanupStack::PushL(bitmap);
+    CActiveListener* listener = new (ELeave) CActiveListener;
+    CleanupStack::PushL(listener);//get the no. of frames in the image.
+    TInt frameCount = decoder->FrameCount();
+    TVerdict result = EPass;
+    //decode all the frames.
+    for(TInt i = 0; i < frameCount; i++)
+        {
+        const TFrameInfo& frameInfo = decoder->FrameInfo(i);
+        const TSize frameSize(frameInfo.iOverallSizeInPixels);
+        listener->InitialiseActiveListener();
+        err = bitmap->Resize(frameSize);
+        decoder->Convert(&listener->iStatus, *bitmap,i);
+        CActiveScheduler::Start();
+        err = listener->iStatus.Int();
+        if(err != KErrNone)
+            {
+            result = EFail; //fail if couldn't decode all frames.
+            break;
+            }
+        err = bitmap->Resize(TSize(0,0));
+        }
+    CleanupStack::PopAndDestroy(3); //listener, bitmap, decoder
+    return result;
+    }

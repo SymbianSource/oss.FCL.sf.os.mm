@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -524,4 +524,8 @@ TEST_COMPLETE
 //! @SYMTestCaseID MM-ICL-COD-U-5114-HP
 
 RUN_TEST_STEP -1, TSU_ICL_COD_03, MM-ICL-COD-U-5114-HP
+TEST_COMPLETE
+
+//AKAL-7YHLPR : Crash found in Themes Thread. Memory corruption with Gif image.
+RUN_TEST_STEP -1, TSU_ICL_COD_03, MM-ICL-COD-U-5108-HP
 TEST_COMPLETE

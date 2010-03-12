@@ -1051,7 +1051,6 @@ private:
 	RChunk										iChunk;
 	RSurfaceManager::TInfoBuf 					iInfo;
 	TSurfaceId									iSurfaceId;
-	TSurfaceId									iRedrawSurfaceId;
 	TBool           							iIsInputEnded;
 	CNGAPostProcTimer*							iPostingTimer;
 	CMMFDevVideoPlay::TPictureCounters  		iPictureCounters;

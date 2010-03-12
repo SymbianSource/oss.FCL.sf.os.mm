@@ -1,4 +1,4 @@
-// Copyright (c) 1997-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 1997-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -256,8 +256,8 @@ TFrameState CGifReadCodec::ProcessFrameL(TBufPtr8& aSrc)
 		if (maskProc)
 			maskProc->FlushPixels();
 		pos = iFrameOffset;
-		
-		if(iGifImageControl && iGifImageControl->iTransparentColorIndex != KErrNotFound)
+		//in case of iFast64kMode == true, palette is of type T64KPixel
+		if(iGifImageControl && iGifImageControl->iTransparentColorIndex != KErrNotFound && !iFast64kMode)
 			{
 			// reset the transparency index
 			if (iTranspColIdx != KTranspColIdxNotPresent)
@@ -436,8 +436,6 @@ void CGifReadCodec::InitFrameL(TFrameInfo& aFrameInfo, CFrameImageData& aFrameIm
             i64KPalette[idx] = iPalette[idx]._Color64K();
             } 
             while (++idx < KGifColorTableMaxEntries);
-            
-        iPalette = reinterpret_cast<const TRgb*>( i64KPalette );
         }
         
     if (imageProc == NULL)

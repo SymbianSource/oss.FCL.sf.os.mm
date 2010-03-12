@@ -142,7 +142,7 @@ void CTestStepPlayerPlay::MapcPlayComplete(TInt aError)
 	CleanupClosePushL(fs);
 	
 	RFile temp;
-	temp.Open(fs, iFileName, EFileRead|EFileWrite|EFileShareAny);
+	temp.Open(fs, iFileName, EFileRead|EFileWrite|EFileShareReadersOnly);
 	CleanupClosePushL(temp);
 	
     iPlayer = CMMFMdaAudioPlayerUtility::NewFilePlayerL(iFileName, *this);

@@ -160,9 +160,9 @@ void CDevCommonControl::ProcessingUnitError(MAudioProcessingUnit* /*aInstance*/,
 
     if(iCallbackFromAdaptor == KCallbackNone)   
         {
-        iCallbackFromAdaptor = KCallbackProcessingUnitError;
-        iAdaptationObserver->CallbackFromAdaptorReceived(KCallbackProcessingUnitError, KErrNone);
         iProcessingUnitError = aError;
+        iCallbackFromAdaptor = KCallbackProcessingUnitError;
+        iAdaptationObserver->CallbackFromAdaptorReceived(KCallbackProcessingUnitError, aError);
         }
     else
         {

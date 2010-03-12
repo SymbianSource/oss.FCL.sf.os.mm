@@ -336,7 +336,8 @@ sub BuildRom()
 	if($uni ne "")
 		{
 		#Use Flexible Memory Model for UniCore
-		$command .= " -DWITH_FLEXIBLE_MM";
+		#Until base have fixed the issue related to this keep commented out.
+		#$command .= " -DWITH_FLEXIBLE_MM";
 		}
 	
 	$command .= " -D_NAND2" if ($nand ne "" && $arm ne "");

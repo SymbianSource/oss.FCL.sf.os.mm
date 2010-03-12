@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -2239,6 +2239,25 @@ public:
         
 private:
     RTestStep_5107(CTestSuite* aSuite);
+        
+private:
+    RFs iFs;
+    CActiveScheduler* iScheduler;
+    };
+
+//AKAL-7YHLPR : Crash found in Themes Thread.
+//memory corruption for Gif image secret.gif 
+NONSHARABLE_CLASS(RTestStep_5108): public RICLCodecDefectTestStep
+    {
+public:
+    static RTestStep_5108* NewL(CTestSuite* aSuite);
+    // From RICLCodecDefectTestStep
+    TVerdict OpenL();
+    TVerdict DoTestStepL();
+    void Close();
+        
+private:
+    RTestStep_5108(CTestSuite* aSuite);
         
 private:
     RFs iFs;

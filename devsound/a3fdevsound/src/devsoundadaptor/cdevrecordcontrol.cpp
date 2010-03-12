@@ -335,9 +335,6 @@ void CDevRecordControl::FinishWithError(TInt aError)
 // ---------------------------------------------------------------------------
 TBool CDevRecordControl::ProcessingError(TBool& aAyncOperation)
     {
-
-    iAdaptationObserver->RecordError(iProcessingUnitError);
-
     TInt err = iDevAudio->iAudioStream->Stop();
     if ( err == KErrNone)
         {

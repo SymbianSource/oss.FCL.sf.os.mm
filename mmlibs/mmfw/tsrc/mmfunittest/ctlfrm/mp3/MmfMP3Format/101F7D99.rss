@@ -33,13 +33,8 @@ RESOURCE REGISTRY_INFO theInfo
 					implementation_uid = KUidMP3ImplementationFormat;  
 					version_no = 1;
 					display_name = "MP3 Raw Read Format||Copyright 2003 Symbian Ltd. All Rights Reserved.||";
-#ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
-					// KMmfUidPlayerAudioImplementationMp3 = 0x10272914 from PV
-					default_data = "0x10272914"; //Preferred Controller
-#else
 					// KMmfUidControllerAudio = 0x101F5022
 					default_data = "0x101f5022"; //Preferred Controller
-#endif
 					// KUidMediaTypeAudio = 0x101F5D07
 					// match by extension only
 					opaque_data = "<s>Symbian<i>0x101f5d07<e>.mp3<m>audio/mp3<m>audio/x-mp3";
@@ -56,15 +51,8 @@ RESOURCE REGISTRY_INFO theInfo
 					implementation_uid = KUidMP3ImplementationFormatID3;
 					version_no = 1;
 					display_name = "MP3 ID3 Read Format||Copyright 2003 Symbian Ltd. All Rights Reserved.||";
-
-#ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
-					// KMmfUidPlayerAudioImplementationMp3 = 0x10272914 from PV
-					default_data = "0x10272914"; //Preferred Controller
-#else
 					// KMmfUidControllerAudio = 0x101F5022
 					default_data = "0x101f5022"; //Preferred Controller
-#endif
-
 					// match by ID3 header & extension
 					opaque_data = "<s>Symbian<i>0x101f5d07<e>.mp3<h>ID3?????????<m>audio/mp3<m>audio/x-mp3";
 					}

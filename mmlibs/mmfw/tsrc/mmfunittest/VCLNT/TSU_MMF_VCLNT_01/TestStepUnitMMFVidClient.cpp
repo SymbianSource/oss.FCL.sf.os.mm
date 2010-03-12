@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -538,7 +538,7 @@ TInt CTestStepUnitMMFVidClient::GetPlayerClipRect(TRect& aRect)
 
 	if (iVpu2)
 		{
-		aRect = iPlayer2->iBody->iActiveDisplays[0]->iWindows[0].iClipRect;
+		aRect = (*(iPlayer2->iBody->iActiveDisplays[0]->iWindowsArrayPtr))[0].iClipRect;
 		}
 #endif	
 	return KErrNone;
@@ -569,7 +569,7 @@ TInt CTestStepUnitMMFVidClient::GetPlayerWindowRect(TRect& aRect)
 
 	if (iVpu2)
 		{
-		aRect = iPlayer2->iBody->iActiveDisplays[0]->iWindows[0].iVideoExtent;
+		aRect = (*(iPlayer2->iBody->iActiveDisplays[0]->iWindowsArrayPtr))[0].iVideoExtent;
 		}
 #endif	
 	return KErrNone;

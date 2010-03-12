@@ -119,7 +119,6 @@ mp4_i32 initFileRead(MP4FileName filename, MP4HandleImp handle)
     // for compatibility, if opening in Any mode fails try more restrictive approach.
     if (file->Open(*fs, TPtrC((const TUint16 *)filename), EFileRead | EFileShareReadersOnly) != KErrNone)
     {
-        fs->Close();
         return -1;
     }
   }
@@ -183,7 +182,6 @@ mp4_i32 initFileWrite(MP4FileName filename, MP4HandleImp handle)
 
   if (file->Replace(*fs, TPtrC((const TUint16 *)filename), EFileWrite|EFileShareExclusive ) != KErrNone)
   {
-    fs->Close();
     return -1;
   }
 

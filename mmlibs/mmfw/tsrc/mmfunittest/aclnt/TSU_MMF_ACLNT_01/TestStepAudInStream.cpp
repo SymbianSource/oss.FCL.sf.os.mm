@@ -135,7 +135,9 @@ void CTestStepAudInStream::StartReadL()
 	{
 	// Issue reads on all available buffers
 	for (TInt ii=0; ii<KRecNumBuffer; ii++)
+	    {
 		iAudInStream->ReadL(iBufferList[ii]);
+	    }
 	}
 
 CTestStepAudInStream::CWriteBufferActive::CWriteBufferActive() : CActive(0)
@@ -1166,10 +1168,12 @@ CTestStepAudInStreamRead::~CTestStepAudInStreamRead()
 
 	TInt err = KErrNone;
 	TRAP(err, iAudInStream->SetDataTypeL(iTestParameters->iEncoding));
+
 	if (err != KErrNone)
 		 return EInconclusive;
 
 	iAudInStream->Open(NULL);
+	
 	CActiveScheduler::Start();
 
 	if (iError != KErrNone)
@@ -1217,7 +1221,7 @@ TVerdict CTestStepAudInStreamRead::DoTestStepL()
 	StartReadL();
 
 	CCallBackTimer* timer  = CCallBackTimer::NewL(TCallBack(stopActiveScheduler));
-	timer->After(5000000); // 3s
+	timer->After(5000000); // 5s
 	CActiveScheduler::Start();
 	delete timer;
 	if (iError != KErrNone)
@@ -1232,6 +1236,7 @@ TVerdict CTestStepAudInStreamRead::DoTestStepL()
 	CMdaAudioOutputStream* outputStream = CMdaAudioOutputStream::NewL(*this);
 	CleanupStack::PushL(outputStream);
 	TRAPD(err, outputStream->SetDataTypeL(iTestParameters->iEncoding));
+	
 	if (err != KErrNone)
 		{
 		CleanupStack::PopAndDestroy(1, outputStream);
@@ -1239,9 +1244,12 @@ TVerdict CTestStepAudInStreamRead::DoTestStepL()
 		}
 	outputStream->Open(NULL);
 	outputStream->SetVolume(outputStream->MaxVolume());
+
 	CActiveScheduler::Start(); // wait for open to complete
 	TInt size = 0;
+
 	User::LeaveIfError(iFile.Size(size));
+
 	// Read the entire file into a buffer - bit naughty but OK for test code
 	INFO_PRINTF2(_L("HBufC8:NewLC(size):  size=%d"), size);
 	HBufC8* buffer = HBufC8::NewLC(size);
