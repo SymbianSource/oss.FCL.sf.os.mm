@@ -26,6 +26,6 @@ NGAPostProcHwDevice.mmp
 
 PRJ_EXPORTS
 
-../Rom/NGA_MDF_Postprocessor.iby     CORE_OS_LAYER_IBY_EXPORT_PATH(NGA_MDF_Postprocessor.iby)
+../rom/NGA_MDF_Postprocessor.iby     CORE_OS_LAYER_IBY_EXPORT_PATH(NGA_MDF_Postprocessor.iby)
 ../data/nga_mdf_postprocessor_stub.sis   /epoc32/data/z/system/install/nga_mdf_postprocessor_stub.sis
 
