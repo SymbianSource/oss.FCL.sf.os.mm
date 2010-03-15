@@ -937,15 +937,15 @@ void CDevAudioControl::ContextEvent(TUid aEvent, TInt aError)
 
 	if (aEvent == KUidA3FContextUpdateComplete)
 		{
-	        if(iIgnoreAsyncOpComplete)
+	    if(iIgnoreAsyncOpComplete)
 			{
-            	    	iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue);
-		    	iIgnoreAsyncOpComplete = EFalse;
-            	    	}
-        	else
-            	    	{
-                    	iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
-                    	}
+            iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue);
+		    iIgnoreAsyncOpComplete = EFalse;
+   	    	}
+        else
+            {
+            iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
+           	}
 		}
 	else if(aEvent == KUidA3FContextPreEmption || aEvent == KUidA3FContextPreEmptedCommit)
 		{

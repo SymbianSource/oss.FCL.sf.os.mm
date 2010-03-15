@@ -47,7 +47,8 @@ _LIT(KMMFDevSoundSessionPanicCategory, "MMFDevSoundSession");
 enum TMMFDevSoundSessionPanicCodes
 	{
 	EMsgQueueFailedToSendMsg =1,
-	EQueueRequestsFailedToAppend
+	EQueueRequestsFailedToAppend,
+	EUnexpectedAsyncOpCompleteHandlingCI
 	};
 
 // CLASS DECLARATION
@@ -1310,6 +1311,9 @@ public: // New functions
 	 */
 	void PreemptionFinishedCallbackReceived(TBool aCanStartNewOperation);
 
+	// from MDevSoundAdaptationObserver
+	TBool AdaptorControlsContext() const;
+
 	/**
 		MDevSoundAdaptationObserver callback.
 		Indicates that a low layer operation completion
@@ -1486,6 +1490,7 @@ private:	// Data
 	RArray<TMMFDevSoundRequest> iQueuedRequests;
 	TMMFDevSoundRequest			iRequestBeingServiced;
 	TBool						iOperationCompletePending;
+	TBool                       iHandlingExtdCI;
 	TBool						iPlayErrorOccured;
 	
 	//Check if the call of SetClientConfigL was alredy made

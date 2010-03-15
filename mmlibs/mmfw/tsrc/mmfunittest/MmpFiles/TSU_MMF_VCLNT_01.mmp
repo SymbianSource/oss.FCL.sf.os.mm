@@ -50,6 +50,9 @@ source			../../../../src/Client/Video/mmfclientvideoplayer2.cpp
 source			../../../../src/Client/Video/mediaclientvideodisplaybody.cpp
 source			../../../../src/Client/Video/mediaclientextdisplayinterface.cpp
 source			../../../../src/Client/Video/mediaclientextdisplayhandler.cpp
+source			../../../../src/Client/Video/mediaclientwseventobserver.cpp
+source			../../../../src/Client/Video/mediaclientpolicyserverclient.cpp
+source			../../../../src/Client/Video/mediaclientpolicyserversession.cpp
 source			teststepvidplayereventhandler.cpp
 #endif
 #ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
@@ -117,6 +120,8 @@ DEFFILE tsu_mmf_vclnt_01_gce.def
 DEFFILE	TSU_MMF_VCLNT_01.DEF
 #endif //SYMBIAN_BUILD_GCE
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+
+MACRO __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
 
 NOSTRICTDEF
 

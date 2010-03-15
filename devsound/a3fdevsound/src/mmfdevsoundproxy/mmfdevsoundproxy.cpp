@@ -1347,6 +1347,10 @@ EXPORT_C TInt RMMFDevSoundProxy::Resume()
             // don't actually resume until then!
             iState = ERecordingResumingInLastBufferCycle;
             }
+	    else if (iState == ERecordingResumingInLastBufferCycle)
+	        {
+            //Do Nothing as you can't resume twice on last buffer 
+	        }
 	    else
 	        {
 	        err = SendReceive(EMMFDevSoundProxyResume,  

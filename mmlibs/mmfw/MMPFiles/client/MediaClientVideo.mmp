@@ -42,6 +42,10 @@ source			mmfclientvideoplayer2.cpp
 source			mediaclientvideodisplaybody.cpp
 source			mediaclientextdisplayinterface.cpp
 source			mediaclientextdisplayhandler.cpp
+source			mediaclientwseventobserver.cpp
+source			mediaclientpolicyserverclient.cpp
+source			mediaclientpolicyserversession.cpp
+
 #endif 
 
 source			mmfclientvideoplayerbody.cpp

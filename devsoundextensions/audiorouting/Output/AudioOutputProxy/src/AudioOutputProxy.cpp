@@ -43,6 +43,7 @@ CAudioOutputProxy::CAudioOutputProxy(TMMFMessageDestinationPckg aMessageHandler,
     iOutput        = ENoPreference;
     iDefaultOutput = ENoPreference;
     iSecureOutput  = EFalse;
+    iRegistered = EFalse;
     }
 
 // Two-phased constructor.
@@ -140,14 +141,22 @@ CAudioOutput::TAudioOutputPreference CAudioOutputProxy::DefaultAudioOutput()
 //
 void CAudioOutputProxy::RegisterObserverL(MAudioOutputObserver& aObserver)
 	{
-	iRegistered = ETrue;
-	iObserver = &aObserver;
-	delete iAsyncSender;
-	iAsyncSender = NULL;
+	if(iRegistered)
+		{
+	       iObserver = &aObserver;
+	       iAsyncSender->SetObserver(aObserver);
+	       }
+	else
+		{
+		iRegistered = ETrue;
+		iObserver = &aObserver;
+		delete iAsyncSender;
+		iAsyncSender = NULL;
 
-	iAsyncSender = CAudioOutputProxyAO::NewL(this,aObserver,iCustomCommand);
-	iAsyncSender->SetRegisterFlag(ETrue);
-	iAsyncSender->SendAsyncMessage(iMessageHandler,EAofRegisterObserver);
+		iAsyncSender = CAudioOutputProxyAO::NewL(this,aObserver,iCustomCommand);
+		iAsyncSender->SetRegisterFlag(ETrue);
+		iAsyncSender->SendAsyncMessage(iMessageHandler,EAofRegisterObserver);
+		}
 	}
 
 // ---------------------------------------------------------

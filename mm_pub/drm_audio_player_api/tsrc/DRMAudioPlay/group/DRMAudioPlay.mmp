@@ -49,7 +49,7 @@ USERINCLUDE     ../inc
 MW_LAYER_SYSTEMINCLUDE
 SYSTEMINCLUDE   /epoc32/include/ecom
 SYSTEMINCLUDE   /epoc32/include/mmf/common
-SYSTEMINCLUDE   /epoc32/include/caf
+//SYSTEMINCLUDE   /epoc32/include/caf
 
 LIBRARY         euser.lib
 LIBRARY         stiftestinterface.lib

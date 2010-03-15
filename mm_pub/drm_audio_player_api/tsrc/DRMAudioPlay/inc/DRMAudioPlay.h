@@ -38,7 +38,7 @@
 #include "UrlParameters.h"
 #include <f32file.h>
 #include <s32file.h>
-#include <mmcaf.h>
+#include <mmf/common/mmcaf.h>
 
 
 	const TInt KErrConfigInvalid = KErrNone;	//-1100;

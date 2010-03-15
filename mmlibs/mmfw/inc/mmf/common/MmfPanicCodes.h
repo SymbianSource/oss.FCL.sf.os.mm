@@ -117,7 +117,10 @@ enum TMMFFilePanicCode
 	EMMFFilePanicBufferFilledLNotSupported,
 	/** Panic code raised if the file is already open.
 	*/
-	EMMFFileAlreadyOpen
+	EMMFFileAlreadyOpen,
+    /** Panic code raised if the file Handle is NULL.
+    */  
+  EMMFFileHandleNULL
 	};
 
 /** 

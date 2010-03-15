@@ -37,6 +37,9 @@ source			mediaclientvideodisplay.cpp
 source			mediaclientvideodisplaybody.cpp
 source			mediaclientextdisplayinterface.cpp 
 source			mediaclientextdisplayhandler.cpp
+source			mediaclientwseventobserver.cpp
+source			mediaclientpolicyserverclient.cpp
+source			mediaclientpolicyserversession.cpp
 
 library			ws32.lib
 library			euser.lib

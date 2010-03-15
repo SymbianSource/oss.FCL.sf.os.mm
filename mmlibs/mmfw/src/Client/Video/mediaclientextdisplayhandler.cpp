@@ -54,6 +54,8 @@ void CMediaClientExtDisplayHandler::ConstructL()
     iRootWindow = RWindowGroup(iWs);
     User::LeaveIfError(iRootWindow.Construct((TUint32)this, ETrue));
 
+    DEBUG_PRINTF2("CMediaClientExtDisplayHandler::ConstructL RWindowGroupId %d", iRootWindow.WindowGroupId());
+    
     DEBUG_PRINTF("CMediaClientExtDisplayHandler::ConstructL RWindow Create");
     iExternalDisplayWindow = RWindow(iWs);
     User::LeaveIfError(iExternalDisplayWindow.Construct(iRootWindow,((TUint32)(this)) + 1));

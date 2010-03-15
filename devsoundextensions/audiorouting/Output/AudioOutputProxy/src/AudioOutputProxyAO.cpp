@@ -17,6 +17,7 @@
 
 
 #include "AudioOutput.h"
+#include "AudioOutputMessageTypes.h"
 #include <e32svr.h>
 #include "AudioOutputProxyAO.h"
 #include <CustomCommandUtility.h>
@@ -46,7 +47,7 @@ CAudioOutputProxyAO::CAudioOutputProxyAO(CAudioOutput *aOutputProxy,MAudioOutput
 	CActive(CActive::EPriorityStandard),
 		iAudioOutputProxy(aOutputProxy),
 		iCustomCommandUtility(aUtility),
-		iObserver(aObserver)
+		iObserver(&aObserver)
 	{
 	}
 
@@ -70,7 +71,7 @@ void CAudioOutputProxyAO::RunL()
 		{
 		iCustomCommandUtility->CustomCommandAsync( *iDestination,iFunction,KNullDesC8,KNullDesC8,iCallbackData,iStatus );
 		SetActive();
-		iObserver.DefaultAudioOutputChanged(*iAudioOutputProxy,iCallbackData());
+		iObserver->DefaultAudioOutputChanged(*iAudioOutputProxy,iCallbackData());
 		}
 	}
 
@@ -82,6 +83,10 @@ void CAudioOutputProxyAO::RunL()
 //
 void CAudioOutputProxyAO::DoCancel()
 	{
+       if ( iRegistered != EFalse )
+       	{
+       	iCustomCommandUtility->CustomCommandSync( *iDestination, EAofUnregisterObserver, KNullDesC8, KNullDesC8);
+       	}
 	}
 
 // ---------------------------------------------------------
@@ -110,3 +115,13 @@ void CAudioOutputProxyAO::SetRegisterFlag(TBool aFlag)
 	{
 	iRegistered = aFlag;
 	}
+// ---------------------------------------------------------
+// CAudioOutputProxyAO::SetObserver
+// ?implementation_description
+// (other items were commented in a header).
+// ---------------------------------------------------------
+//
+void CAudioOutputProxyAO::SetObserver(MAudioOutputObserver& aObserver)
+    {
+    iObserver = &aObserver;
+    }

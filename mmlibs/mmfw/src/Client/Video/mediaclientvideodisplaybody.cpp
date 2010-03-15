@@ -15,6 +15,7 @@
 
 #include "mediaclientvideodisplaybody.h"
 #include "mediaclientvideotrace.h"
+#include "mediaclientpolicyserverclient.h"
 #include <surfaceeventhandler.h>
 #include <mmf/plugin/mmfmediaclientextdisplayinterface.hrh>
 #include <e32cmn.h>
@@ -62,15 +63,36 @@ void CMediaClientVideoDisplayBody::ConstructL(TBool aExtDisplaySwitchingControl)
 
 	SetWindowArrayPtr2Client();
 
-	CreateExtDisplayPluginL();
-	
-	// Try and enable display switching by default. If this leaves then do so quietly.
-	// Either the client has no scheduler installed or the device does not support external
-	// switching (i.e. no plugin was found) 
-	TRAPD(err, SetExternalDisplaySwitchingL(aExtDisplaySwitchingControl));
-	err = err; // remove compile warning
-	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ConstructL SetExternalDisplaySwitchingL returned with %d", err);
-	
+	// External display switching and wserv events are only possible if there is
+	// an active scheduler in client thread
+	if(CActiveScheduler::Current())
+	    {
+        CreateExtDisplayPluginL();
+        iWsEventObserver = CMediaClientWsEventObserver::NewL(*this);
+
+        iServerClient = CMediaClientPolicyServerClient::NewL();
+        if(iServerClient->Connect() != KErrNone)
+            {
+            delete iServerClient;
+            iServerClient = NULL;
+            }
+        
+        if(IsSurfaceCreated() && iServerClient)
+            {
+            iServerClient->SetSurface(iSurfaceId);
+            }
+        
+        // Try and enable display switching by default. If this leaves then do so quietly.
+        // Either the client has no scheduler installed or the device does not support external
+        // switching (i.e. no plugin was found) 
+        TRAPD(err, SetExternalDisplaySwitchingL(aExtDisplaySwitchingControl));
+        err = err; // remove compile warning
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ConstructL SetExternalDisplaySwitchingL returned with %d", err);
+	    }
+	else
+	    {
+	    DEBUG_PRINTF("CMediaClientVideoDisplayBody::ConstructL No CActiveScheduler - ext display and focus features disabled ");
+	    }
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::ConstructL ---");
 	}
 
@@ -106,6 +128,10 @@ CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody()
 	RemoveExtDisplayPlugin();
 	REComSession::FinalClose();
 	
+    delete iWsEventObserver;
+
+    delete iServerClient;
+    
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody ---");
 	}
 
@@ -129,7 +155,7 @@ void CMediaClientVideoDisplayBody::AddDisplayL(MMMFSurfaceEventHandler& aEventHa
 void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow, const TRect& aClipRect, const TRect& aCropRegion, const TRect& aVideoExtent, 
 															TReal32 aScaleWidth, TReal32 aScaleHeight, TVideoRotation aRotation, 
 															TAutoScaleType aAutoScaleType, TInt aHorizPos, TInt aVertPos, RWindow* aWindow2)
-	{
+	{	
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::AddDisplayWindowL +++");
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL - aWindow WsHandle 0x%X", aWindow->WsHandle());
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::AddDisplayWindowL - aClipRect %d,%d - %d,%d", aClipRect.iTl.iX, aClipRect.iTl.iY, aClipRect.iBr.iX, aClipRect.iBr.iY);
@@ -152,24 +178,25 @@ void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow,
 	
 	iCropRegion = aCropRegion;
 	
+	TBool prevClientWindowIsInFocus = iClientWindowIsInFocus;
+    UpdateFocus();
+	
 	if (IsSurfaceCreated())
 		{
-		// first client window just added
-        if((iClientWindows.Count() == 1) && iClientRequestedExtDisplaySwitching)
+        // if first window was just added OR the new window has moved us from out of focus to in focus
+        if(((iClientWindows.Count() == 1) || !prevClientWindowIsInFocus) && iClientRequestedExtDisplaySwitching &&
+                iClientWindowIsInFocus && iExtDisplayConnected)
             {
-            if(iExtDisplayConnected)
+            TRAPD(err, CreateExtDisplayHandlerL());
+            DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL CreateExtDisplayHandlerL error %d", err);
+            if(err == KErrNone)
                 {
-                TRAPD(err, CreateExtDisplayHandlerL());
-                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL CreateExtDisplayHandlerL error %d", err);
-                if(err == KErrNone)
-                    {
-                    SetWindowArrayPtr2Ext();
-                    User::LeaveIfError(RedrawWindows(aCropRegion));
-                    }
+                SetWindowArrayPtr2Ext();
+                User::LeaveIfError(RedrawWindows(aCropRegion));
                 }
             }
         
-        if(!iExtDisplayConnected || !iExtDisplayHandler)
+        if(!iSwitchedToExternalDisplay)
             {
             User::LeaveIfError(SetBackgroundSurface(winData, aCropRegion));
             }
@@ -190,25 +217,32 @@ TInt CMediaClientVideoDisplayBody::RemoveDisplayWindow(const RWindowBase& aWindo
 	TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	
 	if (pos >= 0)
-		{
-		if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
-			{
-			iClientWindows[pos].iWindow->RemoveBackgroundSurface(ETrue);
+	    {
+	    if(IsSurfaceCreated() && !iSwitchedToExternalDisplay)
+            {
+            iClientWindows[pos].iWindow->RemoveBackgroundSurface(ETrue);
             // Make sure all window rendering has completed before proceeding
             RWsSession* ws = iClientWindows[pos].iWindow->Session();
             if (ws)
-              {
-              ws->Finish();
-              }
-			}
-		iClientWindows.Remove(pos);
-		
-		if(iClientWindows.Count() == 0 && iExtDisplayConnected && iExtDisplayHandler)
-		    {
-		    RemoveBackgroundSurface(ETrue);
-		    SetWindowArrayPtr2Client();
-		    RemoveExtDisplayHandler();
-		    }
+                {
+                ws->Finish();
+                }
+            }
+
+	    iClientWindows.Remove(pos);
+	    
+	    TBool prevClientWindowIsInFocus = iClientWindowIsInFocus;
+        UpdateFocus();
+
+        // if only window was just removed OR removal has moved us from in focus to out of focus
+        if((iClientWindows.Count() == 0 || prevClientWindowIsInFocus) && iSwitchedToExternalDisplay &&
+                !iClientWindowIsInFocus)
+            {
+            RemoveBackgroundSurface(ETrue);
+            SetWindowArrayPtr2Client();
+            RemoveExtDisplayHandler();
+            RedrawWindows(iCropRegion);
+            }
 		}
 	
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveDisplayWindow ---");
@@ -235,13 +269,18 @@ TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, 
 	iAspectRatio = aAspectRatio;
 	iCropRegion = aCropRegion;
 	
+	if(iServerClient)
+	    {
+        iServerClient->SetSurface(iSurfaceId);
+	    }
+	
 	if (emitEvent && iEventHandler)
 		{
 		iEventHandler->MmsehSurfaceCreated(iDisplayId, iSurfaceId, iCropRect, iAspectRatio);
 		}
 
 	TInt err = KErrNone;
-    if((iClientWindows.Count() > 0) && iClientRequestedExtDisplaySwitching)
+    if((iClientWindows.Count() > 0) && iClientRequestedExtDisplaySwitching && iClientWindowIsInFocus)
         {
         if(iExtDisplayConnected && !iExtDisplayHandler)
             {
@@ -296,7 +335,7 @@ void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
 
         iSurfaceId = TSurfaceId::CreateNullId();
 
-        if(iExtDisplayConnected && iExtDisplayHandler)
+        if(iSwitchedToExternalDisplay)
             {
             SetWindowArrayPtr2Client();
             RemoveExtDisplayHandler();
@@ -374,7 +413,7 @@ void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, T
         {
         if(prevCropRegion == aCropRegion)
             {
-            if(!iExtDisplayConnected || !iExtDisplayHandler)
+            if(!iSwitchedToExternalDisplay)
                 {
                 User::LeaveIfError(SetBackgroundSurface(iClientWindows[aPos], aCropRegion));
                 }
@@ -486,13 +525,13 @@ void CMediaClientVideoDisplayBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt
 		iClientWindows[i].iAutoScaleType = aScaleType;
 		iClientWindows[i].iHorizPos = aHorizPos;
 		iClientWindows[i].iVertPos = aVertPos;
-	    if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
+	    if (IsSurfaceCreated() && !iSwitchedToExternalDisplay)
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
 	
-	if (IsSurfaceCreated() && iExtDisplayConnected && iExtDisplayHandler && (aCropRegion != prevCropRegion))
+	if (IsSurfaceCreated() && iSwitchedToExternalDisplay && (aCropRegion != prevCropRegion))
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
@@ -513,13 +552,13 @@ void CMediaClientVideoDisplayBody::SetRotationL(TVideoRotation aRotation, const 
 	for (TInt i = 0; i < count; ++i)
 		{
 		iClientWindows[i].iRotation = aRotation;
-        if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
+        if (IsSurfaceCreated() && !iSwitchedToExternalDisplay)
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
 	
-    if (IsSurfaceCreated() && iExtDisplayConnected && iExtDisplayHandler && (aCropRegion != prevCropRegion))
+    if (IsSurfaceCreated() && iSwitchedToExternalDisplay && (aCropRegion != prevCropRegion))
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
@@ -547,13 +586,13 @@ void CMediaClientVideoDisplayBody::SetScaleFactorL(TReal32 aWidthPercentage, TRe
 		iClientWindows[i].iScaleWidth = aWidthPercentage;
 		iClientWindows[i].iScaleHeight = aHeightPercentage;
 		iClientWindows[i].iAutoScaleType = EAutoScaleNone;
-        if (IsSurfaceCreated() && (!iExtDisplayConnected || !iExtDisplayHandler))
+        if (IsSurfaceCreated() && !iSwitchedToExternalDisplay)
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
 	
-    if (IsSurfaceCreated() && iExtDisplayConnected && iExtDisplayHandler && (aCropRegion != prevCropRegion))
+    if (IsSurfaceCreated() && iSwitchedToExternalDisplay && (aCropRegion != prevCropRegion))
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
@@ -978,34 +1017,8 @@ void CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL(TBool aControl)
 
     if(iClientRequestedExtDisplaySwitching != aControl)
         {
-        iClientRequestedExtDisplaySwitching = aControl;
-        
-        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL SurfaceCreated %d", IsSurfaceCreated());
-        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL Client window count %d", iClientWindows.Count());
-        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL External Display Connected %d", iExtDisplayConnected);          
-        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL Client Requested Ext Display Switching %d", iClientRequestedExtDisplaySwitching);          
-        
-        if(IsSurfaceCreated() && (iClientWindows.Count() > 0) && iExtDisplayConnected)
-            {
-            if(iClientRequestedExtDisplaySwitching)
-                {
-                TRAPD(err, CreateExtDisplayHandlerL());
-                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL CreateExtDisplayHandlerL error %d", err);
-                if(err == KErrNone)
-                    {
-                    RemoveBackgroundSurface(ETrue);
-                    SetWindowArrayPtr2Ext();
-                    RedrawWindows(iCropRegion);
-                    }
-                }
-            else if(iExtDisplayHandler)
-                {
-                RemoveBackgroundSurface(ETrue);
-                RemoveExtDisplayHandler();
-                SetWindowArrayPtr2Client();
-                RedrawWindows(iCropRegion);
-                }
-            }
+        iClientRequestedExtDisplaySwitching = aControl;     
+        SwitchSurface();
         }
     
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL ---");
@@ -1018,28 +1031,7 @@ void CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected(TBool aExtDis
 	if(iExtDisplayConnected != aExtDisplayConnected)
 	    {
 	    iExtDisplayConnected = aExtDisplayConnected;
-
-        if(IsSurfaceCreated() && (iClientWindows.Count() > 0) && iClientRequestedExtDisplaySwitching)
-            {
-            if(iExtDisplayConnected)
-                {
-                TRAPD(err, CreateExtDisplayHandlerL());
-                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected CreateExtDisplayHandlerL error %d", err);
-                if(err == KErrNone)
-                    {
-                    RemoveBackgroundSurface(ETrue);
-                    SetWindowArrayPtr2Ext();
-                    RedrawWindows(iCropRegion);
-                    }
-                }
-            else if(iExtDisplayHandler)
-                {
-                RemoveBackgroundSurface(ETrue);
-                RemoveExtDisplayHandler();
-                SetWindowArrayPtr2Client();
-                RedrawWindows(iCropRegion);
-                }
-            }
+        SwitchSurface();
 	    }
 	else
 	    {
@@ -1054,6 +1046,7 @@ void CMediaClientVideoDisplayBody::SetWindowArrayPtr2Client()
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Client +++");
 
     iWindowsArrayPtr = &iClientWindows;
+    iSwitchedToExternalDisplay = EFalse;
 
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Client ---");
     }
@@ -1063,6 +1056,7 @@ void CMediaClientVideoDisplayBody::SetWindowArrayPtr2Ext()
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Ext +++");
 
     iWindowsArrayPtr = &iExtDisplayWindows;
+    iSwitchedToExternalDisplay = ETrue;
 
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowArrayPtr2Ext ---");
     }
@@ -1135,4 +1129,109 @@ void CMediaClientVideoDisplayBody::RemoveExtDisplayPlugin()
         iExtDisplayConnected = EFalse;
         }    
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveExtDisplayPlugin ---");
+    }
+
+void CMediaClientVideoDisplayBody::MmcweoFocusWindowGroupChanged()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::MweocFocusWindowGroupChanged +++");
+    
+    TBool prevClientWindowIsInFocus = iClientWindowIsInFocus;
+    UpdateFocus();
+    
+    if(prevClientWindowIsInFocus != iClientWindowIsInFocus)
+        {
+        SwitchSurface();
+        }
+    
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::MweocFocusWindowGroupChanged ---");
+    }
+
+TBool CMediaClientVideoDisplayBody::MmcweoIgnoreProcess(TSecureId aId)
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::MmcweoIgnoreProcess +++");
+    
+    TBool ignore = ETrue;
+    if (iServerClient)
+        {
+        ignore = iServerClient->IgnoreProcess(aId);
+        }
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MmcweoIgnoreProcess --- return %d", ignore);
+    return ignore;
+    }
+
+void CMediaClientVideoDisplayBody::UpdateFocus()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateFocus +++");
+    
+    if(!iWsEventObserver)
+        {
+        iClientWindowIsInFocus = ETrue;
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateFocus Event Observer is NULL");
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateFocus ---");
+        return;
+        }
+    
+    TBool prevClientWindowIsInFocus = iClientWindowIsInFocus;
+    
+    TInt focusGroupId;
+    if(iWsEventObserver->FocusWindowGroupId(focusGroupId) == KErrNone)
+        {
+        iClientWindowIsInFocus = EFalse;
+        TInt count = iClientWindows.Count();
+        for(TInt i = 0; i < count; i++)
+            {
+            if(iClientWindows[i].iWindow->WindowGroupId() == focusGroupId)
+                {
+                iClientWindowIsInFocus = ETrue;
+                break;
+                }
+            }
+        }
+    else
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateFocus Error retrieving focus WgId from observer");
+        iClientWindowIsInFocus = ETrue;
+        }
+
+    if(iServerClient && (prevClientWindowIsInFocus != iClientWindowIsInFocus))
+        {
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MweocFocusWindowGroupChanged calling server, focus %d", iClientWindowIsInFocus);
+        iServerClient->FocusChanged(iClientWindowIsInFocus);
+        }
+    
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateFocus Client window in focus %d", iClientWindowIsInFocus);
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateFocus ---");
+    }
+
+void CMediaClientVideoDisplayBody::SwitchSurface()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface +++");
+
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface SurfaceCreated %d", IsSurfaceCreated());
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface Client window count %d", iClientWindows.Count());
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface Client Requested Ext Display Switching %d", iClientRequestedExtDisplaySwitching);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface Client Window in Focus %d", iClientWindowIsInFocus);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface External Display Connected %d", iExtDisplayConnected);
+
+    if(IsSurfaceCreated() && (iClientWindows.Count() > 0) && iClientRequestedExtDisplaySwitching &&
+            iClientWindowIsInFocus && iExtDisplayConnected)
+        {
+        TRAPD(err, CreateExtDisplayHandlerL());
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface CreateExtDisplayHandlerL error %d", err);
+        if(err == KErrNone)
+            {
+            RemoveBackgroundSurface(ETrue);
+            SetWindowArrayPtr2Ext();
+            RedrawWindows(iCropRegion);
+            }
+        }
+    else if(iSwitchedToExternalDisplay)
+        {
+        RemoveBackgroundSurface(ETrue);
+        RemoveExtDisplayHandler();
+        SetWindowArrayPtr2Client();
+        RedrawWindows(iCropRegion);
+        }
+
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface ---");
     }

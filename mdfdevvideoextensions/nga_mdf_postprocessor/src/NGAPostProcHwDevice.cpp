@@ -1197,7 +1197,7 @@ TVideoPicture* CNGAPostProcHwDevice::MmvbmGetBufferL(const TSize& aSize)
 				if(err)
 				{
 						PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvbmGetBufferL() Surface Setup Failed %d"), this, err);
-        		return NULL;
+						User::Leave(err);
 				}
 		}
 		
