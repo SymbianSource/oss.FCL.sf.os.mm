@@ -27,9 +27,11 @@
 PRJ_EXPORTS
 // ROM  buildsupport
 ../inc/ecam_stubplugin.iby  /epoc32/rom/include/ecam_stubplugin.iby
+../inc/ecam_webcameraplugin.iby  /epoc32/rom/include/ecam_webcameraplugin.iby
 
 PRJ_MMPFILES
 ../mmpfiles/ECamStubPlugin.mmp
+../mmpfiles/ecamwebcameraplugin.mmp
 
 PRJ_TESTMMPFILES
 ../mmpfiles/TestCamera.mmp

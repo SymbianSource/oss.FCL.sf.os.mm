@@ -1,0 +1,58 @@
+/*
+* Copyright (c) 2010 ISB.
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of the "Symbian Foundation License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.symbianfoundation.org/legal/sfl-v10.html".
+*
+* Initial Contributors:
+* ISB - Initial contribution
+*
+* Contributors:
+*
+* Description:
+*
+*/
+
+#include <ecom/registryinfo.rh>
+#include <ecamuids.hrh>
+#include "ecamwebcamerapluginuids.hrh"
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KUidOnboardWebCameraDll;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KUidOnboardCameraPlugin;
+			implementations = 
+				{
+				IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidOnboardWebCameraPlugin;
+					version_no = 4;
+					display_name = "ECam WebCamera Plugin";
+					opaque_data = "0;";
+					default_data="*";
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = KUidOnboardCameraInfoPlugin;
+			implementations = 
+				{
+				IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidOnboardWebCameraInfo;
+					version_no = 4;
+					display_name = "ECam WebCamera InfoPlugin";
+					opaque_data = "0;";
+					default_data="*";
+					}
+				};
+			}
+		};
+	}
