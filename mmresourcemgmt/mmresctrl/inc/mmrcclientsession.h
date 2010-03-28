@@ -33,7 +33,7 @@ NONSHARABLE_CLASS(RMMRCClientSession) : public RSessionBase
 	{
 public:
 	RMMRCClientSession();
-	RMMRCClientSession::~RMMRCClientSession();
+	~RMMRCClientSession();
 
 	TInt StartServer();
 	TInt Open(MMultimediaResourceControlObserver& aCallback);

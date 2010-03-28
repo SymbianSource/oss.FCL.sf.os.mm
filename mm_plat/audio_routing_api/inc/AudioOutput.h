@@ -65,56 +65,56 @@ class CAudioOutput : public CBase
         * @param CMdaAudioRecorderUtility& - a reference to CMdaAudioRecorderUtility object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(CMdaAudioRecorderUtility& aUtility, TBool aRecordStream);
+		IMPORT_C static CAudioOutput* NewL(CMdaAudioRecorderUtility& aUtility, TBool aRecordStream);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param CMdaAudioOutputStream& - a reference to CMdaAudioOutputStream object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(CMdaAudioOutputStream& aUtility);
+		IMPORT_C static CAudioOutput* NewL(CMdaAudioOutputStream& aUtility);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param CMdaAudioToneUtility& - a reference to CMdaAudioToneUtility object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(CMdaAudioToneUtility& aUtility);
+		IMPORT_C static CAudioOutput* NewL(CMdaAudioToneUtility& aUtility);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param CMMFDevSound& - a reference to CMMFDevSound object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(CMMFDevSound& aDevSound);
+		IMPORT_C static CAudioOutput* NewL(CMMFDevSound& aDevSound);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param MCustomInterface& - a reference to MCustomInterface object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(MCustomInterface& aUtility);
+		IMPORT_C static CAudioOutput* NewL(MCustomInterface& aUtility);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param MCustomCommand& - a reference to MCustomCommand object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(MCustomCommand& aUtility);
+		IMPORT_C static CAudioOutput* NewL(MCustomCommand& aUtility);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param CMidiClientUtility& - a reference to CMidiClientUtility object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* CAudioOutput::NewL(CMidiClientUtility& aUtility);
+		IMPORT_C static CAudioOutput* NewL(CMidiClientUtility& aUtility);
 		/**
         * Factory function for creating audio output object.
         * @since 3.0
         * @param CDrmPlayerUtility& - a reference to CDrmPlayerUtility object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* /*CAudioOutput::*/NewL(CDrmPlayerUtility& aUtility);
+		IMPORT_C static CAudioOutput* NewL(CDrmPlayerUtility& aUtility);
 		
 		/**
         * Factory function for creating audio output object.
@@ -122,7 +122,7 @@ class CAudioOutput : public CBase
         * @param CVideoPlayerUtility& - a reference to CVideoPlayerUtility object
         * @return pointer to CAudioOutput object
         */		
-		IMPORT_C static CAudioOutput* /*CAudioOutput::*/NewL(CVideoPlayerUtility& aUtility);
+		IMPORT_C static CAudioOutput* NewL(CVideoPlayerUtility& aUtility);
 
 		/**
 		* ?member_description.
