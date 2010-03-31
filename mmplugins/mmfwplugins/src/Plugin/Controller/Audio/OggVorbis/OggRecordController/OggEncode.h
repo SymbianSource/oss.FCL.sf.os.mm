@@ -18,8 +18,8 @@
 #define OGGENCODE_H
 
 #include <mmf/server/mmfclip.h>
-#include "oggutil.h"
-#include "vorbisinfo.h"
+#include "OggUtil.h"
+#include "VorbisInfo.h"
 
 #ifdef VORBIS_DEBUG
 #define DEBUG(x) RDebug::Print(_L(x))

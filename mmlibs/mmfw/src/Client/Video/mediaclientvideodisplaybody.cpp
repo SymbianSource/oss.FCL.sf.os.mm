@@ -695,8 +695,8 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
             break;
         default:
             // Should never get to default unless there's been some programming error.
-            User::Invariant();
-            break;
+			DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface --- Returned with error %d", KErrArgument);
+			return KErrArgument;
         }
     
     TReal32 viewportAspect = pixelAspectRatio * inputWidth / inputHeight;
@@ -867,8 +867,8 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
         break;
     default:
         // Should never get to default unless there's been some programming error.
-        User::Invariant();
-        break;
+		DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetBackgroundSurface --- Returned with error %d", KErrArgument);
+        return KErrArgument;
     }
     
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - viewport2 %d,%d - %d,%d", viewport.iTl.iX, viewport.iTl.iY, viewport.iBr.iX, viewport.iBr.iY);
@@ -963,8 +963,9 @@ CFbsBitGc::TGraphicsOrientation CMediaClientVideoDisplayBody::ConvertRotation(TV
 		    break;
 		default:
 			// Should never get to default unless there's been some programming error.
-			User::Invariant();
-			// This is never reached, just to keep the compiler happy
+			DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ConvertRotation --- Failed due to %d bad aRotation argument", aRotation);
+			__ASSERT_DEBUG(FALSE, User::Invariant());
+			// Use the normal option otherwise
 			orientation = CFbsBitGc::EGraphicsOrientationNormal;
 		}
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ConvertRotation --- return %d", orientation);	

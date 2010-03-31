@@ -71,7 +71,7 @@
 #define KExtXMF			_S(".xmf")
 #define KExtXPS			_S(".xps")
 #define KExtBeatnikRMF	_S(".rmf")
-
+#define KExtMOV         _S(".mov")  // for .mov extension
 
 //
 // Recognised MIME-types.
@@ -121,7 +121,7 @@
 #define KMimeXMF		_S8("audio/xmf")
 #define KMimeXPS		_S8("application/x-ext-packetsrc")
 #define KMimeBeatnikRMF _S8("audio/x-beatnik-rmf")
-
+#define KMimeQuickV     _S8("video/quicktime")  // for .mov extension
 
 //
 // Recognised header signatures.

@@ -29,6 +29,25 @@ const TInt KRetries = 5;
 const TInt KInitialTime = 100000;  //100ms
 const TInt KTimeIncrement = 50000; // 50ms 
 
+_LIT_SECURITY_POLICY_C1(KServerHasDRMRights, ECapabilityDRM);
+
+// -----------------------------------------------------------------------------
+// RMMFAudioServerProxy::OpenSessionToTrustedAudioServer
+//
+// -----------------------------------------------------------------------------
+//	
+TInt RMMFAudioServerProxy::OpenSessionToTrustedAudioServer()
+	{
+	return CreateSession(KAudioServerName,
+                                TVersion(KMMFAudioServerVersion,
+                                KMMFAudioServerMinorVersionNumber,
+                                KMMFAudioServerBuildVersionNumber),
+                                -1, // Global pool
+                                EIpcSession_Unsharable,
+                                &KServerHasDRMRights,
+                                NULL); // NULL required for synchronous behaviour
+	}	
+
 // -----------------------------------------------------------------------------
 // RMMFAudioServerProxy::Open
 //
@@ -38,12 +57,8 @@ EXPORT_C TInt RMMFAudioServerProxy::Open()
 	{
 	const TUidType serverUid(KNullUid,KNullUid,KUidAudioServer);
 	// Assume the server is already running and attempt to create a session
-	// 4 message slots
-	TInt err = CreateSession(KAudioServerName,
-								TVersion(KMMFAudioServerVersion,
-								KMMFAudioServerMinorVersionNumber,
-								KMMFAudioServerBuildVersionNumber));
-
+	TInt err = OpenSessionToTrustedAudioServer();
+	
 	if(err == KErrNotFound)
 		{
 		// Server not running
@@ -92,9 +107,8 @@ EXPORT_C TInt RMMFAudioServerProxy::Open()
 				{
 				User::After(waitTime);
 				waitTime+=KTimeIncrement;
-				err = CreateSession(KAudioServerName, TVersion(KMMFAudioServerVersion,
-														KMMFAudioServerMinorVersionNumber,
-														KMMFAudioServerBuildVersionNumber));
+				err = OpenSessionToTrustedAudioServer();				
+				
 				if(err==KErrNone)
 					{
 					//Session created successfully
@@ -105,10 +119,7 @@ EXPORT_C TInt RMMFAudioServerProxy::Open()
 		else
 			{
 			// Create the root server session
-			err = CreateSession(KAudioServerName,
-							TVersion(KMMFAudioServerVersion,
-									KMMFAudioServerMinorVersionNumber,
-									KMMFAudioServerBuildVersionNumber));
+            err = OpenSessionToTrustedAudioServer();
 			}
 		}
 	return err;

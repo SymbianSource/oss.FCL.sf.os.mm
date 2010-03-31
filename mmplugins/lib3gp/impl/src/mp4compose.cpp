@@ -1311,7 +1311,8 @@ extern EXPORT_C MP4Err MP4ComposeSetUserDataAtom(MP4Handle apihandle,
 
     return MP4_OK;
     }
-
+	
+	
 extern EXPORT_C MP4Err MP4SetCustomFileBufferSizes( MP4Handle apihandle, 
                                                                mp4_u32 mediaWriteBufferSize,
                                                                mp4_u32 writeBufferMaxCount,
@@ -1322,14 +1323,19 @@ extern EXPORT_C MP4Err MP4SetCustomFileBufferSizes( MP4Handle apihandle,
     if (!handle)
         return MP4_ERROR;
     
-    // Read Buffer size
-    if ( (readBufferSize) && 
-         (readBufferSize != handle->readBufferSize) )
+    // If no specific file size is given we try to use an 'optimal' buffer size.
+    if (readBufferSize == 0)
+    	{
+    	readBufferSize = RecommendedBufferSize(handle);
+		}
+
+	if (readBufferSize > handle->readBufferSize)
         {
         handle->readBufferSize = readBufferSize;
         if (handle->diskReadBuf)
             {
             mp4free(handle->diskReadBuf);
+            handle->diskReadBuf = NULL;
             if ((handle->diskReadBuf = (mp4_u8 *)mp4malloc(handle->readBufferSize)) == NULL)
                 {
                 return MP4_OUT_OF_MEMORY;

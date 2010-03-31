@@ -19,7 +19,7 @@
 #include <mmf/common/mmfutilities.h>
 #include <mmf/common/mmfcontroller.h>
 #include <mmf/common/mmfpaniccodes.h>
-#include <mmf/server/MmfFile.h>
+#include <mmf/server/mmffile.h>
 #include "MmffilePriv.h"
 #include "FileAccess.h"
 

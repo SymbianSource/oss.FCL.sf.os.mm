@@ -56,5 +56,8 @@ mp4_i32 readMetaDataFileNum(MP4HandleImp handle, mp4_u8 *buffer, mp4_u32 bytesto
 mp4_i32 deleteMetaDataFiles(MP4HandleImp handle);
 mp4_i32 closeMetaDataFiles(MP4HandleImp handle);
 mp4_i32	openStdlib();
+
+TInt RecommendedBufferSize(MP4HandleImp aHandle);
+
 #endif
 // End of File

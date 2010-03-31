@@ -331,7 +331,7 @@ PRJ_EXPORTS
 ../aclnt/TSU_MMF_ACLNT_01/data/smallwav_audiorights.xml		c:/mm/mmf/testfiles/aclnt/smallwav_audiorights.xml
 
 //Test data Add to test DEF140670 
-../ACLNT/TSU_MMF_ACLNT_01/Data/recordtest.wav		c:/mm/mmf/testfiles/aclnt/recordtest.wav
+../aclnt/TSU_MMF_ACLNT_01/data/recordtest.wav		c:/mm/mmf/testfiles/aclnt/recordtest.wav
 
 // remove recorded.wav, as it causes problems
 //../ACLNT/TSU_MMF_ACLNT_01/Data/recorded.wav	c:/mm/mmf/testfiles/aclnt/recorded.wav

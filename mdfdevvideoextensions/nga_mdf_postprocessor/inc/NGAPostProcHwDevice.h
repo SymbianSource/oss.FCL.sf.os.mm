@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <e32def.h>
 #include <e32cmn.h>
-#include <STDIO.H>
+#include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
 

@@ -833,12 +833,12 @@ EXPORT_C void RTestStep::TestCheckPointCompareL(TInt aVal, TInt aExpectedVal,
  * @xxxx
  *
  */
-TInt RTestStep::StackSize() const
+EXPORT_C TInt RTestStep::StackSize() const
 {
 	return iStackSize;
 }
 
-TInt RTestStep::HeapSize() const
+EXPORT_C TInt RTestStep::HeapSize() const
 {
 	return iHeapSize;
 }

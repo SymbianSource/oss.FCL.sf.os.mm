@@ -135,4 +135,6 @@ EXPORTS
 	_ZN13CBusyTestUnit5StartEv @ 134 NONAME
 	_ZN13CBusyTestUnit5StartE27TTimeIntervalMicroSeconds3225TTimeIntervalMicroSeconds @ 135 NONAME
 	_ZN9RTestStep16GetHexFromConfigERK7TDesC16S2_Ri @ 136 NONAME
+	_ZNK9RTestStep8HeapSizeEv @ 137 NONAME
+	_ZNK9RTestStep9StackSizeEv @ 138 NONAME
 

@@ -19,8 +19,8 @@
 
 #include <mmf/server/mmffile.h>
 #include <stdlib.h>
-#include "oggutil.h"
-#include "vorbisinfo.h"
+#include "OggUtil.h"
+#include "VorbisInfo.h"
 
 static const TInt KNumHeaders = 3;// vorbis has 3 header packets
 //Average oggpage is of size 4K. we read 4K buffer during seeking and finding duration sothat we expect

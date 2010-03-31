@@ -68,6 +68,10 @@ public: // New functions
 	* @return TInt handle to the DevSound server.
 	*/
 	IMPORT_C TInt GetDevSoundSessionHandle();
+	
+private:
+
+	TInt OpenSessionToTrustedAudioServer();
 	};
 
 #endif      // MMFAUDIOSERVERPROXY_H

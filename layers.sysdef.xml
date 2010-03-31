@@ -13,7 +13,6 @@
 			<module name="">
 				<unit unitID="AudioEqualizerUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/AudioEqualizerUtility/group" filter="!dfs_build" name="AudioEqualizerUtility" />
 				<unit unitID="EnvironmentalReverbUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/EnvironmentalReverbUtility/group" filter="!dfs_build" name="EnvironmentalReverbUtility" />
-				<unit unitID="StereoWideningUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/StereoWideningUtility/group" filter="!dfs_build" name="StereoWideningUtility" />
 			</module>
 			<module name="">
 				<unit unitID="AacEncoderPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AacEncoderPlugin/group" filter="!sf_build" name="AacEncoderPlugin" />
@@ -88,7 +87,6 @@
 			<module name="">
 				<unit unitID="AudioEqualizerUtility_group" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/AudioEqualizerUtility/group" filter="!dfs_build" name="AudioEqualizerUtility_group" />
 				<unit unitID="EnvironmentalReverbUtility_group" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/EnvironmentalReverbUtility/group" filter="!dfs_build" name="EnvironmentalReverbUtility_group" />
-				<unit unitID="StereoWideningUtility_group" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/StereoWideningUtility/group" filter="!dfs_build" name="StereoWideningUtility_group" />
 			</module>
 			<module name="">
 				<unit unitID="AacEncoderPlugin_group" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AacEncoderPlugin/group" filter="!sf_build" name="AacEncoderPlugin_group" />

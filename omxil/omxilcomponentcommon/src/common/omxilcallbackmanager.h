@@ -157,8 +157,9 @@ public:
 	//
 	// From CActive
 	//
-	IMPORT_C void RunL();
-	IMPORT_C void DoCancel();
+private:
+	void RunL();
+	void DoCancel();
 
 private:
 

@@ -362,62 +362,75 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 		User::Leave(KErrArgument);
 	}
 	pic = aPicture;	
-	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePicture bufId = %d"), this,GetID(pic));
-	iPictureCounters.iTotalPictures++;
-	TInt64 delta = 0;
-	TTimeToPost iTimeToPost = (TTimeToPost)IsTimeToPost(pic, delta);
-	if(!IsGceReady())
-    {  
-		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePictureL GCE not ready"), this );
-		if(iTimeToPost == EPostIt)
+    if (iInputQ.Count() > 0)
+    {
+        AddToQ(pic);
+        AttemptToPost();
+    }
+    else
+    {
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePicture bufId = %d"), this,GetID(pic));
+		iPictureCounters.iTotalPictures++;
+		TInt64 delta = 0;
+		TTimeToPost iTimeToPost = (TTimeToPost)IsTimeToPost(pic, delta);
+		if(!IsGceReady())
+	    {  
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePictureL GCE not ready"), this );
+			if(iTimeToPost == EPostIt)
+			{
+					iTimeToPost = EDelayIt;
+			}
+	    }
+	    if (delta > 0x7FFFFFFF)
+	    {
+	         PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePictureL Too large delta .. skipping"), this ); 
+	         iTimeToPost = ESkipIt;
+	    }
+	
+		switch(iTimeToPost)
 		{
-				iTimeToPost = EDelayIt;
+			case EDelayIt:
+			{
+				if(AddToQ(pic) != 0)
+				{
+					break;
+				}
+				iPostingTimer->Cancel();
+				SetTimer(delta);
+			}
+			break;
+			case EPostIt:
+			{
+		
+				if(iIsColorConversionNeeded)
+				{
+					TVideoPicture* ccPic;				
+	    			ccPic = DoColorConvert(pic); // output will be in ccPic
+	    			pic = ccPic;			   
+				}
+				iProcessQ.Append(pic);
+						
+				#ifdef _DUMP_YUV_FRAMES
+				captureYuv(pic);
+				#endif
+				iSessionManager->PostPicture(iSurfaceId, GetID(pic), iInfo().iBuffers, ETrue);	
+				iCurrentPlaybackPosition = pic->iTimestamp;			
+			
+				if(!iFirstPictureUpdated)
+				{
+					iFirstPictureUpdated = ETrue;
+					PublishSurfaceCreated();
+				}
+			}
+			break;
+			case ESkipIt:
+			{
+				ReleasePicture(pic); 
+				PicturesSkipped();
+			}
+			break;
 		}
     }
-	switch(iTimeToPost)
-	{
-		case EDelayIt:
-		{
-			if(AddToQ(pic) != 0)
-			{
-				break;
-			}
-			iPostingTimer->Cancel();
-			SetTimer(delta);
-		}
-		break;
-		case EPostIt:
-		{
-		
-			if(iIsColorConversionNeeded)
-			{
-				TVideoPicture* ccPic;				
-    			ccPic = DoColorConvert(pic); // output will be in ccPic
-    			pic = ccPic;			   
-			}
-			iProcessQ.Append(pic);
-						
-			#ifdef _DUMP_YUV_FRAMES
-			captureYuv(pic);
-			#endif
-			iSessionManager->PostPicture(iSurfaceId, GetID(pic), iInfo().iBuffers, ETrue);	
-			iCurrentPlaybackPosition = pic->iTimestamp;			
-			
-			if(!iFirstPictureUpdated)
-			{
-				iFirstPictureUpdated = ETrue;
-				PublishSurfaceCreated();
-			}
-		}
-		break;
-		case ESkipIt:
-		{
-			ReleasePicture(pic); 
-			PicturesSkipped();
-		}
-		break;
-	}
-
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePicture --"), this);
 }
 
@@ -1574,6 +1587,11 @@ void CNGAPostProcHwDevice::ReturnPicToDecoder(TVideoPicture* aPic)
 TInt CNGAPostProcHwDevice::AttemptToPost()
 {
    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AttemptToPost ++ Q:%d"), this, iInputQ.Count());
+   if (iPPState == EPaused)
+   {
+        return KErrNone;
+   }
+
     TInt err = KErrNotReady;
     TInt count = iInputQ.Count();
     TBool bDone = EFalse;
@@ -1646,11 +1664,22 @@ TInt CNGAPostProcHwDevice::IsTimeToPost(TVideoPicture* frame, TInt64& delta)
 	}
 
     TInt resp = EPostIt;
-    
-    if (iClockSource)
+    // Frame presentation time
+    TInt64 uPresTime = frame->iTimestamp.Int64();
+      
+    // Check if this is an out of order frame in case of forward playback
+    if((iCurrentPlaybackPosition.Int64() >= uPresTime) && (iPlayRate > 0))    
+    {      
+         PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost : Out of order frame (forward playback) Tfm=%d"), this,(TInt)uPresTime);
+         resp = ESkipIt;  //drop      
+    }      // Check if this is an out of order frame in case of backward playback
+    else if((iCurrentPlaybackPosition.Int64() <= uPresTime) && (iPlayRate < 0))    
+    {      
+        PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost : Out of order frame (backward playback) Tfm=%d"), this,(TInt)uPresTime);
+        resp = ESkipIt;  //drop      
+    }
+    else if (iClockSource)
     {
-        // Frame presentation time
-        TInt64 uPresTime = frame->iTimestamp.Int64();
         // The time to sync with.
         TInt64 uSyncTime = iClockSource->Time().Int64();
         

@@ -36,7 +36,7 @@ EXPORTS
 	?HandleInsufficientResources@XOmxILCallbackManagerIfImpl@@MAEXXZ @ 35 NONAME ; void XOmxILCallbackManagerIfImpl::HandleInsufficientResources(void)
 	?DoRegisterILClientCallbacks@XOmxILCallbackManagerIfImpl@@MAE?AW4OMX_ERRORTYPE@@PBUOMX_CALLBACKTYPE@@PAX@Z @ 36 NONAME ; enum OMX_ERRORTYPE XOmxILCallbackManagerIfImpl::DoRegisterILClientCallbacks(struct OMX_CALLBACKTYPE const *, void *)
 	?Compare@TBufferInfo@COmxILPort@@SAHABV12@0@Z @ 37 NONAME ; int COmxILPort::TBufferInfo::Compare(class COmxILPort::TBufferInfo const &, class COmxILPort::TBufferInfo const &)
-	?RunL@COmxILCallbackManager@@UAEXXZ @ 38 NONAME ; void COmxILCallbackManager::RunL(void)
+	?RunL@COmxILCallbackManager@@UAEXXZ @ 38 NONAME ABSENT ; void COmxILCallbackManager::RunL(void)
 	?SetParameter@COmxILVideoPort@@UAE?AW4OMX_ERRORTYPE@@W4OMX_INDEXTYPE@@PBXAAH@Z @ 39 NONAME ; enum OMX_ERRORTYPE COmxILVideoPort::SetParameter(enum OMX_INDEXTYPE, void const *, int &)
 	?RegisterBufferMarkPropagationPort@COmxILInContextCallbackManager@@UAE?AW4OMX_ERRORTYPE@@KK@Z @ 40 NONAME ; enum OMX_ERRORTYPE COmxILInContextCallbackManager::RegisterBufferMarkPropagationPort(unsigned long, unsigned long)
 	?MediaTimeIndication@COmxILProcessingFunction@@UAE?AW4OMX_ERRORTYPE@@ABUOMX_TIME_MEDIATIMETYPE@@@Z @ 41 NONAME ; enum OMX_ERRORTYPE COmxILProcessingFunction::MediaTimeIndication(struct OMX_TIME_MEDIATIMETYPE const &)
@@ -58,7 +58,7 @@ EXPORTS
 	?BufferDoneNotification@COmxILInContextCallbackManager@@UAE?AW4OMX_ERRORTYPE@@PAUOMX_BUFFERHEADERTYPE@@KW4OMX_DIRTYPE@@@Z @ 57 NONAME ; enum OMX_ERRORTYPE COmxILInContextCallbackManager::BufferDoneNotification(struct OMX_BUFFERHEADERTYPE *, unsigned long, enum OMX_DIRTYPE)
 	?GetComponentVersion@COmxILConfigManager@@UBE?AW4OMX_ERRORTYPE@@PADPATOMX_VERSIONTYPE@@1PAY0IA@E@Z @ 58 NONAME ; enum OMX_ERRORTYPE COmxILConfigManager::GetComponentVersion(char *, union OMX_VERSIONTYPE *, union OMX_VERSIONTYPE *, unsigned char [128] *) const
 	?DoEventNotification@XOmxILCallbackManagerIfImpl@@MAE?AW4OMX_ERRORTYPE@@W4OMX_EVENTTYPE@@KKPAD@Z @ 59 NONAME ; enum OMX_ERRORTYPE XOmxILCallbackManagerIfImpl::DoEventNotification(enum OMX_EVENTTYPE, unsigned long, unsigned long, char *)
-	?DoCancel@COmxILCallbackManager@@UAEXXZ @ 60 NONAME ; void COmxILCallbackManager::DoCancel(void)
+	?DoCancel@COmxILCallbackManager@@UAEXXZ @ 60 NONAME ABSENT ; void COmxILCallbackManager::DoCancel(void)
 	?SetParameter@COmxILOtherPort@@UAE?AW4OMX_ERRORTYPE@@W4OMX_INDEXTYPE@@PBXAAH@Z @ 61 NONAME ; enum OMX_ERRORTYPE COmxILOtherPort::SetParameter(enum OMX_INDEXTYPE, void const *, int &)
 	??1COmxILAudioPort@@UAE@XZ @ 62 NONAME ; COmxILAudioPort::~COmxILAudioPort(void)
 	?RegisterComponentHandle@COmxILInContextCallbackManager@@UAE?AW4OMX_ERRORTYPE@@PAX@Z @ 63 NONAME ; enum OMX_ERRORTYPE COmxILInContextCallbackManager::RegisterComponentHandle(void *)

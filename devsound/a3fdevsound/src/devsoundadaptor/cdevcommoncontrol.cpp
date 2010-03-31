@@ -613,7 +613,10 @@ void CDevCommonControl::ContextEventUpdateWithoutStateEventButWithError(TInt aEr
         break;
         
     default:
-        break;
+        if(iBeingPreempted)
+            {
+            iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue); // notify client of end of cycle
+            }
         }
        
     DP_OUT();
