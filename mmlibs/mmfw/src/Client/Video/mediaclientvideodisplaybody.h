@@ -146,7 +146,7 @@ private:
 	TInt SetBackgroundSurface(TWindowData& aWindowData, const TRect& aCropRegion);
 	TBool HasWindows() const;
 	
-    void UpdateCropRegionL(const TRect& aCropRegion, TInt aPos);
+    void UpdateCropRegionL(const TRect& aCropRegion, TInt aPos, TBool aRedrawIndividualWindow);
     void CreateExtDisplayPluginL();
     void RemoveExtDisplayPlugin();
     void CreateExtDisplayHandlerL();
@@ -155,6 +155,11 @@ private:
     void SetWindowArrayPtr2Ext();
     void SwitchSurface();
     void UpdateFocus();
+	TBool IsRotationValid(TVideoRotation aVideoRotation);
+	TBool IsAutoScaleTypeValid(TAutoScaleType aAutoScaleType);
+	TBool SurfaceCropRectChangeRequiresRedraw(TRect aOldSurfaceCropRect, TRect aNewSurfaceCropRect, TRect aClientCropRegion);
+	TBool ClientCropRegionChangeRequiresRedraw(TRect aOldClientCropRegion, TRect aNewClientCropRegion, TRect aSurfaceCropRect);
+	TBool IntersectionAreaChanged(TRect aOldRect, TRect aNewRect, TRect aOtherRect);
 
     // MExtDisplayConnectionProviderCallback
     void MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected);

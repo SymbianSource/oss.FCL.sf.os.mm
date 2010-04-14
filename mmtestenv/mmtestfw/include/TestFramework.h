@@ -28,14 +28,6 @@
 #endif
 #include <testframeworkipc.h>
 
-// do not export if Unit Testing
-#if defined (__TSU_TESTFRAMEWORK__)
-#undef IMPORT_C
-#define IMPORT_C
-#endif
-
-// Common includes
-
 /**
  *
  * Server name
@@ -533,10 +525,9 @@ public:
     IMPORT_C TInt StackSize() const;
     IMPORT_C TInt HeapSize() const;
 
-    // accessors - not required to be exported
-    void SetSuite(CTestSuite* aSuite);
-    void SetResult(TVerdict aResult);
-    TPtrC StepName() const;
+    IMPORT_C void SetSuite(CTestSuite* aSuite);
+    IMPORT_C void SetResult(TVerdict aResult);
+    IMPORT_C TPtrC StepName() const;
     
     // param set - not required to be exported. Note assumes actual param is stable
     void SetDefaultParamSet(const TDesC& aParamSet);

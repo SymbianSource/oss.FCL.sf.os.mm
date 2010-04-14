@@ -94,6 +94,7 @@ CNGAPostProcHwDevice::CNGAPostProcHwDevice()
             iOverflowPictureCounter(0),
             iVideoFrameBufSize(0),
             iResourceLost(EFalse),
+            iRedrawDone(EFalse),
             iVBMObserver(NULL),
             count(0),
             iSurfaceMask(surfaceHints::EAllowAllExternals),
@@ -141,6 +142,10 @@ CNGAPostProcHwDevice::~CNGAPostProcHwDevice()
     {
         TVideoPicture* pic = iVBMBufferReferenceQ[0];
         iVBMBufferReferenceQ.Remove(0);
+        if (iColorConversionQ.Count()>0)
+    	{
+	        iColorConversionQ.Remove(0);
+	    }
 
         if (pic->iHeader) delete pic->iHeader;
         delete pic->iData.iRawData;
@@ -152,6 +157,9 @@ CNGAPostProcHwDevice::~CNGAPostProcHwDevice()
     
     iVBMBufferReferenceQ.Reset();
     iVBMBufferReferenceQ.Close();
+    
+    iColorConversionQ.Reset();
+    iColorConversionQ.Close();
     
     iVBMBufferQ.Reset();
     iVBMBufferQ.Close();
@@ -167,7 +175,10 @@ CNGAPostProcHwDevice::~CNGAPostProcHwDevice()
     	if(!iSurfaceId.IsNull())
     	{
     		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::UnregisterSurface"), this);
-    		iWsSession.UnregisterSurface(0, iSurfaceId);
+    		for(TInt i=0;i < iWsSession.NumberOfScreens();i++)
+    		{
+    			iWsSession.UnregisterSurface(i, iSurfaceId);
+    		}
         	iSurfaceHandler->DestroySurface(iSurfaceId);
     	}
         delete iSurfaceHandler;
@@ -826,7 +837,7 @@ void CNGAPostProcHwDevice::Redraw()
 { 
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw ++"), this);
 	TInt err = KErrNone;
-	if(iResourceLost)
+	if(iResourceLost && !iRedrawDone)
 	{
         err = AddHints();
         if (err != KErrNone)
@@ -836,6 +847,7 @@ void CNGAPostProcHwDevice::Redraw()
             iProxy->MdvppFatalError(this, err);	
             return;   
         }
+        PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw registering the temp surface"), this);
 		err = RegisterSurface(iSurfaceId);
 		if (err != KErrNone)
 		{
@@ -846,10 +858,10 @@ void CNGAPostProcHwDevice::Redraw()
 			iProxy->MdvppFatalError(this, err);	
 			return;   				
 		}
-
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw registering the temp surface done"), this);
         iSessionManager->PostPicture(iSurfaceId, 0, 1, EFalse);
         PublishSurfaceCreated();
-        iResourceLost = EFalse;
+        iRedrawDone = ETrue;
     }
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw --"), this);
 }
@@ -1290,7 +1302,10 @@ void CNGAPostProcHwDevice::MmvssSurfaceRemovedL(const TSurfaceId& aSurfaceId)
 	if(!aSurfaceId.IsNull())
 	{
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssSurfaceRemovedL(): UnregisterSurface ID = 0x%x"), this, aSurfaceId );
-		iWsSession.UnregisterSurface(0, aSurfaceId);
+		for(TInt i=0;i < iWsSession.NumberOfScreens();i++)
+		{
+			iWsSession.UnregisterSurface(i, aSurfaceId);
+		}
 		iSurfaceHandler->DestroySurface(aSurfaceId);
 	}
 		
@@ -1326,12 +1341,30 @@ void CNGAPostProcHwDevice::MmvpoUpdateVideoProperties(const TYuvFormat& aYuvForm
 void CNGAPostProcHwDevice::MmvroResourcesLost(TUid )
 {
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost ++"), this);
-	iResourceLost = ETrue;
-	Pause();
-	ReleaseInputQ();
-	iSessionManager->CancelUpdate();
-	ReleaseProcessQ();
-	iVideoSurfaceObserver->MmvsoRemoveSurface();
+    if(!iResourceLost)
+    {
+		iResourceLost = ETrue;
+		iRedrawDone = EFalse;
+		Pause();
+		ReleaseInputQ();
+		iSessionManager->CancelUpdate();
+		ReleaseProcessQ();
+		iVideoSurfaceObserver->MmvsoRemoveSurface();
+	}
+	else if(iResourceLost && iRedrawDone)
+	{
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost ResourceLost happening \
+					while Postprocessor is already in ResourceLoss state"), 
+	   				this);
+		iProxy->MdvppFatalError(this, KErrHardwareNotAvailable);	   				
+	    return;		
+	}
+	else
+	{
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost Ignoring the \
+					duplicate ResourceLoss call"), 
+	   				this);
+	}
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost --"), this);
 }
 
@@ -1881,7 +1914,12 @@ TInt CNGAPostProcHwDevice::GetExternalBufferID(TVideoPicture *aPicture)
 TInt CNGAPostProcHwDevice::RegisterSurface(const TSurfaceId& aSurfaceId)
 {
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:RegisterSurface(): RegisterSurface ID = 0x%x"), this, aSurfaceId);
-	return(iWsSession.RegisterSurface(0, aSurfaceId));
+	TInt err = KErrNone;
+	for(TInt i=0; (i < iWsSession.NumberOfScreens() && err == KErrNone); i++)
+	{
+		err = iWsSession.RegisterSurface(i, aSurfaceId);
+	}	
+	return(err);
 }
 
 TInt CNGAPostProcHwDevice::IsGceReady()
@@ -2027,6 +2065,7 @@ TVideoPicture* CNGAPostProcHwDevice::DoColorConvert(TVideoPicture* aPicture)
 	    pOutPicture    = iColorConversionQ[0];
 	    iColorConversionQ.Remove(0);
 	    ConvertPostProcBuffer(aPicture, pOutPicture);
+	   	pOutPicture->iTimestamp = aPicture->iTimestamp;
 	    ReleasePicture(aPicture);    	    
     }				    
     else

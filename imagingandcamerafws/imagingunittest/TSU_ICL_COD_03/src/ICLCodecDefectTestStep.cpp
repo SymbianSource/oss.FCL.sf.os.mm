@@ -10326,3 +10326,79 @@ TVerdict RTestStep_5108::DoTestStepL()
     CleanupStack::PopAndDestroy(3); //listener, bitmap, decoder
     return result;
     }
+
+//DEF144646 : Genius Case #144754: Nokia N97-1: Israel: N97 TIFF files not displayed properly. 
+    RTestStep_5109::RTestStep_5109(CTestSuite* aSuite) 
+        { 
+        iSuite = aSuite; 
+        iTestStepName = _L("MM-ICL-COD-U-5109-HP"); 
+        } 
+      
+    void RTestStep_5109::Close() 
+        { 
+        delete iScheduler; 
+        iScheduler = NULL; 
+        iFs.Close(); 
+        RFbsSession::Disconnect(); 
+        } 
+      
+    RTestStep_5109* RTestStep_5109::NewL(CTestSuite* aSuite) 
+        { 
+        if (!aSuite) 
+            { 
+            User::Leave(KErrArgument);         
+            } 
+        return new(ELeave) RTestStep_5109(aSuite); 
+        } 
+      
+    TVerdict RTestStep_5109::OpenL() 
+        { 
+        User::LeaveIfError(RFbsSession::Connect()); 
+        User::LeaveIfError(iFs.Connect()); 
+      
+        iScheduler = new(ELeave) CActiveScheduler(); 
+        CActiveScheduler::Install(iScheduler); 
+         
+        return EPass; 
+        } 
+      
+    /* 
+     * Test added for PDEF144975: TIFF files not displayed properly 
+     * The test is to check the decoding a test tif image.  
+     */ 
+    TVerdict RTestStep_5109::DoTestStepL() 
+        { 
+        INFO_PRINTF1(_L("PDEF144975: TIFF files not displayed properly")); 
+        INFO_PRINTF1(_L("Test is to check the decoding of below tif image")); 
+        _LIT(KTifImage, "c:\\tsu_icl_cod_03\\3178500m.tif"); 
+        CImageDecoder* decoder = NULL; 
+        //create decoder  
+        decoder = CImageDecoder::FileNewL(iFs, KTifImage, CImageDecoder::EOptionNone); 
+        CleanupStack::PushL(decoder); 
+         
+        //Get frameinformation 
+        TInt frameNo = 0; 
+        const TFrameInfo& frameInfo = decoder->FrameInfo(frameNo); 
+         
+        //Create a destination bitmap 
+        CFbsBitmap* bitmap = new (ELeave) CFbsBitmap; 
+        TInt err = bitmap->Create(frameInfo.iOverallSizeInPixels, frameInfo.iFrameDisplayMode); 
+        User::LeaveIfError(err); 
+        CleanupStack::PushL(bitmap); 
+         
+        CActiveListener* listener = new (ELeave) CActiveListener; 
+        CleanupStack::PushL(listener); 
+        TVerdict result = EPass; 
+         
+        //decode the frame. 
+        listener->InitialiseActiveListener(); 
+        decoder->Convert(&listener->iStatus, *bitmap, frameNo); 
+        CActiveScheduler::Start(); 
+        err = listener->iStatus.Int(); 
+        if(err != KErrNone) 
+          { 
+          result = EFail; //fail if couldn't decode a frame. 
+          } 
+        CleanupStack::PopAndDestroy(3); //listener, bitmap, decoder 
+        return result; 
+        }

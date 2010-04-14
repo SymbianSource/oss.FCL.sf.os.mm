@@ -43,6 +43,15 @@ class MAudioContext;
 class MAudioStream;
 class MGlobalProperties;
 
+/**
+Panic category and codes that CDevAudio raises on the client
+*/
+_LIT(KMMFDevAudioPanicCategory, "CDevAudio");
+
+enum TMMFDevAudioPanicCodes
+	{
+	EValidStateBeforeCommit =1
+	};
 
 enum TDevSoundAdaptorState
 	{
@@ -148,6 +157,24 @@ public:
 	TDevSoundAdaptorState ActiveState() const;
 
 	/**
+	* Retrieve the previous DevSound adaptor state
+	* @return void
+	*/
+	TDevSoundAdaptorState PreviousState() const;
+
+	/**
+	* Set the current DevSound adaptor state
+	* @return void
+	*/
+	void SetActiveState(TDevSoundAdaptorState aAdaptorState);
+
+	/**
+	* Set the previous DevSound adaptor state
+	* @return void
+	*/
+	void SetPreviousState(TDevSoundAdaptorState aAdaptorState);
+
+	/**
 	* SetVolume for DevSound
 	*/
 	TInt SetDevSoundVolume(TInt aVolume, TBool& aAsyncCompletion);
@@ -247,6 +274,9 @@ public:
 	
 	TBool IsPrioritySet();
 	
+	//Panic function
+	void Panic(TMMFDevAudioPanicCodes aCode);
+
 protected:
 
 	CDevAudio(MDevSoundAdaptationObserver& aAdaptationObserver);
@@ -257,6 +287,9 @@ protected:
 	// Helper methods
 	TInt CreateAudioProcessingUnits(TUid aSource, TUid aSink, TUid aCodec);
 	void DeleteAudioProcessingUnits();
+
+	TInt CommitAudioContext();
+	TBool IsMidState(TDevSoundAdaptorState aAdaptorState);
 
 /*
 * most of member data is protected for DevAudioControl access
@@ -321,6 +354,11 @@ protected: // data
 	* Active DevSound Adaptor state
 	*/
 	TDevSoundAdaptorState iActiveState;
+
+	/**
+	* Previous DevSound Adaptor state
+	*/
+	TDevSoundAdaptorState iPreviousState;
 
 	TAudioState		iActiveStreamState;
 

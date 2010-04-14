@@ -951,11 +951,11 @@ void CMMFWavFormatWrite::EmptyBufferL(CMMFBuffer* aBuffer, MDataSource* aSupplie
 	//the sink buffer size will be used to determine the frame time.
 	//check media id &pass onto clip
 
-	if ((aBuffer != NULL) && (!CMMFBuffer::IsSupportedDataBuffer(aBuffer->Type())))
-		User::Leave(KErrNotSupported);
-	
 	//[ precondition the buffer is not null ]
 	__ASSERT_DEBUG( aBuffer, Panic( EPreconditionViolation ) );
+	
+	if ((aBuffer != NULL) && (!CMMFBuffer::IsSupportedDataBuffer(aBuffer->Type())))
+		User::Leave(KErrNotSupported);
 	
 	//[ precondition it must be audio ]
 	if(aMediaId.iMediaType!=KUidMediaTypeAudio)

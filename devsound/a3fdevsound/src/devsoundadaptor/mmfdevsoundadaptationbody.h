@@ -665,6 +665,12 @@ public: // New functions
 	*/
 	void BufferErrorEvent();
 
+	/**
+	* Used rollback the adapror active state to the previous state prior a Commit call
+	* @return void
+	*/
+	void RollbackAdaptorActiveStateToBeforeCommit();
+
 private:
 
 	CBody(MDevSoundAdaptationObserver& aDevSoundObserver,

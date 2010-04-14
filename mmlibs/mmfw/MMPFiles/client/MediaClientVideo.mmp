@@ -94,9 +94,4 @@ start			wins
 	baseaddress	0x4F2A0000
 end
 
-MACRO __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
-
-
-                    
-
 SMPSAFE

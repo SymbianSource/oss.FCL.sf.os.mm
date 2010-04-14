@@ -45,7 +45,8 @@ enum TDevSoundAdaptorPanicCode
 	EStreamBeingDemotedToEIdle,
 	EAudioCodecIsNull,
 	EStreamMismatch,
-	EBufferMismatch
+	EBufferMismatch,
+	EInvalidStateDuringPreemptionCycle
 	};
 
 

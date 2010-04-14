@@ -137,4 +137,7 @@ EXPORTS
 	_ZN9RTestStep16GetHexFromConfigERK7TDesC16S2_Ri @ 136 NONAME
 	_ZNK9RTestStep8HeapSizeEv @ 137 NONAME
 	_ZNK9RTestStep9StackSizeEv @ 138 NONAME
+	_ZN9RTestStep8SetSuiteEP10CTestSuite @ 139 NONAME
+	_ZN9RTestStep9SetResultE8TVerdict @ 140 NONAME
+	_ZNK9RTestStep8StepNameEv @ 141 NONAME
 

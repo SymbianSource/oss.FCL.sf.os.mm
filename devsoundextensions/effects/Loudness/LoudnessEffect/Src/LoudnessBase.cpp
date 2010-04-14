@@ -78,6 +78,7 @@ EXPORT_C CLoudness* CLoudness::NewL(CMdaAudioConvertUtility& aUtility)
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 
@@ -156,6 +157,7 @@ EXPORT_C CLoudness* CLoudness::NewL(
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 
@@ -187,6 +189,7 @@ EXPORT_C CLoudness* CLoudness::NewL(
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 
@@ -273,6 +276,7 @@ EXPORT_C CLoudness* CLoudness::NewL(
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 
@@ -330,6 +334,7 @@ EXPORT_C CLoudness* CLoudness::NewL(
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 
@@ -361,6 +366,7 @@ EXPORT_C CLoudness* CLoudness::NewL(
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 
@@ -392,6 +398,7 @@ EXPORT_C CLoudness* CLoudness::NewL(
 	if ( !loudnessProxy )
 		{
 		DEBPRN1("No Adaptation Support - leaving");
+		CleanupStack::Pop(customInterface);
 		User::Leave(KErrNotSupported);
 		}
 

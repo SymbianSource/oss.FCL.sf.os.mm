@@ -2264,4 +2264,21 @@ private:
     CActiveScheduler* iScheduler;
     };
 
+//DEF144646 : Genius Case #144754: Nokia N97-1: Israel: N97 TIFF files not displayed properly. 
+    NONSHARABLE_CLASS(RTestStep_5109): public RICLCodecDefectTestStep 
+        { 
+    public: 
+        static RTestStep_5109* NewL(CTestSuite* aSuite); 
+        // From RICLCodecDefectTestStep 
+        TVerdict OpenL(); 
+        TVerdict DoTestStepL(); 
+        void Close(); 
+             
+    private: 
+        RTestStep_5109(CTestSuite* aSuite); 
+             
+    private: 
+        RFs iFs; 
+        CActiveScheduler* iScheduler; 
+        }; 
 #endif // ICLCODECDEFECTTESTSTEP_H

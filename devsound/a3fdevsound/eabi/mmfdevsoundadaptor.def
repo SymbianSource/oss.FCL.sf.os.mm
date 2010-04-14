@@ -62,4 +62,5 @@ EXPORTS
 	_ZN22CMMFDevSoundAdaptation6ResumeEv @ 61 NONAME
 	_ZN22CMMFDevSoundAdaptation16BufferErrorEventEv @ 62 NONAME
 	_ZN22CMMFDevSoundAdaptation15ProcessingErrorERi @ 63 NONAME
+	_ZN22CMMFDevSoundAdaptation40RollbackAdaptorActiveStateToBeforeCommitEv @ 64 NONAME
 

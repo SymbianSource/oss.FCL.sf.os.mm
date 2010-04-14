@@ -26,6 +26,12 @@
 
 class CSetVol;
 
+enum TSetVolCommands
+    {
+    ETestSetVolIfSetVolCommand,
+    ETestSetVolIfVolCommand,
+    };
+
 /**
 *
 * CA3fClientCiStubExtn
@@ -52,6 +58,7 @@ protected:
 	
 	// from MTestSetVolIf
 	TInt SetVol(TInt aVolume);
+	TInt Vol(TInt aMaxVolume);
 	
 protected:
 	TUid iKey;
@@ -109,6 +116,7 @@ private:
 	
 	void UpdateA3fPointers();
 	void SetVolumeL(TInt aVol);
+	TInt VolumeL(TInt aMaxVolume);
 	
 	MCustomInterface* iInterface; // not owned
 	MAudioContext* iContext;

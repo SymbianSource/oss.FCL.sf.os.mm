@@ -49,8 +49,4 @@ library			ecom.lib
 
 nostrictdef
 
-MACRO __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
-
 SMPSAFE
-
-                    

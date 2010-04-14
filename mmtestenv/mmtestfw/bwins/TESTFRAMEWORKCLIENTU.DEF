@@ -102,4 +102,7 @@ EXPORTS
 	?Stop@CBusyTestUnit@@QAEXXZ @ 101 NONAME ; void CBusyTestUnit::Stop(void)
 	?Start@CBusyTestUnit@@QAEHVTTimeIntervalMicroSeconds32@@VTTimeIntervalMicroSeconds@@@Z @ 102 NONAME ; int CBusyTestUnit::Start(class TTimeIntervalMicroSeconds32, class TTimeIntervalMicroSeconds)
 	?GetHexFromConfig@RTestStep@@IAEHABVTDesC16@@0AAH@Z @ 103 NONAME ; int RTestStep::GetHexFromConfig(class TDesC16 const &, class TDesC16 const &, int &)
+	?SetResult@RTestStep@@QAEXW4TVerdict@@@Z @ 104 NONAME ; void RTestStep::SetResult(enum TVerdict)
+	?StepName@RTestStep@@QBE?AVTPtrC16@@XZ @ 105 NONAME ; class TPtrC16 RTestStep::StepName(void) const
+	?SetSuite@RTestStep@@QAEXPAVCTestSuite@@@Z @ 106 NONAME ; void RTestStep::SetSuite(class CTestSuite *)
 

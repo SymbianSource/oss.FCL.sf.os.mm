@@ -179,8 +179,11 @@ TInt CDevAudioControl::Uninitialize()
 
 	if (err == KErrNone)
 		{
+		err = iDevAudio->CommitAudioContext();
+		}
+	if (err == KErrNone)
+		{
 		iDevAudio->iActiveState = EDevSoundAdaptorUninitialising;
-		err = iDevAudio->iAudioContext->Commit();
 		}
 
 	DP0_RET(err,"%d");
@@ -198,7 +201,7 @@ TInt CDevAudioControl::Unload()
 	TInt err = iDevAudio->iAudioStream->Unload();
 	if (err == KErrNone)
 		{
-		err = iDevAudio->iAudioContext->Commit();
+		err = iDevAudio->CommitAudioContext();
 		}
 	if (err == KErrNone)
 		{
@@ -332,7 +335,7 @@ TInt CDevAudioControl::SetConfig(const TMMFCapabilities& aConfig)
 	
 	if(err == KErrNone)
 		{
-		err = iDevAudio->iAudioContext->Commit();
+		err = iDevAudio->CommitAudioContext();
 		if (err == KErrNone)
 			{
 			iDesiredMode = mode;
@@ -489,7 +492,7 @@ TInt CDevAudioControl::SetGains(TInt aDevSoundGain, TInt aDevSoundMaxGain, TInt 
 		// It means we're here due to RequestGainAndBalance call
 		if(err == KErrNone && !aBecomingActive)
 			{
-			err = iDevAudio->iAudioContext->Commit();
+			err = iDevAudio->CommitAudioContext();
 			}		
 		}
 	DP0_RET(err,"%d");
@@ -546,7 +549,7 @@ TBool CDevAudioControl::DestroyChain()
 			err = iDevAudio->iAudioStream->Stop();
 			if(err == KErrNone)
 				{
-				err = iDevAudio->iAudioContext->Commit();
+				err = iDevAudio->CommitAudioContext();
 				}
 			if (err == KErrNone)
 				{
@@ -559,7 +562,7 @@ TBool CDevAudioControl::DestroyChain()
 			err = iDevAudio->iAudioStream->Unload();
 			if(err == KErrNone)
 				{
-				err = iDevAudio->iAudioContext->Commit();	
+				err = iDevAudio->CommitAudioContext();
 				}
 			if (err == KErrNone)
 				{
@@ -572,7 +575,7 @@ TBool CDevAudioControl::DestroyChain()
 			err = iDevAudio->iAudioStream->Uninitialize();
 			if(err == KErrNone)
 				{
-				err = iDevAudio->iAudioContext->Commit();
+				err = iDevAudio->CommitAudioContext();
 				}
 			if (err == KErrNone)
 				{
@@ -582,6 +585,16 @@ TBool CDevAudioControl::DestroyChain()
 			break;
 		case EDevSoundAdaptorCreated_Uninitialised:
 			readyToDestroy = ETrue;
+			break;
+		case EDevSoundAdaptorUnitialised_Uninitialised:
+			//If following condition is true, then we are here because of a
+			//pre-emption clash in last Commit cycle started from
+			//CDevCommonControl::ContextEventUpdateWithStateEventNoError.
+			if(iDevAudio->iPreviousState == EDevSoundAdaptorRemovingProcessingUnits)
+				{
+				err = RemoveProcessingUnits();
+				break;
+				}
 		default:
 			break;
 		}
@@ -621,7 +634,7 @@ TInt CDevAudioControl::RemoveProcessingUnits()
 
 	if (err == KErrNone)
 		{
-		err = iDevAudio->iAudioContext->Commit();
+		err = iDevAudio->CommitAudioContext();
 		}
 		
 	if(err == KErrNone)
@@ -847,8 +860,12 @@ void CDevAudioControl::SampleRateSet(TInt aError)
 			{
 			iCurrentSampleRate = iDesiredSampleRate;
 			}
-		iDesiredSampleRate = 0;
 		}
+	else
+	    {
+        iAdaptationObserver->NotifyError(aError);
+	    }
+    iDesiredSampleRate = 0;
 	}
 
 // -----------------------------------------------------------------------------
@@ -864,8 +881,12 @@ void CDevAudioControl::ModeSet(TInt aError)
 			{
 			iCurrentMode = iDesiredMode;
 			}
-		iDesiredMode = KNullUid;
 		}
+    else
+        {
+        iAdaptationObserver->NotifyError(aError);
+        }
+    iDesiredMode = KNullUid;
 	}
 
 // -----------------------------------------------------------------------------
@@ -935,6 +956,11 @@ void CDevAudioControl::ContextEvent(TUid aEvent, TInt aError)
 	DP_CONTEXT(CDevAudioControl::ContextEvent *CD1*, CtxDevSound, DPLOCAL);
 	DP_IN();
 
+    if(!(iAdaptationObserver->AdaptorControlsContext()))
+        {
+        iIgnoreAsyncOpComplete = ETrue;
+        }
+    
 	if (aEvent == KUidA3FContextUpdateComplete)
 		{
 	    if(iIgnoreAsyncOpComplete)
@@ -947,18 +973,15 @@ void CDevAudioControl::ContextEvent(TUid aEvent, TInt aError)
             iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
            	}
 		}
-	else if(aEvent == KUidA3FContextPreEmption || aEvent == KUidA3FContextPreEmptedCommit)
+	else if(aEvent == KUidA3FContextPreEmption)
 		{
-		
-		//Preemption during the below states should complete invoke AsynOperationComplete
-		if(iDevAudio->iActiveState!=EDevSoundAdaptorActivating && iDevAudio->iActiveState!=EDevSoundAdaptorLoading && 
-			iDevAudio->iActiveState!=EDevSoundAdaptorStopping && iDevAudio->iActiveState!=EDevSoundAdaptorUnloading
-			 && iDevAudio->iActiveState!=EDevSoundAdaptorPausing)
-			{
-			iIgnoreAsyncOpComplete = ETrue;
-			iAdaptationObserver->PreemptionStartedCallbackReceived();
-			}
+		//If we are in a normal pre-emption cycle, we should not be in a mid-state.
+		__ASSERT_DEBUG(!iDevAudio->IsMidState(iDevAudio->iActiveState), Panic(EInvalidStateDuringPreemptionCycle));
+		iIgnoreAsyncOpComplete = ETrue;
+		iAdaptationObserver->PreemptionStartedCallbackReceived();
 		}
+	//In a clashing pre-emption cycle we must be in a commit cycle, so do nothing here - CDevCommonControl deals
+	//with this case.
 	DP_OUT();
 	}
 

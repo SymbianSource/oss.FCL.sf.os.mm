@@ -229,6 +229,27 @@ class MDevSoundAdaptationObserver
 	 */
 	virtual TBool AdaptorControlsContext() const = 0;
 
+	/*
+	 * Callback indicating that a clash with pre-emption has occurred during the commit cycle
+	 * and to push the current request that was being processed onto front of queue.
+	 */
+
+	virtual void PreemptionClash() = 0;
+
+	/*
+	 * Callback indicating the clash with pre-emption during the commit cycle was with state change,
+	 * so the current request that was previously pushed onto the front of queue should be removed
+	 * without processing.
+	 */
+
+	virtual void PreemptionClashWithStateChange() = 0;
+
+	/*
+	 * Callback to indicate an error has been noticed. This is to be cached until subsequent
+	 * AsynchronousOperationComplete(), and handled then if needs.
+	 */
+	virtual void NotifyError(TInt aError) = 0;
+
 	};
 
 
@@ -883,6 +904,12 @@ public: // New functions
 	*/
 	IMPORT_C void BufferErrorEvent();
 	
+	/**
+	* Used rollback the adapror active state to the previous state prior a Commit call
+	* @return void
+	*/
+	IMPORT_C void RollbackAdaptorActiveStateToBeforeCommit();
+
 protected:
 
 	// So that nobody can extend

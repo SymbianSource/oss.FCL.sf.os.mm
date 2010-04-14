@@ -84,9 +84,18 @@ TInt CA3fClientCiStubExtn::SetVol(TInt aVol)
 	// the rest of the parameters can be ignored
 	TPckgBuf<TInt> volumePkg (aVol);
 	TMMFMessageDestinationPckg setVolDest (TMMFMessageDestination(KUidTestSetVolIf, 0));
-	TInt result = iCommand->CustomCommandSync(setVolDest, 0, volumePkg, KNullDesC8);
+	TInt result = iCommand->CustomCommandSync(setVolDest, ETestSetVolIfSetVolCommand, volumePkg, KNullDesC8);
 	return result;
 	}
+
+TInt CA3fClientCiStubExtn::Vol(TInt aMaxVol)
+    {
+    // again the key is is the destination package
+    TPckgBuf<TInt> maxVolPkg (aMaxVol);
+    TMMFMessageDestinationPckg setVolDest (TMMFMessageDestination(KUidTestSetVolIf, 0));
+    TInt result = iCommand->CustomCommandSync(setVolDest, ETestSetVolIfVolCommand, maxVolPkg, KNullDesC8);
+    return result;
+    }
 
 // __________________________________________________________________________
 // Server-side extension
@@ -170,24 +179,41 @@ CSetVol::~CSetVol()
 	
 TInt CSetVol::HandleMessageL(const RMmfIpcMessage& aMessage)
 	{
-	TPckgBuf<TInt> volPckg;
-	MmfMessageUtil::ReadL(aMessage, 1, volPckg);
-	UpdateA3fPointers(); // grab pointers to context, stream etc
-	SetVolumeL(volPckg());
-	
-	User::LeaveIfError(iContext->RegisterAudioContextObserver(*this));
-	
-	TInt error = iContext->Commit();
-	if (!error)
-		{
-		iError = KErrNone;
-		iWait->Start();
-		error = iError;
-		}
-	(void) iContext->UnregisterAudioContextObserver(*this);
-	
-	aMessage.Complete(error); 
-	return KErrNone; // KErrNone says we've handled the message
+    switch (aMessage.Function())
+        {
+        case ETestSetVolIfSetVolCommand:
+            {
+            TPckgBuf<TInt> volPckg;
+            MmfMessageUtil::ReadL(aMessage, 1, volPckg);
+            UpdateA3fPointers(); // grab pointers to context, stream etc
+            SetVolumeL(volPckg());
+
+            User::LeaveIfError(iContext->RegisterAudioContextObserver(*this));
+
+            TInt error = iContext->Commit();
+            if (!error)
+                {
+                iError = KErrNone;
+                iWait->Start();
+                error = iError;
+                }
+            (void) iContext->UnregisterAudioContextObserver(*this);
+
+            aMessage.Complete(error);
+            return KErrNone; // KErrNone says we've handled the message
+            }
+        case ETestSetVolIfVolCommand:
+            {
+            TPckgBuf<TInt> maxVolPckg;
+            MmfMessageUtil::ReadL(aMessage, 1, maxVolPckg);
+            UpdateA3fPointers(); // grab pointers to context, stream etc
+            TInt result = VolumeL(maxVolPckg());
+            aMessage.Complete(result);
+            return KErrNone; // KErrNone says we've handled the message
+            }
+        default:
+            return KErrArgument;
+        }
 	}
 	
 void CSetVol::UpdateA3fPointers()
@@ -224,6 +250,23 @@ void CSetVol::SetVolumeL(TInt aVolume)
 	User::LeaveIfError(gainControl->SetGain(channelGains));	
 	CleanupStack::PopAndDestroy(&channelGains);
 	}
+
+TInt CSetVol::VolumeL(TInt aMaxVolume)
+    {
+    RArray<TAudioChannelGain>   channelGains;
+    CleanupClosePushL(channelGains);
+    TInt maxGain;
+
+    MAudioGainControl* gainControl = static_cast<MAudioGainControl*>(iGain->Interface(KUidAudioGainControl));
+    User::LeaveIfError(gainControl->GetGain(channelGains));
+    User::LeaveIfError(gainControl->GetMaxGain(maxGain));
+
+    TInt basicVolume = (channelGains[0].iGain + channelGains[1].iGain) / 2;
+    TInt result = basicVolume * aMaxVolume / maxGain; // scale to 0 to maxVolume
+
+    CleanupStack::PopAndDestroy(&channelGains);
+    return result;
+    }
 	
 void CSetVol::ContextEvent(TUid aEvent, TInt aError)
 	{

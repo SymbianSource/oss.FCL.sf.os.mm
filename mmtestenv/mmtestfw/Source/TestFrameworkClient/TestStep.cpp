@@ -183,7 +183,7 @@ EXPORT_C void RTestStep::Close()
  * @xxxx
  *
  */
-void RTestStep::SetSuite(CTestSuite* aSuite)
+EXPORT_C void RTestStep::SetSuite(CTestSuite* aSuite)
 	{
 	iSuite = aSuite;
 	}
@@ -198,7 +198,7 @@ void RTestStep::SetSuite(CTestSuite* aSuite)
  * @xxxx
  *
  */
-void RTestStep::SetResult(TVerdict aResult)
+EXPORT_C void RTestStep::SetResult(TVerdict aResult)
 	{
 	iTestStepResult = aResult;
 	}
@@ -213,7 +213,7 @@ void RTestStep::SetResult(TVerdict aResult)
  * @xxxx
  *
  */
-TPtrC RTestStep::StepName() const
+EXPORT_C TPtrC RTestStep::StepName() const
 	{
 	return iTestStepName;
 	}

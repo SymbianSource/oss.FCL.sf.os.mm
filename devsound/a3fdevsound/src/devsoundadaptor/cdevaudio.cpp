@@ -349,7 +349,8 @@ TInt CDevAudio::Initialize(TUid aFormat, TMMFState aMode)
 
 	if(iActiveState != EDevSoundAdaptorCreated_Uninitialised &&
 		iActiveState != EDevSoundAdaptorInitialised_Initialised && 
-		iActiveState != EDevSoundAdaptorInitialised_Idle)
+		iActiveState != EDevSoundAdaptorInitialised_Idle &&
+		iActiveState != EDevSoundAdaptorUnitialised_Uninitialised )
 		{
 		DP0_RET(KErrNotReady, "%d");
 		}
@@ -366,14 +367,26 @@ TInt CDevAudio::Initialize(TUid aFormat, TMMFState aMode)
 			err = iAudioStream->Unload();
 			if(err == KErrNone)
 				{
+				err = CommitAudioContext();
+				}
+			if(err == KErrNone)
+				{
 				iActiveState = EDevSoundAdaptorUnloading;
-				err = iAudioContext->Commit();
 				}
 			}
 		else
 			{
 			err = iCurrentAudioControl->Uninitialize();
 			}
+		DP0_RET(err, "%d");
+		}
+
+	// Redo partial initialization after pre-emption clash event in
+	// EDevSoundAdaptorRemovingProcessingUnits state
+	if (iActiveState == EDevSoundAdaptorUnitialised_Uninitialised &&
+			iPreviousState == EDevSoundAdaptorRemovingProcessingUnits)
+		{
+		err = iCurrentAudioControl->RemoveProcessingUnits();
 		DP0_RET(err, "%d");
 		}
 
@@ -486,6 +499,15 @@ TInt CDevAudio::CancelInitialize()
 		{
 		DP0_RET(KErrNotReady, "%d");
 		}
+
+	// Redo partial cancelling of initialization after pre-emption clash event in
+	// EDevSoundAdaptorRemovingProcessingUnits state.
+	if (iActiveState == EDevSoundAdaptorUnitialised_Uninitialised &&
+			iPreviousState == EDevSoundAdaptorRemovingProcessingUnits)
+		{
+		err = iCurrentAudioControl->RemoveProcessingUnits();
+		DP0_RET(err, "%d");
+		}
 			
 	err = iCurrentAudioControl->Uninitialize();
 	
@@ -574,6 +596,40 @@ TDevSoundAdaptorState CDevAudio::ActiveState() const
 	DP0_RET(iActiveState, "%d");
 	}
 
+// -----------------------------------------------------------------------------
+// CDevAudio::ActiveState
+// -----------------------------------------------------------------------------
+//
+TDevSoundAdaptorState CDevAudio::PreviousState() const
+	{
+	DP_CONTEXT(CDevAudio::PreviousState *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	DP0_RET(iPreviousState, "%d");
+	}
+
+// -----------------------------------------------------------------------------
+// CDevAudio::SetActiveState
+// -----------------------------------------------------------------------------
+//
+void CDevAudio::SetActiveState(TDevSoundAdaptorState aAdaptorState)
+	{
+	DP_CONTEXT(CDevAudio::SetActiveState *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	iActiveState = aAdaptorState;
+	DP_OUT();
+	}
+
+// -----------------------------------------------------------------------------
+// CDevAudio::SetPreviousState
+// -----------------------------------------------------------------------------
+//
+void CDevAudio::SetPreviousState(TDevSoundAdaptorState aAdaptorState)
+	{
+	DP_CONTEXT(CDevAudio::SetPreviousState *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	iPreviousState = aAdaptorState;
+	DP_OUT();
+	}
 
 // -----------------------------------------------------------------------------
 // CDevAudio::SetDevSoundVolume
@@ -911,6 +967,34 @@ void CDevAudio::DeleteAudioProcessingUnits()
 	DP_OUT();
 	}
 
+TInt CDevAudio::CommitAudioContext()
+	{
+	DP_CONTEXT(CDevAudio::CommitAudioContext *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+
+	//If we are in mid state then Panic as DevSound server-side session (CMMFDevSoundSession) is not blocking properly
+	__ASSERT_DEBUG(!IsMidState(iActiveState), Panic(EValidStateBeforeCommit));
+
+	TInt err = KErrNone;
+	iPreviousState = iActiveState;
+	err = iAudioContext->Commit();
+
+	DP0_RET(err,"%d");
+	}
+
+TBool CDevAudio::IsMidState(TDevSoundAdaptorState aAdaptorState)
+	{
+	DP_CONTEXT(CDevAudio::IsMidState *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	if (aAdaptorState == EDevSoundAdaptorRemovingProcessingUnits || aAdaptorState == EDevSoundAdaptorUninitialising ||
+			aAdaptorState == EDevSoundAdaptorInitialising || aAdaptorState == EDevSoundAdaptorLoading ||
+			aAdaptorState == EDevSoundAdaptorUnloading || aAdaptorState == EDevSoundAdaptorStopping ||
+			aAdaptorState == EDevSoundAdaptorActivating || aAdaptorState == EDevSoundAdaptorPausing)
+		{
+		DP0_RET(ETrue,"%d");
+		}
+	DP0_RET(EFalse,"%d");
+	}
 
 // -----------------------------------------------------------------------------
 // From MA3FDevSoundAutoPauseResume
@@ -979,5 +1063,9 @@ void CDevAudio::NotifyResume()
 	DP_OUT();
 	}
 
+void CDevAudio::Panic(TMMFDevAudioPanicCodes aCode)
+	{
+	User::Panic(KMMFDevAudioPanicCategory, aCode);
+	}
 
 // End of file

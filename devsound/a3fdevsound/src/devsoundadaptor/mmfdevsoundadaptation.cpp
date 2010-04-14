@@ -923,5 +923,13 @@ EXPORT_C void CMMFDevSoundAdaptation::BufferErrorEvent()
 	{
 	iBody->BufferErrorEvent();
 	}
+
+EXPORT_C void CMMFDevSoundAdaptation::RollbackAdaptorActiveStateToBeforeCommit()
+	{
+	DP_CONTEXT(CMMFDevSoundAdaptation::RollbackAdaptorActiveStateToBeforeCommit *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	iBody->RollbackAdaptorActiveStateToBeforeCommit();
+	DP_OUT();
+	}
 	
 // End of file

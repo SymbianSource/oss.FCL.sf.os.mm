@@ -128,6 +128,7 @@ void CICLCodecDefectTestSuite::InitialiseL()
 	AddTestStepL(RTestStep_5113::NewL(this));
 	AddTestStepL(RTestStep_5114::NewL(this));
 	AddTestStepL(RTestStep_5108::NewL(this));
+        AddTestStepL(RTestStep_5109::NewL(this));
 	}
 
 void CICLCodecDefectTestSuite::InitSystemPath()

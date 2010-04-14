@@ -24,6 +24,8 @@ class MTestSetVolIf
 public:
 	// Backdoor to set volume - support via CIClient/ServerExtension
 	virtual TInt SetVol(TInt aVolume) = 0;
+	// Backdoor to volume - actually the gain value from the context scaled to 0..aMaxVol
+	virtual TInt Vol(TInt aMaxVol) = 0;
 	};
 
 

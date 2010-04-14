@@ -529,3 +529,6 @@ TEST_COMPLETE
 //AKAL-7YHLPR : Crash found in Themes Thread. Memory corruption with Gif image.
 RUN_TEST_STEP -1, TSU_ICL_COD_03, MM-ICL-COD-U-5108-HP
 TEST_COMPLETE
+//DEF144646 : Genius Case #144754: Nokia N97-1: Israel: N97 TIFF files not displayed properly. 
+RUN_TEST_STEP -1, TSU_ICL_COD_03, MM-ICL-COD-U-5109-HP 
+TEST_COMPLETE 

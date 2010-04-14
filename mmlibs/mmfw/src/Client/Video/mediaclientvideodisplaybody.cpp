@@ -166,6 +166,16 @@ void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow,
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL - aAutoScaleType %d", aAutoScaleType);
     DEBUG_PRINTF3("CMediaClientVideoDisplayBody::AddDisplayWindowL - aHorizPos %d, aVertPos %d", aHorizPos, aVertPos);
 
+	if (!IsRotationValid(aRotation))
+		{
+		User::Leave(KErrArgument);
+		}
+
+	if (!IsAutoScaleTypeValid(aAutoScaleType))
+		{
+		User::Leave(KErrArgument);
+		}
+
 	TInt pos = iClientWindows.Find(aWindow->WsHandle(), TWindowData::CompareByWsHandle);
 	
 	if (pos != KErrNotFound)
@@ -295,7 +305,7 @@ TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, 
     
     err = RedrawWindows(aCropRegion);
     
-    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceCreated ---");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SurfaceCreated --- Return error %d", err);
 	return err;
 	}
 
@@ -354,26 +364,47 @@ TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aS
 
     if (!IsSurfaceCreated())
 		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged --- Return error KErrNotSupproted");
 		return KErrNotSupported;
 		}
 
 	if (iSurfaceId != aSurfaceId)
 		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged --- Return error KErrInUse");
 		return KErrInUse;
 		}
-	
-	iCropRect = aCropRect;
-	iAspectRatio = aAspectRatio;
-	
+
 	if (iEventHandler)
 		{
-		iEventHandler->MmsehSurfaceParametersChanged(iSurfaceId, iCropRect, iAspectRatio);
+		iEventHandler->MmsehSurfaceParametersChanged(iSurfaceId, aCropRect, aAspectRatio);
 		}
 
-	RedrawWindows(iCropRegion);
-	
-	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged ---");
-	return KErrNone;
+	TInt error = KErrNone;
+	if (iCropRect != aCropRect || iAspectRatio != aAspectRatio)
+		{
+		// We only need to redraw if the aspect ratio has changed, or the area of the video to
+		// display (i.e the intersection of client crop region and surface crop rectangle) has changed.
+		TBool redraw = EFalse;
+		if (iAspectRatio != aAspectRatio || SurfaceCropRectChangeRequiresRedraw(iCropRect, aCropRect, iCropRegion))
+			{
+			redraw = ETrue;
+			}
+
+		iCropRect = aCropRect;
+		iAspectRatio = aAspectRatio;
+
+		if (redraw)
+			{
+			error = RedrawWindows(iCropRegion);
+			}
+		}
+	else
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged - Surface parameters have not changed");
+		}
+
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SurfaceParametersChanged --- Return error %d", error);
+	return error;
 	}
 	
 TInt CMediaClientVideoDisplayBody::RedrawWindows(const TRect& aCropRegion)
@@ -402,7 +433,7 @@ TInt CMediaClientVideoDisplayBody::RedrawWindows(const TRect& aCropRegion)
 	return err;
 	}
 
-void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, TInt aPos)
+void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, TInt aPos, TBool aRedrawIndividualWindow)
     {
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateCropRegionL +++");
 
@@ -413,14 +444,19 @@ void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, T
         {
         if(prevCropRegion == aCropRegion)
             {
-            if(!iSwitchedToExternalDisplay)
+            if(!iSwitchedToExternalDisplay && aRedrawIndividualWindow)
                 {
                 User::LeaveIfError(SetBackgroundSurface(iClientWindows[aPos], aCropRegion));
                 }
             }
         else
             {
-            User::LeaveIfError(RedrawWindows(aCropRegion));
+			// We only need to redraw if the area of the video to display (i.e the
+			// intersection of client crop region and surface crop rectangle) has changed.
+			if (ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect))
+				{
+				User::LeaveIfError(RedrawWindows(aCropRegion));
+				}
             }
         }
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateCropRegionL ---");    
@@ -434,15 +470,29 @@ void CMediaClientVideoDisplayBody::SetAutoScaleL(const RWindowBase& aWindow, TAu
     DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetAutoScaleL - aHorizPos %d, aVertPos %d", aHorizPos, aVertPos);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetAutoScaleL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
 
+	if (!IsAutoScaleTypeValid(aScaleType))
+		{
+		User::Leave(KErrArgument);
+		}
+
     TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
-	
-	iClientWindows[pos].iAutoScaleType = aScaleType;
-	iClientWindows[pos].iHorizPos = aHorizPos;
-	iClientWindows[pos].iVertPos = aVertPos;
 
-	UpdateCropRegionL(aCropRegion, pos);
-	
+	TBool parameterChanged = EFalse;
+	if (aScaleType != iClientWindows[pos].iAutoScaleType || aHorizPos != iClientWindows[pos].iHorizPos || aVertPos != iClientWindows[pos].iVertPos)
+		{
+		iClientWindows[pos].iAutoScaleType = aScaleType;
+		iClientWindows[pos].iHorizPos = aHorizPos;
+		iClientWindows[pos].iVertPos = aVertPos;
+		parameterChanged = ETrue;
+		}
+	else
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL - Scale parameters have not changed");
+		}
+
+	UpdateCropRegionL(aCropRegion, pos, parameterChanged);
+
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL ---");
 	}
 	
@@ -454,12 +504,26 @@ void CMediaClientVideoDisplayBody::SetRotationL(const RWindowBase& aWindow, TVid
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetRotationL - aRotation %d", aRotation);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetRotationL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
 
+	if (!IsRotationValid(aRotation))
+		{
+		User::Leave(KErrArgument);
+		}
+
     TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
-	
-	iClientWindows[pos].iRotation = aRotation;
 
-    UpdateCropRegionL(aCropRegion, pos);
+	TBool parameterChanged = EFalse;
+	if (aRotation != iClientWindows[pos].iRotation)
+		{
+		iClientWindows[pos].iRotation = aRotation;
+		parameterChanged = ETrue;
+		}
+	else
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetRotationL - Rotation has not changed");
+		}
+
+    UpdateCropRegionL(aCropRegion, pos, parameterChanged);
 
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetRotationL ---");
 	}
@@ -489,11 +553,22 @@ void CMediaClientVideoDisplayBody::SetScaleFactorL(const RWindowBase& aWindow, T
 		User::Leave(KErrArgument);
 		}
 
-	iClientWindows[pos].iScaleWidth = aWidthPercentage;
-	iClientWindows[pos].iScaleHeight = aHeightPercentage;
-	iClientWindows[pos].iAutoScaleType = EAutoScaleNone;
-	
-    UpdateCropRegionL(aCropRegion, pos);
+	TBool parameterChanged = EFalse;
+	if (aWidthPercentage != iClientWindows[pos].iScaleWidth ||
+	    aHeightPercentage != iClientWindows[pos].iScaleHeight ||
+		EAutoScaleNone != iClientWindows[pos].iAutoScaleType)
+		{
+		iClientWindows[pos].iScaleWidth = aWidthPercentage;
+		iClientWindows[pos].iScaleHeight = aHeightPercentage;
+		iClientWindows[pos].iAutoScaleType = EAutoScaleNone;
+		parameterChanged = ETrue;
+		}
+	else
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetScaleFactorL - Scale parameters have not changed");
+		}
+
+    UpdateCropRegionL(aCropRegion, pos, parameterChanged);
 	
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetScaleFactorL ---");
 	}
@@ -515,23 +590,44 @@ void CMediaClientVideoDisplayBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetAutoScaleL - aScaleType %d", aScaleType);
     DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SetAutoScaleL - aHorizPos %d, aVertPos %d", aHorizPos, aVertPos);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetAutoScaleL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
-	
+
+	if (!IsAutoScaleTypeValid(aScaleType))
+		{
+		User::Leave(KErrArgument);
+		}
+
     TRect prevCropRegion(iCropRegion);
 	iCropRegion = aCropRegion;
-	TInt count = iClientWindows.Count();
 	
+	TBool parameterChanged;
+	TInt count = iClientWindows.Count();
+
 	for (TInt i = 0; i < count; ++i)
 		{
-		iClientWindows[i].iAutoScaleType = aScaleType;
-		iClientWindows[i].iHorizPos = aHorizPos;
-		iClientWindows[i].iVertPos = aVertPos;
-	    if (IsSurfaceCreated() && !iSwitchedToExternalDisplay)
+		parameterChanged = EFalse;
+		if (aScaleType != iClientWindows[i].iAutoScaleType || aHorizPos != iClientWindows[i].iHorizPos || aVertPos != iClientWindows[i].iVertPos)
+			{
+			iClientWindows[i].iAutoScaleType = aScaleType;
+			iClientWindows[i].iHorizPos = aHorizPos;
+			iClientWindows[i].iVertPos = aVertPos;
+			parameterChanged = ETrue;
+			}
+		else
+			{
+			DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetAutoScaleL - Scale parameters for window pos %d have not changed", i);
+			}
+
+		// We only need to redraw if the scale parameters have changed, or the area of the video
+		// to display (i.e the intersection of client crop region and surface crop rectangle) has changed.
+		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
-	
-	if (IsSurfaceCreated() && iSwitchedToExternalDisplay && (aCropRegion != prevCropRegion))
+
+	// We only need to redraw if the area of the video to display (i.e the
+	// intersection of client crop region and surface crop rectangle) has changed.
+	if (IsSurfaceCreated() && iSwitchedToExternalDisplay && ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect))
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
@@ -545,20 +641,41 @@ void CMediaClientVideoDisplayBody::SetRotationL(TVideoRotation aRotation, const 
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetRotationL - aRotation %d", aRotation);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetRotationL - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
 
+	if (!IsRotationValid(aRotation))
+		{
+		User::Leave(KErrArgument);
+		}
+
     TRect prevCropRegion(iCropRegion);
     iCropRegion = aCropRegion;
+
+	TBool parameterChanged;
 	TInt count = iClientWindows.Count();
 	
 	for (TInt i = 0; i < count; ++i)
 		{
-		iClientWindows[i].iRotation = aRotation;
-        if (IsSurfaceCreated() && !iSwitchedToExternalDisplay)
+		parameterChanged = EFalse;
+		if (aRotation != iClientWindows[i].iRotation)
+			{
+			iClientWindows[i].iRotation = aRotation;
+			parameterChanged = ETrue;
+			}
+		else
+			{
+			DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetRotationL - Rotation for window pos %d has not changed", i);
+			}
+
+		// We only need to redraw if the scale parameters have changed, or the area of the video
+		// to display (i.e the intersection of client crop region and surface crop rectangle) has changed.
+		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
 	
-    if (IsSurfaceCreated() && iSwitchedToExternalDisplay && (aCropRegion != prevCropRegion))
+	// We only need to redraw if the area of the video to display (i.e the
+	// intersection of client crop region and surface crop rectangle) has changed.
+	if (IsSurfaceCreated() && iSwitchedToExternalDisplay && ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect))
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
@@ -579,20 +696,39 @@ void CMediaClientVideoDisplayBody::SetScaleFactorL(TReal32 aWidthPercentage, TRe
 	
     TRect prevCropRegion(iCropRegion);
 	iCropRegion = aCropRegion;
+
+	TBool parameterChanged;
 	TInt count = iClientWindows.Count();
 	
 	for (TInt i = 0; i < count; ++i)
 		{
-		iClientWindows[i].iScaleWidth = aWidthPercentage;
-		iClientWindows[i].iScaleHeight = aHeightPercentage;
-		iClientWindows[i].iAutoScaleType = EAutoScaleNone;
-        if (IsSurfaceCreated() && !iSwitchedToExternalDisplay)
+		parameterChanged = EFalse;
+		
+		if (aWidthPercentage != iClientWindows[i].iScaleWidth ||
+		    aHeightPercentage != iClientWindows[i].iScaleHeight ||
+			EAutoScaleNone != iClientWindows[i].iAutoScaleType)
+			{
+			iClientWindows[i].iScaleWidth = aWidthPercentage;
+			iClientWindows[i].iScaleHeight = aHeightPercentage;
+			iClientWindows[i].iAutoScaleType = EAutoScaleNone;
+			parameterChanged = ETrue;
+			}
+		else
+			{
+			DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetScaleFactorL - Scale parameters for window pos %d have not changed", i);
+			}
+
+		// We only need to redraw if the scale parameters have changed, or the area of the video to
+		// display (i.e the intersection of client crop region and surface crop rectangle) has changed.
+		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
 		}
-	
-    if (IsSurfaceCreated() && iSwitchedToExternalDisplay && (aCropRegion != prevCropRegion))
+
+	// We only need to redraw if the area of the video to display (i.e the
+	// intersection of client crop region and surface crop rectangle) has changed.
+	if (IsSurfaceCreated() && iSwitchedToExternalDisplay && ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect))
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
@@ -609,10 +745,24 @@ void CMediaClientVideoDisplayBody::SetWindowClipRectL(const RWindowBase& aWindow
 	
 	TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
-	
-	iClientWindows[pos].iClipRect = aWindowClipRect;
 
-    UpdateCropRegionL(aCropRegion, pos);
+	TBool parameterChanged = EFalse;
+	if (aWindowClipRect != iClientWindows[pos].iClipRect)
+		{
+		// We only want to redraw if the change in the clipping rectangle would result
+		// in a change to the area of the display used for the video.
+		// The video is always displayed in the intersection of the clipping rectangle
+		// and the video extent, so check if this has changed.
+		parameterChanged = IntersectionAreaChanged(iClientWindows[pos].iClipRect, aWindowClipRect, iClientWindows[pos].iVideoExtent);
+
+		iClientWindows[pos].iClipRect = aWindowClipRect;
+		}
+	else
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowClipRectL - Clip rect parameter has not changed");
+		}
+
+    UpdateCropRegionL(aCropRegion, pos, parameterChanged);
 
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetWindowClipRectL ---");
 	}
@@ -626,10 +776,19 @@ void CMediaClientVideoDisplayBody::SetVideoExtentL(const RWindowBase& aWindow, c
 
     TInt pos = iClientWindows.Find(aWindow.WsHandle(), TWindowData::CompareByWsHandle);
 	User::LeaveIfError(pos);
-	
-	iClientWindows[pos].iVideoExtent = aVideoExtent;
 
-    UpdateCropRegionL(aCropRegion, pos);
+	TBool parameterChanged = EFalse;
+	if (aVideoExtent != iClientWindows[pos].iVideoExtent)
+		{
+		iClientWindows[pos].iVideoExtent = aVideoExtent;
+		parameterChanged = ETrue;
+		}
+	else
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetVideoExtentL - Video extent parameter has not changed");
+		}
+
+    UpdateCropRegionL(aCropRegion, pos, parameterChanged);
     
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetVideoExtentL ---");
 	}
@@ -1221,18 +1380,138 @@ void CMediaClientVideoDisplayBody::SwitchSurface()
         DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface CreateExtDisplayHandlerL error %d", err);
         if(err == KErrNone)
             {
-            RemoveBackgroundSurface(ETrue);
+            // Set background surface for external display window before removing from client windows.
+            // Required for switching of paused video
             SetWindowArrayPtr2Ext();
             RedrawWindows(iCropRegion);
+            SetWindowArrayPtr2Client();
+            RemoveBackgroundSurface(ETrue);
+            SetWindowArrayPtr2Ext();
             }
         }
     else if(iSwitchedToExternalDisplay)
         {
+        // Set background surface for clientwindows before removing from external display window.
+        // Required for switching of paused video
+        SetWindowArrayPtr2Client();
+        RedrawWindows(iCropRegion);
+        SetWindowArrayPtr2Ext();
         RemoveBackgroundSurface(ETrue);
         RemoveExtDisplayHandler();
         SetWindowArrayPtr2Client();
-        RedrawWindows(iCropRegion);
         }
 
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface ---");
     }
+
+TBool CMediaClientVideoDisplayBody::IsRotationValid(TVideoRotation aVideoRotation)
+	{
+	if (aVideoRotation == EVideoRotationNone ||
+	    aVideoRotation == EVideoRotationClockwise90 ||
+		aVideoRotation == EVideoRotationClockwise180 ||
+		aVideoRotation == EVideoRotationClockwise270)
+		{
+		return ETrue;
+		}
+
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::IsRotationValid - Rotation %d not valid", aVideoRotation);
+	return EFalse;
+	}
+
+TBool CMediaClientVideoDisplayBody::IsAutoScaleTypeValid(TAutoScaleType aAutoScaleType)
+	{
+	if (aAutoScaleType == EAutoScaleNone ||
+	    aAutoScaleType == EAutoScaleBestFit ||
+	    aAutoScaleType == EAutoScaleClip ||
+	    aAutoScaleType == EAutoScaleStretch)
+		{
+		return ETrue;
+		}
+
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::IsAutoScaleTypeValid - Auto scale %d not valid", aAutoScaleType);
+	return EFalse;
+	}
+
+/**
+Check whether a change in the surface crop rectangle would mean that the surface viewport calculated in SetBackgroundSurface would change.
+The surface viewport is the intersection of the surface crop rectangle and the client crop region
+*/
+TBool CMediaClientVideoDisplayBody::SurfaceCropRectChangeRequiresRedraw(TRect aOldSurfaceCropRect, TRect aNewSurfaceCropRect, TRect aClientCropRegion)
+	{
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceCropRectChangeRequiresRedraw +++");
+	
+	// If aClientCropRegion is empty then it is not currently being used in the SetBackgroundSurface calculations.
+	// This means that only aOldSurfaceCropRect is being used to decide which part of the video is displayed.
+	// By setting aClientCropRect to the same as aOldSurfaceCropRect we ensure that only aOldSurfaceCropRect is
+	// used in the subsequent intersection area checks.
+	if (aClientCropRegion.IsEmpty())
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceCropRectChangeRequiresRedraw - Client crop region is empty");		
+		aClientCropRegion = aOldSurfaceCropRect;
+		}
+
+	TBool ret = IntersectionAreaChanged(aOldSurfaceCropRect, aNewSurfaceCropRect, aClientCropRegion);
+
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SurfaceCropRectChangeRequiresRedraw --- ret = %d", ret);
+
+	return ret;
+	}
+
+/**
+Check whether a change in the client crop region would mean that the surface viewport calculated in SetBackgroundSurface would change.
+The surface viewport is the intersection of the surface crop rectangle and the client crop region
+*/
+TBool CMediaClientVideoDisplayBody::ClientCropRegionChangeRequiresRedraw(TRect aOldClientCropRegion, TRect aNewClientCropRegion, TRect aSurfaceCropRect)
+	{
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::ClientCropRegionChangeRequiresRedraw +++");
+
+	// If aOldClientCropRegion is empty then it is not currently being used in the SetBackgroundSurface calculations.
+	// This means that only aSurfaceCropRect is being used to decide which part of the video is displayed. By
+	// setting aOldClientCropRegion to the same as aSurfaceCropRect we ensure that only aSurfaceCropRect is
+	// used in the subsequent intersection area checks.
+	if (aOldClientCropRegion.IsEmpty())
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::ClientCropRegionChangeRequiresRedraw - Old client crop region is empty");
+		aOldClientCropRegion = aSurfaceCropRect;
+		}
+
+	// If aNewClientCropRegion is empty then it will not be used in the SetBackgroundSurface calculations.
+	// This means that only aSurfaceCropRect will impact which part of the video is displayed. By
+	// setting aNewClientCropRegion to the same as aSurfaceCropRect we ensure that only aSurfaceCropRect is
+	// used in the subsequent intersection area checks.
+	if (aNewClientCropRegion.IsEmpty())
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::ClientCropRegionChangeRequiresRedraw - New client crop region is empty");
+		aNewClientCropRegion = aSurfaceCropRect;
+		}
+
+	TBool ret = IntersectionAreaChanged(aOldClientCropRegion, aNewClientCropRegion, aSurfaceCropRect);
+
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ClientCropRegionChangeRequiresRedraw --- ret = %d", ret);
+
+	return ret;
+	}
+
+/**
+Check whether the change in size of a rectangle means its intersection with another rectangle has changed.
+This is used to check whether changes in things like the surface crop rectangle, client crop region, and window clip rectangle, would mean
+the area of video displayed would change.
+*/
+TBool CMediaClientVideoDisplayBody::IntersectionAreaChanged(TRect aOldRect, TRect aNewRect, TRect aOtherRect)
+	{
+	DEBUG_PRINTF5("CMediaClientVideoDisplayBody::IntersectionAreaChanged - aOldRect %d,%d - %d,%d", aOldRect.iTl.iX, aOldRect.iTl.iY, aOldRect.iBr.iX, aOldRect.iBr.iY);
+	DEBUG_PRINTF5("CMediaClientVideoDisplayBody::IntersectionAreaChanged - aNewRect %d,%d - %d,%d", aNewRect.iTl.iX, aNewRect.iTl.iY, aNewRect.iBr.iX, aNewRect.iBr.iY);
+	DEBUG_PRINTF5("CMediaClientVideoDisplayBody::IntersectionAreaChanged - aOtherRect %d,%d - %d,%d", aOtherRect.iTl.iX, aOtherRect.iTl.iY, aOtherRect.iBr.iX, aOtherRect.iBr.iY);
+
+	aOldRect.Intersection(aOtherRect);
+	aNewRect.Intersection(aOtherRect);
+
+	if (aOldRect != aNewRect)
+		{
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::IntersectionAreaChanged - Intersection area has changed");
+		return ETrue;
+		}
+
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::IntersectionAreaChanged - Intersection area has not changed");
+	return EFalse;
+	}

@@ -675,7 +675,7 @@ TVerdict CTestStepDevSound::TestPlayInit()
 		}
 	else
 		{
-		// Temp addition to check for alternative CI implementation
+		// Check for alternative CI implementation
 		MTestSetVolIf *volIf = static_cast<MTestSetVolIf*>(iMMFDevSound->CustomInterface(KUidTestSetVolIf));
 		if (volIf)
 			{
@@ -4435,9 +4435,16 @@ TVerdict CTestStepDevSoundGetSupportedInputDataTypes::DoTestStepL(void)
 			//note test does not make any assumptions as to what the supported datatypes are
 			if (numberOfSupportedDataTypes)
 				{
+				TUint32 testsFourCC = TFourCC(_L8("TST*")).FourCC(); // if any fourCc matches first three chars then we treat as test
 				for (TUint entryNumber = 0; entryNumber < numberOfSupportedDataTypes; entryNumber++)
 					{
 					TUint32 fourCC = supportedDataTypes[entryNumber].FourCC();
+					if ((testsFourCC&0xFFFFFF) == (fourCC&0xFFFFFF))
+						{
+						// comparison ignoring top byte - equates to last digit of fourCC
+						continue;
+						}
+					
 					ResetCallbacks();
 					TRAP(err,iMMFDevSound->InitializeL(*this, fourCC, prioritySettings.iState));
 					if ((err)||(iCallbackError))
@@ -4523,9 +4530,16 @@ TVerdict CTestStepDevSoundGetSupportedOutputDataTypes::DoTestStepL(void) {
 			//note test does not make any assumptions as to what the supported datatypes are
 			if (numberOfSupportedDataTypes)
 				{
+				TUint32 testsFourCC = TFourCC(_L8("TST*")).FourCC(); // if any fourCc matches first three chars then we treat as test
 				for (TUint entryNumber = 0; entryNumber < numberOfSupportedDataTypes; entryNumber++)
 					{
 					TUint32 fourCC = supportedDataTypes[entryNumber].FourCC();
+					if ((testsFourCC&0xFFFFFF) == (fourCC&0xFFFFFF))
+						{
+						// comparison ignoring top byte - equates to last digit of fourCC
+						continue;
+						}
+					
 					ResetCallbacks();
 					TRAP(err,iMMFDevSound->InitializeL(*this, fourCC, prioritySettings.iState));
 					if ((err)||(iCallbackError))
@@ -7561,7 +7575,7 @@ void RDevSoundMultiInitTest::FsmL(EClientId aClientId, EMultiInitTestEvent aTest
 			iDevSoundObserver1 = CMultiInitTestDevSoundObserver::NewL(this, EObserver1);
 			delete iDevSoundObserver2;
 			iDevSoundObserver2 = NULL;
-			iMMFDevSound->InitializeL(*iDevSoundObserver1, TUid::Uid(KMmfUidHwDevicePCM8ToPCM16), EMMFStatePlaying);
+			iMMFDevSound->InitializeL(*iDevSoundObserver1, KMMFFourCCCodePCM8, EMMFStatePlaying);
 			iTestState = EInit2Observer1;
 			}
 		else
@@ -7576,7 +7590,7 @@ void RDevSoundMultiInitTest::FsmL(EClientId aClientId, EMultiInitTestEvent aTest
 			iDevSoundObserver2 = CMultiInitTestDevSoundObserver::NewL(this, EObserver2);
 			delete iDevSoundObserver1;
 			iDevSoundObserver1 = NULL;
-			iMMFDevSound->InitializeL(*iDevSoundObserver2, TUid::Uid(KMmfUidHwDevicePCM8ToPCM16), EMMFStatePlaying);
+			iMMFDevSound->InitializeL(*iDevSoundObserver2, KMMFFourCCCodePCM8, EMMFStatePlaying);
 			INFO_PRINTF1(_L("Initialising with Observer2"));
 			iTestState = EInit2Observer2;
 			}
@@ -8682,6 +8696,23 @@ void RA3FDevSoundTestPlay::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 									StopTest (KErrGeneral);
 									break;
 									}
+						        // Check the low-level a3f volume. Should have been applied by now
+						        MTestSetVolIf *volIf = static_cast<MTestSetVolIf*>(iMMFDevSound->CustomInterface(KUidTestSetVolIf));
+						        if (volIf)
+						            {
+						            TInt vol = volIf->Vol(iMMFDevSound->MaxVolume());
+	                                if (vol == iVolume)
+	                                    {
+	                                    INFO_PRINTF1(_L("Low-level volume returned equal previous set value as expected"));
+	                                    }
+	                                else
+	                                    {
+	                                    ERR_PRINTF3(_L("Low-level volume returned different set value = %d (expect %d)"), vol, iVolume);
+	                                    StopTest (KErrGeneral);
+	                                    break;
+	                                    }
+						            }
+
 								INFO_PRINTF1(_L("Call iMMFDevSound::GetPlayBalanceL for verifying."));
 								TInt getLSpeakerBalance = 0;
 								TInt getRSpeakerBalance = 0;
