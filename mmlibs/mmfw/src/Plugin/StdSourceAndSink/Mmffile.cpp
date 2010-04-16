@@ -1032,7 +1032,10 @@ TInt CMMFFile::Size()
 			fileOpened = ETrue;
 		}
 	if (err == KErrNone)
+	    {
+	    __ASSERT_DEBUG(iFile != NULL,Panic(EMMFFileHandleNULL));
 		err = iFile->Size(size);
+	    }
 	if (err)
 		{
 		size = 0;
@@ -1043,6 +1046,7 @@ TInt CMMFFile::Size()
 
 	if (fileOpened)
 		{
+		__ASSERT_DEBUG(iFile != NULL,Panic(EMMFFileHandleNULL));
 		delete iFile;
 		iFile = NULL;
 		iFileSize = -1;

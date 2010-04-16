@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -23,6 +23,7 @@
 #include "VideoPlayerBody.h"
 #include "mmfclientvideocommon.h"
 #include "mmfclientutility.h"
+#include "mediaclientvideotrace.h"
 
 #ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
 #include <mmf/common/mmfvideoenums.h>
@@ -69,10 +70,12 @@ CVideoPlayerUtility::CBody* CVideoPlayerUtility::CBody::NewL(CVideoPlayerUtility
 															 const TRect& aScreenRect,
 															 const TRect& aClipRect)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::NewL (CVPU1)++");
 	CBody* self = new(ELeave) CBody(aParent, aObserver, aScreenDevice.GetScreenNumber(), aPriority, aPref);
 	CleanupStack::PushL(self);
 	self->ConstructL(aWs, aScreenDevice, aWindow, aScreenRect, aClipRect);
 	CleanupStack::Pop();
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::NewL (CVPU1)--");
 	return self;
 	}
 
@@ -82,16 +85,19 @@ CVideoPlayerUtility::CBody* CVideoPlayerUtility::CBody::NewL(CVideoPlayerUtility
 															 TInt aPriority,
 															 TInt aPref)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::NewL (CVPU2)++");
 	CBody* self = new(ELeave) CBody(aParent, aObserver, aPriority, aPref);
 	CleanupStack::PushL(self);
 	self->ConstructL();
 	CleanupStack::Pop();
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::NewL (CVPU2)--");
 	return self;
 	}
 #endif // SYMBIAN_BUILD_GCE
 
 CVideoPlayerUtility::CBody::~CBody()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::~CBody++");
 	Close();
 	
 	delete iControllerImplementationInformation;
@@ -104,10 +110,12 @@ CVideoPlayerUtility::CBody::~CBody()
 	delete iFrameBitmap;
 	if (iFbsSessionConnected)
 		iFbsSession.Disconnect();
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::~CBody--");
 	}
 
 void CVideoPlayerUtility::CBody::Close()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Close++");
 #ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
 	DisableSubtitles();
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
@@ -135,6 +143,7 @@ void CVideoPlayerUtility::CBody::Close()
 	iControllerUid = KNullUid;
 	iControllerOpen = EFalse;
 	iDirectScreenAccessAbort = EFalse;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Close--");
 	}
 
 CVideoPlayerUtility::CBody::CBody(CVideoPlayerUtility* aParent,
@@ -201,11 +210,13 @@ CVideoPlayerUtility::CBody::CBody(CVideoPlayerUtility2* aParent,
 
 void CVideoPlayerUtility::CBody::ConstructL()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::ConstructL1++");
 	CommonConstructL();
 	iFindAndOpenController = CMMFFindAndOpenController::NewL(*this);
 	iFindAndOpenController->SetSurfaceMode(iUsingVPU2, &iVideoPlaySurfaceSupportCustomCommands);
 	iFindAndOpenController->Configure(KUidMediaTypeVideo, iPrioritySettings, CMMFPluginSelectionParameters::EAllowOtherMediaIds);
 	iFindAndOpenController->ConfigureController(iController, *iControllerEventMonitor, CMMFFindAndOpenController::EPlayback);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::ConstructL1--");
 	}
 
 #endif // SYMBIAN_BUILD_GCE
@@ -216,6 +227,7 @@ void CVideoPlayerUtility::CBody::ConstructL(RWsSession& aWs,
 						const TRect& aWindowRect,
 						const TRect& aClipRect)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::ConstructL2++");
 	CommonConstructL();
 	
 	SetDisplayWindowL(aWs, aScreenDevice, aWindow, aWindowRect, aClipRect);
@@ -235,6 +247,7 @@ void CVideoPlayerUtility::CBody::ConstructL(RWsSession& aWs,
 #endif
 	iFindAndOpenController->Configure(KUidMediaTypeVideo, iPrioritySettings, CMMFPluginSelectionParameters::EAllowOtherMediaIds);
 	iFindAndOpenController->ConfigureController(iController, *iControllerEventMonitor, CMMFFindAndOpenController::EPlayback);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::ConstructL2--");
 	}
 
 void CVideoPlayerUtility::CBody::CommonConstructL()
@@ -249,6 +262,7 @@ void CVideoPlayerUtility::CBody::CommonConstructL()
 
 void CVideoPlayerUtility::CBody::Reset() 
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Reset++");
 	Close();
 	
 	// reset all state variables
@@ -259,10 +273,12 @@ void CVideoPlayerUtility::CBody::Reset()
 	iGraphicsSurfaceSupported = EFalse;
 #endif
 	iControllerUid = KNullUid;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Reset--");
 	}
 
 void CVideoPlayerUtility::CBody::SetAndUpdateWindow()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetAndUpdateWindow++");
 	if (iOpenError == KErrNone)	
 		{
 		// Set the display window and update display region if the controller doesn't support graphics surface. 		
@@ -273,6 +289,7 @@ void CVideoPlayerUtility::CBody::SetAndUpdateWindow()
 		{
 		iOpenError = iVideoPlayControllerCustomCommands.UpdateDisplayRegion(*iDirectScreenAccess->DrawingRegion());
 		}
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetAndUpdateWindow--");
 	}
 
 void CVideoPlayerUtility::CBody::MfaocComplete(		
@@ -282,6 +299,8 @@ void CVideoPlayerUtility::CBody::MfaocComplete(
 	TMMFMessageDestination* /*aSourceHandle*/, 
 	TMMFMessageDestination* /*aSinkHandle*/)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::MfaocComplete++");
+    DEBUG_PRINTF3("CVideoPlayerUtility::CBody::MfaocComplete - aError %d, aControllerUid 0x%X", aError, aControllerUid.iUid);
 	iCallbackOpenReceived = ETrue;
 
 	// save the error in iOpenError -
@@ -295,6 +314,8 @@ void CVideoPlayerUtility::CBody::MfaocComplete(
 #ifdef SYMBIAN_BUILD_GCE
 		// Check if the graphics surfaces is supported
 		TInt err = CheckSurfaceSupported();
+
+		DEBUG_PRINTF4("CVideoPlayerUtility::CBody::MfaocComplete - Checked surfaces supported - Err %d, Surfaces supported %d, Using VPU2 %d", err, iGraphicsSurfaceSupported, iUsingVPU2);
 	
 		if (!iGraphicsSurfaceSupported)
 			{
@@ -397,24 +418,31 @@ void CVideoPlayerUtility::CBody::MfaocComplete(
 		iCallbackOpenReceived = EFalse;
 		iAsyncCallback->Signal(iOpenError, CMMFVideoPlayerCallback::EOpenCompleteEvent);
 		}
-
+	
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::MfaocComplete--");
 	}
 
 void CVideoPlayerUtility::CBody::OpenFileL(const TDesC& aFileName, TUid aControllerUid)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenFileL (filename)++");
 	TMMFileSource filesource(aFileName, KDefaultContentObject, EPlay);
 	OpenFileL(filesource, aControllerUid);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenFileL (filename)--");
 	}
 	
 void CVideoPlayerUtility::CBody::OpenFileL(const RFile& aFile, TUid aControllerUid)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenFileL (filehandle)++");
 	RFile& file = const_cast<RFile&>(aFile);
 	TMMFileHandleSource filehandlesource(file, KDefaultContentObject, EPlay);
 	OpenFileL(filehandlesource, aControllerUid);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenFileL (filehandle)--");
 	}
 
 void CVideoPlayerUtility::CBody::OpenFileL(const TMMSource& aSource, TUid aControllerUid)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenFileL (source)++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::OpenFileL - aControllerUid 0x%X", aControllerUid.iUid);
 	// Make sure we are closed
 	Reset();
 
@@ -434,6 +462,8 @@ void CVideoPlayerUtility::CBody::OpenFileL(const TMMSource& aSource, TUid aContr
 		{
 		iFindAndOpenController->OpenByFileSource(aSource);
 		}
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenFileL (source)--");
 	}
 	
 //
@@ -442,6 +472,7 @@ void CVideoPlayerUtility::CBody::OpenFileL(const TMMSource& aSource, TUid aContr
 //
 void CVideoPlayerUtility::CBody::OpenDesL(const TDesC8& aDescriptor, TUid aControllerUid)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenDesL++");
 	// Make sure we are closed
 	Reset();
 
@@ -461,10 +492,12 @@ void CVideoPlayerUtility::CBody::OpenDesL(const TDesC8& aDescriptor, TUid aContr
 		{
 		iFindAndOpenController->OpenByDescriptor(aDescriptor);
 		}
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenDesL--");
 	}
 	
 void CVideoPlayerUtility::CBody::OpenUrlL(const TDesC& aUrl, TInt aIapId, const TDesC8& aMimeType, TUid aControllerUid)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenUrlL++");
 	// Make sure we are closed
 	Reset();
 
@@ -487,16 +520,20 @@ void CVideoPlayerUtility::CBody::OpenUrlL(const TDesC& aUrl, TInt aIapId, const 
 		iFindAndOpenController->OpenByUrl(aUrl, aIapId, aMimeType);
 
 	delete urlCfgBuffer;
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::OpenUrlL--");
 	}
 
 void CVideoPlayerUtility::CBody::Play()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Play++");
 	TInt err = iController.Prime();
 	if (err == KErrNone)
 		err = iController.Play();
 	if (err != KErrNone)
 	    {
 	    iAsyncCallback->Signal(err,CMMFVideoPlayerCallback::EPlayCompleteEvent);
+	    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::Play (exit 1)-- - Err %d", err);
 	    return;
 	    }
 	iState = EPlaying;
@@ -511,16 +548,20 @@ void CVideoPlayerUtility::CBody::Play()
 			iAsyncCallback->Signal(err, CMMFVideoPlayerCallback::EPlayCompleteEvent);
 			}
 		}
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::Play-- - Err %d", err);
 	}
 
 void CVideoPlayerUtility::CBody::Play(const TTimeIntervalMicroSeconds& aStartTime, const TTimeIntervalMicroSeconds& aEndTime)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Play++");
+    DEBUG_PRINTF3("CVideoPlayerUtility::CBody::Play - aStartTime %ld, aEndTime %ld", aStartTime.Int64(), aEndTime.Int64());
 	TInt err = iController.Prime();
 	if (err == KErrNone)
 	err = iVideoPlayControllerCustomCommands.Play(aStartTime, aEndTime);
 	if (err != KErrNone)
 	    {
 	    iAsyncCallback->Signal(err, CMMFVideoPlayerCallback::EPlayCompleteEvent);
+		DEBUG_PRINTF2("CVideoPlayerUtility::CBody::Play (exit1)-- - Err %d", err);
 	    return;
 	    }
 	iState = EPlaying;
@@ -535,20 +576,25 @@ void CVideoPlayerUtility::CBody::Play(const TTimeIntervalMicroSeconds& aStartTim
 			iAsyncCallback->Signal(err, CMMFVideoPlayerCallback::EPlayCompleteEvent);
 			}
 		}
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::Play-- - Err %d", err);
 	}
 
 
 TInt CVideoPlayerUtility::CBody::Stop()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::Stop++");
 	TInt err = iController.Stop();
 	iState = EStopped;
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::Stop-- - Err %d", err);
 	return err;
 	}
 
 void CVideoPlayerUtility::CBody::PauseL()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::PauseL++");
 	User::LeaveIfError(iController.Pause());
 	iState = EPaused;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::PauseL--");
 	}
 
 void CVideoPlayerUtility::CBody::SetVolumeL(TInt aVolume)
@@ -558,17 +604,27 @@ void CVideoPlayerUtility::CBody::SetVolumeL(TInt aVolume)
 
 void CVideoPlayerUtility::CBody::PrepareDSAL(RWsSession& aWs, CWsScreenDevice& aScreenDevice, RWindowBase& aWindow)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::PrepareDSAL++");
 	CDirectScreenAccess* old = iDirectScreenAccess;
 	iDirectScreenAccess = CDirectScreenAccess::NewL(aWs,aScreenDevice,aWindow,*this);
 	delete old;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::PrepareDSAL - Starting");
 	iDirectScreenAccess->StartL();
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::PrepareDSAL--");
 	}
 
 void CVideoPlayerUtility::CBody::SetDisplayWindowL(RWsSession& aWs, CWsScreenDevice& aScreenDevice,
 							RWindowBase& aWindow, const TRect& aWindowRect,
 							const TRect& aClipRect)
 	{	
-	iWindowRect = aWindowRect;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetDisplayWindowL++");
+    DEBUG_PRINTF4("CVideoPlayerUtility::CBody::SetDisplayWindowL - aScreenDevice num %d, width %d, height %d", aScreenDevice.GetScreenNumber(), aScreenDevice.SizeInPixels().iWidth, aScreenDevice.SizeInPixels().iHeight);
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetDisplayWindowL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::SetDisplayWindowL - aWindow abs pos %d,%d - width %d, height %d", aWindow.AbsPosition().iX, aWindow.AbsPosition().iY, aWindow.Size().iWidth, aWindow.Size().iHeight);
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::SetDisplayWindowL - aWindowRect %d,%d - %d,%d", aWindowRect.iTl.iX, aWindowRect.iTl.iY, aWindowRect.iBr.iX, aWindowRect.iBr.iY);
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::SetDisplayWindowL - aClipRect %d,%d - %d,%d", aClipRect.iTl.iX, aClipRect.iTl.iY, aClipRect.iBr.iX, aClipRect.iBr.iY);
+
+    iWindowRect = aWindowRect;
 	iClipRect = aClipRect;
 	
 #ifdef SYMBIAN_BUILD_GCE
@@ -630,6 +686,7 @@ void CVideoPlayerUtility::CBody::SetDisplayWindowL(RWsSession& aWs, CWsScreenDev
 			}
 		}
 #endif
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetDisplayWindowL--");
 	}
 
 TReal32 CVideoPlayerUtility::CBody::VideoFrameRateL() const
@@ -668,6 +725,9 @@ TInt CVideoPlayerUtility::CBody::Balance() const
 
 void CVideoPlayerUtility::CBody::SetRotationL(TVideoRotation aRotation)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetRotationL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetRotationL - aRotation %d", aRotation);
+
 #ifdef SYMBIAN_BUILD_GCE
 	if (!iGraphicsSurfaceSupported)
 		{
@@ -708,6 +768,8 @@ void CVideoPlayerUtility::CBody::SetRotationL(TVideoRotation aRotation)
 #else 
 	User::LeaveIfError(iVideoPlayControllerCustomCommands.SetRotation(aRotation));
 #endif // SYMBIAN_BUILD_GCE
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetRotationL--");
 	}
 
 TVideoRotation CVideoPlayerUtility::CBody::RotationL() const
@@ -731,6 +793,9 @@ TVideoRotation CVideoPlayerUtility::CBody::RotationL() const
 
 void CVideoPlayerUtility::CBody::SetScaleFactorL(TReal32 aWidthPercentage, TReal32 aHeightPercentage, TBool aAntiAliasFiltering)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetScaleFactorL");
+    DEBUG_PRINTF4("CVideoPlayerUtility::CBody::SetScaleFactorL - aWidthPercentage %f, aHeightPercentage %f, aAntiAliasFiltering %d", aWidthPercentage, aHeightPercentage, aAntiAliasFiltering);
+
 #ifdef SYMBIAN_BUILD_GCE
 	if (!iGraphicsSurfaceSupported)
 		{
@@ -755,6 +820,8 @@ void CVideoPlayerUtility::CBody::SetScaleFactorL(TReal32 aWidthPercentage, TReal
 #else
 	User::LeaveIfError(iVideoPlayControllerCustomCommands.SetScaleFactor(aWidthPercentage, aHeightPercentage, aAntiAliasFiltering));
 #endif	// SYMBIAN_BUILD_GCE
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetScaleFactorL--");
 	}
 
 void CVideoPlayerUtility::CBody::GetScaleFactorL(TReal32& aWidthPercentage, TReal32& aHeightPercentage, TBool& aAntiAliasFiltering) const
@@ -853,7 +920,10 @@ CMMFMetaDataEntry* CVideoPlayerUtility::CBody::MetaDataEntryL(TInt aMetaDataInde
 
 void CVideoPlayerUtility::CBody::SetPriorityL(TInt aPriority, TInt aPref)
 	{
-	iPrioritySettings.iPref = aPref;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetPriorityL++");
+    DEBUG_PRINTF3("CVideoPlayerUtility::CBody::SetPriorityL - aPriority %d, aPref %d", aPriority, aPref);
+
+    iPrioritySettings.iPref = aPref;
 	iPrioritySettings.iPriority = aPriority;
 
 	TInt err = iController.SetPrioritySettings(iPrioritySettings);
@@ -865,6 +935,7 @@ void CVideoPlayerUtility::CBody::SetPriorityL(TInt aPriority, TInt aPref)
 		{
 		User::Leave(err);
 		}
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetPriorityL--");
 	}
 
 void CVideoPlayerUtility::CBody::PriorityL(TInt & aPriority, TMdaPriorityPreference &aPref) const 
@@ -876,7 +947,10 @@ void CVideoPlayerUtility::CBody::PriorityL(TInt & aPriority, TMdaPriorityPrefere
 
 void CVideoPlayerUtility::CBody::SetPositionL(const TTimeIntervalMicroSeconds& aPosition)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetPositionL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetPositionL - aPosition %ld", aPosition.Int64());
 	User::LeaveIfError(iController.SetPosition(aPosition));
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetPositionL--");
 	}
 
 
@@ -971,7 +1045,10 @@ TFourCC CVideoPlayerUtility::CBody::AudioTypeL() const
 
 void CVideoPlayerUtility::CBody::HandleEvent(const TMMFEvent& aEvent)
 	{
-	if (aEvent.iEventType == KMMFEventCategoryVideoOpenComplete)
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::HandleEvent++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::HandleEvent - Event type 0x%X", aEvent.iEventType);
+
+    if (aEvent.iEventType == KMMFEventCategoryVideoOpenComplete)
 		{
 		// if we haven't had a MfaocComplete() callback yet,
 		// we need to delay the call back to the client
@@ -1066,12 +1143,16 @@ void CVideoPlayerUtility::CBody::HandleEvent(const TMMFEvent& aEvent)
 	else 
 		// Pass on all unrecognised events to the client
 		iObserver.MvpuoEvent(aEvent);
+
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::HandleEvent--");
 	}
 
 #ifdef SYMBIAN_BUILD_GCE
 TInt CVideoPlayerUtility::CBody::SurfaceCreated()
 	{
-	TInt count = iActiveDisplays.Count();
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SurfaceCreated++");
+
+    TInt count = iActiveDisplays.Count();
 	TBool replaceSurface = !(iSurfaceId.IsNull());
 	TSurfaceId oldSurfaceId(iSurfaceId);
 	
@@ -1130,11 +1211,14 @@ TInt CVideoPlayerUtility::CBody::SurfaceCreated()
             error = error2;
             }
         }
-    return error;
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::SurfaceCreated--");
+	return error;
 	}
 
 TInt CVideoPlayerUtility::CBody::SurfaceParametersChanged()
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SurfaceParametersChanged++");
 	if (iSurfaceId.IsNull())
 		{
 		return KErrNotSupported;
@@ -1171,7 +1255,8 @@ TInt CVideoPlayerUtility::CBody::SurfaceParametersChanged()
 			error = error2;
 			}
 		}
-	return error;
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SurfaceParametersChanged-- - Error %d", error);
+    return error;
 	}
 		
 TInt CVideoPlayerUtility::CBody::SetAllBackgroundSurfaces()
@@ -1194,6 +1279,7 @@ TInt CVideoPlayerUtility::CBody::SetAllBackgroundSurfaces()
 
 TInt CVideoPlayerUtility::CBody::RemoveSurface(TBool aControllerEvent)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::RemoveSurface++");
 	if (iSurfaceId.IsNull())
 		{
 		return KErrNotFound;
@@ -1209,6 +1295,7 @@ TInt CVideoPlayerUtility::CBody::RemoveSurface(TBool aControllerEvent)
 
 	iSurfaceId = TSurfaceId::CreateNullId();
 	
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::RemoveSurface-- - Error %d", error);
 	return error;
 	}
 	
@@ -1402,7 +1489,14 @@ void CVideoPlayerUtility::CBody::AddDisplayWindowL(RWsSession& aWs, CWsScreenDev
 							RWindow& aWindow, const TRect& aVideoExtent, 
 							const TRect& aWindowClipRect)
 	{
-	// set window and get display ID for the window
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::AddDisplayWindowL++");
+    DEBUG_PRINTF4("CVideoPlayerUtility::CBody::AddDisplayWindowL - aScreenDevice num %d, width %d, height %d", aScreenDevice.GetScreenNumber(), aScreenDevice.SizeInPixels().iWidth, aScreenDevice.SizeInPixels().iHeight);
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::AddDisplayWindowL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::AddDisplayWindowL - aWindow abs pos %d,%d - width %d, height %d", aWindow.AbsPosition().iX, aWindow.AbsPosition().iY, aWindow.Size().iWidth, aWindow.Size().iHeight);
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::AddDisplayWindowL - aVideoExtent %d,%d - %d,%d", aVideoExtent.iTl.iX, aVideoExtent.iTl.iY, aVideoExtent.iBr.iX, aVideoExtent.iBr.iY);
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::AddDisplayWindowL - aWindowClipRect %d,%d - %d,%d", aWindowClipRect.iTl.iX, aWindowClipRect.iTl.iY, aWindowClipRect.iBr.iX, aWindowClipRect.iBr.iY);
+
+    // set window and get display ID for the window
 	TRect windowRect = TRect(aWindow.Size()); 
 	
 	// Check the rectangle is contained completely within the window
@@ -1415,11 +1509,19 @@ void CVideoPlayerUtility::CBody::AddDisplayWindowL(RWsSession& aWs, CWsScreenDev
 		}
 		
 	DoAddDisplayWindowL(aWs, aScreenDevice.GetScreenNumber(), aWindow, aWindowClipRect, aVideoExtent, &aWindow);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::AddDisplayWindowL--");
 	}
 	
 void CVideoPlayerUtility::CBody::AddDisplayWindowL(RWsSession& aWs, CWsScreenDevice& aScreenDevice, RWindow& aWindow)
 	{
-	DoAddDisplayWindowL(aWs, aScreenDevice.GetScreenNumber(), aWindow, TRect(aWindow.Size()), TRect(aWindow.Size()), &aWindow);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::AddDisplayWindowL++");
+    DEBUG_PRINTF4("CVideoPlayerUtility::CBody::AddDisplayWindowL - aScreenDevice num %d, width %d, height %d", aScreenDevice.GetScreenNumber(), aScreenDevice.SizeInPixels().iWidth, aScreenDevice.SizeInPixels().iHeight);
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::AddDisplayWindowL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::AddDisplayWindowL - aWindow abs pos %d,%d - width %d, height %d", aWindow.AbsPosition().iX, aWindow.AbsPosition().iY, aWindow.Size().iWidth, aWindow.Size().iHeight);
+
+    DoAddDisplayWindowL(aWs, aScreenDevice.GetScreenNumber(), aWindow, TRect(aWindow.Size()), TRect(aWindow.Size()), &aWindow);
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::AddDisplayWindowL--");
 	}
 
 void CVideoPlayerUtility::CBody::DoAddDisplayWindowL(RWsSession& aWs, TInt aDisplayId, RWindowBase& aWindow,
@@ -1450,11 +1552,11 @@ void CVideoPlayerUtility::CBody::DoAddDisplayWindowL(RWsSession& aWs, TInt aDisp
 		{
 		if(iSurfaceId.IsNull())
 			{
-			display = CMediaClientVideoDisplayBody::NewL(aDisplayId);
+			display = CMediaClientVideoDisplayBody::NewL(aDisplayId, ETrue);
 			}
 		else
 			{
-			display = CMediaClientVideoDisplayBody::NewL(aDisplayId, iSurfaceId, iSurfaceCropRect, iAspectRatio);
+			display = CMediaClientVideoDisplayBody::NewL(aDisplayId, iSurfaceId, iSurfaceCropRect, iAspectRatio, ETrue);
 			}
 		CleanupStack::PushL(display);
 		iActiveDisplays.InsertInOrderL(display, CMediaClientVideoDisplayBody::Compare);
@@ -1485,7 +1587,10 @@ void CVideoPlayerUtility::CBody::DoAddDisplayWindowL(RWsSession& aWs, TInt aDisp
 
 void CVideoPlayerUtility::CBody::RemoveDisplayWindow(RWindowBase& aWindow)
 	{
-	CMediaClientVideoDisplayBody* display = NULL;
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::RemoveDisplayWindow++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::RemoveDisplayWindow - aWindow WsHandle 0x%X", aWindow.WsHandle());
+
+    CMediaClientVideoDisplayBody* display = NULL;
 	TRAPD(err, display = CMediaClientVideoDisplayBody::FindDisplayWithWindowL(iActiveDisplays, aWindow));
 	
 	if (err == KErrNone)
@@ -1508,10 +1613,13 @@ void CVideoPlayerUtility::CBody::RemoveDisplayWindow(RWindowBase& aWindow)
 			}
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
 		}	
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::RemoveDisplayWindow--");
 	}
 
 void CVideoPlayerUtility::CBody::AddDisplayL(TInt aDisplay, MMMFSurfaceEventHandler& aEventHandler)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::AddDisplayL");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::AddDisplayL - aDisplay %d", aDisplay);
 	if (!iControllerOpen)
 		{
 		User::Leave(KErrNotReady);
@@ -1524,11 +1632,11 @@ void CVideoPlayerUtility::CBody::AddDisplayL(TInt aDisplay, MMMFSurfaceEventHand
 		CMediaClientVideoDisplayBody* display;
 		if(iSurfaceId.IsNull())
 			{
-			display = CMediaClientVideoDisplayBody::NewL(aDisplay);
+			display = CMediaClientVideoDisplayBody::NewL(aDisplay, ETrue);
 			}
 		else
 			{
-			display = CMediaClientVideoDisplayBody::NewL(aDisplay, iSurfaceId, iSurfaceCropRect, iAspectRatio);
+			display = CMediaClientVideoDisplayBody::NewL(aDisplay, iSurfaceId, iSurfaceCropRect, iAspectRatio, ETrue);
 			}
 		CleanupStack::PushL(display);
 		iActiveDisplays.InsertInOrderL(display, CMediaClientVideoDisplayBody::Compare);
@@ -1540,10 +1648,13 @@ void CVideoPlayerUtility::CBody::AddDisplayL(TInt aDisplay, MMMFSurfaceEventHand
 		User::LeaveIfError(err);
 		iActiveDisplays[err]->AddDisplayL(aEventHandler);
 		}
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::AddDisplayL--");
 	}
 
 void CVideoPlayerUtility::CBody::RemoveDisplay(TInt aDisplay)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::RemoveDisplay++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::RemoveDisplay - aDisplay %d", aDisplay);
 	TInt pos = iActiveDisplays.FindInOrder(aDisplay, CMediaClientVideoDisplayBody::CompareByDisplay);
 	
 	if (pos >= KErrNone)
@@ -1557,6 +1668,7 @@ void CVideoPlayerUtility::CBody::RemoveDisplay(TInt aDisplay)
 			delete disp;
 			}
 		}
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::RemoveDisplay--");
 	}
 
 void CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow(
@@ -1566,6 +1678,7 @@ void CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow(
             TRect& aToWindowRect,
             TRect& aToClipRect)
     {
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow++");
     TPoint windowOrigin = aWindow.AbsPosition();
     
     // window rect
@@ -1579,11 +1692,19 @@ void CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow(
     aToClipRect.iTl.iY = aFromClipRect.iTl.iY - windowOrigin.iY;
     aToClipRect.iBr.iX = aFromClipRect.iBr.iX - windowOrigin.iX;
     aToClipRect.iBr.iY = aFromClipRect.iBr.iY - windowOrigin.iY;
+
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow - New Window rect %d,%d - %d,%d", aToWindowRect.iTl.iX, aToWindowRect.iTl.iY, aToWindowRect.iBr.iX, aToWindowRect.iBr.iY);
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow - New Clip rect %d,%d - %d,%d", aToClipRect.iTl.iX, aToClipRect.iTl.iY, aToClipRect.iBr.iX, aToClipRect.iBr.iY);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::ConvertFromRelativeToDisplayToRelativeToWindow--");
     }
 
 void CVideoPlayerUtility::CBody::SetVideoExtentL(const RWindowBase& aWindow, const TRect& aVideoExtent)
 	{
-	// check opening the source is complete and the client has been recieved an MvpuoOpenComplete() callback
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetVideoExtentL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetVideoExtentL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::SetVideoExtentL - aVideoExtent %d,%d - %d,%d", aVideoExtent.iTl.iX, aVideoExtent.iTl.iY, aVideoExtent.iBr.iX, aVideoExtent.iBr.iY);
+
+    // check opening the source is complete and the client has been recieved an MvpuoOpenComplete() callback
 	if (!iControllerOpen)
 		{
 		User::Leave(KErrNotReady);
@@ -1591,10 +1712,16 @@ void CVideoPlayerUtility::CBody::SetVideoExtentL(const RWindowBase& aWindow, con
 		
 	CMediaClientVideoDisplayBody* display = CMediaClientVideoDisplayBody::FindDisplayWithWindowL(iActiveDisplays, aWindow);
 	display->SetVideoExtentL(aWindow, aVideoExtent, iCropRegion);
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetVideoExtentL--");
 	}
 
 void CVideoPlayerUtility::CBody::SetWindowClipRectL(const RWindowBase& aWindow, const TRect& aWindowClipRect)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetWindowClipRectL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetWindowClipRectL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF5("CVideoPlayerUtility::CBody::SetWindowClipRectL - aWindowClipRect %d,%d - %d,%d", aWindowClipRect.iTl.iX, aWindowClipRect.iTl.iY, aWindowClipRect.iBr.iX, aWindowClipRect.iBr.iY);
+
     // check opening the source is complete and the client has been recieved an MvpuoOpenComplete() callback
 	if (!iControllerOpen)
 		{
@@ -1623,6 +1750,8 @@ void CVideoPlayerUtility::CBody::SetWindowClipRectL(const RWindowBase& aWindow, 
 #else
 	display->SetWindowClipRectL(aWindow, aWindowClipRect, iCropRegion);
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetWindowClipRectL--");
 	}
 
 // Check if the controller supports the graphics surface. Has to be called after resource opened.
@@ -1658,18 +1787,28 @@ void CVideoPlayerUtility::CBody::SetAutoScaleL(const RWindowBase& aWindow, TAuto
 	
 void CVideoPlayerUtility::CBody::SetAutoScaleL(const RWindowBase& aWindow, TAutoScaleType aScaleType, TInt aHorizPos, TInt aVertPos)
 	{
-	if (!iControllerOpen)
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetAutoScaleL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetAutoScaleL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF4("CVideoPlayerUtility::CBody::SetAutoScaleL - aScaleType %d, aHorizPos %d, aVertPos %d", aScaleType, aHorizPos, aVertPos);
+
+    if (!iControllerOpen)
 		{
 		User::Leave(KErrNotReady);
 		}
 		
 	CMediaClientVideoDisplayBody* display = CMediaClientVideoDisplayBody::FindDisplayWithWindowL(iActiveDisplays, aWindow);
 	display->SetAutoScaleL(aWindow, aScaleType, aHorizPos, aVertPos, iCropRegion);
+
+	DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetAutoScaleL--");
 	}
 
 void CVideoPlayerUtility::CBody::SetRotationL(const RWindowBase& aWindow, TVideoRotation aRotation)
 	{
-	if (!iControllerOpen)
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetRotationL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetRotationL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetRotationL - aRotation %d", aRotation);
+
+    if (!iControllerOpen)
 		{
 		User::Leave(KErrNotReady);
 		}
@@ -1688,6 +1827,7 @@ void CVideoPlayerUtility::CBody::SetRotationL(const RWindowBase& aWindow, TVideo
 #else
 	display->SetRotationL(aWindow, aRotation, iCropRegion);
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetRotationL--");
 	}
 	
 TVideoRotation CVideoPlayerUtility::CBody::RotationL(const RWindowBase& aWindow) const
@@ -1702,6 +1842,9 @@ TVideoRotation CVideoPlayerUtility::CBody::RotationL(const RWindowBase& aWindow)
 	
 void CVideoPlayerUtility::CBody::SetScaleFactorL(const RWindowBase& aWindow, TReal32 aWidthPercentage, TReal32 aHeightPercentage)
 	{
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetScaleFactorL++");
+    DEBUG_PRINTF2("CVideoPlayerUtility::CBody::SetScaleFactorL - aWindow WsHandle 0x%X", aWindow.WsHandle());
+    DEBUG_PRINTF3("CVideoPlayerUtility::CBody::SetScaleFactorL - aWidthPercentage %f, aHeightPercentage %f", aWidthPercentage, aHeightPercentage);
 	if (!iControllerOpen)
 		{
 		User::Leave(KErrNotReady);
@@ -1709,6 +1852,7 @@ void CVideoPlayerUtility::CBody::SetScaleFactorL(const RWindowBase& aWindow, TRe
 		}
 	CMediaClientVideoDisplayBody* display = CMediaClientVideoDisplayBody::FindDisplayWithWindowL(iActiveDisplays, aWindow);
 	display->SetScaleFactorL(aWindow, aWidthPercentage, aHeightPercentage, iCropRegion);
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetScaleFactorL--");
 	}
 	
 void CVideoPlayerUtility::CBody::GetScaleFactorL(const RWindowBase& aWindow, TReal32& aWidthPercentage, TReal32& aHeightPercentage) const
@@ -1852,7 +1996,10 @@ void CVideoPlayerUtility::CBody::SetAutoScaleL(TAutoScaleType aScaleType)
 	}
 void CVideoPlayerUtility::CBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt aHorizPos, TInt aVertPos)
 	{
-	// Leave if Open is not yet called.
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetAutoScaleL++");
+    DEBUG_PRINTF4("CVideoPlayerUtility::CBody::SetAutoScaleL - aScaleType %d, aHorizPos %d, aVertPos %d", aScaleType, aHorizPos, aVertPos);
+
+    // Leave if Open is not yet called.
 	if(!iEventOpenReceived )
 		{
 		User::Leave(KErrNotReady);
@@ -1882,6 +2029,7 @@ void CVideoPlayerUtility::CBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt a
 #else
 	User::LeaveIfError(iVideoPlayControllerExtCustomCommands.SetAutoScale(aScaleType, aHorizPos, aVertPos));
 #endif // SYMBIAN_BUILD_GCE
+    DEBUG_PRINTF("CVideoPlayerUtility::CBody::SetAutoScaleL--");
 	}
 
 #ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT

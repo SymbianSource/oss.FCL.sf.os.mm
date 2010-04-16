@@ -1286,10 +1286,10 @@ TVerdict CTestMmfAclntRecDes::DoTestStepL( void )
 
 		if (iError != KErrOverflow)
 			{
-			ERR_PRINTF2( _L("CMdaAudioRecorderUtility failed with error %d"),iError );
-			CleanupStack::PopAndDestroy(recUtil);	
-			User::After(KOneSecond);
-			return ret;
+            ERR_PRINTF2( _L("CMdaAudioRecorderUtility failed with error %d"),iError );
+            CleanupStack::PopAndDestroy(recUtil);	
+            User::After(KOneSecond);
+            return ret;
 			}
 
 		TInt expectedLength=0;
@@ -1376,6 +1376,29 @@ TVerdict CTestMmfAclntRecDes::DoTestStepL( void )
 			else
 				{
 				INFO_PRINTF3(_L("Expected length %d, actual length %d"), expectedLength, actualLength);
+				
+				TInt machineType;
+	            TInt err = HAL::Get(HALData::EMachineUid, machineType);
+	            if (err)
+	                {
+				    ERR_PRINTF1(_L("Error Getting Device information"));
+				    iTestStepResult = EFail;
+				    CActiveScheduler::Stop();
+				    }
+	            else
+	                {
+                    if ((machineType == 0x102864F7) && (sampleRate == 8000))
+                        {
+                            // If test is running on a NaviEngine and uses 8K sample rate
+                            // then apply a tollerance when checking duration as we will
+                            // have applied conversion function.
+                            if ((iAudio->Length() >= expectedLength - 1000) &&
+                                 (iAudio->Length() <= expectedLength + 1000))
+                                {
+                                ret = EPass;
+                                }
+                        }
+	                }
 				}
 			}
 		else

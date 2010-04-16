@@ -151,14 +151,16 @@ One, and only one of "setup", "build" or "clean" must be given.
         commands += ["--logfile=-"] # send output to stdout
         if self.iOptions.keepgoing:
             commands += ["--keepgoing"]
-        if len(remainingArgs)>0 and remainingArgs[0]=="winscw":
-            if testBuild:
-                commands += ["--config=winscw.test"]
-            else:
-                commands += ["--config=winscw"]
+        if testBuild:
+            commands += ["--config=winscw.test"]
         else:
+            commands += ["--config=winscw"]
+        if not(len(remainingArgs)>0 and remainingArgs[0]=="winscw"):
+            # not the winscw scenario - we want both winscw and armv5
             if testBuild:
-               commands += ["--config=default.test"]
+                commands += ["--config=armv5.test"]
+            else:
+                commands += ["--config=armv5"]
         commands += ["--filters=FilterSquashLog"] # reduce log size
         commands += ["--tries=2"] # retry on failure - e.g. for license fails
         commands += ["build"]

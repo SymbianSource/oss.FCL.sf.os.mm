@@ -160,9 +160,9 @@ void CDevCommonControl::ProcessingUnitError(MAudioProcessingUnit* /*aInstance*/,
 
     if(iCallbackFromAdaptor == KCallbackNone)   
         {
-        iCallbackFromAdaptor = KCallbackProcessingUnitError;
-        iAdaptationObserver->CallbackFromAdaptorReceived(KCallbackProcessingUnitError, KErrNone);
         iProcessingUnitError = aError;
+        iCallbackFromAdaptor = KCallbackProcessingUnitError;
+        iAdaptationObserver->CallbackFromAdaptorReceived(KCallbackProcessingUnitError, aError);
         }
     else
         {
@@ -177,28 +177,42 @@ void CDevCommonControl::ProcessingUnitError(MAudioProcessingUnit* /*aInstance*/,
 void CDevCommonControl::ContextEvent(TUid aEvent, TInt aError) 
     {
     DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
-    DP_IN();
+    DP3_IN("ContextEvent aEvent=%x iActiveState=%d aError=%d",aEvent, iDevAudio->iActiveState, aError);
 
     // Can't "switch {...}" on UIDs unfortunately:
-
     if (aEvent == KUidA3FContextUpdateComplete)
         {
-        //use a sub state pattern to make premtion cycles like other cycles.
-        if(iBeingPreempted)
+        if(iBeingPreempted && iStateEventReceived)
             {
+            //use a sub state pattern to make premtion cycles like other cycles.
             DP1(DLERR,"Preemption error=%d", aError);
-            CDevAudioControl::ContextEvent(aEvent, aError);
             iDevAudio->iActiveState = EDevSoundAdaptorBeingPreempted;
             iBeingPreempted=EFalse;
             }
-        ContextEventUpdateComplete(aError);
+		ContextEventUpdateComplete(aError);
+        }
+
+    else if ((aEvent == KUidA3FContextCommitUpdate))
+        {
+        iBeingPreempted=EFalse; // clear being preempted
+        TBool adaptorControlsContext = iAdaptationObserver->AdaptorControlsContext();
+        iIgnoreAsyncOpComplete = !adaptorControlsContext;
+            // if we don't control context, always send a PreemptionFinishedCallbackReceived()
+		iStateEventReceived=EFalse;
         }
 
     else if ((aEvent == KUidA3FContextPreEmption) or (aEvent == KUidA3FContextPreEmptedCommit))
         {
-        //we are not being preemptied
+        // clear iBeingPreepted - will be set in ContextEventPreEmption if req
         iBeingPreempted=EFalse;
+        TBool adaptorControlsContext = iAdaptationObserver->AdaptorControlsContext();
+		iStateEventReceived=EFalse;
+        iIgnoreAsyncOpComplete=EFalse; // clear being iIgnoreAsyncOpComplete
         ContextEventPreEmption(aEvent, aError);
+        if (!adaptorControlsContext)
+            {
+            iIgnoreAsyncOpComplete = ETrue; // if we don't control context never do AsyncOpComplete
+            }
         }
 
     else if (aEvent == KUidA3FContextAbort)
@@ -212,7 +226,7 @@ void CDevCommonControl::ContextEvent(TUid aEvent, TInt aError)
 
 void CDevCommonControl::ContextEventAsynchronousPlayCompletion(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventAsynchronousPlayCompletion, CtxDevSound, DPLOCAL);
     DP_IN();
     
 	iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
@@ -228,7 +242,7 @@ void CDevCommonControl::ContextEventAsynchronousPlayCompletion(TInt aError) // f
 
 void CDevCommonControl::ContextEventAsynchronousInitializeComplete(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventAsynchronousInitializeComplete, CtxDevSound, DPLOCAL);
     DP_IN();
     
     iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
@@ -240,7 +254,7 @@ void CDevCommonControl::ContextEventAsynchronousInitializeComplete(TInt aError) 
 
 void CDevCommonControl::ContextEventUpdateComplete(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventUpdateComplete, CtxDevSound, DPLOCAL);
     DP_IN();
     
     if (iStateEventReceived)
@@ -277,7 +291,7 @@ void CDevCommonControl::ContextEventUpdateComplete(TInt aError) // from CDevComm
 
 void CDevCommonControl::ContextEventPreEmption(TUid aEvent, TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventPreEmption, CtxDevSound, DPLOCAL);
     DP_IN();
     
     DP1(DLERR,"Preemption error=%d", aError);
@@ -290,7 +304,7 @@ void CDevCommonControl::ContextEventPreEmption(TUid aEvent, TInt aError) // from
 
 void CDevCommonControl::ContextEventAbort(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventAbort, CtxDevSound, DPLOCAL);
     DP_IN();
     
     DP1(DLERR,"Abort error=%d", aError);
@@ -302,7 +316,7 @@ void CDevCommonControl::ContextEventAbort(TInt aError) // from CDevCommonControl
 
 void CDevCommonControl::ContextEventStopDevSoundNotifications() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventStopDevSoundNotifications, CtxDevSound, DPLOCAL);
     DP_IN();
     
     iDevAudio->iAudioStream->UnregisterAudioStreamObserver(*this);
@@ -316,7 +330,7 @@ void CDevCommonControl::ContextEventStopDevSoundNotifications() // from CDevComm
 
 void CDevCommonControl::ContextEventPauseResumeSequenceDueToEmptyBuffers(TBool aFlush) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventPauseResumeSequenceDueToEmptyBuffers, CtxDevSound, DPLOCAL);
     DP_IN();
     
     TInt err(KErrNone);
@@ -345,7 +359,7 @@ void CDevCommonControl::ContextEventPauseResumeSequenceDueToEmptyBuffers(TBool a
 
 void CDevCommonControl::ContextEventStateDevSoundAdaptorUnloading() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventStateDevSoundAdaptorUnloading, CtxDevSound, DPLOCAL);
     DP_IN();
     
     // Due destruction sequence or reinitialization
@@ -400,7 +414,7 @@ void CDevCommonControl::ContextEventStateDevSoundAdaptorUnloading() // from CDev
 
 void CDevCommonControl::ContextEventStateDevSoundAdaptorLoading() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventStateDevSoundAdaptorLoading, CtxDevSound, DPLOCAL);
     DP_IN();
     
     iDevAudio->RequestGainAndBalance(this); // TODO handle error
@@ -429,7 +443,7 @@ void CDevCommonControl::ContextEventStateDevSoundAdaptorLoading() // from CDevCo
 
 void CDevCommonControl::ContextEventStateDevSoundAdaptorStopping() // from CDevCommonControl
     {   
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventStateDevSoundAdaptorStopping, CtxDevSound, DPLOCAL);
     DP_IN();
     
     TInt err = Unload();
@@ -447,7 +461,7 @@ void CDevCommonControl::ContextEventStateDevSoundAdaptorStopping() // from CDevC
 
 void CDevCommonControl::ContextEventStateDevSoundAdaptorBeingPreempted() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventStateDevSoundAdaptorBeingPreempted, CtxDevSound, DPLOCAL);
     DP_IN();
     
     __ASSERT_DEBUG(iDevAudio->iActiveStreamState == EInitialized, Panic(EStreamBeingDemotedToEIdle));
@@ -468,7 +482,7 @@ void CDevCommonControl::ContextEventStateDevSoundAdaptorBeingPreempted() // from
 
 void CDevCommonControl::ContextEventStateDevSoundAdaptorUninitializing() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventStateDevSoundAdaptorUninitializing, CtxDevSound, DPLOCAL);
     DP_IN();
     TInt err = RemoveProcessingUnits();
 
@@ -487,7 +501,7 @@ void CDevCommonControl::ContextEventStateDevSoundAdaptorUninitializing() // from
 
 void CDevCommonControl::ContextEventErrorStateDevSoundAdaptorActivating(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventErrorStateDevSoundAdaptorActivating, CtxDevSound, DPLOCAL);
     DP_IN();
 
     // If the resume operation fails as result of EmptyBuffers
@@ -515,7 +529,7 @@ void CDevCommonControl::ContextEventErrorStateDevSoundAdaptorActivating(TInt aEr
 
 void CDevCommonControl::ContextEventErrorStateDevSoundAdaptorBeingPreempted() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventErrorStateDevSoundAdaptorBeingPreempted, CtxDevSound, DPLOCAL);
     DP_IN();
     
 __ASSERT_DEBUG(iDevAudio->iActiveStreamState == EInitialized, Panic(EStreamBeingDemotedToEIdle));
@@ -532,12 +546,20 @@ __ASSERT_DEBUG(iDevAudio->iActiveStreamState == EInitialized, Panic(EStreamBeing
 
 void CDevCommonControl::ContextEventUpdateWithoutStateEventNoError() // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
-    DP_IN();
+    DP_CONTEXT(CDevCommonControl::ContextEventUpdateWithoutStateEventNoError, CtxDevSound, DPLOCAL);
+    DP2_IN("iActiveState=%d iIgnoreAsyncOpComplete=%d",iDevAudio->iActiveState, iIgnoreAsyncOpComplete);
     
     if (iDevAudio->iActiveState != EDevSoundAdaptorRemovingProcessingUnits)
         {
-        iAdaptationObserver->AsynchronousOperationComplete(KErrNone, ETrue);
+	    if (iIgnoreAsyncOpComplete)
+	      {
+	      iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue);
+	      iIgnoreAsyncOpComplete = EFalse;
+	      }
+	    else
+	      {
+	      iAdaptationObserver->AsynchronousOperationComplete(KErrNone, ETrue);
+	      }
         DP_OUT();
         return;
         }
@@ -568,11 +590,9 @@ void CDevCommonControl::ContextEventUpdateWithoutStateEventNoError() // from CDe
 
 void CDevCommonControl::ContextEventUpdateWithoutStateEventButWithError(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventUpdateWithoutStateEventButWithError, CtxDevSound, DPLOCAL);
     DP_IN();
     
-	// NOTE: If no state change then do NOT complete the event.
-	
     // NOTE: We shouldn't actually be in any of the states below when calling this function.
     //       But just in case we are we will rewind the state before dealing with the error. 
     switch (iDevAudio->iActiveState)
@@ -602,7 +622,7 @@ void CDevCommonControl::ContextEventUpdateWithoutStateEventButWithError(TInt aEr
 
 void CDevCommonControl::ContextEventUpdateWithStateEventNoError() // from CDevCommonControl 
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventUpdateWithStateEventNoError, CtxDevSound, DPLOCAL);
     DP_IN();
 
     switch (iDevAudio->iActiveState)
@@ -657,10 +677,10 @@ void CDevCommonControl::ContextEventUpdateWithStateEventNoError() // from CDevCo
 
 void CDevCommonControl::ContextEventUpdateWithStateEventAndError(TInt aError) // from CDevCommonControl
     {
-    DP_CONTEXT(CDevCommonControl::ContextEvent, CtxDevSound, DPLOCAL);
+    DP_CONTEXT(CDevCommonControl::ContextEventUpdateWithStateEventAndError, CtxDevSound, DPLOCAL);
     DP_IN();
 
-    DP1(DLERR,"ContextEvent error=%d", aError);
+    DP1(DLERR,"ContextEventUpdateWithStateEventAndError error=%d", aError);
     
     switch(iDevAudio->iActiveState)
         {

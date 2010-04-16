@@ -30,5 +30,5 @@ PRJ_EXPORTS
 PRJ_MMPFILES
 ../AudioEqualizerUtility/group/AudioEqualizerUtility.mmp
 ../EnvironmentalReverbUtility/group/EnvironmentalReverbUtility.mmp
-../StereoWideningUtility/group/StereoWideningUtility.mmp
+#include "../StereoWideningUtility/group/bld.inf"
 

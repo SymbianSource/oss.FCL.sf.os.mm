@@ -8815,6 +8815,7 @@ void RA3FDevSoundTestRecord::Reset()
     iRecordDataPriorToResume = EFalse;
     iCheckForNoDataAfterResume = EFalse;
     iInitAfterPauseClause = EFalse;
+    iResumeAfterResume = EFalse;
     }
 
 RA3FDevSoundTestRecord::~RA3FDevSoundTestRecord()
@@ -9111,7 +9112,11 @@ void RA3FDevSoundTestRecord::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 						    INFO_PRINTF1(_L("Calling CMMFDevSound::Resume()"));
 						    err = iMMFDevSound->Resume();
 						    }
-						
+						if(iResumeAfterResume)
+						    {
+						    INFO_PRINTF1(_L("Calling CMMFDevSound::Resume()"));
+						    err = iMMFDevSound->Resume();
+						    }
 						if (iTestStepName != _L("MM-MMF-DEVSOUND-U-0088-HP"))
 						    {
 						    INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
@@ -10235,6 +10240,12 @@ void RA3FDevSoundPauseAndResumeRecordingPCMTest::DoKickoffTestL()
     if ( !GetBoolFromConfig(iDefaultParamSet, KRecordDataPriorToResume, iRecordDataPriorToResume) )
         {
         ERR_PRINTF2(KMsgErrorGetParameter, &KRecordDataPriorToResume);
+        StopTest(KErrNotFound, ETestSuiteError);
+        return;     
+        }
+    if ( !GetBoolFromConfig(iDefaultParamSet, KCallResumeAfterResume, iResumeAfterResume) )
+        {
+        ERR_PRINTF2(KMsgErrorGetParameter, &KCallResumeAfterResume);
         StopTest(KErrNotFound, ETestSuiteError);
         return;     
         }
@@ -11387,6 +11398,12 @@ void RA3FDevSoundPauseAndInitRecordingPCMTest::DoKickoffTestL()
         StopTest(KErrNotFound, ETestSuiteError);
         return;     
         }
+    if ( !GetBoolFromConfig(iDefaultParamSet, KCallResumeAfterResume, iResumeAfterResume) )
+        {
+        ERR_PRINTF2(KMsgErrorGetParameter, &KCallResumeAfterResume);
+        StopTest(KErrNotFound, ETestSuiteError);
+        return;     
+        }
     if ( !GetBoolFromConfig(iDefaultParamSet, KCheckForNoDataAfterResume, iCheckForNoDataAfterResume) )
         {
         ERR_PRINTF2(KMsgErrorGetParameter, &KCheckForNoDataAfterResume);
@@ -11467,4 +11484,7 @@ void RA3FDevSoundPauseAndResumeAndInitPlayingTest::DoKickoffTestL()
     EncodingFromStringToTFourCC(fourccCode);
     iTimer = CPeriodic::NewL(CActive::EPriorityHigh);
     }
+
+
+
 

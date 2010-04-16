@@ -60,6 +60,15 @@ class CAudioOutputProxyAO : public CActive
         * @return void
         */
 		void SetRegisterFlag(TBool aFlag);
+		
+		/**
+        * ?member_description.
+        * @since Series 60 3.0
+        * @param aObserver Observer Instance
+        * @return void
+        */
+		void SetObserver(MAudioOutputObserver& aObserver);
+
 
     private:
 
@@ -89,7 +98,7 @@ class CAudioOutputProxyAO : public CActive
 		CAudioOutput*									iAudioOutputProxy;
 		MCustomCommand*							iCustomCommandUtility;
 		TPckgBuf<CAudioOutput::TAudioOutputPreference>	iCallbackData;
-		MAudioOutputObserver&							iObserver;
+		MAudioOutputObserver*							iObserver;
 		const TMMFMessageDestinationPckg*				iDestination;
 		TInt											iFunction;
 		TBool											iRegistered;

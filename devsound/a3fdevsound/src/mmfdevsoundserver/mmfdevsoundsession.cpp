@@ -227,7 +227,8 @@ void CMMFDevSoundSession::CreateL(const CMmfIpcServer& aServer)
 //
 void CMMFDevSoundSession::ServiceL(const RMmfIpcMessage& aMessage)
 	{
-	SYMBIAN_DEBPRN2(_L("\nCMMFDevSoundSession[0x%x] NEW REQUEST %02x while pending=%d"), aMessage.Function(), iOperationCompletePending);
+	SYMBIAN_DEBPRN2(_L("\nCMMFDevSoundSession[0x%x] NEW REQUEST %02x while pending=%d"),
+	        aMessage.Function(), iOperationCompletePending || iAsyncQueueStart->IsActive());
 	if( iOperationCompletePending || iAsyncQueueStart->IsActive())
 		{
 		// if not possible to service now, then queue request
@@ -236,7 +237,16 @@ void CMMFDevSoundSession::ServiceL(const RMmfIpcMessage& aMessage)
 	else
 		{
 		// If there is no oustanding operation service inmediately
-		DoServiceRequestL(aMessage);
+		TRAPD(err, DoServiceRequestL(aMessage));
+		if (err)
+		    {
+            aMessage.Complete(err); // repeat normal ServiceL() behaviour since we may keep going
+		    }
+	    if (!iOperationCompletePending && iQueuedRequests.Count() != 0)
+	        {
+	        //dequeue next
+	        DequeueRequest();
+	        }
 		}
 	}
 	
@@ -444,12 +454,14 @@ void CMMFDevSoundSession::DoServiceRequestL(const RMmfIpcMessage& aMessage)
 		if (iCIExtension)
 			{
 			iOperationCompletePending = ETrue;
+			iHandlingExtdCI = ETrue;
 			TRAPD(err2, err = iCIExtension->HandleMessageL(aMessage));
 			if (err2)
 				{
 				err = err2;
 				}
 			iOperationCompletePending = EFalse;
+			iHandlingExtdCI = EFalse;
 			}
 
 		if (err != KErrNone)
@@ -1699,6 +1711,11 @@ void CMMFDevSoundSession::PreemptionStartedCallbackReceived()
 //
 void CMMFDevSoundSession::PreemptionFinishedCallbackReceived(TBool aCanStartNewOperation)
 	{
+    if (iHandlingExtdCI)
+        {
+        // we are in the middle of handling a CI, so ignore - will handle later when unwinding
+        return;
+        }
 	iOperationCompletePending = EFalse;
 	if ( aCanStartNewOperation && iQueuedRequests.Count() != 0 )
 		{
@@ -1706,6 +1723,14 @@ void CMMFDevSoundSession::PreemptionFinishedCallbackReceived(TBool aCanStartNewO
 		}
 	}
 
+//
+// CMMFDevSoundSession::AdaptorControlsContext()
+//
+
+TBool CMMFDevSoundSession::AdaptorControlsContext() const
+    {
+    return !iHandlingExtdCI;
+    }
 
 MMMFDevSoundCustomInterfaceDeMuxPlugin* CMMFDevSoundSession::InterfaceFromUid(TUid aUid)
 	{
@@ -1740,6 +1765,9 @@ void CMMFDevSoundSession::SendEventToClient(const TMMFEvent& aEvent)
 
 void CMMFDevSoundSession::AsynchronousOperationComplete(TInt aError, TBool aCanStartNewOperation)
 	{
+    __ASSERT_DEBUG(!iHandlingExtdCI, Panic(EUnexpectedAsyncOpCompleteHandlingCI));
+        // when handling CIs we should not reach here
+
 	switch (iRequestBeingServiced.Type())
 		{
 		case TMMFDevSoundRequest::ESessionEvents:
@@ -1820,6 +1848,8 @@ void CMMFDevSoundSession::AsynchronousOperationComplete(TInt aError, TBool aCanS
 
 void CMMFDevSoundSession::DequeueRequest()
 	{
+    iAsyncQueueStart->Cancel(); // if we're in here cancel any background request
+
 	TMMFDevSoundRequest msg = iQueuedRequests[0];
 
 	if (msg.IsCallBack() > 0)
@@ -1839,7 +1869,8 @@ void CMMFDevSoundSession::DequeueRequest()
 		    }
 
 		}
-	else
+
+	if (iQueuedRequests.Count()>0)
 		{
 		// Some rules about what request can be followed
 		SYMBIAN_DEBPRN0(_L("\n CMMFDevSoundSession[0x%x]======== Flag can service new request\n"));

@@ -220,8 +220,10 @@ TInt RMdaDevSound::CBody::BytesPlayed()
 			{
 			timePlayed = endTime-iStartTime;
 			}	
-		TUint32 bytesPlayed = (timePlayed*iPlayData.iSampleRate*KBytesPerSample)/iFCFrequency;
-		currentBytesPlayed = iBytesPlayed+bytesPlayed;
+        TUint64 bytesPlayed = iPlayData.iSampleRate*KBytesPerSample;    //A TUint64 is used because during the multiplying segment of the calculation we regularly overflow what a TUint32 can handle
+        bytesPlayed = (bytesPlayed * timePlayed)/iFCFrequency;  //The division brings it back into TUint32 territory, however.  We cannot do this before the multiplication without risking significant loss of accuracy
+
+		currentBytesPlayed = iBytesPlayed+I64LOW(bytesPlayed);
         #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
             RDebug::Printf("EstimatedBytesPlayed[%d]  Driver's bytesPlayed[%d]", currentBytesPlayed, iBytesPlayed);
         #endif

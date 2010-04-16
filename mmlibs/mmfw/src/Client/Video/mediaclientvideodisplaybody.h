@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -16,7 +16,7 @@
 #ifndef MEDIACLIENTVIDEODISPLAYBODY_H
 #define MEDIACLIENTVIDEODISPLAYBODY_H
 
-#include <w32std.h>
+#include "mediaclientextdisplayhandler.h"
 #include <graphics/surface.h>
 #include <graphics/surfaceconfiguration.h>
 #include <mmf/common/mmfvideosurfacecustomcommands.h>
@@ -92,8 +92,8 @@ private:
 		};
 public:
 
-	static CMediaClientVideoDisplayBody* NewL(TInt aDisplayId);
-	static CMediaClientVideoDisplayBody* NewL(TInt aDisplayId, const TSurfaceId& aSurfaceId, const TRect& aCropRect, TVideoAspectRatio aAspectRatio);
+	static CMediaClientVideoDisplayBody* NewL(TInt aDisplayId, TBool aExtDisplaySwitchingControl);
+	static CMediaClientVideoDisplayBody* NewL(TInt aDisplayId, const TSurfaceId& aSurfaceId, const TRect& aCropRect, TVideoAspectRatio aAspectRatio, TBool aExtDisplaySwitchingControl);
 	
 	~CMediaClientVideoDisplayBody();
 	
@@ -129,7 +129,7 @@ private:
 	CMediaClientVideoDisplayBody(TInt aDisplayId);
 	CMediaClientVideoDisplayBody(TInt aDisplayId, const TSurfaceId& aSurfaceId, const TRect& aCropRect,	TVideoAspectRatio aAspectRatio);
 	
-	void ConstructL();
+	void ConstructL(TBool aExtDisplaySwitchingControl);
 	
 	CFbsBitGc::TGraphicsOrientation ConvertRotation(TVideoRotation aRotation);
 	
@@ -141,15 +141,18 @@ private:
 	static CMediaClientVideoDisplayBody* FindDisplayWithWindowL(const RPointerArray<CMediaClientVideoDisplayBody>& aDisplays, const RWindowBase& aWindow);
 	TBool IsSurfaceCreated() const;
 	TInt SetBackgroundSurface(TWindowData& aWindowData, const TRect& aCropRegion);
-	void CalculateExtentAndViewport(const TWindowData& aWindowData, TRect& aExtent, TRect& aViewport);
 	TBool HasWindows() const;
 	
-    void CreateExtDisplayConnProvAndRemoveSurfaceL(TBool aRemoveBackgroundSurface);
-    void RemoveExtDisplayConnProvAndRedrawL();
-    void RemoveExtDisplayConnProv();
-    void MedcpcExtDisplayCalculateExtentAndViewportL(TRect& aExtent, TRect& aViewport, TRect& aExternalDisplayRect);
     void MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected);
 
+    void UpdateCropRegionL(const TRect& aCropRegion, TInt aPos);
+    void CreateExtDisplayPluginL();
+    void RemoveExtDisplayPlugin();
+    void CreateExtDisplayHandlerL();
+    void RemoveExtDisplayHandler();
+    void SetWindowArrayPtr2Client();
+    void SetWindowArrayPtr2Ext();
+    
 private:
 
     MMMFSurfaceEventHandler* iEventHandler;
@@ -157,11 +160,15 @@ private:
 	TSurfaceId iSurfaceId;
 	TRect iCropRect;
 	TVideoAspectRatio iAspectRatio;
-	RArray<TWindowData> iWindows;
+	
+	RArray<TWindowData> iClientWindows;
+	RArray<TWindowData> iExtDisplayWindows;
+	RArray<TWindowData>* iWindowsArrayPtr;
 	
 	TRect iCropRegion;
 	TBool iClientRequestedExtDisplaySwitching;
 	CExtDisplayConnectionProviderInterface* iExtDisplayConnectionProvider;
+	CMediaClientExtDisplayHandler* iExtDisplayHandler;
     TBool iExtDisplayConnected;
     TBool iExtDisplaySwitchingSupported;
 	

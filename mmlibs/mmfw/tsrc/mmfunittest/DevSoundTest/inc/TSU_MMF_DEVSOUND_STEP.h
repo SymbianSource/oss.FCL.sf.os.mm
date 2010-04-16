@@ -1529,6 +1529,7 @@ _LIT(KFourccCode, "FourccCode");
 _LIT(KRecordDataFollowingResume, "RecordDataFollowingResume");
 _LIT(KRecordDataPriorToResume, "RecordDataPriorToResume");
 _LIT(KCheckForNoDataAfterResume, "CheckForNoDataAfterResume");
+_LIT(KCallResumeAfterResume, "CallResumeAfterResume ");
 
 enum TPanicCodes
 	{
@@ -1806,6 +1807,7 @@ protected:
 	TBool iRecordDataPriorToResume;
 	TBool iCheckForNoDataAfterResume;
 	TBool iInitAfterPauseClause;
+	TBool iResumeAfterResume;
 	};
 
 /*

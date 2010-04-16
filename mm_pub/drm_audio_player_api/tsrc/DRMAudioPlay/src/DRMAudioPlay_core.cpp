@@ -19,8 +19,8 @@
 #include <StifTestInterface.h>
 #include "DRMAudioPlay.h"
 #include <caf.h>
-#include <supplier.h>
-#include <importfile.h>
+#include <caf/supplier.h>
+#include <caf/importfile.h>
 #include <oma2agent.h>
 #include <BAUTILS.H>
 

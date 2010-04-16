@@ -223,7 +223,11 @@ class MDevSoundAdaptationObserver
 	*/
 	virtual void PreemptionFinishedCallbackReceived(TBool aCanStartNewOperation) = 0;
 
-	
+	/*
+	 * The adaptor has control of the context.
+	 * @return returns True if the adaptor is the entity responsible for calling Commit()
+	 */
+	virtual TBool AdaptorControlsContext() const = 0;
 
 	};
 

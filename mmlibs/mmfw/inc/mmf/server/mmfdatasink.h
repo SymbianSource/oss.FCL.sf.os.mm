@@ -222,7 +222,7 @@ protected:
 	@param  aType
 	        The source type UID.
 	*/
-	MDataSink(TUid aType): iDataSinkType(aType) {}
+	MDataSink(TUid aType): iDataSinkType(aType),iDtor_ID_Key(TUid::Null()) {}
 	
 private:
 	TUid iDataSinkType;

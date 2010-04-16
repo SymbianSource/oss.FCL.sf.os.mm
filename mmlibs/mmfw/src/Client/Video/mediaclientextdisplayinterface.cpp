@@ -1,4 +1,4 @@
-// Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -18,48 +18,28 @@
 #include <e32cmn.h> 
 #include <ecom/ecom.h>
 
-TBool CExtDisplayConnectionProviderInterface::ExternalDisplaySupportedL()
+void CleanupEComArray(TAny* aArray);
+
+CExtDisplayConnectionProviderInterface* CExtDisplayConnectionProviderInterface::NewL()
     {
     RImplInfoPtrArray implInfoArray;
-    REComSession::ListImplementationsL(TUid::Uid(KMediaDisplayExtProviderInterfaceUid), implInfoArray);
+    TCleanupItem cleanup(CleanupEComArray, &implInfoArray);
+    CleanupStack::PushL(cleanup);
 
-    TBool ret = EFalse;
-    if(implInfoArray.Count() > 0)
-        {
-        ret = ETrue;
-        }
-    
-    implInfoArray.Close();
-    return ret;
-    }
-
-CExtDisplayConnectionProviderInterface* CExtDisplayConnectionProviderInterface::NewL(MExtDisplayConnectionProviderCallback& aCallback, TSurfaceId& aSurfaceId)
-    {
-    RImplInfoPtrArray implInfoArray;
-    CleanupClosePushL(implInfoArray);
     REComSession::ListImplementationsL(TUid::Uid(KMediaDisplayExtProviderInterfaceUid), implInfoArray);
     
     if(implInfoArray.Count() == 0)
         {
-        User::Leave(KErrNotSupported);
+        CleanupStack::PopAndDestroy(); // implInfoArray
+        return NULL;
         }
     
     CExtDisplayConnectionProviderInterface* self = 
         REINTERPRET_CAST(CExtDisplayConnectionProviderInterface*, REComSession::CreateImplementationL(
                 implInfoArray[0]->ImplementationUid(), _FOFF(CExtDisplayConnectionProviderInterface, iInstanceKey)));
-    CleanupStack::PushL(self);
-    
-    self->ConstructL(aCallback, aSurfaceId);
-    CleanupStack::Pop(self);
     
     CleanupStack::PopAndDestroy(); // implInfoArray
     return self;
-    }
-
-void CExtDisplayConnectionProviderInterface::ConstructL(MExtDisplayConnectionProviderCallback& aCallback, TSurfaceId& aSurfaceId)
-    {
-    iCallback = &aCallback;
-    iSurfaceId = aSurfaceId;
     }
 
 EXPORT_C CExtDisplayConnectionProviderInterface::~CExtDisplayConnectionProviderInterface()
@@ -69,4 +49,11 @@ EXPORT_C CExtDisplayConnectionProviderInterface::~CExtDisplayConnectionProviderI
 
 EXPORT_C CExtDisplayConnectionProviderInterface::CExtDisplayConnectionProviderInterface()
     {
+    }
+
+// CleanupEComArray function is used for cleanup support of locally declared arrays
+void CleanupEComArray(TAny* aArray)
+    {
+    (static_cast<RImplInfoPtrArray*> (aArray))->ResetAndDestroy();
+    (static_cast<RImplInfoPtrArray*> (aArray))->Close();
     }

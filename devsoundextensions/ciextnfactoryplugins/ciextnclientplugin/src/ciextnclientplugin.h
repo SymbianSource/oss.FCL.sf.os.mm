@@ -23,7 +23,7 @@
 
 // Include files
 #include <e32base.h>
-#include <a3f/MmfDevSoundCustomInterfaceExtensions.h>
+#include <a3f/mmfdevsoundcustominterfaceextensions.h>
 
 // Forward declarations
 class MCIFactoryIntfc;

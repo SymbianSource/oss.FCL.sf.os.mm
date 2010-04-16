@@ -17,6 +17,17 @@
 
 // INCLUDE FILES
 #include "mmfdevsoundproxy.h"
+#ifdef _DEBUG
+#include <e32debug.h>
+
+#define SYMBIAN_DEBPRN0(str)                RDebug::Print(str, this)
+#define SYMBIAN_DEBPRN1(str, val1)          RDebug::Print(str, this, val1)
+#define SYMBIAN_DEBPRN2(str, val1, val2)    RDebug::Print(str, this, val1, val2)
+#else
+#define SYMBIAN_DEBPRN0(str)
+#define SYMBIAN_DEBPRN1(str, val1)
+#define SYMBIAN_DEBPRN2(str, val1, val2)
+#endif //_DEBUG
 
 // SYMBIAN_CHECK used to add extra asserts when MACRO is added - helps debugging overall A3F
 
@@ -80,6 +91,7 @@ EXPORT_C RMMFDevSoundProxy::RMMFDevSoundProxy() :
 //
 EXPORT_C void RMMFDevSoundProxy::Close()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Close - Enter"));
 	if (iAudioServerProxy)
 		{
 		if (iAudioServerProxy->Handle() != NULL)
@@ -103,6 +115,7 @@ EXPORT_C void RMMFDevSoundProxy::Close()
 		iMsgQueueHandler = NULL;
 		}
 	iMsgQueue.Close();
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Close - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -113,6 +126,7 @@ EXPORT_C void RMMFDevSoundProxy::Close()
 //
 EXPORT_C TInt RMMFDevSoundProxy::Open()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Open - Enter"));
 	TInt err = iMsgQueue.CreateGlobal(KNullDesC, KMaxMessageQueueItems);
 	// global, accessible to all that have its handle
 	
@@ -139,6 +153,7 @@ EXPORT_C TInt RMMFDevSoundProxy::Open()
 		{	
 		Close();
 		}
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::Open - Exit [%d]"), err);
 	return err;
 	}
 
@@ -149,7 +164,10 @@ EXPORT_C TInt RMMFDevSoundProxy::Open()
 //
 EXPORT_C TInt RMMFDevSoundProxy::PostOpen()
 	{
-	return SendReceive(EMMFDevSoundProxyPostOpen, iDestinationPckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PostOpen - Enter"));
+	TInt err = SendReceive(EMMFDevSoundProxyPostOpen, iDestinationPckg);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::PostOpen - Exit [%d]"), err);
+	return err;
 	}
 
 
@@ -161,7 +179,10 @@ EXPORT_C TInt RMMFDevSoundProxy::PostOpen()
 //
 EXPORT_C TInt RMMFDevSoundProxy::SetDevSoundInfo()
 	{
-	return SendReceive(EMMFAudioLaunchRequests);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetDevSoundInfo - Enter"));
+	TInt err = SendReceive(EMMFAudioLaunchRequests);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::SetDevSoundInfo - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -175,6 +196,7 @@ EXPORT_C void RMMFDevSoundProxy::InitializeL(
 							TMMFState aMode,
 							MMMFDevSoundCustomInterfaceObserver& aDevSoundCIObserver)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::InitializeL - Enter"));
 	TInt err = KErrNone;
 	iDevSoundObserver = &aDevSoundObserver;
 	
@@ -195,7 +217,7 @@ EXPORT_C void RMMFDevSoundProxy::InitializeL(
 			iState = EInitializing;
 			}	
 		}
-	
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::InitializeL - Exit [%d]"), err);
 	User::LeaveIfError(err);
 	}
 
@@ -227,6 +249,7 @@ EXPORT_C void RMMFDevSoundProxy::InitializeL(
 								TMMFState aMode,
 								MMMFDevSoundCustomInterfaceObserver& aDevSoundCIObserver)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::InitializeL - Enter"));
 	TInt err = KErrNone;
 	if(aMode == EMMFStateTonePlaying)
 		{
@@ -251,7 +274,7 @@ EXPORT_C void RMMFDevSoundProxy::InitializeL(
 			iState = EInitializing;
 			}	
 		}
-
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::InitializeL - Exit [%d]"), err);
 	User::LeaveIfError(err);
 	}
 
@@ -263,13 +286,15 @@ EXPORT_C void RMMFDevSoundProxy::InitializeL(
 //
 EXPORT_C TMMFCapabilities RMMFDevSoundProxy::Capabilities()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Capabilities - Enter"));
 	// TODO should we use the following ? SYMBIAN_CHECK(iState>=EInitialized, Panic(EMMFDevSoundProxyCapabilitiesInWrongState));
 	if (iState < EInitialized)
 		{
 		// call has been made before we are initialized. Not much we can do, so return
 		// dummy values but hit debugger on the emulator
 		__DEBUGGER()
-		RDebug::Print(_L("BRDBG:CapabilitiesCalledWhenNotInitialised")); // TODO Remove or redo as trace				
+		RDebug::Print(_L("BRDBG:CapabilitiesCalledWhenNotInitialised")); // TODO Remove or redo as trace
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Capabilities - Exit"));
 		return KZeroCapabilities;
 		}
 	TMMFDevSoundProxySettings set;
@@ -280,10 +305,12 @@ EXPORT_C TMMFCapabilities RMMFDevSoundProxy::Capabilities()
 					pckg);
 	if (err == KErrNone)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Capabilities - Exit"));
 		return pckg().iCaps;
 		}
 	else
 		{
+		SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::Capabilities - Exit [%d]"), err);
 		return KZeroCapabilities;
 		}
 	}
@@ -296,13 +323,15 @@ EXPORT_C TMMFCapabilities RMMFDevSoundProxy::Capabilities()
 //
 EXPORT_C TMMFCapabilities RMMFDevSoundProxy::Config()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Config - Enter"));
 	// TODO should we use the following ? SYMBIAN_CHECK(iState>=EInitialized, Panic(EMMFDevSoundProxyConfigInWrongState));
 	if (iState < EInitialized)
 		{
 		// call has been made before we are initialized. Not much we can do, so return
 		// dummy values but hit debugger on the emulator
 		__DEBUGGER()
-		RDebug::Print(_L("BRDBG:ConfigCalledWhenNotInitialised")); // TODO Remove or redo as trace				
+		RDebug::Print(_L("BRDBG:ConfigCalledWhenNotInitialised")); // TODO Remove or redo as trace
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Config - Exit"));
 		return KZeroCapabilities;
 		}
 	TMMFDevSoundProxySettings set;
@@ -311,6 +340,7 @@ EXPORT_C TMMFCapabilities RMMFDevSoundProxy::Config()
 					iDestinationPckg,
 					KNullDesC8,
 					pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Config - Exit"));
 	return pckg().iConfig;
 	}
 
@@ -323,6 +353,7 @@ EXPORT_C TMMFCapabilities RMMFDevSoundProxy::Config()
 EXPORT_C void RMMFDevSoundProxy::SetConfigL(
 	const TMMFCapabilities& aConfig )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetConfigL - Enter"));
 	TInt err = KErrNone;
 	
 	if (iState==EInitialized)
@@ -330,17 +361,16 @@ EXPORT_C void RMMFDevSoundProxy::SetConfigL(
 		TMMFDevSoundProxySettings set;
 		set.iConfig = aConfig;
 		TMMFDevSoundProxySettingsPckg pckg(set);
-		TInt err = SendReceive(EMMFDevSoundProxySetConfig,
+		err = SendReceive(EMMFDevSoundProxySetConfig,
 							iDestinationPckg,
 							pckg);
-		User::LeaveIfError(err);
 		}
 	else
 		{
 		RDebug::Print(_L("BRDBG:SetConfigCalledWhenNotInitialised")); // TODO Remove or redo as trace				
 		err = KErrNotReady;
 		}
-
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::SetConfigL - Exit [%d]"), err);
 	User::LeaveIfError(err);
 	}
 
@@ -352,12 +382,14 @@ EXPORT_C void RMMFDevSoundProxy::SetConfigL(
 //
 EXPORT_C TInt RMMFDevSoundProxy::MaxVolume()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::MaxVolume - Enter"));
 	TMMFDevSoundProxySettings set;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	SendReceiveResult(EMMFDevSoundProxyMaxVolume,
 					iDestinationPckg,
 					KNullDesC8,
 					pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::MaxVolume - Exit"));
 	return pckg().iMaxVolume;
 	}
 
@@ -369,12 +401,14 @@ EXPORT_C TInt RMMFDevSoundProxy::MaxVolume()
 //
 EXPORT_C TInt RMMFDevSoundProxy::Volume()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Volume - Enter"));
 	TMMFDevSoundProxySettings set;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	SendReceiveResult(EMMFDevSoundProxyVolume,
 					iDestinationPckg,
 					KNullDesC8,
 					pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Volume - Exit"));
 	return pckg().iVolume;
 	}
 
@@ -386,12 +420,15 @@ EXPORT_C TInt RMMFDevSoundProxy::Volume()
 //
 EXPORT_C TInt RMMFDevSoundProxy::SetVolume(TInt aVolume )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetVolume - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iVolume = aVolume;
 	TMMFDevSoundProxySettingsPckg pckg(set);
-	return SendReceive(EMMFDevSoundProxySetVolume,
+	TInt err = SendReceive(EMMFDevSoundProxySetVolume,
 					iDestinationPckg,
 					pckg);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::SetVolume - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -402,12 +439,14 @@ EXPORT_C TInt RMMFDevSoundProxy::SetVolume(TInt aVolume )
 //
 EXPORT_C TInt RMMFDevSoundProxy::MaxGain()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::MaxGain - Enter"));
 	TMMFDevSoundProxySettings set;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	SendReceiveResult(EMMFDevSoundProxyMaxGain,
 					iDestinationPckg,
 					KNullDesC8,
 					pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::MaxGain - Exit"));
 	return pckg().iMaxGain;
 	}
 
@@ -419,12 +458,14 @@ EXPORT_C TInt RMMFDevSoundProxy::MaxGain()
 //
 EXPORT_C TInt RMMFDevSoundProxy::Gain()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Gain - Enter"));
 	TMMFDevSoundProxySettings set;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	SendReceiveResult(EMMFDevSoundProxyGain,
 				iDestinationPckg,
 				KNullDesC8,
 				pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Gain - Exit"));
 	return pckg().iGain;
 	}
 
@@ -437,12 +478,16 @@ EXPORT_C TInt RMMFDevSoundProxy::Gain()
 EXPORT_C TInt RMMFDevSoundProxy::SetGain(
 	TInt aGain )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetGain - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iGain = aGain;
 	TMMFDevSoundProxySettingsPckg pckg(set);
-	return SendReceive(EMMFDevSoundProxySetGain,
+
+	TInt err = SendReceive(EMMFDevSoundProxySetGain,
 					iDestinationPckg,
 					pckg);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::SetGain - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -455,6 +500,7 @@ EXPORT_C void RMMFDevSoundProxy::GetPlayBalanceL(
 		TInt& aLeftPercentage,
 		TInt& aRightPercentage )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetPlayBalanceL - Enter"));
 	TMMFDevSoundProxySettings set;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	User::LeaveIfError(SendReceiveResult(EMMFDevSoundProxyPlayBalance,
@@ -463,6 +509,7 @@ EXPORT_C void RMMFDevSoundProxy::GetPlayBalanceL(
 									pckg));
 	aLeftPercentage = pckg().iLeftPercentage;
 	aRightPercentage = pckg().iRightPercentage;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetPlayBalanceL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -475,6 +522,7 @@ EXPORT_C void RMMFDevSoundProxy::SetPlayBalanceL(
 					TInt aLeftPercentage,
 					TInt aRightPercentage )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetPlayBalanceL - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iLeftPercentage = aLeftPercentage;
 	set.iRightPercentage = aRightPercentage;
@@ -482,6 +530,7 @@ EXPORT_C void RMMFDevSoundProxy::SetPlayBalanceL(
 	User::LeaveIfError(SendReceive(EMMFDevSoundProxySetPlayBalance,
 								iDestinationPckg,
 								pckg));
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetPlayBalanceL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -494,6 +543,7 @@ EXPORT_C void RMMFDevSoundProxy::GetRecordBalanceL(
 					TInt& aLeftPercentage,
 					TInt& aRightPercentage )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetRecordBalanceL - Enter"));
 	TMMFDevSoundProxySettings set;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	User::LeaveIfError(SendReceiveResult(EMMFDevSoundProxyRecordBalance,
@@ -502,6 +552,7 @@ EXPORT_C void RMMFDevSoundProxy::GetRecordBalanceL(
 										pckg));
 	aLeftPercentage = pckg().iLeftPercentage;
 	aRightPercentage = pckg().iRightPercentage;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetRecordBalanceL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -514,6 +565,7 @@ EXPORT_C void RMMFDevSoundProxy::SetRecordBalanceL(
 				TInt aLeftPercentage,
 				TInt aRightPercentage )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetRecordBalanceL - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iLeftPercentage = aLeftPercentage;
 	set.iRightPercentage = aRightPercentage;
@@ -521,6 +573,7 @@ EXPORT_C void RMMFDevSoundProxy::SetRecordBalanceL(
 	User::LeaveIfError(SendReceive(EMMFDevSoundProxySetRecordBalance,
 									iDestinationPckg,
 									pckg));
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetRecordBalanceL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -531,12 +584,14 @@ EXPORT_C void RMMFDevSoundProxy::SetRecordBalanceL(
 //
 EXPORT_C void RMMFDevSoundProxy::PlayInitL()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayInitL - Enter"));
 	if (!iDevSoundObserver || iState!=EInitialized)
 		{
 		if (iState == EPlaying || iState == EPlayingBufferWait)
 		    {
 		    // treat PlayInitL() during play as Resume()
 		    User::LeaveIfError(Resume());
+		    SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayInitL - Exit"));
 		    return;
 		    }
 		User::Leave(KErrNotReady);
@@ -545,6 +600,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayInitL()
 	User::LeaveIfError(SendReceive(EMMFDevSoundProxyPlayInit,
 							iDestinationPckg));
 	iState = EPlaying;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayInitL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -555,6 +611,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayInitL()
 //
 EXPORT_C void RMMFDevSoundProxy::RecordInitL()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::RecordInitL - Enter"));
 	if (!iDevSoundObserver || iState!=EInitialized)
 		{
 		if(iState == ERecording || iState == ERecordingBufferWait || iState == ERecordingInLastBufferCycle 
@@ -562,6 +619,7 @@ EXPORT_C void RMMFDevSoundProxy::RecordInitL()
 		    { 
 		    // treat RecordInitL() during record as Resume()
             User::LeaveIfError(Resume());
+            SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::RecordInitL - Exit"));
             return;
 		    }
         User::Leave(KErrNotReady);
@@ -570,6 +628,7 @@ EXPORT_C void RMMFDevSoundProxy::RecordInitL()
 	User::LeaveIfError(SendReceive(EMMFDevSoundProxyRecordInit,
 								iDestinationPckg));
 	iState = ERecording;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::RecordInitL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -580,6 +639,7 @@ EXPORT_C void RMMFDevSoundProxy::RecordInitL()
 //
 EXPORT_C void RMMFDevSoundProxy::PlayData()
 	{
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayData - Enter")); //Uncommenting this will produce a lot of logging!
 	__ASSERT_ALWAYS(iState == EPlaying || iState == EPlayingBufferWait,
 				Panic(EMMFDevSoundProxyPlayDataWithoutInitialize));
 	ASSERT(iDevSoundObserver);
@@ -592,6 +652,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayData()
 
 	SendReceive(EMMFDevSoundProxyPlayData, iDestinationPckg, pckg);
 	iState = EPlaying;
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayData - Exit")); //Uncommenting this will produce a lot of logging!
 	}
 
 // -----------------------------------------------------------------------------
@@ -602,6 +663,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayData()
 //
 EXPORT_C void RMMFDevSoundProxy::RecordData()
 	{
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::RecordData - Enter")); //Uncommenting this will produce a lot of logging!
 	__ASSERT_ALWAYS(iState == ERecording || iState == ERecordingBufferWait ||
                     iState == ERecordingInLastBufferCycle || iState == ERecordingResumingInLastBufferCycle,
 					Panic(EMMFDevSoundProxyRecordDataWithoutInitialize));
@@ -626,6 +688,7 @@ EXPORT_C void RMMFDevSoundProxy::RecordData()
 	        iState = ERecording;
 	        break;
 	    }
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::RecordData - Exit")); //Uncommenting this will produce a lot of logging!
 	}
 
 // -----------------------------------------------------------------------------
@@ -635,13 +698,15 @@ EXPORT_C void RMMFDevSoundProxy::RecordData()
 // -----------------------------------------------------------------------------
 //
 EXPORT_C void RMMFDevSoundProxy::Stop()
-	{	
+	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Stop - Enter"));
 	if (iState > EInitialized)
 		{
 		SendReceive(EMMFDevSoundProxyStop, iDestinationPckg);
 		iState = EInitialized;	
 		iMsgQueueHandler->Finish(); // will delete the buffer
 		}
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Stop - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -652,10 +717,12 @@ EXPORT_C void RMMFDevSoundProxy::Stop()
 //
 EXPORT_C void RMMFDevSoundProxy::Pause()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Pause - Enter"));
 	if(iState > EInitialized)
 	    {
 	    SendReceive(EMMFDevSoundProxyPause, iDestinationPckg);
 	    }
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Pause - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -668,8 +735,10 @@ EXPORT_C void RMMFDevSoundProxy::PlayToneL(
 								TInt aFrequency,
 								const TTimeIntervalMicroSeconds& aDuration)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayToneL - Enter"));
 	if(iState==ETonePlaying)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayToneL - Exit"));
 		return;
 		}
 	
@@ -687,6 +756,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayToneL(
 								pckg));
 	iState = ETonePlaying;
 	iToneMode = ESimple;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayToneL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -700,8 +770,10 @@ EXPORT_C void RMMFDevSoundProxy::PlayDualToneL(
 									TInt aFrequencyTwo,
 									const TTimeIntervalMicroSeconds& aDuration)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayDualToneL - Enter"));
 	if(iState==ETonePlaying)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayDualToneL - Exit"));
 		return;
 		}
 			
@@ -718,6 +790,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayDualToneL(
 	User::LeaveIfError(SendReceive(EMMFDevSoundProxyPlayDualTone, iDestinationPckg, pckg));
 	iState = ETonePlaying;
 	iToneMode = EDual;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayDualToneL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -728,8 +801,10 @@ EXPORT_C void RMMFDevSoundProxy::PlayDualToneL(
 //
 EXPORT_C void RMMFDevSoundProxy::PlayDTMFStringL(const TDesC& aDTMFString)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayDTMFStringL - Enter"));
 	if(iState==ETonePlaying)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayDTMFStringL - Exit"));
 		return;
 		}
 			
@@ -749,6 +824,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayDTMFStringL(const TDesC& aDTMFString)
 						tempPtr));
 	iState = ETonePlaying;
 	iToneMode = EDTMFString;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayDTMFStringL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -759,8 +835,10 @@ EXPORT_C void RMMFDevSoundProxy::PlayDTMFStringL(const TDesC& aDTMFString)
 //
 EXPORT_C void RMMFDevSoundProxy::PlayToneSequenceL(const TDesC8& aData )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayToneSequenceL - Enter"));
 	if(iState==ETonePlaying)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayToneSequenceL - Exit"));
 		return;
 		}
 			
@@ -774,6 +852,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayToneSequenceL(const TDesC8& aData )
 								aData));
 	iState = ETonePlaying;
 	iToneMode = ESequence;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayToneSequenceL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -784,8 +863,10 @@ EXPORT_C void RMMFDevSoundProxy::PlayToneSequenceL(const TDesC8& aData )
 //
 EXPORT_C void RMMFDevSoundProxy::PlayFixedSequenceL(TInt aSequenceNumber)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayFixedSequenceL - Enter"));
 	if(iState==ETonePlaying)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayFixedSequenceL - Exit"));
 		return;
 		}
 			
@@ -798,6 +879,7 @@ EXPORT_C void RMMFDevSoundProxy::PlayFixedSequenceL(TInt aSequenceNumber)
 	User::LeaveIfError(SendReceive(EMMFDevSoundProxyPlayFixedSequence, iDestinationPckg, seqNum));
 	iState = ETonePlaying;
 	iToneMode = EFixedSequence;
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::PlayFixedSequenceL - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -811,12 +893,14 @@ EXPORT_C void RMMFDevSoundProxy::SetDTMFLengths(
 									TTimeIntervalMicroSeconds32& aToneOffLength,
 									TTimeIntervalMicroSeconds32& aPauseLength )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetDTMFLengths - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iToneOnLength = aToneOnLength;
 	set.iToneOffLength = aToneOffLength;
 	set.iPauseLength = aPauseLength;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	SendReceive(EMMFDevSoundProxySetDTMFLengths, iDestinationPckg, pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetDTMFLengths - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -828,10 +912,12 @@ EXPORT_C void RMMFDevSoundProxy::SetDTMFLengths(
 EXPORT_C void RMMFDevSoundProxy::SetVolumeRamp(
 								const TTimeIntervalMicroSeconds& aRampDuration)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetVolumeRamp - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iDuration = aRampDuration;
 	TMMFDevSoundProxySettingsPckg pckg(set);
 	SendReceive(EMMFDevSoundProxySetVolumeRamp, iDestinationPckg, pckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetVolumeRamp - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -844,6 +930,7 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedInputDataTypesL(
 								RArray<TFourCC>& aSupportedDataTypes,
 								const TMMFPrioritySettings& aPrioritySettings)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetSupportedInputDataTypesL - Enter"));
 	aSupportedDataTypes.Reset();
 
 	TMMFPrioritySettings prioritySet = aPrioritySettings;
@@ -856,6 +943,7 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedInputDataTypesL(
 							pckg,
 							numberOfElementsPckg));
 							
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetSupportedInputDataTypesL - Exit 1"));
 
 	HBufC8* buf = HBufC8::NewLC(numberOfElementsPckg()*sizeof(TFourCC));
 	TPtr8 ptr = buf->Des();
@@ -883,6 +971,7 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedInputDataTypesL(
 		}
 	CleanupStack::PopAndDestroy(&stream);
 	CleanupStack::PopAndDestroy(buf);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetSupportedInputDataTypesL - Exit 2"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -895,6 +984,7 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedOutputDataTypesL(
 								RArray<TFourCC>& aSupportedDataTypes,
 								const TMMFPrioritySettings& aPrioritySettings)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetSupportedOutputDataTypesL - Enter"));
 	aSupportedDataTypes.Reset();
 
 	TMMFPrioritySettings prioritySet = aPrioritySettings;
@@ -907,6 +997,7 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedOutputDataTypesL(
 								pckg,
 								numberOfElementsPckg));
 								
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetSupportedOutputDataTypesL - Exit 1"));
 
 	HBufC8* buf = HBufC8::NewLC(numberOfElementsPckg()*sizeof(TFourCC));
 	TPtr8 ptr = buf->Des();
@@ -933,6 +1024,7 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedOutputDataTypesL(
 		}
 	CleanupStack::PopAndDestroy(&stream);
 	CleanupStack::PopAndDestroy(buf);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetSupportedOutputDataTypesL - Exit 2"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -943,12 +1035,13 @@ EXPORT_C void RMMFDevSoundProxy::GetSupportedOutputDataTypesL(
 //
 EXPORT_C TInt RMMFDevSoundProxy::SamplesRecorded()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SamplesRecorded - Enter"));
 	TPckgBuf<TInt> numSamples;
 	SendReceiveResult(EMMFDevSoundProxySamplesRecorded,
 					iDestinationPckg,
 					KNullDesC8,
 					numSamples);
-					
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SamplesRecorded - Exit"));
 	return numSamples();
 	}
 
@@ -960,11 +1053,13 @@ EXPORT_C TInt RMMFDevSoundProxy::SamplesRecorded()
 //
 EXPORT_C TInt RMMFDevSoundProxy::SamplesPlayed()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SamplesPlayed - Enter"));
 	TPckgBuf<TInt> numSamples;
 	SendReceiveResult(EMMFDevSoundProxySamplesPlayed,
 					iDestinationPckg,
 					KNullDesC8,
 					numSamples);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SamplesPlayed - Exit"));
 	return numSamples();
 	}
 
@@ -979,12 +1074,14 @@ EXPORT_C void RMMFDevSoundProxy::SetToneRepeats(
 								const TTimeIntervalMicroSeconds&
 									aRepeatTrailingSilence)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetToneRepeats - Enter"));
 	TPckgBuf<TInt> countRepeat(aRepeatCount);
 	TPckgBuf<TTimeIntervalMicroSeconds> repeatTS(aRepeatTrailingSilence);
 	SendReceive(EMMFDevSoundProxySetToneRepeats,
 				iDestinationPckg,
 				countRepeat,
 				repeatTS);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetToneRepeats - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -996,10 +1093,12 @@ EXPORT_C void RMMFDevSoundProxy::SetToneRepeats(
 EXPORT_C void RMMFDevSoundProxy::SetPrioritySettings(
 								const TMMFPrioritySettings& aPrioritySettings)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetPrioritySettings - Enter"));
 	TPckgBuf<TMMFPrioritySettings> prioritySet(aPrioritySettings);
 	SendReceive(EMMFDevSoundProxySetPrioritySettings,
 				iDestinationPckg,
 				prioritySet);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetPrioritySettings - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -1010,7 +1109,9 @@ EXPORT_C void RMMFDevSoundProxy::SetPrioritySettings(
 //
 EXPORT_C const TDesC& RMMFDevSoundProxy::FixedSequenceName(TInt /*aSequenceNumber*/)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::FixedSequenceName - Enter"));
 	_LIT(KNullDesC, "");
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::FixedSequenceName - Exit"));
 	return KNullDesC;
 	}
 
@@ -1022,13 +1123,15 @@ EXPORT_C const TDesC& RMMFDevSoundProxy::FixedSequenceName(TInt /*aSequenceNumbe
 //
 EXPORT_C TAny* RMMFDevSoundProxy::CustomInterface(TUid aInterfaceId)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomInterface - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iInterface = aInterfaceId;
 	// Added for ask for custom interface
 	TAny* customInterface = NULL;
 	if (aInterfaceId == KMmfUidDevSoundCancelInitializeCustomInterface)
 		{
-		MMMFDevSoundCancelInitialize* result = this; 
+		MMMFDevSoundCancelInitialize* result = this;
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomInterface - Exit"));
 		return result;
 		}
 	TPckgBuf<TAny*> pckg2(customInterface);
@@ -1037,6 +1140,7 @@ EXPORT_C TAny* RMMFDevSoundProxy::CustomInterface(TUid aInterfaceId)
 	SendReceiveResult(EMMFDevSoundProxyCustomInterface, 
 							iDestinationPckg, 
 							pckg, pckg2);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomInterface - Exit"));
 	return reinterpret_cast<TAny*> (customInterface);
 	}
 	
@@ -1048,13 +1152,14 @@ EXPORT_C TAny* RMMFDevSoundProxy::CustomInterface(TUid aInterfaceId)
 //
 EXPORT_C TInt RMMFDevSoundProxy::FixedSequenceCount()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::FixedSequenceCount - Enter"));
 	TPckgBuf<TInt> fixSeqCountPckg;
 	SendReceiveResult(EMMFDevSoundProxyFixedSequenceCount,
 					iDestinationPckg,
 					KNullDesC8,
 					fixSeqCountPckg);
-					
-					
+
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::FixedSequenceCount - Exit"));
 	return fixSeqCountPckg();
 	}
 
@@ -1066,13 +1171,16 @@ EXPORT_C TInt RMMFDevSoundProxy::FixedSequenceCount()
 EXPORT_C TInt RMMFDevSoundProxy::BufferToBeFilledData(
 		TBool aRequestChunk, TMMFDevSoundProxyHwBufPckg& aSetPckg)
 	{
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::BufferToBeFilledData - Enter")); //Uncommenting this will produce a lot of logging!
 	// Note that there will only ever be one of these requests outstanding
 	// per session
 	TPckgBuf<TInt> requestChunkBuf (aRequestChunk);
-	return SendReceiveResult(EMMFDevSoundProxyBTBFData,
+	TInt err = SendReceiveResult(EMMFDevSoundProxyBTBFData,
 							iDestinationPckg,
 							requestChunkBuf,
 							aSetPckg);
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::BufferToBeFilledData - Exit [%d]"), err); //Uncommenting this will produce a lot of logging!
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1083,12 +1191,15 @@ EXPORT_C TInt RMMFDevSoundProxy::BufferToBeFilledData(
 EXPORT_C TInt RMMFDevSoundProxy::BufferToBeEmptiedData(
 							TMMFDevSoundProxyHwBufPckg& aSetPckg)
 	{
+	//SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::BufferToBeEmptiedData - Enter")); //Uncommenting this will produce a lot of logging!
 	// Note that there will only ever be one of these requests outstanding
 	// per session
-	return SendReceiveResult(EMMFDevSoundProxyBTBEData,
+	TInt err = SendReceiveResult(EMMFDevSoundProxyBTBEData,
 								iDestinationPckg,
 								KNullDesC8,
 								aSetPckg);
+	//SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::BufferToBeEmptiedData - Exit [%d]"), err); //Uncommenting this will produce a lot of logging!
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1098,10 +1209,13 @@ EXPORT_C TInt RMMFDevSoundProxy::BufferToBeEmptiedData(
 //
 EXPORT_C TInt RMMFDevSoundProxy::RegisterAsClient(TUid aEventType, const TDesC8& aNotificationRegistrationData)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::RegisterAsClient - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iNotificationEventUid = aEventType;
 	TMMFDevSoundProxySettingsPckg pckg(set);
-	return SendReceive(EMMFDevSoundProxyRequestResourceNotification, iDestinationPckg, pckg, aNotificationRegistrationData);
+	TInt err = SendReceive(EMMFDevSoundProxyRequestResourceNotification, iDestinationPckg, pckg, aNotificationRegistrationData);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::RegisterAsClient - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1111,10 +1225,13 @@ EXPORT_C TInt RMMFDevSoundProxy::RegisterAsClient(TUid aEventType, const TDesC8&
 //
 EXPORT_C TInt RMMFDevSoundProxy::CancelRegisterAsClient(TUid aEventType)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CancelRegisterAsClient - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iNotificationEventUid = aEventType;
 	TMMFDevSoundProxySettingsPckg pckg(set);
-	return SendReceiveResult(EMMFDevSoundProxyCancelRequestResourceNotification, iDestinationPckg, KNullDesC8, pckg);
+	TInt err = SendReceiveResult(EMMFDevSoundProxyCancelRequestResourceNotification, iDestinationPckg, KNullDesC8, pckg);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::CancelRegisterAsClient - Exit [%d]"), err);
+	return err;
 	}
 	
 // -----------------------------------------------------------------------------
@@ -1124,10 +1241,13 @@ EXPORT_C TInt RMMFDevSoundProxy::CancelRegisterAsClient(TUid aEventType)
 //
 EXPORT_C TInt RMMFDevSoundProxy::GetResourceNotificationData(TUid aEventType, TDes8& aNotificationData)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetResourceNotificationData - Enter"));
 	TMMFDevSoundProxySettings set;
 	set.iNotificationEventUid = aEventType;
 	TMMFDevSoundProxySettingsPckg pckg(set);
-	return SendReceiveResult(EMMFDevSoundProxyGetResourceNotificationData, iDestinationPckg, pckg, aNotificationData);
+	TInt err = SendReceiveResult(EMMFDevSoundProxyGetResourceNotificationData, iDestinationPckg, pckg, aNotificationData);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::GetResourceNotificationData - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1139,7 +1259,10 @@ EXPORT_C TInt RMMFDevSoundProxy::GetResourceNotificationData(TUid aEventType, TD
 //
 EXPORT_C TInt RMMFDevSoundProxy::WillResumePlay()
 	{
-	return SendReceive(EMMFDevSoundProxyWillResumePlay, iDestinationPckg);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::WillResumePlay - Enter"));
+	TInt err = SendReceive(EMMFDevSoundProxyWillResumePlay, iDestinationPckg);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::WillResumePlay - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1151,6 +1274,7 @@ EXPORT_C TInt RMMFDevSoundProxy::WillResumePlay()
 
 EXPORT_C TInt RMMFDevSoundProxy::EmptyBuffers()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::EmptyBuffers - Enter"));
 	TInt error = SendReceive(EMMFDevSoundProxyEmptyBuffers, iDestinationPckg); 
 	
 	if(error==KErrNone)
@@ -1161,6 +1285,7 @@ EXPORT_C TInt RMMFDevSoundProxy::EmptyBuffers()
 	        iState = EPlaying;
 	        }
 	    }
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::EmptyBuffers - Exit [%d]"), error);
 	return error;
 	}
 
@@ -1171,6 +1296,7 @@ EXPORT_C TInt RMMFDevSoundProxy::EmptyBuffers()
 //
 EXPORT_C TInt RMMFDevSoundProxy::CancelInitialize()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CancelInitialize - Enter"));
 	TInt err=KErrNone;
 	
 	if (iState==EInitializing)
@@ -1182,7 +1308,7 @@ EXPORT_C TInt RMMFDevSoundProxy::CancelInitialize()
 		{
 		err = KErrNotReady;
 		}
-	
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::CancelInitialize - Exit [%d]"), err);
 	return err;
 	}
 
@@ -1194,8 +1320,11 @@ EXPORT_C TInt RMMFDevSoundProxy::CancelInitialize()
 //
 EXPORT_C TInt RMMFDevSoundProxy::SetClientThreadInfo(TThreadId& aTid)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SetClientThreadInfo - Enter"));
 	TPckgBuf<TThreadId> threadId(aTid);
-	return SendReceive(EMMFDevSoundProxySetClientThreadInfo, iDestinationPckg, threadId);
+	TInt err = SendReceive(EMMFDevSoundProxySetClientThreadInfo, iDestinationPckg, threadId);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::SetClientThreadInfo - Exit [%d]"), err);
+	return err;
 	}
 
 
@@ -1211,11 +1340,14 @@ EXPORT_C TInt RMMFDevSoundProxy::CustomCommandSync(
 							const TDesC8& aDataTo2,
 							TDes8& aDataFrom)
 	{
-	return SendReceiveResult(aFunction,
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomCommandSync - Enter"));
+	TInt err = SendReceiveResult(aFunction,
 							aDestination,
 							aDataTo1,
 							aDataTo2,
 							aDataFrom);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::CustomCommandSync - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1229,7 +1361,10 @@ EXPORT_C TInt RMMFDevSoundProxy::CustomCommandSync(
 							const TDesC8& aDataTo1,
 							const TDesC8& aDataTo2)
 	{
-	return SendReceive(aFunction, aDestination, aDataTo1, aDataTo2);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomCommandSync - Enter"));
+	TInt err =  SendReceive(aFunction, aDestination, aDataTo1, aDataTo2);
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::CustomCommandSync - Exit [%d]"), err);
+	return err;
 	}
 
 // -----------------------------------------------------------------------------
@@ -1245,12 +1380,14 @@ EXPORT_C void RMMFDevSoundProxy::CustomCommandAsync(
 								TDes8& aDataFrom,
 								TRequestStatus& aStatus )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomCommandAsync - Enter"));
 	SendReceiveResult(aFunction,
 					aDestination,
 					aDataTo1,
 					aDataTo2,
 					aDataFrom,
 					aStatus);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomCommandAsync - Exit"));
 	}
 
 // -----------------------------------------------------------------------------
@@ -1265,40 +1402,52 @@ EXPORT_C void RMMFDevSoundProxy::CustomCommandAsync(
 								const TDesC8& aDataTo2,
 								TRequestStatus& aStatus )
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomCommandAsync - Enter"));
 	SendReceive(aFunction, aDestination, aDataTo1, aDataTo2, aStatus);
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::CustomCommandAsync - Exit"));
 	}
 
 // implementation of a simple CustomCommand() scheme
 EXPORT_C TInt RMMFDevSoundProxy::SyncCustomCommand(TUid aUid, const TDesC8& aParam1, const TDesC8& aParam2, TDes8* aOutParam)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SyncCustomCommand - Enter"));
 	TMMFMessageDestinationPckg dest(TMMFMessageDestination(aUid, KMMFObjectHandleDevSound));
 
+	TInt err = KErrNone;
 	if (aOutParam==NULL)
 		{
-		return SendReceive(EMMFDevSoundProxySyncCustomCommand, dest, aParam1, aParam2);
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SyncCustomCommand - Exit"));
+		err = SendReceive(EMMFDevSoundProxySyncCustomCommand, dest, aParam1, aParam2);
+		return err;
 		}
 	else
 		{
-		return SendReceiveResult(EMMFDevSoundProxySyncCustomCommandResult, dest, aParam1, aParam2, *aOutParam);		
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::SyncCustomCommand - Exit"));
+		err = SendReceiveResult(EMMFDevSoundProxySyncCustomCommandResult, dest, aParam1, aParam2, *aOutParam);
+		return err;
 		}
 	}
 
 EXPORT_C void RMMFDevSoundProxy::AsyncCustomCommand(TUid aUid, TRequestStatus& aStatus, const TDesC8& aParam1, const TDesC8& aParam2, TDes8* aOutParam)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::AsyncCustomCommand - Enter"));
 	TMMFMessageDestination dest(aUid, KMMFObjectHandleDevSound);
 	iCustIntPckg = dest;
 	if (aOutParam==NULL)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::AsyncCustomCommand - Exit"));
 		SendReceive(EMMFDevSoundProxyAsyncCustomCommand, iCustIntPckg, aParam1, aParam2, aStatus);
 		}
 	else
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::AsyncCustomCommand - Exit"));
 		SendReceiveResult(EMMFDevSoundProxyAsyncCustomCommandResult, iCustIntPckg, aParam1, aParam2, *aOutParam, aStatus);		
 		}
 	}
 
 EXPORT_C TInt RMMFDevSoundProxy::GetTimePlayed(TTimeIntervalMicroSeconds& aTime)
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::GetTimePlayed - Enter"));
 	TTimeIntervalMicroSeconds time(0);
 	TPckgBuf<TTimeIntervalMicroSeconds> timePckg(time);
 	TInt err = SendReceiveResult(EMMFDevSoundProxyGetTimePlayed, iDestinationPckg, KNullDesC8, timePckg);
@@ -1306,11 +1455,13 @@ EXPORT_C TInt RMMFDevSoundProxy::GetTimePlayed(TTimeIntervalMicroSeconds& aTime)
 		{
 		aTime = timePckg();
 		}
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::GetTimePlayed - Exit [%d]"), err);
 	return err;
 	}
 
 EXPORT_C TBool RMMFDevSoundProxy::IsResumeSupported()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::IsResumeSupported - Enter"));
 	TPckgBuf<TBool> isResumeSupported;
 	TInt err = SendReceiveResult(EMMFDevSoundProxyIsResumeSupported, 
 								iDestinationPckg, 
@@ -1318,16 +1469,19 @@ EXPORT_C TBool RMMFDevSoundProxy::IsResumeSupported()
 								isResumeSupported);
 	if(err == KErrNone)
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::IsResumeSupported - Exit"));
 		return isResumeSupported();
 		}
 	else
 		{
+		SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::IsResumeSupported - Exit"));
 		return EFalse;
 		}
 	}
 
 EXPORT_C TInt RMMFDevSoundProxy::Resume()
 	{
+	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Resume - Enter"));
 	TInt err = KErrNone;
 	if (!iDevSoundObserver ||  iState <= EInitialized  )
 		{
@@ -1335,6 +1489,7 @@ EXPORT_C TInt RMMFDevSoundProxy::Resume()
 		}
 	else if(iState == ETonePlaying && iToneMode != ESequence)
 		{
+		SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::Resume - Exit [%d]"), err);
 		return KErrNotSupported;
 		}
 	else
@@ -1347,12 +1502,17 @@ EXPORT_C TInt RMMFDevSoundProxy::Resume()
             // don't actually resume until then!
             iState = ERecordingResumingInLastBufferCycle;
             }
+	    else if (iState == ERecordingResumingInLastBufferCycle)
+	        {
+            //Do Nothing as you can't resume twice on last buffer 
+	        }
 	    else
 	        {
 	        err = SendReceive(EMMFDevSoundProxyResume,  
 	                    iDestinationPckg);	        
 	        }
 		}
+	SYMBIAN_DEBPRN1(_L("RMMFDevSoundProxy[0x%x]::Resume - Exit [%d]"), err);
 	return err;
 	}
 
