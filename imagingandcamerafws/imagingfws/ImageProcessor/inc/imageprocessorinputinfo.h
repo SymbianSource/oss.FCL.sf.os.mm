@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2008-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -23,6 +23,7 @@
 #define __IMAGE_PROCESSOR_INPUT_INFO_H__
 
 #include <e32base.h>
+#include <gdi.h>
 
 namespace ImageProcessor
 	{
@@ -35,7 +36,9 @@ namespace Plugin
 	}
 
 /**
-This class provides functions to read image input details.
+This class provides functions to read input image details. These details can be used for display in a file browser 
+or to verify the correct capabilities. Prior to use this API, a pointer to ImageProcessor::InputInfoL() interface must be 
+obtained from the active CImgProcessor instance.
 
 @publishedAll
 @released

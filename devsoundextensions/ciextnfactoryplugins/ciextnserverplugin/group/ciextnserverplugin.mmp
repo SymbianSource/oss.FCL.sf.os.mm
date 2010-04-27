@@ -28,7 +28,6 @@ VENDORID            VID_DEFAULT
 
 SOURCEPATH          ../src
 SOURCE              ciextnserverplugin.cpp
-SOURCE              ciextnserverpluginwrapper.cpp
 SOURCE              main.cpp
 
 USERINCLUDE         .

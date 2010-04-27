@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <DistanceAttenuationData.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 
 const TUid KUidDistanceAttenuationEffect = {0x1020382C};

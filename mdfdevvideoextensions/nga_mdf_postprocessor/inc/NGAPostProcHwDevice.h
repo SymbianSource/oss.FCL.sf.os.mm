@@ -41,9 +41,11 @@
 #include <advancedsecureoutputci.h>
 #include <graphics/suerror.h>
 
+#include "fetchframecustominterface.h"
 #include "MdfRDebug.h"
 #include "NGAPostProcHwDevice_UID.hrh"
 #include "NGAPostProcSessionManagerObserver.h"
+#include "common.h"
 
 class CNGAPostProcSessionManager;
 class CNGAPostProcSurfaceHandler;
@@ -528,8 +530,8 @@ public:
             plug-in does not support snapshots."
     @pre    "This method can only be called after the hwdevice has been initialized with Initialize()."
     */
-//    TBool GetSnapshotL(TPictureData& aPictureData, const TUncompressedVideoFormat& aFormat) {return EFalse;};
-    TBool GetSnapshotL(TPictureData&, const TUncompressedVideoFormat& ) {return EFalse;};
+//  TBool GetSnapshotL(TPictureData& aPictureData, const TUncompressedVideoFormat& aFormat) {return EFalse;};
+    TBool GetSnapshotL(TPictureData& aPictureData, const TUncompressedVideoFormat& aFormat);
 
     /**
     When the snapshot is available, it will be returned to the client using the TimedSnapshotComplete()
@@ -1008,6 +1010,10 @@ private:
 	#ifdef _DUMP_YUV_FRAMES
     void captureYuv(TVideoPicture* aPicture);
     #endif
+    
+    TInt SetSourceFormat();
+    TInt SetSourceRange();
+    TInt ColorConvert(tBaseVideoFrame* aInputFrame, TUint8* aDestPtr, tWndParam* aInputCropWindow, tWndParam* aOutputCropWindow);
 
 private:
 
@@ -1091,6 +1097,13 @@ private:
     TUint8                              iSkippedFramesCountingBuffer[64];       
     TUint8                              iSkippedFramesInLast64Frames;       
     TUint8                              iCurrentPosInFramesCountingBuffer; 
+    TUncompressedVideoFormat 			iVideoFormat;
+        //---------- utility variables -------
+	// Image source format
+	TUint8 								iSourceFormat;
+
+	//Image range
+	TUint8		 						iSourceRange;
 };    
 
 /**

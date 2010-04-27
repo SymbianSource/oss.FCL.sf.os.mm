@@ -1154,7 +1154,7 @@ TTiffFaxState CTiffGroup3Fax2dDecoder::ProcessNextCode()
 	if(!iBitCacheLength)
 		return(ETiffFaxUnderflow);
 
-	if(iBitCache&(1<<31))
+	if(iBitCache&((TUint32)1<<31))
 		iState = E1d;
 	else
 		iState = E2d;

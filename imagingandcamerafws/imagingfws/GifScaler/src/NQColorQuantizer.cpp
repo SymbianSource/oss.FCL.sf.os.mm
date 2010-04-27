@@ -458,7 +458,7 @@ TInt CNQColorQuantizer::Contest(TInt aB, TInt aG, TInt aR)
 	// For frequently chosen neurons, freq[i] is high and bias[i] is negative
 	// bias[i] = gamma*((1/netsize)-freq[i])
 
-	TInt bestd = ~(1<<31);
+	TInt bestd = ~((TUint32)1<<31);
 	TInt bestbiasd = bestd;
 	TInt bestpos = -1;
 	TInt bestbiaspos = bestpos;

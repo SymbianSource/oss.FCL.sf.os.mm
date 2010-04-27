@@ -23,7 +23,7 @@
 
 #include <e32base.h>
 #include <OrientationBase.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 const TUid KUidSourceOrientationEffect = {0x10203834};
 
