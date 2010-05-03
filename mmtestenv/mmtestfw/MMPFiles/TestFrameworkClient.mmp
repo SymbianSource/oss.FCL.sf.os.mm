@@ -25,6 +25,7 @@ VENDORID 0x70000001
 
 SOURCEPATH		../Source/TestFrameworkClient
 SOURCE			Log.cpp
+SOURCE			testfwclientsession.cpp
 SOURCE			TestSuite.cpp
 SOURCE			TestStep.cpp
 SOURCE			TestUtils.cpp

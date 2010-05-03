@@ -28,8 +28,3 @@
 ; Unique Vendor name
 :"Nokia"
 
-"\epoc32\release\armv5\urel\NGAPostProcHwDevice.dll"-"!:\sys\bin\NGAPostProcHwDevice.dll"
-
-"\epoc32\data\z\resource\plugins\NGAPostProcHwDevice.RSC"-"!:\resource\plugins\NGAPostProcHwDevice.RSC"
-
-

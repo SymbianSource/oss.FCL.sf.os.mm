@@ -94,6 +94,7 @@ CNGAPostProcHwDevice::CNGAPostProcHwDevice()
             iOverflowPictureCounter(0),
             iVideoFrameBufSize(0),
             iResourceLost(EFalse),
+            iRedrawDone(EFalse),
             iVBMObserver(NULL),
             count(0),
             iSurfaceMask(surfaceHints::EAllowAllExternals),
@@ -826,7 +827,7 @@ void CNGAPostProcHwDevice::Redraw()
 { 
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw ++"), this);
 	TInt err = KErrNone;
-	if(iResourceLost)
+	if(iResourceLost && !iRedrawDone)
 	{
         err = AddHints();
         if (err != KErrNone)
@@ -836,6 +837,7 @@ void CNGAPostProcHwDevice::Redraw()
             iProxy->MdvppFatalError(this, err);	
             return;   
         }
+        PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw registering the temp surface"), this);
 		err = RegisterSurface(iSurfaceId);
 		if (err != KErrNone)
 		{
@@ -846,10 +848,10 @@ void CNGAPostProcHwDevice::Redraw()
 			iProxy->MdvppFatalError(this, err);	
 			return;   				
 		}
-
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw registering the temp surface done"), this);
         iSessionManager->PostPicture(iSurfaceId, 0, 1, EFalse);
         PublishSurfaceCreated();
-        iResourceLost = EFalse;
+        iRedrawDone = ETrue;
     }
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw --"), this);
 }
@@ -1326,12 +1328,30 @@ void CNGAPostProcHwDevice::MmvpoUpdateVideoProperties(const TYuvFormat& aYuvForm
 void CNGAPostProcHwDevice::MmvroResourcesLost(TUid )
 {
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost ++"), this);
-	iResourceLost = ETrue;
-	Pause();
-	ReleaseInputQ();
-	iSessionManager->CancelUpdate();
-	ReleaseProcessQ();
-	iVideoSurfaceObserver->MmvsoRemoveSurface();
+    if(!iResourceLost)
+    {
+		iResourceLost = ETrue;
+		iRedrawDone = EFalse;
+		Pause();
+		ReleaseInputQ();
+		iSessionManager->CancelUpdate();
+		ReleaseProcessQ();
+		iVideoSurfaceObserver->MmvsoRemoveSurface();
+	}
+	else if(iResourceLost && iRedrawDone)
+	{
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost ResourceLost happening \
+					while Postprocessor is already in ResourceLoss state"), 
+	   				this);
+		iProxy->MdvppFatalError(this, KErrHardwareNotAvailable);	   				
+	    return;		
+	}
+	else
+	{
+		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost Ignoring the \
+					duplicate ResourceLoss call"), 
+	   				this);
+	}
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost --"), this);
 }
 

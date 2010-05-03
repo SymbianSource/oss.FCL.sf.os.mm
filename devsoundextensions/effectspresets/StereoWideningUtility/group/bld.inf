@@ -30,7 +30,7 @@ PRJ_EXPORTS
 PRJ_MMPFILES
 
 // AAC Encoder Plugin
-//StereoWideningUtility.mmp 	//Utility DLL 
+StereoWideningUtility.mmp 	//Utility DLL 
 
 
 

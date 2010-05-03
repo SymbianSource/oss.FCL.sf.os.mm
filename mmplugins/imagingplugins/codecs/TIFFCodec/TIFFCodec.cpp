@@ -158,7 +158,7 @@ TFrameState CTiffReadCodec::ProcessFrameHeaderL(TBufPtr8& aData)
 		case EFinish:
 			{
 			err = iRecordTable->InsertRecordL(iIfdOffset, iIfdSize);
-			if (err != KErrNone)
+			if (err != KErrNone && err != KErrAlreadyExists)
 				{
 				User::Leave(KErrCorrupt);
 				}

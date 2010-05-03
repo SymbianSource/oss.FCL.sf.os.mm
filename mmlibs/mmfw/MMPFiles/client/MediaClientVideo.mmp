@@ -42,6 +42,10 @@ source			mmfclientvideoplayer2.cpp
 source			mediaclientvideodisplaybody.cpp
 source			mediaclientextdisplayinterface.cpp
 source			mediaclientextdisplayhandler.cpp
+source			mediaclientwseventobserver.cpp
+source			mediaclientpolicyserverclient.cpp
+source			mediaclientpolicyserversession.cpp
+
 #endif 
 
 source			mmfclientvideoplayerbody.cpp
@@ -89,10 +93,5 @@ strictdepend
 start			wins
 	baseaddress	0x4F2A0000
 end
-
-MACRO __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
-
-
-                    
 
 SMPSAFE

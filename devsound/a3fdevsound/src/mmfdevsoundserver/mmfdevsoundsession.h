@@ -48,7 +48,8 @@ enum TMMFDevSoundSessionPanicCodes
 	{
 	EMsgQueueFailedToSendMsg =1,
 	EQueueRequestsFailedToAppend,
-	EUnexpectedAsyncOpCompleteHandlingCI
+	EUnexpectedAsyncOpCompleteHandlingCI,
+	ERequestBeingServicedMismatch
 	};
 
 // CLASS DECLARATION
@@ -207,6 +208,14 @@ public: // New functions
 	TBool DoInitialize1L(const RMmfIpcMessage& aMessage);
 
 	/**
+		Method to service Initialize1L request that has already completed, but
+		not finished due to a pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedInitialize1L();
+
+	/**
 		Method to service Initialize2L request.
 		Leaves on failure.
 		@since 
@@ -215,6 +224,14 @@ public: // New functions
 		@return ETrue if the request is serviced completely else EFalse.
 	*/
 	TBool DoInitialize2L(const RMmfIpcMessage& aMessage);
+
+	/**
+		Method to service Initialize2L request that has already completed, but
+		not finished due to a pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedInitialize2L();
 
 	/**
 		Method to service Initialize3L request.
@@ -234,6 +251,14 @@ public: // New functions
 	*/
 	TBool DoInitialize4L(const RMmfIpcMessage& aMessage);
 	
+	/**
+		Method to service Initialize4L request that has already completed, but
+		not finished due to a pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedInitialize4L();
+
 	/**
 		Method to service CancelInitialize request.
 		Leaves on failure.
@@ -388,6 +413,14 @@ public: // New functions
 	TBool DoPlayInitL(const RMmfIpcMessage& aMessage);
 
 	/**
+		Method to service initialize DevSound to play request that has already completed,
+		but not finished due to a pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedPlayInitL();
+
+	/**
 		Method to service initialize DevSound to record request.
 		Leaves on failure.
 		@since 
@@ -396,6 +429,14 @@ public: // New functions
 		@return ETrue if the request is serviced completely else EFalse.
 	*/
 	TBool DoRecordInitL(const RMmfIpcMessage& aMessage);
+
+	/**
+		Method to service initialize DevSound to record request that has already completed,
+		but not finished due to a pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedRecordInitL();
 
 	/**
 		Method to service signal DevSound to playing current buffer request.
@@ -450,6 +491,15 @@ public: // New functions
 	TBool DoPlayToneL(const RMmfIpcMessage& aMessage);
 
 	/**
+		Method to service signal DevSound to play simple tone operation
+		request that has already completed, but not finished due to a
+		pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedPlayToneL();
+
+	/**
 		Method to service signal DevSound to play dual tone  operation
 		request.
 		Leaves on failure.
@@ -459,6 +509,15 @@ public: // New functions
 		@return ETrue if the request is serviced completely else EFalse.
 	*/
 	TBool DoPlayDualToneL(const RMmfIpcMessage& aMessage);
+
+	/**
+		Method to service signal DevSound to play dual tone operation
+		request that has already completed, but not finished due to a
+		pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedPlayDualToneL();
 
 	/**
 		Method to service signal DevSound to play DTMFString operation
@@ -472,6 +531,15 @@ public: // New functions
 	TBool DoPlayDTMFStringL(const RMmfIpcMessage& aMessage);
 
 	/**
+		Method to service signal DevSound to play DTMFString operation
+		request that has already completed, but not finished due to a
+		pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedPlayDTMFStringL();
+
+	/**
 		Method to service signal DevSound to play tone sequence operation
 		request.
 		Leaves on failure.
@@ -483,6 +551,15 @@ public: // New functions
 	TBool DoPlayToneSequenceL(const RMmfIpcMessage& aMessage);
 
 	/**
+		Method to service signal DevSound to play tone sequence operation
+		request that has already completed, but not finished due to a
+		pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedPlayToneSequenceL();
+
+	/**
 		Method to service signal DevSound to play fixed sequence operation
 		request.
 		Leaves on failure.
@@ -492,6 +569,15 @@ public: // New functions
 		@return ETrue if the request is serviced completely else EFalse.
 	*/
 	TBool DoPlayFixedSequenceL(const RMmfIpcMessage& aMessage);
+
+	/**
+		Method to service signal DevSound to play fixed sequence operation
+		request that has already completed, but not finished due to a
+		pre-emption clash during its commit cycle(s).
+		Leaves on failure.
+		@return void
+	*/
+	void DoAlreadyCompletedPlayFixedSequenceL();
 
 	/**
 		Method to service signal DevSound to initilize DTMF String operation
@@ -1313,6 +1399,9 @@ public: // New functions
 
 	// from MDevSoundAdaptationObserver
 	TBool AdaptorControlsContext() const;
+	void PreemptionClash();
+	void PreemptionClashWithStateChange();
+    void NotifyError(TInt aError);
 
 	/**
 		MDevSoundAdaptationObserver callback.
@@ -1383,6 +1472,18 @@ private: // Functions
 	void DoServiceRequestL(const RMmfIpcMessage& aMessage);
 
 	/*
+	Services the first request of queue for a pseudo asynchronous function that has already completed,
+	but needs to be re-applied again due to pre-emption clash.
+	*/
+	void DoServiceAlreadyCompletedRequestL(const TInt aFunction);
+
+	/*
+	Handles the first request of queue for a pseudo asynchronous function that has already completed,
+	but needs to be re-applied again due to pre-emption clash.
+	*/
+	void HandleAlreadyCompletedRequest();
+
+	/*
 	Services the first request at the FIFO
 	*/
 	void DoServiceNextRequestL();
@@ -1451,6 +1552,11 @@ private:
 	static TInt AsyncQueueStartCallback(TAny* aPtr);
 	void AsyncQueueStartCallback();
 
+	void ResetNotifiedError();
+	TInt NotifiedError() const;
+
+	TBool NeedToQueue() const;
+
 protected:	// Data
 	CMMFDevSoundAdaptation* iAdapter;
 
@@ -1502,6 +1608,13 @@ private:	// Data
 	
 	CActiveSchedulerWait*		iClosingWait;
 	CAsyncCallBack*				iAsyncQueueStart;
+
+	TInt iRedoFunction;
+	TMMFDevSoundProxySettingsPckg iCachedClientData;
+	TInt iSeqNum;
+	TBool iPreemptionClash;
+	TInt iNotifiedError;
+
 	};
 
 #endif // MMFDEVSOUNDSESSION_H

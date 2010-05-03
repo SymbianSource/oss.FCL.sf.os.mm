@@ -1467,7 +1467,7 @@ TInt CJpgReadCodec::GetHuffmanCodeL(const TDecHuffmanTable& aTable)
 	do
 		{
 		index = (index << 1) + 1;
-		index +=((look & TUint(1<<31)) != 0);
+		index +=((look & ((TUint32)1<<31)) != 0);
 		look<<=1;
 		} while (++bitCount < nb);
 

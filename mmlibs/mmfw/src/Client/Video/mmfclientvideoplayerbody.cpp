@@ -171,6 +171,7 @@ CVideoPlayerUtility::CBody::CBody(CVideoPlayerUtility* aParent,
 #ifdef SYMBIAN_BUILD_GCE
 	,iGlobalScaleWidth(100.0f),
 	iGlobalScaleHeight(100.0f),
+	iGlobalAutoScaleType(EAutoScaleBestFit),  // Really need some platform specific way of defining this. Not everyone will want it.
 	iGlobalHorizPos(EHorizontalAlignCenter),
 	iGlobalVertPos(EVerticalAlignCenter)
 #endif
@@ -753,7 +754,15 @@ void CVideoPlayerUtility::CBody::SetRotationL(TVideoRotation aRotation)
 				if (window.iRotation != aRotation)
 					{
 					// update config only if setting has actually changed
-					UpdateSurfaceAndSubtitleConfigL(*display, window, window.iClipRect, aRotation, iCropRegion);
+					display->SetRotationL(*window.iWindow, aRotation, iCropRegion);
+
+					if (iSubtitleUtility)
+						{
+						TMMFSubtitleWindowConfig config;
+						GetSubtitleConfigFromWindowData(window, config);
+
+						iSubtitleUtility->UpdateSubtitleConfig(config);
+						}
 					}
 				}
 #else
@@ -857,9 +866,11 @@ void CVideoPlayerUtility::CBody::SetCropRegionL(const TRect& aCropRegion)
 		// Crop region setting is not sent to controller when graphics surfaces are used.
 		// If the surface has been created, perform crop region with the help of graphics surfaces;
 		// otherwise, just store the crop region info.
-		
-		iCropRegion = aCropRegion;
-		User::LeaveIfError(SetAllBackgroundSurfaces());
+		if (aCropRegion != iCropRegion)
+			{
+			iCropRegion = aCropRegion;
+			User::LeaveIfError(SetAllBackgroundSurfaces());
+			}
 		}
 #else
 	User::LeaveIfError(iVideoPlayControllerCustomCommands.SetCropRegion(aCropRegion));
@@ -1245,11 +1256,9 @@ TInt CVideoPlayerUtility::CBody::SurfaceParametersChanged()
 	TInt error2 = KErrNone;
 	for (TInt i = 0; i < count; ++i)
 		{
-		// ignore error and continue to set parameters
-		iActiveDisplays[i]->SurfaceParametersChanged(surfaceId, cropRect, aspectRatio);
+		error2 = iActiveDisplays[i]->SurfaceParametersChanged(surfaceId, cropRect, aspectRatio);
 		
-		// save the error for the first failure and attempt to redraw remaining displays
-		error2 = iActiveDisplays[i]->RedrawWindows(iCropRegion);
+		// Save the error for the first failure only
 		if ((error2 != KErrNone) && (error == KErrNone))
 			{
 			error = error2;
@@ -1745,7 +1754,15 @@ void CVideoPlayerUtility::CBody::SetWindowClipRectL(const RWindowBase& aWindow, 
 	if (currentWin.iClipRect != aWindowClipRect)
 		{
 		// update config only if setting has actually changed
-		UpdateSurfaceAndSubtitleConfigL(*display, currentWin, aWindowClipRect, currentWin.iRotation, iCropRegion);
+		display->SetWindowClipRectL(aWindow, aWindowClipRect, iCropRegion);
+
+		if (iSubtitleUtility)
+			{
+			TMMFSubtitleWindowConfig config;
+			GetSubtitleConfigFromWindowData(currentWin, config);
+
+			iSubtitleUtility->UpdateSubtitleConfig(config);
+			}
 		}
 #else
 	display->SetWindowClipRectL(aWindow, aWindowClipRect, iCropRegion);
@@ -1822,7 +1839,15 @@ void CVideoPlayerUtility::CBody::SetRotationL(const RWindowBase& aWindow, TVideo
 	CMediaClientVideoDisplayBody::TWindowData& currentWin = windows[pos];
 	if (currentWin.iRotation != aRotation)
 		{
-		UpdateSurfaceAndSubtitleConfigL(*display, currentWin, currentWin.iClipRect, aRotation, iCropRegion);
+		display->SetRotationL(aWindow, aRotation, iCropRegion);
+
+		if (iSubtitleUtility)
+			{
+			TMMFSubtitleWindowConfig config;
+			GetSubtitleConfigFromWindowData(currentWin, config);
+
+			iSubtitleUtility->UpdateSubtitleConfig(config);
+			}
 		}
 #else
 	display->SetRotationL(aWindow, aRotation, iCropRegion);
@@ -2170,38 +2195,6 @@ RWindow* CVideoPlayerUtility::CBody::FindWindowWithWsHandle(const RPointerArray<
 		}
 		
 	return NULL;
-	}
-
-// Update the supplied window with the new clip rect and rotation
-// If updating of surface failed, this function leave after restoring the original aWindowData
-void CVideoPlayerUtility::CBody::UpdateSurfaceAndSubtitleConfigL(CMediaClientVideoDisplayBody& aDisplay,CMediaClientVideoDisplayBody::TWindowData& aWindowData, const TRect& aClipRect, TVideoRotation aRotation, const TRect& aCropRegion)
-	{
-	TRect oldClipRect = aWindowData.iClipRect;
-	TVideoRotation oldRotation = aWindowData.iRotation;
-	
-	aWindowData.iClipRect = aClipRect;
-	aWindowData.iRotation = aRotation;
-	
-	if (aDisplay.IsSurfaceCreated())
-		{
-		TInt err = aDisplay.SetBackgroundSurface(aWindowData, aCropRegion);
-		if (KErrNone != err)
-			{
-			aWindowData.iClipRect = oldClipRect;
-			aWindowData.iRotation = oldRotation;
-			User::Leave(err);
-			}
-		}
-	
-	// Set background was successful or surface was not created, so 
-	// update subtitle config if subtitles are enabled
-	if (iSubtitleUtility)
-		{
-		TMMFSubtitleWindowConfig config;
-		GetSubtitleConfigFromWindowData(aWindowData, config);
-
-		iSubtitleUtility->UpdateSubtitleConfig(config);
-		}
 	}
 
 void CVideoPlayerUtility::CBody::GetSubtitleConfigFromWindowData(CMediaClientVideoDisplayBody::TWindowData& aWindowData, TMMFSubtitleWindowConfig& aConfig)

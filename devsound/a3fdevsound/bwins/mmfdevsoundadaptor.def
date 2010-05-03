@@ -55,4 +55,5 @@ EXPORTS
 	?Resume@CMMFDevSoundAdaptation@@QAEHXZ @ 54 NONAME ; int CMMFDevSoundAdaptation::Resume(void)
 	?BufferErrorEvent@CMMFDevSoundAdaptation@@QAEXXZ @ 55 NONAME ; void CMMFDevSoundAdaptation::BufferErrorEvent(void)
 	?ProcessingError@CMMFDevSoundAdaptation@@QAEHAAH@Z @ 56 NONAME ; int CMMFDevSoundAdaptation::ProcessingError(int &)
+	?RollbackAdaptorActiveStateToBeforeCommit@CMMFDevSoundAdaptation@@QAEXXZ @ 57 NONAME ; void CMMFDevSoundAdaptation::RollbackAdaptorActiveStateToBeforeCommit(void)
 

@@ -1758,4 +1758,48 @@ mp4_i32 closeMetaDataFiles(MP4HandleImp handle)
 }
 
 
+TInt RecommendedBufferSize(MP4HandleImp aHandle)
+	{
+	TInt recommendedSize = READBUFSIZE;
+	
+    MP4HandleImp handle = (MP4HandleImp)aHandle;
+    if (handle)
+    	{
+		// handle->rfile will be set in the cases of
+		// - MP4ParseOpen(MP4FileName) <if the filename is set>
+		// - MP4ParseOpenFileHandle64(RFile64)
+		// - MP4ParseOpenFileHandle(RFile) <via MP4ParseOpenFileHandle64()>
+		//
+		// It will not be set by MP4ParseOpenCAF()
+
+		RFs* fs = (RFs*)handle->fs;
+		RFile64* file64 = (RFile64*)handle->rfile;
+		
+		if (fs && file64)
+			{
+			TInt driveNumber = 0;
+			TDriveInfo driveInfo;
+			TVolumeIOParamInfo volumeInfo;
+			
+			TInt err = file64->Drive(driveNumber, driveInfo);
+			if (err == KErrNone)
+				{
+				err = fs->VolumeIOParam(driveNumber, volumeInfo);
+				}
+			
+			if (err == KErrNone)
+				{
+				if (volumeInfo.iRecReadBufSize != KErrNotSupported)
+					{
+					recommendedSize = Max(recommendedSize, volumeInfo.iRecReadBufSize);
+					}
+				}
+				
+			}
+    	}
+
+    return recommendedSize;
+	}
+	
+
 // End of File

@@ -293,7 +293,12 @@ OMX_ERRORTYPE ROmxILCoreClientSession::DeinitAndClose()
 	RHandleBase::Close();
 
 	// Release server handle so it will exit cleanly.
-	XGlobalILCoreCache::IlCoreCache()->SetServerHandle(KNullHandle);
+	XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
+
+	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
+					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
+
+	pGlobalILCoreCache->SetServerHandle(KNullHandle);
 	
 	RThread serverThread;
 	TInt ret = serverThread.Open(TThreadId(serverThreadId));

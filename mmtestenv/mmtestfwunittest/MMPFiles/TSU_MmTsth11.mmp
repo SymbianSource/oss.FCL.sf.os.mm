@@ -35,12 +35,6 @@ SOURCE			tsu_mmtsth11/TSU_MmTsthSuite11.cpp
 SOURCE			tsu_mmtsth11/TSU_MmTsthStep11.cpp
 SOURCE			tsu_mmtsth11/TSU_MmTsth11.cpp
 
-// code to be tested
-
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/TestStep.cpp
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/asyncscheduler.cpp // to keep previous happy
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/Log.cpp
-
 // required stubs
 
 SOURCE			tsu_stubs/TestStepVirtualStub.cpp

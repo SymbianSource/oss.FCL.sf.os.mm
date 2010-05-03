@@ -48,7 +48,7 @@ TInt CDevCommonControl::Stop() // from CDevAudioControl
             err = iDevAudio->iAudioStream->Stop();
             if (err == KErrNone)
                 {
-                err = iDevAudio->iAudioContext->Commit();
+                err = iDevAudio->CommitAudioContext();
                 }
             if (err == KErrNone)
                 {
@@ -58,6 +58,17 @@ TInt CDevCommonControl::Stop() // from CDevAudioControl
         case EDevSoundAdaptorGoingActive:
             iDevAudio->iActiveState = EDevSoundAdaptorStopping;
             break;
+        case EDevSoundAdaptorInitialised_Idle:
+        	{
+        	//If following condition is true, then we are here because of a
+        	//pre-emption clash in last Commit cycle started from
+        	//CDevCommonControl::ContextEventUpdateWithStateEventNoError.
+        	if(iDevAudio->iPreviousState == EDevSoundAdaptorUnloading)
+        		{
+				err = Unload();
+				break;
+        		}
+        	}
         default:
             break;
         }
@@ -79,7 +90,7 @@ TInt CDevCommonControl::Pause() // from CDevAudioControl
     TInt err = iDevAudio->iAudioStream->Prime();
     if ( err == KErrNone)
         {
-        err = iDevAudio->iAudioContext->Commit();
+        err = iDevAudio->CommitAudioContext();
         }
     if (err == KErrNone)
         {
@@ -101,13 +112,28 @@ TInt CDevCommonControl::Resume() // from CDevAudioControl
         err = KErrNotReady;
         }
 
+    //If following condition is true, then we are here because of a
+    //pre-emption clash in last Commit cycle started from
+    //CDevCommonControl::ContextEventUpdateWithStateEventAndError.
+    if(iDevAudio->iActiveState == EDevSoundAdaptorInitialised_Idle &&
+    		iDevAudio->iPreviousState == EDevSoundAdaptorUnloading)
+    	{
+		err = Unload();
+		DP0_RET(err,"%d");
+    	}
+
+    if(err == KErrNone)
+        {
+        // Populate gain and balance values set in the Paused state and being cached
+        err = iDevAudio->RequestGainAndBalance(this);
+        }
     if(err == KErrNone)
         {
         err = iDevAudio->iAudioStream->Activate();
         }
     if ( err == KErrNone)
         {
-        err = iDevAudio->iAudioContext->Commit();
+        err = iDevAudio->CommitAudioContext();
         }
     if (err == KErrNone)
         {
@@ -182,12 +208,26 @@ void CDevCommonControl::ContextEvent(TUid aEvent, TInt aError)
     // Can't "switch {...}" on UIDs unfortunately:
     if (aEvent == KUidA3FContextUpdateComplete)
         {
-        if(iBeingPreempted && iStateEventReceived)
+        if(iBeingPreempted)
             {
-            //use a sub state pattern to make premtion cycles like other cycles.
-            DP1(DLERR,"Preemption error=%d", aError);
-            iDevAudio->iActiveState = EDevSoundAdaptorBeingPreempted;
-            iBeingPreempted=EFalse;
+			if(iStateEventReceived)
+				{
+				//use a sub state pattern to make pre-emption cycles like other cycles.
+				DP1(DLERR,"Preemption error=%d", aError);
+				iDevAudio->iActiveState = EDevSoundAdaptorBeingPreempted;
+				if(iPreemptionClash)
+					{
+					// remove last request from front of queue without processing it
+					iAdaptationObserver->PreemptionClashWithStateChange();
+					iPreemptionClash=EFalse;
+					}
+				}
+            else if(!iStateEventReceived && iPreemptionClash)
+        		{
+				iIgnoreAsyncOpComplete=ETrue;
+				iPreemptionClash=EFalse;
+        		}
+			iBeingPreempted=EFalse;
             }
 		ContextEventUpdateComplete(aError);
         }
@@ -195,17 +235,39 @@ void CDevCommonControl::ContextEvent(TUid aEvent, TInt aError)
     else if ((aEvent == KUidA3FContextCommitUpdate))
         {
         iBeingPreempted=EFalse; // clear being preempted
+        iPreemptionClash=EFalse; // clear pre-emption clash flag
         TBool adaptorControlsContext = iAdaptationObserver->AdaptorControlsContext();
         iIgnoreAsyncOpComplete = !adaptorControlsContext;
             // if we don't control context, always send a PreemptionFinishedCallbackReceived()
 		iStateEventReceived=EFalse;
         }
 
-    else if ((aEvent == KUidA3FContextPreEmption) or (aEvent == KUidA3FContextPreEmptedCommit))
+    else if (aEvent == KUidA3FContextPreEmption)
         {
         // clear iBeingPreepted - will be set in ContextEventPreEmption if req
         iBeingPreempted=EFalse;
+        iPreemptionClash=EFalse; // clear pre-emption clash flag
         TBool adaptorControlsContext = iAdaptationObserver->AdaptorControlsContext();
+		iStateEventReceived=EFalse;
+        iIgnoreAsyncOpComplete=EFalse; // clear being iIgnoreAsyncOpComplete
+        ContextEventPreEmption(aEvent, aError);
+        if (!adaptorControlsContext)
+            {
+            iIgnoreAsyncOpComplete = ETrue; // if we don't control context never do AsyncOpComplete
+            }
+        }
+    else if (aEvent == KUidA3FContextPreEmptedCommit)
+        {
+		DP0(DLINFO,"KUidA3FContextPreEmptedCommit event received, thus clash with Pre-emption");
+        // clear iBeingPreepted - will be set in ContextEventPreEmption if req
+        iBeingPreempted=EFalse;
+        TBool adaptorControlsContext = iAdaptationObserver->AdaptorControlsContext();
+        if (adaptorControlsContext)
+        	{
+			// push current request that was being processed onto front of queue.
+        	iAdaptationObserver->PreemptionClash();
+        	iPreemptionClash=ETrue;
+        	}
 		iStateEventReceived=EFalse;
         iIgnoreAsyncOpComplete=EFalse; // clear being iIgnoreAsyncOpComplete
         ContextEventPreEmption(aEvent, aError);
@@ -426,7 +488,7 @@ void CDevCommonControl::ContextEventStateDevSoundAdaptorLoading() // from CDevCo
         return;
         }
     
-    err = iDevAudio->iAudioContext->Commit();
+    err = iDevAudio->CommitAudioContext();
     if (err)
         {
         ContextEventAsynchronousPlayCompletion(err);
@@ -564,6 +626,18 @@ void CDevCommonControl::ContextEventUpdateWithoutStateEventNoError() // from CDe
         return;
         }
 
+    //If the Commit cycle when going into EDevSoundAdaptorRemovingProcessingUnits fails due to pre-emption
+    //clash then we re-apply the client request again.
+    if (iDevAudio->iActiveState == EDevSoundAdaptorRemovingProcessingUnits && iIgnoreAsyncOpComplete)
+    	{
+		//Pop front of queue to re-apply the request again via CMMFDevSoundSession::DequeueRequest
+		//from the callback into CMMFDevSoundSession below:
+		iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue);
+		iIgnoreAsyncOpComplete = EFalse;
+		DP_OUT();
+		return;
+    	}
+
     iDevAudio->iActiveState = EDevSoundAdaptorCreated_Uninitialised;
     
     if (iDevAudio->iReinitializing)
@@ -592,29 +666,78 @@ void CDevCommonControl::ContextEventUpdateWithoutStateEventButWithError(TInt aEr
     {
     DP_CONTEXT(CDevCommonControl::ContextEventUpdateWithoutStateEventButWithError, CtxDevSound, DPLOCAL);
     DP_IN();
-    
-    // NOTE: We shouldn't actually be in any of the states below when calling this function.
-    //       But just in case we are we will rewind the state before dealing with the error. 
-    switch (iDevAudio->iActiveState)
-        {
-    case EDevSoundAdaptorInitialising:
-        iDevAudio->iActiveState = EDevSoundAdaptorCreated_Uninitialised;
-        ContextEventAsynchronousInitializeComplete(aError);
-        break;
-        
-    case EDevSoundAdaptorLoading:
-        iDevAudio->iActiveState = EDevSoundAdaptorInitialised_Initialised;
-        ContextEventAsynchronousPlayCompletion(aError);
-        break;
-        
-    case EDevSoundAdaptorActivating:
-        iDevAudio->iActiveState = EDevSoundAdaptorInitialised_Idle;
-        ContextEventAsynchronousPlayCompletion(aError);
-        break;
-        
-    default:
-        break;
-        }
+
+    //If flag is true below then it must be due to a stateless normal pre-emption or
+    //stateless pre-emption clash scenario.
+    if(iIgnoreAsyncOpComplete)
+    	{
+		//If we are in pre-emption clash then callback below will retry the client request again.
+		iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue); // notify client of end of cycle
+		iIgnoreAsyncOpComplete = EFalse;
+    	}
+    else
+    	{
+        TDevSoundAdaptorState previousState = iDevAudio->iPreviousState;
+
+        DP3(DLINFO,"Error with no state change, state %d, previous %d, error %d during Commit cycle",
+                    iDevAudio->iActiveState, previousState, aError);
+
+        // We can end up here for a number of reasons. For non "mid states", this is
+        // a standard error scenario. For some mid-states (e.g. Activating, Loading etc),
+        // when we try and "promote" the state, this happens when the promotion is rejected
+        // and we handle thus accordingly. For other mid-states the situation is less clear
+        // and we call AsynchronousOperationComplete() with the error assuming the parent
+        // session will deal with it. Whatever we don't want to stay in a mid-state, so
+        // rewind to the previous ("normal") one if we are in one.
+
+        // Longer term TODO. If the code were refactored so that the InitializeComplete(),
+        // PlayError() etc callback came from AsynchronousOperationComplete() then the
+        // following code might be simpler. Most of the time (at least) we get here because
+        // we are doing a session function, and we can use the function to determine what
+        // to do more easily than relying on the state. As it is, for some mid-states we
+        // try and work out what error code to generate. Not clear this covers 100% cases,
+        // although demotion transitions should not fail, so the problem cases might not occur.
+        //
+
+		//If we reach this condition then it is because of rejection/error during Commit cycle.
+		switch (iDevAudio->iActiveState)
+			{
+			case EDevSoundAdaptorInitialising:
+				{
+				iDevAudio->iActiveState = previousState;
+				ContextEventAsynchronousInitializeComplete(aError);
+				break;
+				}
+			case EDevSoundAdaptorLoading:
+				{
+				iDevAudio->iActiveState = previousState;
+				ContextEventAsynchronousPlayCompletion(aError);
+				break;
+				}
+			case EDevSoundAdaptorActivating:
+				{
+				iDevAudio->iActiveState = previousState;
+				ContextEventAsynchronousPlayCompletion(aError);
+				break;
+				}
+			case EDevSoundAdaptorRemovingProcessingUnits:
+			case EDevSoundAdaptorUninitialising:
+			case EDevSoundAdaptorUnloading:
+			case EDevSoundAdaptorStopping:
+			case EDevSoundAdaptorPausing:
+			    {
+                DP2(DLINFO,"Unexpected mid state [%d] when handling error [%d] during Commit cycle, workback", iDevAudio->iActiveState, aError);
+			    iDevAudio->iActiveState = previousState;
+                iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
+			    break;
+			    }
+			default:
+				{
+				DP2(DLINFO,"Unexpected state [%d] when handling error [%d] during Commit cycle", iDevAudio->iActiveState, aError);
+		        iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
+				}
+			}
+    	}
        
     DP_OUT();
     }
@@ -710,12 +833,15 @@ void CDevCommonControl::ContextEventUpdateWithStateEventAndError(TInt aError) //
     
     iCallbackFromAdaptor = KCallbackNone;
     
-    if(iIgnoreAsyncOpComplete==EFalse)
+    if(!iIgnoreAsyncOpComplete)
         {
         iAdaptationObserver->AsynchronousOperationComplete(aError, ETrue);
         }
-    
-    iIgnoreAsyncOpComplete=EFalse;
+    else
+        {
+        iAdaptationObserver->PreemptionFinishedCallbackReceived(ETrue);
+        iIgnoreAsyncOpComplete=EFalse;
+        }
     
     DP_OUT();
     }

@@ -35,17 +35,6 @@ SOURCE			tsu_mmtsth12/TSU_MmTsthSuite12.cpp
 SOURCE			tsu_mmtsth12/TSU_MmTsthStep12.cpp
 SOURCE			tsu_mmtsth12/TSU_MmTsth12.cpp
 
-// code to be tested
-
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/TestSuite.cpp
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/Log.cpp
-
-// required for non-exported functions which need testing
-
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/TestStep.cpp
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/asyncscheduler.cpp // to keep previous happy
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/TestIniData.cpp
-
 // required stubs
 
 SOURCE			tsu_stubs/TestStepVirtualStub.cpp

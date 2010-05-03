@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -127,6 +127,8 @@ void CICLCodecDefectTestSuite::InitialiseL()
 	AddTestStepL(RTestStep_5112::NewL(this));
 	AddTestStepL(RTestStep_5113::NewL(this));
 	AddTestStepL(RTestStep_5114::NewL(this));
+	AddTestStepL(RTestStep_5108::NewL(this));
+	AddTestStepL(RTestStep_5109::NewL(this));
 	}
 
 void CICLCodecDefectTestSuite::InitSystemPath()

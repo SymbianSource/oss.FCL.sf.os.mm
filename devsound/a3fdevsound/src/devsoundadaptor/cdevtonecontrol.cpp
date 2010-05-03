@@ -156,7 +156,7 @@ TInt CDevToneControl::Initialize(TUid aFormat)
 	err = iDevAudio->iAudioStream->Initialize();
 	if (err == KErrNone)
 		{
-		err = iDevAudio->iAudioContext->Commit();
+		err = iDevAudio->CommitAudioContext();
 		}
 	if (err == KErrNone)
 		{
@@ -195,7 +195,7 @@ TInt CDevToneControl::ProcessInit()
 				}
 			if ( err == KErrNone)
 				{
-				err = iDevAudio->iAudioContext->Commit();
+				err = iDevAudio->CommitAudioContext();
 				}
 			if(err == KErrNone)
 				{
@@ -204,8 +204,28 @@ TInt CDevToneControl::ProcessInit()
 			}
 			break;
 
+		case EDevSoundAdaptorGoingActive:
+			{
+			//If following condition is false, then we are here because of a
+			//pre-emption clash in last Commit cycle started from
+			//CDevCommonControl::ContextEventUpdateWithStateEventNoError.
+			if(iDevAudio->iPreviousState != EDevSoundAdaptorActivating)
+				{
+				break;
+				}
+			//Fall through as required
+			}
 		case EDevSoundAdaptorPaused_Primed:
 		case EDevSoundAdaptorInitialised_Idle:
+			{
+			//If following condition is true, then we are here because of a
+			//pre-emption clash in last Commit cycle started from
+			//CDevCommonControl::ContextEventUpdateWithStateEventAndError.
+			if(iDevAudio->iPreviousState == EDevSoundAdaptorUnloading)
+				{
+				err = Unload();
+				break;
+				}
 			DP0(DLINFO, "Already in loaded state");
 			err = iDevAudio->RequestGainAndBalance(this);
 			if (err==KErrNone)
@@ -214,13 +234,14 @@ TInt CDevToneControl::ProcessInit()
 				}
 			if (err == KErrNone)
 				{
-				err = iDevAudio->iAudioContext->Commit();
+				err = iDevAudio->CommitAudioContext();
 				}
 			if (err == KErrNone)
 				{
 				iDevAudio->iActiveState = EDevSoundAdaptorActivating;
 				}
 			break;
+			}
 		case EDevSoundAdaptorActive_Active:
 		default:
 			err = KErrNotReady;
@@ -339,7 +360,7 @@ TInt CDevToneControl::ProcessingFinishedReceived(TBool& asyncOperation)
 	TInt err = iDevAudio->iAudioStream->Stop();
 	if ( err == KErrNone)
 		{
-		err = iDevAudio->iAudioContext->Commit();
+		err = iDevAudio->CommitAudioContext();
 		if(err == KErrNone)
 			{
 			iDevAudio->iActiveState = EDevSoundAdaptorStopping;

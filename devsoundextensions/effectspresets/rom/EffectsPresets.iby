@@ -25,9 +25,6 @@ file=ABI_DIR\BUILD_DIR\AudioEqualizerUtility.dll		SHARED_LIB_DIR\AudioEqualizerU
 file=ABI_DIR\BUILD_DIR\EnvironmentalReverbUtility.dll		SHARED_LIB_DIR\EnvironmentalReverbUtility.dll
 file=ABI_DIR\BUILD_DIR\StereoWideningUtility.dll		SHARED_LIB_DIR\StereoWideningUtility.dll
 
-//CenRep Keys Backup for Audio Equalizer Utility
-data=DATAZ_\private\10207A8F\backup_registration.xml	private\10207A8F\backup_registration.xml
-
 // Effect Presets
 data=ZSYSTEM\install\EffectsPresets_Stub.SIS    System\Install\EffectsPresets_Stub.SIS
 

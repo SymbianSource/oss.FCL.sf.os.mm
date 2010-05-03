@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -203,7 +203,6 @@ public:
 	TInt EnableSubtitles(CMediaClientVideoDisplayBody& aDisplay);
 	TInt AddSubtitleConfig(CMediaClientVideoDisplayBody::TWindowData& aWindowData);
 	void GetSubtitleConfigFromWindowData(CMediaClientVideoDisplayBody::TWindowData& aWindowData, TMMFSubtitleWindowConfig& aConfig);
-	void UpdateSurfaceAndSubtitleConfigL(CMediaClientVideoDisplayBody& aDisplay,CMediaClientVideoDisplayBody::TWindowData& aWindowData, const TRect& aClipRect, TVideoRotation aRotation, const TRect& aCropRegion);
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
 
 private:
@@ -232,7 +231,6 @@ private:
 								const TRect& aClipRect, const TRect& aVideoExtent, RWindow* aWindow2);
 	TInt SurfaceCreated();
 	TInt SurfaceParametersChanged();
-	TInt SetBackgroundSurface(const CMediaClientVideoDisplayBody& aDisplay);
 	TInt RemoveSurface(TBool aControllerEvent);
 	TInt SetAllBackgroundSurfaces();
 

@@ -80,6 +80,7 @@ private:
     
 private:
     TBool iBeingPreempted;
+    TBool iPreemptionClash;
 	};
 
 #endif // CDEVCOMMONCONTROL_H

@@ -35,10 +35,6 @@ SOURCE			tsu_mmtsth13/TSU_MmTsthSuite13.cpp
 SOURCE			tsu_mmtsth13/TSU_MmTsthStep13.cpp
 SOURCE			tsu_mmtsth13/TSU_MmTsth13.cpp
 
-// code to be tested
-
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/TestUtils.cpp
-
 // required stubs
 
 

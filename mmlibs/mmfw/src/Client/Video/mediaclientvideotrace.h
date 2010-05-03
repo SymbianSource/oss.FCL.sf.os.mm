@@ -18,7 +18,7 @@
 #ifndef MEDIACLIENTVIDEOTRACE_H_
 #define MEDIACLIENTVIDEOTRACE_H_
 
-#ifdef __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
+#ifdef _DEBUG
 
 #include <e32debug.h>
 
@@ -28,7 +28,7 @@
 #define DEBUG_PRINTF4(a,b,c,d) RDebug::Printf(a,b,c,d)
 #define DEBUG_PRINTF5(a, b, c, d, e) RDebug::Printf(a,b,c,d,e)
 
-#else // __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
+#else // _DEBUG
 
 #define DEBUG_PRINTF(a)
 #define DEBUG_PRINTF2(a, b)
@@ -36,6 +36,6 @@
 #define DEBUG_PRINTF4(a, b, c, d)
 #define DEBUG_PRINTF5(a, b, c, d, e)
 
-#endif // __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
+#endif // _DEBUG
 
 #endif // MEDIACLIENTVIDEOTRACE_H_

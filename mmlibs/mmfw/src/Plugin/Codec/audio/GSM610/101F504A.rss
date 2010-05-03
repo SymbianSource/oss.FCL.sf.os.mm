@@ -16,7 +16,7 @@
 //
 
 #include <ecom/registryinfo.rh>
-#include <mmf/plugin/mmfCodecImplementationUIDs.hrh>
+#include <mmf/plugin/mmfcodecimplementationuids.hrh>
 #include <mmf/plugin/mmfplugininterfaceuids.hrh>
 
 RESOURCE REGISTRY_INFO theInfo

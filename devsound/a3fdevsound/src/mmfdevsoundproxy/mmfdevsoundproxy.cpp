@@ -127,7 +127,7 @@ EXPORT_C void RMMFDevSoundProxy::Close()
 EXPORT_C TInt RMMFDevSoundProxy::Open()
 	{
 	SYMBIAN_DEBPRN0(_L("RMMFDevSoundProxy[0x%x]::Open - Enter"));
-	TInt err = iMsgQueue.CreateGlobal(KNullDesC, KMaxMessageQueueItems);
+	TInt err = iMsgQueue.CreateGlobal(KNullDesC, KMaxMessageQueueItems, EOwnerThread);
 	// global, accessible to all that have its handle
 	
 	if (err == KErrNone)

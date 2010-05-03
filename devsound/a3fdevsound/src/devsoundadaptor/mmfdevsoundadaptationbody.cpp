@@ -1243,3 +1243,15 @@ void CMMFDevSoundAdaptation::CBody::BufferErrorEvent()
 	ASSERT(iDevAudio);
 	iDevAudio->GetAudioControl()->BufferErrorEvent();
 	}
+
+void CMMFDevSoundAdaptation::CBody::RollbackAdaptorActiveStateToBeforeCommit()
+	{
+	DP_CONTEXT(CMMFDevSoundAdaptation::CBody::RollbackAdaptorActiveStateToBeforeCommit *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	TDevSoundAdaptorState previousState = iDevAudio->PreviousState();
+	// Set previous state to the active state set after state changing Commit call
+	iDevAudio->SetPreviousState(iDevAudio->ActiveState());
+	// Set active state to the previous state set before state changing Commit call
+	iDevAudio->SetActiveState(previousState);
+	DP_OUT();
+	}

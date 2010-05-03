@@ -1062,6 +1062,7 @@ private:
     TInt                                		iOverflowPictureCounter;
     TInt 								    	iVideoFrameBufSize;	
     TBool 										iResourceLost;
+    TBool 										iRedrawDone;
     
     //-- members for buffer management --
     MMmfVideoBufferManagementObserver*  		iVBMObserver;

@@ -18,7 +18,17 @@
 // INCLUDE FILES
 #include "mmfdevsoundproxy.h"
 #include "mmfdevsoundcallbackhandler.h"
+#ifdef _DEBUG
+#include <e32debug.h>
 
+#define SYMBIAN_DEBPRN0(str)                RDebug::Print(str, this)
+#define SYMBIAN_DEBPRN1(str, val1)          RDebug::Print(str, this, val1)
+#define SYMBIAN_DEBPRN2(str, val1, val2)    RDebug::Print(str, this, val1, val2)
+#else
+#define SYMBIAN_DEBPRN0(str)
+#define SYMBIAN_DEBPRN1(str, val1)
+#define SYMBIAN_DEBPRN2(str, val1, val2)
+#endif //_DEBUG
 
 // ============================ MEMBER FUNCTIONS ==============================
 
@@ -101,11 +111,13 @@ CMsgQueueHandler::~CMsgQueueHandler()
 //
 void CMsgQueueHandler::ReceiveEvents()
 	{
-	if (!IsActive())
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::ReceiveEvents - Enter"));	
+    if (!IsActive())
 		{
 		iMsgQueue->NotifyDataAvailable(iStatus);
 		SetActive();
 		}
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::ReceiveEvents - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -116,7 +128,8 @@ void CMsgQueueHandler::ReceiveEvents()
 //
 void CMsgQueueHandler::RunL()
 	{
-	TInt err = iMsgQueue->Receive(iCurrentItem);
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::RunL - Enter"));
+    TInt err = iMsgQueue->Receive(iCurrentItem);
 
 	if (err == KErrNone || err == KErrUnderflow)
 		{
@@ -205,6 +218,7 @@ void CMsgQueueHandler::RunL()
 				}
 			}
 		}
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::RunL - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -214,9 +228,11 @@ void CMsgQueueHandler::RunL()
 //
 TInt CMsgQueueHandler::RunError(TInt aError)
 	{
-	TMMFEvent event;
+    SYMBIAN_DEBPRN1(_L("CMsgQueueHandler[0x%x]::RunError - Enter. Error [%d]"), aError);
+    TMMFEvent event;
 	event.iErrorCode = aError;
 	iDevSoundObserver.SendEventToClient(event);
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::RunError - Exit"));
 	return KErrNone;
 	}
 
@@ -228,7 +244,9 @@ TInt CMsgQueueHandler::RunError(TInt aError)
 //
 void CMsgQueueHandler::DoCancel()
 	{
-	iMsgQueue->CancelDataAvailable();
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoCancel - Enter"));
+    iMsgQueue->CancelDataAvailable();
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoCancel - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -238,7 +256,9 @@ void CMsgQueueHandler::DoCancel()
 //
 void CMsgQueueHandler::DoInitComplete()
 	{
-	iDevSoundObserver.InitializeComplete(iCurrentItem.iErrorCode);
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoInitComplete - Enter"));
+    iDevSoundObserver.InitializeComplete(iCurrentItem.iErrorCode);
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoInitComplete - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -248,8 +268,10 @@ void CMsgQueueHandler::DoInitComplete()
 //
 void CMsgQueueHandler::DoPlayErrorComplete()
 	{
-	iAsyncQueueFinish->CallBack(); // async call to Finish()
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoPlayErrorComplete - Enter"));
+    iAsyncQueueFinish->CallBack(); // async call to Finish()
 	iDevSoundObserver.PlayError(iCurrentItem.iErrorCode);
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoPlayErrorComplete - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -260,7 +282,8 @@ void CMsgQueueHandler::DoPlayErrorComplete()
 //
 void CMsgQueueHandler::DoBTBFCompleteL()
 	{
-	// Returns either chunk handle or NULL
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoBTBFCompleteL - Enter"));
+    // Returns either chunk handle or NULL
 	// any error is assumed to be due to a pending PlayError(), so the error here is ignored - the PlayError() call will ensure the client remains lively
 	// the chunk has been closed by the server. No action should be taken.
 	TBool requestChunk = iDataBuffer==NULL; // if we have no buffer, tell server we need a chunk handle
@@ -281,6 +304,7 @@ void CMsgQueueHandler::DoBTBFCompleteL()
 		
 		iDevSoundObserver.BufferToBeFilled(iDataBuffer);
 		}
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoBTBFCompleteL - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -291,7 +315,8 @@ void CMsgQueueHandler::DoBTBFCompleteL()
 //
 void CMsgQueueHandler::DoBTBECompleteL()
 	{
-	// Returns either chunk handle or NULL
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoBTBECompleteL - Enter"));
+    // Returns either chunk handle or NULL
 	// any error is assumed to be due to a pending RecordError(), so the error here is ignored - the RecordError() call will ensure the client remains lively
 	// the chunk has been closed by the server. No action should be taken.
 	TInt handle = iDevSoundProxy->BufferToBeEmptiedData(iSetPckg);
@@ -305,6 +330,7 @@ void CMsgQueueHandler::DoBTBECompleteL()
 		iDataBuffer->Data().SetLength(iSetPckg().iRequestSize);
 		iDevSoundObserver.BufferToBeEmptied(iDataBuffer);
 		}
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoBTBECompleteL - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -314,8 +340,10 @@ void CMsgQueueHandler::DoBTBECompleteL()
 //
 void CMsgQueueHandler::DoRecordErrorComplete()
 	{
-	iAsyncQueueFinish->CallBack(); // async call to Finish()
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoRecordErrorComplete - Enter"));
+    iAsyncQueueFinish->CallBack(); // async call to Finish()
 	iDevSoundObserver.RecordError(iCurrentItem.iErrorCode);
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoRecordErrorComplete - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -325,7 +353,9 @@ void CMsgQueueHandler::DoRecordErrorComplete()
 //
 void CMsgQueueHandler::DoToneFinishedComplete()
 	{
-	iDevSoundObserver.ToneFinished(iCurrentItem.iErrorCode);
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoToneFinishedComplete - Enter"));
+    iDevSoundObserver.ToneFinished(iCurrentItem.iErrorCode);
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoToneFinishedComplete - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -335,7 +365,9 @@ void CMsgQueueHandler::DoToneFinishedComplete()
 //
 void CMsgQueueHandler::DoSendEventToClientComplete()
 	{
-	iDevSoundObserver.SendEventToClient(iCurrentItem.iEventPckg());
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoSendEventToClientComplete - Enter"));
+    iDevSoundObserver.SendEventToClient(iCurrentItem.iEventPckg());
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoSendEventToClientComplete - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -346,9 +378,11 @@ void CMsgQueueHandler::DoSendEventToClientComplete()
 //
 void CMsgQueueHandler::DoPausedRecordComplete()
 	{
-	ASSERT(iEmptyBuffer);
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoPausedRecordComplete - Enter"));
+    ASSERT(iEmptyBuffer);
 	iEmptyBuffer->SetLastBuffer(ETrue);
 	iDevSoundObserver.BufferToBeEmptied(iEmptyBuffer);
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoPausedRecordComplete - Exit"));
 	}
 
 // ----------------------------------------------------------------------------
@@ -358,7 +392,8 @@ void CMsgQueueHandler::DoPausedRecordComplete()
 //
 void CMsgQueueHandler::AssignDataBufferToChunkL(TInt aHandle)
 	{
-	if ( iChunk.Handle() )
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::AssignDataBufferToChunkL - Enter"));
+    if ( iChunk.Handle() )
 		{
 		iChunk.Close();
 		}
@@ -374,20 +409,24 @@ void CMsgQueueHandler::AssignDataBufferToChunkL(TInt aHandle)
 		{
 		iDataBuffer = CMMFPtrBuffer::NewL();	
 		}
-	UpdateDataBufferL(); 
+	UpdateDataBufferL();
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::AssignDataBufferToChunkL - Exit"));
 	}
 	
 void CMsgQueueHandler::UpdateDataBufferL()
 	{
-	ASSERT(iDataBuffer); // to get here, we should have a data buffer
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::UpdateDataBufferL - Enter"));
+    ASSERT(iDataBuffer); // to get here, we should have a data buffer
 	iDataBuffer->SetPtr(iChunkDataPtr);
 	iDataBuffer->SetRequestSizeL(iSetPckg().iRequestSize);
-	iDataBuffer->SetLastBuffer(EFalse);	
+	iDataBuffer->SetLastBuffer(EFalse);
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::UpdateDataBufferL - Exit"));
 	}
 	
 void CMsgQueueHandler::Finish()
 	{
-	if (iDataBuffer)
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::Finish - Enter"));
+    if (iDataBuffer)
 		{
 		delete iDataBuffer;
 		iDataBuffer = NULL;
@@ -396,6 +435,7 @@ void CMsgQueueHandler::Finish()
 		{
 		iChunk.Close();
 		}
+	SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::Finish - Exit"));
 	}
 
 // 	AsyncQueueStartCallback
@@ -403,14 +443,16 @@ void CMsgQueueHandler::Finish()
 
 TInt CMsgQueueHandler::AsyncQueueFinishCallback(TAny* aPtr)
 	{
-	CMsgQueueHandler* self = static_cast<CMsgQueueHandler*>(aPtr);
+    CMsgQueueHandler* self = static_cast<CMsgQueueHandler*>(aPtr);
 	self->DoAsyncQueueFinishCallback();
 	return KErrNone;
 	}
 	
 void CMsgQueueHandler::DoAsyncQueueFinishCallback()
 	{
-	Finish();
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoAsyncQueueFinishCallback - Enter"));
+    Finish();
+    SYMBIAN_DEBPRN0(_L("CMsgQueueHandler[0x%x]::DoAsyncQueueFinishCallback - Exit"));
 	}
 
 

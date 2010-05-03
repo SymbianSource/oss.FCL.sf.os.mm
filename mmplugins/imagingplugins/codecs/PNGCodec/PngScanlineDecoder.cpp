@@ -327,7 +327,7 @@ void CFastProcessor16Mto16MA::SetPixels(const TUint8* aDataPtr, const TUint8* aD
     
     while (aDataPtr < aDataPtrLimit)
         {
-        *scanLinePtr++ = (0xFF << 24) | (aDataPtr[0] << 16) | (aDataPtr[1] << 8) | aDataPtr[2]; 
+        *scanLinePtr++ = ((TUint32)0xFF << 24) | ((TUint32)aDataPtr[0] << 16) | ((TUint32)aDataPtr[1] << 8) | aDataPtr[2]; 
 
         aDataPtr += KPngDepth3BytesPerPixel;
         }

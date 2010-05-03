@@ -28,7 +28,7 @@ static const TUint32 K3GPBrand = MAKE_INT32('3', 'g', 'p', 0);
 static const TUint32 K3G2Brand = MAKE_INT32('3', 'g', '2', 0);
 static const TUint32 K3GSBrand = MAKE_INT32('3', 'g', 's', 0);	// Streaming servers.
 static const TUint32 K3GRBrand = MAKE_INT32('3', 'g', 'r', 0);	// Progresive download and MMS.
-
+static const TUint32 KQTBrand  = MAKE_INT32('q', 't', ' ', ' '); // for quicktime
 //
 // Box identifiers.
 //
@@ -103,7 +103,8 @@ static const TMPEG4File KMPEG4Files[] =
 		{KExt3G2,	K3G2Brand,	KMime3G2_A,	KMime3G2_V},
 		{KExt3GP,	K3GSBrand,	KMime3GP_A,	KMime3GP_V},
 		{KExt3GP,	K3GRBrand,	KMime3GP_A,	KMime3GP_V},
-		{KExt3GA,	K3GPBrand,	KMime3GA,	NULL}
+		{KExt3GA,	K3GPBrand,	KMime3GA,	NULL},
+		{KExtMOV,   KQTBrand,   NULL, KMimeQuickV} // this entry is for .mov files
 	};
 
 static const TInt KMPEG4FileTypeCount = sizeof(KMPEG4Files) / sizeof(TMPEG4File);
@@ -465,6 +466,11 @@ void TMPEG4Parser::ReadFileTypeL()
 	// If the majorBrand isn't recognised we should also
 	// search the compatible brand list.
 	TInt64 bytesRemaining = iSize - KMPEG4FtypIntroLen;
+	//here there should be bytes remaining. Otherwise we cant read.
+	if( bytesRemaining <0 )
+	{
+	    User::Leave(KErrCorrupt);    
+	}
 	
 	iReader.Read32L(brand);
 	iBrandIndex = TMPEG4Parser::IsCompatibleBrand(brand);

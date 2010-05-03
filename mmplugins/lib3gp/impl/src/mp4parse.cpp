@@ -165,7 +165,7 @@ extern EXPORT_C MP4Err MP4ParseOpenFileHandle64(MP4Handle *apihandle,
   	if (openStdlib() !=  MP4_OK)
   		{
   		// clean up
-  		mp4free((*handle)->diskReadBuf);
+		mp4free((*handle)->diskReadBuf);
 		mp4free((*handle)->buf);
 		listDestroyList((*handle)->mem);
 		closeFile(*handle);

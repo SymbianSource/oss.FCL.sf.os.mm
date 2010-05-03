@@ -38,7 +38,7 @@ SOURCE			tsu_mmtsth10/TSU_MmTsth10.cpp
 
 // code to be tested
 
-SOURCE			../../mmtestfw/Source/TestFrameworkClient/Log.cpp
+SOURCE			../../mmtestfw/Source/TestFrameworkClient/testfwclientsession.cpp
 
 // required stubs
 

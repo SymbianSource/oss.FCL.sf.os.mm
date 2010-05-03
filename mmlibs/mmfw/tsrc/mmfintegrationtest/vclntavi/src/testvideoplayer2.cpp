@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2007-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -265,7 +265,6 @@ void RTestMediaClientVideoDisplay::HandlePrepareCompleteL()
     iMediaClientVideoDisplay = CMediaClientVideoDisplay::NewL(displayId);
     
 	TRect videoExtent = clipRect;
-	TVideoRotation rotation = EVideoRotationNone;
 	TReal32 scaleWidth(100.0f);
 	TReal32 scaleHeight(100.0f);
 	TInt horizPos(EHorizontalAlignCenter);
@@ -276,11 +275,102 @@ void RTestMediaClientVideoDisplay::HandlePrepareCompleteL()
 	TReal32 widthP; 
 	TReal32 heightP;
 	RWindow newWindow;
-	TVideoRotation videoRotation(EVideoRotationClockwise180);
+	
+	// Check for invalid rotation when adding new window
+	INFO_PRINTF1(_L("Testing invalid rotations for AddDisplayWindowL"));
+	TInt err = KErrNone;
+	TVideoRotation rotation = static_cast<TVideoRotation>(-1);
+	TRAP(err, iMediaClientVideoDisplay->AddDisplayWindowL(iWindow, clipRect, cropRegion, videoExtent, scaleWidth, scaleHeight, rotation, EAutoScaleBestFit, horizPos, vertPos, iWindow));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->AddDisplayWindowL() did not leave with KErrArgument for negative rotation"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	rotation = static_cast<TVideoRotation>(4);
+	TRAP(err, iMediaClientVideoDisplay->AddDisplayWindowL(iWindow, clipRect, cropRegion, videoExtent, scaleWidth, scaleHeight, rotation, EAutoScaleBestFit, horizPos, vertPos, iWindow));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->AddDisplayWindowL() did not leave with KErrArgument for out of range rotation"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	rotation = EVideoRotationNone;
+
+	// Check for invalid autoScaleType when adding new window
+	INFO_PRINTF1(_L("Testing invalid autoScaleType for AddDisplayWindowL"));
+	TAutoScaleType autoScaleType = static_cast<TAutoScaleType>(-1);
+	TRAP(err, iMediaClientVideoDisplay->AddDisplayWindowL(iWindow, clipRect, cropRegion, videoExtent, scaleWidth, scaleHeight, rotation, autoScaleType, horizPos, vertPos, iWindow));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->AddDisplayWindowL() did not leave with KErrArgument for negative scale"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	autoScaleType = static_cast<TAutoScaleType>(4);
+	TRAP(err, iMediaClientVideoDisplay->AddDisplayWindowL(iWindow, clipRect, cropRegion, videoExtent, scaleWidth, scaleHeight, rotation, autoScaleType, horizPos, vertPos, iWindow));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->AddDisplayWindowL() did not leave with KErrArgument for out of range scale"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
 	
 	iMediaClientVideoDisplay->AddDisplayWindowL(iWindow, clipRect, cropRegion, videoExtent, scaleWidth, scaleHeight, rotation, EAutoScaleBestFit, horizPos, vertPos, iWindow);
 	INFO_PRINTF1(_L("iMediaClientVideoDisplay->AddDisplayWindowL()"));   
-    
+
+	// Check for invalid rotation when setting rotation for window
+	INFO_PRINTF1(_L("Testing invalid rotation for SetRotationL"));
+	TVideoRotation videoRotation = static_cast<TVideoRotation>(-1);
+	TRAP(err, iMediaClientVideoDisplay->SetRotationL(*iWindow, videoRotation, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetRotationL(window) did not leave with KErrArgument for negative value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	videoRotation = static_cast<TVideoRotation>(4);
+	TRAP(err, iMediaClientVideoDisplay->SetRotationL(*iWindow, videoRotation, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetRotationL(window) did not leave with KErrArgument for out of range value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	// Check for invalid rotation when setting rotation for all windows
+	videoRotation = static_cast<TVideoRotation>(-1);
+	TRAP(err, iMediaClientVideoDisplay->SetRotationL(videoRotation, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetRotationL() did not leave with KErrArgument for negative value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	videoRotation = static_cast<TVideoRotation>(4);
+	TRAP(err, iMediaClientVideoDisplay->SetRotationL(videoRotation, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetRotationL() did not leave with KErrArgument for out of range value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	videoRotation = EVideoRotationClockwise180;
+
     iMediaClientVideoDisplay->SetRotationL(*iWindow, videoRotation, cropRegion);
     INFO_PRINTF1(_L("iMediaClientVideoDisplay->SetRotationL()"));
     
@@ -311,6 +401,49 @@ void RTestMediaClientVideoDisplay::HandlePrepareCompleteL()
     
     iMediaClientVideoDisplay->SetWindowClipRectL(*iWindow, clipRect, cropRegion);
     INFO_PRINTF1(_L("iMediaClientVideoDisplay->SetWindowClipRectL()"));
+
+	// Check for invalid autoScaleType when setting autoScaleType for window
+	INFO_PRINTF1(_L("Testing invalid autoScaleType for SetAutoScaleL"));
+	autoScaleType = static_cast<TAutoScaleType>(-1);
+	TRAP(err, iMediaClientVideoDisplay->SetAutoScaleL(*iWindow, autoScaleType, horizPos, vertPos, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetAutoScaleL(window) did not leave with KErrArgument for negative value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	autoScaleType = static_cast<TAutoScaleType>(4);
+	TRAP(err, iMediaClientVideoDisplay->SetAutoScaleL(*iWindow, autoScaleType, horizPos, vertPos, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetAutoScaleL(window) did not leave with KErrArgument for out of range value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	// Check for invalid autoScaleType when setting autoScaleType for all windows
+	autoScaleType = static_cast<TAutoScaleType>(-1);
+	TRAP(err, iMediaClientVideoDisplay->SetAutoScaleL(autoScaleType, horizPos, vertPos, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetAutoScaleL() did not leave with KErrArgument for negative value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
+
+	autoScaleType = static_cast<TAutoScaleType>(4);
+	TRAP(err, iMediaClientVideoDisplay->SetAutoScaleL(autoScaleType, horizPos, vertPos, cropRegion));
+	if (err != KErrArgument)
+		{
+		ERR_PRINTF1(_L("iVideoPlayer2->SetAutoScaleL() did not leave with KErrArgument for out of range value"));
+    	iTestStepResult = EFail;
+    	CActiveScheduler::Stop();
+    	return;
+		}
     
     iMediaClientVideoDisplay->SetAutoScaleL(EAutoScaleBestFit, horizPos, vertPos, cropRegion);
     INFO_PRINTF1(_L("iMediaClientVideoDisplay->SetAutoScaleL()"));

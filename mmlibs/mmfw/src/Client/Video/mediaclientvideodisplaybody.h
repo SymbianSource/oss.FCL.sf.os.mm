@@ -17,6 +17,7 @@
 #define MEDIACLIENTVIDEODISPLAYBODY_H
 
 #include "mediaclientextdisplayhandler.h"
+#include "mediaclientwseventobserver.h"
 #include <graphics/surface.h>
 #include <graphics/surfaceconfiguration.h>
 #include <mmf/common/mmfvideosurfacecustomcommands.h>
@@ -24,13 +25,15 @@
 #include <mmf/plugin/mmfmediaclientextdisplayinterface.h>
 
 class MMMFSurfaceEventHandler;
+class CMediaClientPolicyServerClient;
 
 /**
 @internalTechnology
 @released
 
 */
-NONSHARABLE_CLASS(CMediaClientVideoDisplayBody) : public CBase, public MExtDisplayConnectionProviderCallback
+NONSHARABLE_CLASS(CMediaClientVideoDisplayBody) : public CBase, public MExtDisplayConnectionProviderCallback,
+public MMediaClientWsEventObserverCallback
 	{
 private:
 	NONSHARABLE_CLASS(TWindowData)
@@ -143,15 +146,27 @@ private:
 	TInt SetBackgroundSurface(TWindowData& aWindowData, const TRect& aCropRegion);
 	TBool HasWindows() const;
 	
-    void MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected);
-
-    void UpdateCropRegionL(const TRect& aCropRegion, TInt aPos);
+    void UpdateCropRegionL(const TRect& aCropRegion, TInt aPos, TBool aRedrawIndividualWindow);
     void CreateExtDisplayPluginL();
     void RemoveExtDisplayPlugin();
     void CreateExtDisplayHandlerL();
     void RemoveExtDisplayHandler();
     void SetWindowArrayPtr2Client();
     void SetWindowArrayPtr2Ext();
+    void SwitchSurface();
+    void UpdateFocus();
+	TBool IsRotationValid(TVideoRotation aVideoRotation);
+	TBool IsAutoScaleTypeValid(TAutoScaleType aAutoScaleType);
+	TBool SurfaceCropRectChangeRequiresRedraw(TRect aOldSurfaceCropRect, TRect aNewSurfaceCropRect, TRect aClientCropRegion);
+	TBool ClientCropRegionChangeRequiresRedraw(TRect aOldClientCropRegion, TRect aNewClientCropRegion, TRect aSurfaceCropRect);
+	TBool IntersectionAreaChanged(TRect aOldRect, TRect aNewRect, TRect aOtherRect);
+
+    // MExtDisplayConnectionProviderCallback
+    void MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected);
+
+    // MMediaClientWsEventObserverCallback
+    void MmcweoFocusWindowGroupChanged();
+    TBool MmcweoIgnoreProcess(TSecureId aId);
     
 private:
 
@@ -164,14 +179,19 @@ private:
 	RArray<TWindowData> iClientWindows;
 	RArray<TWindowData> iExtDisplayWindows;
 	RArray<TWindowData>* iWindowsArrayPtr;
+	TBool iSwitchedToExternalDisplay;
 	
 	TRect iCropRegion;
 	TBool iClientRequestedExtDisplaySwitching;
 	CExtDisplayConnectionProviderInterface* iExtDisplayConnectionProvider;
 	CMediaClientExtDisplayHandler* iExtDisplayHandler;
+	CMediaClientWsEventObserver* iWsEventObserver;
+	TBool iClientWindowIsInFocus;
     TBool iExtDisplayConnected;
     TBool iExtDisplaySwitchingSupported;
 	
+    CMediaClientPolicyServerClient* iServerClient;
+    
 	friend class CVideoPlayerUtility::CBody;	
 	friend class CTestStepUnitMMFVidClient;
 	};

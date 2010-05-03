@@ -226,6 +226,7 @@ void TQTable::Quantize(TDataUnit& aDestination,const TDataUnit& aSource, TBool a
                 register TAligned64Value dstValue;
 				register TAligned64Value qValue;
 				register TAligned64Value zValue;
+				dstValue.iAligment = 0; //to remove possible RVCT warning
 				zValue.iAligment = *reinterpret_cast<const TUint64*>(zigZagPtr);
                 
 				qValue.iAligment = *qPtr++;                

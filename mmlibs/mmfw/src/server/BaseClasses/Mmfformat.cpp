@@ -16,8 +16,8 @@
 #include <mmf/common/mmfcontrollerpluginresolver.h>
 #include <mmf/server/mmfdatabuffer.h>
 #include <mmf/common/mmfutilities.h>
-#include <mmf/server/Mmfclip.h>
-#include <mmf/server/MmfFile.h>
+#include <mmf/server/mmfclip.h>
+#include <mmf/server/mmffile.h>
 #include <mmf/server/mmfformat.h>
 
 //static const TUid KUidMmfPluginInterfaceFormatDecode = {KMmfUidPluginInterfaceFormatDecode};
