@@ -65,7 +65,10 @@ protected:
 	// From COmxILPort
 	IMPORT_C TBool IsTunnelledPortCompatible(
 		const OMX_PARAM_PORTDEFINITIONTYPE& aPortDefinition) const = 0;
-		
+	
+	IMPORT_C TBool UpdateColorFormat(OMX_COLOR_FORMATTYPE& aOldColor, OMX_COLOR_FORMATTYPE aNewColor, TBool& aUpdated);
+	IMPORT_C TBool UpdateCodingType(OMX_VIDEO_CODINGTYPE& aOldCodingType, OMX_VIDEO_CODINGTYPE aNewCodingType, TBool& aUpdated);
+
 protected:
 
 	RArray<OMX_VIDEO_CODINGTYPE> iSupportedVideoFormats;

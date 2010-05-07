@@ -155,57 +155,26 @@ EXPORT_C OMX_ERRORTYPE COmxILVideoPort::SetParameter(OMX_INDEXTYPE aParamIndex, 
 				{
 				return omxRetValue;
 				}
-							
+
 			const OMX_VIDEO_PARAM_PORTFORMATTYPE *componentParameterStructure = static_cast<const OMX_VIDEO_PARAM_PORTFORMATTYPE*>(apComponentParameterStructure);
-	
-			if(OMX_VIDEO_CodingUnused == componentParameterStructure->eCompressionFormat)
+
+			if (!UpdateColorFormat(iParamVideoPortFormat.eColorFormat, componentParameterStructure->eColorFormat, aUpdateProcessingFunction))
 				{
-				if(OMX_COLOR_FormatUnused == componentParameterStructure->eColorFormat)
-					{
-					// Both Compression Format and Color can not be Unused at the same time.
-					return OMX_ErrorBadParameter;
-					}
-				
-				if(iParamVideoPortFormat.eColorFormat != componentParameterStructure->eColorFormat)
-					{
-					if(KErrNotFound == iSupportedColorFormats.Find(componentParameterStructure->eColorFormat))
-						{
-						return OMX_ErrorUnsupportedSetting;
-						}
-					else
-						{
-						iParamVideoPortFormat.eColorFormat = componentParameterStructure->eColorFormat;
-						}
-					aUpdateProcessingFunction = ETrue;
-					}
-				
+				return OMX_ErrorUnsupportedSetting;
+				}
+
+			if (!UpdateCodingType(iParamVideoPortFormat.eCompressionFormat, componentParameterStructure->eCompressionFormat, aUpdateProcessingFunction))
+				{
+				return OMX_ErrorUnsupportedSetting;
+				}
+
+			if(iParamVideoPortFormat.eCompressionFormat == OMX_VIDEO_CodingUnused)
+				{
 				if(iParamVideoPortFormat.xFramerate != componentParameterStructure->xFramerate)
 					{
 					iParamVideoPortFormat.xFramerate = componentParameterStructure->xFramerate;
 					aUpdateProcessingFunction = ETrue;
 					}
-				}
-			else
-				{
-				// Data is compressed. Change relevant variables.
-				if (OMX_COLOR_FormatUnused != componentParameterStructure->eColorFormat)
-					{
-					// Both Compression Format and Color can not be Unused at the same time.
-					return OMX_ErrorBadParameter;
-					}
-						
-				if (iParamVideoPortFormat.eCompressionFormat != componentParameterStructure->eCompressionFormat)
-					{
-					if(KErrNotFound == iSupportedVideoFormats.Find(componentParameterStructure->eCompressionFormat))
-						{
-						return OMX_ErrorUnsupportedSetting;
-						}
-					else
-						{
-						iParamVideoPortFormat.eCompressionFormat = componentParameterStructure->eCompressionFormat;
-						aUpdateProcessingFunction = ETrue;
-						}
-					}	
 				}
 			break;
 			}
@@ -216,4 +185,34 @@ EXPORT_C OMX_ERRORTYPE COmxILVideoPort::SetParameter(OMX_INDEXTYPE aParamIndex, 
 			}
 		};
 	return OMX_ErrorNone;
+	}
+
+EXPORT_C TBool COmxILVideoPort::UpdateColorFormat(OMX_COLOR_FORMATTYPE& aOldColor, OMX_COLOR_FORMATTYPE aNewColor, TBool& aUpdated)
+	{
+	if (aNewColor != aOldColor)
+		{
+		if(iSupportedColorFormats.Find(aNewColor) == KErrNotFound)
+			{
+			return EFalse;
+			}
+		aOldColor = aNewColor;
+		aUpdated = ETrue;
+		}
+
+	return ETrue;
+	}
+
+EXPORT_C TBool COmxILVideoPort::UpdateCodingType(OMX_VIDEO_CODINGTYPE& aOldCodingType, OMX_VIDEO_CODINGTYPE aNewCodingType, TBool& aUpdated)
+	{
+	if (aNewCodingType != aOldCodingType)
+		{
+		if(iSupportedVideoFormats.Find(aNewCodingType) == KErrNotFound)
+			{
+			return EFalse;
+			}
+		aOldCodingType = aNewCodingType;
+		aUpdated = ETrue;
+		}
+
+	return ETrue;
 	}

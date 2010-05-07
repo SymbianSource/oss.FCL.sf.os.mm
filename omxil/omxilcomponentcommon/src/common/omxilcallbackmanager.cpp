@@ -21,9 +21,10 @@
 
 #include "log.h"
 #include "omxilcallbackmanager.h"
-#include "omxilportmanager.h"
 #include "omxilfsm.h"
+
 #include "omxilutil.h"
+#include "omxilportmanagerif.h"
 
 const TInt COmxILCallbackManager::KMaxMsgQueueEntries;
 
@@ -125,7 +126,7 @@ COmxILCallbackManager::CleanUpQueue(RCallbackManagerQueue& aQueue)
 
 
 EXPORT_C void
-COmxILCallbackManager::SetPortManager(COmxILPortManager& apPortManager)
+COmxILCallbackManager::SetPortManager(MOmxILPortManagerIf& apPortManager)
 	{
 	DoSetPortManager(apPortManager);
 	}
@@ -300,7 +301,6 @@ COmxILCallbackManager::CommandCompleteNotification(OMX_COMMANDTYPE aOmxCommand,
 							 0);
 
 	}
-
 
 EXPORT_C OMX_ERRORTYPE
 COmxILCallbackManager::ErrorEventNotification(OMX_ERRORTYPE aOmxError)
@@ -1044,3 +1044,4 @@ COmxILCallbackManager::CPortSettingsChangeCommand::operator()(
 		}
 
 	}
+

@@ -1,0 +1,31 @@
+/*
+* Copyright (c) 2008 Nokia Corporation and/or its subsidiary(-ies).
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of "Eclipse Public License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.eclipse.org/legal/epl-v10.html".
+*
+* Initial Contributors:
+* Nokia Corporation - initial contribution.
+*
+* Contributors:
+*
+* Description: 
+*
+*/
+
+
+
+#ifndef OMXILADPCMENCODER_HRH_
+#define OMXILADPCMENCODER_HRH_
+
+// TODO: assign proper UIDs
+#define KUidSymbianOmxILAdPcmEncoderDll        0x1028708B
+#define KUidSymbianOmxILAdPcmEncoder           0x1028708C
+
+#define KSymbianOmxILAdPcmEncoderName "OMX.SYMBIAN.AUDIO.ENCODER.ADPCM" //This is used in the rss (REGISTRY_INFO) AND to create ipConfigManager 
+#define KSymbianOmxILAdPcmEncoderRole "audio_encoder.adpcm" //This is used in the rss (REGISTRY_INFO) AND to create ipConfigManager
+
+
+#endif /*OMXILADPCMENCODER_HRH_*/

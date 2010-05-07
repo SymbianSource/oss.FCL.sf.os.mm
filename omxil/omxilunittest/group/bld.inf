@@ -19,3 +19,4 @@
 #include "../test_plugins/dummy_cp/group/bld.inf"
 #include "../test_plugins/dummy_cp_2/group/bld.inf"
 #include "../test_plugins/dummy_loader/group/bld.inf"
+

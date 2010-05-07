@@ -44,7 +44,7 @@ public:
 
 	IMPORT_C ~COmxILInContextCallbackManager();
 
-	IMPORT_C void SetPortManager(COmxILPortManager& apPortManager);
+	IMPORT_C void SetPortManager(MOmxILPortManagerIf& apPortManager);
 
 	IMPORT_C void SetFsm(COmxILFsm& apFsm);
 

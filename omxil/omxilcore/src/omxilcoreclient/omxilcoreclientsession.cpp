@@ -1,17 +1,20 @@
-// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
-// All rights reserved.
-// This component and the accompanying materials are made available
-// under the terms of "Eclipse Public License v1.0"
-// which accompanies this distribution, and is available
-// at the URL "http://www.eclipse.org/legal/epl-v10.html".
-//
-// Initial Contributors:
-// Nokia Corporation - initial contribution.
-//
-// Contributors:
-//
-// Description:
-//
+/*
+* Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of "Eclipse Public License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.eclipse.org/legal/epl-v10.html".
+*
+* Initial Contributors:
+* Nokia Corporation - initial contribution.
+*
+* Contributors:
+*
+* Description: 
+*
+*/
+
 
 #include <openmax/il/khronos/v1_x/OMX_Core.h>
 
@@ -24,6 +27,20 @@
 #include <pls.h>
 #include "../core/omxiluids.hrh"
 #endif
+
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL
+#include "OSTOMXILFrameworkTrace.h"
+#endif
+
+
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL_OSTV1
+
+#include "../../traces/OstTraceDefinitions.h"
+#ifdef OST_TRACE_COMPILER_IN_USE
+#include "omxilcoreclientsessionTraces.h"
+#endif
+#endif
+
 
 _LIT(KOmxILCoreClientPanic, "OmxILCoreClient Panic");
 const TInt KOpenSeverSessionMaxRetries = 3;
@@ -169,47 +186,75 @@ ROmxILCoreClientSession::~ROmxILCoreClientSession()
 TInt ROmxILCoreClientSession::Connect()
 	{
     DEBUG_PRINTF(_L8("ROmxILCoreClientSession::Connect"));
+    
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL
+        OstPrintf(TTraceContext(KTracePerformanceTraceUID, EPerFormanceTraceClassification), Ost_OMXIL_Performance::K_OMX_PerformanceTraceFormatMin,
+            Ost_OMXIL_Performance::EMeasurementStart, MAKESTRING(E_Init)); 
+#endif
 
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL_OSTV1
+    OstTrace0( TRACE_API, _Connect1, "OMX_Init >" ); 
+#endif 
+    
     TInt err = KErrNotFound;
 	XGlobalILCoreCache *glbCache = XGlobalILCoreCache::IlCoreCache();
 	if(!glbCache)
 	    {
-	    return KErrGeneral;
+	    err = KErrGeneral;
 	    }
-	if(glbCache->ServerHandle().Handle() != KNullHandle)
-	    {
-	    err = CreateSession(glbCache->ServerHandle(), TVersion(1,0,0));
-	    }
-
-	if(err == KErrNotFound)
-		{
-		// Server not running
-		TUint32 serverHandle = KNullHandle;
-		if (KErrNone != (err = StartOmxILCoreServer(&serverHandle)))
-			{
-			return err;
-			}
-		err = glbCache->SetServerHandle(serverHandle);
-		}
 	else
-		{
-		// The server exists already... close the session and return...
-		RHandleBase::Close();
-		return KErrAlreadyExists;
-		}
+	    {
+        if(glbCache->ServerHandle().Handle() != KNullHandle)
+            {
+            err = CreateSession(glbCache->ServerHandle(), TVersion(1,0,0));
+            }
+        
+           if(err == KErrNotFound)
+                {
+                // Server not running
+                TUint32 serverHandle = KNullHandle;
+                if (KErrNone == (err = StartOmxILCoreServer(&serverHandle)))
+                    {
+                    if (KErrNone == (err = glbCache->SetServerHandle(serverHandle) ))
+                        {
+                        if(glbCache->ServerHandle().Handle() == KNullHandle)
+                            {
+                            err = KErrNotFound;
+                            }
+                        else
+                            {
+                            err = CreateSession(glbCache->ServerHandle(), TVersion(1,0,0));
+                            }
+                        }
+                    }
+                }
+            else
+                {
+                // The server exists already... close the session and return...
+                RHandleBase::Close();
+                err = KErrAlreadyExists;
+                }
+	    }
 
-    if(glbCache->ServerHandle().Handle() == KNullHandle)
-        {
-        return KErrNotFound;
-        }
+#if defined(SYMBIAN_PERF_TRACE_OMX_IL) || defined(SYMBIAN_PERF_TRACE_OMX_IL_OSTV1)
+	OMX_ERRORTYPE omxError = OMX_ErrorNone;
+	if(KErrNone != err)
+	    {
+	    omxError = OMX_ErrorUndefined;
+	    }
+#endif
 	
-	// Now, create the session...
-	if (KErrNone == err)
-		{
-        err = CreateSession(glbCache->ServerHandle(), TVersion(1,0,0));
-		}
-
-	return err;
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL
+    TBufC8<1> InitStr;
+    OstPrintf(TTraceContext(KTracePerformanceTraceUID, EPerFormanceTraceClassification), Ost_OMXIL_Performance::K_OMX_PerformanceTraceFormat,
+            Ost_OMXIL_Performance::EMeasurementEnd, MAKESTRING(E_Init),omxError,&InitStr); 
+#endif
+    
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL_OSTV1
+    OstTrace1( TRACE_API, _Connect2, "OMX_Init < ReturnVal=%u", omxError );
+#endif     
+    
+    return err;	
 
 	}
 
@@ -274,7 +319,15 @@ OMX_ERRORTYPE ROmxILCoreClientSession::ListLoaders()
 OMX_ERRORTYPE ROmxILCoreClientSession::DeinitAndClose()
 	{
     DEBUG_PRINTF(_L8("ROmxILCoreClientSession::DeinitAndClose"));
-
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL
+        OstPrintf(TTraceContext(KTracePerformanceTraceUID, EPerFormanceTraceClassification), Ost_OMXIL_Performance::K_OMX_PerformanceTraceFormatMin,
+            Ost_OMXIL_Performance::EMeasurementStart, MAKESTRING(E_DeInit)); 
+#endif
+   
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL_OSTV1
+    OstTrace0( TRACE_API, _DeinitAndClose1, "OMX_Deinit >" );
+#endif
+        
 	// Param 0
 	OMX_ERRORTYPE err = OMX_ErrorNone;
     TPckgBuf<OMX_ERRORTYPE> pckg0;
@@ -335,6 +388,23 @@ OMX_ERRORTYPE ROmxILCoreClientSession::DeinitAndClose()
 
 	serverThread.Close();
 
+#if defined(SYMBIAN_PERF_TRACE_OMX_IL) || defined(SYMBIAN_PERF_TRACE_OMX_IL_OSTV1)
+	OMX_ERRORTYPE omxError = OMX_ErrorNone;
+    if(KErrNone != err)
+        {
+        omxError = OMX_ErrorUndefined;
+        }	
+#endif
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL
+    TBuf8<1> DeInitStr;
+    OstPrintf(TTraceContext(KTracePerformanceTraceUID, EPerFormanceTraceClassification), Ost_OMXIL_Performance::K_OMX_PerformanceTraceFormat,
+            Ost_OMXIL_Performance::EMeasurementEnd, MAKESTRING(E_DeInit), omxError,&DeInitStr); 
+#endif
+
+#ifdef SYMBIAN_PERF_TRACE_OMX_IL_OSTV1
+    OstTrace1( TRACE_API, _DeinitAndClose2, "OMX_Deinit < ReturnVal=%u", omxError );
+#endif 
+    
     return err;
 
 	}
@@ -599,7 +669,7 @@ OMX_ERRORTYPE ROmxILCoreClientSession::GetRolesOfComponent(
  */
 OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_Init()
 	{
-
+	OMX_TRACE_INIT_IN();
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -684,6 +754,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_Init()
 		}
 
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_INIT_OUT(omxError);
 	return omxError;
 
 	}
@@ -697,7 +768,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_Init()
  */
 OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_Deinit()
 	{
-
+	OMX_TRACE_DEINIT_IN();
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -759,6 +830,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_Deinit()
 		}
 
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_DEINIT_OUT(omxError);
 	return omxError;
 
 	}
@@ -775,7 +847,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_ComponentNameEnum(
 	    OMX_IN  OMX_U32 nNameLength,
 	    OMX_IN  OMX_U32 nIndex)
 	{
-
+	OMX_TRACE_COMPONENTNAMEENUM_IN(cComponentName, nNameLength, nIndex);
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -829,6 +901,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_ComponentNameEnum(
 
 	coresession.Close();
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_COMPONENTNAMEENUM_OUT(cComponentName, nNameLength, nIndex, omxError);
 	return omxError;
 
 	}
@@ -845,7 +918,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_GetHandle(
 	    OMX_IN  OMX_PTR pAppData,
 	    OMX_IN  OMX_CALLBACKTYPE* pCallBacks)
 	{
-
+	OMX_TRACE_GETHANDLE_IN(*pHandle, cComponentName, pAppData, pCallBacks);
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -892,6 +965,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_GetHandle(
 		}
 
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_GETHANDLE_OUT(*pHandle, cComponentName, pAppData, pCallBacks, omxError);
 	return omxError;
 
 	}
@@ -905,7 +979,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_GetHandle(
 OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_FreeHandle(
 	OMX_IN  OMX_HANDLETYPE hComponent)
 	{
-
+	OMX_TRACE_FREEHANDLE_IN(hComponent);
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -943,6 +1017,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_FreeHandle(
 		}
 
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_FREEHANDLE_OUT(hComponent, omxError);
 	return omxError;
 
 	}
@@ -959,7 +1034,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_SetupTunnel(
 	OMX_IN  OMX_HANDLETYPE hInput,
 	OMX_IN  OMX_U32 nPortInput)
 	{
-
+	OMX_TRACE_SETUPTUNNEL_IN(hOutput, nPortOutput, hInput, nPortInput);
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -1008,7 +1083,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_SetupTunnel(
 
 		coresession.Close();
 		}
-
+	OMX_TRACE_SETUPTUNNEL_OUT(hOutput, nPortOutput, hInput, nPortInput, omxError);
 	return omxError;
 
 	}
@@ -1023,7 +1098,7 @@ OMX_API OMX_ERRORTYPE   OMX_GetContentPipe(
 	OMX_OUT OMX_HANDLETYPE* hPipe,
 	OMX_IN OMX_STRING szURI)
 	{
-
+	OMX_TRACE_GETCONTENTPIPE_IN(hPipe, szURI);
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -1067,6 +1142,7 @@ OMX_API OMX_ERRORTYPE   OMX_GetContentPipe(
 		}
 
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_GETCONTENTPIPE_OUT(hPipe, szURI, omxError);
 	return omxError;
 
 	}
@@ -1082,8 +1158,8 @@ OMX_API OMX_ERRORTYPE OMX_GetComponentsOfRole (
 	OMX_INOUT   OMX_U32* pNumComps,
 	OMX_INOUT   OMX_U8** compNames)
 	{
-
-    XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
+	OMX_TRACE_GETCOMPONENTSOFROLE_IN(role, pNumComps, compNames);
+	XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
 	pGlobalILCoreCache->Lock();
@@ -1137,6 +1213,7 @@ OMX_API OMX_ERRORTYPE OMX_GetComponentsOfRole (
 
 	coresession.Close();
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_GETCOMPONENTSOFROLE_OUT(role, pNumComps, compNames, omxError);
 	return omxError;
 
 	}
@@ -1152,7 +1229,7 @@ OMX_API OMX_ERRORTYPE OMX_GetRolesOfComponent (
 	OMX_INOUT   OMX_U32* pNumRoles,
 	OMX_OUT     OMX_U8** roles)
 	{
-
+	OMX_TRACE_GETROLESOFCOMPONENT_IN(compName, pNumRoles, roles);
     XGlobalILCoreCache* pGlobalILCoreCache = XGlobalILCoreCache::IlCoreCache();
 	__ASSERT_ALWAYS(pGlobalILCoreCache != NULL,
 					User::Panic(KOmxILCoreClientPanic, KErrNotReady));
@@ -1207,6 +1284,7 @@ OMX_API OMX_ERRORTYPE OMX_GetRolesOfComponent (
 
 	coresession.Close();
 	pGlobalILCoreCache->Unlock();
+	OMX_TRACE_GETROLESOFCOMPONENT_OUT(compName, pNumRoles, roles, omxError);
 	return omxError;
 
 	}

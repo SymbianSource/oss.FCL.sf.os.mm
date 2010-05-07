@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	te_omx_filesinksrc.xml
+
+	Copyright (c) NOKIA 2009. All rights reserved.
+	
+	Audio record tests for OpenMAX IL.
+-->
+<TestSet>
+
+	<!--  ->  
+		File Source  -> 	File Sink	 	
+	-->
+	<Test name="Testcase1">
+		<!-- Simple audio record testcase: all comps. to IDLE then to EXECUTING then 3 secs later to IDLE
+			 suppliers: filesink, mediatime -->
+		<LoadComponent comp="filesink" name="OMX.NOKIA.AUDIO.FILESINK" />
+		<LoadComponent comp="filesource" name="OMX.NOKIA.AUDIO.FILESOURCE" />
+		
+		<SetupTunnel output="filesource:0" input="filesink:0" />
+		<BufferSupplierOverride output="filesource:0" input="filesink:0" supplier="output" />
+		
+		<SetFilename comp="filesink" filename="C:\aac_same.stream" />
+		<SetFilename comp="filesource" filename="C:\aac.stream" />
+		<!--
+		-->
+		
+		<GetFilename comp="filesource" filename="C:\aac.stream"/>
+		
+		
+		
+		<IgnoreEvent comp="filesink" event="PortSettingsChanged" nData1="0x02000001" nData2="0" nData3="0"/>
+		<IgnoreEvent comp="filesource" event="PortSettingsChanged" nData1="0x02000001" nData2="0" nData3="0"/>
+		
+		<IgnoreEvent comp="filesink" event="OMX_EventBufferFlag" nData1="0x00000000 " nData2="0x00000001" nData3="0"/>
+		<IgnoreEvent comp="filesource" event="OMX_EventBufferFlag" nData1="0x00000000 " nData2="0x00000001" nData3="0"/>
+		
+		
+		<AllTransition state="idle" order="auto"/>
+
+		<AllTransition state="executing" order="auto" />
+		<Wait delaytime="3000000" />
+		<AllTransition state="idle" order="auto"/>
+		<AllTransition state="loaded" order="auto"/>
+	</Test>
+
+	
+</TestSet>
+
+
+

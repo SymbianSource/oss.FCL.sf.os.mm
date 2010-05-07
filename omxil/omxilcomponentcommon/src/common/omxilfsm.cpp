@@ -22,10 +22,10 @@
 #include "log.h"
 #include "omxilfsm.h"
 #include "omxilstate.h"
-#include "omxilportmanager.h"
 #include "omxilconfigmanager.h"
 #include "omxilcallbackmanager.h"
 #include "omxilprocessingfunction.h"
+#include "omxilportmanagerif.h"
 
 #define RETURN_OMX_ERROR_AND_EVENT_IF_NEEDED(_a)						\
 	{																	\
@@ -40,7 +40,7 @@ const TInt COmxILFsm::KMaxMsgQueueEntries;
 EXPORT_C COmxILFsm*
 COmxILFsm::NewL(COmxILComponent& aComponent,
 				COmxILProcessingFunction& aProcFunction,
-				COmxILPortManager& aPortManager,
+				MOmxILPortManagerIf& aPortManager,
 				COmxILConfigManager& aConfigManager,
 				MOmxILCallbackManagerIf& aCallbacks)
 	{
@@ -91,7 +91,7 @@ COmxILFsm::ConstructL()
 
 COmxILFsm::COmxILFsm(COmxILComponent& aComponent,
 					 COmxILProcessingFunction& aProcFunction,
-					 COmxILPortManager& aPortManager,
+					 MOmxILPortManagerIf& aPortManager,
 					 COmxILConfigManager& aConfigManager,
 					 MOmxILCallbackManagerIf& aCallbacks)
 	:

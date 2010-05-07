@@ -13,12 +13,10 @@
 // Description:
 //
 
-PRJ_MMPFILES
-// Components
-../mmpfiles/omxilpcmrenderer.mmp
 
 PRJ_EXPORTS
 // Romkit include files
 omxilcompref.iby							/epoc32/rom/include/omxilcompref.iby
 
 
+#include "../audio/pcmrenderer/group/bld.inf"

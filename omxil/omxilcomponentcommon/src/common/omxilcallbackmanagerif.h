@@ -27,7 +27,7 @@
 #include "omxilcallbacknotificationif.h"
 
 // Forward declarations
-class COmxILPortManager;
+class MOmxILPortManagerIf;
 class COmxILFsm;
 
 /**
@@ -47,7 +47,7 @@ public:
 
 	   @return OMX_ERRORTYPE
 	*/
-	virtual void SetPortManager(COmxILPortManager& aPortManager) = 0;
+	virtual void SetPortManager(MOmxILPortManagerIf& aPortManager) = 0;
 
 	/**
 	   Method to update the FSM reference

@@ -15,20 +15,21 @@
 
 
 /**
-@file
-@internalComponent
+   @file
+   @internalComponent
 */
 
 #include "log.h"
 #include "omxilcallbackmanagerifimpl.h"
-#include "omxilportmanager.h"
 #include "omxilfsm.h"
+#include "omxilportmanagerif.h"
+#include "omxilspecversion.h"
 
 
 EXPORT_C
 XOmxILCallbackManagerIfImpl::XOmxILCallbackManagerIfImpl(OMX_HANDLETYPE apComponentHandle,
-											 OMX_PTR apAppData,
-											 OMX_CALLBACKTYPE* apCallbacks)
+														 OMX_PTR apAppData,
+														 OMX_CALLBACKTYPE* apCallbacks)
 	:
 	ipHandle(static_cast<OMX_COMPONENTTYPE*>(apComponentHandle)),
 	ipAppData(apAppData),
@@ -63,7 +64,7 @@ XOmxILCallbackManagerIfImpl::~XOmxILCallbackManagerIfImpl()
 	}
 
 EXPORT_C void
-XOmxILCallbackManagerIfImpl::DoSetPortManager(COmxILPortManager& apPortManager)
+XOmxILCallbackManagerIfImpl::DoSetPortManager(MOmxILPortManagerIf& apPortManager)
 	{
 	ipPortManager = &apPortManager;
 	}
@@ -91,7 +92,7 @@ XOmxILCallbackManagerIfImpl::DoRegisterComponentHandle(OMX_HANDLETYPE aComponent
 
 EXPORT_C OMX_ERRORTYPE
 XOmxILCallbackManagerIfImpl::DoRegisterILClientCallbacks(const OMX_CALLBACKTYPE* apCallbacks,
-												   const OMX_PTR apAppData)
+														 const OMX_PTR apAppData)
 	{
     DEBUG_PRINTF(_L8("XOmxILCallbackManagerIfImpl::DoRegisterILClientCallbacks"));
 
@@ -197,23 +198,23 @@ XOmxILCallbackManagerIfImpl::DoTransitionCompleteNotification(OMX_STATETYPE aOmx
     DEBUG_PRINTF(_L8("XOmxILCallbackManagerIfImpl::DoTransitionCompleteNotification"));
 
 	return DoEventNotification(OMX_EventCmdComplete,
-							 OMX_CommandStateSet,
-							 aOmxState,
-							 0);
+							   OMX_CommandStateSet,
+							   aOmxState,
+							   0);
 
 	}
 
 
 EXPORT_C OMX_ERRORTYPE
 XOmxILCallbackManagerIfImpl::DoCommandCompleteNotification(OMX_COMMANDTYPE aOmxCommand,
-												   OMX_U32 aOmxPortIndex)
+														   OMX_U32 aOmxPortIndex)
 	{
     DEBUG_PRINTF(_L8("XOmxILCallbackManagerIfImpl::DoCommandCompleteNotification"));
 
 	return DoEventNotification(OMX_EventCmdComplete,
-							 aOmxCommand,
-							 aOmxPortIndex,
-							 0);
+							   aOmxCommand,
+							   aOmxPortIndex,
+							   0);
 
 	}
 
@@ -224,21 +225,23 @@ XOmxILCallbackManagerIfImpl::DoErrorEventNotification(OMX_ERRORTYPE aOmxError)
     DEBUG_PRINTF2(_L8("XOmxILCallbackManagerIfImpl::DoErrorEventNotification : aOmxError[%X] "), aOmxError);
 
 	return DoEventNotification(OMX_EventError,
-							 aOmxError,
-							 0,
-							 0);
+							   aOmxError,
+							   0,
+							   0);
 
 	}
 
 EXPORT_C OMX_ERRORTYPE
 XOmxILCallbackManagerIfImpl::DoEventNotification(OMX_EVENTTYPE aEvent,
-										   TUint32 aData1,
-										   TUint32 aData2,
-										   OMX_STRING aExtraInfo)
+												 TUint32 aData1,
+												 TUint32 aData2,
+												 OMX_STRING aExtraInfo)
 	{
-    DEBUG_PRINTF4(_L8("XOmxILCallbackManagerIfImpl::DoEventNotification : aEvent[%u] aData1[%u] aData2[%u]"), aEvent, aData1, aData2);
+    DEBUG_PRINTF5(_L8("XOmxILCallbackManagerIfImpl::DoEventNotification : Handle[%X] aEvent[%u] aData1[%u] aData2[%u]"), ipHandle, aEvent, aData1, aData2);
 
 	__ASSERT_DEBUG(ipHandle && ipCallbacks, User::Panic(KOmxILCallbackManagerIfImplPanicCategory, 1));
+
+	OMX_TRACE_EVENTHANDLER_IN(ipHandle, ipAppData, aEvent, aData1, aData2, aExtraInfo);
 
 	ipCallbacks->EventHandler(ipHandle,
 							  ipAppData,
@@ -246,6 +249,7 @@ XOmxILCallbackManagerIfImpl::DoEventNotification(OMX_EVENTTYPE aEvent,
 							  aData1,
 							  aData2,
 							  aExtraInfo);
+	OMX_TRACE_EVENTHANDLER_OUT(ipHandle, ipAppData, aEvent, aData1, aData2, aExtraInfo, OMX_ErrorNone);
 	return OMX_ErrorNone;
 
 	}
@@ -253,8 +257,8 @@ XOmxILCallbackManagerIfImpl::DoEventNotification(OMX_EVENTTYPE aEvent,
 
 EXPORT_C OMX_ERRORTYPE
 XOmxILCallbackManagerIfImpl::DoBufferDoneNotification(OMX_BUFFERHEADERTYPE* apBufferHeader,
-											 OMX_U32 aLocalPortIndex,
-											 OMX_DIRTYPE aLocalPortDirection)
+													  OMX_U32 aLocalPortIndex,
+													  OMX_DIRTYPE aLocalPortDirection)
 	{
     DEBUG_PRINTF5(_L8("XOmxILCallbackManagerIfImpl::DoBufferDoneNotification : HANDLE [%X] BUFFER [%X] PORT[%d] DIR[%d]"), ipHandle, apBufferHeader, aLocalPortIndex, aLocalPortDirection);
 
@@ -322,9 +326,30 @@ XOmxILCallbackManagerIfImpl::DoBufferDoneNotification(OMX_BUFFERHEADERTYPE* apBu
 		// From OMX_Core.h "Callbacks should not return an error to the
 		// component, so if an error occurs, the application shall handle it
 		// internally". Callback return error ignored here.
+#ifdef OMX_DEBUG_TRACING_ON
+		if (aLocalPortDirection == OMX_DirInput)
+			{
+			OMX_TRACE_EMPTYBUFFERDONE_IN(ipHandle, ipAppData, apBufferHeader);
+			}
+		else
+			{
+			OMX_TRACE_FILLBUFFERDONE_IN(ipHandle, ipAppData, apBufferHeader);
+			}
+#endif
 		fp2CBackHandler(ipHandle,
 						ipAppData,
 						apBufferHeader);
+#ifdef OMX_DEBUG_TRACING_ON
+        if (aLocalPortDirection == OMX_DirInput)
+            {
+            OMX_TRACE_EMPTYBUFFERDONE_OUT(ipHandle, ipAppData, apBufferHeader, 0);
+            }
+        else
+            {
+            OMX_TRACE_FILLBUFFERDONE_OUT(ipHandle, ipAppData, apBufferHeader, 0);
+            }
+#endif
+
 		}
 
 	return OMX_ErrorNone;
@@ -471,7 +496,7 @@ XOmxILCallbackManagerIfImpl::SignalOrPropagateBufferMarks(
 
 				// Mark the header...
 				apBufferHeader->hMarkTargetComponent = markInfo.ipMarkTargetComponent;
-				apBufferHeader->pMarkData			 = markInfo.ipMarkData;
+				apBufferHeader->pMarkData                        = markInfo.ipMarkData;
 
 				// Remove the mark info from the local store
 				iBufferMarks.Remove(index);

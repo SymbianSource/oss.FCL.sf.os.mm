@@ -361,6 +361,11 @@ protected:
 	// Associated port that will be used to propagate buffer marks
 	OMX_U32 iBufferMarkPropagationPortIndex;
 
+	// This is a flag that is set when the port receives the first
+	// OMX_UseBuffer (non-supplier ports). This will be used to know when
+	// SetParameter will be allowed
+	OMX_BOOL aFirstUseBufferHasBeenReceived;
+
 	// OpenMAX IL port definition structure
 	OMX_PARAM_PORTDEFINITIONTYPE iParamPortDefinition;
 

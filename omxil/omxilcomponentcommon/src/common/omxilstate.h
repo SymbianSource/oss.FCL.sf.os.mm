@@ -427,10 +427,6 @@ class COmxILFsm::COmxILStateLoadedToIdle : public COmxILFsm::COmxILStateLoaded
 public:
 
 
-	OMX_ERRORTYPE SetParameter(COmxILFsm& aFsm,
-							   OMX_INDEXTYPE aParamIndex,
-							   const TAny* apComponentParameterStructure);
-
 	OMX_ERRORTYPE PopulateBuffer(COmxILFsm& aFsm,
 								 OMX_BUFFERHEADERTYPE** appBufferHdr,
 								 OMX_U32 aPortIndex,
@@ -446,10 +442,6 @@ public:
 	OMX_ERRORTYPE CommandPortEnable(
 		COmxILFsm& aFsm,
 		const TOmxILCommand& aCommand);
-
-private:
-
-	TBool iUseBufferReceived;
 
 	};
 

@@ -17,6 +17,7 @@
 #define __SWI_LOG_H__
 
 #include <e32debug.h>
+#include "OMX_Trace.h"
 
 namespace DSD
 {

@@ -647,13 +647,7 @@ void COmxILPcmRendererProcessingFunction::CAudioDevice::ProcessNextBuffer()
         {
         if (!bufferHasStartTime)
             {
-            // Connected with the Clock but OMX_BUFFERFLAG_STARTTIME isn't set; drop the buffer
-			if (!iIsStartTimeFlagSet)
-				{
-				iParent.iBuffersToEmpty.Remove(0);
-            	SignalBufferCompletion(bufferPtr);
-				}
-            bufferPtr = NULL;
+            // Connected with the Clock but OMX_BUFFERFLAG_STARTTIME isn't set; simply queue the buffer
             return;
             }
         else
@@ -805,6 +799,11 @@ void COmxILPcmRendererProcessingFunction::CAudioDevice::SendBufferToSoundDevice(
 	iStatus = KRequestPending;
 	DEBUG_PRINTF2(_L8("COmxILPcmRendererProcessingFunction::CAudioDevice::SendBufferToSoundDevice() PlayData [%d]"), aBuffer.Length());
 	iSoundDevice.PlayData(iStatus, aBuffer);
+	if (iResumeAfterNextPlay)
+		{
+		iResumeAfterNextPlay = EFalse;
+		iSoundDevice.ResumePlaying();
+		}
 	SetActive();				
 	}
 	
@@ -883,6 +882,11 @@ void COmxILPcmRendererProcessingFunction::CAudioDevice::StartUpdateTimer()
 
 TBool COmxILPcmRendererProcessingFunction::CAudioDevice::CanPlayNow()
     {
+    if (iParent.iState != OMX_StateExecuting)
+        {
+        return EFalse;
+        }
+    
     if (iClockMediaTime < iParent.iStartMediaTime)
         {
         // Once all required Clock's clients have responded, the clock component starts 
@@ -962,6 +966,16 @@ void COmxILPcmRendererProcessingFunction::CAudioDevice::HandleClockStateChanged(
 	                return;
 	                }
 	            }
+			else if ((!iClockStateRunning) && (iParent.iState == OMX_StateExecuting))
+				{
+				// The clock has gone to running but no start time flag was received. This would
+				// indicate that the client moved it straight from stopped to running. As we may
+				// have received buffers while in stopped state, we need to start processing
+				// them now.
+                DEBUG_PRINTF(_L8("HandleClockStateChanged() Gone to running without start time flag set"));
+				iClockStateRunning = ETrue;
+				ProcessNextBuffer();
+				}
 	        
 	        // Otherwise, the queue is empty;
 	        //
@@ -1035,10 +1049,24 @@ void COmxILPcmRendererProcessingFunction::CAudioDevice::HandleClockScaleChanged(
 		// The scale is a Q16 value
 		iPausedClockViaScale = EFalse;
 		DEBUG_PRINTF2(_L8("HandleClockScaleChanged() resuming iPausedClockViaScale = %d"), iPausedClockViaScale);
-		iSoundDevice.ResumePlaying();
+
+		// If we are active then there is an outstanding PlayData() request so we need to call ResumePlaying().
+		// However calling ResumePlaying() without an outstanding PlayData() request can cause the TimePLayed() API
+		// to go awry, so we should defer calling ResumePlaying() until the next PlayData() call.
+		if (IsActive())
+			{
+			iSoundDevice.ResumePlaying();
+			}
+		else
+			{
+			iResumeAfterNextPlay = ETrue;
+			}
 		iParent.iPFHelper->BufferIndication();	//handles the race condition where both 1) iSoundDevice was paused after the last PlayData() completed and before it was passed any data & 2) BufferIndication()s came in for all the IL buffers while in this paused state
 		StartUpdateTimer();
 		}
+
+	// TODO: Handle the rest of the scale values
+
 	}
 
 
@@ -1087,6 +1115,7 @@ OMX_ERRORTYPE COmxILPcmRendererProcessingFunction::CAudioDevice::CloseDevice()
 	if(iSoundDevice.Handle())
 		{
 		iSoundDevice.Close();
+		iResumeAfterNextPlay = EFalse;
 		}
 	return err;
 	}
@@ -1106,7 +1135,17 @@ OMX_ERRORTYPE COmxILPcmRendererProcessingFunction::CAudioDevice::Execute()
 		// Now we can send BufferDone notifications for each emptied
 		// buffer...
 		iParent.FlushBufferList(iParent.iBuffersEmptied);
-		iSoundDevice.ResumePlaying();
+		// If we are active then there is an outstanding PlayData() request so we need to call ResumePlaying().
+		// However calling ResumePlaying() without an outstanding PlayData() request can cause the TimePLayed() API
+		// to go awry, so we should defer calling ResumePlaying() until the next PlayData() call.
+		if (IsActive())
+			{
+			iSoundDevice.ResumePlaying();
+			}
+		else
+			{
+			iResumeAfterNextPlay = ETrue;
+			}
 		StartUpdateTimer();
 		}
 	else
@@ -1175,13 +1214,14 @@ OMX_ERRORTYPE COmxILPcmRendererProcessingFunction::CAudioDevice::Stop()
 			iLastBytesPlayedValue = iSoundDevice.BytesPlayed();
 			// Close the sound device
 			iSoundDevice.Close();
+			iResumeAfterNextPlay = EFalse;
 			}
 		}
 	
 	iClockStateRunning = EFalse;
 	iIsStartTimeFlagSet = EFalse;
 	iPlayData = ETrue;
-	
+
 	return OMX_ErrorNone;
 	}
 

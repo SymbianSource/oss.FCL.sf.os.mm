@@ -162,6 +162,7 @@ private:
 		// This variable is used to optionally allocate a memory segment to cache OMX buffers if the tunnelled component does not utilise them well
 		// If the tunnelled components don't fill in sufficient data in the buffers, this can create underflows in the renderer, as the driver won't have enough data to play
 		RBuf8 iCachedPlayBuffer;		
+		TBool iResumeAfterNextPlay;
 
 		} *iAudioDevice;
 

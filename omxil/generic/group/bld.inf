@@ -1,0 +1,2 @@
+#include "../omxilfilesink/group/bld.inf"
+#include "../omxilfilesource/group/bld.inf"

@@ -36,7 +36,7 @@ _LIT(KOmxILConfigManagerPanicCategory, "OmxILConfigManager");
 
 
 // Forward declarations
-class COmxILPortManager;
+class MOmxILPortManagerIf;
 
 
 /**
@@ -53,7 +53,7 @@ class COmxILConfigManager : public COmxILIndexManager
 public:
 
 	IMPORT_C static COmxILConfigManager* NewL(
-		COmxILPortManager& aPortManager,
+		MOmxILPortManagerIf& aPortManager,
 		const TDesC8& aComponentName,
 		const OMX_VERSIONTYPE& aComponentVersion,
 		const RPointerArray<TDesC8>& aComponentRoleList);
@@ -93,7 +93,7 @@ public:
 
 protected:
 
-	IMPORT_C explicit COmxILConfigManager(COmxILPortManager& aPortManager);
+	IMPORT_C explicit COmxILConfigManager(MOmxILPortManagerIf& aPortManager);
 
 	IMPORT_C void ConstructL(const TDesC8& aComponentName,
 					const OMX_VERSIONTYPE& aComponentVersion,
@@ -106,7 +106,7 @@ protected:
 protected:
 
 	// Reference to the component's port manager
-	COmxILPortManager& iPortManager;
+	MOmxILPortManagerIf& iPortManager;
 
 	// Reference to the component's port manager
 	RBuf8 iComponentName;

@@ -30,7 +30,7 @@
 #include "omxilcommand.h"
 
 // forward declarations
-class COmxILPortManager;
+class MOmxILPortManagerIf;
 class COmxILConfigManager;
 class MOmxILCallbackManagerIf;
 class COmxILComponent;
@@ -73,7 +73,7 @@ public:
 
 	IMPORT_C static COmxILFsm* NewL(COmxILComponent& aComponent,
 									COmxILProcessingFunction& aProcFunction,
-									COmxILPortManager& aPortManager,
+									MOmxILPortManagerIf& aPortManager,
 									COmxILConfigManager& aConfigManager,
 									MOmxILCallbackManagerIf& aCallbacks);
 
@@ -183,7 +183,7 @@ private:
 
 	COmxILFsm(COmxILComponent& aComponent,
 			  COmxILProcessingFunction& aProcFunction,
-			  COmxILPortManager& aPortManager,
+			  MOmxILPortManagerIf& aPortManager,
 			  COmxILConfigManager& aConfigManager,
 			  MOmxILCallbackManagerIf& aCallbacks);
 
@@ -207,7 +207,7 @@ private:
 
 	COmxILComponent& iComponent;
 	COmxILProcessingFunction& iProcFunction;
-	COmxILPortManager& iPortManager;
+	MOmxILPortManagerIf& iPortManager;
 	COmxILConfigManager& iConfigManager;
 	MOmxILCallbackManagerIf& iCallbacks;
 

@@ -13,6 +13,8 @@
 // Description:
 //
 
+PRJ_PLATFORMS
+BASEDEFAULT
 
 PRJ_MMPFILES
 // Core and Loader

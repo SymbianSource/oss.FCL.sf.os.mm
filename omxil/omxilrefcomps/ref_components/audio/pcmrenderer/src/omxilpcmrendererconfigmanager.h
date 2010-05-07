@@ -40,7 +40,7 @@ NONSHARABLE_CLASS(COmxILPcmRendererConfigManager) : public COmxILConfigManager
 public:
 
 	static COmxILPcmRendererConfigManager* NewL(
-		COmxILPortManager& aPortManager,
+		MOmxILPortManagerIf& aPortManager,
 		COmxILPcmRendererProcessingFunction& aProcessingFunction,
 		const TDesC8& aComponentName,
 		const OMX_VERSIONTYPE& aComponentVersion,
@@ -62,8 +62,8 @@ public:
 
 protected:
 
-	COmxILPcmRendererConfigManager(COmxILPortManager& aPortManager, 
-											COmxILPcmRendererProcessingFunction& aProcessingFunction);
+	COmxILPcmRendererConfigManager(MOmxILPortManagerIf& aPortManager,
+								   COmxILPcmRendererProcessingFunction& aProcessingFunction);
 
 	void ConstructL(const TDesC8& aComponentName,
 					const OMX_VERSIONTYPE& aComponentVersion,

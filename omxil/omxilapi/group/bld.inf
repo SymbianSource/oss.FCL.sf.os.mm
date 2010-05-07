@@ -34,3 +34,12 @@ PRJ_EXPORTS
 // should be added to filenamepolicyexclusions.txt ahead of time. Otherwise
 // checksource will flag it as error.
 // filenamepolicyexclusions.txt is in \src\cedar\generic\tools\e32toolp\platform
+
+../shai/OMX_Symbian_AudioExt.h          SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_AudioExt.h) 
+../shai/OMX_Symbian_ComponentExt.h      SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_ComponentExt.h) 
+../shai/OMX_Symbian_CoreExt.h           SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_CoreExt.h) 
+../shai/OMX_Symbian_ExtensionNames.h    SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_ExtensionNames.h) 
+../shai/OMX_Symbian_ImageExt.h          SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_ImageExt.h) 
+../shai/OMX_Symbian_IVCommonExt.h       SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_IVCommonExt.h) 
+../shai/OMX_Symbian_OtherExt.h          SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_OtherExt.h) 
+../shai/OMX_Symbian_VideoExt.h          SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(openmax/il/shai/OMX_Symbian_VideoExt.h) 

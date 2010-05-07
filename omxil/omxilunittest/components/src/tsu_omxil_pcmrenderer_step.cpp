@@ -3848,9 +3848,8 @@ RAsyncTestStepOmxILPcmRenderer0030::DoEmptyBufferDoneL(OMX_HANDLETYPE /*aCompone
 	//check the number of bytes played by the device corresponds
 	//to the number of bytes readed from file
 	//allow an extra margin of one buffer.
-	TUint minAllowedBytesPlayed = ipTestFile->GetPos() - aBuffer->nAllocLen;
 	TUint maxAllowedBytesPlayed =ipTestFile->GetPos();
-	if ((bytesPlayedStruct.nBytesPlayed < minAllowedBytesPlayed)||(bytesPlayedStruct.nBytesPlayed > maxAllowedBytesPlayed))
+	if ((bytesPlayedStruct.nBytesPlayed < 0)||(bytesPlayedStruct.nBytesPlayed > maxAllowedBytesPlayed))
 		{
 		StopTest(KErrGeneral, EFail);
 		}

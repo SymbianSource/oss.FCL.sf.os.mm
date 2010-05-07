@@ -93,7 +93,7 @@ COmxILInContextCallbackManager::UnlockCallbackManager()
 	}
 
 EXPORT_C void
-COmxILInContextCallbackManager::SetPortManager(COmxILPortManager& apPortManager)
+COmxILInContextCallbackManager::SetPortManager(MOmxILPortManagerIf& apPortManager)
 	{
 	LockCallbackManager();
 	DoSetPortManager(apPortManager);
@@ -646,7 +646,6 @@ COmxILInContextCallbackManager::PortSettingsChangeNotification(
 	return omxError;
 
 	}
-
 
 void
 COmxILInContextCallbackManager::FlushQueue(

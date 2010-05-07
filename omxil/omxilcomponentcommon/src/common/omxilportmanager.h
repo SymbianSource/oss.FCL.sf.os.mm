@@ -26,6 +26,7 @@
 
 #include "omxilport.h"
 #include "omxilindexmanager.h"
+#include "omxilportmanagerif.h"
 
 /**
    Port Manager Panic category
@@ -45,19 +46,12 @@ class MOmxILCallbackManagerIf;
    the ports.
 
 */
-NONSHARABLE_CLASS(COmxILPortManager) : public COmxILIndexManager
+NONSHARABLE_CLASS(COmxILPortManager) : public COmxILIndexManager,
+									   public MOmxILPortManagerIf
 	{
 
 public:
-	/*
-	   @param aImmediateReturnTimeBuffer Indicates whether the component needs to 
-	   return the arriving buffer to the sender immediately or not . This is particularly
-	   related to time port (e.g. COmxILClientClockPort), where notification 
-	   could be requested on every frame. Returning the buffer immediately to the
-	   the sender (e.g. Clock Component) would avoid the sender from buffer starvation.
-	   By default, time related component will need to return the buffer sooner, except 
-	   Clock Component (the buffer sender)  
-	*/
+
 	IMPORT_C static COmxILPortManager* NewL(
 		COmxILProcessingFunction& aProcessingFunction,
 		MOmxILCallbackManagerIf& aCallbacks,
@@ -121,7 +115,8 @@ public:
 		TBool& aComponentDePopulationCompleted);
 
 	OMX_ERRORTYPE InitiateTunnellingDataFlow(
-		OMX_U32 aPortIndex = OMX_ALL);
+		OMX_U32 aPortIndex = OMX_ALL,
+		OMX_BOOL aSuppliersAndNonSuppliers = OMX_FALSE);
 
 	OMX_ERRORTYPE BufferIndication(
 		OMX_BUFFERHEADERTYPE* apBufferHeader,
@@ -169,19 +164,22 @@ public:
 private:
 
 	COmxILPortManager(COmxILProcessingFunction& aProcessingFunction,
-					  MOmxILCallbackManagerIf& aCallbacks,
-					  const OMX_VERSIONTYPE& aOmxVersion,
-					  OMX_U32 aNumberOfAudioPorts,
-					  OMX_U32 aStartAudioPortNumber,
-					  OMX_U32 aNumberOfImagePorts,
-					  OMX_U32 aStartImagePortNumber,
-					  OMX_U32 aNumberOfVideoPorts,
-					  OMX_U32 aStartVideoPortNumber,
-					  OMX_U32 aNumberOfOtherPorts,
-					  OMX_U32 aStartOtherPortNumber,
-					  OMX_BOOL aImmediateReturnTimeBuffer);
+					  MOmxILCallbackManagerIf& aCallbacks);
 
-	void ConstructL();
+	// From MOmxILPortManagerIf
+	void ConstructL(COmxILProcessingFunction& aProcessingFunction,
+					MOmxILCallbackManagerIf& aCallbacks,
+					const OMX_VERSIONTYPE& aOmxVersion,
+					OMX_U32 aNumberOfAudioPorts,
+					OMX_U32 aStartAudioPortNumber,
+					OMX_U32 aNumberOfImagePorts,
+					OMX_U32 aStartImagePortNumber,
+					OMX_U32 aNumberOfVideoPorts,
+					OMX_U32 aStartVideoPortNumber,
+					OMX_U32 aNumberOfOtherPorts,
+					OMX_U32 aStartOtherPortNumber,
+					OMX_BOOL aImmediateReturnTimeBuffer = OMX_TRUE);
+
 
 	void AppendPortL(const COmxILPort* aPort);
 

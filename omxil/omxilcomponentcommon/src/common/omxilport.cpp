@@ -67,7 +67,8 @@ COmxILPort::COmxILPort(const TOmxILCommonPortData& aCommonPortData)
 	iBufferMarks(_FOFF(TBufferMarkInfo, iLink)),
 	iTransitionState(EPortNotTransitioning),
 	iBufferMarkPropagationPortIndex(
-		aCommonPortData.iBufferMarkPropagationPortIndex)
+		aCommonPortData.iBufferMarkPropagationPortIndex),
+	aFirstUseBufferHasBeenReceived(OMX_FALSE)
 	{
     DEBUG_PRINTF(_L8("COmxILPort::COmxILPort"));
 
@@ -226,7 +227,18 @@ COmxILPort::SetParameter(OMX_INDEXTYPE aParamIndex,
 
 	aUpdateProcessingFunction = EFalse;
 
+
+	if (OMX_TRUE == aFirstUseBufferHasBeenReceived)
+		{
+		DEBUG_PRINTF2(_L8("COmxILPort::SetParameter : PORT [%u] WARNING : port population already initiated, returning OMX_ErrorIncorrectStateOperation"), Index());
+		// SetParameter is not allowed after the first OMX_UseBuffer has been
+		// received in the port, that is, the population of the port has
+		// already been initiated...
+		return OMX_ErrorIncorrectStateOperation;
+		}
+
 	OMX_ERRORTYPE omxRetValue = OMX_ErrorNone;
+
 	switch(aParamIndex)
 		{
 	case OMX_IndexParamPortDefinition:
@@ -262,6 +274,8 @@ COmxILPort::SetParameter(OMX_INDEXTYPE aParamIndex,
 				{
 				return OMX_ErrorBadParameter;
 				}
+			DEBUG_PRINTF3(_L8("COmxILPort::SetParameter : old.nBufferCountActual [%u] new.nBufferCountActual [%u]"),
+						  iParamPortDefinition.nBufferCountActual, pPortDefinition->nBufferCountActual);
 			iParamPortDefinition.nBufferCountActual =
 				pPortDefinition->nBufferCountActual;
 			aUpdateProcessingFunction = ETrue;
@@ -315,6 +329,8 @@ COmxILPort::SetParameter(OMX_INDEXTYPE aParamIndex,
 					return retValue;
 					}
 				}
+			DEBUG_PRINTF3(_L8("COmxILPort::SetParameter : old.eBufferSupplier [%u] new.eBufferSupplier [%u]"),
+						  iParamCompBufferSupplier.eBufferSupplier, pBufferSupplier->eBufferSupplier);
 			iParamCompBufferSupplier.eBufferSupplier =
 				pBufferSupplier->eBufferSupplier;
 			}
@@ -365,7 +381,7 @@ COmxILPort::PopulateBuffer(OMX_BUFFERHEADERTYPE** appBufferHdr,
 						   OMX_U8* apBuffer,
 						   TBool& portPopulationCompleted)
 	{
-    DEBUG_PRINTF(_L8("COmxILPort::PopulateBuffer"));
+    DEBUG_PRINTF3(_L8("COmxILPort::PopulateBuffer : pBuffer[%X] PORT[%u]"), apBuffer, iParamPortDefinition.nPortIndex);
 
 	portPopulationCompleted = EFalse;
 
@@ -382,6 +398,8 @@ COmxILPort::PopulateBuffer(OMX_BUFFERHEADERTYPE** appBufferHdr,
 		return OMX_ErrorInsufficientResources;
 		}
 
+    DEBUG_PRINTF3(_L8("COmxILPort::PopulateBuffer : BUFFER[%X] PORT[%u]"), pHeader, iParamPortDefinition.nPortIndex);
+
 	// Here, lets discriminate between apBuffer == 0 (AllocateBuffer) and
 	// apBuffer != 0 (UseBuffer)
 	TUint8* pPortSpecificBuffer = 0;
@@ -397,6 +415,8 @@ COmxILPort::PopulateBuffer(OMX_BUFFERHEADERTYPE** appBufferHdr,
 										   pPortPrivate,
 										   pPlatformPrivate,
 										   apAppPrivate);
+
+		aFirstUseBufferHasBeenReceived = OMX_TRUE;
 		}
 	else
 		{
@@ -547,6 +567,7 @@ COmxILPort::FreeBuffer(OMX_BUFFERHEADERTYPE* apBufferHeader,
 	if (0 == iBufferHeaders.Count())
 		{
 		portDepopulationCompleted = ETrue;
+		aFirstUseBufferHasBeenReceived = OMX_FALSE;
 		}
 
 	return OMX_ErrorNone;
@@ -1275,7 +1296,7 @@ COmxILPort::IsBufferAtHome(OMX_BUFFERHEADERTYPE* apBufferHeader) const
    @param [OUT] apPortPrivate A pointer that refers to an optional
    port-specific structure.
 
-   @param apPlatformPrivate[OUT] A pointer to an optional platform-specific
+   @apPlatformPrivate[OUT] A pointer to an optional platform-specific
    structure.
 
    @param apAppPrivate A pointer that refers to a buffer supplier-specific
@@ -1434,9 +1455,9 @@ COmxILPort::DoBufferUnwrapping(OMX_PTR /* apBuffer*/,
    @param apPlatformPrivate pPlatformPrivate pointer as returned by
    DoBufferAllocation
 
-   @param aSizeBytes The size in bytes of the to be allocated buffer
+   @aSizeBytes The size in bytes of the to be allocated buffer
 
-   @param apBuffer A pointer to the allocated buffer
+   @apBuffer A pointer to the allocated buffer
 
    @return OMX_ERRORTYPE
 

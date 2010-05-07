@@ -30,7 +30,7 @@
 _LIT(KOmxILCallbackManagerIfImplPanicCategory, "OmxILCallbackManagerIfImpl");
 
 // Forward declarations
-class COmxILPortManager;
+class MOmxILPortManagerIf;
 class COmxILFsm;
 
 /**
@@ -50,7 +50,7 @@ protected:
 
 	IMPORT_C virtual ~XOmxILCallbackManagerIfImpl();
 
-	IMPORT_C virtual void DoSetPortManager(COmxILPortManager& apPortManager);
+	IMPORT_C virtual void DoSetPortManager(MOmxILPortManagerIf& apPortManager);
 
 	IMPORT_C virtual void DoSetFsm(COmxILFsm& apFsm);
 
@@ -141,7 +141,7 @@ protected:
 	RArray<TOutputPortBufferMarkInfo> iBufferMarks;
 
 	// Port manager
-	COmxILPortManager* ipPortManager;
+	MOmxILPortManagerIf* ipPortManager;
 
 	// FSM
 	COmxILFsm* ipFsm;

@@ -252,7 +252,6 @@ COmxILFsm::COmxILState::CommandMarkBuffer(COmxILFsm& aFsm,
 
 	}
 
-
 //
 // COmxILStateInvalid
 //
@@ -426,7 +425,6 @@ COmxILFsm::COmxILStateInvalid::CommandMarkBuffer(
 	return OMX_ErrorInvalidState;
 	}
 
-
 //
 // COmxILStateLoaded
 //
@@ -473,7 +471,6 @@ COmxILFsm::COmxILStateLoaded::PopulateBuffer(
 									   aSizeBytes,
 									   apBuffer,
 									   portPopulationCompleted);
-
 	}
 
 
@@ -647,27 +644,6 @@ COmxILFsm::COmxILStateLoaded::CommandPortEnable(
 // COmxILStateLoadedToIdle
 //
 OMX_ERRORTYPE
-COmxILFsm::COmxILStateLoadedToIdle::SetParameter(
-	COmxILFsm& aFsm,
-	OMX_INDEXTYPE aParamIndex,
-	const TAny* apComponentParameterStructure)
-	{
-
-	// In this transitional state, OMX_SetParameter is allowed only if
-	// OMX_UseBuffer has not been received yet...
-	if (iUseBufferReceived)
-		{
-		return OMX_ErrorIncorrectStateOperation;
-		}
-
-
-	return COmxILStateLoaded::SetParameter(aFsm,
-										   aParamIndex,
-										   apComponentParameterStructure);
-
-	}
-
-OMX_ERRORTYPE
 COmxILFsm::COmxILStateLoadedToIdle::PopulateBuffer(
 	COmxILFsm& aFsm,
 	OMX_BUFFERHEADERTYPE** appBufferHdr,
@@ -690,10 +666,7 @@ COmxILFsm::COmxILStateLoadedToIdle::PopulateBuffer(
 
 	if (apBuffer && OMX_ErrorNone == omxError)
 		{
-		// Flag that OMX_UseBuffer has been called in LoadedToIdle state. This
-		// will be used to know if an OMX_SetParameter call will be allowed in
-		// this state... It will be allowed only if false...
-		iUseBufferReceived = ETrue;
+		DEBUG_PRINTF2(_L8("COmxILStateLoadedToIdle::PopulateBuffer : PORT [%u] : Buffer population occurring in state LoadedToIdle"), aPortIndex);
 		}
 
 	return omxError;

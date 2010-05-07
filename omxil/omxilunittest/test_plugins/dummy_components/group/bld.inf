@@ -14,8 +14,8 @@
 //
 
 PRJ_MMPFILES
-../mmpfiles/Core_Conf_Dummy_Component1.mmp
-../mmpfiles/Core_Conf_Dummy_Component2.mmp
+//../mmpfiles/Core_Conf_Dummy_Component1.mmp
+//../mmpfiles/Core_Conf_Dummy_Component2.mmp
 
 
 PRJ_EXPORTS

@@ -24,9 +24,9 @@
 
 #include "log.h"
 #include "omxilconfigmanager.h"
-#include "omxilportmanager.h"
 #include "omxilspecversion.h"
 #include "omxilutil.h"
+#include "omxilportmanagerif.h"
 
 
 // NOTE: OMX_UUIDTYPE[128] is defined in OMX_Types.h
@@ -34,7 +34,7 @@
 
 EXPORT_C COmxILConfigManager*
 COmxILConfigManager::NewL(
-	COmxILPortManager& aPortManager,
+	MOmxILPortManagerIf& aPortManager,
 	const TDesC8& aComponentName,
 	const OMX_VERSIONTYPE& aComponentVersion,
 	const RPointerArray<TDesC8>& aComponentRoleList)
@@ -84,7 +84,7 @@ COmxILConfigManager::ConstructL(const TDesC8& aComponentName,
 	}
 
 EXPORT_C
-COmxILConfigManager::COmxILConfigManager(COmxILPortManager& aPortManager)
+COmxILConfigManager::COmxILConfigManager(MOmxILPortManagerIf& aPortManager)
 	:
 	iPortManager(aPortManager),
 	iComponentName(),

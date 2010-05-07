@@ -31,7 +31,7 @@
 
 COmxILPcmRendererConfigManager*
 COmxILPcmRendererConfigManager::NewL(
-	COmxILPortManager& aPortManager,
+	MOmxILPortManagerIf& aPortManager,
 	COmxILPcmRendererProcessingFunction& aProcessingFunction,
 	const TDesC8& aComponentName,
 	const OMX_VERSIONTYPE& aComponentVersion,
@@ -62,7 +62,7 @@ COmxILPcmRendererConfigManager::ConstructL(const TDesC8& aComponentName,
 	ManagedConfigIndexes().InsertInOrderL(OMX_SymbianIndexConfigAudioBytesPlayed);
 	}
 
-COmxILPcmRendererConfigManager::COmxILPcmRendererConfigManager(COmxILPortManager& aPortManager,
+COmxILPcmRendererConfigManager::COmxILPcmRendererConfigManager(MOmxILPortManagerIf& aPortManager,
 															   COmxILPcmRendererProcessingFunction& aProcessingFunction)
 	:
 	COmxILConfigManager(aPortManager),

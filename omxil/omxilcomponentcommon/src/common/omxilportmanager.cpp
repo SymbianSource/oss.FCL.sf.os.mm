@@ -25,6 +25,39 @@
 #include "omxilcallbackmanager.h"
 #include "omxilutil.h"
 
+	/**
+	   Static NewL for two-phase construction
+
+	   @param   aProcessingFunction The component's processing function
+
+	   @param   aCallbacks The component's callback manager
+
+	   @param   aOmxVersion The IL Spec version in use
+
+	   @param   aNumberOfAudioPorts Number of audio ports in the component
+
+	   @param   aStartAudioPortNumber The start index for audio ports
+
+	   @param   aNumberOfImagePorts Number of image ports in the component
+
+	   @param   aStartImagePortNumber The start index for image ports
+
+	   @param   aNumberOfVideoPorts Number of video ports in the component
+
+	   @param   aStartVideoPortNumber The start index for video ports
+
+	   @param   aNumberOfOtherPorts Number of other ports in the component
+
+	   @param   aStartOtherPortNumber The start index for other ports
+
+	   @param aImmediateReturnTimeBuffer This only applies to components with a
+	   clock client port. Indicates whether the Port Manager must forward an
+	   arriving clock buffer to the Callback Manager (ETrue) or to the
+	   Processing Function (EFalse) . If the clock buffer is to be forwarded to
+	   the Processing Function, this will happen using the BufferIndication
+	   function of the component's PF. Otherwise, PF's MediaTimeIndication is
+	   used instead.
+	*/
 EXPORT_C COmxILPortManager*
 COmxILPortManager::NewL(
 	COmxILProcessingFunction& aProcessingFunction,
@@ -45,28 +78,64 @@ COmxILPortManager::NewL(
 	COmxILPortManager* self =
 		new (ELeave)COmxILPortManager(
 			aProcessingFunction,
-			aCallbacks,
-			aOmxVersion,
-			aNumberOfAudioPorts,
-			aStartAudioPortNumber,
-			aNumberOfImagePorts,
-			aStartImagePortNumber,
-			aNumberOfVideoPorts,
-			aStartVideoPortNumber,
-			aNumberOfOtherPorts,
-			aStartOtherPortNumber,
-			aImmediateReturnTimeBuffer);
+			aCallbacks);
 
 	CleanupStack::PushL(self);
-	self->ConstructL();
+	self->ConstructL(aProcessingFunction,
+					 aCallbacks,
+					 aOmxVersion,
+					 aNumberOfAudioPorts,
+					 aStartAudioPortNumber,
+					 aNumberOfImagePorts,
+					 aStartImagePortNumber,
+					 aNumberOfVideoPorts,
+					 aStartVideoPortNumber,
+					 aNumberOfOtherPorts,
+					 aStartOtherPortNumber,
+					 aImmediateReturnTimeBuffer);
 	CleanupStack::Pop(self);
 	return self;
 	}
 
 void
-COmxILPortManager::ConstructL()
+COmxILPortManager::ConstructL(
+	COmxILProcessingFunction& /* aProcessingFunction */,
+	MOmxILCallbackManagerIf& /* aCallbacks */,
+	const OMX_VERSIONTYPE& aOmxVersion,
+	OMX_U32 aNumberOfAudioPorts,
+	OMX_U32 aStartAudioPortNumber,
+	OMX_U32 aNumberOfImagePorts,
+	OMX_U32 aStartImagePortNumber,
+	OMX_U32 aNumberOfVideoPorts,
+	OMX_U32 aStartVideoPortNumber,
+	OMX_U32 aNumberOfOtherPorts,
+	OMX_U32 aStartOtherPortNumber,
+	OMX_BOOL aImmediateReturnTimeBuffer)
 	{
     DEBUG_PRINTF(_L8("COmxILPortManager::ConstructL"));
+
+	iImmediateReturnTimeBuffer = aImmediateReturnTimeBuffer;
+
+	iAudioParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
+	iAudioParamInit.nVersion		 = aOmxVersion;
+	iAudioParamInit.nPorts			 = aNumberOfAudioPorts;
+	iAudioParamInit.nStartPortNumber = aStartAudioPortNumber;
+
+	iImageParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
+	iImageParamInit.nVersion		 = aOmxVersion;
+	iImageParamInit.nPorts			 = aNumberOfImagePorts;
+	iImageParamInit.nStartPortNumber = aStartImagePortNumber;
+
+	iVideoParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
+	iVideoParamInit.nVersion		 = aOmxVersion;
+	iVideoParamInit.nPorts			 = aNumberOfVideoPorts;
+	iVideoParamInit.nStartPortNumber = aStartVideoPortNumber;
+
+	iOtherParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
+	iOtherParamInit.nVersion		 = aOmxVersion;
+	iOtherParamInit.nPorts			 = aNumberOfOtherPorts;
+	iOtherParamInit.nStartPortNumber = aStartOtherPortNumber;
+
 
 	InsertParamIndexL(OMX_IndexParamAudioInit);
 	InsertParamIndexL(OMX_IndexParamImageInit);
@@ -113,44 +182,13 @@ COmxILPortManager::ConstructL()
 
 COmxILPortManager::COmxILPortManager(
 	COmxILProcessingFunction& aProcessingFunction,
-	MOmxILCallbackManagerIf& aCallbacks,
-	const OMX_VERSIONTYPE& aOmxVersion,
-	OMX_U32 aNumberOfAudioPorts,
-	OMX_U32 aStartAudioPortNumber,
-	OMX_U32 aNumberOfImagePorts,
-	OMX_U32 aStartImagePortNumber,
-	OMX_U32 aNumberOfVideoPorts,
-	OMX_U32 aStartVideoPortNumber,
-	OMX_U32 aNumberOfOtherPorts,
-	OMX_U32 aStartOtherPortNumber,
-	OMX_BOOL aImmediateReturnTimeBuffer)
+	MOmxILCallbackManagerIf& aCallbacks)
 	:
 	iProcessingFunction(aProcessingFunction),
 	iCallbacks(aCallbacks),
-	iAllPorts(),
-	iImmediateReturnTimeBuffer(aImmediateReturnTimeBuffer)
+	iAllPorts()
 	{
     DEBUG_PRINTF(_L8("COmxILPortManager::COmxILPortManager"));
-
-	iAudioParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
-	iAudioParamInit.nVersion		 = aOmxVersion;
-	iAudioParamInit.nPorts			 = aNumberOfAudioPorts;
-	iAudioParamInit.nStartPortNumber = aStartAudioPortNumber;
-
-	iImageParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
-	iImageParamInit.nVersion		 = aOmxVersion;
-	iImageParamInit.nPorts			 = aNumberOfImagePorts;
-	iImageParamInit.nStartPortNumber = aStartImagePortNumber;
-
-	iVideoParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
-	iVideoParamInit.nVersion		 = aOmxVersion;
-	iVideoParamInit.nPorts			 = aNumberOfVideoPorts;
-	iVideoParamInit.nStartPortNumber = aStartVideoPortNumber;
-
-	iOtherParamInit.nSize			 = sizeof(OMX_PORT_PARAM_TYPE);
-	iOtherParamInit.nVersion		 = aOmxVersion;
-	iOtherParamInit.nPorts			 = aNumberOfOtherPorts;
-	iOtherParamInit.nStartPortNumber = aStartOtherPortNumber;
 
 	}
 
@@ -514,6 +552,8 @@ COmxILPortManager::SetParameter(OMX_INDEXTYPE aParamIndex,
 		return OMX_ErrorBadPortIndex;
 		}
 
+    DEBUG_PRINTF2(_L8("COmxILPortManager::SetParameter : PORT[%u]"), portIndex);
+
 	// Grab the port here...
 	COmxILPort* pPort = iAllPorts[portIndex];
 
@@ -594,7 +634,7 @@ OMX_ERRORTYPE
 COmxILPortManager::SetConfig(OMX_INDEXTYPE aConfigIndex,
 							 const TAny* apComponentConfigStructure)
 	{
-    DEBUG_PRINTF(_L8("COmxILPortManager::SetConfig"));
+	DEBUG_PRINTF(_L8("COmxILPortManager::SetConfig"));
 
 	TInt index = FindConfigIndex(aConfigIndex);
 	if (KErrNotFound == index)
@@ -609,6 +649,8 @@ COmxILPortManager::SetConfig(OMX_INDEXTYPE aConfigIndex,
 		{
 		return OMX_ErrorBadPortIndex;
 		}
+
+    DEBUG_PRINTF2(_L8("COmxILPortManager::SetConfig : PORT[%u]"), portIndex);
 
 	TBool updateProcessingFunction = EFalse;
 	OMX_ERRORTYPE omxRetValue =
@@ -727,7 +769,7 @@ COmxILPortManager::FreeBuffer(OMX_U32 aPortIndex,
 							  TBool& portDepopulationCompleted,
 							  OMX_BOOL aPortIsDisabled /* = OMX_FALSE */)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::FreeBuffer : BUFFER [%X]"), apBufferHeader);
+    DEBUG_PRINTF3(_L8("COmxILPortManager::FreeBuffer : PORT[%u] BUFFER [%X]"), aPortIndex, apBufferHeader);
 
 	// Check the index of the port..
 	if (CheckPortIndex(aPortIndex) != OMX_ErrorNone)
@@ -1055,7 +1097,9 @@ COmxILPortManager::TunnellingBufferDeallocation(
 	}
 
 OMX_ERRORTYPE
-COmxILPortManager::InitiateTunnellingDataFlow(OMX_U32 aPortIndex /* = OMX_ALL */)
+COmxILPortManager::InitiateTunnellingDataFlow(
+	OMX_U32 aPortIndex /* = OMX_ALL */,
+	OMX_BOOL aSuppliersAndNonSuppliers /* = OMX_FALSE */)
 	{
     DEBUG_PRINTF2(_L8("COmxILPortManager::InitiateTunnellingDataFlow : PORT[%d]"), aPortIndex);
 
@@ -1086,7 +1130,9 @@ COmxILPortManager::InitiateTunnellingDataFlow(OMX_U32 aPortIndex /* = OMX_ALL */
 			portIndex = pPort->Index();
 			}
 
-		if (pPort->IsEnabled() && pPort->IsTunnelledAndBufferSupplier())
+		if (pPort->IsEnabled() &&
+			((OMX_TRUE == aSuppliersAndNonSuppliers) ||
+			 pPort->IsTunnelledAndBufferSupplier()))
 			{
 			const TInt headerCount = pPort->Count();
 			OMX_BUFFERHEADERTYPE* pHeader = 0;
@@ -1179,12 +1225,14 @@ OMX_ERRORTYPE
 COmxILPortManager::BufferIndication(
 	OMX_BUFFERHEADERTYPE* apBufferHeader,
 	OMX_DIRTYPE aDirection,
-	OMX_BOOL aPortIsDisabled /* = OMX_FALSE */)
+	OMX_BOOL /* aPortIsDisabled = OMX_FALSE */)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::BufferIndication : BUFFER [%X]"), apBufferHeader);
 
 	OMX_U32 portIndex = aDirection == OMX_DirInput ?
 		apBufferHeader->nInputPortIndex : apBufferHeader->nOutputPortIndex;
+
+    DEBUG_PRINTF3(_L8("COmxILPortManager::BufferIndication : PORT[%u] BUFFER [%X] "),
+				  portIndex, apBufferHeader);
 
 	// Check the index of the port..
 	if (CheckPortIndex(portIndex) != OMX_ErrorNone)
@@ -1199,23 +1247,6 @@ COmxILPortManager::BufferIndication(
 	if (pPort->Direction() != aDirection)
 		{
 		return OMX_ErrorBadPortIndex;
-		}
-
-	if (!pPort->IsEnabled() &&
-		!pPort->IsTransitioningToDisabled() &&
-		!pPort->IsTransitioningToEnabled())
-		{
-		return OMX_ErrorIncorrectStateOperation;
-		}
-
-	// Check port enabled property...
-	if (OMX_TRUE == aPortIsDisabled &&
-		pPort->IsEnabled())
-		{
-		// There is an indication from the FSM that the port must be disabled,
-		// otherwise, the buffer indication is not allowed in the current
-		// state.
-		return OMX_ErrorIncorrectStateOperation;
 		}
 
 	OMX_ERRORTYPE omxRetValue = OMX_ErrorNone;
@@ -1263,8 +1294,7 @@ COmxILPortManager::BufferIndication(
 		// processing function...
 		return OMX_ErrorNone;
 
-		} // if (pPort->IsTransitioningToDisabled())
-
+		} // if ((pPort->IsTunnelledAndBufferSupplier() && pPort->IsTransitioningToDisabled())
 
 	// Inform the port that one of its buffers is going to be sent to the
 	// processing function (exception applies to OMX_PortDomainOther ports) ... 
@@ -1337,12 +1367,14 @@ COmxILPortManager::BufferReturnIndication(
 	OMX_DIRTYPE aDirection,
 	TBool& aAllBuffersReturned)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::BufferReturnIndication : [%X]"), apBufferHeader);
 
 	aAllBuffersReturned = EFalse;
 
 	OMX_U32 portIndex = aDirection == OMX_DirInput ?
 		apBufferHeader->nInputPortIndex : apBufferHeader->nOutputPortIndex;
+
+    DEBUG_PRINTF3(_L8("COmxILPortManager::BufferReturnIndication : PORT[%u] BUFFER [%X]"),
+				  portIndex, apBufferHeader);
 
 	// Check the index of the port..
 	if (CheckPortIndex(portIndex) != OMX_ErrorNone)
@@ -1394,7 +1426,7 @@ OMX_ERRORTYPE
 COmxILPortManager::BufferFlushIndicationFlushCommand(
 	TUint32 aPortIndex, TBool aEjectBuffers /* = ETrue */)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::BufferFlushIndicationFlushCommand PORT[%d]"), aPortIndex);
+    DEBUG_PRINTF2(_L8("COmxILPortManager::BufferFlushIndicationFlushCommand : PORT[%u]"), aPortIndex);
 
 	// Check the index of the port..
 	if ((OMX_ALL != aPortIndex) && (CheckPortIndex(aPortIndex) != OMX_ErrorNone))
@@ -1424,8 +1456,16 @@ COmxILPortManager::BufferFlushIndicationFlushCommand(
 
 		if (pPort->IsEnabled() && pPort->Count())
 			{
-			if (pPort->IsTunnelledAndBufferSupplier() &&
-				!pPort->HasAllBuffersAtHome())
+			// If port is tunnelled:
+			//
+			// - Output ports buffers are sent to the processing function when
+			// flushed
+			//
+			// - Input ports buffers are sent upstream.
+			//
+			// If port is non-tunnelled:
+			// - Buffers are ejected always...
+			if (pPort->IsTunnelled())
 				{
 				// Remove buffers from PF only...
 				RemoveBuffersFromPfOrCm(pPort, OMX_TRUE);
@@ -1433,9 +1473,10 @@ COmxILPortManager::BufferFlushIndicationFlushCommand(
 				if (aEjectBuffers)
 					{
 					// Now we need to send input buffers upstream and ouput
-					// buffers to the PF...
-					if ((omxRetValue = InitiateTunnellingDataFlow())
-						!= OMX_ErrorNone)
+					// buffers to the PF... this is done by
+					// InitiateTunnellingDataFlow
+					if ((omxRetValue = InitiateTunnellingDataFlow(
+							 pPort->Index(), OMX_TRUE)) != OMX_ErrorNone)
 						{
 						// The flush has failed, we need to notify the IL Cient
 						// via EventHandler...
@@ -1443,10 +1484,10 @@ COmxILPortManager::BufferFlushIndicationFlushCommand(
 						flushSuccessful = EFalse;
 						}
 					}
-
 				}
 			else
 				{
+				// All other ports are simply flushed...
 				portsToFlush.Append(pPort);
 				}
 			}
@@ -1513,7 +1554,7 @@ COmxILPortManager::BufferFlushIndicationPauseOrExeToIdleCommand(
 		{
 		pPort = iAllPorts[i];
 
-		if (pPort->IsEnabled() && pPort->Count())
+		if (pPort->Count())
 			{
 			if (pPort->IsTunnelledAndBufferSupplier() &&
 				!pPort->HasAllBuffersAtHome())
@@ -1526,7 +1567,6 @@ COmxILPortManager::BufferFlushIndicationPauseOrExeToIdleCommand(
 					}
 				continue;
 				}
-
 			if (OMX_ErrorNone !=
 				(omxRetValue = iProcessingFunction.BufferFlushingIndication(
 					pPort->Index(),
@@ -1551,7 +1591,7 @@ COmxILPortManager::PortEnableIndication(
 	TUint32 aPortIndex,
 	TBool aIndicationIsFinal)
 	{
-    DEBUG_PRINTF3(_L8("COmxILPortManager::PortEnableIndication: PORT[%d] TRANSITIONISFINAL[%d]"), aPortIndex, aIndicationIsFinal);
+    DEBUG_PRINTF3(_L8("COmxILPortManager::PortEnableIndication: PORT[%u] TRANSITIONISFINAL[%d]"), aPortIndex, aIndicationIsFinal);
 
 	// Check the index of the port..
 	if ((OMX_ALL != aPortIndex) && (CheckPortIndex(aPortIndex) != OMX_ErrorNone))
@@ -1657,7 +1697,7 @@ OMX_ERRORTYPE
 COmxILPortManager::PortDisableIndication(
 	TUint32 aPortIndex)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::PortDisableIndication: PORT[%d] "), aPortIndex);
+    DEBUG_PRINTF2(_L8("COmxILPortManager::PortDisableIndication: PORT[%u] "), aPortIndex);
 
 	// Check the index of the port..
 	if ((OMX_ALL != aPortIndex) && (CheckPortIndex(aPortIndex) != OMX_ErrorNone))
@@ -1820,7 +1860,7 @@ COmxILPortManager::BufferMarkIndication(
 	TUint32 aPortIndex,
 	OMX_PTR ipMarkData)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::BufferMarkIndication: PORT[%d] "), aPortIndex);
+    DEBUG_PRINTF2(_L8("COmxILPortManager::BufferMarkIndication: PORT[%u] "), aPortIndex);
 
 	// Check the index of the port..
 	if (CheckPortIndex(aPortIndex) != OMX_ErrorNone)
@@ -1844,7 +1884,7 @@ COmxILPortManager::BufferMarkIndication(
 OMX_ERRORTYPE
 COmxILPortManager::ComponentRoleIndication(TUint aComponentRoleIndex)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::ComponentRoleIndication : aComponentRoleIndex[%d]"), aComponentRoleIndex);
+    DEBUG_PRINTF2(_L8("COmxILPortManager::ComponentRoleIndication : aComponentRoleIndex[%u]"), aComponentRoleIndex);
 
 	// At this point, the IL Client wants to set the default role that the
 	// standard component is assuming. Therefore, the role defaults need to be
@@ -1871,7 +1911,7 @@ COmxILPortManager::PortSettingsChangeIndication(OMX_U32 aPortIndex,
 												const TDesC8& aPortSettings,
 												OMX_EVENTTYPE& aEventForILClient)
 	{
-    DEBUG_PRINTF2(_L8("COmxILPortManager::PortSettingsChangeIndication: PORT[%d] "), aPortIndex);
+    DEBUG_PRINTF2(_L8("COmxILPortManager::PortSettingsChangeIndication: PORT[%u] "), aPortIndex);
 
 	// Check the index of the port..
 	if (CheckPortIndex(aPortIndex) != OMX_ErrorNone)

@@ -21,7 +21,11 @@
  @internalComponent
 */
 
+#ifdef _OMXIL_PCMRENDERER_INCONTEXT_CALLBACKMANAGER_ON
+#include "omxilincontextcallbackmanager.h"
+#else
 #include "omxilcallbackmanager.h"
+#endif
 #include "omxilfsm.h"
 #include "omxilportmanager.h"
 #include "omxilspecversion.h"

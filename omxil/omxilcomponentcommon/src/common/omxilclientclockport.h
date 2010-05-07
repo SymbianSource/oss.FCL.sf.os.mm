@@ -32,28 +32,28 @@ public:
 						    					const RArray<OMX_OTHER_FORMATTYPE>& aSupportedOtherFormats);
 
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE GetMediaTime(OMX_TICKS& aMediaTime) const;
+	virtual OMX_ERRORTYPE GetMediaTime(OMX_TICKS& aMediaTime) const;
 	
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE GetWallTime(OMX_TICKS& aWallTime) const;
+	virtual OMX_ERRORTYPE GetWallTime(OMX_TICKS& aWallTime) const;
 
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE GetClockState(OMX_TIME_CONFIG_CLOCKSTATETYPE& aClockState) const;
+	virtual OMX_ERRORTYPE GetClockState(OMX_TIME_CONFIG_CLOCKSTATETYPE& aClockState) const;
 	
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE MediaTimeRequest(const OMX_PTR apPrivate, const OMX_TICKS aMediaTime, const OMX_TICKS aOffset) const;
+	virtual OMX_ERRORTYPE MediaTimeRequest(const OMX_PTR apPrivate, const OMX_TICKS aMediaTime, const OMX_TICKS aOffset) const;
 	
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE SetStartTime(const OMX_TICKS aStartTime) const;
+	virtual OMX_ERRORTYPE SetStartTime(const OMX_TICKS aStartTime) const;
 	
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE SetVideoReference(const OMX_TICKS aVideRef) const;
+	virtual OMX_ERRORTYPE SetVideoReference(const OMX_TICKS aVideRef) const;
 	
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_ERRORTYPE SetAudioReference(const OMX_TICKS aAudioRef) const;
+	virtual OMX_ERRORTYPE SetAudioReference(const OMX_TICKS aAudioRef) const;
 	
 	// From MOmxILClockComponentCmdsIf
-	IMPORT_C OMX_BOOL IsClockComponentAvailable() const;
+	virtual OMX_BOOL IsClockComponentAvailable() const;
 	
 	// From COmxILPort
 	OMX_ERRORTYPE GetLocalOmxParamIndexes(RArray<TUint>& aIndexArray) const;

@@ -13,6 +13,7 @@
 // Description:
 //
 
+#include "OSTOMXILFrameworkTrace.mmh"
 #include "../src/core/omxiluids.hrh"
 
 TARGET			omxilcoreclient.dll
@@ -28,7 +29,7 @@ SOURCEPATH		../src/omxilcoreclient
 SOURCE			omxilcoreclientsession.cpp
 
 USERINCLUDE		../src/omxilcoreserver
-USERINCLUDE		../src/core
+USERINCLUDE		../src/core ../traces
 
 OS_LAYER_SYSTEMINCLUDE_SYMBIAN
 

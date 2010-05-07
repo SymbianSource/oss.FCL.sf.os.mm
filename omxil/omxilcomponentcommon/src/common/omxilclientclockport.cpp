@@ -98,21 +98,21 @@ TBool COmxILClientClockPort::IsTunnelledPortCompatible(const OMX_PARAM_PORTDEFIN
 	}
 
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::GetMediaTime(OMX_TICKS& aMediaTime) const
+OMX_ERRORTYPE COmxILClientClockPort::GetMediaTime(OMX_TICKS& aMediaTime) const
 	{
 	DEBUG_PRINTF(_L8("COmxILClientClockPort::GetMediaTime"));
 	return GetTime(aMediaTime, OMX_IndexConfigTimeCurrentMediaTime);
 	}
 
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::GetWallTime(OMX_TICKS& aWallTime) const
+OMX_ERRORTYPE COmxILClientClockPort::GetWallTime(OMX_TICKS& aWallTime) const
 	{
 	DEBUG_PRINTF(_L8("COmxILClientClockPort::GetWallTime"));
 	return GetTime(aWallTime, OMX_IndexConfigTimeCurrentWallTime);
 	}
 
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::GetClockState(OMX_TIME_CONFIG_CLOCKSTATETYPE& aClockState) const
+OMX_ERRORTYPE COmxILClientClockPort::GetClockState(OMX_TIME_CONFIG_CLOCKSTATETYPE& aClockState) const
 	{
 	DEBUG_PRINTF(_L8("COmxILClientClockPort::GetClockState"));
 
@@ -131,7 +131,7 @@ EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::GetClockState(OMX_TIME_CONFIG_CLOC
 
 	}
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::MediaTimeRequest(const OMX_PTR apPrivate, 
+OMX_ERRORTYPE COmxILClientClockPort::MediaTimeRequest(const OMX_PTR apPrivate, 
 															const OMX_TICKS aMediaTime,
 															const OMX_TICKS aOffset) const
 	{
@@ -153,27 +153,27 @@ EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::MediaTimeRequest(const OMX_PTR apP
 	}
 
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::SetStartTime(const OMX_TICKS aStartTime) const
+OMX_ERRORTYPE COmxILClientClockPort::SetStartTime(const OMX_TICKS aStartTime) const
 	{
 	DEBUG_PRINTF(_L8("COmxILClientClockPort::SetStartTime"));
 	return SetTime(aStartTime, OMX_IndexConfigTimeClientStartTime);
 	}
 
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::SetVideoReference(const OMX_TICKS aVideoRef) const
+OMX_ERRORTYPE COmxILClientClockPort::SetVideoReference(const OMX_TICKS aVideoRef) const
 	{
 	DEBUG_PRINTF(_L8("COmxILClientClockPort::SetVideoReference"));
 	return SetTime(aVideoRef, OMX_IndexConfigTimeCurrentVideoReference);
 	}
 
 
-EXPORT_C OMX_ERRORTYPE COmxILClientClockPort::SetAudioReference(const OMX_TICKS aAudioRef) const
+OMX_ERRORTYPE COmxILClientClockPort::SetAudioReference(const OMX_TICKS aAudioRef) const
 	{
 	DEBUG_PRINTF(_L8("COmxILClientClockPort::SetAudioReference"));
 	return SetTime(aAudioRef, OMX_IndexConfigTimeCurrentAudioReference);
 	}
 
-EXPORT_C OMX_BOOL COmxILClientClockPort::IsClockComponentAvailable() const
+OMX_BOOL COmxILClientClockPort::IsClockComponentAvailable() const
 {
 	if (iTunnelledComponent != NULL && iParamPortDefinition.bEnabled)
 		{

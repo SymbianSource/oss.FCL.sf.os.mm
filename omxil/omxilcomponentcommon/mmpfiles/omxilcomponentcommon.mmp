@@ -23,7 +23,7 @@ VENDORID                0x70000001
 
 OS_LAYER_SYSTEMINCLUDE_SYMBIAN
 
-USERINCLUDE             ../src/common/
+USERINCLUDE             ../src/common/ ../../omxilcore/traces
 
 SOURCEPATH              ../src/common/
 SOURCE                  omxilcomponent.cpp

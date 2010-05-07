@@ -30,7 +30,7 @@
 class COmxILFsm;
 class COmxILConfigManager;
 class MOmxILCallbackManagerIf;
-class COmxILPortManager;
+class MOmxILPortManagerIf;
 class COmxILProcessingFunction;
 
 
@@ -157,7 +157,7 @@ protected:
 	COmxILFsm* ipFsm;
 	COmxILConfigManager* ipConfigManager;
 	MOmxILCallbackManagerIf* ipCallbackManager;
-	COmxILPortManager* ipPortManager;
+	MOmxILPortManagerIf* ipPortManager;
 	COmxILProcessingFunction* ipProcessingFunction;
 
 	};
