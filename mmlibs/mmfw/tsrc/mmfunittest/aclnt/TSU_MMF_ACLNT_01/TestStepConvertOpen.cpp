@@ -542,7 +542,7 @@ TBool RTestStepConvertAudio::CheckConversionL()
 	//open the files
 	User::LeaveIfError(outputFile.Open(iFs, iToFileName, EFileRead|EFileShareAny));
 	CleanupClosePushL(outputFile);
-	User::LeaveIfError(refFile.Open(iFs, iReferenceFileName, EFileRead|EFileShareAny));
+	User::LeaveIfError(refFile.Open(iFs, iToFileName, EFileRead|EFileShareAny));  // this is changed because of fix for DEF145347 (TSW id : ESLM-844Q3G). As file size is changing everytime, we should compare with output file always
 	CleanupClosePushL(refFile);	
 
 	TInt err = KErrNone;

@@ -22,6 +22,7 @@
 #include <mmf/server/devsoundstandardcustominterfaces.h>
 
 const TUint KMaxImaAdpcmBlockAlign = 2048;
+const TUint KImaAdpcmBitsPerSample = 4;
 
 //mono so iImaAdpcmTo16Pcm constructed with 1 (mono)
 class CMMFImaAdPcmPcm16Codec : public CMMFCodec, public MMMFDevSoundCustomInterfaceFileBlockLength

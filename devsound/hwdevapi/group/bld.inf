@@ -27,8 +27,8 @@ PRJ_EXPORTS
 //export mmfhwdevice.h/.inl 
 ../inc/mmfhwdevice.h		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/mmfhwdevice.h)
 ../inc/MmfHwDevice.inl		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/mmfhwdevice.inl)
-../inc/MMFHwDeviceCmds.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(mmf/server/mmfhwdevicecmds.h)
-../inc/TaskConfig.h		SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(mmf/server/taskconfig.h)		
+../inc/MMFHwDeviceCmds.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/mmfhwdevicecmds.h)
+../inc/TaskConfig.h		SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/taskconfig.h)		
 ../inc/mmfhwdevicesetup.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(mmf/server/mmfhwdevicesetup.h)
 
 

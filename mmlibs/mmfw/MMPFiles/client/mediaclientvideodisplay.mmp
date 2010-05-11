@@ -46,6 +46,7 @@ library			euser.lib
 library			mmfcontrollerframework.lib
 library			mmfstandardcustomcommands.lib
 library			ecom.lib
+library			centralrepository.lib
 
 nostrictdef
 
