@@ -19,7 +19,7 @@
 #define __CUSTOMINTERFACEUTILITY_H
 
 #include <e32base.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 //#include "CustomCommandTypes.h"
 #include <CustomCommandUtility.h>
 class CProxyCustomInterfaceUtility;

@@ -39,7 +39,8 @@ CAPABILITY      CAP_ECOM_PLUGIN
 
 SOURCEPATH      ../src
 
-SOURCE					Colorspace_conv_yuv.c
+SOURCE			Colorspace_conv_yuv.c
+SOURCE			colorconversion.c
 SOURCE          NGAPostProcHwDevice.cpp
 SOURCE          ImplementationProxy.cpp
 SOURCE          NGAPostProcSessionManager.cpp

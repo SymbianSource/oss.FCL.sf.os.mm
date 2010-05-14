@@ -25,7 +25,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <OrientationData.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 // CLASS DECLARATION
 

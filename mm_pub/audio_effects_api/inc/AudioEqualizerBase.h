@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <AudioEqualizerData.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 
 const TUid KUidAudioEqualizerEffect = {0x1020382A};

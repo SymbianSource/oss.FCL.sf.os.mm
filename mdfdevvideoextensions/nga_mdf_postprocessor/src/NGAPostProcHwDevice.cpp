@@ -19,7 +19,6 @@
 #include "NGAPostProcHwDevice.h"
 #include "NGAPostProcSessionManager.h"
 #include "NGAPostProcSurfaceHandler.h"
-#include "common.h"
 
 // post-processor info
 const TUid KUidVideoPostProcHwDevice = {KUidNGAPostProcHwDeviceImplUid};
@@ -47,6 +46,11 @@ extern "C"
 int32 gColorConvYUVtoYUV422Int (tBaseVideoFrame *yuv420Frame, tBaseVideoFrame* yuv422Frame,
 							   uint8 outClrFmt, int16 stride); 
 
+int32 Emz_VDec_gColorConv_YUVtoRGB ( 
+	  tBaseVideoFrame *srcImage, uint8 *dstImage, tWndParam *srcWindow, 
+	  tWndParam *dstWindow, uint8 srcImageFormat, uint8 dstImageFormat,
+	  uint8 colorConvScheme);
+		 	  
 #ifdef __cplusplus
 }
 #endif
@@ -142,6 +146,10 @@ CNGAPostProcHwDevice::~CNGAPostProcHwDevice()
     {
         TVideoPicture* pic = iVBMBufferReferenceQ[0];
         iVBMBufferReferenceQ.Remove(0);
+        if (iColorConversionQ.Count()>0)
+    	{
+	        iColorConversionQ.Remove(0);
+	    }
 
         if (pic->iHeader) delete pic->iHeader;
         delete pic->iData.iRawData;
@@ -153,6 +161,9 @@ CNGAPostProcHwDevice::~CNGAPostProcHwDevice()
     
     iVBMBufferReferenceQ.Reset();
     iVBMBufferReferenceQ.Close();
+    
+    iColorConversionQ.Reset();
+    iColorConversionQ.Close();
     
     iVBMBufferQ.Reset();
     iVBMBufferQ.Close();
@@ -196,11 +207,15 @@ void CNGAPostProcHwDevice::SetInputFormatL(const TUncompressedVideoFormat&  aFor
         User::Leave(KErrNotReady);
 	  }
 
-
-		if( ((aFormat.iYuvFormat.iPattern == EYuv420Chroma1) ||
-			(aFormat.iYuvFormat.iPattern == EYuv420Chroma2) ||
-    		(aFormat.iYuvFormat.iPattern == EYuv420Chroma3) ))
+		iVideoFormat = aFormat; 
+		if( ((iVideoFormat.iYuvFormat.iPattern == EYuv420Chroma1) ||
+			(iVideoFormat.iYuvFormat.iPattern == EYuv420Chroma2) ||
+    		(iVideoFormat.iYuvFormat.iPattern == EYuv420Chroma3) ))
 		{
+			iVideoFormat.iYuvFormat.iCoefficients  	     = EYuvBt709Range1;
+    		iVideoFormat.iYuvFormat.iPattern       	     = EYuv422Chroma1;
+    		iVideoFormat.iYuvFormat.iDataLayout          = EYuvDataInterleavedBE;
+			
 #if defined __WINSCW__				
 				iIsColorConversionNeeded = ETrue; 
 #else
@@ -349,7 +364,7 @@ void CNGAPostProcHwDevice::Initialize()
 
 void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture) 
 { 
-	PP_DEBUG(_L("CNGAPostProcHwDevice:WritePicture ++"));
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePicture bufId = %d"), this,GetID(aPicture));
 	TVideoPicture* pic;
 	if (iPPState==EInitializing || iPPState==EStopped || iIsInputEnded)
     {
@@ -363,15 +378,18 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 		User::Leave(KErrArgument);
 	}
 	pic = aPicture;	
-    if (iInputQ.Count() > 0)
-    {
-        AddToQ(pic);
-        AttemptToPost();
-    }
-    else
-    {
-		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePicture bufId = %d"), this,GetID(pic));
-		iPictureCounters.iTotalPictures++;
+	iPictureCounters.iTotalPictures++;
+	if((iPPState != EPlaying) && (iFirstPictureUpdated))
+	{
+		AddToQ(pic);
+	}
+	else if( iInputQ.Count() > 0 )
+	{
+		AddToQ(pic);
+		AttemptToPost();
+	}
+	else
+	{
 		TInt64 delta = 0;
 		TTimeToPost iTimeToPost = (TTimeToPost)IsTimeToPost(pic, delta);
 		if(!IsGceReady())
@@ -387,7 +405,10 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 	         PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:WritePictureL Too large delta .. skipping"), this ); 
 	         iTimeToPost = ESkipIt;
 	    }
-	
+		if(!iFirstPictureUpdated)
+		{
+			iTimeToPost = EPostIt;
+		}
 		switch(iTimeToPost)
 		{
 			case EDelayIt:
@@ -860,6 +881,7 @@ void CNGAPostProcHwDevice::Start()
 {  
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Start ++"), this);
 	iPPState = EPlaying;
+	AttemptToPost();
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Start --"), this);
 }
 
@@ -969,6 +991,107 @@ void CNGAPostProcHwDevice::ReturnPicture(TVideoPicture* )
 { 
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:ReturnPicture +-"), this);
     //not required for direct rendering 
+}
+
+TBool CNGAPostProcHwDevice::GetSnapshotL(TPictureData& aPictureData, const TUncompressedVideoFormat& /*aFormat*/)
+{ 
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:GetSnapshotL %d %d ++"), this, iVBMEnabled, iProcessQ.Count());
+	TVideoPicture* 		pic = NULL;
+	TInt 				err = KErrNone;
+	TBool				frameAvailable =EFalse;
+	tWndParam			inputCropWindow;
+	tWndParam			outputCropWindow;
+	tBaseVideoFrame		inputFrame;
+	inputFrame.lum 		= NULL; 
+	
+	if(aPictureData.iDataFormat == ERgbFbsBitmap)
+	{	
+		if(iProcessQ.Count())
+		{
+			pic = iProcessQ[0]; //frame already submitted for display
+		}
+		else if(iInputQ.Count())
+		{
+			pic = iInputQ[0]; //frame yet to be displayed
+		}
+		if(pic) 
+		{
+			if (iVBMEnabled)
+		    {
+				inputFrame.lum	= (TUint8*)pic->iData.iRawData->Ptr();
+			}
+			else
+			{
+				if (iInputDecoderDevice)
+				{
+					MMmfVideoFetchFrame* VFHandler = NULL;
+					VFHandler = (MMmfVideoFetchFrame*)iInputDecoderDevice->CustomInterface(KUidMMFVideoFetchFrame);
+					if (VFHandler)
+					{
+						PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:GetSnapshotL() fetch frame"), this);
+						inputFrame.lum = (TUint8*)VFHandler->MmvffGetFrame(GetID(pic));
+					}
+					else
+					{
+						PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:GetSnapshotL() decoder yet to implement MMmfVideoFetchFrame CI"), this);
+					}
+				}
+			}
+		}
+		if(inputFrame.lum)
+		{
+			inputFrame.cb	= inputFrame.lum + iPicSize.iWidth * iPicSize.iHeight;
+			
+			if( ((iVideoFormat.iYuvFormat.iPattern == EYuv420Chroma1) ||
+				(iVideoFormat.iYuvFormat.iPattern == EYuv420Chroma2) ||
+	    		(iVideoFormat.iYuvFormat.iPattern == EYuv420Chroma3) ))						
+			{
+				inputFrame.cr = inputFrame.lum + (iPicSize.iWidth * iPicSize.iHeight*5)/4;
+			}
+			else
+			{
+				inputFrame.cr = inputFrame.lum + (iPicSize.iWidth * iPicSize.iHeight*3)/2;
+			}
+			
+			inputFrame.width	= (unsigned short)iPicSize.iWidth;
+			inputFrame.height	= (unsigned short)iPicSize.iHeight;
+			
+			outputCropWindow.wndHeight  = iPicSize.iHeight;	
+			outputCropWindow.wndWidth	= iPicSize.iWidth; 	
+			outputCropWindow.xOffset	= 0;
+			outputCropWindow.yOffset	= 0;
+			
+			inputCropWindow.wndHeight  = iPicSize.iHeight;	
+			inputCropWindow.wndWidth	= iPicSize.iWidth; 	
+			inputCropWindow.xOffset	= 0;
+			inputCropWindow.yOffset	= 0;
+			
+			RFbsSession fbs;
+			fbs.Connect();
+			CFbsBitmap* iOutBitmap = aPictureData.iRgbBitmap;
+			TInt status = iOutBitmap->Resize(iPicSize);
+			if (status == KErrNone)
+			{
+				// Lock the heap to prevent the FBS server from invalidating the address
+		        iOutBitmap->LockHeap();
+		        TUint8* dataAddress = (TUint8*)iOutBitmap->DataAddress();
+				err = ColorConvert(&inputFrame, dataAddress, &inputCropWindow, &outputCropWindow);
+				iOutBitmap->UnlockHeap();
+				frameAvailable = ETrue;
+			}
+			fbs.Disconnect();
+		}
+	}
+	else
+	{
+		err = KErrNotSupported;
+	}
+	if(err != KErrNone)
+	{
+		User::Leave(err);
+	}
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:GetSnapshotL --"), this);
+	return(frameAvailable);
 }
 
 void CNGAPostProcHwDevice::InputEnd() 
@@ -1208,12 +1331,13 @@ TVideoPicture* CNGAPostProcHwDevice::MmvbmGetBufferL(const TSize& aSize)
 		
 		if(iVBMBufferReferenceQ.Count() == 0)
 		{
-				err = SetupSurface(aSize);
-				if(err)
-				{
-						PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvbmGetBufferL() Surface Setup Failed %d"), this, err);
-						User::Leave(err);
-				}
+			iPicSize = aSize;
+			err = SetupSurface(aSize);
+			if(err)
+			{
+					PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvbmGetBufferL() Surface Setup Failed %d"), this, err);
+					User::Leave(err);
+			}
 		}
 		
     if(!iVBMBufferQ.Count())
@@ -1292,7 +1416,7 @@ void CNGAPostProcHwDevice::MmvssSurfaceRemovedL(const TSurfaceId& aSurfaceId)
 	if(!aSurfaceId.IsNull())
 	{
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssSurfaceRemovedL(): UnregisterSurface ID = 0x%x"), this, aSurfaceId );
-		iWsSession.UnregisterSurface(0, aSurfaceId);
+		iWsSession.UnregisterSurface(0, iSurfaceId);
 		iSurfaceHandler->DestroySurface(aSurfaceId);
 	}
 		
@@ -1688,12 +1812,12 @@ TInt CNGAPostProcHwDevice::IsTimeToPost(TVideoPicture* frame, TInt64& delta)
     TInt64 uPresTime = frame->iTimestamp.Int64();
       
     // Check if this is an out of order frame in case of forward playback
-    if((iCurrentPlaybackPosition.Int64() >= uPresTime) && (iPlayRate > 0))    
+    if((iCurrentPlaybackPosition.Int64() > uPresTime) && (iPlayRate > 0))    
     {      
          PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost : Out of order frame (forward playback) Tfm=%d"), this,(TInt)uPresTime);
          resp = ESkipIt;  //drop      
     }      // Check if this is an out of order frame in case of backward playback
-    else if((iCurrentPlaybackPosition.Int64() <= uPresTime) && (iPlayRate < 0))    
+    else if((iCurrentPlaybackPosition.Int64() < uPresTime) && (iPlayRate < 0))    
     {      
         PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost : Out of order frame (backward playback) Tfm=%d"), this,(TInt)uPresTime);
         resp = ESkipIt;  //drop      
@@ -1716,7 +1840,7 @@ TInt CNGAPostProcHwDevice::IsTimeToPost(TVideoPicture* frame, TInt64& delta)
        PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost .. Tfm=%d, Tcs=%d, delta=%d"), this, (TInt)uPresTime, (TInt)uSyncTime, (TInt)delta);
     }       
    
-   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost -- %d"), this, resp);
+   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:IsTimeToPost -- %d BufID = %d"), this, resp, GetID(frame));
     return resp;
 }
 
@@ -2047,6 +2171,7 @@ TVideoPicture* CNGAPostProcHwDevice::DoColorConvert(TVideoPicture* aPicture)
 	    pOutPicture    = iColorConversionQ[0];
 	    iColorConversionQ.Remove(0);
 	    ConvertPostProcBuffer(aPicture, pOutPicture);
+	   	pOutPicture->iTimestamp = aPicture->iTimestamp;
 	    ReleasePicture(aPicture);    	    
     }				    
     else
@@ -2132,6 +2257,110 @@ TInt CNGAPostProcHwDevice::AddHints()
    }
    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AddHints. err = %d --"), this,err);
    return err;
+}
+
+TInt CNGAPostProcHwDevice::ColorConvert(tBaseVideoFrame* aInputFrame, TUint8* aDestPtr, tWndParam* aInputCropWindow, tWndParam* aOutputCropWindow)
+{
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:ColorConvert ++"), this);
+	__ASSERT_ALWAYS(aDestPtr, User::Invariant());
+	TInt				lError = E_SUCCESS;
+	TInt				err = KErrNone;
+	
+	err = SetSourceFormat();
+	if(err == KErrNone)
+	{
+    	err = SetSourceRange();
+    	if(err == KErrNone)
+    	{
+						
+			lError = Emz_VDec_gColorConv_YUVtoRGB(aInputFrame,aDestPtr, 
+						aInputCropWindow, aOutputCropWindow, iSourceFormat,
+						EBitmapColor16MU, iSourceRange);
+
+			if(lError)
+			{
+				if(lError == E_OUT_OF_MEMORY)
+					{
+					err = KErrNoMemory;
+					}
+				else if(lError == E_FAILURE)
+					{
+					err = KErrNotSupported;
+					}
+				else
+					{
+					err = KErrGeneral;
+					}
+			}
+		}
+	}
+	
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:ColorConvert --"), this);
+	return err;
+}
+
+TInt CNGAPostProcHwDevice::SetSourceFormat()
+{
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetSourceFormatL ++"), this);
+	TInt err = KErrNone;
+	switch (iVideoFormat.iYuvFormat.iPattern)
+	{
+	    case EYuv420Chroma1:
+    		iSourceFormat = EYuv420Chroma1_Planar;
+    		break;
+        case EYuv420Chroma2:
+    		iSourceFormat = EYuv420Chroma2_Planar;
+    		break;
+        case EYuv420Chroma3:
+    		iSourceFormat = EYuv420Chroma3_Planar;
+    		break;
+	    case EYuv422Chroma1:
+			if( iVideoFormat.iYuvFormat.iDataLayout == EYuvDataInterleavedLE)
+    			iSourceFormat = EYuv422Chroma1_LE;
+	    	else if( iVideoFormat.iYuvFormat.iDataLayout == EYuvDataInterleavedBE )
+				iSourceFormat = EYuv422Chroma1_BE;
+			else
+			    err = KErrArgument;
+			break;
+    	case EYuv422Chroma2:
+    		if( iVideoFormat.iYuvFormat.iDataLayout == EYuvDataInterleavedLE)
+	    		iSourceFormat = EYuv422Chroma2_LE;
+    		else if( iVideoFormat.iYuvFormat.iDataLayout == EYuvDataInterleavedBE )
+    			iSourceFormat = EYuv422Chroma2_BE;
+			else
+			    err = KErrArgument;
+			break;
+      default:
+    		err = KErrNotSupported;
+	}
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetSourceFormatL --"), this);
+	return err;
+}
+
+
+TInt CNGAPostProcHwDevice::SetSourceRange()
+{
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetSourceRangeL ++"), this);
+	TInt err = KErrNone;
+	switch (iVideoFormat.iYuvFormat.iCoefficients)
+	{
+	    case EYuvBt601Range0:
+			iSourceRange = EITU601_5_REDUCEDRANGE;
+            break;
+        case EYuvBt601Range1:
+			iSourceRange = EITU601_5_FULLRANGE;
+			break;
+        case EYuvBt709Range0:
+			iSourceRange = EB709_REDUCEDRANGE;
+			break;
+        case EYuvBt709Range1:
+			iSourceRange = EB709_FULLRANGE;
+            break;
+	    default:
+		    err = KErrNotSupported;
+    }
+    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetSourceRangeL --"), this);
+    return err;
 }
 
 CNGAPostProcTimer::CNGAPostProcTimer( CNGAPostProcHwDevice& aParent )

@@ -25,7 +25,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <DopplerData.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 // CLASS DECLARATION
 
