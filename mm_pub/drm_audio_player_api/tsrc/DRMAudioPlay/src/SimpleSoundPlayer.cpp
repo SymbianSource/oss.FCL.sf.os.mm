@@ -249,7 +249,7 @@ void CSimpleSoundPlayer::MdapcInitComplete(TInt aError, const TTimeIntervalMicro
 				if (iMetaInfoTest)
 				    {	//No error yet
 					TInt currMetaDataIndex = 0;
-					CMMFMetaDataEntry* currMetaData;
+					CMMFMetaDataEntry* currMetaData = NULL;
 					for ( currMetaDataIndex=0 ; currMetaDataIndex < NumMetaDatas ; currMetaDataIndex++)
 					    {
 					    currMetaData = iMdaPlayer->GetMetaDataEntryL(currMetaDataIndex);
@@ -783,7 +783,8 @@ TInt CSimpleSoundPlayer::ExecuteL(CParameters *aParams)
 			return ETrue;
 			//break;
 		case KPlayerActionStopPlayUrl:
-			CUrlParameters *p = static_cast<CUrlParameters *>(aParams);
+			CUrlParameters *p ;
+			p = static_cast<CUrlParameters *>(aParams);
 			OpenUrlL(p->GetUrl() , p->GetIapId() , p->GetMimeType() );
 			break;
 		case KPlayerActionStopPlayFileHandler:

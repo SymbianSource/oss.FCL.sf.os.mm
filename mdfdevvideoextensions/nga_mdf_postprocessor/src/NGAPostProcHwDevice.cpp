@@ -1426,7 +1426,7 @@ void CNGAPostProcHwDevice::MmvssSurfaceRemovedL(const TSurfaceId& aSurfaceId)
 	if(!aSurfaceId.IsNull())
 	{
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssSurfaceRemovedL(): UnregisterSurface ID = 0x%x"), this, aSurfaceId );
-		iWsSession.UnregisterSurface(0, iSurfaceId);
+		iWsSession.UnregisterSurface(0, aSurfaceId);
 		iSurfaceHandler->DestroySurface(aSurfaceId);
 	}
 		

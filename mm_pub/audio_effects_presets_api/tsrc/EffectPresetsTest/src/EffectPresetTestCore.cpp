@@ -353,7 +353,7 @@ TInt CTestAudioEqualizerUtility::GetPreset(CStifItemParser *aItem,TTestResult & 
 TUint32 CTestAudioEqualizerUtility::NumberOfPreDefinePresets(TTestResult & aResult)
 	{
 		TInt err=KErrNone;
-		TUint32 aPredefinedPreset;
+		TUint32 aPredefinedPreset = 0;
 
 		TRAP(err, aPredefinedPreset=iAudioEqualizerUtility->NumberOfPreDefinedPresets());
 		aResult.iResult = err;

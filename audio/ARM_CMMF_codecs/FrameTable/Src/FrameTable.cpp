@@ -46,11 +46,9 @@
 
 // CONSTANTS
 
-const TInt KBuffersToKeep = 3;
-
 const TInt KLowResPeriodMs = 1000; // approximate interval for entries stored in low res table is 1 sec
 
-
+const TInt KHighResLengthMs = 5000; // approximate cummulative Length of the enteries stored in the high res table is 5 sec
 
 // ============================ MEMBER FUNCTIONS ===============================
 
@@ -300,14 +298,17 @@ EXPORT_C TInt CFrameTable::SubmitTableEntry(TUint aPos)
 
             ASSERT(status == KErrNone);
 
-            if (iOkToShrink)
-
+            if(!iOkToShrink)
                 {
-
-                DP0(_L("CFrameTable::SubmitTableEntry removing an entry "));
-
+                if( iFrameTable.Count() >= ( KHighResLengthMs / iMsecPerFrame ) )
+                    {
+                    DP0(_L("CFrameTable::SubmitTableEntry iOkToShrink = ETrue now"));
+                    iOkToShrink = ETrue;
+                    }
+                }
+            else
+                {
                 iFrameTable.Remove(0);
-
                 }
 
             }
@@ -1080,8 +1081,6 @@ EXPORT_C void CFrameTable::ResetTable()
 
     iFrameTable.Reset();
 
-    iBufCnt = 0;
-
     iOkToShrink = EFalse;
 
     }
@@ -1099,27 +1098,9 @@ EXPORT_C void CFrameTable::ResetTable()
 EXPORT_C void CFrameTable::ShrinkTable()
 
     { // gets called from controller decoder when switching to next buffer
-
-    DP0(_L("CFrameTable::ShrinkTable"));
-
-    if (iBufCnt < KBuffersToKeep)
-
-        {
-
-        iBufCnt++;
-
-        }
-
-    else
-
-        {
-
-        iOkToShrink = ETrue;
-
-        DP0(_L("CFrameTable::ShrinkTable ok to shrink"));
-
-        }
-
+	//function is no longer required
+	//decision to start shrinking is now part of CFrameTable itself.
+	//Not removing this function as it may be needed later on.
     }
 
 
