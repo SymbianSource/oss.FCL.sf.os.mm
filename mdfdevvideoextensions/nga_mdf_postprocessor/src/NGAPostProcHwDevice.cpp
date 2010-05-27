@@ -99,6 +99,7 @@ CNGAPostProcHwDevice::CNGAPostProcHwDevice()
             iVideoFrameBufSize(0),
             iResourceLost(EFalse),
             iRedrawDone(EFalse),
+			iRedrawSurfaceInUse(EFalse),
             iVBMObserver(NULL),
             count(0),
             iSurfaceMask(surfaceHints::EAllowAllExternals),
@@ -407,7 +408,10 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 	    }
 		if(!iFirstPictureUpdated)
 		{
-			iTimeToPost = EPostIt;
+            if(iTimeToPost == EDelayIt)
+            {
+                iTimeToPost = EPostIt;
+            }
 		}
 		switch(iTimeToPost)
 		{
@@ -441,7 +445,10 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 				if(!iFirstPictureUpdated)
 				{
 					iFirstPictureUpdated = ETrue;
-					PublishSurfaceCreated();
+                    if(!iSurfaceCreatedEventPublished)
+                    {
+                        PublishSurfaceCreated();
+                    }
 				}
 			}
 			break;
@@ -848,12 +855,12 @@ void CNGAPostProcHwDevice::Redraw()
 { 
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw ++"), this);
 	TInt err = KErrNone;
-	if(iResourceLost && !iRedrawDone)
+	if(iRedrawSurfaceInUse && !iRedrawDone)
 	{
         err = AddHints();
         if (err != KErrNone)
         {
-            PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost -- failed to AddHints %d"), 
+            PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw -- failed to AddHints %d"), 
                          this, err);
             iProxy->MdvppFatalError(this, err);	
             return;   
@@ -862,7 +869,7 @@ void CNGAPostProcHwDevice::Redraw()
 		err = RegisterSurface(iSurfaceId);
 		if (err != KErrNone)
 		{
-		   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost -- failed to Register Surface %d"), 
+		   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw -- failed to Register Surface %d"), 
 		   				this, err);
 		   	iSurfaceHandler->DestroySurface(iSurfaceId);
 	   		iSurfaceId = TSurfaceId::CreateNullId();
@@ -926,7 +933,10 @@ void CNGAPostProcHwDevice::SetPosition(const TTimeIntervalMicroSeconds& aPlaybac
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetPosition FAILED: Unexpected state"), this);
         return;
     }
-    
+    if (iPPState == EPaused)
+    {	
+        iFirstPictureUpdated = EFalse;
+    }
     iCurrentPlaybackPosition = aPlaybackPosition;  
     
     ReleaseInputQ();
@@ -1416,7 +1426,7 @@ void CNGAPostProcHwDevice::MmvssSurfaceRemovedL(const TSurfaceId& aSurfaceId)
 	if(!aSurfaceId.IsNull())
 	{
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssSurfaceRemovedL(): UnregisterSurface ID = 0x%x"), this, aSurfaceId );
-		iWsSession.UnregisterSurface(0, iSurfaceId);
+		iWsSession.UnregisterSurface(0, aSurfaceId);
 		iSurfaceHandler->DestroySurface(aSurfaceId);
 	}
 		
@@ -1460,7 +1470,12 @@ void CNGAPostProcHwDevice::MmvroResourcesLost(TUid )
 		ReleaseInputQ();
 		iSessionManager->CancelUpdate();
 		ReleaseProcessQ();
-		iVideoSurfaceObserver->MmvsoRemoveSurface();
+		if(iVideoSurfaceObserver && iSurfaceCreatedEventPublished)
+		{
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost - Telling client to remove surface"), this);
+			iVideoSurfaceObserver->MmvsoRemoveSurface();
+			iSurfaceCreatedEventPublished = EFalse;
+		}
 	}
 	else if(iResourceLost && iRedrawDone)
 	{
@@ -1506,7 +1521,7 @@ void CNGAPostProcHwDevice::MmvshcSetSurfaceHandle(const TSurfaceId &aSurfaceID)
 
 void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
 {
-    PP_DEBUG(_L("CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface ++"), this);
+    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface ++"), this);
 	
 	TSize 			surfaceSize; 
     TUint8*         lPtr;
@@ -1550,6 +1565,7 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
 	   				this, err);
 	   	iSurfaceHandler->DestroySurface(iSurfaceId);
 	   	iSurfaceId = TSurfaceId::CreateNullId();
+		iChunk.Close();
 		iProxy->MdvppFatalError(this, err);	   				
 	    return;
 	}
@@ -1561,6 +1577,7 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
     	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface offset query failed %d"), this, err);
     	iSurfaceHandler->DestroySurface(iSurfaceId);
 	   	iSurfaceId = TSurfaceId::CreateNullId();
+		iChunk.Close();
     	iProxy->MdvppFatalError(this, err);
     	return;
     }
@@ -1568,7 +1585,9 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
     
 	lPtr = reinterpret_cast<TUint8*>(iChunk.Base() + offset);
 	memcpy((TAny *)lPtr, (TAny *)aRedrawBuffer.Ptr(), aRedrawBuffer.Size());
-	
+
+	iRedrawSurfaceInUse = ETrue;
+
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface error = %d --"), this, err);
 }
 
@@ -1578,14 +1597,27 @@ TInt CNGAPostProcHwDevice::SetupExternalSurface(const TSurfaceId &aSurfaceID)
     
     if(!iSurfaceId.IsNull())
     {
-    	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface Cleaning ReDraw Surface"), this);
-		iVideoSurfaceObserver->MmvsoRemoveSurface();
+		if (iVideoSurfaceObserver && iSurfaceCreatedEventPublished)
+		{
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface - Telling client to remove old surface"), this);
+			iVideoSurfaceObserver->MmvsoRemoveSurface();
+			iSurfaceCreatedEventPublished = EFalse;
+		}
+		else
+		{
+			// We never told the client about the surface, so we must destroy it ourselves
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface - Destroying old surface"), this);
+   			iWsSession.UnregisterSurface(0, iSurfaceId);
+			iSurfaceHandler->DestroySurface(iSurfaceId);
+		}
+
+		iChunk.Close();
 	}
     
     iSurfaceId            = aSurfaceID;
     iUsingExternalSurface = ETrue;
-    
-    
+    iRedrawSurfaceInUse = EFalse;
+
     // Create the surface handler if it doesn't exist.
     if (!iSurfaceHandler)
     {
@@ -1776,7 +1808,10 @@ TInt CNGAPostProcHwDevice::AttemptToPost()
 				if(!iFirstPictureUpdated)
 				{
 					iFirstPictureUpdated = ETrue;
-					PublishSurfaceCreated();
+                    if(!iSurfaceCreatedEventPublished)
+                    {
+                        PublishSurfaceCreated();
+                    }
 				}	
 			}	// end of postit
 			break;
