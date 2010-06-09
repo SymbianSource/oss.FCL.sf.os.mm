@@ -149,9 +149,6 @@ private:
         TInt iMaxOutputBufSoftLimit;
         // Current output file size
 		TInt64 iOutputFileSize;
-		// Output file setsize cooldown 
-		//(setsize is done only after previously added size has been written to)
-		TInt64 iOutputFileSetSizeCooldown;
 
         // Output file for writes.
         RFile64* iOutputFile;

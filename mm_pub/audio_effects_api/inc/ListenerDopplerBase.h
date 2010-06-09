@@ -23,7 +23,7 @@
 
 #include <e32base.h>
 #include <DopplerBase.h>
-#include <mcustominterface.h>
+#include <MCustomInterface.h>
 
 const TUid KUidListenerDopplerEffect = {0x10207B16};
 

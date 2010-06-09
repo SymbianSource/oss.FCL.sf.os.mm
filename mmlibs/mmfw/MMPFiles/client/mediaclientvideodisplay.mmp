@@ -48,6 +48,8 @@ library			mmfstandardcustomcommands.lib
 library			ecom.lib
 library			centralrepository.lib
 
+MACRO MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+
 nostrictdef
 
 SMPSAFE

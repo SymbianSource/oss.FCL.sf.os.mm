@@ -590,19 +590,12 @@ public: // New functions
 	/**
 	* Sets client configuration
 	* @since
-	* @param TMMFClientConfig& aClientConfig A reference to client
-	*        configuration object.
+	* @param aActualProcessId the effective devsound client (supplied with SetClientThreadInfo)
+	* @param aProcessId the client of DevSound
 	* @return KErrNone if successful, system wide error otherwise
 	*/
-	TInt SetClientConfig(const TMMFClientConfig& aClientConfig);
-
-	/**
-	* Returns client configuration
-	* @since
-	* @return const TMMFClientConfig& A constant reference to client
-	*        configuration.
-	*/
-	const TMMFClientConfig& ClientConfig() const;
+    TInt SetClientConfig(const TProcessId& aProcessId);
+    TInt SetClientConfig(const TProcessId& aActualProcessId, const TProcessId& aProcessId);
 
 	/**
 	* Return to idle state, preparing for destruction.
@@ -707,11 +700,6 @@ private: // data
 	* (channels, sampling rates, buffersize...)
 	*/
 	TMMFCapabilities iMmfConfig;
-
-	/**
-	* holds client platsec related information (VID,SID,PID,caps)
-	*/
-	TMMFClientConfig iClientConfig;
 
 	/**
 	* holds client audio type information

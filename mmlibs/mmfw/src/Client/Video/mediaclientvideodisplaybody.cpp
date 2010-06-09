@@ -25,6 +25,13 @@
 const TUid KCRUidTvoutSettings = {0x1020730B};
 const TUint32 KSettingsTvAspectRatio = 0x00000001;
 
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+// make sure that off screen is bottom right and not top left. This makes it more efficient for GCE backend
+// to render
+const TInt KHiddenExtentA = 2000; // rect Ax and Ay co-ordinate used to set extent off screen
+const TInt KHiddenExtentB = 2001; // rect Bx and By co-ordinate used to set extent off screen
+#endif
+
 CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::NewL(TInt aDisplayId, TBool aExtDisplaySwitchingControl)
 	{
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::NewL +++");
@@ -44,7 +51,7 @@ CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::NewL(TInt aDisplayId
 	{
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::NewL +++");
 	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::NewL - aDisplayId %d", aDisplayId);
-    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::NewL - aSurfaceId 0x%X,0x%X,0x%X,0x%X", aSurfaceId.iInternal[0], aSurfaceId.iInternal[1], aSurfaceId.iInternal[2], aSurfaceId.iInternal[3]);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::NewL - aSurfaceId %08x:%08x:%08x:%08x", aSurfaceId.iInternal[3], aSurfaceId.iInternal[2], aSurfaceId.iInternal[1], aSurfaceId.iInternal[0]);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::NewL - aCropRect %d,%d - %d,%d", aCropRect.iTl.iX, aCropRect.iTl.iY, aCropRect.iBr.iX, aCropRect.iBr.iY);
     DEBUG_PRINTF3("CMediaClientVideoDisplayBody::NewL - aAspectRatio %d/%d", aAspectRatio.iNumerator, aAspectRatio.iDenominator);
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::NewL - aExtDisplaySwitchingControl %d", aExtDisplaySwitchingControl);
@@ -124,6 +131,14 @@ CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody()
 
 	// remove for whichever array is current
 	RemoveBackgroundSurface(ETrue);
+
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+    if(iSwitchedToExternalDisplay)
+        {
+        SetWindowArrayPtr2Client();
+        RemoveBackgroundSurface(ETrue);
+        }
+#endif
 
 	iClientWindows.Close();	
     iExtDisplayWindows.Close(); 
@@ -205,6 +220,12 @@ void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow,
             DEBUG_PRINTF2("CMediaClientVideoDisplayBody::AddDisplayWindowL CreateExtDisplayHandlerL error %d", err);
             if(err == KErrNone)
                 {
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+                // attach surface to client window and hide
+                // ignore error - no handling required
+                SetHiddenBackgroundSurfaceOnClientWindow(winData);
+#endif                
+                // handle external display
                 SetWindowArrayPtr2Ext();
                 User::LeaveIfError(RedrawWindows(aCropRegion));
                 }
@@ -232,8 +253,12 @@ TInt CMediaClientVideoDisplayBody::RemoveDisplayWindow(const RWindowBase& aWindo
 	
 	if (pos >= 0)
 	    {
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+        if(IsSurfaceCreated())
+#else
 	    if(IsSurfaceCreated() && !iSwitchedToExternalDisplay)
-            {
+#endif
+	        {
             iClientWindows[pos].iWindow->RemoveBackgroundSurface(ETrue);
             // Make sure all window rendering has completed before proceeding
             RWsSession* ws = iClientWindows[pos].iWindow->Session();
@@ -267,7 +292,7 @@ TInt CMediaClientVideoDisplayBody::RemoveDisplayWindow(const RWindowBase& aWindo
 TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, const TRect& aCropRect, TVideoAspectRatio aAspectRatio, const TRect& aCropRegion)
 	{
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceCreated +++");
-    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aSurfaceId 0x%X,0x%X,0x%X,0x%X", aSurfaceId.iInternal[0], aSurfaceId.iInternal[1], aSurfaceId.iInternal[2], aSurfaceId.iInternal[3]);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aSurfaceId %08x:%08x:%08x:%08x", aSurfaceId.iInternal[3], aSurfaceId.iInternal[2], aSurfaceId.iInternal[1], aSurfaceId.iInternal[0]);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aCropRect %d,%d - %d,%d", aCropRect.iTl.iX, aCropRect.iTl.iY, aCropRect.iBr.iX, aCropRect.iBr.iY);
     DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SurfaceCreated - aAspectRatio %d/%d", aAspectRatio.iNumerator, aAspectRatio.iDenominator);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aCropRegion %d,%d - %d,%d", aCropRegion.iTl.iX, aCropRegion.iTl.iY, aCropRegion.iBr.iX, aCropRegion.iBr.iY);
@@ -302,6 +327,9 @@ TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, 
             DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SurfaceCreated CreateExtDisplayHandlerL error %d", err);
             if(err == KErrNone)
                 {
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+                SetHiddenBackgroundSurfaceOnAllClientWindows();
+#endif          
                 SetWindowArrayPtr2Ext();
                 }
             }
@@ -316,6 +344,8 @@ TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, 
 void CMediaClientVideoDisplayBody::RemoveBackgroundSurface(TBool aTriggerRedraw)
 	{
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveBackgroundSurface +++");
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::RemoveBackgroundSurface - iSurfaceId %08x:%08x:%08x:%08x", iSurfaceId.iInternal[3], iSurfaceId.iInternal[2], iSurfaceId.iInternal[1], iSurfaceId.iInternal[0]);
+
 	if (IsSurfaceCreated())
 		{
 		RWsSession* ws = NULL;
@@ -338,6 +368,8 @@ void CMediaClientVideoDisplayBody::RemoveBackgroundSurface(TBool aTriggerRedraw)
 void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
     {
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveSurface +++");
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::RemoveSurface - iSurfaceId %08x:%08x:%08x:%08x", iSurfaceId.iInternal[3], iSurfaceId.iInternal[2], iSurfaceId.iInternal[1], iSurfaceId.iInternal[0]);
+
     if (IsSurfaceCreated())
         {
         RemoveBackgroundSurface(ETrue);
@@ -347,13 +379,15 @@ void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
             iEventHandler->MmsehRemoveSurface(iSurfaceId);
             }
 
-        iSurfaceId = TSurfaceId::CreateNullId();
-
         if(iSwitchedToExternalDisplay)
             {
             SetWindowArrayPtr2Client();
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+            RemoveBackgroundSurface(ETrue);
+#endif
             RemoveExtDisplayHandler();
             }
+        iSurfaceId = TSurfaceId::CreateNullId();
         }
     
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::RemoveSurface ---");
@@ -362,7 +396,7 @@ void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
 TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aSurfaceId, const TRect& aCropRect, TVideoAspectRatio aAspectRatio)
 	{
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged +++");
-    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aSurfaceId 0x%X,0x%X,0x%X,0x%X", aSurfaceId.iInternal[0], aSurfaceId.iInternal[1], aSurfaceId.iInternal[2], aSurfaceId.iInternal[3]);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aSurfaceId %08x:%08x:%08x:%08x", aSurfaceId.iInternal[3], aSurfaceId.iInternal[2], aSurfaceId.iInternal[1], aSurfaceId.iInternal[0]);
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SurfaceCreated - aCropRect %d,%d - %d,%d", aCropRect.iTl.iX, aCropRect.iTl.iY, aCropRect.iBr.iX, aCropRect.iBr.iY);
     DEBUG_PRINTF3("CMediaClientVideoDisplayBody::SurfaceCreated - aAspectRatio %d/%d", aAspectRatio.iNumerator, aAspectRatio.iDenominator);
 
@@ -1049,6 +1083,9 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
     aWindowData.iSurfaceConfig.SetOrientation(ConvertRotation(aWindowData.iRotation));
     
     aWindowData.iSurfaceConfig.SetSurfaceId(iSurfaceId);
+
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - iSurfaceId %08x:%08x:%08x:%08x",
+            iSurfaceId.iInternal[3], iSurfaceId.iInternal[2], iSurfaceId.iInternal[1], iSurfaceId.iInternal[0]);
     
     // Get the rectangle that bounds the crop rectangle and the viewport.  This should be
     // the same as the crop rectangle as long as the viewport does not go outside this area.
@@ -1427,20 +1464,26 @@ void CMediaClientVideoDisplayBody::SwitchSurface()
         DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SwitchSurface CreateExtDisplayHandlerL error %d", err);
         if(err == KErrNone)
             {
-            // Set background surface for external display window before removing from client windows.
-            // Required for switching of paused video
             SetWindowArrayPtr2Ext();
-            RedrawWindows(iCropRegion);
+            RedrawWindows(iCropRegion); 
+            
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+            // Hide surface so that video is not seen on client window
+            HideAllClientWindows();
+#else
+            // Surface removed from window
             SetWindowArrayPtr2Client();
             RemoveBackgroundSurface(ETrue);
             SetWindowArrayPtr2Ext();
+#endif
             }
         }
     else if(iSwitchedToExternalDisplay)
         {
         // Set background surface for clientwindows before removing from external display window.
-        // Required for switching of paused video
         SetWindowArrayPtr2Client();
+        // RedrawWindows handles both the case where the surface was removed from client window and 
+        // also the case where the surface was hidden from client window
         RedrawWindows(iCropRegion);
         SetWindowArrayPtr2Ext();
         RemoveBackgroundSurface(ETrue);
@@ -1665,3 +1708,82 @@ TAutoScaleType CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL()
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL --- return %d", autoScaleType);
     return autoScaleType;
     }
+
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+
+void CMediaClientVideoDisplayBody::HideAllClientWindows()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::HideAllClientWindows +++");
+
+    TInt count = iClientWindows.Count();
+    for (TInt i = 0; i < count; ++i)
+        {
+        // ignore error - cannot be handled
+        HideWindow(iClientWindows[i].iWindow);
+        }
+    
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::HideAllClientWindows ---");
+    }
+
+TInt CMediaClientVideoDisplayBody::HideWindow(RWindowBase* aWindow)
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::HideWindow +++");
+
+    TSurfaceConfiguration config;
+    TInt err = aWindow->GetBackgroundSurface(config);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::HideWindow GetBackgroundSurface error %d", err);
+    
+#ifdef _DEBUG
+    TSurfaceId surface;
+    config.GetSurfaceId(surface);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::HideWindow - Retrieved Surface %08x:%08x:%08x:%08x", 
+            surface.iInternal[3], surface.iInternal[2], surface.iInternal[1], surface.iInternal[0]);
+#endif
+    
+    if (err == KErrNone)
+        {
+        config.SetExtent(TRect(KHiddenExtentA, KHiddenExtentA, KHiddenExtentB, KHiddenExtentB));
+        err = aWindow->SetBackgroundSurface(config, ETrue);
+        // Make sure all window rendering has completed before proceeding
+        RWsSession* ws = aWindow->Session();
+        if (ws)
+           {
+           ws->Finish();
+           }
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::HideWindow SetBackgroundSurface error %d", err);
+        }
+    
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::HideWindow ---");
+    return err;
+    }
+
+void CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnAllClientWindows()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnAllClientWindows +++");
+
+    TInt count = iClientWindows.Count();
+    for (TInt i = 0; i < count; ++i)
+        {
+        // ignore error - cannot be handled
+        SetHiddenBackgroundSurfaceOnClientWindow(iClientWindows[i]);
+        }
+    
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnAllClientWindows ---");
+    }
+
+
+TInt CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnClientWindow(TWindowData& aWindowData)
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnClientWindow +++");    
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnClientWindow - iSurfaceId %08x:%08x:%08x:%08x",
+                iSurfaceId.iInternal[3], iSurfaceId.iInternal[2], iSurfaceId.iInternal[1], iSurfaceId.iInternal[0]);
+    
+    TSurfaceConfiguration config;
+    config.SetExtent(TRect(KHiddenExtentA, KHiddenExtentA, KHiddenExtentB, KHiddenExtentB));   
+    config.SetSurfaceId(iSurfaceId);
+    TInt err = aWindowData.iWindow->SetBackgroundSurface(config, ETrue);
+    
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SetHiddenBackgroundSurfaceOnClientWindow ---, return %d", err);
+    return err;
+    }
+#endif

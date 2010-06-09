@@ -1037,7 +1037,10 @@ void CMMFMdaAudioToneUtility::PlayAfterInitialized()
 		}
 	else
 		{
-		iAsyncCallback->MatoPlayStarted(KErrNone);
+        if(iPlayStartObserver)
+            {
+            iAsyncCallback->MatoPlayStarted(KErrNone);
+            }
 		}
 	}
 	
@@ -1139,12 +1142,15 @@ void CMMFMdaAudioToneObserverCallback::MatoPrepareComplete(TInt aError)
 
 void CMMFMdaAudioToneObserverCallback::MatoPlayComplete(TInt aError)
 	{
-	iAction = EPlayComplete;
-	iErrorCode = aError;
-
-	TRequestStatus* s = &iStatus;
-	SetActive();
-	User::RequestComplete(s, KErrNone);
+    if(!IsActive())
+        {
+        iAction = EPlayComplete;
+        iErrorCode = aError;
+        
+        TRequestStatus* s = &iStatus;
+        SetActive();
+        User::RequestComplete(s, KErrNone);
+        }
 	}
 
 void CMMFMdaAudioToneObserverCallback::MatoPlayStarted(TInt aError)

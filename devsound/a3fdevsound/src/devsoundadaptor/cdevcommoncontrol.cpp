@@ -107,10 +107,6 @@ TInt CDevCommonControl::Resume() // from CDevAudioControl
     DP_IN();
     
     TInt err = KErrNone;
-    if(iDevAudio->iActiveState != EDevSoundAdaptorPaused_Primed)
-        {
-        err = KErrNotReady;
-        }
 
     //If following condition is true, then we are here because of a
     //pre-emption clash in last Commit cycle started from
@@ -121,6 +117,10 @@ TInt CDevCommonControl::Resume() // from CDevAudioControl
 		err = Unload();
 		DP0_RET(err,"%d");
     	}
+    else if(iDevAudio->iActiveState != EDevSoundAdaptorPaused_Primed)
+        {
+        DP0_RET(KErrNotReady, "%d");
+        }
 
     if(err == KErrNone)
         {

@@ -143,10 +143,11 @@ public:
 	/**
 	* Sets client configuration
 	* @since
-	* @param TMMFClientConfig& aClientConfig A reference to client
-	*        configuration object.
+	* @param aProcessId DevSound's client process
+	* @param aActualProcessId DevSound's effective/actual client (supplied by SetClientThreadInfo)
 	*/
-	TInt SetClientConfig(const TMMFClientConfig& aClientConfig);
+    TInt SetClientConfig(const TProcessId& aProcessId);
+    TInt SetClientConfig(const TProcessId& aActualProcessId, const TProcessId& aProcessId);
 
 
 	/**

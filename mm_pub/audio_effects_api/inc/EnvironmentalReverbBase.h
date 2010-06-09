@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <EnvironmentalReverbData.h>
-#include <mcustominterface.h>
+#include <MCustomInterface.h>
 
 const TUid KUidEnvironmentalReverbEffect = {0x10203837};
 

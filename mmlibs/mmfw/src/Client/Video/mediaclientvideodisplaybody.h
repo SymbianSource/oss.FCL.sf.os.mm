@@ -171,6 +171,13 @@ private:
     void MmcweoFocusWindowGroupChanged();
     TBool MmcweoIgnoreProcess(TSecureId aId);
     
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+    void HideAllClientWindows();
+    TInt HideWindow(RWindowBase* aWindow);
+    void SetHiddenBackgroundSurfaceOnAllClientWindows();
+    TInt SetHiddenBackgroundSurfaceOnClientWindow(TWindowData& aWindowData);
+#endif
+    
 private:
 
     MMMFSurfaceEventHandler* iEventHandler;
