@@ -1,0 +1,28 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//*Files (scripts, data, etc.) To Copy...<src> <destination>
+
+"\epoc32\release\armv5\urel\tsu_mmf_srssnk.dll"-"c:\sys\bin\tsu_mmf_srssnk.dll"
+
+// script files
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\TSU_MMF_SRSSNK_ALLOC.script"-"c:\TSU_MMF_SRSSNK_ALLOC.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\TSU_MMF_SRSSNK_FH_ALLOC.script"-"c:\TSU_MMF_SRSSNK_FH_ALLOC.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\TSU_MMF_SRSSNK_Panic.script"-"c:\TSU_MMF_SRSSNK_Panic.script"
+
+//data files
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\data\MMFTestFile1.dat"-"c:\mm\mmf\testfiles\srssnk\mmftestfile1.dat"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\data\MMFTestFile2.dat"-"c:\mm\mmf\testfiles\srssnk\mmftestfile2.dat"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\data\MMFTestFile3.dat"-"c:\mm\mmf\testfiles\srssnk\mmftestfile3.dat"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\data\mmftestfile1.wav"-"c:\mm\mmf\testfiles\srssnk\mmftestfile1.wav"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\data\mmftestfile2.wav"-"c:\mm\mmf\testfiles\srssnk\mmftestfile2.wav"

@@ -16,9 +16,13 @@
 //
 
 PRJ_MMPFILES
-../mmpfiles/tsu_icl_GenIclImgDisp_01.mmp
 
 PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+../mmpfiles/tsu_icl_GenIclImgDisp_01.mmp
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_ICL_ExifImgDisp_01.script	c:/tsu_icl_exifimgdisp_01.script
@@ -83,5 +87,4 @@ PRJ_EXPORTS
 
 // .iby
 ../inc/tsu_icl_ExifImgDisp_01.iby	/epoc32/rom/include/tsu_icl_exifimgdisp_01.iby
-
 

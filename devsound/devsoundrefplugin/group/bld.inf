@@ -27,8 +27,8 @@ PRJ_EXPORTS
 ../inc/SwCodecWrapper/mmfSwCodecWrapper.h				SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(mmf/server/mmfswcodecwrapper.h)
 ../inc/SwCodecWrapper/mmfSwCodecWrappercustomInterfacesUIDs.hrh 	/epoc32/include/mmf/server/mmfswcodecwrappercustominterfacesuids.hrh
 
-../inc/Plugin/mmfHwDeviceImplementationUIDs.hrh				/epoc32/include/mmf/plugin/mmfhwdeviceimplementationuids.hrh
-../inc/Plugin/mmfSBCCodecImplementationUIDs.hrh 			/epoc32/include/mmf/plugin/mmfsbccodecimplementationuids.hrh
+../inc/plugin/mmfHwDeviceImplementationUIDs.hrh				/epoc32/include/mmf/plugin/mmfhwdeviceimplementationuids.hrh
+../inc/plugin/mmfSBCCodecImplementationUIDs.hrh 			/epoc32/include/mmf/plugin/mmfsbccodecimplementationuids.hrh
 
 // Romkit include files
 devsound_refplugin.iby		/epoc32/rom/include/
@@ -48,14 +48,14 @@ PRJ_MMPFILES
 #endif 
 
 //Audio Tone Controller
-../mmpfiles/controller/mmfaudiotonecontroller.mmp
+../mmpfiles/controller/MmfAudioToneController.mmp
 	
 //Sw Codec Wrapper
 ../mmpfiles/swcodecwrapper/mmfswaudiodevice.mmp
 ../mmpfiles/swcodecwrapper/mmfswcodecwrapper.mmp
 
 // SBC encoder
-../mmpfiles/codec/sbcencoder.mmp
+../mmpfiles/codec/SBCEncoder.mmp
 
 //audio 'software' hw device plugins
 ../mmpfiles/plugin/mmfAudioHwDevices.mmp

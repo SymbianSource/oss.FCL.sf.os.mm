@@ -20,6 +20,10 @@
 #include <mmf/plugin/mmfmediaclientextdisplayinterface.hrh>
 #include <e32cmn.h>
 #include <ecom/ecom.h>
+#include <centralrepository.h>
+
+const TUid KCRUidTvoutSettings = {0x1020730B};
+const TUint32 KSettingsTvAspectRatio = 0x00000001;
 
 CMediaClientVideoDisplayBody* CMediaClientVideoDisplayBody::NewL(TInt aDisplayId, TBool aExtDisplaySwitchingControl)
 	{
@@ -834,7 +838,7 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
     DEBUG_PRINTF5("CMediaClientVideoDisplayBody::SetBackgroundSurface - viewport1 %d,%d - %d,%d", viewport.iTl.iX, viewport.iTl.iY, viewport.iBr.iX, viewport.iBr.iY);
 
     TRect videoExtent(aWindowData.iVideoExtent);
-    
+
     TReal32 inputWidth = 0.0f;
     TReal32 inputHeight = 0.0f;
     TReal32 pixelAspectRatio = 0.0f;
@@ -899,7 +903,10 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
         }
     else if (aWindowData.iAutoScaleType == EAutoScaleStretch)
         {
-        // Don't do anything: the extent is already set to the size of the video extent.
+        if(iSwitchedToExternalDisplay)
+            {
+            UpdateDeltaForExtDisplay(viewportAspect, videoExtent, deltaHeight, deltaWidth);
+            }
         }
     else if (aWindowData.iAutoScaleType == EAutoScaleNone)
         {
@@ -1184,19 +1191,58 @@ void CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL(TBool aControl)
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetExternalDisplaySwitchingL ---");
     }
 
-void CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected)
+void CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected(TExtDisplayConnectionProviderConnType aExtDisplayConnType)
 	{
-	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected +++ aExtDisplayConnected=%d", aExtDisplayConnected);
+	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected +++ aExtDisplayConnType=%d", aExtDisplayConnType);
 	
-	if(iExtDisplayConnected != aExtDisplayConnected)
+	if(aExtDisplayConnType != iExtDisplayConnType)
 	    {
-	    iExtDisplayConnected = aExtDisplayConnected;
-        SwitchSurface();
+        TExtDisplayConnectionProviderConnType prevExtDisplayConnType = iExtDisplayConnType;
+        iExtDisplayConnType = aExtDisplayConnType;
+        
+        if(prevExtDisplayConnType == EExtDisplayConnectionProviderConnTypeDisconnected)
+            {
+            // disconnected -> connected  - don't care which type it is
+            DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected disconnected -> connected(type %d)", iExtDisplayConnType);
+            iExtDisplayConnected = ETrue;
+            SwitchSurface();
+            }
+        else if(iExtDisplayConnType == EExtDisplayConnectionProviderConnTypeDisconnected)
+            {
+            // connected -> disconnected  - don't care from which type it is
+            DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected connected(type %d) -> disconnected", prevExtDisplayConnType);
+            iExtDisplayConnected = EFalse;
+            SwitchSurface();
+            }
+        else
+            {
+            // If we get this far then the connection type has changed from "AV Out -> HDMI" or "HDMI -> AV Out"
+            // Both are likely. "AV Out -> HDMI" occurs if AV Out cable is connected and HDMI cable is then connected.
+            // "HDMI -> AV Out" occurs if both AV Out and HDMI cables are connected and HDMI cable is then disconnected.
+            // HDMI is preferred over AV Out.
+        
+            // update external display window data
+            iExtDisplayHandler->UpdateWindow();
+            TRect externalDisplayRect(TPoint(0, 0), iExtDisplayHandler->DisplaySizeInPixels());
+            (*iWindowsArrayPtr)[0].iClipRect = externalDisplayRect;
+            (*iWindowsArrayPtr)[0].iVideoExtent = externalDisplayRect;
+            TRAPD(err, (*iWindowsArrayPtr)[0].iAutoScaleType = ExtDisplayAutoScaleTypeL());
+            if(err == KErrNone)
+                {
+                RemoveBackgroundSurface(ETrue);
+                RedrawWindows(iCropRegion);
+                }
+            else
+                {
+                // Not a lot we can do. Just keep as it is but external display output will be incorrect. 
+                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected ExtDisplayAutoScaleTypeL failed %d", err);
+                }
+            }
 	    }
 	else
-	    {
-	    DEBUG_PRINTF("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected No change in ext display connection status");
-	    }
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected No change to connection type");
+        }
 	
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected ---");
 	}
@@ -1235,10 +1281,10 @@ void CMediaClientVideoDisplayBody::CreateExtDisplayHandlerL()
     TRect externalDisplayRect(TPoint(0, 0), extDisplayHandler->DisplaySizeInPixels());
     windowData.iClipRect = externalDisplayRect;
     windowData.iVideoExtent = externalDisplayRect;
-    // windowData.iScaleWidth not required for EAutoScaleBestFit
-    // windowData.iScaleHeight not required for EAutoScaleBestFit
+    // windowData.iScaleWidth only required for EAutoScaleNone
+    // windowData.iScaleWidth only required for EAutoScaleNone
     windowData.iRotation = EVideoRotationNone;
-    windowData.iAutoScaleType = EAutoScaleBestFit;
+    windowData.iAutoScaleType = ExtDisplayAutoScaleTypeL();
     windowData.iHorizPos = EHorizontalAlignCenter;
     windowData.iVertPos = EVerticalAlignCenter;
     // windowData.iWindow2 not used        
@@ -1271,7 +1317,8 @@ void CMediaClientVideoDisplayBody::CreateExtDisplayPluginL()
         {
         iExtDisplaySwitchingSupported = ETrue;
         iExtDisplayConnectionProvider->SetExtDisplayConnectionProviderCallback(*this);
-        iExtDisplayConnected = iExtDisplayConnectionProvider->ExtDisplayConnected();
+        iExtDisplayConnType = iExtDisplayConnectionProvider->ExtDisplayConnType();
+        iExtDisplayConnected = (iExtDisplayConnType != EExtDisplayConnectionProviderConnTypeDisconnected);
         }
 
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::CreateExtDisplayPluginL ---");
@@ -1508,10 +1555,113 @@ TBool CMediaClientVideoDisplayBody::IntersectionAreaChanged(TRect aOldRect, TRec
 
 	if (aOldRect != aNewRect)
 		{
-		DEBUG_PRINTF("CMediaClientVideoDisplayBody::IntersectionAreaChanged - Intersection area has changed");
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::IntersectionAreaChanged --- Intersection area has changed");
 		return ETrue;
 		}
 
-	DEBUG_PRINTF("CMediaClientVideoDisplayBody::IntersectionAreaChanged - Intersection area has not changed");
+	DEBUG_PRINTF("CMediaClientVideoDisplayBody::IntersectionAreaChanged --- Intersection area has not changed");
 	return EFalse;
 	}
+
+/**
+* This function calculates the delta width and delta height for AV out when the TV-Out setting is set to "widescreen".
+*
+* AV out has fixed resolution whether TV-Out is set to "normal" or "widescreen". The TV-Out setting indicates
+* that the video should be scaled so that when displayed on a corresponding TV the aspect looks correct.
+* 
+* When displaying video on a widescreen TV through AV out, because the resolution is the same the TV stretches
+* the video horizontally. When displaying on a normal TV no stretching takes place.
+* 
+* For "normal" TAutoScaleType::EAutoScaleClip is used.
+* 
+* For "widescreen" this function calculates the width delta and height delta required so that when the video is stretched
+* the aspect looks correct on a widescreen TV.
+* 
+* This function must only be called when autoscale is set to TAutoScaleType::EAutoScaleStretch and an external display is
+* connected.
+**/
+void CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay(TReal32 aViewportAspect, const TRect& aVideoExtent, TInt& aDeltaHeight, TInt& aDeltaWidth)
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay +++");
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay aViewportAspect %f", aViewportAspect);
+    DEBUG_PRINTF5("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay aVideoExtent %d,%d - %d,%d", aVideoExtent.iTl.iX, aVideoExtent.iTl.iY, aVideoExtent.iBr.iX, aVideoExtent.iBr.iY);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay aDeltaHeight %d", aDeltaHeight);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay aDeltaWidth %d", aDeltaWidth);
+
+    aDeltaWidth = 0;
+    aDeltaHeight = 0;
+    
+    TReal32 wideScreenAspect = (TReal32)16 / (TReal32)9;
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay wideScreenAspect %f", wideScreenAspect);
+
+    if(aViewportAspect == wideScreenAspect)
+        {
+        // no need to calculate
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay - Viewport Aspect equals wideScreenAspect");
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay - width delta and height delta not changed");
+        }
+    else if(aViewportAspect < wideScreenAspect)
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay - Viewport Aspect is less than wideScreenAspect");
+        
+        // calculate video width for viewport that when stretched looks ok on widescreen
+        TReal32 correctedWidth = (TReal32)aVideoExtent.Width() * aViewportAspect / wideScreenAspect;
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay corrected viewport width %f", correctedWidth);
+        
+        aDeltaWidth = correctedWidth - aVideoExtent.Width();
+        }
+    else // aViewportAspect > wideScreenAspect
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay - Viewport Aspect is greater than wideScreenAspect");
+
+        // calculate video height for viewport that when stretched looks ok on widescreen
+        TReal32 correctedHeight = (TReal32)aVideoExtent.Height() * wideScreenAspect / aViewportAspect;
+        DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay corrected viewport height %f", correctedHeight);
+        
+        aDeltaHeight = aVideoExtent.Height() - correctedHeight;
+        }        
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay --- aDeltaHeight %d", aDeltaHeight);
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay --- aDeltaWidth %d", aDeltaWidth);
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::UpdateDeltaForExtDisplay ---");
+    }
+
+TBool CMediaClientVideoDisplayBody::IsWideScreenL()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::IsWideScreenL +++");
+    
+    CRepository* repo = CRepository::NewLC(KCRUidTvoutSettings);
+    TInt value;
+    User::LeaveIfError(repo->Get(KSettingsTvAspectRatio, value));
+
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::IsWideScreenL Tv Apect Ratio set to %d, 0=4x3 1=16x9", value);
+
+    CleanupStack::PopAndDestroy(repo);
+    
+    TBool ret = value > 0;
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::IsWideScreenL --- return %d", ret);
+    return ret;
+    }
+
+TAutoScaleType CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL()
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL +++");
+    
+    // EExtDisplayConnectionProviderConnTypeHdmi - EAutoScaleBestFit
+    // EExtDisplayConnectionProviderConnTypeAnalog / normal - EAutoScaleBestFit
+    // EExtDisplayConnectionProviderConnTypeAnalog / widescreen - EAutoScaleStretch
+    
+    TAutoScaleType autoScaleType;
+    if((iExtDisplayConnType == EExtDisplayConnectionProviderConnTypeAnalog) && IsWideScreenL())
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL External display scale type EAutoScaleStretch");
+        autoScaleType = EAutoScaleStretch;
+        }
+    else
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL External display scale type EAutoScaleBestFit");
+        autoScaleType = EAutoScaleBestFit;
+        }
+    
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::ExtDisplayAutoScaleTypeL --- return %d", autoScaleType);
+    return autoScaleType;
+    }

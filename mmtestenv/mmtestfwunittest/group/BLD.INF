@@ -19,7 +19,7 @@ PRJ_PLATFORMS
 DEFAULT
 
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 ../MMPFiles/TSU_MmTsth00.mmp
 ../MMPFiles/TSU_MmTsth01.mmp
@@ -33,7 +33,7 @@ PRJ_MMPFILES
 ../MMPFiles/TSU_MmTsth21.mmp
 ../MMPFiles/TSU_MmTsth22.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // ROM build support
 

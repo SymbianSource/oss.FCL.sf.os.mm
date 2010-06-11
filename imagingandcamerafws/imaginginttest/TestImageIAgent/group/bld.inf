@@ -17,7 +17,11 @@ PRJ_PLATFORMS
 DEFAULT
 
 PRJ_EXPORTS
-../group/multimediatestimageiagent.iby /epoc32/rom/include/multimediatestimageiagent.iby
 
 PRJ_MMPFILES
+
+PRJ_TESTEXPORTS
+../group/multimediatestimageiagent.iby /epoc32/rom/include/multimediatestimageiagent.iby
+
+PRJ_TESTMMPFILES
 multimediatestimageiagent.mmp

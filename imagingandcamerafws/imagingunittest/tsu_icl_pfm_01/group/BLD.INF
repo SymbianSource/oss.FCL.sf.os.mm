@@ -23,10 +23,14 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
 // TSI_WP5 files
 ../mmpfiles/TSU_ICL_PFM_01.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // scripts
 ../scripts/TSU_ICL_PFM_01.script	c:/tsu_icl_pfm_01.script

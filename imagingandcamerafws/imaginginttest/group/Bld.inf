@@ -22,8 +22,8 @@ DEFAULT
 // MINT
 
 #ifdef SYMBIAN_ENABLE_1630_JPEG_EXTENSIONS
-#include "../imagedecoder/group/bld_include.inf"
-#include "../imageencoder/group/bld_include.inf"
+#include "../imagedecoder/group/bld.inf"
+#include "../imageencoder/group/bld.inf"
 #endif
 
 #include "../tsi_icl_btrans_01/group/BLD.INF"
@@ -35,11 +35,15 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
 // TSI_WP5 files
 // Add the build instructions - NOTE - Must be inserted here in MMP list
 ../mmpfiles/TSI_ICL_FRM_00.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 ../scriptfiles/TSI_ICL_FRM_00.script	c:/icl/tsi_icl_frm_00.script
 
 ../scriptfiles/TSI_ICL_FRM_FS.script		c:/icl/tsi_icl_frm_fs.script
@@ -53,6 +57,7 @@ PRJ_EXPORTS
 
 ../scriptfiles/TSI_ICL_FRM_00.ini	c:/icl/tsi_icl_frm_00.ini
 
+../group/IntTest_Icl.iby             /epoc32/rom/include/IntTest_Icl.iby
 
 // test files
 ../src/Data/jfif444_8.mbm		c:/icl/refimages/jfif444_8.mbm
@@ -277,6 +282,7 @@ PRJ_EXPORTS
 ../data/refimages/mbm/jpeg_sml03_refarto100.mbm            c:/icl/refimages/mbm/jpeg_sml03_refarto100.mbm
 ../data/refimages/mbm/auto_rot_4_ref160_dec1.mbm            c:/icl/refimages/mbm/auto_rot_4_ref160_dec1.mbm
 ../data/refimages/mbm/auto_rot_4_refarto160.mbm            c:/icl/refimages/mbm/auto_rot_4_refarto160.mbm
+
 
 #endif
 

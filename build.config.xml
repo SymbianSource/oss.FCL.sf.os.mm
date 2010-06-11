@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!DOCTYPE SystemDefinition [
+ <!ELEMENT SystemDefinition (systemModel?, build?)>
+ <!ATTLIST SystemDefinition
+  name CDATA #REQUIRED
+  schema CDATA #REQUIRED>
+ <!ELEMENT systemModel (layer+)>
+ <!ELEMENT layer (logicalset* | module*)*>
+ <!ATTLIST layer
+  name CDATA #REQUIRED
+  levels CDATA #IMPLIED
+  span CDATA #IMPLIED>
+ <!ELEMENT logicalset (logicalsubset* | module* | unit* | package* | prebuilt*)*>
+ <!ATTLIST logicalset 
+  name CDATA #REQUIRED
+  levels CDATA #IMPLIED  
+  span CDATA #IMPLIED
+  level CDATA #IMPLIED>
+ <!ELEMENT logicalsubset (module* | unit* | package* | prebuilt*)*>
+ <!ATTLIST logicalsubset name CDATA #REQUIRED>
+ <!ELEMENT module (component* | unit* | package* | prebuilt*)*>
+ <!ATTLIST module
+  name CDATA #REQUIRED
+  level CDATA #IMPLIED>
+ <!ELEMENT component (unit* | package* | prebuilt*)*>
+ <!ATTLIST component name CDATA #REQUIRED>
+ <!ELEMENT unit EMPTY>
+ <!ATTLIST unit
+  unitID ID #REQUIRED
+  name CDATA #REQUIRED
+  mrp CDATA #REQUIRED
+  filter CDATA #IMPLIED
+  bldFile CDATA #REQUIRED
+  priority CDATA #IMPLIED
+  contract CDATA #IMPLIED>
+ <!ELEMENT package EMPTY>
+ <!ATTLIST package
+  name CDATA #REQUIRED
+  mrp CDATA #REQUIRED
+  filter CDATA #IMPLIED
+  contract CDATA #IMPLIED>
+ <!ELEMENT prebuilt EMPTY>
+ <!ATTLIST prebuilt
+  name CDATA #REQUIRED
+  version CDATA #REQUIRED
+  late (Y|N) #IMPLIED
+  filter CDATA #IMPLIED
+  contract CDATA #IMPLIED>
+ <!ELEMENT build (option* | target+ | targetList+ | unitList+ | configuration+)*>
+ <!ELEMENT unitList (unitRef+)>
+ <!ATTLIST unitList
+  name ID #REQUIRED
+  description CDATA #REQUIRED>
+ <!ELEMENT unitRef EMPTY>
+ <!ATTLIST unitRef unit IDREF #REQUIRED>
+ <!ELEMENT targetList EMPTY>
+ <!ATTLIST targetList
+  name ID #REQUIRED
+  description CDATA #REQUIRED
+  target IDREFS #REQUIRED>
+ <!ELEMENT target EMPTY>
+ <!ATTLIST target
+  name ID #REQUIRED
+  abldTarget CDATA #REQUIRED
+  description CDATA #REQUIRED>
+ <!ELEMENT option EMPTY>
+ <!ATTLIST option
+  name ID #REQUIRED
+  abldOption CDATA #REQUIRED
+  description CDATA #REQUIRED
+  enable (Y | N | y | n) #REQUIRED>
+ <!ELEMENT configuration (unitListRef+ | layerRef+ | task+)*>
+ <!ATTLIST configuration
+  name ID #REQUIRED
+  description CDATA #REQUIRED
+  filter CDATA #REQUIRED>
+ <!ELEMENT task ( unitListRef* , (buildLayer | specialInstructions))>
+ <!ELEMENT unitListRef EMPTY>
+ <!ATTLIST unitListRef unitList IDREF #REQUIRED>
+ <!ELEMENT layerRef EMPTY>
+ <!ATTLIST layerRef layerName CDATA #REQUIRED>
+ <!ELEMENT buildLayer EMPTY>
+ <!ATTLIST buildLayer
+  command CDATA #REQUIRED
+  targetList IDREFS #IMPLIED
+  unitParallel (Y | N | y | n) #REQUIRED
+  targetParallel (Y | N | y | n) #IMPLIED>
+ <!ELEMENT specialInstructions EMPTY>
+ <!ATTLIST specialInstructions
+  name CDATA #REQUIRED
+  cwd CDATA #REQUIRED
+  command CDATA #REQUIRED>
+ <!ENTITY layer_real_source_path "/sf/os/mm" >
+]>
+<SystemDefinition name="multimedia" schema="1.4.0">
+  <systemModel>
+		<layer name="os_layer">
+			<module name="multimedia_icl">
+				<unit name="imagingfws" unitID="sos.imagingfws" bldFile="sf\os\mm\imagingandcamerafws\imagingfws\group" mrp="sf\os\mm\imagingandcamerafws\imagingfws\group\multimedia_icl.mrp"/>				
+			</module>
+			<module name="multimedia_camera">				
+				<unit name="camerafw" unitID="sos.camerafw" bldFile="sf\os\mm\imagingandcamerafws\camerafw\group" mrp="sf\os\mm\imagingandcamerafws\camerafw\group\multimedia_ecam_framework.mrp"/>
+			</module>			
+			<module name="multimedia_imgplugins">
+				<unit name="imgplugins" unitID="sos.imgplugins" bldFile="sf\os\mm\mmplugins\imagingplugins\group" mrp="sf\os\mm\mmplugins\imagingplugins\group\multimedia_icl_plugin.mrp"/>
+			</module>
+			<module name="multimedia_mmlibs">
+				<unit name="mmutilitylib" unitID="sos.mmutilitylib" bldFile="sf\os\mm\mmlibs\mmutilitylib\group" mrp="sf\os\mm\mmlibs\mmutilitylib\group\multimedia_common.mrp"/>
+				<unit name="mmfw" unitID="sos.mmfw" bldFile="sf\os\mm\mmlibs\mmfw\group" mrp="sf\os\mm\mmlibs\mmfw\group\multimedia_mmf.mrp"/>
+			</module>			
+			<module name="multimedia_mmdevicefw">
+				<unit name="speechrecogsupport" unitID="sos.speechrecogsupport" bldFile="sf\os\mm\mmdevicefw\speechrecogsupport\group" mrp="sf\os\mm\mmdevicefw\speechrecogsupport\group\multimedia_mmf_ASR.mrp"/>				
+			</module>			
+			<module name="multimedia_devsound">
+				<unit name="a3facf" unitID="sos.a3facf" bldFile="sf\os\mm\devsound\a3facf\group" mrp="sf\os\mm\devsound\a3facf\group\multimedia_a3f_acf.mrp"/>
+				<unit name="a3fdevsound" unitID="sos.a3fdevsound" bldFile="sf\os\mm\devsound\a3fdevsound\group" mrp="sf\os\mm\devsound\a3fdevsound\group\multimedia_a3f_devsound.mrp"/>
+				<unit name="a3fsrvstart" unitID="sos.a3fsrvstart" bldFile="sf\os\mm\devsound\a3fsrvstart\group" mrp="sf\os\mm\devsound\a3fsrvstart\group\multimedia_a3f_serverstart.mrp"/>
+				<unit name="a3ftrace" unitID="sos.a3ftrace" bldFile="sf\os\mm\devsound\a3ftrace\group" mrp="sf\os\mm\devsound\a3ftrace\group\multimedia_a3f_traces.mrp"/>
+				<unit name="hwdevapi" unitID="sos.hwdevapi" bldFile="sf\os\mm\devsound\hwdevapi\group" mrp="sf\os\mm\devsound\hwdevapi\group\multimedia_mdf_devsound_hwdev.mrp"/>	
+				<unit name="devsoundapi" unitID="sos.devsoundapi" bldFile="sf\os\mm\devsound\devsoundapi\group" mrp="sf\os\mm\devsound\devsoundapi\group\multimedia_mdf_devsound_api.mrp"/>	
+				<unit name="devsoundpluginsupport" unitID="sos.devsoundpluginsupport" bldFile="sf\os\mm\devsound\devsoundpluginsupport\group" mrp="sf\os\mm\devsound\devsoundpluginsupport\group\multimedia_mdf_devsound_pluginsupport.mrp"/>
+			</module>
+			<module name="multimedia_mmhais">
+				<unit name="videohai" unitID="sos.videohai" bldFile="sf\os\mm\mmhais\videohai\group" mrp="sf\os\mm\mmhais\videohai\group\multimedia_videohai.mrp"/>
+			</module>
+			<module name="multimedia_mmplugins">
+				<unit name="lib3gp" unitID="sos.lib3gp" bldFile="sf\os\mm\mmplugins\lib3gp\group" mrp="sf\os\mm\mmplugins\lib3gp\group\multimedia_3gplibrary.mrp"/>
+			</module>
+			<module name="multimedia_mmswadaptation">
+				<unit name="videorenderer" unitID="sos.videorenderer" bldFile="sf\os\mm\mmswadaptation\videorenderer\group" mrp="sf\os\mm\mmswadaptation\videorenderer\group\multimedia_videorenderer.mrp"/>
+			</module>
+			<module name="multimedia_testframework">
+				<unit name="mmtestfw" unitID="sos.mmtestfw" bldFile="sf\os\mm\mmtestenv\mmtestfw\group" mrp="sf\os\mm\mmtestenv\mmtestfw\group\multimedia_testframework_source.mrp" filter="mm_common"/>
+			</module>
+			<module name="mm_testagent">
+				<unit name="mmtestagent" unitID="sos.mmtestagent" bldFile="sf\os\mm\mmtestenv\mmtestagent\group" mrp="sf\os\mm\mmtestenv\mmtestagent\group\multimediatestagent_source.mrp" filter="image"/>
+			</module>
+			<module name="multimedia_testtools">
+				<unit name="mmtesttools" unitID="sos.mmtesttools" bldFile="sf\os\mm\mmtestenv\mmtesttools\group" mrp="sf\os\mm\mmtestenv\mmtesttools\group\multimedia_testtools_source.mrp" filter="mmmw"/>
+			</module>	
+		</layer>
+		<layer name="api_test_layer">
+			<module name="multimedia_test_component">
+				<unit name="a3fchartest" unitID="sos.a3fchartest" bldFile="sf\os\mm\devsound\a3fcharacterisationtest\group" mrp="" filter="audio"/>
+				<unit name="speechrecogsupporttest" unitID="sos.speechrecogsupporttest" bldFile="sf\os\mm\mmdevicefw\speechrecogsupport\tsrc\ASR\group" mrp="" filter="audio"/>
+				<unit name="mmfintgdevsound" unitID="sos.mmfintgdevsound" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\devsound\group" mrp="" filter="audio"/>
+				<unit name="acod" unitID="sos.acod" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\ACOD\group" mrp="" filter="audio"/>
+				<unit name="DevSoundTestCIPlugins" unitID="sos.DevSoundTestCIPlugins" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\CIPlugins\group" mrp="" filter="audio"/>
+				<unit name="DevSoundTest" unitID="sos.DevSoundTest" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\group" mrp="" filter="audio"/>
+				<unit name="SbcCodec" unitID="sos.SbcCodec" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\SbcCodec\group" mrp="" filter="audio"/>
+				<unit name="mmtestfwunittest" unitID="sos.mmtestfwunittest" bldFile="sf\os\mm\mmtestenv\mmtestfwunittest\group" mrp="" filter="audio"/>
+				<unit name="SDevSound" unitID="sos.SDevSound" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\SDevSound\group" mrp="" filter="audio"/>				
+				<unit name="mmfcharacterisationvalidationaudioplay" unitID="sos.mmfcharacterisationvalidationaudioplay" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\play\group" mrp="" filter="mmmw"/>
+				<unit name="mmfcharacterisationvalidationaudiorecord" unitID="sos.mmfcharacterisationvalidationaudiorecord" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\group" mrp="" filter="mmmw"/>
+				<unit name="mmfintegrationtestCtlfrm" unitID="sos.mmfintegrationtestCtlfrm" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\Ctlfrm\group" mrp="" filter="mmmw"/>
+				<unit name="mmfintegrationtestSecureDrm" unitID="sos.mmfintegrationtestSecureDrm" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\SecureDRM\group" mrp="" filter="mmmw"/>
+				<unit name="mmfintegrationtestAclnt" unitID="sos.mmfintegrationtestAclnt" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\ACLNT\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsActrl" unitID="sos.mmfunittestsActrl" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\Actrl\group" mrp="" filter="mmmw"/>	
+				<unit name="mmfunittestaclnt" unitID="sos.mmfunittestaclnt" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsAFMT" unitID="sos.mmfunittestsAFMT" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\AFMT\group" mrp="" filter="mmmw"/>	
+				<unit name="mmfunittestsBasecl" unitID="sos.mmfunittestsBasecl" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\basecl\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsctlfrm" unitID="sos.mmfunittestsctlfrm" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\ctlfrm\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsGEF" unitID="sos.mmfunittestsGEF" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\GEF\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsMidiClnt" unitID="sos.mmfunittestsMidiClnt" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\MidiClnt\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsMidiTestCntrl" unitID="sos.mmfunittestsMidiTestCntrl" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\MidiClnt\MidiTestCntrl\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsRecogniser" unitID="sos.mmfunittestsRecogniser" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\Recogniser\group" mrp="" filter="mmmw"/>
+				<unit name="mmfunittestsSRSSNK" unitID="sos.mmfunittestsSRSSNK" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\srssnk\group" mrp="" filter="mmmw"/>				
+				<unit name="mdfunittestcodecapi" unitID="sos.mdfunittestcodecapi" bldFile="sf\os\mm\mmdevicefw\mdfunittest\codecapi\video\group" mrp="" filter="video"/>
+				<unit name="mdfunittestcodecapiPU" unitID="sos.mdfunittestcodecapiPU" bldFile="sf\os\mm\mmdevicefw\mdfunittest\codecapi\PU\video\group" mrp="" filter="video"/>				
+				<unit name="lib3gpunittest" unitID="sos.lib3gpunittest" bldFile="sf\os\mm\mmplugins\lib3gpunittest\group" mrp="" filter="video"/>				
+				<unit name="cameraunittest" unitID="sos.cameraunittest" bldFile="sf\os\mm\imagingandcamerafws\cameraunittest\group" mrp="" filter="video"/>				
+				<unit name="VideoUnitTest" unitID="sos.VideoUnitTest" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\group\VideoGroup" mrp="" filter="video"/>
+				<unit name="xvidcore" unitID="sos.xvidcore" bldFile="sf\xvidhwdevice\group" mrp="" filter="video"/>
+				<unit name="xvidpu" unitID="sos.xvidpu" bldFile="sf\xvidpu\group" mrp="" filter="video"/>			
+				<!--unit name="dvbhreceiverhai" unitID="sos.dvbhreceiverhai" bldFile="sf\os\mm\mmhais\dvbhreceiverhai\hai\dvbh\group" mrp="" filter="video"/-->
+				<!--unit name="dvbhunittest" unitID="sos.dvbhunittest" bldFile="sf\os\mm\mmhais\dvbhunittest\hai\dvbh\group" mrp="" filter="video"/-->				
+				<unit name="mmtplugin" unitID="sos.mmplugin" bldFile="sf\os\mm\mmplugins\mmfwplugins\group" mrp="" filter="video"/>
+				<!--unit name="mvsintegrationtest" unitID="sos.mvsintegrationtest" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmvalidationsuite\mvsintegrationtest\group" mrp="" filter="video"/-->
+				<unit name="VideoIntegrationTest" unitID="sos.VideoIntegrationTest" bldFile="sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\group\VideoGroup" mrp="" filter="video"/>				
+				<unit name="imagingunittest" unitID="sos.imagingunittest" bldFile="sf\os\mm\imagingandcamerafws\imagingunittest\group" mrp="" filter="image"/>
+				<unit name="imaginginttest" unitID="sos.imaginginttest" bldFile="sf\os\mm\imagingandcamerafws\imaginginttest\group" mrp="" filter="image"/>
+				<unit name="TSU_ICL_GSCAL_01" unitID="sos.TSU_ICL_GSCAL_01" bldFile="sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_GSCAL_01\group" mrp="" filter="image"/>
+				<unit name="TSU_ICL_ITFM_01" unitID="sos.TSU_ICL_ITFM_01" bldFile="sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\group" mrp="" filter="image"/>				
+			</module>
+			<module name="multimedia_test_component_rom">
+				<unit name="a3fintegrationtest" unitID="sos.a3fintegrationtest" bldFile="sf\os\mm\devsound\a3fintegrationtest\group" mrp="" filter="audio"/>
+			</module>
+		</layer>
+  </systemModel>
+</SystemDefinition>

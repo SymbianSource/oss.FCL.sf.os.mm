@@ -20,9 +20,13 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
 ../mmpfiles/TSU_ICL_PFM_02.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // scripts
 ../scripts/TSU_ICL_PFM_02.script	c:/tsu_icl_pfm_02.script

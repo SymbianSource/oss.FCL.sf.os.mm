@@ -40,6 +40,7 @@ PRJ_EXPORTS
 ../inc/mbuffersource.h			SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(a3f/mbuffersource.h)
 ../inc/msynccisupport.h			SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(a3f/msynccisupport.h)
 ../inc/tonedata.h			SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(a3f/tonedata.h)
+../inc/mcontexteffectiveclient.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(a3f/mcontexteffectiveclient.h)
 
 // DEF FILES
 ../bwins/audiocontextfactory.def	/epoc32/include/def/bwins/audiocontextfactory.def

@@ -28,7 +28,7 @@ TARGETTYPE 	PLUGIN
 UID	0x10009D8D   KMmfUidCustomInterfaceSbcEncoderDll
 VENDORID 0x70000001
 
-SOURCEPATH ../src/custominterfaces
+SOURCEPATH ../src/CustomInterfaces
 
 SOURCE sbcencoderci.cpp
 

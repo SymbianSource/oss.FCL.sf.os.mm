@@ -65,6 +65,7 @@ library			mmfstandardcustomcommands.lib
 library			fbscli.lib
 library			mediaclient.lib
 library			ecom.lib
+library			centralrepository.lib
 
 LIBRARY			mmcommon.lib
 

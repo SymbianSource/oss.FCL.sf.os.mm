@@ -19,8 +19,7 @@ PRINT Run all the ICL codec tests
 PRINT 
 //PAUSE_AT_END
 
-// 
-MULTITHREAD
+// MULTITHREAD
 
 
 //

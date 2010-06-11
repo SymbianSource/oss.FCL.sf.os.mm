@@ -15,14 +15,15 @@
 
 PRJ_EXPORTS
 
+PRJ_MMPFILES
+
+PRJ_TESTEXPORTS
+
 ../testdata/imagetransform_source.jpeg				c:/te_tsi_icl_pluginsupport_01/imagetransform_source.jpeg
 ../scripts/te_tsi_icl_pluginsupport_01suite.script	c:/testdata/scripts/te_tsi_icl_pluginsupport_01suite.script
 ./te_tsi_icl_pluginsupport_01suite.iby   			/epoc32/rom/include/te_tsi_icl_pluginsupport_01suite.iby
 
-PRJ_TESTEXPORTS
-
-PRJ_MMPFILES
-
-te_tsi_icl_pluginsupport_01suite.mmp
 
 PRJ_TESTMMPFILES
+
+te_tsi_icl_pluginsupport_01suite.mmp

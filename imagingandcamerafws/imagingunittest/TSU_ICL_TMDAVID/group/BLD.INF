@@ -24,10 +24,14 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_TESTMMPFILES
+
 // TSI_WP5 files
 ../MMPFiles/TSU_ICL_TMDAVID.mmp
 
 PRJ_EXPORTS
+
+PRJ_TESTEXPORTS
 
 // scripts
 ../scripts/TSU_ICL_TMDAVID.script	c:/tsu_icl_tmdavid.script

@@ -19,9 +19,6 @@ TARGETTYPE      DLL
 UID             0x1000008d 0x102833D6
 VENDORID        0x70000001
 
-//If this macro is enabled, BytesPlayed() uses iBytesPlayed instead of RSoundSc's BytesTransferred()
-MACRO SYMBIAN_SOUNDADAPTER_BYTESPLAYED
-
 // Enable this for debug output
 //MACRO SYMBIAN_SOUNDADAPTER_DEBUG
 
@@ -54,7 +51,7 @@ SOURCE			mdasoundadapterbody.cpp
 SOURCE			mdasoundadapterconsts.cpp
 
 LIBRARY			euser.lib
-LIBRARY			hal.lib //needed only when SYMBIAN_SOUNDADAPTER_BYTESPLAYED is enabled
+LIBRARY			hal.lib
 LIBRARY			audioutils.lib // for rate converter
 DEFFILE			mdasoundadapter.def
 NOSTRICTDEF

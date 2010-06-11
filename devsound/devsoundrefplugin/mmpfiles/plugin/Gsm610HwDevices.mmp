@@ -34,7 +34,7 @@ USERINCLUDE		 	../../inc
 
 OS_LAYER_SYSTEMINCLUDE_SYMBIAN
 
-SOURCEPATH	../../src/plugin/audio/gsm610
+SOURCEPATH	../../src/plugin/audio/Gsm610
 source		GSM610.CPP gsm610Proxy.cpp
 
 

@@ -233,7 +233,7 @@ void CMMFImaAdPcmPcm16Codec::ConfigureL(TUid aConfigType, const TDesC8& aConfigD
 			User::Leave(KErrArgument);
 		}
 	
-	const TUint KImaAdpcmBitsPerSample = 4;
+	
 	// SamplesPerBlock = [(BlockAlign - 4 * Channels) * 8] / (BitsPerSample * Channels) + 1
 	iSamplesPerBlock = (iBlockAlign - 4 * iChannels) * 8 / (KImaAdpcmBitsPerSample * iChannels) + 1;
 	}
@@ -252,7 +252,9 @@ TInt CMMFImaAdPcmPcm16Codec::Extension_(TUint aExtensionId, TAny*& aExtPtr, TAny
 	}
 
 void CMMFImaAdPcmPcm16Codec::SetFileBlockLength(TUint aBlockAlign)
-	{
-	iBlockAlign = aBlockAlign;		
+	{	
+    iBlockAlign = aBlockAlign;		
+  	iSamplesPerBlock = (iBlockAlign - 4 * iChannels) * 8 / (KImaAdpcmBitsPerSample * iChannels) + 1;
+  		    
 	}
 

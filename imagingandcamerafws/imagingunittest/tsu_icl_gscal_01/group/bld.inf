@@ -17,9 +17,13 @@
 //
 
 PRJ_MMPFILES
-../mmpfiles/TSU_ICL_GSCAL_01.mmp
 
 PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+../mmpfiles/TSU_ICL_GSCAL_01.mmp
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_ICL_GSCAL_01.script		c:/tsu_icl_gscal_01.script
@@ -59,5 +63,4 @@ PRJ_EXPORTS
 
 
 ../TestFiles/png2_2_8pmThrsh.mbm		c:/tsu_icl_gscal_01/png2_2_8pmthrsh.mbm
-
 

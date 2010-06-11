@@ -1,0 +1,35 @@
+;
+; Copyright (c) 2005-2010 Nokia Corporation and/or its subsidiary(-ies).
+; All rights reserved.
+; This component and the accompanying materials are made available
+; under the terms of the License "Symbian Foundation License v1.0"
+; which accompanies this distribution, and is available
+; at the URL "http://www.eclipse.org/legal/epl-v10.html".
+;
+; Initial Contributors:
+; Nokia Corporation - initial contribution.
+;
+; Contributors:
+;
+; Description:
+;
+
+//ini
+"\epoc32\data\c\video.ini" - "c:\video.ini"
+
+// scripts
+"\epoc32\data\c\TSI_MMF_VCLNT_WM.script" - "c:\TSI_MMF_VCLNT_WM.script"
+"\epoc32\data\c\TSI_MMF_VCLNT_OF.script" - "c:\TSI_MMF_VCLNT_OF.script"
+"\epoc32\data\c\TSI_MMF_VCLNT_OF_ALLOC.script" - "c:\TSI_MMF_VCLNT_OF_ALLOC.script"
+
+// data files
+"\epoc32\data\c\VclntITestData\longvideo.dummy" - "c:\VclntITestData\longvideo.dummy"
+"\epoc32\data\c\VclntITestData\shortvideo.dummy" - "c:\VclntITestData\shortvideo.dummy"
+"\epoc32\data\c\VclntITestData\drmvideo.drm" - "c:\VclntITestData\drmvideo.drm"
+"\epoc32\data\c\VclntITestData\textInput.wav" - "c:\VclntITestData\textInput.wav"
+"\epoc32\data\c\VclntITestData\textOutput.wav" - "c:\VclntITestData\textOutput.wav"
+
+// SYMBIAN_CAF_V2
+"\epoc32\data\c\VclntITestData\Video.contentrights" - "c:\VclntITestData\Video.contentrights"
+"\epoc32\data\c\VclntITestData\Video.content" - "c:\VclntITestData\Video.content"
+

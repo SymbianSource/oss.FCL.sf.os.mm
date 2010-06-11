@@ -131,7 +131,7 @@ void CTestStepPlayerPlay::MapcPlayComplete(TInt aError)
 
     if(!GetStringFromConfig(_L("SectionOne"), _L("AudioPlayFName1"), iFileName))
       {
-       //INFO_PRINTF2(_L("file name %s not found..."), fileptr);
+       INFO_PRINTF2(_L("file name %S not found..."), &iFileName);
        return EInconclusive;
       }
 
@@ -982,7 +982,8 @@ void RAudioPlayCompleteTest::MapcPlayComplete(TInt aError)
 		TTimeIntervalMicroSeconds playDuration(curTime.MicroSecondsFrom(iPlayStartTime));
 		if(playDuration < iDuration)
 			{
-			INFO_PRINTF1(_L("Clip is not played till the end"));
+			INFO_PRINTF3(_L("Clip is not played till the end - playDuration %d iDuration %d"),
+						 TInt(playDuration.Int64()), TInt(iDuration.Int64()));
 			StopTest(EFail);
 			}
 		else

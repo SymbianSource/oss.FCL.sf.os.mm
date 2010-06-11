@@ -21,11 +21,15 @@ DEFAULT
 // WINS ARMI THUMB
 // MINT
 
+PRJ_EXPORTS
+
 PRJ_MMPFILES
+
+PRJ_TESTMMPFILES
 
 ../mmpfiles/TSI_ICL_BTRANS_01.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // scripts
 ../scripts/TSI_ICL_BTRANS_01.script	c:/mm/tsi_icl_btrans_01.script

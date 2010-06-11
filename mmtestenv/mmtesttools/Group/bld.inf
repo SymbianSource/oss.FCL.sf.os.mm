@@ -51,6 +51,8 @@ PRJ_EXPORTS
 ../Rom/miscOpt.iby	/epoc32/rom/include/miscopt.iby
 ../Rom/miscOptTests.iby /epoc32/rom/include/miscopttests.iby
 
+../Rom/mmmwunittests.iby /epoc32/rom/include/mmmwunittests.iby
+
 // .bat files
 ../Scripts/run3gplibrarytests.bat	c:/run3gplibrarytests.bat
 ../Scripts/runICLPREQ1920Tests.bat		c:/runiclpreq1920tests.bat
