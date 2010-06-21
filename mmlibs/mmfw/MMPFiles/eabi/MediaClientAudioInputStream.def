@@ -17,10 +17,10 @@ EXPORTS
 	_ZNK20CMdaAudioInputStream8DataTypeEv @ 16 NONAME
 	_ZTI12CMMFFifoBase @ 17 NONAME ; #<TI>#
 	_ZTI20CMdaAudioInputStream @ 18 NONAME ; #<TI>#
-	_ZTIN23CMMFMdaAudioInputStream15CActiveCallbackE @ 19 NONAME ; #<TI>#
+	_ZTIN23CMMFMdaAudioInputStream15CActiveCallbackE @ 19 NONAME ABSENT ; #<TI>#
 	_ZTV12CMMFFifoBase @ 20 NONAME ; #<VT>#
 	_ZTV20CMdaAudioInputStream @ 21 NONAME ; #<VT>#
-	_ZTVN23CMMFMdaAudioInputStream15CActiveCallbackE @ 22 NONAME ; #<VT>#
+	_ZTVN23CMMFMdaAudioInputStream15CActiveCallbackE @ 22 NONAME ABSENT ; #<VT>#
 	_ZN20CMdaAudioInputStream11SetBitRateLEi @ 23 NONAME
 	_ZN20CMdaAudioInputStream21GetSupportedBitRatesLER6RArrayIiE @ 24 NONAME
 	_ZNK20CMdaAudioInputStream8BitRateLEv @ 25 NONAME

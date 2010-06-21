@@ -2,8 +2,8 @@ EXPORTS
 	_ZN18CMMFDevSoundServer11StartThreadEPv @ 1 NONAME
 	_ZN18CMMFDevSoundServer4NewLEP17MGlobalPropertiesR10TProcessId @ 2 NONAME
 	_ZTI19CMMFDevSoundSession @ 3 NONAME
-	_ZTIN18CMMFDevSoundServer22CDelayDevSoundShutDownE @ 4 NONAME
+	_ZTIN18CMMFDevSoundServer22CDelayDevSoundShutDownE @ 4 NONAME ABSENT
 	_ZTV19CMMFDevSoundSession @ 5 NONAME
-	_ZTVN18CMMFDevSoundServer22CDelayDevSoundShutDownE @ 6 NONAME
+	_ZTVN18CMMFDevSoundServer22CDelayDevSoundShutDownE @ 6 NONAME ABSENT
 	KDevsoundServerPriority @ 7 NONAME DATA 4
 
