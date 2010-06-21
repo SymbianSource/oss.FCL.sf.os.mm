@@ -130,8 +130,9 @@ private:
 	HBufC* iFilePath;
 	ContentAccess::CData* iData;
 
-	RFile iLegacyFile;
-	TBool iLegacyFileOpen;
+	RFile   iLegacyFile;
+	RFile64 iFile64; //For defect EASA-84ZC6J 
+	TBool   iLegacyFileOpen;
 	};
 
 
