@@ -66,6 +66,7 @@
 #define ATOMTYPE_URN  0x75726e20 /* 'urn ' */
 #define ATOMTYPE_UUID 0x75756964 /* 'uuid' */
 #define ATOMTYPE_EDTS 0x65647473 /* 'edts' */
+#define ATOMTYPE_META 0x6d657461 /* 'meta' */
 /* AVC Additions */
 #define ATOMTYPE_AVCC 0x61766343 /* 'avcC' */
 #define ATOMTYPE_BTRT 0x62747274 /* 'btrt' */
@@ -76,7 +77,8 @@
 /* QCELP 13K Additions */
 #define ATOMTYPE_SQCP 0x73716370 /* 'sqcp' */
 #define ATOMTYPE_DQCP 0x64716370 /* 'dqcp' */
-
+/* inline Addition */
+#define ATOMTYPE_ID32 0x49443332 /* 'ID32' */
 
 #define HANDLERTYPE_ODSM 0x6f64736d /* 'odsm' */
 #define HANDLERTYPE_VIDE 0x76696465 /* 'vide' */
@@ -560,6 +562,20 @@ typedef struct trackAtom
   userDataAtom           *udta;
 } trackAtom;
 
+typedef struct ID32Atom
+{
+  atomHeader *atomhdr;
+  mp4_u64    atomcontentloc;
+  mp4_u16    language; // top bit is padding, remaining 15 bits is Packed ISO-639-2/T language code 
+} ID32Atom;
+
+typedef struct metaAtom
+{
+  atomHeader  *atomhdr;
+  handlerAtom *hdlr;
+  ID32Atom    *ID32;
+} metaAtom;
+
 typedef struct movieAtom
 {
   atomHeader            *atomhdr;
@@ -568,6 +584,7 @@ typedef struct movieAtom
   trackAtom             *trakVideo; // video
   objectDescriptorAtom  *iods;
   userDataAtom          *udta;
+  metaAtom              *meta;
 } movieAtom;
 
 
@@ -777,12 +794,15 @@ mp4_i32 readESD(MP4HandleImp handle, ESDAtom *esd);
 mp4_i32 readD263(MP4HandleImp handle, h263SpecificAtom *d263);
 mp4_i32 readBITR(MP4HandleImp handle, bitrateAtom *bitr);
 mp4_i32 readDAMR(MP4HandleImp handle, amrDecSpecStruc *damr);
+mp4_i32 readMeta(MP4HandleImp handle, metaAtom *meta);
 /* avc inclusions*/
 mp4_i32 readAVC1(MP4HandleImp handle, avcSampleEntry *avc1);
 mp4_i32 readSDTP(MP4HandleImp handle, sampleDependencyAtom *sdtp,  mp4_i32 sample_count);
 /* QCELP 13k inclusions */
 mp4_i32 readSQCP(MP4HandleImp handle, qcelpSampleEntry *sqcp);
 mp4_i32 readDQCP(MP4HandleImp handle, qcelpDecSpecStruc *dqcp);
+/* inline related */
+mp4_i32 readID32(MP4HandleImp handle, ID32Atom *ID32);
 
 mp4_i32 freeFTYP(fileTypeAtom *ftyp);
 mp4_i32 freeMOOV(movieAtom *moov);
@@ -826,6 +846,7 @@ mp4_i32 freeIODS(objectDescriptorAtom *iods);
 mp4_i32 readUDTA(MP4HandleImp handle, userDataAtom *udta);
 mp4_i32 freeUDTA(userDataAtom *udta);
 mp4_i32 freeSDTP(sampleDependencyAtom* sdtp);
+mp4_i32 freeMETA(metaAtom *meta);
 /* The following and AVC related */
 mp4_i32 freeAVC1(avcSampleEntry *avc1);
 mp4_i32 freeM4DS(mpeg4ExtensionDescriptorsAtom *m4ds);
@@ -834,6 +855,8 @@ mp4_i32 freeAVCC(avcConfigurationAtom *avcc);
 /* QCELP 13K related */
 mp4_i32 freeSQCP(qcelpSampleEntry *sqcp);
 mp4_i32 freeDQCP(qcelpDecSpecStruc *dqcp);
+/* inline related */
+mp4_i32 freeID32(ID32Atom *ID32);
 
 mp4_i32 determineVideoLength(MP4HandleImp handle, mp4_u32 *videolength);
 mp4_i32 determineFrameRate(MP4HandleImp handle, mp4_double *framerate);

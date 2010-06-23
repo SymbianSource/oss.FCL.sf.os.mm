@@ -53,4 +53,5 @@ EXPORTS
 	MP4ParseGetLastPosition64 @ 52 NONAME
 	MP4ComposeOpenFileHandle64 @ 53 NONAME
 	MP4ParseOpenFileHandle64 @ 54 NONAME
+	MP4ParseGetID32Location @ 55 NONAME
 

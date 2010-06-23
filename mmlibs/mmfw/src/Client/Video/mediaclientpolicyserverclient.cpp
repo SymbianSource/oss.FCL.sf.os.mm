@@ -45,10 +45,7 @@ void CMediaClientPolicyServerClient::SetSurface(const TSurfaceId& aSurfaceId)
     else
         {
         iSurfaceId = aSurfaceId;
-        DEBUG_PRINTF2("CMediaClientPolicyServerClient::SetSurface - SurfaceId 0 0x%x", iSurfaceId.iInternal[0]);  
-        DEBUG_PRINTF2("CMediaClientPolicyServerClient::SetSurface - SurfaceId 1 0x%x", iSurfaceId.iInternal[1]);  
-        DEBUG_PRINTF2("CMediaClientPolicyServerClient::SetSurface - SurfaceId 2 0x%x", iSurfaceId.iInternal[2]);  
-        DEBUG_PRINTF2("CMediaClientPolicyServerClient::SetSurface - SurfaceId 3 0x%x", iSurfaceId.iInternal[3]);  
+        DEBUG_PRINTF5("CMediaClientPolicyServerClient::SetSurface - iSurfaceId %08x:%08x:%08x:%08x", iSurfaceId.iInternal[3], iSurfaceId.iInternal[2], iSurfaceId.iInternal[1], iSurfaceId.iInternal[0]);
         }
     
     DEBUG_PRINTF(" CMediaClientPolicyServerClient::SetSurface ---");
@@ -58,10 +55,7 @@ void CMediaClientPolicyServerClient::FocusChanged(TBool aForeground)
     {
     DEBUG_PRINTF(" CMediaClientPolicyServerClient::FocusChanged +++");
 
-    DEBUG_PRINTF2("CMediaClientPolicyServerClient::FocusChanged - SurfaceId 0 0x%x", iSurfaceId.iInternal[0]);  
-    DEBUG_PRINTF2("CMediaClientPolicyServerClient::FocusChanged - SurfaceId 1 0x%x", iSurfaceId.iInternal[1]);  
-    DEBUG_PRINTF2("CMediaClientPolicyServerClient::FocusChanged - SurfaceId 2 0x%x", iSurfaceId.iInternal[2]);  
-    DEBUG_PRINTF2("CMediaClientPolicyServerClient::FocusChanged - SurfaceId 3 0x%x", iSurfaceId.iInternal[3]);  
+    DEBUG_PRINTF5("CMediaClientPolicyServerClient::FocusChanged - iSurfaceId %08x:%08x:%08x:%08x", iSurfaceId.iInternal[3], iSurfaceId.iInternal[2], iSurfaceId.iInternal[1], iSurfaceId.iInternal[0]);
     DEBUG_PRINTF2("CMediaClientPolicyServerClient::FocusChanged - Focus %d", aForeground);  
 
     if( iSurfaceId.IsNull() )
