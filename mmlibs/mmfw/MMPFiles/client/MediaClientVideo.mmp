@@ -65,6 +65,7 @@ library			mmfstandardcustomcommands.lib
 library			fbscli.lib
 library			mediaclient.lib
 library			ecom.lib
+library			centralrepository.lib
 
 LIBRARY			mmcommon.lib
 
@@ -86,6 +87,8 @@ DEFFILE MEDIACLIENTVIDEO.DEF
 
 #endif //SYMBIAN_BUILD_GCE
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+
+MACRO MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
 
 nostrictdef
 strictdepend

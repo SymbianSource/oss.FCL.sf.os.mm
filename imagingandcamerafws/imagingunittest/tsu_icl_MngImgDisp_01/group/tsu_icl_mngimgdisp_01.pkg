@@ -1,0 +1,74 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+"\epoc32\release\armv5\urel\TSU_ICL_MngImgDisp_01.dll"-"c:\sys\bin\TSU_ICL_MngImgDisp_01.dll"
+
+\\REM Scripts
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_MngImgDisp_01\scripts\TSU_ICL_MngImgDisp_01.script"-"c:\TSU_ICL_MngImgDisp_01.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_MngImgDisp_01\scripts\TSU_ICL_MngImgDisp_01_ALLOC.script"-"c:\TSU_ICL_MngImgDisp_01_ALLOC.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_MngImgDisp_01\scripts\TSU_ICL_MngImgDisp_01_Panic.script"-"c:\TSU_ICL_MngImgDisp_01_Panic.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_MngImgDisp_01\scripts\TSU_ICL_MngIclDecoder_01.script"-"c:\TSU_ICL_MngIclDecoder_01.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_MngImgDisp_01\scripts\TSU_ICL_MngIclDecoder_01_Alloc.script"-"c:\TSU_ICL_MngIclDecoder_01_Alloc.script"
+
+\\ mm_testdata
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\24bit.mng"-"c:\tsu_icl_mngimgdisp_01\24bit.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\advisory_bg.mng"-"c:\tsu_icl_mngimgdisp_01\advisory_bg.mng:"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\back-invalidlength.mng"-"c:\tsu_icl_mngimgdisp_01\back-invalidlength.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\back-invalidoptions.mng"-"c:\tsu_icl_mngimgdisp_01\back-invalidoptions.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\basi.mng"-"c:\tsu_icl_mngimgdisp_01\basi.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\def_int_frame_delay_sub_opt_2.mng"-"c:\tsu_icl_mngimgdisp_01\def_int_frame_delay_sub_opt_2.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\defi-filppedrect.mng"-"c:\tsu_icl_mngimgdisp_01\defi-filppedrect.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\defi-invalidlength.mng"-"c:\tsu_icl_mngimgdisp_01\defi-invalidlength.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\empty.mng"-"c:\tsu_icl_mngimgdisp_01\empty.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\endl-withoutloop-negative.mng"-"c:\tsu_icl_mngimgdisp_01\endl-withoutloop-negative.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\flag3col.mng"-"c:\tsu_icl_mngimgdisp_01\flag3col.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\forclippingfram1.mng"-"c:\tsu_icl_mngimgdisp_01\forclippingfram1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\forclippingfram1.mng"-"z:\resource\forclippingfram1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram1.mng"-"c:\tsu_icl_mngimgdisp_01\fram1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram2.mng"-"c:\tsu_icl_mngimgdisp_01\fram2.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram3.mng"-"c:\tsu_icl_mngimgdisp_01\fram3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram4.mng"-"c:\tsu_icl_mngimgdisp_01\fram4.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram-invalidchangeoption.mng"-"c:\tsu_icl_mngimgdisp_01\fram-invalidchangeoption.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram-invalidnegativedelay.mng"-"c:\tsu_icl_mngimgdisp_01\fram-invalidnegativedelay.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\fram-invalidoption.mng"-"c:\tsu_icl_mngimgdisp_01\fram-invalidoption.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\loop-9-1x2x2-term3.mng"-"c:\tsu_icl_mngimgdisp_01\loop-9-1x2x2-term3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\loop-9-6x2-5-4-1x2-term3.mng"-"c:\tsu_icl_mngimgdisp_01\loop-9-6x2-5-4-1x2-term3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\loop-invalidnestlevel.mng"-"c:\tsu_icl_mngimgdisp_01\loop-invalidnestlevel.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\loop-noendl.mng"-"c:\tsu_icl_mngimgdisp_01\loop-noendl.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\magn1-mx5-my3.mng"-"c:\tsu_icl_mngimgdisp_01\magn1-mx5-my3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\magn2-mx8-my4.mng"-"c:\tsu_icl_mngimgdisp_01\magn2-mx8-my4.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\magn3-mx8-my4.mng"-"c:\tsu_icl_mngimgdisp_01\magn3-mx8-my4.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\magn-invalidmethod.mng"-"c:\tsu_icl_mngimgdisp_01\magn-invalidmethod.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mhdr-jngpresent.mng"-"c:\tsu_icl_mngimgdisp_01\mhdr-jngpresent.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mhdr-negativesize.mng"-"c:\tsu_icl_mngimgdisp_01\mhdr-negativesize.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm0.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm0.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm1.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm2.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm2.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-0-0-1.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-0-0-1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-0-0-3.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-0-0-3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-0-3-3.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-0-3-3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-1-0-1.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-1-0-1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-1-0-3.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-1-0-3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-1-3-3.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-1-3-3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-2-0-1.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-2-0-1.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-2-0-3.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-2-0-3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\mngterm3-2-3-3.mng"-"c:\tsu_icl_mngimgdisp_01\mngterm3-2-3-3.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\movegama.mng"-"c:\tsu_icl_mngimgdisp_01\movegama.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\no_any_bg.mng"-"c:\tsu_icl_mngimgdisp_01\no_any_bg.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\simple_b.mng"-"c:\tsu_icl_mngimgdisp_01\simple_b.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\subframes.mng"-"c:\tsu_icl_mngimgdisp_01\subframes.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\term-invalidlength.mng"-"c:\tsu_icl_mngimgdisp_01\term-invalidlength.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\term-invalidoptions.mng"-"c:\tsu_icl_mngimgdisp_01\term-invalidoptions.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mngimgdisp_01\testfiles\var-fram1-term3-0-3-2.mng"-"c:\tsu_icl_mngimgdisp_01\var-fram1-term3-0-3-2.mng"

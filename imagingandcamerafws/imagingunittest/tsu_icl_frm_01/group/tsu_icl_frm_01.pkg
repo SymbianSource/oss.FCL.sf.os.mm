@@ -1,0 +1,53 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+"\epoc32\release\armv5\urel\tsu_icl_frm_01.dll"-"c:\sys\bin\tsu_icl_frm_01.dll"
+
+//REM test scripts
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\TSU_ICL_FRM_01.script"-"c:\TSU_ICL_FRM_01.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\tsu_icl_frm_01b.script"-"c:\tsu_icl_frm_01b.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\TSU_ICL_FRM_01_ALLOC.script"-"c:\TSU_ICL_FRM_01_ALLOC.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\TSU_ICL_FRM_FH.script"-"c:\TSU_ICL_FRM_FH.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\TSU_ICL_FRM_FH_ALLOC.script"-"c:\TSU_ICL_FRM_FH_ALLOC.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\TSU_ICL_FRM_DRM_DEBUG.script"-"c:\TSU_ICL_FRM_DRM_DEBUG.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\scripts\TSU_ICL_FRM_DRM_ALLOC.script"-"c:\TSU_ICL_FRM_DRM_ALLOC.script"
+
+
+//test source/input files
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\Tif2.mbm"-"c:\tsu_icl_frm_01\Tif2.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\Trans_1.mbm"-"c:\tsu_icl_frm_01\Trans_1.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\Gif87a.mbm"-"c:\tsu_icl_frm_01\Gif87a.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\Test.tst"-"c:\tsu_icl_frm_01\Test.tst"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\jfif444.mbm"-"c:\tsu_icl_frm_01\jfif444.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\png4_8.mbm"-"c:\tsu_icl_frm_01\png4_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\trans_8.mbm"-"c:\tsu_icl_frm_01\trans_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\Image.content"-"c:\tsu_icl_frm_01\Image.content"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\Image.contentrights"-"c:\tsu_icl_frm_01\Image.contentrights"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_frm_01\TestFiles\operator.mbm"-"c:\tsu_icl_frm_01\operator.mbm"
+
+// mm_testdata
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\clock.gif"-"c:\tsu_icl_frm_01/clock.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\decodertest.jpg"-"c:/tsu_icl_frm_01/decodertest.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\gif87a.gif"-"c:/tsu_icl_frm_01/gif87a.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\jfif422_4_ref.jpg"-"c:/tsu_icl_frm_01/jfif422_4_ref.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\jfif444.jpg"-"c:/tsu_icl_frm_01/jfif444.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\jfif444.jpg"-"z:/resource/jfif444.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\png24bpp_1.png"-"c:/tsu_icl_frm_01/png24bpp_1.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\png4_8.png"-"c:/tsu_icl_frm_01/png4_8.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\simple_b.mng"-"c:/tsu_icl_frm_01/simple_b.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\tif2.tif"-"c:\tsu_icl_frm_01/tif2.tif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\trans_1.gif"-"c:/tsu_icl_frm_01/trans_1.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\trans_8.gif"-"c:/tsu_icl_frm_01/trans_8.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_frm_01\testfiles\video.mp4"-"c:\tsu_icl_frm_01/video.mp4"

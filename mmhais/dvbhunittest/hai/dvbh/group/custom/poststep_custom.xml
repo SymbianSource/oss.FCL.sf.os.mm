@@ -1,0 +1,9 @@
+<step passrate="100" harness="GENERIC" enabled="true" name="Fetch test module logs" significant="false">
+  <command>fetch-log</command>
+  <params>
+    <param type="text"/>
+    <param delete="true"/>
+    <param path="c:\logs\testresults\tsu_dvbh_hai\*"/>
+  </params>
+</step>
+

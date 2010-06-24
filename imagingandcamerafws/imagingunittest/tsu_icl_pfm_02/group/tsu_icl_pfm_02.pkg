@@ -1,0 +1,28 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+"\epoc32\release\armv5\urel\tsu_icl_pfm_02.dll"-"c:\sys\bin\tsu_icl_pfm_02.dll"
+
+\\REM Scripts
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_PFM_02\scripts\TSU_ICL_PFM_02.script"-"c:\TSU_ICL_PFM_02.script"
+
+\\mm_testdata
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\gif256colours.gif"-"c:\tsu_icl_pfm_02\gif256colours.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\mng-16m.mng"-"c:\tsu_icl_pfm_02\mng-16m.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\mng-16ma.mng"-"c:\tsu_icl_pfm_02\mng-16ma.mng"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\png-16m.png"-"c:\tsu_icl_pfm_02\png-16m.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\png-16ma.png"-"c:\tsu_icl_pfm_02\png-16ma.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\png-16m-interlaced.png"-"c:\tsu_icl_pfm_02\png-16m-interlaced.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_pfm_02\testfiles\vga.gif"-"c:\tsu_icl_pfm_02\vga.gif"

@@ -1,0 +1,52 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// \inttest\icl\imagedecoder\group is built from \inttest\icl\group
+// 
+//
+
+
+PRJ_MMPFILES
+
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+tsi_icl_imagedecoder.mmp
+
+PRJ_TESTEXPORTS
+../group/tsi_icl_imagedecoder.iby                       /epoc32/rom/include/tsi_icl_imagedecoder.iby
+
+../scripts/tsi_icl_imagedecoder_perf.ini                c:/icl/imagedecoder/tsi_icl_imagedecoder_perf.ini
+../scripts/tsi_icl_imagedecoder_perf.script             c:/icl/imagedecoder/tsi_icl_imagedecoder_perf.script
+
+../scripts/tsi_icl_imagedecoder_extinterface.ini        c:/icl/imagedecoder/tsi_icl_imagedecoder_extinterface.ini
+../scripts/tsi_icl_imagedecoder_extinterface.script     c:/icl/imagedecoder/tsi_icl_imagedecoder_extinterface.script
+../scripts/tsi_icl_imagedecoder_extinterface_panic.script       c:/icl/imagedecoder/tsi_icl_imagedecoder_extinterface_panic.script
+
+../scripts/tsi_icl_imagedecoder_crop.ini                c:/icl/imagedecoder/tsi_icl_imagedecoder_crop.ini
+../scripts/tsi_icl_imagedecoder_crop.script             c:/icl/imagedecoder/tsi_icl_imagedecoder_crop.script
+
+../scripts/tsi_icl_imagedecoder_scale.ini               c:/icl/imagedecoder/tsi_icl_imagedecoder_scale.ini
+../scripts/tsi_icl_imagedecoder_scale.script            c:/icl/imagedecoder/tsi_icl_imagedecoder_scale.script
+
+../scripts/tsi_icl_imagedecoder_rotation.ini            c:/icl/imagedecoder/tsi_icl_imagedecoder_rotation.ini
+../scripts/tsi_icl_imagedecoder_rotation.script         c:/icl/imagedecoder/tsi_icl_imagedecoder_rotation.script
+
+../scripts/tsi_icl_imagedecoder_stream.ini              c:/icl/imagedecoder/tsi_icl_imagedecoder_stream.ini
+../scripts/tsi_icl_imagedecoder_stream.script           c:/icl/imagedecoder/tsi_icl_imagedecoder_stream.script
+
+../scripts/tsi_icl_imagedecoder_multipleop.ini          c:/icl/imagedecoder/tsi_icl_imagedecoder_multipleop.ini
+../scripts/tsi_icl_imagedecoder_multipleop.script       c:/icl/imagedecoder/tsi_icl_imagedecoder_multipleop.script
+
+../scripts/tsi_icl_imagedecoder_autorotate.ini            c:/icl/imagedecoder/tsi_icl_imagedecoder_autorotate.ini
+../scripts/tsi_icl_imagedecoder_autorotate.script         c:/icl/imagedecoder/tsi_icl_imagedecoder_autorotate.script

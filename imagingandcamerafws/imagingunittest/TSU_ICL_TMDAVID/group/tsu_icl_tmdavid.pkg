@@ -1,0 +1,110 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+"\epoc32\release\armv5\urel\tsu_icl_tmdavid.dll"-"c:\sys\bin\tsu_icl_tmdavid.dll"
+
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\scripts\TSU_ICL_TMDAVID.script"-"c:\tsu_icl_tmdavid.script"
+
+
+// tsetfiles
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm12bpp.mbm"-"c:\tmdavid\mbm12bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm16bpp.mbm"-"c:\tmdavid\mbm16bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm1bpp.mbm"-"c:\tmdavid\mbm1bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm24bpp.mbm"-"c:\tmdavid\mbm24bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm2bpp.mbm"-"c:\tmdavid\mbm2bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm4bppc.mbm"-"c:\tmdavid\mbm4bppc.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm4bppm.mbm"-"c:\tmdavid\mbm4bppm.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm8bppc.mbm"-"c:\tmdavid\mbm8bppc.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\mbm8bppm.mbm"-"c:\tmdavid\mbm8bppm.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\tmdavid.mbm"-"c:\tmdavid\tmdavid.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Anon\otabitmap.mbm"-"c:\tmdavid\anon\otabitmap.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Anon\wirelessbitmap.mbm"-"c:\tmdavid\anon\wirelessbitmap.mbm"
+
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\bmp1bpp.mbm"-"c:\tmdavid\ref\bmp1bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\bmp24bpp.mbm"-"c:\tmdavid\ref\bmp24bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\bmp4bpp.mbm"-"c:\tmdavid\ref\bmp4bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\bmp8bpp.mbm"-"c:\tmdavid\ref\bmp8bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\bmprle4.mbm"-"c:\tmdavid\ref\bmprle4.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\bmprle8.mbm"-"c:\tmdavid\ref\bmprle8.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif10.mbm"-"c:\tmdavid\ref\jfif10.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif100.mbm"-"c:\tmdavid\ref\jfif100.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif30.mbm"-"c:\tmdavid\ref\jfif30.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif420.mbm"-"c:\tmdavid\ref\jfif420.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif422.mbm"-"c:\tmdavid\ref\jfif422.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif444.mbm"-"c:\tmdavid\ref\jfif444.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfif60.mbm"-"c:\tmdavid\ref\jfif60.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfifMono.mbm"-"c:\tmdavid\ref\jfifmono.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\jfifProg.mbm"-"c:\tmdavid\ref\jfifprog.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm12bpp.mbm"-"c:\tmdavid\ref\mbm12bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm16bpp.mbm"-"c:\tmdavid\ref\mbm16bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm1bpp.mbm"-"c:\tmdavid\ref\mbm1bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm24bpp.mbm"-"c:\tmdavid\ref\mbm24bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm2bpp.mbm"-"c:\tmdavid\ref\mbm2bpp.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm4bppc.mbm"-"c:\tmdavid\ref\mbm4bppc.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm4bppm.mbm"-"c:\tmdavid\ref\mbm4bppm.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm8bppc.mbm"-"c:\tmdavid\ref\mbm8bppc.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\mbm8bppm.mbm"-"c:\tmdavid\ref\mbm8bppm.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\png1.mbm"-"c:\tmdavid\ref\png1.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\png2.mbm"-"c:\tmdavid\ref\png2.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\png3.mbm"-"c:\tmdavid\ref\png3.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\png4.mbm"-"c:\tmdavid\ref\png4.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\scaled0.mbm"-"c:\tmdavid\ref\scaled0.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\scaled1.mbm"-"c:\tmdavid\ref\scaled1.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\scaled2.mbm"-"c:\tmdavid\ref\scaled2.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\scaled3.mbm"-"c:\tmdavid\ref\scaled3.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\scaled4.mbm"-"c:\tmdavid\ref\scaled4.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\scaled5.mbm"-"c:\tmdavid\ref\scaled5.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\tif1.mbm"-"c:\tmdavid\ref\tif1.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\tif2.mbm"-"c:\tmdavid\ref\tif2.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\tif3.mbm"-"c:\tmdavid\ref\tif3.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\tmdavid.mbm"-"c:\tmdavid\ref\tmdavid.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\trans.mbm"-"c:\tmdavid\ref\trans.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\wmf1.mbm"-"c:\tmdavid\ref\wmf1.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\wmf2.mbm"-"c:\tmdavid\ref\wmf2.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\wmf3.mbm"-"c:\tmdavid\ref\wmf3.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\wmf4.mbm"-"c:\tmdavid\ref\wmf4.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\wmf5.mbm"-"c:\tmdavid\ref\wmf5.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_tmdavid\TestFiles\TMdaVid\Ref\wmf6.mbm"-"c:\tmdavid\ref\wmf6.mbm"
+
+//mm_testdata
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\bmp1bpp.bmp"-"c:\tmdavid\bmp1bpp.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\bmp24bpp.bmp"-"c:\tmdavid\bmp24bpp.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\bmp4bpp.bmp"-"c:\tmdavid\bmp4bpp.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\bmp8bpp.bmp"-"c:\tmdavid\bmp8bpp.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\bmprle4.bmp"-"c:\tmdavid\bmprle4.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\bmprle8.bmp"-"c:\tmdavid\bmprle8.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif10.jpg"-"c:\tmdavid\jfif10.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif100.jpg"-"c:\tmdavid\jfif100.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif30.jpg"-"c:\tmdavid\jfif30.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif420.jpg"-"c:\tmdavid\jfif420.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif422.jpg"-"c:\tmdavid\jfif422.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif444.jpg"-"c:\tmdavid\jfif444.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfif60.jpg"-"c:\tmdavid\jfif60.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfifmono.jpg"-"c:\tmdavid\jfifmono.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\jfifprog.jpg"-"c:\tmdavid\jfifprog.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\png1.png"-"c:\tmdavid\png1.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\png2.png"-"c:\tmdavid\png2.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\png3.png"-"c:\tmdavid\png3.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\png4.png"-"c:\tmdavid\png4.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\tif1.tif"-"c:\tmdavid\tif1.tif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\tif2.tif"-"c:\tmdavid\tif2.tif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\tif3.tif"-"c:\tmdavid\tif3.tif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\trans.gif"-"c:\tmdavid\trans.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\wmf2.wmf"-"c:\tmdavid\wmf2.wmf"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\wmf3.wmf"-"c:\tmdavid\wmf3.wmf"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\wmf5.wmf"-"c:\tmdavid\wmf5.wmf"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\wmf6.wmf"-"c:\tmdavid\wmf6.wmf"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\Anon\wirelessbitmap"-"c:\tmdavid\anon\wirelessbitmap"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_tmdavid\testfiles\tmdavid\Anon\otabitmap"-"c:\tmdavid\anon\otabitmap"

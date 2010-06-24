@@ -1539,6 +1539,21 @@ request, nothing happens.
 */
 extern IMPORT_C void MP4CancelReadFrame(MP4Handle handle);
 
+/**
+Fetches ID32 data location.
+ *
+ * Parameters:
+ *
+@param handle         MP4 library handle
+@param location       Returns ID32 data location
+
+@return	MP4_OK                         Success
+		MP4_ERROR                      Generic error 
+		MP4_INVALID_INPUT_STREAM       MP4 stream is invalid
+		MP4_NOT_AVAILABLE              Metadata, META atom or ID32 atom is not available
+ */
+extern IMPORT_C MP4Err MP4ParseGetID32Location(MP4Handle apihandle, mp4_u32& location);
+
 #ifdef __cplusplus
 }
 #endif
