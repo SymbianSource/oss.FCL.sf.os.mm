@@ -26,11 +26,11 @@ DEFAULT
 #include "../imageencoder/group/bld.inf"
 #endif
 
-#include "../tsi_icl_btrans_01/group/BLD.INF"
-#include "../TSI_ICL_COD/group/Bld.inf"
+#include "../tsi_icl_btrans_01/group/bld.inf"
+#include "../TSI_ICL_COD/group/bld.inf"
 #include "../te_tsi_icl_cod_5/group/bld.inf"
 #include "../te_tsi_icl_pluginsupport_01/group/bld.inf"
-#include "../Codecs/Group/BLD.INF"
+#include "../Codecs/Group/bld.inf"
 
 
 PRJ_MMPFILES

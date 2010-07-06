@@ -24,9 +24,9 @@
  
 
 // Include imagedisplay, imagetransform, imageprocessor, panorama and gifscaler sub-components
-#include "../GifScaler/group/bld_include.inf" 
+#include "../GifScaler/group/bld.inf" 
 #include "../ImageDisplay/group/bld.inf"
-#include "../ImageTransform/group/bld_include.inf"
+#include "../ImageTransform/group/bld.inf"
 #include "../ImageProcessor/group/bld.inf"
 #include "../panorama/group/bld.inf"
 
@@ -135,6 +135,6 @@ PRJ_TESTEXPORTS
 
 PRJ_TESTEXPORTS
 // BitmapTransforms
-#include "../BitmapTransform/group/BLD.inf"
+#include "../BitmapTransform/group/bld.inf"
 // MediaClientImage
-#include "../MediaClientImage/Group/BLD.INF"
+#include "../MediaClientImage/Group/bld.inf"

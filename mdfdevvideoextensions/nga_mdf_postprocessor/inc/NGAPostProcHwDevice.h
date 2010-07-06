@@ -1092,6 +1092,8 @@ private:
 	MMmfVideoPropertiesObserver*				iVPObserver;
 	RWsSession									iWsSession;
 	TSize										iPicSize;
+	TUint										iAspectRatioNum;
+	TUint										iAspectRatioDenom;
 	//-- members for Trickplay support --
 	TInt                                iStepFrameCount;
     TInt                                iPlayRate;       

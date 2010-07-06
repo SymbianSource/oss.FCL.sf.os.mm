@@ -13,7 +13,7 @@
 // Description:
 //
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 ../include/TestFramework.h		SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(testframework.h)
 ../include/TestFrameworkIpc.h		SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(testframeworkipc.h) 
 ../include/TestFrameworkIpc.inl		SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(testframeworkipc.inl)
@@ -27,7 +27,7 @@ PRJ_EXPORTS
 // Tests that run via recognizer [not required on EKA2]
 ../recog/data/AutorunTests.cfg	c:/mm/autoruntests.cfg
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 // TestFramework files
 ../MMPFiles/TestFrameworkServer.mmp

@@ -13,7 +13,7 @@
 // Description:
 //
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 #ifdef WINS
 gceavailable_winscw.mmp
@@ -21,7 +21,7 @@ gceavailable_winscw.mmp
 gceavailable_eabi.mmp
 #endif // WINS
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 gceavailable.iby	/epoc32/rom/include/gceavailable.iby
 
 ../inc/gceavailable.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(gceavailable.h)
