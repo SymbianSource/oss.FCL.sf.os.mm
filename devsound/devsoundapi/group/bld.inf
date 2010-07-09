@@ -19,12 +19,12 @@ PRJ_EXPORTS
 ../inc/SoundDevice.inl	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/sounddevice.inl)
 ../inc/DevSoundStandardCustomInterfaces.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/devsoundstandardcustominterfaces.h)
 ../inc/MmfDevSoundCustomInterfaceSupport.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/mmfdevsoundcustominterfacesupport.h)
-../inc/mmfdevsoundcustominterfaceobserver.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(mmf/server/mmfdevsoundcustominterfaceobserver.h)
-../inc/mmfdevsoundcustominterfacesupportclasses.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(mmf/server/mmfdevsoundcustominterfacesupportclasses.h)
+../inc/mmfdevsoundcustominterfaceobserver.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/mmfdevsoundcustominterfaceobserver.h)
+../inc/mmfdevsoundcustominterfacesupportclasses.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(mmf/server/mmfdevsoundcustominterfacesupportclasses.h)
 
 ../bwins/MMFDEVSOUND.DEF	/epoc32/include/def/bwins/mmfdevsound.def
 ../eabi/MMFDevSound.def	/epoc32/include/def/eabi/mmfdevsound.def
 PRJ_MMPFILES
 // DevSound
-../MMPFiles/mmfdevsoundlib.mmp	
+../mmpfiles/mmfdevsoundlib.mmp	
 

@@ -13,7 +13,7 @@
 // Description:
 //
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 ../scripts/tsu_omxil_pcmrenderer_01.script		c:/omxil/tsu_omxil_pcmrenderer_01.script
 
 // Export test files
@@ -23,6 +23,6 @@ PRJ_EXPORTS
 // .iby
 tsu_omxil_components.iby                        	/epoc32/rom/include/tsu_omxil_components.iby
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 ../mmpfiles/tsu_omxil_pcmrenderer_01.mmp
 

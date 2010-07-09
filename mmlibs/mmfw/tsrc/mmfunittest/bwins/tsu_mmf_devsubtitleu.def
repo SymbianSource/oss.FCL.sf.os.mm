@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite@@XZ @ 1 NONAME ; class CTestSuite * NewTestSuiteL(void)
-

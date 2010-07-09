@@ -23,7 +23,19 @@
 
 #include <e32base.h>
 
-#define MMF_MEDIA_CLIENT_EXT_DISPLAY_INTERFACE_V2
+#define MMF_MEDIA_CLIENT_EXT_DISPLAY_INTERFACE_V3
+
+/**
+
+Enumeration used to indicate external display current connection status
+
+**/
+enum TExtDisplayConnectionProviderConnType
+    {
+    EExtDisplayConnectionProviderConnTypeDisconnected,
+    EExtDisplayConnectionProviderConnTypeHdmi,
+    EExtDisplayConnectionProviderConnTypeAnalog
+    };
 
 /**
 
@@ -33,7 +45,7 @@ Mixin class capable of handling events from provider
 class MExtDisplayConnectionProviderCallback
     {
 public:
-    virtual void MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected) = 0;
+    virtual void MedcpcExtDisplayNotifyConnected(TExtDisplayConnectionProviderConnType aExtDisplayConnType) = 0;
     };
 
 /**
@@ -63,15 +75,14 @@ public:
         A reference to an object that can be used by the provider to send events back to the client.
     */
     virtual void SetExtDisplayConnectionProviderCallback(MExtDisplayConnectionProviderCallback& aCallback) = 0;
-	    
-    /**
-    Function to be implemented by connection provider that indicates whether an external display is
-    connected.
-    
-    @return ETrue if external display is connected otherwise EFalse.
-    */
-	virtual TBool ExtDisplayConnected() = 0;
 
+    /**
+    Function to be implemented by connection provider that indicates the external display connection type 
+    
+    @return One of values defined in TExtDisplayConnectionProviderConnType
+    */
+    virtual TExtDisplayConnectionProviderConnType ExtDisplayConnType() = 0;
+	
     /**
     Function to be implemented by connection provider that indicates the display id that should
     be used for the external display port.

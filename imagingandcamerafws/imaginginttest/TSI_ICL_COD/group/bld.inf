@@ -1,0 +1,32 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+
+PRJ_PLATFORMS
+DEFAULT
+
+#include "../../TestImageIAgent/group/bld.inf"
+PRJ_MMPFILES
+
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+../MMPFiles/TSI_ICL_COD.mmp
+
+PRJ_TESTEXPORTS
+// Test Scripts
+../scriptFiles/TSI_ICL_COD_00.script	c:/icl/tsi_icl_cod_00.script
+../scriptFiles/TSI_ICL_COD_01.script	c:/icl/tsi_icl_cod_01.script
+../scriptFiles/TSI_ICL_COD_02.script	c:/icl/tsi_icl_cod_02.script

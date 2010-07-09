@@ -14,6 +14,12 @@
 //
 
 PRJ_EXPORTS
+// None
+
+PRJ_MMPFILES
+// None
+
+PRJ_TESTEXPORTS
 
 ../scripts/te_tsi_icl_cod_5Suite_1.script		c:/testdata/scripts/te_tsi_icl_cod_5suite_1.script
 ../scripts/te_tsi_icl_cod_5Suite_2.script		c:/testdata/scripts/te_tsi_icl_cod_5suite_2.script
@@ -946,13 +952,7 @@ PRJ_EXPORTS
 ../testdata/bmp/ref/8bpp_bmp_16mu_no_mask_decode.mbm		c:/te_tsi_icl_cod_05/bmp/ref/8bpp_bmp_16mu_no_mask_decode.mbm
 ../testdata/bmp/ref/8bpp_bmp_16ma_no_mask_decode.mbm		c:/te_tsi_icl_cod_05/bmp/ref/8bpp_bmp_16ma_no_mask_decode.mbm
 
-PRJ_TESTEXPORTS
-// None
-
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 Te_tsi_icl_cod_5suite.mmp
 Te_tsi_icl_cod_5asuite.mmp
-
-PRJ_TESTMMPFILES
-// None

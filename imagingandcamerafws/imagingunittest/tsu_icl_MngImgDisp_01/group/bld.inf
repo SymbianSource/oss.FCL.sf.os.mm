@@ -16,9 +16,14 @@
 //
 
 PRJ_MMPFILES
-../mmpfiles/tsu_icl_MngImgDisp_01.mmp
 
 PRJ_EXPORTS
+
+
+PRJ_TESTMMPFILES
+../mmpfiles/tsu_icl_MngImgDisp_01.mmp
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_ICL_MngImgDisp_01.script			c:/tsu_icl_mngimgdisp_01.script
@@ -97,5 +102,4 @@ PRJ_EXPORTS
 ../TestFiles/ref/flag3col.mbm            		c:/tsu_icl_mngimgdisp_01/ref/flag3col.mbm
 // .iby
 ../inc/tsu_icl_MngImgDisp_01.iby	/epoc32/rom/include/tsu_icl_mngimgdisp_01.iby
-
 

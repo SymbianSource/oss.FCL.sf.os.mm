@@ -115,6 +115,12 @@
 			<module name="">
 				<unit unitID="Utilities_group" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/Utilities/group" filter="sf_build" name="Utilities_group" />
 			</module>
-    </layer>    
+    </layer>
+
+  	<layer name="os_mm_mdfdevvideoextensions_layer">
+			<module name="mm_mdfdevvideoextensions">
+				<unit unitID="mm_mdfdevvideoextensions" mrp="" bldFile="&layer_real_source_path;/mdfdevvideoextensions/nga_mdf_postprocessor/group" name="mm_mdfdevvideoextensions" />
+			</module>
+   	 </layer>    
   </systemModel>
 </SystemDefinition>

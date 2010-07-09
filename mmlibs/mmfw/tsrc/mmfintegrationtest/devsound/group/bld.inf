@@ -16,12 +16,12 @@
 PRJ_PLATFORMS
 DEFAULT
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 // DEVSOUND
 ../mmpfiles/tsi_mmf_devsound.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/tsi_mmf_devsound_debug.script    c:/mm/tsi_mmf_devsound_debug.script

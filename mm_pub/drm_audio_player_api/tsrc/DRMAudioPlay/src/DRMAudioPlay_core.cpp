@@ -21,7 +21,7 @@
 #include <caf.h>
 #include <caf/supplier.h>
 #include <caf/importfile.h>
-#include <oma2agent.h>
+#include <Oma2Agent.h>
 #include <BAUTILS.H>
 
 using namespace ContentAccess;

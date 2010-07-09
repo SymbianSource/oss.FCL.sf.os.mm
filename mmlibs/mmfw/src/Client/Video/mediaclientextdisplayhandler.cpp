@@ -96,3 +96,10 @@ TSize CMediaClientExtDisplayHandler::DisplaySizeInPixels()
     DEBUG_PRINTF("CMediaClientExtDisplayHandler::DisplaySizeInPixels ---");
     return iScreen->SizeInPixels();
     }
+
+void CMediaClientExtDisplayHandler::UpdateWindow()
+    {
+    DEBUG_PRINTF("CMediaClientExtDisplayHandler::UpdateWindow +++");
+    iExternalDisplayWindow.SetExtent(TPoint(0,0), iScreen->SizeInPixels());
+    DEBUG_PRINTF("CMediaClientExtDisplayHandler::UpdateWindow ---");
+    }

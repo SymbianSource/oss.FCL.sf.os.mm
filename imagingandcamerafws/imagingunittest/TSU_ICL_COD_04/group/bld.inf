@@ -1,0 +1,54 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+
+PRJ_PLATFORMS
+// specify the platforms your component needs to be built for here
+// may add platform for OMAP, Helen etc
+DEFAULT
+
+PRJ_MMPFILES
+
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
+../MMPFiles/TSU_ICL_COD_04.mmp
+
+PRJ_TESTEXPORTS
+
+// ini file
+../scripts/TSU_ICL_COD_04.ini	c:/tsu_icl_cod_04.ini
+
+// scripts
+../scripts/TSU_ICL_COD_04.script	c:/tsu_icl_cod_04.script
+../scripts/TSU_ICL_COD_04_alloc.script	c:/tsu_icl_cod_04_alloc.script
+../scripts/TSU_ICL_COD_04b.script	c:/tsu_icl_cod_04b.script
+
+../TestFiles/DecodeThumbnail.mbm	c:/tsu_icl_cod_04/decodethumbnail.mbm
+../TestFiles/EncodeTestSource.mbm	c:/tsu_icl_cod_04/encodetestsource.mbm
+../TestFiles/EncodeThumbnail.mbm	c:/tsu_icl_cod_04/encodethumbnail.mbm
+../TestFiles/CamSunset2MPRed2.mbm 			c:/tsu_icl_cod_04/camsunset2mpred2.mbm
+../TestFiles/CamSunset2MPRed3.mbm 			c:/tsu_icl_cod_04/camsunset2mpred3.mbm
+../TestFiles/CamSunset2MPRed2_64K.mbm 			c:/tsu_icl_cod_04/camsunset2mpred2_64k.mbm
+../TestFiles/289_8981100000300165521f.mbm 		c:/tsu_icl_cod_04/289_8981100000300165521f.mbm
+../TestFiles/system-3128-1.mbm 				c:/tsu_icl_cod_04/system-3128-1.mbm
+../TestFiles/NO_TRAIL.mbm 				c:/tsu_icl_cod_04/no_trail.mbm
+../TestFiles/TestCorruptThumbnailHeader.mbm	c:/tsu_icl_cod_04/testcorruptthumbnailheader.mbm
+../TestFiles/TestNoExifReference.mbm		c:/tsu_icl_cod_04/testnoexifreference.mbm
+
+// iby
+TSU_ICL_COD_04.iby			/epoc32/rom/include/tsu_icl_cod_04.iby
+

@@ -17,7 +17,7 @@ EXPORTS
 	_ZN22CMMFDevSoundAdaptation15GetPlayBalanceLERiS0_ @ 16 NONAME
 	_ZN22CMMFDevSoundAdaptation15PlayDTMFStringLERK7TDesC16 @ 17 NONAME
 	_ZN22CMMFDevSoundAdaptation15SamplesRecordedEv @ 18 NONAME
-	_ZN22CMMFDevSoundAdaptation15SetClientConfigERK16TMMFClientConfig @ 19 NONAME
+	_ZN22CMMFDevSoundAdaptation15SetClientConfigERK16TMMFClientConfig @ 19 NONAME ABSENT
 	_ZN22CMMFDevSoundAdaptation15SetPlayBalanceLEiiRi @ 20 NONAME
 	_ZN22CMMFDevSoundAdaptation16CancelInitializeEv @ 21 NONAME
 	_ZN22CMMFDevSoundAdaptation17FixedSequenceNameEi @ 22 NONAME
@@ -44,7 +44,7 @@ EXPORTS
 	_ZN22CMMFDevSoundAdaptationD0Ev @ 43 NONAME
 	_ZN22CMMFDevSoundAdaptationD1Ev @ 44 NONAME
 	_ZN22CMMFDevSoundAdaptationD2Ev @ 45 NONAME
-	_ZNK22CMMFDevSoundAdaptation12ClientConfigEv @ 46 NONAME
+	_ZNK22CMMFDevSoundAdaptation12ClientConfigEv @ 46 NONAME ABSENT
 	_ZNK22CMMFDevSoundAdaptation27GetSupportedInputDataTypesLER6RArrayI7TFourCCERK20TMMFPrioritySettings @ 47 NONAME
 	_ZNK22CMMFDevSoundAdaptation28GetSupportedOutputDataTypesLER6RArrayI7TFourCCERK20TMMFPrioritySettings @ 48 NONAME
 	_ZNK22CMMFDevSoundAdaptation6ConfigEv @ 49 NONAME
@@ -63,4 +63,6 @@ EXPORTS
 	_ZN22CMMFDevSoundAdaptation16BufferErrorEventEv @ 62 NONAME
 	_ZN22CMMFDevSoundAdaptation15ProcessingErrorERi @ 63 NONAME
 	_ZN22CMMFDevSoundAdaptation40RollbackAdaptorActiveStateToBeforeCommitEv @ 64 NONAME
+	_ZN22CMMFDevSoundAdaptation15SetClientConfigERK10TProcessId @ 65 NONAME
+	_ZN22CMMFDevSoundAdaptation15SetClientConfigERK10TProcessIdS2_ @ 66 NONAME
 

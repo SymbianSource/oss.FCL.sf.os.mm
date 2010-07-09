@@ -16,13 +16,12 @@
 PRJ_PLATFORMS
 DEFAULT
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 ../mmpfiles/VideoTestEncoderPU.mmp
 ../mmpfiles/VideoTestDecoderPU.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // .iby
 TSU_MDF_VIDEOTESTPROCESSINGUNITS.iby	/epoc32/rom/include/tsu_mdf_videotestprocessingunits.iby
-

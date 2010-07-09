@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -16,52 +16,13 @@
 #ifndef __INTTEST_MMF_IBY__
 #define __INTTEST_MMF_IBY__
 
-#ifdef SYMBIAN_VARIABLE_BITRATE_CODEC // use system wide flag to trigger model controller build
-#define SYMBIAN_MMF_MODEL_CONTROLLERS
-#endif
-
-file=ABI_DIR\BUILD_DIR\TSI_MMFACLNT.DLL 	System\Libs\TSI_MMFACLNT.DLL
-file=ABI_DIR\BUILD_DIR\TSI_MMFVCLNT.DLL 	System\Libs\TSI_MMFVCLNT.DLL
-file=ABI_DIR\BUILD_DIR\TSI_MMFCTLFRM.DLL 	System\Libs\TSI_MMFCTLFRM.DLL
-
-#ifndef SYMBIAN_USE_MMF_RUF_RECOGNIZER
-file=ABI_DIR\BUILD_DIR\TSI_MMFRECOG.DLL 	System\Libs\TSI_MMFRECOG.DLL
-#endif
-
-file=ABI_DIR\BUILD_DIR\TSI_MMF_SDEVSOUND.dll 	System\Libs\TSI_MMF_SDEVSOUND.dll
-file=ABI_DIR\DEBUG_DIR\CapTestServer.exe	System\Libs\CapTestServer.exe
-file=ABI_DIR\DEBUG_DIR\DSCapTestServer.exe	System\Libs\DSCapTestServer.exe
-file=ABI_DIR\DEBUG_DIR\SDSCapTestServer.exe	System\Libs\SDSCapTestServer.exe
+#include <IntTest_Mmf_excl_test.iby>
+#include <sdevsound_test.iby>
 
 //ini
 data=EPOCROOT##epoc32\data\c\audio.ini        			\audio.ini
-data=EPOCROOT##epoc32\data\c\video.ini        			\video.ini
 data=EPOCROOT##epoc32\data\c\securedrm_testdata.ini             \securedrm_testdata.ini
-data=EPOCROOT##epoc32\data\c\securedrm_video.ini                \securedrm_video.ini
 data=EPOCROOT##epoc32\data\c\securedrm_audio.ini                \securedrm_audio.ini
-
-// plugins for ACLNT
-ECOM_PLUGIN(tsi_mmfuseoldcodecaudiocontroller.dll,101f7d39.rsc)
-
-// plugins for CTLFRM
-
-ECOM_PLUGIN(tsi_mmfcontroller.dll,101f7bf9.rsc)
-ECOM_PLUGIN(tsi_mmfcontroller2.dll,101f7bfb.rsc)
-file=ABI_DIR\BUILD_DIR\TSI_MMFCUSTOMCOMMANDS.DLL 	System\Libs\TSI_MMFCUSTOMCOMMANDS.DLL
-
-ECOM_PLUGIN(tsi_mmfdatasink.dll,101f7bfd.rsc)
-ECOM_PLUGIN(tsi_mmfdatasource.dll,101f7bff.rsc)
-
-ECOM_PLUGIN(CUSTOMMMFAUDIOCONTROLLER.DLL,101f7d29.rsc)
-
-ECOM_PLUGIN(tsi_mmfformat.dll,101ffa10.rsc)
-
-// plugins for VCLNT
-
-file=ABI_DIR\BUILD_DIR\TS_CMMFVideoTestCustomCommands.dll 	System\Libs\TS_CMMFVideoTestCustomCommands.dll
-ECOM_PLUGIN(TS_VideoInput.dll,101f7f8c.rsc)
-ECOM_PLUGIN(TS_VideoOutput.dll,101f7f8d.rsc)
-ECOM_PLUGIN(TS_VideoTestFormat.dll,101f7f89.rsc)
 
 
 // scripts
@@ -93,10 +54,6 @@ data=EPOCROOT##epoc32\data\c\tsi_mmf_aclnt_00_nona3f.script        	\tsi_mmf_acl
 data=EPOCROOT##epoc32\data\c\tsi_mmf_aclnt_03_nona3f.script        	\tsi_mmf_aclnt_03_nona3f.script
 #endif // SYMBIAN_MULTIMEDIA_A3FDEVSOUND
 
-data=EPOCROOT##epoc32\data\c\TSI_MMF_VCLNT.script        	\TSI_MMF_VCLNT.script
-data=EPOCROOT##epoc32\data\c\TSI_MMF_VCLNT_OF.script        	\TSI_MMF_VCLNT_OF.script
-data=EPOCROOT##epoc32\data\c\TSI_MMF_VCLNT_OF_ALLOC.script      \TSI_MMF_VCLNT_OF_ALLOC.script
-
 data=EPOCROOT##epoc32\data\c\TSI_MMF_CTLFRM.script        	\TSI_MMF_CTLFRM.script
 data=EPOCROOT##epoc32\data\c\TSI_MMF_CTLFRM_POS.script        	\TSI_MMF_CTLFRM_POS.script
 data=EPOCROOT##epoc32\data\c\TSI_MMF_CTLFRM_NEG.script        	\TSI_MMF_CTLFRM_NEG.script
@@ -110,11 +67,8 @@ data=EPOCROOT##epoc32\data\c\TSI_MMF_RECOG.script        	\TSI_MMF_RECOG.script
 data=EPOCROOT##epoc32\data\c\TSI_MMF_RECOG_ALLOC.script       	\TSI_MMF_RECOG_ALLOC.script
 #endif
 
-data=EPOCROOT##epoc32\data\c\TSI_MMF_SDEVSOUND_01.script        \TSI_MMF_SDEVSOUND_01.script
 data=EPOCROOT##epoc32\data\c\TSI_MMF_ACLNT_SD.script        	\TSI_MMF_ACLNT_SD.script
-data=EPOCROOT##epoc32\data\c\TSI_MMF_SDEVSOUND_NOCAP.script     \TSI_MMF_SDEVSOUND_NOCAP.script
 
-data=EPOCROOT##epoc32\data\c\TSI_MMF_SDEVSOUND_01_PREEMPTION.script        \TSI_MMF_SDEVSOUND_01_PREEMPTION.script
 data=EPOCROOT##epoc32\data\c\TSI_MMF_ACLNT_SD_PREEMPTION.script        	\TSI_MMF_ACLNT_SD_PREEMPTION.script
 
 data=EPOCROOT##epoc32\data\c\TSI_MMF_ACLNT_FS.script	\TSI_MMF_ACLNT_FS.script
@@ -136,7 +90,6 @@ data=EPOCROOT##epoc32\data\c\TSI_MMF_ACLNTOGG_APR.script    \TSI_MMF_ACLNTOGG_AP
 
 // Scripts for SecureDRM
 data=EPOCROOT##epoc32\data\c\tsi_mmf_securedrm_testdata.script      \tsi_mmf_securedrm_testdata.script
-data=EPOCROOT##epoc32\data\c\tsi_mmf_securedrm_video_mmddcap.script         \tsi_mmf_securedrm_video_mmddcap.script
 data=EPOCROOT##epoc32\data\c\tsi_mmf_securedrm_audio_mmddcap.script         \tsi_mmf_securedrm_audio_mmddcap.script
 
 // data
@@ -184,8 +137,6 @@ data=EPOCROOT##epoc32\data\c\AclntITestData\PCM8BitStereo.au    \AclntITestData\
 // Media Access by File Handles
 data=EPOCROOT##epoc32\data\c\AclntITestData\textInput.wav	\AclntITestData\textInput.wav
 data=EPOCROOT##epoc32\data\c\AclntITestData\textOutput.wav	\AclntITestData\textOutput.wav
-data=EPOCROOT##epoc32\data\c\VclntITestData\textInput.wav	\VclntITestData\textInput.wav
-data=EPOCROOT##epoc32\data\c\VclntITestData\textOutput.wav	\VclntITestData\textOutput.wav
 
 // SYMBIAN_CAF_V2
 data=EPOCROOT##epoc32\data\c\AclntITestData\Audio.content			\AclntITestData\Audio.content
@@ -194,10 +145,6 @@ data=EPOCROOT##epoc32\data\c\AclntITestData\Audio.contentrights		\AclntITestData
 data=EPOCROOT##epoc32\data\c\AclntITestData\AudioOgg.content			\AclntITestData\AudioOgg.content
 data=EPOCROOT##epoc32\data\c\AclntITestData\AudioOgg.contentrights		\AclntITestData\AudioOgg.contentrights
 #endif
-
-// SYMBIAN_CAF_V2
-data=EPOCROOT##epoc32\data\c\VclntITestData\Video.contentrights		\VclntITestData\Video.contentrights
-data=EPOCROOT##epoc32\data\c\VclntITestData\Video.content			\VclntITestData\Video.content
 
 REM test files - au
 data=\epoc32\data\c\aclnt_05itestdata\8bitPCM.au	\aclnt_05itestdata\8bitPCM.au
@@ -239,10 +186,6 @@ data=\epoc32\data\c\aclnt_05itestdata\Corr_DataOffset_loger.au          \aclnt_0
 data=\epoc32\data\c\aclnt_05itestdata\Corr_DataOffset_shorter.au        \aclnt_05itestdata\Corr_DataOffset_shorter.au
 data=\epoc32\data\c\aclnt_05itestdata\Corr_Datasize_longer.au           \aclnt_05itestdata\Corr_Datasize_longer.au
 data=\epoc32\data\c\aclnt_05itestdata\Corr_Datasize_shorter.au          \aclnt_05itestdata\Corr_Datasize_shorter.au
-
-data=EPOCROOT##epoc32\data\c\sdevsoundinttestdata\PCM_08_16_m.raw     	\sdevsoundinttestdata\PCM_08_16_m.raw
-data=EPOCROOT##epoc32\data\c\sdevsoundinttestdata\8bitmPcm.wav     	\sdevsoundinttestdata\8bitmPcm.wav
-data=EPOCROOT##epoc32\data\c\sdevsoundinttestdata\mainTst.wav         	\sdevsoundinttestdata\mainTst.wav
 
 // test files - Audio Resource Notification (ARN)
 data=EPOCROOT##epoc32\data\c\AclntITestData\mainTst3.wav	\AclntITestData\mainTst3.wav

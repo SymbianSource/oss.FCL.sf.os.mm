@@ -1,0 +1,177 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRJ_PLATFORMS
+// specify the platforms your component needs to be built for here
+// may add platform for OMAP, Helen etc
+DEFAULT
+// DEFAULT MISA 
+// WINS ARMI THUMB
+// MINT
+
+PRJ_MMPFILES
+
+PRJ_EXPORTS
+
+PRJ_EXPORTS
+
+
+PRJ_TESTMMPFILES
+
+// TSI_WP5 files
+../MMPFiles/TSU_ICL_COD_03.mmp
+../MMPFiles/testiclresolver.mmp
+
+PRJ_TESTEXPORTS
+
+// scripts
+../scripts/TSU_ICL_COD_03.script	c:/tsu_icl_cod_03.script
+../scripts/TSU_ICL_COD_03_alloc.script	c:/tsu_icl_cod_03_alloc.script
+
+// iby
+TSU_ICL_COD_03.iby			/epoc32/rom/include/tsu_icl_cod_03.iby
+
+
+PRJ_TESTEXPORTS
+
+// test files
+../TestFiles/gifPalette.mbm    		c:/tsu_icl_cod_03/gifpalette.mbm
+../TestFiles/clinton.mbm    		c:/tsu_icl_cod_03/clinton.mbm
+../TestFiles/anmatcat.mbm    		c:/tsu_icl_cod_03/anmatcat.mbm
+../TestFiles/am475.mbm    		c:/tsu_icl_cod_03/am475.mbm
+../TestFiles/Restart0.mbm    		c:/tsu_icl_cod_03/restart0.mbm
+../TestFiles/InterlacResize.mbm    	c:/tsu_icl_cod_03/interlacresize.mbm
+../TestFiles/Cancel.mbm    		c:/tsu_icl_cod_03/cancel.mbm
+../TestFiles/Comment.mbm    		c:/tsu_icl_cod_03/comment.mbm
+../TestFiles/AdobeMono.mbm    		c:/tsu_icl_cod_03/adobemono.mbm
+../TestFiles/NGimage1.mbm    		c:/tsu_icl_cod_03/ngimage1.mbm
+../TestFiles/bmp1bpp.mbm		c:/tsu_icl_cod_03/bmp1bpp.mbm
+../TestFiles/png8bpp_g0_b.mbm    	c:/tsu_icl_cod_03/png8bpp_g0_b.mbm
+../TestFiles/png4bpp_g0_b.mbm    	c:/tsu_icl_cod_03/png4bpp_g0_b.mbm
+../TestFiles/png2bpp_g0_b.mbm    	c:/tsu_icl_cod_03/png2bpp_g0_b.mbm
+../TestFiles/Anibdog.mbm    		c:/tsu_icl_cod_03/anibdog.mbm
+../TestFiles/bit1.mbm    			c:/tsu_icl_cod_03/bit1.mbm
+../TestFiles/bit2.mbm    			c:/tsu_icl_cod_03/bit2.mbm
+../TestFiles/bit3.mbm    			c:/tsu_icl_cod_03/bit3.mbm
+../TestFiles/bit4.mbm    			c:/tsu_icl_cod_03/bit4.mbm
+../TestFiles/bit5.mbm    			c:/tsu_icl_cod_03/bit5.mbm
+../TestFiles/bit6.mbm    			c:/tsu_icl_cod_03/bit6.mbm
+../TestFiles/bit7.mbm    			c:/tsu_icl_cod_03/bit7.mbm
+../TestFiles/bit8.mbm    			c:/tsu_icl_cod_03/bit8.mbm
+../TestFiles/stil1002.mbm    			c:/tsu_icl_cod_03/stil1002.mbm
+../TestFiles/640X480.mbm    			c:/tsu_icl_cod_03/640x480.mbm
+../TestFiles/160x120_5080.mbm    		c:/tsu_icl_cod_03/160x120_5080.mbm
+../TestFiles/80x60_5080.mbm    			c:/tsu_icl_cod_03/80x60_5080.mbm
+../TestFiles/anim_1_160x120_5080.mbm		c:/tsu_icl_cod_03/anim_1_160x120_5080.mbm
+../TestFiles/anim_2_160x120_5080.mbm		c:/tsu_icl_cod_03/anim_2_160x120_5080.mbm
+../TestFiles/anim_3_160x120_5080.mbm		c:/tsu_icl_cod_03/anim_3_160x120_5080.mbm
+../TestFiles/WMFRef/DibPatternBrush.mbm	c:/tsu_icl_cod_03/wmfref/dibpatternbrush.mbm
+../TestFiles/WMFRef/Intersect.mbm	c:/tsu_icl_cod_03/wmfref/intersect.mbm
+../TestFiles/WMFRef/PatBlt.mbm		c:/tsu_icl_cod_03/wmfref/patblt.mbm
+../TestFiles/WMFRef/Polygon.mbm		c:/tsu_icl_cod_03/wmfref/polygon.mbm
+../TestFiles/WMFRef/Rop2.mbm		c:/tsu_icl_cod_03/wmfref/rop2.mbm
+../TestFiles/WMFRef/Rop2NoBkgnd.mbm	c:/tsu_icl_cod_03/wmfref/rop2nobkgnd.mbm
+../TestFiles/WMFRef/Text.mbm		c:/tsu_icl_cod_03/wmfref/text.mbm
+../TestFiles/WMFRef/The_Rest.mbm	c:/tsu_icl_cod_03/wmfref/the_rest.mbm
+../TestFiles/WMFRef/mso290.mbm 		c:/tsu_icl_cod_03/wmfref/mso290.mbm
+
+../TestFiles/WMFRefMask/DibPatternBrush.mbm	c:/tsu_icl_cod_03/wmfrefmask/dibpatternbrush.mbm
+../TestFiles/WMFRefMask/Intersect.mbm		c:/tsu_icl_cod_03/wmfrefmask/intersect.mbm
+../TestFiles/WMFRefMask/PatBlt.mbm		c:/tsu_icl_cod_03/wmfrefmask/patblt.mbm
+../TestFiles/WMFRefMask/Polygon.mbm		c:/tsu_icl_cod_03/wmfrefmask/polygon.mbm
+../TestFiles/WMFRefMask/Rop2.mbm		c:/tsu_icl_cod_03/wmfrefmask/rop2.mbm
+../TestFiles/WMFRefMask/Rop2NoBkgnd.mbm		c:/tsu_icl_cod_03/wmfrefmask/rop2nobkgnd.mbm
+../TestFiles/WMFRefMask/Text.mbm		c:/tsu_icl_cod_03/wmfrefmask/text.mbm
+../TestFiles/WMFRefMask/The_Rest.mbm		c:/tsu_icl_cod_03/wmfrefmask/the_rest.mbm
+../TestFiles/WMFRefMask/mso290.mbm 		c:/tsu_icl_cod_03/wmfrefmask/mso290.mbm
+
+../TestFiles/WMFArmRef/DibPatternBrush.mbm	c:/tsu_icl_cod_03/wmfarmref/dibpatternbrush.mbm
+../TestFiles/WMFArmRef/Intersect.mbm		c:/tsu_icl_cod_03/wmfarmref/intersect.mbm
+../TestFiles/WMFArmRef/PatBlt.mbm		c:/tsu_icl_cod_03/wmfarmref/patblt.mbm
+../TestFiles/WMFArmRef/Polygon.mbm		c:/tsu_icl_cod_03/wmfarmref/polygon.mbm
+../TestFiles/WMFArmRef/Rop2.mbm			c:/tsu_icl_cod_03/wmfarmref/rop2.mbm
+../TestFiles/WMFArmRef/Rop2NoBkgnd.mbm		c:/tsu_icl_cod_03/wmfarmref/rop2nobkgnd.mbm
+../TestFiles/WMFArmRef/Text.mbm			c:/tsu_icl_cod_03/wmfarmref/text.mbm
+../TestFiles/WMFArmRef/The_Rest.mbm		c:/tsu_icl_cod_03/wmfarmref/the_rest.mbm
+../TestFiles/WMFArmRef/text_ne.mbm			c:/tsu_icl_cod_03/wmfarmref/text_ne.mbm
+../TestFiles/WMFArmRef/the_rest_ne.mbm		c:/tsu_icl_cod_03/wmfarmref/the_rest_ne.mbm
+../TestFiles/WMFArmRef/text_h6.mbm			c:/tsu_icl_cod_03/wmfarmref/text_h6.mbm
+../TestFiles/WMFArmRef/the_rest_h6.mbm		c:/tsu_icl_cod_03/wmfarmref/the_rest_h6.mbm
+../TestFiles/WMFArmRef/mso290.mbm 		c:/tsu_icl_cod_03/wmfarmref/mso290.mbm
+
+../TestFiles/WMFArmRefMask/DibPatternBrush.mbm	c:/tsu_icl_cod_03/wmfarmrefmask/dibpatternbrush.mbm
+../TestFiles/WMFArmRefMask/Intersect.mbm	c:/tsu_icl_cod_03/wmfarmrefmask/intersect.mbm
+../TestFiles/WMFArmRefMask/PatBlt.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/patblt.mbm
+../TestFiles/WMFArmRefMask/Polygon.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/polygon.mbm
+../TestFiles/WMFArmRefMask/Rop2.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/rop2.mbm
+../TestFiles/WMFArmRefMask/Rop2NoBkgnd.mbm	c:/tsu_icl_cod_03/wmfarmrefmask/rop2nobkgnd.mbm
+../TestFiles/WMFArmRefMask/Text.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/text.mbm
+../TestFiles/WMFArmRefMask/The_Rest.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/the_rest.mbm
+../TestFiles/WMFArmRefMask/text_ne.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/text_ne.mbm
+../TestFiles/WMFArmRefMask/the_rest_ne.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/the_rest_ne.mbm
+../TestFiles/WMFArmRefMask/text_h6.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/text_h6.mbm
+../TestFiles/WMFArmRefMask/the_rest_h6.mbm		c:/tsu_icl_cod_03/wmfarmrefmask/the_rest_h6.mbm
+../TestFiles/WMFArmRefMask/mso290.mbm 		c:/tsu_icl_cod_03/wmfarmrefmask/mso290.mbm
+
+../TestFiles/Image(078).mbm			c:/tsu_icl_cod_03/image(078).mbm
+../TestFiles/240_320_xy_15_15(1).mbm			c:/tsu_icl_cod_03/240_320_xy_15_15(1).mbm
+../TestFiles/240_320_xy_15_15(2).mbm			c:/tsu_icl_cod_03/240_320_xy_15_15(2).mbm
+../TestFiles/240_320_xy_15_15(3).mbm			c:/tsu_icl_cod_03/240_320_xy_15_15(3).mbm
+../TestFiles/ref_nail_peace.mbm		c:/tsu_icl_cod_03/ref_nail_peace.mbm
+../TestFiles/ref_mask_peace.mbm			c:/tsu_icl_cod_03/ref_mask_peace.mbm
+../TestFiles/ref_frame_peace.mbm		c:/tsu_icl_cod_03/ref_frame_peace.mbm
+../TestFiles/jfifthumb.mbm			c:/tsu_icl_cod_03/jfifthumb.mbm
+../TestFiles/ref_waterdrop_firstframe.mbm    		c:/tsu_icl_cod_03/ref_waterdrop_firstframe.mbm
+../TestFiles/clock-zero-sub-block.mbm    		c:/tsu_icl_cod_03/clock-zero-sub-block.mbm
+../TestFiles/ref_streamFFFFJpg.mbm              c:/tsu_icl_cod_03/ref_streamffffjpg.mbm
+
+../TestFiles/scaled1.mbm		c:/tsu_icl_cod_03/scaled1.mbm
+../TestFiles/rf4_bmp8bpp_8_bmp.mbm		c:/tsu_icl_cod_03/rf4_bmp8bpp_8_bmp.mbm
+../TestFiles/rf4_anim_640x480_5080_gif.mbm	c:/tsu_icl_cod_03/rf4_anim_640x480_5080_gif.mbm
+../TestFiles/rf4_icoepoc_ico.mbm		c:/tsu_icl_cod_03/rf4_icoepoc_ico.mbm
+../TestFiles/rf4_MISS0001_JPG.mbm		c:/tsu_icl_cod_03/rf4_miss0001_jpg.mbm
+../TestFiles/rf4_scaled1_mbm.mbm		c:/tsu_icl_cod_03/rf4_scaled1_mbm.mbm
+../TestFiles/rf4_operator_ota.mbm		c:/tsu_icl_cod_03/rf4_operator_ota.mbm
+../TestFiles/rf4_png8bpp_g0_b_png.mbm		c:/tsu_icl_cod_03/rf4_png8bpp_g0_b_png.mbm
+../TestFiles/rf4_tif3_4_tif.mbm			c:/tsu_icl_cod_03/rf4_tif3_4_tif.mbm
+../TestFiles/rf4_sun_wbmp.mbm			c:/tsu_icl_cod_03/rf4_sun_wbmp.mbm
+../TestFiles/mso290(2)_0.mbm 	c:/tsu_icl_cod_03/mso290(2)_0.mbm
+../TestFiles/mso290(3)_1.mbm 	c:/tsu_icl_cod_03/mso290(3)_1.mbm
+../TestFiles/mso290(4)_2.mbm 	c:/tsu_icl_cod_03/mso290(4)_2.mbm
+../TestFiles/mso290(5)_3.mbm 	c:/tsu_icl_cod_03/mso290(5)_3.mbm
+../TestFiles/mso290(6)_0.mbm 	c:/tsu_icl_cod_03/mso290(6)_0.mbm
+../TestFiles/mso290(7)_1.mbm 	c:/tsu_icl_cod_03/mso290(7)_1.mbm
+../TestFiles/mso290(8)_2.mbm 	c:/tsu_icl_cod_03/mso290(8)_2.mbm
+../TestFiles/multiscan_EColor16M_0rf.mbm			c:/tsu_icl_cod_03/multiscan_ecolor16m_0rf.mbm
+../TestFiles/multiscan_EColor16M_2rf.mbm			c:/tsu_icl_cod_03/multiscan_ecolor16m_2rf.mbm
+../TestFiles/multiscan_EColor4K_1rf.mbm				c:/tsu_icl_cod_03/multiscan_ecolor4k_1rf.mbm
+../TestFiles/multiscan_EGray2_0rf.mbm				c:/tsu_icl_cod_03/multiscan_egray2_0rf.mbm
+../TestFiles/multiscan_EGray256_3rf.mbm				c:/tsu_icl_cod_03/multiscan_egray256_3rf.mbm
+../TestFiles/multiscan_v_deleted_at_end.mbm			c:/tsu_icl_cod_03/multiscan_v_deleted_at_end.mbm
+../TestFiles/multiscan_uv_few_deleted_at_end.mbm	c:/tsu_icl_cod_03/multiscan_uv_few_deleted_at_end.mbm
+../TestFiles/multiscan1_EColor16M_0rf.mbm			c:/tsu_icl_cod_03/multiscan1_ecolor16m_0rf.mbm
+../TestFiles/multiscan_exif_EColor16M_1rf.mbm		c:/tsu_icl_cod_03/multiscan_exif_ecolor16m_1rf.mbm
+../TestFiles/testsource1.mbm		c:/tsu_icl_cod_03/testsource1.mbm
+../TestFiles/testsource2.mbm		c:/tsu_icl_cod_03/testsource2.mbm
+../TestFiles/os2v1header.mbm    	c:/tsu_icl_cod_03/os2v1header.mbm
+../TestFiles/valuesd1.mbm    		c:/tsu_icl_cod_03/valuesd1.mbm
+../TestFiles/valuesd4.mbm    		c:/tsu_icl_cod_03/valuesd4.mbm
+../TestFiles/valuesd8.mbm    		c:/tsu_icl_cod_03/valuesd8.mbm
+../TestFiles/valuesd24.mbm  	  	c:/tsu_icl_cod_03/valuesd24.mbm
+../TestFiles/winv3depth24withpalettebmp.mbm  	  	c:/tsu_icl_cod_03/winv3depth24withpalettebmp.mbm
+
+../TestFiles/test.dummy		c:/tsu_icl_cod_03/test.dummy
+../TestFiles/anim1_gif89_Reduced_Size_Mask.mbm c:/tsu_icl_cod_03/anim1_gif89_reduced_size_mask.mbm
+../TestFiles/refbut4.mbm		c:/tsu_icl_cod_03/refbut4.mbm

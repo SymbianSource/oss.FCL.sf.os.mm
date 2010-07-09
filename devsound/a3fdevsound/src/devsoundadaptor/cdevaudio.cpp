@@ -28,6 +28,7 @@
 #include <a3f/audiocontextfactory.h>
 #include <a3f/maudioprocessingunit.h>
 #include <a3f/maudiocontext.h>
+#include <a3f/mcontexteffectiveclient.h>
 #include <a3f/maudiostream.h>
 #include <a3f/maudiocodec.h>
 #include <a3f/maudiogaincontrol.h>
@@ -495,11 +496,6 @@ TInt CDevAudio::CancelInitialize()
 	DP_IN();
 	TInt err(KErrNone);
 
-	if(	iActiveState != EDevSoundAdaptorInitialised_Initialised)
-		{
-		DP0_RET(KErrNotReady, "%d");
-		}
-
 	// Redo partial cancelling of initialization after pre-emption clash event in
 	// EDevSoundAdaptorRemovingProcessingUnits state.
 	if (iActiveState == EDevSoundAdaptorUnitialised_Uninitialised &&
@@ -508,7 +504,11 @@ TInt CDevAudio::CancelInitialize()
 		err = iCurrentAudioControl->RemoveProcessingUnits();
 		DP0_RET(err, "%d");
 		}
-			
+	else if(iActiveState != EDevSoundAdaptorInitialised_Initialised)
+		{
+		DP0_RET(KErrNotReady, "%d");
+		}
+
 	err = iCurrentAudioControl->Uninitialize();
 	
 	DP0_RET(err, "%d");
@@ -557,23 +557,61 @@ TBool CDevAudio::IsPrioritySet()
 	{
 	return iPriorityFlag;
 	}
+
 // -----------------------------------------------------------------------------
 // CDevAudio::SetClientConfig
 // -----------------------------------------------------------------------------
 //
-TInt CDevAudio::SetClientConfig(const TMMFClientConfig& aClientConfig)
+TInt CDevAudio::SetClientConfig(const TProcessId& aProcessId)
 	{
 	DP_CONTEXT(CDevAudio::SetClientConfig *CD1*, CtxDevSound, DPLOCAL);
 	DP_IN();
 	// TODO: Check if the TClientContextSettings atributte go back since 
 	// if not there is no way to send the vendor id
 	TClientContextSettings context;
-	context.iProcessId = aClientConfig.iProcessId;
+	context.iProcessId = aProcessId;
 	TInt err = iAudioContext->SetClientSettings(context);
 	if (err != KErrNone)
 		{
 		DP1(DLERR, "Error %d setting client context!",err);
 		}
+	DP0_RET(err, "%d");
+	}
+
+TInt CDevAudio::SetClientConfig(const TProcessId& aActualProcessId, const TProcessId& aProcessId)
+	{
+	DP_CONTEXT(CDevAudio::SetClientConfig *CD1*, CtxDevSound, DPLOCAL);
+	DP_IN();
+	
+	MContextSetEffectiveClient* setEffectiveClient
+        = static_cast<MContextSetEffectiveClient*>(iAudioContext->Interface(KSetClientInfoUid));
+	
+	TInt err;
+	
+	if (!setEffectiveClient)
+	    {
+        DP0(DLINFO, "MContextSetEffectiveClient not supported, revert to old behaviour of just passing actual client info");
+        err = SetClientConfig(aActualProcessId);
+	    }
+	else
+	    {
+        TClientContextSettings context;
+        context.iProcessId = aProcessId;
+        err = iAudioContext->SetClientSettings(context);
+        if (err != KErrNone)
+            {
+            DP1(DLERR, "Error %d setting client context!",err);
+            }
+        if (!err)
+            {
+            err = setEffectiveClient->SetEffectiveClientInfo(aActualProcessId);
+            if (err != KErrNone)
+                {
+                DP1(DLERR, "Error %d setting effective client context!",err);
+                }
+            }
+	    }
+
 	DP0_RET(err, "%d");
 	}
 

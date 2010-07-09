@@ -19,7 +19,7 @@
 #define __CUSTOMINTERFACEPROXYFACTORY_H
 
 #include <e32std.h>
-#include <MCustomCommand.h>
+#include <mcustomcommand.h>
 #include <CustomInterfaceUtility.h>
 
 class CCustomInterfaceProxyFactory

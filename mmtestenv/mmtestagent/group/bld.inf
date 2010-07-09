@@ -19,8 +19,8 @@ DEFAULT
 // If CAF_LITE is defined the cut down "lite" version is built
 // otherwise by default the complete version of CAF is built 
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 ../group/multimediatestagent.iby /epoc32/rom/include/multimediatestagent.iby
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 multimediatestagent.mmp

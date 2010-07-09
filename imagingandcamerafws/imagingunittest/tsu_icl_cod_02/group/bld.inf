@@ -1,0 +1,57 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRJ_PLATFORMS
+// specify the platforms your component needs to be built for here
+// may add platform for OMAP, Helen etc
+DEFAULT
+// DEFAULT MISA 
+// WINS ARMI THUMB
+// MINT
+
+PRJ_MMPFILES
+
+PRJ_EXPORTS
+
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
+// TSI_WP5 files
+../mmpfiles/TSU_ICL_COD_02.mmp
+../mmpfiles/TSU_ICL_COD_02_Recog.mmp
+
+PRJ_TESTEXPORTS
+
+// scripts
+../scripts/TSU_ICL_COD_02.script		c:/tsu_icl_cod_02.script
+../scripts/TSU_ICL_COD_02_Recog.script		c:/tsu_icl_cod_02_recog.script
+../scripts/TSU_ICL_COD_02_Recog_ALLOC.script	c:/tsu_icl_cod_02_recog_alloc.script
+
+// iby
+TSU_ICL_COD_02.iby			/epoc32/rom/include/tsu_icl_cod_02.iby
+
+
+PRJ_TESTEXPORTS
+
+// test files
+../TestFiles/wolf.mbm c:/tsu_icl_cod_02/wolf.mbm
+../TestFiles/A.txt c:/tsu_icl_cod_02/a.txt
+../TestFiles/B.txt c:/tsu_icl_cod_02/b.txt
+../TestFiles/G.txt c:/tsu_icl_cod_02/g.txt
+../TestFiles/Gif.txt c:/tsu_icl_cod_02/gif.txt
+../TestFiles/I.txt c:/tsu_icl_cod_02/i.txt
+../TestFiles/M.txt c:/tsu_icl_cod_02/m.txt
+../TestFiles/R.txt c:/tsu_icl_cod_02/r.txt

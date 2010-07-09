@@ -1,0 +1,101 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+
+PRJ_PLATFORMS
+// specify the platforms your component needs to be built for here
+// may add platform for OMAP, Helen etc
+DEFAULT
+// DEFAULT MISA 
+// WINS ARMI THUMB
+// MINT
+
+PRJ_MMPFILES
+
+PRJ_TESTMMPFILES
+
+// TSI_WP5 files
+../MMPFiles/TSU_ICL_TMDAVID.mmp
+
+PRJ_EXPORTS
+
+PRJ_TESTEXPORTS
+
+// scripts
+../scripts/TSU_ICL_TMDAVID.script	c:/tsu_icl_tmdavid.script
+
+// iby
+//TSU_ICL_TMDAVID.iby			\epoc32\rom\include\TSU_ICL_TMDAVID.iby
+
+// Test files
+
+../TestFiles/TMdaVid/mbm12bpp.mbm    c:/tmdavid/mbm12bpp.mbm
+../TestFiles/TMdaVid/mbm16bpp.mbm    c:/tmdavid/mbm16bpp.mbm
+../TestFiles/TMdaVid/mbm1bpp.mbm    c:/tmdavid/mbm1bpp.mbm
+../TestFiles/TMdaVid/mbm24bpp.mbm    c:/tmdavid/mbm24bpp.mbm
+../TestFiles/TMdaVid/mbm2bpp.mbm    c:/tmdavid/mbm2bpp.mbm
+../TestFiles/TMdaVid/mbm4bppc.mbm    c:/tmdavid/mbm4bppc.mbm
+../TestFiles/TMdaVid/mbm4bppm.mbm    c:/tmdavid/mbm4bppm.mbm
+../TestFiles/TMdaVid/mbm8bppc.mbm    c:/tmdavid/mbm8bppc.mbm
+../TestFiles/TMdaVid/mbm8bppm.mbm    c:/tmdavid/mbm8bppm.mbm
+../TestFiles/TMdaVid/tmdavid.mbm    c:/tmdavid/tmdavid.mbm
+../TestFiles/TMdaVid/Anon/otabitmap.mbm    c:/tmdavid/anon/otabitmap.mbm
+../TestFiles/TMdaVid/Anon/wirelessbitmap.mbm    c:/tmdavid/anon/wirelessbitmap.mbm
+
+../TestFiles/TMdaVid/Ref/bmp1bpp.mbm    c:/tmdavid/ref/bmp1bpp.mbm
+../TestFiles/TMdaVid/Ref/bmp24bpp.mbm    c:/tmdavid/ref/bmp24bpp.mbm
+../TestFiles/TMdaVid/Ref/bmp4bpp.mbm    c:/tmdavid/ref/bmp4bpp.mbm
+../TestFiles/TMdaVid/Ref/bmp8bpp.mbm    c:/tmdavid/ref/bmp8bpp.mbm
+../TestFiles/TMdaVid/Ref/bmprle4.mbm    c:/tmdavid/ref/bmprle4.mbm
+../TestFiles/TMdaVid/Ref/bmprle8.mbm    c:/tmdavid/ref/bmprle8.mbm
+../TestFiles/TMdaVid/Ref/jfif10.mbm    c:/tmdavid/ref/jfif10.mbm
+../TestFiles/TMdaVid/Ref/jfif100.mbm    c:/tmdavid/ref/jfif100.mbm
+../TestFiles/TMdaVid/Ref/jfif30.mbm    c:/tmdavid/ref/jfif30.mbm
+../TestFiles/TMdaVid/Ref/jfif420.mbm    c:/tmdavid/ref/jfif420.mbm
+../TestFiles/TMdaVid/Ref/jfif422.mbm    c:/tmdavid/ref/jfif422.mbm
+../TestFiles/TMdaVid/Ref/jfif444.mbm    c:/tmdavid/ref/jfif444.mbm
+../TestFiles/TMdaVid/Ref/jfif60.mbm    c:/tmdavid/ref/jfif60.mbm
+../TestFiles/TMdaVid/Ref/jfifMono.mbm    c:/tmdavid/ref/jfifmono.mbm
+../TestFiles/TMdaVid/Ref/jfifProg.mbm    c:/tmdavid/ref/jfifprog.mbm
+../TestFiles/TMdaVid/Ref/mbm12bpp.mbm    c:/tmdavid/ref/mbm12bpp.mbm
+../TestFiles/TMdaVid/Ref/mbm16bpp.mbm    c:/tmdavid/ref/mbm16bpp.mbm
+../TestFiles/TMdaVid/Ref/mbm1bpp.mbm    c:/tmdavid/ref/mbm1bpp.mbm
+../TestFiles/TMdaVid/Ref/mbm24bpp.mbm    c:/tmdavid/ref/mbm24bpp.mbm
+../TestFiles/TMdaVid/Ref/mbm2bpp.mbm    c:/tmdavid/ref/mbm2bpp.mbm
+../TestFiles/TMdaVid/Ref/mbm4bppc.mbm    c:/tmdavid/ref/mbm4bppc.mbm
+../TestFiles/TMdaVid/Ref/mbm4bppm.mbm    c:/tmdavid/ref/mbm4bppm.mbm
+../TestFiles/TMdaVid/Ref/mbm8bppc.mbm    c:/tmdavid/ref/mbm8bppc.mbm
+../TestFiles/TMdaVid/Ref/mbm8bppm.mbm    c:/tmdavid/ref/mbm8bppm.mbm
+../TestFiles/TMdaVid/Ref/png1.mbm    c:/tmdavid/ref/png1.mbm
+../TestFiles/TMdaVid/Ref/png2.mbm    c:/tmdavid/ref/png2.mbm
+../TestFiles/TMdaVid/Ref/png3.mbm    c:/tmdavid/ref/png3.mbm
+../TestFiles/TMdaVid/Ref/png4.mbm    c:/tmdavid/ref/png4.mbm
+../TestFiles/TMdaVid/Ref/scaled0.mbm    c:/tmdavid/ref/scaled0.mbm
+../TestFiles/TMdaVid/Ref/scaled1.mbm    c:/tmdavid/ref/scaled1.mbm
+../TestFiles/TMdaVid/Ref/scaled2.mbm    c:/tmdavid/ref/scaled2.mbm
+../TestFiles/TMdaVid/Ref/scaled3.mbm    c:/tmdavid/ref/scaled3.mbm
+../TestFiles/TMdaVid/Ref/scaled4.mbm    c:/tmdavid/ref/scaled4.mbm
+../TestFiles/TMdaVid/Ref/scaled5.mbm    c:/tmdavid/ref/scaled5.mbm
+../TestFiles/TMdaVid/Ref/tif1.mbm    c:/tmdavid/ref/tif1.mbm
+../TestFiles/TMdaVid/Ref/tif2.mbm    c:/tmdavid/ref/tif2.mbm
+../TestFiles/TMdaVid/Ref/tif3.mbm    c:/tmdavid/ref/tif3.mbm
+../TestFiles/TMdaVid/Ref/tmdavid.mbm    c:/tmdavid/ref/tmdavid.mbm
+../TestFiles/TMdaVid/Ref/trans.mbm    c:/tmdavid/ref/trans.mbm
+../TestFiles/TMdaVid/Ref/wmf1.mbm    c:/tmdavid/ref/wmf1.mbm
+../TestFiles/TMdaVid/Ref/wmf2.mbm    c:/tmdavid/ref/wmf2.mbm
+../TestFiles/TMdaVid/Ref/wmf3.mbm    c:/tmdavid/ref/wmf3.mbm
+../TestFiles/TMdaVid/Ref/wmf4.mbm    c:/tmdavid/ref/wmf4.mbm
+../TestFiles/TMdaVid/Ref/wmf5.mbm    c:/tmdavid/ref/wmf5.mbm
+../TestFiles/TMdaVid/Ref/wmf6.mbm    c:/tmdavid/ref/wmf6.mbm

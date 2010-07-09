@@ -13,11 +13,11 @@
 // Description:
 //
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 //Dummy Content Pipe Unit Tests
 ../mmpfiles/tsu_omxil_dummycontentpipe.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 // test scripts
 ../scripts/tsu_omxil_dummycontentpipe.script	c:/omxil/tsu_omxil_dummycontentpipe.script
 

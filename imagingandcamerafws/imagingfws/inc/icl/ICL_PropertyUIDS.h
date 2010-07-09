@@ -1,4 +1,4 @@
-// Copyright (c) 2006-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2006-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -97,6 +97,12 @@ Identifier for the auto rotate support property.
  @see KUidJPGAutoRotateSupportValue
 */ 
 const TUid KUidJPGAutoRotateSupport   = {KUidJPGAutoRotateSupportValue};
+
+/** 
+Identifier for optimised partial decoding support property.
+ @see KUidJPGOptimisedPartialDecodingSupportValue
+*/ 
+const TUid KUidJPGOptimisedPartialDecodingSupport = {KUidJPGOptimisedPartialDecodingSupportValue};
 
 /**
 Identifier for an ICL Extension. This is used in the opaque_data section of an ICL

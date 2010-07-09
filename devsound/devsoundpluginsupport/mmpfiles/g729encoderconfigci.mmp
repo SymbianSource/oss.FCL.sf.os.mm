@@ -28,7 +28,7 @@ TARGETTYPE 	PLUGIN
 UID	0x10009D8D   KMmfUidCustomInterfaceG729EncoderIntfcDll
 VENDORID 0x70000001
 
-SOURCEPATH	../src/custominterfaces
+SOURCEPATH	../src/CustomInterfaces
 
 SOURCE	g729encoderconfigci.cpp
 

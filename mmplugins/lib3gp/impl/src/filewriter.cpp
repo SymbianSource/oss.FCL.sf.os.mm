@@ -57,7 +57,6 @@ void CFileWriter::ConstructL( RFile64& aFile )
     iOutputBufferSize = KFileWriterBufferSizeSmall;
     iMaxOutputBufHardLimit = KFileWriterHardBufLimit;
     iMaxOutputBufSoftLimit = KFileWriterSoftBufLimit;
-    iOutputFileSetSizeCooldown = 0;
 
     iMemReadyForWriting = EFalse;
     iInputBuf = NULL;
@@ -496,25 +495,7 @@ void CFileWriter::RunL()
         PRINT((_L("e_cfilewriter_runl 0")));  
         return;
         }
-        
-	// SetSize - reserve room for file writes in output file for all full buffers.
-	// This is done for performance reasons. Reserving space beforehand reduce FS overhead per write.
-	// Don't do new setsize until previously increased filesize has been filled.
-	if ( iOutputFileSetSizeCooldown ) 
-		{
-		iOutputFileSetSizeCooldown--;
-		PRINT((_L("CFileWriter::RunL() Setsize, buffer was written to reserved space, cooldown: %d"), iOutputFileSetSizeCooldown));		
-		}
-		
-	// if we have cumulated over iMaxOutputBufSoftLimit/2 full output buffers and setsize not in cooldown then set new size.
-	if ( !iOutputFileSetSizeCooldown && (iFullBufferQueue.Count() > iMaxOutputBufSoftLimit/2) )
-		{
-		PRINT(_L("CFileWriter::RunL() Setsize, start new size set"));
-		iOutputFile->SetSize(iOutputFileSize + (iFullBufferQueue.Count()*iOutputBufferSize) );
-		iOutputFileSetSizeCooldown = iFullBufferQueue.Count();
-		PRINT((_L("CFileWriter::RunL() Setsize, New size set to: %d, cooldown set: %d"), iOutputFileSize + (iFullBufferQueue.Count()*iOutputBufferSize), iOutputFileSetSizeCooldown));		
-		}
-	
+
     if ( iFullBufferQueue.Count() >= iMaxOutputBufHardLimit )
         {
         while ( iFullBufferQueue.Count() > iMaxOutputBufSoftLimit )

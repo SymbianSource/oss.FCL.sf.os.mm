@@ -23,7 +23,7 @@
 
 #include <e32base.h>
 #include <LocationBase.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 const TUid KUidListenerLocationEffect = {0x1020382D};
 

@@ -28,6 +28,9 @@ data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_record.script
 data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_long_record.script	\tsi_a3f_devsound_pcm_long_record.script
 
 data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_play.script			\tsi_a3f_devsound_pcm_play.script
+data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_play2.script			\tsi_a3f_devsound_pcm_play2.script
+data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_play3.script			\tsi_a3f_devsound_pcm_play3.script
+data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_play4.script			\tsi_a3f_devsound_pcm_play4.script
 // To be uncommented if long playback script required
 data=EPOCROOT##epoc32\data\c\tsi_a3f_devsound\tsi_a3f_devsound_pcm_long_play.script		\tsi_a3f_devsound_pcm_long_play.script
 

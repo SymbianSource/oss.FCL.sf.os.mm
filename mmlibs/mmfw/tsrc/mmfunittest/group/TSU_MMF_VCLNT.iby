@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -16,12 +16,7 @@
 #ifndef TSU_MMF_VCLNT_IBY
 #define TSU_MMF_VCLNT_IBY
 
-#include <testframework.iby>
-#include <cinidata.iby>
-
-file=ABI_DIR\DEBUG_DIR\TSU_MMF_VCLNT_01.DLL 			System\Libs\TSU_MMF_VCLNT_01.DLL
-
-file=ABI_DIR\BUILD_DIR\TS_CmmfVideoTestCustomCommands.dll 	System\Libs\TS_CmmfVideoTestCustomCommands.dll
+#include <TSU_MMF_VCLNT_excl_test.iby>
 
 data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_VCLNT_01_WM_CAF_V2.script    	\TSU_MMF_VCLNT_01_WM_CAF_V2.script
 data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_VCLNT_01_WM_CAF_V2_priority.script    	\TSU_MMF_VCLNT_01_WM_CAF_V2_priority.script
@@ -55,20 +50,6 @@ data=EPOCROOT##epoc32\data\c\mm\tsu_mmf_vclnt_u_01_gce_unavailable.script	\tsu_m
 #endif
 #endif
 #endif
-
-#ifdef SYMBIAN_GRAPHICS_USE_GCE
-ECOM_PLUGIN(ts_cmmfvideotestcontroller_gce.dll,101f7d2d_gce.rsc)
-#else
-ECOM_PLUGIN(ts_cmmfvideotestcontroller.dll,101f7d2d.rsc)
-#endif
-
-ECOM_PLUGIN(ts_videoinput.dll,101f7f8c.rsc)
-ECOM_PLUGIN(ts_videooutput.dll,101f7f8d.rsc)
-ECOM_PLUGIN(TS_VideoTestFormat.dll,101f7f89.rsc)
-
-file=ABI_DIR\BUILD_DIR\VclntAppTest.exe	Sys\bin\VclntAppTest.exe
-data=EPOCROOT##epoc32\data\Z\resource\Apps\VclntAppTest.rsc		resource\Apps\VclntAppTest.rsc
-data=EPOCROOT##epoc32\data\Z\private\10003a3f\apps\VclntAppTest_reg.rsc  	private\10003a3f\apps\VclntAppTest_reg.rsc
 
 #endif
 

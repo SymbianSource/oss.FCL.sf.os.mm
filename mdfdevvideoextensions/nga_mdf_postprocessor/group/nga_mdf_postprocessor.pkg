@@ -20,7 +20,7 @@
 &EN
 
 ; Header
-#{"NGA MDF PostProcessor"},(0x0251318C), 1, 0, 0, TYPE=PU
+#{"NGA MDF PostProcessor"},(0x0251318C), 1, 0, 0, TYPE=SA,RU
 
 ; Localised Vendor name
 %{"Nokia"}

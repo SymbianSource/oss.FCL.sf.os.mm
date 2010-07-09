@@ -1004,33 +1004,25 @@ void CMMFDevSoundAdaptation::CBody::GetSupportedOutputDataTypesL(
 // -----------------------------------------------------------------------------
 //
 TInt CMMFDevSoundAdaptation::CBody::SetClientConfig(
-								const TMMFClientConfig& aClientConfig)
-	{
-	DP_CONTEXT(CMMFDevSoundAdaptation::CBody::SetClientConfig *CD1*, CtxDevSound, DPLOCAL);
-	DP_IN();
+                                const TProcessId& aActualProcessId,
+                                const TProcessId& aProcessId)
+    {
+    DP_CONTEXT(CMMFDevSoundAdaptation::CBody::SetClientConfig *CD1*, CtxDevSound, DPLOCAL);
+    DP_IN();
 
-	TInt err = iDevAudio->SetClientConfig(aClientConfig);
-	if (err == KErrNone)
-		{
-		iClientConfig = aClientConfig;
-		}
-	DP0_RET(err, "%d");
-	}
+    TInt err = iDevAudio->SetClientConfig(aActualProcessId, aProcessId);
+    DP0_RET(err, "%d");
+    }
 
-// -----------------------------------------------------------------------------
-// TMMFClientConfig& CMMFDevSoundAdaptation::CBody::ClientConfig
-// Returns client capabilities of this instance of DevSound Adaptation.
-// (other items were commented in a header).
-// -----------------------------------------------------------------------------
-//
-const TMMFClientConfig& CMMFDevSoundAdaptation::CBody::ClientConfig() const
-	{
-	DP_CONTEXT(CMMFDevSoundAdaptation::CBody::ClientConfig *CD1*, CtxDevSound, DPLOCAL);
-	DP_IN();
-	DP_OUT();
-	return iClientConfig;
-	}
+TInt CMMFDevSoundAdaptation::CBody::SetClientConfig(
+                                const TProcessId& aProcessId)
+    {
+    DP_CONTEXT(CMMFDevSoundAdaptation::CBody::SetClientConfig *CD1*, CtxDevSound, DPLOCAL);
+    DP_IN();
 
+    TInt err = iDevAudio->SetClientConfig(aProcessId);
+    DP0_RET(err, "%d");
+    }
 
 TBool CMMFDevSoundAdaptation::CBody::CloseDevSound()
 	{

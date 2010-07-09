@@ -17,9 +17,13 @@
 //
 
 PRJ_MMPFILES
-  ../mmpfiles/TSU_ICL_BTRANS_01.mmp
 
 PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+  ../mmpfiles/TSU_ICL_BTRANS_01.mmp
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_ICL_BTRANS_01.script	c:/tsu_icl_btrans_01.script

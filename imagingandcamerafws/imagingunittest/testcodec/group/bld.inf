@@ -20,14 +20,17 @@ PRJ_PLATFORMS
 
 PRJ_EXPORTS
 
+PRJ_MMPFILES
+
+PRJ_TESTEXPORTS
+
 // IBY file
 ExtendedTestCodec.iby		/epoc32/rom/include/extendedtestcodec.iby
 TestCodec.iby			/epoc32/rom/include/testcodec.iby
 fwexttestcodec.iby		/epoc32/rom/include/fwexttestcodec.iby
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 ../mmpfiles/ExtendedPlugin.mmp
 ../mmpfiles/ExtendedTestCodec.mmp
 ../mmpfiles/TestCodec.mmp
 ../mmpfiles/fwexttestcodec.mmp
-

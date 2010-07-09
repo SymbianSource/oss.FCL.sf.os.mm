@@ -1609,8 +1609,8 @@ TInt	CTestStepConversion::EnquireDecoderUIDAndImplementationInfoL(const TDesC& a
 	INFO_PRINTF1(_L("Implementation information"));
 	INFO_PRINTF2(_L("Display name : %S"), &dispName);
 	INFO_PRINTF2(_L("Version : %d"), theVersion);
-	INFO_PRINTF2(_L("Data type : %S"), &dataType);
-	INFO_PRINTF2(_L("Opaque data : %S"), &opaqueData);
+	//INFO_PRINTF2(_L("Data type : %S"), &dataType);
+	//INFO_PRINTF2(_L("Opaque data : %S"), &opaqueData);
 
 //-------
 	CleanupStack::PopAndDestroy(3, theImageFromFile); //theImageDecoder, theImageFromFile, theImplementationInfo
