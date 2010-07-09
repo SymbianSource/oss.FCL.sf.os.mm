@@ -1337,8 +1337,8 @@ TVideoPicture* CNGAPostProcHwDevice::MmvbmGetBufferL(const TSize& aSize)
         User::Leave(KErrNotReady);
 	  }
 
-    if (aSize.iWidth < KMinVBMInputWidth 
-        || aSize.iHeight < KMinVBMInputHeight
+    if (aSize.iWidth <= KMinVBMInputWidth 
+        || aSize.iHeight <= KMinVBMInputHeight
         || aSize.iWidth > iVBMBufferOptions.iBufferSize.iWidth 
         || aSize.iHeight > iVBMBufferOptions.iBufferSize.iHeight)
   	{

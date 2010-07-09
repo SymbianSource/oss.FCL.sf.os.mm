@@ -20,7 +20,7 @@
 #define __CUSTOMCOMMANDUTILITY_H
 
 #include <e32base.h>
-#include <MCustomCommand.h>
+#include <mcustomcommand.h>
 //#include "CustomCommandTypes.h"
 
 

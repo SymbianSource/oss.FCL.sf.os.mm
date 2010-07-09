@@ -24,19 +24,90 @@
 
 /**
  *
+ * Console reader mixin class.
+ * Any main program or class using a CServerConsole
+ * should implement this class.
+ *
+ * @xxxx
+ *
+ */
+class MConsoleReader
+	{
+public:
+/**
+ *
+ * Processes a received keystroke.
+ *
+ * @param	"TKeyCode aKeystroke"
+ *			The received keystroke.
+ *
+ * @xxxx 
+ *
+ */
+	virtual void InputReceived(TKeyCode aKeystroke) = 0;
+/**
+ *
+ * Handles console reader errors.
+ *
+ * @param	"TInt aError"
+ *			The error code.
+ *
+ * @xxxx 
+ *
+ */
+	virtual void Error(TInt aError) = 0;
+	};
+
+/**
+ *
+ * Keystroke reader for CServerConsole.
+ *
+ *
+ * @xxxx
+ *
+ */
+class CConsoleReader : public CActive
+	{
+public:
+	static CConsoleReader* NewL(CConsoleBase& aConsole);
+	~CConsoleReader();
+	void DoRead(MConsoleReader& aClient);
+	void DoRead();//keeping same client as before
+	void RunL();
+
+protected:
+	void DoCancel();
+
+private:
+	CConsoleReader(CConsoleBase& aConsole);
+
+private:
+	MConsoleReader* iClient;
+	CConsoleBase& iConsole;
+	TKeyCode iKeyStroke;
+	};
+
+/**
+ *
  * Active console for test input.
  * To be used where manual control of testing is required
  *
  * @xxxx
  *
  */
-class CServerConsole : public CBase
+class CServerConsole : public CActive
 	{
 public:
 	static CServerConsole* NewL(const TDesC& aName);
 	~CServerConsole();
 
 	void SetInstructionsL(const TDesC& aInstructions);
+	void Read(MConsoleReader& aReader);
+	void ReadCancel();
+
+	void RunL();
+	void DoCancel();
+	TInt RunError(TInt aError);
 
 	// accessor
 	CConsoleBase* Console() const;
@@ -50,6 +121,7 @@ private:
 	TRectBuf iWindow;
 	HBufC* iWindowName;
 	HBufC* iInstructions;
+	CConsoleReader* iConsoleReader;
 	};
 
 #endif // __SERVERCONSOLE_H__

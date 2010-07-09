@@ -1423,7 +1423,7 @@ TVerdict CTestMmfAclntAudioPlayVolume::DoTestL(CMdaAudioPlayerUtility* aPlayer)
 		INFO_PRINTF2( _L("Volume: Max Volume = %d"),iVolume);
 		
 		//on device & emulator KMaxVolume have different values
-		//if(iVolume != KMaxVolume) // XXX: how to cross ref. this appears to be random values at the moment 
+		//if(iVolume != KMaxVolume) // TODO: how to cross ref. this appears to be random values at the moment 
 		//	{
 		//	INFO_PRINTF3( _L("Expected volume: %d, received volume : %d"), 
 		//		KMaxVolume, iVolume);
@@ -2111,8 +2111,8 @@ TVerdict CTestMmfAclntAudioType::DoTestL(CMdaAudioPlayerUtility* /*aPlayer*/)
 	// what code should/might look like.
 	//CMdaAudioType* type = aPlayer->TypeL();
 
-	// CMdaAudioType class not complete:
-	// XXX check data returned is valid???
+	// CMdaAudioType class incomplete:
+	// TODO check data returned is valid???
 
 	return ret;
 	}

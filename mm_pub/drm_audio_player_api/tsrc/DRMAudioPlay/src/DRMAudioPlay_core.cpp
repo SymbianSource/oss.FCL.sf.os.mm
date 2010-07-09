@@ -21,6 +21,7 @@
 #include <caf.h>
 #include <caf/supplier.h>
 #include <caf/importfile.h>
+#include <Oma2Agent.h>
 #include <BAUTILS.H>
 
 using namespace ContentAccess;
@@ -33,9 +34,6 @@ using namespace ContentAccess;
 	const TInt CDRMAudioPlay::KDefaultPlayDelay = 3000000;
 	const TInt CDRMAudioPlay::KDefaultStopOpenPlayDelay = 1000000;
 	const TInt CDRMAudioPlay::KDefaultReportDelay = 500000;
-	
-	// Taken from Oma2Agent.h
-	_LIT8(KOma1XmlRoContentType, "application/vnd.oma.drm.rights+xml");
 
 	//Cases
 	const TInt CDRMAudioPlay::KCaseImplementationInformation                        = 1001;

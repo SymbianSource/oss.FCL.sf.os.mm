@@ -1,4 +1,4 @@
-// Copyright (c) 2006-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -13,10 +13,14 @@
 // Description:
 //
 
-#ifndef MMFAUDIOTONETESTCONTROLLER.IBY
-#define MMFAUDIOTONETESTCONTROLLER.IBY
+PRINT Unit Testing for Test Framework - ServerConsole
+//
+PRINT 
+//
+LOAD_SUITE TSU_MmTsth21.dll
+//
+//! @SYMTestCaseID MM-TSTH-U-2101
 
-ECOM_PLUGIN(mmfaudiotonetestcontroller.dll,2002C398.rsc)
-
-#endif //MMFAUDIOTONETESTCONTROLLER.IBY
-
+RUN_TEST_STEP 10000 TSU_MmTsth21 MM-TSTH-U-2101
+TEST_COMPLETE
+//

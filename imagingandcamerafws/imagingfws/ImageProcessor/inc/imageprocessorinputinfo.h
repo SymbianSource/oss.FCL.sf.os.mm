@@ -23,7 +23,6 @@
 #define __IMAGE_PROCESSOR_INPUT_INFO_H__
 
 #include <e32base.h>
-#include <gdi.h>
 
 namespace ImageProcessor
 	{

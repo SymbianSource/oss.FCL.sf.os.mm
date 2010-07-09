@@ -59,7 +59,7 @@ TVerdict CTestMmfAclntOpenFile7805::DoTestL(CMdaAudioPlayerUtility* aPlayer)
 	
 	TInt failCount = 1;
 	TBool completed = EFalse;
-	iAllocTestStepResult = EPass; // XXX check?? assume pass
+	iAllocTestStepResult = EPass; // TODO check?? assume pass
 	TBool reachedEnd = EFalse; // Note: declare outside loop to help with debugging
 	
 	aPlayer->UseSharedHeap(); //-Enable UseSharedHeap to test controller alloc failures

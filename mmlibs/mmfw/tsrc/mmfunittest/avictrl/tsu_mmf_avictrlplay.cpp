@@ -2318,7 +2318,7 @@ TVerdict RTestStepAviPlayCtrlMemAlloc1::DoTestStepL()
 	
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -2430,7 +2430,7 @@ TVerdict RTestStepAviPlayCtrlMemAlloc2::DoTestStepL()
 		
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -2531,7 +2531,7 @@ TVerdict RTestStepAviPlayCtrlMemAlloc3::DoTestStepL()
 	
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();

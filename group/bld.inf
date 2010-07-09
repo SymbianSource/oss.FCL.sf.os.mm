@@ -29,6 +29,8 @@ PRJ_MMPFILES
 #include "../mm_pub/group/bld.inf"
 #include "../devsoundextensions/group/bld.inf"
 #include "../mdfdevvideoextensions/group/bld.inf"
+#include "../frametable_stub/group/bld.inf"
+#include "../eaacplusutil_stub/group/bld.inf"
 
 
 

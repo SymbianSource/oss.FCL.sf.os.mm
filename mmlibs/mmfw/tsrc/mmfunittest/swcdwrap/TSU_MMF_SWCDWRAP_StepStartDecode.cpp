@@ -145,7 +145,7 @@ CTestStep_MMF_SWCDWRAP_U_0010::CTestStep_MMF_SWCDWRAP_U_0010()
 TVerdict CTestStep_MMF_SWCDWRAP_U_0010::DoTestStepL( void )
 /**
  * Use case: N/A
- * Use Start() to play one not completed buffer synchronously
+ * Use Start() to play one incomplete buffer synchronously
  * buffer size < codec buffer size
  * @test Req. under test REQ1931.2
  */
@@ -257,7 +257,7 @@ CTestStep_MMF_SWCDWRAP_U_0012::CTestStep_MMF_SWCDWRAP_U_0012()
 TVerdict CTestStep_MMF_SWCDWRAP_U_0012::DoTestStepL( void )
 /**
  * Use case: N/A
- * Use Start() to play five complete and 1 not completed buffers synchronously
+ * Use Start() to play five complete and 1 incomplete buffers synchronously
  * @test Req. under test REQ1931.2
  */
 	{
@@ -280,7 +280,7 @@ TVerdict CTestStep_MMF_SWCDWRAP_U_0012::DoTestStepL( void )
 				verdict = EFail;
 				}
 			if (iHwDeviceObserver->NumberOfBuffersObserved() != 6)
-				{//expected 6 buffers 5 complete + 1 not completed buffer
+				{//expected 6 buffers 5 complete + 1 incomplete buffer
 				INFO_PRINTF1(_L("incorrect number of buffers"));
 				verdict = EFail;
 				}
@@ -1142,7 +1142,7 @@ CTestStep_MMF_SWCDWRAP_U_0040::CTestStep_MMF_SWCDWRAP_U_0040()
 TVerdict CTestStep_MMF_SWCDWRAP_U_0040::DoTestStepL( void )
 /**
  * Use case: N/A
- * Use Start() to play one not completed buffer synchronously using 2:1 codec
+ * Use Start() to play one incomplete buffer synchronously using 2:1 codec
  * buffer size < codec buffer size
  * @test Req. under test REQ1931.2
  */
@@ -1254,7 +1254,7 @@ CTestStep_MMF_SWCDWRAP_U_0042::CTestStep_MMF_SWCDWRAP_U_0042()
 TVerdict CTestStep_MMF_SWCDWRAP_U_0042::DoTestStepL( void )
 /**
  * Use case: N/A
- * Use Start() to play five complete and 1 not completed buffers synchronously using 2:1 codec
+ * Use Start() to play five complete and 1 incomplete buffers synchronously using 2:1 codec
  * buffer size < codec buffer size
  * @test Req. under test REQ1931.2
  */
@@ -1278,7 +1278,7 @@ TVerdict CTestStep_MMF_SWCDWRAP_U_0042::DoTestStepL( void )
 				verdict = EFail;
 				}
 			if (iHwDeviceObserver->NumberOfBuffersObserved() != 6)
-				{//expected 6 buffers 5 complete + 1 not completed buffer
+				{//expected 6 buffers 5 complete + 1 incomplete buffer
 				INFO_PRINTF1(_L("incorrect number of buffers"));
 				verdict = EFail;
 				}

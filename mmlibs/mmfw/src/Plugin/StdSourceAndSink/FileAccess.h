@@ -18,7 +18,7 @@
 
 #include <caf/content.h>
 #include <caf/data.h>
-#include <mmf/common/mmcaf.h>
+#include "mmf/common/mmcaf.h"
 
 // Abstract class providing generic file access
 class MGenericFile
@@ -130,9 +130,8 @@ private:
 	HBufC* iFilePath;
 	ContentAccess::CData* iData;
 
-	RFile   iLegacyFile;
-	RFile64 iFile64; //For defect EASA-84ZC6J 
-	TBool   iLegacyFileOpen;
+	RFile iLegacyFile;
+	TBool iLegacyFileOpen;
 	};
 
 

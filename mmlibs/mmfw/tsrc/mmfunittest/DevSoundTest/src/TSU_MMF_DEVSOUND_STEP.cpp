@@ -11182,7 +11182,7 @@ void RA3FDevSoundPlayPauseFlushResumeTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,
 					{
 					iBuffer->SetLastBuffer (ETrue);
 					}
-				INFO_PRINTF1(_L("CMMFDevSound::PlayData")); //XXX tidy up
+				INFO_PRINTF1(_L("CMMFDevSound::PlayData")); //todo tidy up
 				iMMFDevSound->PlayData();
 				}
 			else if ((aDevSoundEvent == EEventTimerComplete) && (aError == KErrNone))

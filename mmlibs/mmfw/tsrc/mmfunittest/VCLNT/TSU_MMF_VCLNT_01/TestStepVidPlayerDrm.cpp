@@ -26,7 +26,7 @@
 //
 // Literals 
 //
-//_LIT(KConfigFile, "video.ini");							// config file for this test - XXX use script to load video.ini
+//_LIT(KConfigFile, "video.ini");							// config file for this test - TODO use script to load video.ini
 _LIT(KSectionDrm, "SectionDRM");						// video.ini section
 _LIT(KEntryFileRights, "VideoContent");						// video.ini filename entry
 _LIT(KEntryFileNoRights, "VideoContentNoRights");						// video.ini filename entry
@@ -442,7 +442,7 @@ TVerdict CTestStepVidPlayerDrm::DoTestStepPostambleL(void)
 	iFile.Close();
 	iFs.Close();
 
-	UnloadConfig();	// XXX use script to load video.ini
+	UnloadConfig();	// TODO use script to load video.ini
 	
 	// Destroy the scheduler
 	return CTestStepUnitMMFVidClient::DoTestStepPostambleL();

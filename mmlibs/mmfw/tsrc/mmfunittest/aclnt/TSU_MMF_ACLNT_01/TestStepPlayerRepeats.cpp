@@ -192,7 +192,7 @@ TVerdict CTestStepPlayerRepeats::DoTestStepL()
 	iPlayer->SetRepeats(0, TTimeIntervalMicroSeconds(0) );
 
 	// use the following line to check that test silence > KMaxTInt is supported
-	// removed because it will take > 35 minutes
+	// commented out because it will take > 35 minutes
 	
 	// iPlayer->SetRepeats(1, TTimeIntervalMicroSeconds(TInt64(KMaxTInt) + 10000000));
 

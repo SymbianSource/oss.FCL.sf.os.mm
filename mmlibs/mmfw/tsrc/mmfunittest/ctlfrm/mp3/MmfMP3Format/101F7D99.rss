@@ -73,7 +73,7 @@ RESOURCE REGISTRY_INFO theInfo
 					default_data = "?"; //Preferred Controller
 					
 					// KUidMediaTypeAudio = 0x101F5D07
-					// match by header & extension - for testing
+					// match by header & extension - for Calimero testing
 					// (need to report a wav mime type so that it gets picked up by the audio app)
 					// opaque_data = "<s>Symbian<i>0x101f5d07<e>.mp3<h>ID3?????????<h>RIFF????WAVE<m>audio/wav<m>audio/x-wav";
 					

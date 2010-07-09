@@ -43,7 +43,7 @@
 #include "mmfclientaudioplayer.h"
 #include "../../ctlfrm/TS_Codes.h"
 
-_LIT(KAudioControllerName,"Symbian Audio Wav Test controller");
+_LIT(KAudioControllerName,"Symbian Audio controller");
 
 
 

@@ -47,6 +47,7 @@ ECOM_PLUGIN(recmmf.dll,101f7c0c.rsc)
 //RESOURCES
 ECOM_PLUGIN(gsm610.dll,101f504a.rsc)
 ECOM_PLUGIN(audiocodecs.dll,101f51d8.rsc)
+ECOM_PLUGIN(mmfaudiocontroller.dll,101f55bf.rsc)
 ECOM_PLUGIN(mmfstdsourceandsinkplugin.dll,101f53ae.rsc)
 ECOM_PLUGIN(mmfaudioinput.dll,101f53ba.rsc)
 ECOM_PLUGIN(mmfaudiooutput.dll,101f53b8.rsc)

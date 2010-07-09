@@ -52,17 +52,7 @@ EXPORT_C void TOutputInfo::SetSamplingL(TUid& aSampling)
 	__ASSERT_ALWAYS(iImageProcessorImpl.IsOutputSet(), User::Leave(KErrNotReady));
 	iOutputInfoImpl.SetSamplingL(aSampling);
 	}
-/**
-Retrieves access to a custom extension.
 
-@param  aExtension
-        The UID of the extension to be retrieved
+	}//namespace ImageProcessor
 
-@return Extension corresponding to the UID given as a parameter.
-*/
-EXPORT_C TAny* TOutputInfo::Extension(TUid /*aExtension*/) const
-    {
-    return NULL;    
-    }
-    }//namespace ImageProcessor
 //EOF

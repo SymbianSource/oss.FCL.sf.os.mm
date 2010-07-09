@@ -40,7 +40,7 @@
 #include <midiclientutility.h>
 #include <mmf/common/mmfcontrollerframework.h>
 
-// Uncomment this line for Jet-stream project
+// Uncomment this line for Jetstream project
 //#define JETSTREAM_TESTS  1 
 
 class CTestSuite ;

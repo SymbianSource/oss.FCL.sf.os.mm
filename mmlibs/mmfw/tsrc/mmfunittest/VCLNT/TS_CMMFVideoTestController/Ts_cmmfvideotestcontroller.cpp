@@ -318,7 +318,7 @@ void CMMFTestController::RemoveSourceSinkL()
 		User::Leave(KErrNotSupported);
 	}
 
-void CMMFTestController::ResetL() //XXX - replacement for RemoveSourceSink()
+void CMMFTestController::ResetL() //FIXME - replacement for RemoveSourceSink()
 	{
 	_LIT8(KFuncText, "ResetL Called");
 	iMemFunctionText = KFuncText;
@@ -703,7 +703,7 @@ void CMMFTestController::MapdSetVolumeRampL(const TTimeIntervalMicroSeconds& aRa
 
 	if (aRampDuration.Int64() == 10)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		} 
 	}
 
@@ -714,7 +714,7 @@ void CMMFTestController::MapdSetBalanceL(TInt aBalance)
 
 	if (aBalance == 10)
 		{
-		//XXX, check it's the correct value
+		//FIXME, check it's the correct value
 		}
 	}
 
@@ -762,7 +762,7 @@ void CMMFTestController::MardSetBalanceL(TInt aBalance)
 
 	if (aBalance == 8)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 

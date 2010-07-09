@@ -177,7 +177,7 @@ TVerdict CTestMmfAclntDoConv::DoTestL(CMdaAudioConvertUtility* aConverter)
 	INFO_PRINTF1( _L("Convert CMdaAudioConvertUtility"));
 	CActiveScheduler::Start();
 
-	// XXX Improve test. e.g. check that a valid AU file is written
+	// TODO Improve test. e.g. check that a valid AU file is written
 	if(iError == KErrNone)
 		{
 		ret = EPass;
@@ -192,7 +192,7 @@ TVerdict CTestMmfAclntDoConv::DoTestL(CMdaAudioConvertUtility* aConverter)
 		{
 		CActiveScheduler::Start();
 
-		// XXX Improve test. e.g. check that a valid AU file is written
+		// TODO Improve test. e.g. check that a valid AU file is written
 		if(iError == KErrNone)
 			{
 			ret = EPass;

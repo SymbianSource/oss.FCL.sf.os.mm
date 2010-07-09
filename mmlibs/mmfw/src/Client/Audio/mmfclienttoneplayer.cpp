@@ -860,7 +860,7 @@ void CMMFMdaAudioToneUtility::PrepareToPlayFixedSequence(TInt aSequenceNumber)
 
 void CMMFMdaAudioToneUtility::CancelPrepare()
 	{
-	// xxx - do we need to cancel the callback?  What if the callback is actually calling back another error?  Probably best not to cancel...
+	// FIXME - do we need to cancel the callback?  What if the callback is actually calling back another error?  Probably best not to cancel...
 	delete iToneConfig;
 	iToneConfig = NULL;
 

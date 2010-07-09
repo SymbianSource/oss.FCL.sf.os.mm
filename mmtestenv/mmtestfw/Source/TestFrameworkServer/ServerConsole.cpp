@@ -48,6 +48,8 @@ CServerConsole* CServerConsole::NewL(const TDesC& aName)
  */
 CServerConsole::~CServerConsole()
 	{
+	Cancel();
+	delete iConsoleReader;
 	delete iWindowName;
 	delete iInstructions;
 	delete iConsole;
@@ -62,7 +64,9 @@ CServerConsole::~CServerConsole()
  *
  */
 CServerConsole::CServerConsole()
+	:CActive(EPriorityHigh)
 	{
+	CActiveScheduler::Add(this);
 	}
 
 /**
@@ -80,6 +84,7 @@ void CServerConsole::ConstructL(const TDesC& aName)
 	{
 	iWindowName = aName.AllocL();
 	iConsole =  Console::NewL(*iWindowName, TSize(KConsFullScreen,KConsFullScreen));
+	iConsoleReader = CConsoleReader::NewL(*iConsole);
 	}
 
 /**
@@ -119,3 +124,190 @@ void CServerConsole::SetInstructionsL(const TDesC& aInstructions)
 	iConsole->Write(*iInstructions);
 	}
 
+/**
+ *
+ * Starts the console reader listening for input.
+ *
+ * @param	"MConsoleReader& aReader"
+ *			The console reader.
+ *
+ * @xxxx 
+ *
+ */
+void CServerConsole::Read(MConsoleReader& aReader)
+	{
+	iConsoleReader->DoRead(aReader);
+	}
+
+/**
+ *
+ * Stops the console reader listening for input.
+ *
+ *
+ * @xxxx 
+ *
+ */
+void CServerConsole::ReadCancel()
+	{
+	iConsoleReader->Cancel();
+	}
+
+/**
+ *
+ * RunL method for active object CServerConsole.
+ *
+ * @xxxx
+ *
+ */
+void CServerConsole::RunL()
+	{
+	User::LeaveIfError(iStatus.Int());
+	TBool reading = iConsoleReader->IsActive();
+	iConsoleReader->Cancel();
+
+	//listen for key input if we were before...
+	if (reading)
+		iConsoleReader->DoRead();
+	}
+
+/**
+ *
+ * DoCancel method for active object CServerConsole.
+ *
+ * @xxxx
+ *
+ */
+void CServerConsole::DoCancel()
+	{
+	ReadCancel();
+	}
+
+/**
+ *
+ * Error handler for active object CServerConsole.
+ * (Currently a stub)
+ *
+ * @param	"TInt aError"
+ *			The error code
+ *
+ * @return	"TInt"
+ *			The error code
+ *
+ * @xxxx
+ *
+ */
+TInt CServerConsole::RunError(TInt aError)
+	{
+	return aError;
+	}
+
+
+
+/**
+ *
+ * Static constructor for CConsoleReader.
+ *
+ * @param	"CConsoleBase& aConsole"
+ *			The console we are to read
+ *
+ * @return	"CConsoleReader*"
+ *			The constructed CConsoleReader
+ *
+ * @xxxx
+ *
+ */
+CConsoleReader* CConsoleReader::NewL(CConsoleBase& aConsole)
+	{
+	CConsoleReader* s = new(ELeave) CConsoleReader(aConsole);
+	return s;
+	}
+
+/**
+ *
+ * First-phase constructor for CConsoleReader.
+ * Adds itself to the Active Scheduler.
+ *
+ * @param	"CConsoleBase& aConsole"
+ *			console to read from
+ *
+ * @xxxx
+ *
+ */
+CConsoleReader::CConsoleReader(CConsoleBase& aConsole) :
+	CActive(EPriorityUserInput),
+	iConsole(aConsole)
+	{
+	CActiveScheduler::Add(this);
+	}
+
+/**
+ *
+ * Destructor for CConsoleReader.
+ *
+ * @xxxx
+ *
+ */
+CConsoleReader::~CConsoleReader()
+	{
+	Cancel();
+	}
+
+/**
+ *
+ * DoRead method for active object CConsoleReader;
+ * sets client and starts reading
+ *
+ * @param	"MConsoleReader& aClient"
+ *			client MConsoleReader (which will process the input)
+ *
+ * @xxxx
+ *
+ */
+void CConsoleReader::DoRead(MConsoleReader& aClient)
+	{
+	iClient = &aClient;
+	DoRead();
+	}
+
+/**
+ *
+ * DoRead method for active object CConsoleReader;
+ * starts reading from current client
+ *
+ * @xxxx
+ *
+ */
+void CConsoleReader::DoRead()
+	{
+	iConsole.Read(iStatus);
+	SetActive();
+	}
+
+/**
+ *
+ * RunL method for active object CConsoleReader;
+ * fetches a keystroke and sends it to its client for processing.
+ *
+ * @xxxx
+ *
+ */
+void CConsoleReader::RunL()
+	{
+	iKeyStroke = iConsole.KeyCode();
+	if (iStatus.Int())
+		iClient->Error(iStatus.Int());
+	else
+		iClient->InputReceived(iKeyStroke);
+	}
+
+/**
+ *
+ * DoCancel method for active object CConsoleReader
+ *
+ * @xxxx
+ *
+ */
+void CConsoleReader::DoCancel()
+	{
+	iConsole.ReadCancel();
+	}

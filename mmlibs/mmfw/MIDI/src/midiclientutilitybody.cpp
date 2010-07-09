@@ -909,7 +909,7 @@ TInt CMidiClientUtility::CBody::DoOpen(const RMMFControllerImplInfoArray& aContr
    		}
    	else
    		{
-   		// xxx - what do we do when we don't understand the error type?
+   		// FIXME - what do we do when we don't understand the error type?
    		}
    	}
 

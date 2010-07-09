@@ -802,7 +802,7 @@ void ltpcomp( CGSM610FR_Encoder* aEncoder, int2 *Nc, int2 *bc, int2 d[], int k_s
     L_result = 0;
     for (k = 0; k <= 39; k++)
 	  L_result = L_mac( L_result, wt[k], aEncoder->dp[k-lambda+120] );
-  /* Borland C++ 3.1 error if -3 (386-instructions) are used.
+  /* Borland C++ 3.1 Bug if -3 (386-instructions) are used.
   ** The code makes error (compared to (L_result > L_max)
   ** comparison. The problem disapears if the result of L_sub
   ** is stored to variable, e.g.

@@ -19,7 +19,7 @@
 #ifdef SYMBIAN_CAF_V2
 
 #include <e32base.h>
-#include <mmf/common/mmcaf.h>
+#include "mmf/common/mmcaf.h"
 #include <mmf/common/mmfstandardcustomcommands.h>
 
 

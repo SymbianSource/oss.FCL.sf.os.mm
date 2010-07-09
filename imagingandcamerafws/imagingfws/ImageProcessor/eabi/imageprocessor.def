@@ -168,6 +168,4 @@ EXPORTS
 	_ZN14ImageProcessor13CImgProcessorD1Ev @ 167 NONAME
 	_ZN14ImageProcessor13CImgProcessorD2Ev @ 168 NONAME
 	_ZN14ImageProcessor13CImgProcessor9SetInputLER14CImagePanorama @ 169 NONAME
-	_ZNK14ImageProcessor10TInputInfo9ExtensionE4TUid @ 170 NONAME
-	_ZNK14ImageProcessor11TOutputInfo9ExtensionE4TUid @ 171 NONAME
 

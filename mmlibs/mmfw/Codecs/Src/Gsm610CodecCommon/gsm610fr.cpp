@@ -22,7 +22,7 @@
 // a pointer codec object - have been added to some original routines.
 // - Global tables are now const C++ tables in tables.h header file.
 // - VAD and DTX modules have been removed from the original routines.
-// - Due to error in GNU tool chain all array indexes of type [i-1] in
+// - Due to bug in GNU tool chain all array indexes of type [i-1] in
 // rpeltp.cpp have been removed and changed to [j] type.
 // - multr, L_add, L_mac from basicop.cpp inlined
 // INCLUDES

@@ -92,8 +92,7 @@ class CMMFTestController : public CMMFController,
 #ifdef SYMBIAN_BUILD_GCE
 						   , public MMMFVideoPlaySurfaceSupportCustomCommandImplementor //,
 #endif // SYMBIAN_BUILD_GCE						   
-						   //public MMMFVideoControllerCustomCommandImplementor 
-						   //XXX - these custom commands are changing...
+						   //public MMMFVideoControllerCustomCommandImplementor FIXME - these custom commands are changing...
 #ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
 						   , public MMMFVideoPlaySubtitleSupportCustomCommandImplementor
 #endif // SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
@@ -108,7 +107,7 @@ public:
 	virtual void RemoveDataSourceL(MDataSource& aDataSource);
 	virtual void RemoveDataSinkL(MDataSink& aDataSink);
 	virtual void RemoveSourceSinkL();
-	virtual void ResetL();//XXX - replacement for RemoveSourceSink()
+	virtual void ResetL();//FIXME - replacement for RemoveSourceSink()
 	virtual void PrimeL();
 	virtual void PlayL();
 	virtual void PauseL();

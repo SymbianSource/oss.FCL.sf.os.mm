@@ -164,6 +164,4 @@ EXPORTS
 	?ZoomL@TPreview@ImageProcessor@@QBEMXZ @ 163 NONAME ; float ImageProcessor::TPreview::ZoomL(void) const
 	??1CImgProcessor@ImageProcessor@@UAE@XZ @ 164 NONAME ; ImageProcessor::CImgProcessor::~CImgProcessor(void)
 	?SetInputL@CImgProcessor@ImageProcessor@@QAEXAAVCImagePanorama@@@Z @ 165 NONAME ; void ImageProcessor::CImgProcessor::SetInputL(class CImagePanorama &)
-	?Extension@TInputInfo@ImageProcessor@@QBEPAXVTUid@@@Z @ 166 NONAME ; void * ImageProcessor::TInputInfo::Extension(class TUid) const
-	?Extension@TOutputInfo@ImageProcessor@@QBEPAXVTUid@@@Z @ 167 NONAME ; void * ImageProcessor::TOutputInfo::Extension(class TUid) const
 

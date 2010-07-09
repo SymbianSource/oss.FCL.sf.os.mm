@@ -25,7 +25,7 @@
 #include <mdaaudiotoneplayer.h>
 #include <mdaaudiooutputstream.h>
 #include <midiclientutility.h>
-#include <MCustomInterface.h>
+#include <mcustominterface.h>
 
 // FORWARD DECLARATIONS
 class MAudioOutputObserver;
