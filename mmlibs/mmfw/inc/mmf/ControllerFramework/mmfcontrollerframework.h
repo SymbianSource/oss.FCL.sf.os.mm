@@ -394,7 +394,7 @@ private:
 	TMMFMessageDestination iDestination;
 
 	/**
-	Defines whether this object has yet to be completed.
+	Defines know about object completion state.
 	*/
 	TBool iAmCompleted;
 	};

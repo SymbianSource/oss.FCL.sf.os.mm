@@ -945,7 +945,7 @@ TInt CMediaClientVideoDisplayBody::SetBackgroundSurface(TWindowData& aWindowData
     else if (aWindowData.iAutoScaleType == EAutoScaleNone)
         {
         // for non-square pixels, reduce one dimension
-        // TBD other option is to enlarge in the other dimension
+        // XXX other option is to enlarge in the other dimension
         if(pixelAspectRatio > 1)
             {
             inputHeight /= pixelAspectRatio;

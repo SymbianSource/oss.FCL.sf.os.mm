@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <RoomLevelData.h>
-#include <mcustominterface.h>
+#include <MCustomInterface.h>
 
 const TUid KUidRoomLevelEffect = {0x10207B3C};
 

@@ -116,7 +116,7 @@ void CTestSuiteAviCtrl::InitialiseL( void )
 	AddTestStepL( new(ELeave) RTestStepAviCtrlPlayInvalid(_L("MM-MMF-AVICTRL-U-0018-HP"), _L("SectionPlayer"), _L("invalid"), KAviPlayControllerUid));
 	AddTestStepL( new(ELeave) RTestStepAviCtrlNotAudioEnabled(_L("MM-MMF-AVICTRL-U-0019-HP"), _L("SectionPlayer"), _L("video_only"), KAviPlayControllerUid));
 	AddTestStepL( new(ELeave) RTestStepAviCtrlDirectScreenAccess(_L("MM-MMF-AVICTRL-U-0020-HP"), _L("SectionPlayer"), _L("video_only"), KAviPlayControllerUid));
-	// TODO: MM-MMF-AVICTRL-U-0021-HP identifier is duplicated, should be fixed
+	// XXX: MM-MMF-AVICTRL-U-0021-HP identifier is duplicated, should be fixed
 	AddTestStepL( new(ELeave) RTestStepAviCtrlSetPlayWindow(_L("MM-MMF-AVICTRL-U-0021-HP"), _L("SectionPlayer"), _L("video_only"), KAviPlayControllerUid));
 	// NOTE: More PlayController test steps follow at the bottom...
 

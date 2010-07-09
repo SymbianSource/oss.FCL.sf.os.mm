@@ -843,7 +843,7 @@ TInt CMMFWavFormatWrite::DetermineIfValidClip()
 	
 	// To avoid behavior break for now we do this only for Gsm610
 	// If the RIFF chunk data size is greater than the file size and
-	// it is not a new file, then the file must be incomplete/corrupted.
+	// it is not a new file, then the file must be corrupted or not a complete file.
 	//
 	if ( (iFourCC == KMMFFourCCCodeGSM610) && (iRiffChunkLength > fileSize) && (iBuffer->Data().Size() != 0) )
 		{

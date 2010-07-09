@@ -21,7 +21,7 @@
 
 RESOURCE REGISTRY_INFO theInfo
 	{
-	dll_uid = 0x101F7D95;
+	dll_uid = 0x2002C398;
 	interfaces = 
 		{
 		INTERFACE_INFO
@@ -33,7 +33,7 @@ RESOURCE REGISTRY_INFO theInfo
 					{
 					implementation_uid = KMmfUidControllerAudioTone ;
 					version_no = 1;
-					display_name = "Symbian Audio Tone controller";
+					display_name = "Symbian Audio Tone Test controller";
 					default_data = "?";
 					opaque_data = "<s>Symbian<n>yes<i>0x101F5D07<p>0x101FFA00";//<n>yes indicates controller has no url handling capability.
 					}

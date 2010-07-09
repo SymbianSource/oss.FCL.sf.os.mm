@@ -174,7 +174,7 @@ enum TVerdict CTestStepUnitMMFAudClient::DoTestStepPostambleL(void)
 	delete iScheduler ;
 	iScheduler = NULL;
 
-	// FIXME: determine whether this is reasonable: allow ECOM, et al to shut down properly
+	// XXX: determine whether this is reasonable: allow ECOM, et al to shut down properly
 	// it is rather horrible, but it may not be an issue at all (just a side affect of the whole
 	// EXE test bed structure
 	User::After(1000000); 

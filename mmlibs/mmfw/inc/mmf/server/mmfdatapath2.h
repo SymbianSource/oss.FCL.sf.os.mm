@@ -115,7 +115,7 @@ protected:
 	TTimeIntervalMicroSeconds iTrailingSilenceLeftToPlay;
 	
 	/**
-    The time left for the play to be completed in a particular repeat
+    The time left for the play will be completed in a particular repeat
 	*/
 	TTimeIntervalMicroSeconds iTimeLeftToPlayComplete;
 

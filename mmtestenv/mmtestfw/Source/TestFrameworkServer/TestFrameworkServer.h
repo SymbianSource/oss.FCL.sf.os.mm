@@ -84,7 +84,7 @@ private:
  * @xxxx
  *
  */
-class CTestFrameworkServer : public CMmfIpcServer, public MConsoleReader
+class CTestFrameworkServer : public CMmfIpcServer
 	{
 public:
 	//construct / destruct
@@ -101,10 +101,6 @@ public:
 
 	void AddInputWindowL(CTestFrameworkServerSession* aOwner);
 	void RemoveWindow(CTestFrameworkServerSession* aOwner);
-
-	//from MConsoleReader
-	void InputReceived(TKeyCode aKeystroke);
-	void Error(TInt aError);
 
 private:
 	CTestFrameworkServer();

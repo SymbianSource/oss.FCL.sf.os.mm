@@ -19,13 +19,13 @@
  @file
 */
 
-target mmfaudiotonecontroller.dll
+target mmfaudiotonetestcontroller.dll
 CAPABILITY ALL -TCB
 targettype plugin
 UNPAGED
 
 // ECom Dll recognition UID followed by the unique UID for this dll
-UID 0x10009D8D 0x101F7D95
+UID 0x10009D8D 0x2002C398
 VENDORID 0x70000001
 
 SOURCEPATH		../../src/controller/audio
@@ -48,8 +48,8 @@ USERINCLUDE		/GenericGatewayComponent/BridgeAbstractionLayer
 #endif //__OMAP__
 
 
-start resource 101F7D95.rss
-target mmfaudiotonecontroller.rsc
+start resource 2002C398.rss
+target mmfaudiotonetestcontroller.rsc
 end
 
 LIBRARY euser.lib

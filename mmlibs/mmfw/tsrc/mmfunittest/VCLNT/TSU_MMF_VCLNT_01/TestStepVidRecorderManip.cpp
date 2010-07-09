@@ -699,7 +699,7 @@ TVerdict CTestStepVidRecorderPriority::DoTestStepL()
 //	TInt err;
 //	err = KErrNone;	// EABI warning removal
 
-	// do the priority test. TBD
+	// do the priority test. XXX
 
 	delete iRecorder;
 	iRecorder = NULL;
@@ -2392,7 +2392,7 @@ TVerdict CTestStepVidRecorderAudioType::DoTestStepL()
 	if (err != KErrNone)
 		return EFail;
 
-	// TBD
+	// XXX
 	//RArray<TFourCC> vidTypes;
 	//TRAP(err, GetSupportedAudioTypesL(vidTypes) );
 	//else if (err != KErrNone) 

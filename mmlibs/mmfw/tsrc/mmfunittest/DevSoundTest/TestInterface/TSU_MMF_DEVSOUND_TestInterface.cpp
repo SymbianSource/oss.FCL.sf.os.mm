@@ -195,7 +195,7 @@ void CMMF_TSU_DEVSOUND_TestInterfaceMux::RunL()
 	
 void CMMF_TSU_DEVSOUND_TestInterfaceMux::DoCancel()
 	{
-	// TODO - do we need to send a cancel message to the DeMux plugin?
+	// XXX - do we need to send a cancel message to the DeMux plugin?
 	if (iClientStatus->Int() == KRequestPending)
 		{
 		User::RequestComplete(iClientStatus, KErrCancel);
