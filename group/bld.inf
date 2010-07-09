@@ -29,8 +29,7 @@ PRJ_MMPFILES
 #include "../mm_pub/group/bld.inf"
 #include "../devsoundextensions/group/bld.inf"
 #include "../mdfdevvideoextensions/group/bld.inf"
-#include "../audio/group/bld.inf"
-#include "../video/group/bld.inf"
+
 
 
 //  End of File

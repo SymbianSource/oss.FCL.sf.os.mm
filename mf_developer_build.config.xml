@@ -16,34 +16,6 @@
 				<unit unitID="AudioEqualizerUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/AudioEqualizerUtility/group" filter="!dfs_build" name="AudioEqualizerUtility" />
 				<unit unitID="EnvironmentalReverbUtility" mrp="" bldFile="&layer_real_source_path;/devsoundextensions/effectspresets/EnvironmentalReverbUtility/group" filter="!dfs_build" name="EnvironmentalReverbUtility" />
 			</module>
-			<module name="">
-				<unit unitID="AacEncoderPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AacEncoderPlugin/group" filter="!sf_build" name="AacEncoderPlugin" />
-			</module>
-			<module name="">
-				<unit unitID="AmrNbCodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AmrNbCodecPlugin/group" filter="!sf_build" name="AmrNbCodecPlugin" />
-			</module>
-			<module name="">
-				<unit unitID="AmrWbCodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/AmrWbCodecPlugin/group" filter="!sf_build" name="AmrWbCodecPlugin" />
-			</module>
-			<module name="">
-				<unit unitID="EAacPlusCodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusCodecPlugin/group" filter="!sf_build" name="EAacPlusCodecPlugin" />
-			</module>
-			<module name="">
-				<unit unitID="EAacPlusUtil" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/EAacPlusUtil/group" filter="!sf_build" name="EAacPlusUtil" />
-			</module>		
-			<module name="">
-				<unit unitID="MP3CodecPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/MP3CodecPlugin/group" filter="!sf_build" name="MP3CodecPlugin" />
-			</module>
-			<module name="">
-				<unit unitID="WMADecoderPlugin" mrp="" bldFile="&layer_real_source_path;/audio/ARM_CMMF_codecs/WMADecoderPlugin/group" filter="!sf_build" name="WMADecoderPlugin" />
-			</module>
-			<module name="">
-				<unit unitID="ARM_MDF_Decoders" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/group" filter="!sf_build" name="ARM_MDF_Decoders" />
-			</module>
-			<module name="">
-				<unit unitID="Utilities" mrp="" bldFile="&layer_real_source_path;/video/ARM_MDF_Decoders/Utilities/group" filter="sf_build" name="Utilities" />
-			</module>
-	
 			<module name="multimedia_icl">
 				<!--unit name="imagingfws" unitID="sos.imagingfws" mrp="" bldFile="&layer_real_source_path;/imagingandcamerafws/imagingfws/group" / -->				
 			</module>

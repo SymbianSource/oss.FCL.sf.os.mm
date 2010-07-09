@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SystemDefinition schema="3.0.0">
   <package id="mm" name="Multimedia" levels="adaptation hw-if device-fw devices middleware app-if">
-    <collection id="audio" name="Audio Codecs" level="middleware">
-      <component id="arm_cmmf_codecs" filter="s60" name="ARM CMMF Codecs" class="plugin">
-        <unit bldFile="audio/arm_cmmf_codecs/group"/>
-      </component>
-    </collection>
-    <collection id="video" name="Video Codecs" level="middleware">
-    </collection>
-    <collection id="devsoundextensions" name="Devsound Extensions" level="device-fw">
+     <collection id="devsoundextensions" name="Devsound Extensions" level="device-fw">
       <component id="drmaudioplayer" filter="s60" name="DRM Audio Player">
         <unit bldFile="devsoundextensions/drmaudioplayer/group"/>
            <!-- following two units should be #included in above bld.inf -->
