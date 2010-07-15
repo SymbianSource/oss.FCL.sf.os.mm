@@ -38,7 +38,11 @@
 // might leave.
 // -----------------------------------------------------------------------------
 //
-CFileWriter::CFileWriter() : CActive( EPriorityHigh ) 
+CFileWriter::CFileWriter( TInt aInitSetSize, TInt aOutputBufferSizeSmall, TInt aOutputBufferSizeLarge ):
+	CActive( EPriorityHigh ),
+	iSetSize( aInitSetSize ),
+	iOutputBufferSizeSmall( aOutputBufferSizeSmall ),
+	iOutputBufferSizeLarge( aOutputBufferSizeLarge )
     {
     }
 
@@ -52,6 +56,7 @@ void CFileWriter::ConstructL( RFile64& aFile )
     PRINT((_L("CFileWriter::ConstructL() in")));         
     iFlush = EFalse;
     iError = KErrNone;
+
     iOutputFile = &aFile;
     iWritingStarted = EFalse;
     iOutputBufferSize = KFileWriterBufferSizeSmall;
@@ -73,9 +78,9 @@ void CFileWriter::ConstructL( RFile64& aFile )
 // Two-phased constructor.
 // -----------------------------------------------------------------------------
 //
-CFileWriter* CFileWriter::NewL( RFile64& aFile )
+CFileWriter* CFileWriter::NewL( RFile64& aFile, TInt aInitSetSize, TInt aOutputBufferSizeSmall, TInt aOutputBufferSizeLarge )
     {
-    CFileWriter* self = new(ELeave) CFileWriter;
+    CFileWriter* self = new(ELeave) CFileWriter( aInitSetSize, aOutputBufferSizeSmall, aOutputBufferSizeLarge );
     CleanupStack::PushL(self);
     self->ConstructL( aFile );
     CleanupStack::Pop(self);
@@ -111,6 +116,37 @@ CFileWriter::~CFileWriter()
     PRINT((_L("CFileWriter::~CFileWriter() out")));         
     }
 
+// -----------------------------------------------------------------------------
+// CFileWriter::UpdateOutputFileSize()
+// Updates output file size and reserves extra space for following writing 
+// if iSetSize is set.  
+// Takes into account if the position in the file was changed.
+// -----------------------------------------------------------------------------
+//
+void CFileWriter::UpdateOutputFileSize()
+    {
+    TInt64 pos = 0;
+    PRINT((_L("e_cfilewriter_write_updateoutputfilesize_seek 1")));
+    iOutputFile->Seek(ESeekCurrent, pos);
+    PRINT((_L("e_cfilewriter_write_updateoutputfilesize_seek 0")));
+    
+    PRINT((_L("CFileWriter::UpdateOutputFileSize() pos: %Ld"), pos));
+    PRINT((_L("CFileWriter::UpdateOutputFileSize() iOutputFileSize: %Ld"), iOutputFileSize));
+    PRINT((_L("CFileWriter::UpdateOutputFileSize() iSetSize: %Ld"), iSetSize));
+    
+    if (pos > iOutputFileSize) 
+        {
+        iOutputFileSize = pos;
+        }
+    
+    while (iOutputFileSize >= iSetSize) 
+        {
+        iSetSize += iOutputBufferSize * (iMaxOutputBufHardLimit >> 1);
+        PRINT((_L("e_cfilewriter_updateoutputfilesize_setsize 1")));                     
+        iOutputFile->SetSize( iSetSize );
+        PRINT((_L("e_cfilewriter_updateoutputfilesize_setsize 0")));                     
+        }
+    }
 
 // -----------------------------------------------------------------------------
 // CFileWriter::Write( const TDesC8& aBuf )
@@ -233,6 +269,7 @@ TInt CFileWriter::Flush( const TDesC8& aBuf )
         PRINT((_L("e_cfilewriter_flush_remove_buf 1")));
         if ( error == KErrNone )
             {
+            UpdateOutputFileSize();
             iFullBufferQueue[0]->Des().Zero();
             if ( iEmptyBufferQueue.Append( iFullBufferQueue[0] ) )
                 {
@@ -257,6 +294,7 @@ TInt CFileWriter::Flush( const TDesC8& aBuf )
         PRINT((_L("e_cfilewriter_flush_writeinput_sync 0")));
         if ( error == KErrNone )
             {
+            UpdateOutputFileSize();
             iInputBuf->Des().Zero();
             }
         else
@@ -293,11 +331,11 @@ TInt CFileWriter::SetOutputBufferSize( TOutputBufferSize aBufferSize, MP4Handle 
 
     if ( aBufferSize == EBufferSizeSmall ) 
         {
-        size = KFileWriterBufferSizeSmall;
+        size = iOutputBufferSizeSmall;
         }
     else if ( aBufferSize == EBufferSizeLarge ) 
         {
-        size = KFileWriterBufferSizeLarge;
+        size = iOutputBufferSizeLarge;
         }
     else if ( aBufferSize == EBufferSizeCustom )
         {
@@ -373,7 +411,7 @@ TInt CFileWriter::AddDataToBuffer( const TDesC8& aBuf )
 
     while (byteswritten < aBuf.Length() )
         {
-        available = (iInputBuf->Des()).MaxLength() - iInputBuf->Length();
+        available = iOutputBufferSize - iInputBuf->Length();
 
         if (available > 0)
             {
@@ -468,7 +506,7 @@ void CFileWriter::RunL()
 
     if ( iStatus == KErrNone )
         {
-        iOutputFileSize += iFullBufferQueue[0]->Des().Length();
+        UpdateOutputFileSize();                    
         iFullBufferQueue[0]->Des().Zero();
         iError = iEmptyBufferQueue.Append( iFullBufferQueue[0] );
         if ( iError )
@@ -487,7 +525,7 @@ void CFileWriter::RunL()
         return;
         }
 
-    PRINT((_L("CFileWriter::RunL() Buffer written, Status: Full:%d Empty:%d Filesize:%d"), iFullBufferQueue.Count(), iEmptyBufferQueue.Count(), iOutputFileSize ));
+    PRINT((_L("CFileWriter::RunL() Buffer written, Status: Full:%d Empty:%d Filesize:%Ld"), iFullBufferQueue.Count(), iEmptyBufferQueue.Count(), iOutputFileSize ));
     
     if ( iFlush )
         {
@@ -505,7 +543,7 @@ void CFileWriter::RunL()
             PRINT((_L("e_cfilewriter_runl_write 0")));                     
             if ( iError == KErrNone )
                 {
-                iOutputFileSize += iFullBufferQueue[0]->Des().Length();
+                UpdateOutputFileSize();
                 iFullBufferQueue[0]->Des().Zero();
                 iError = iEmptyBufferQueue.Append( iFullBufferQueue[0] );
                 if ( iError )
@@ -516,7 +554,7 @@ void CFileWriter::RunL()
                     return;
                     }
                 iFullBufferQueue.Remove( 0 );
-    			PRINT((_L("CFileWriter::RunL() Hardlimit : Buffer sync written, Status: Full:%d Empty:%d Filesize:%d"), iFullBufferQueue.Count(), iEmptyBufferQueue.Count(), iOutputFileSize ));
+    			PRINT((_L("CFileWriter::RunL() Hardlimit : Buffer sync written, Status: Full:%d Empty:%d Filesize:%Ld"), iFullBufferQueue.Count(), iEmptyBufferQueue.Count(), iOutputFileSize ));
                 }   
             else
                 {
@@ -533,7 +571,7 @@ void CFileWriter::RunL()
         PRINT((_L("e_cfilewriter_runl_outfile_write 0")));                     
         if ( iError == KErrNone )
             {
-            iOutputFileSize += iFullBufferQueue[0]->Des().Length();
+            UpdateOutputFileSize();
             iFullBufferQueue[0]->Des().Zero();
             iError = iEmptyBufferQueue.Append( iFullBufferQueue[0] );
             if ( iError )
@@ -544,7 +582,7 @@ void CFileWriter::RunL()
                 return;
                 }
             iFullBufferQueue.Remove( 0 );
-    		PRINT((_L("CFileWriter::RunL() Softlimit : Buffer sync written, Status: Full:%d Empty:%d Filesize:%d"), iFullBufferQueue.Count(), iEmptyBufferQueue.Count(), iOutputFileSize ));
+    		PRINT((_L("CFileWriter::RunL() Softlimit : Buffer sync written, Status: Full:%d Empty:%d Filesize:%Ld"), iFullBufferQueue.Count(), iEmptyBufferQueue.Count(), iOutputFileSize ));
             }   
         else
             {
