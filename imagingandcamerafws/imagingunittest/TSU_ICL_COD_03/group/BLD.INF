@@ -23,11 +23,18 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_EXPORTS
+
+PRJ_EXPORTS
+
+
+PRJ_TESTMMPFILES
+
 // TSI_WP5 files
 ../MMPFiles/TSU_ICL_COD_03.mmp
 ../MMPFiles/testiclresolver.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // scripts
 ../scripts/TSU_ICL_COD_03.script	c:/tsu_icl_cod_03.script
@@ -37,7 +44,7 @@ PRJ_EXPORTS
 TSU_ICL_COD_03.iby			/epoc32/rom/include/tsu_icl_cod_03.iby
 
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // test files
 ../TestFiles/gifPalette.mbm    		c:/tsu_icl_cod_03/gifpalette.mbm

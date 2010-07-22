@@ -1,7 +1,0 @@
-EXPORTS
-	_ZN11CBaseEngine4NewLEP22MProcessEngineObserverP10MBaseCodecii @ 1 NONAME
-	_ZTI18CBaseProcessEngine @ 2 NONAME ; #<TI>#
-	_ZTI25CBaseEngineImplementation @ 3 NONAME ; #<TI>#
-	_ZTV18CBaseProcessEngine @ 4 NONAME ; #<VT>#
-	_ZTV25CBaseEngineImplementation @ 5 NONAME ; #<VT>#
-

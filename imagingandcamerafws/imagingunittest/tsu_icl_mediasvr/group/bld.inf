@@ -17,9 +17,15 @@
 //
 
 PRJ_MMPFILES
-  ../mmpfiles/TSU_ICL_MediaSvr.mmp
+
 
 PRJ_EXPORTS
+
+
+PRJ_TESTMMPFILES
+  ../mmpfiles/TSU_ICL_MediaSvr.mmp
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_ICL_MediaSvr.script	c:/tsu_icl_mediasvr.script

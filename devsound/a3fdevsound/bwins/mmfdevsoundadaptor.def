@@ -2,7 +2,7 @@ EXPORTS
 	??1CMMFDevSoundAdaptation@@UAE@XZ @ 1 NONAME ; CMMFDevSoundAdaptation::~CMMFDevSoundAdaptation(void)
 	?CancelInitialize@CMMFDevSoundAdaptation@@QAEHXZ @ 2 NONAME ; int CMMFDevSoundAdaptation::CancelInitialize(void)
 	?Capabilities@CMMFDevSoundAdaptation@@QAEHAAVTMMFCapabilities@@@Z @ 3 NONAME ; int CMMFDevSoundAdaptation::Capabilities(class TMMFCapabilities &)
-	?ClientConfig@CMMFDevSoundAdaptation@@QBEABVTMMFClientConfig@@XZ @ 4 NONAME ; class TMMFClientConfig const & CMMFDevSoundAdaptation::ClientConfig(void) const
+	?ClientConfig@CMMFDevSoundAdaptation@@QBEABVTMMFClientConfig@@XZ @ 4 NONAME ABSENT ; class TMMFClientConfig const & CMMFDevSoundAdaptation::ClientConfig(void) const
 	?CloseDevSound@CMMFDevSoundAdaptation@@QAEHXZ @ 5 NONAME ; int CMMFDevSoundAdaptation::CloseDevSound(void)
 	?Config@CMMFDevSoundAdaptation@@QBE?AVTMMFCapabilities@@XZ @ 6 NONAME ; class TMMFCapabilities CMMFDevSoundAdaptation::Config(void) const
 	?CustomInterface@CMMFDevSoundAdaptation@@QAEPAXVTUid@@@Z @ 7 NONAME ; void * CMMFDevSoundAdaptation::CustomInterface(class TUid)
@@ -34,7 +34,7 @@ EXPORTS
 	?RecordInitL@CMMFDevSoundAdaptation@@QAEXXZ @ 33 NONAME ; void CMMFDevSoundAdaptation::RecordInitL(void)
 	?SamplesPlayed@CMMFDevSoundAdaptation@@QAEHXZ @ 34 NONAME ; int CMMFDevSoundAdaptation::SamplesPlayed(void)
 	?SamplesRecorded@CMMFDevSoundAdaptation@@QAEHXZ @ 35 NONAME ; int CMMFDevSoundAdaptation::SamplesRecorded(void)
-	?SetClientConfig@CMMFDevSoundAdaptation@@QAEHABVTMMFClientConfig@@@Z @ 36 NONAME ; int CMMFDevSoundAdaptation::SetClientConfig(class TMMFClientConfig const &)
+	?SetClientConfig@CMMFDevSoundAdaptation@@QAEHABVTProcessId@@@Z @ 36  NONAME ; int CMMFDevSoundAdaptation::SetClientConfig(class TProcessId const &)
 	?SetConfigL@CMMFDevSoundAdaptation@@QAEXABVTMMFCapabilities@@@Z @ 37 NONAME ; void CMMFDevSoundAdaptation::SetConfigL(class TMMFCapabilities const &)
 	?SetDTMFLengths@CMMFDevSoundAdaptation@@QAEHAAVTTimeIntervalMicroSeconds32@@00@Z @ 38 NONAME ; int CMMFDevSoundAdaptation::SetDTMFLengths(class TTimeIntervalMicroSeconds32 &, class TTimeIntervalMicroSeconds32 &, class TTimeIntervalMicroSeconds32 &)
 	?SetGain@CMMFDevSoundAdaptation@@QAEHHAAH@Z @ 39 NONAME ; int CMMFDevSoundAdaptation::SetGain(int, int &)
@@ -56,4 +56,5 @@ EXPORTS
 	?BufferErrorEvent@CMMFDevSoundAdaptation@@QAEXXZ @ 55 NONAME ; void CMMFDevSoundAdaptation::BufferErrorEvent(void)
 	?ProcessingError@CMMFDevSoundAdaptation@@QAEHAAH@Z @ 56 NONAME ; int CMMFDevSoundAdaptation::ProcessingError(int &)
 	?RollbackAdaptorActiveStateToBeforeCommit@CMMFDevSoundAdaptation@@QAEXXZ @ 57 NONAME ; void CMMFDevSoundAdaptation::RollbackAdaptorActiveStateToBeforeCommit(void)
+	?SetClientConfig@CMMFDevSoundAdaptation@@QAEHABVTProcessId@@0@Z @ 58  NONAME ; int CMMFDevSoundAdaptation::SetClientConfig(class TProcessId const &, class TProcessId const &)
 

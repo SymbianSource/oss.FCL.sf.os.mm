@@ -38,7 +38,7 @@ TVerdict RTestASRCLNewL::DoTestStepL()
 	TRAPD(err, speechClient = CSpeechRecognitionUtility::NewL(*this, uid));
 	if (err != KErrNone)
 		{
-		INFO_PRINTF1(_L("Failure Creating Speech Recognition Utility"));
+		INFO_PRINTF2(_L("Failure Creating Speech Recognition Utility and error is %d"), err);
 		return EFail;
 		}
 	delete speechClient;
@@ -78,7 +78,7 @@ TVerdict RTestASRCLNewLC::DoTestStepL()
 					CleanupStack::PopAndDestroy(speechClient));
 	if (err != KErrNone)
 		{
-		INFO_PRINTF1(_L("Failure Creating Speech Recognition Utility"));
+		INFO_PRINTF2(_L("Failure Creating Speech Recognition Utility and the error is %d"), err);
 		return EFail;
 		}
 	return EPass;

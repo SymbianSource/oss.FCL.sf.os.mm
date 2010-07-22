@@ -1069,7 +1069,10 @@ private:
     TInt 								    	iVideoFrameBufSize;	
     TBool 										iResourceLost;
     TBool 										iRedrawDone;
-    
+	// Flag to indicate that the redraw surface has been created, and
+	// can be used in a subsequent call ro Redraw()
+	TBool										iRedrawSurfaceInUse;
+
     //-- members for buffer management --
     MMmfVideoBufferManagementObserver*  		iVBMObserver;
     TBufferOptions                      		iVBMBufferOptions;
@@ -1089,6 +1092,8 @@ private:
 	MMmfVideoPropertiesObserver*				iVPObserver;
 	RWsSession									iWsSession;
 	TSize										iPicSize;
+	TUint										iAspectRatioNum;
+	TUint										iAspectRatioDenom;
 	//-- members for Trickplay support --
 	TInt                                iStepFrameCount;
     TInt                                iPlayRate;       

@@ -180,7 +180,7 @@ mp4_i32 initFileWrite(MP4FileName filename, MP4HandleImp handle)
   if (error != KErrNone && error != KErrAlreadyExists)
     return -1;
 
-  if (file->Replace(*fs, TPtrC((const TUint16 *)filename), EFileWrite|EFileShareExclusive ) != KErrNone)
+  if (file->Replace(*fs, TPtrC((const TUint16 *)filename), EFileWrite|EFileShareExclusive|EFileWriteDirectIO ) != KErrNone)
   {
     return -1;
   }
@@ -226,7 +226,7 @@ mp4_i32 initTmpFileWrite(MP4FileName filename, MP4HandleImp handle)
   RFile64 * file = new RFile64;
   TBuf16<KMaxFileName> name(reinterpret_cast<const TUint16*>(filename));
   ASSERT(handle->fs != NULL);
-  err = file->Replace(*(RFs*)(handle->fs), name, EFileStream | EFileRead | EFileWrite);
+  err = file->Replace(*(RFs*)(handle->fs), name, EFileStream | EFileRead | EFileWrite | EFileWriteDirectIO);
   if (err != KErrNone)
   {
 	delete file;

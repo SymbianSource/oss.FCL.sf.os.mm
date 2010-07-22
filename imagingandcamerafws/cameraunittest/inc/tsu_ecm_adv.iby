@@ -18,13 +18,9 @@
 
 // debug build
 
-file=ABI_DIR\DEBUG_DIR\TSU_ECM_ADV.dll 	System\Libs\TSU_ECM_ADV.dll
+#include <tsu_ecm_adv_excl_test.iby>
 
 data=EPOCROOT##epoc32\data\c\mm\TSU_ECM_ADV_ALLOC.script     	TSU_ECM_ADV_ALLOC.script
 data=EPOCROOT##epoc32\data\c\mm\TSU_ECM_ADV.script     	TSU_ECM_ADV.script
-
-#ifndef SYMBIAN_EXCLUDE_ECAM_UNITTESTPLUGIN
-ECOM_PLUGIN(ECamUnitTestPlugin.dll,102070CF.rsc)
-#endif 
 
 #endif //TSU_ECM_ADV_IBY

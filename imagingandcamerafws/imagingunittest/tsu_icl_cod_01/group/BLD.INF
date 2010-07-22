@@ -29,6 +29,13 @@ PRJ_MMPFILES
 
 PRJ_EXPORTS
 
+PRJ_TESTMMPFILES
+
+// TSI_WP5 files
+../mmpfiles/TSU_ICL_COD_01.mmp
+
+PRJ_TESTEXPORTS
+
 // scripts
 ../scripts/TSU_ICL_COD_01.script	c:/tsu_icl_cod_01.script
 ../scripts/TSU_ICL_COD_01_alloc.script	c:/tsu_icl_cod_01_alloc.script
@@ -40,5 +47,5 @@ PRJ_EXPORTS
 // iby
 TSU_ICL_COD_01.iby			/epoc32/rom/include/tsu_icl_cod_01.iby
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 #include "bld_TImageTestExports.inf"

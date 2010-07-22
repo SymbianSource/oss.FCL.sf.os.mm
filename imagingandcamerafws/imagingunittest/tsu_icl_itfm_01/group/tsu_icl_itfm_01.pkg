@@ -1,0 +1,24 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+"\epoc32\release\armv5\urel\TSU_ICL_ITFM_01.dll"-"c:\sys\bin\TSU_ICL_ITFM_01.dll"
+"\epoc32\release\armv5\urel\TestTransformerExt.dll"-"c:\sys\bin\TestTransformerExt.dll"
+"\epoc32\release\armv5\urel\testtransformer.dll"-"c:\sys\bin\testtransformer.dll"
+
+
+// REM Scripts
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\scripts\TSU_ICL_ITFM_01_nocap.script "-"c:\TSU_ICL_ITFM_01_nocap.script "
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\scripts\TSU_ICL_ITFM_01_nocap_ALLOC.script "-"c:\TSU_ICL_ITFM_01_nocap_ALLOC.script "
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\scripts\TSU_ICL_ITFM_01_panic_nocap.script"-"c:\TSU_ICL_ITFM_01_panic_nocap.script"

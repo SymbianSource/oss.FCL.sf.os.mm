@@ -2314,11 +2314,20 @@ TInt CMMFDevSoundSession::DoSetClientConfig()
 				static_cast<const CMMFDevSoundServer*>(Server()));
 			
 		ASSERT(server); // session should always have a server!
+		
+		TProcessId actualProcessId = server->ActualProcessId();
+		TProcessId processId = server->ProcessId();
+		
+		if (actualProcessId!=processId)
+		    {
+            // we have a differing actual process id, so pass that to the adaptor too
+            err = iAdapter->SetClientConfig(actualProcessId, processId);
+		    }
+		else
+		    {
+            err = iAdapter->SetClientConfig(processId);
+		    }
 
-		TMMFClientConfig clientConfig;
-		clientConfig.iProcessId = server->ActualProcessId();
-
-		err = iAdapter->SetClientConfig(clientConfig);
 		if (!err)
 			{
 			iSetClientConfigApplied = ETrue;

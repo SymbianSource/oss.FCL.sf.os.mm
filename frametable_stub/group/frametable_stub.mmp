@@ -1,0 +1,45 @@
+/*
+* Copyright (c) 2005-2008 Nokia Corporation and/or its subsidiary(-ies). 
+* All rights reserved.
+* This component and the accompanying materials are made available
+* under the terms of "Eclipse Public License v1.0"
+* which accompanies this distribution, and is available
+* at the URL "http://www.eclipse.org/legal/epl-v10.html".
+*
+* Initial Contributors:
+* Nokia Corporation - initial contribution.
+*
+* Contributors:
+*
+* Description: FrameTable Stubs -  Project definition file for project FrameTable_Stub
+* 
+*
+*/
+
+#include <platform_paths.hrh>
+
+TARGET          frametable_stub.dll
+TARGETTYPE      DLL
+UID             0x1000008D 0x20031603
+
+CAPABILITY CAP_GENERAL_DLL
+
+VENDORID        VID_DEFAULT
+
+DEFFILE frametable_stubu.def
+NOSTRICTDEF
+
+SOURCEPATH      ../src
+SOURCE          frametable_stub.cpp
+
+OS_LAYER_SYSTEMINCLUDE
+
+
+LIBRARY         euser.lib
+
+// Users link against the non-stub name, so that rebuild is not necessary
+EXPORTLIBRARY	frametable.lib
+
+LINKAS          frametable.dll
+
+// End of file

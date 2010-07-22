@@ -1,4 +1,4 @@
-// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2001-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -340,7 +340,15 @@ public:
 		
 		Requests that codec applies the auto rotation when decoding according to the orientation tag in the image Exif header.
 		*/
-		EOptionAutoRotate = 0x040000
+		EOptionAutoRotate = 0x040000,
+
+		/**
+		@publishedPartner
+		@prototype
+		
+		Requests the Codec to do optimised partial image decoding, whenever partial decoding is needed.
+		*/
+		EOptionOptimisedPartialImageDecoding = 0x80000
 		};
 
 	/**

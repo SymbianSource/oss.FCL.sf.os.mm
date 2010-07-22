@@ -31,6 +31,7 @@ public:
     
     RWindowBase* Window();
     TSize DisplaySizeInPixels();
+    void UpdateWindow();
     
     ~CMediaClientExtDisplayHandler();
 

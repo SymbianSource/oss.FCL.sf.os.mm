@@ -576,7 +576,24 @@ mp4_i32 readMoov(MP4HandleImp handle, movieAtom *moov)
 
       break;
       }
+      
+    case ATOMTYPE_META:
+        
+        {
+        if (moov->meta) /* META has already been read, more than one is not allowed */
+          return -1;
+           
+        if ((moov->meta = (metaAtom *)mp4malloc(sizeof(metaAtom))) == NULL)
+            return -100;
 
+        bytesread = readMeta(handle, moov->meta);
+        if (bytesread < 0)
+          return -1;
+        totalbytesread += bytesread;
+        
+        break;
+        }
+        
     default:
 
       bytesread = readUnknown(handle);
@@ -4357,6 +4374,8 @@ mp4_i32 freeMOOV(movieAtom *moov)
     if (freeIODS(moov->iods) < 0)
       return -1;
     if (freeUDTA(moov->udta) < 0)
+      return -1;
+    if (freeMETA(moov->meta) < 0)
       return -1;
 
     mp4free(moov);
@@ -8897,4 +8916,228 @@ mp4_i64 getChunkOffset(sampleTableAtom *stbl, mp4_u32 index)
     return stbl->stco64->chunkOffset[index];
 }
 
+/*
+ * Function:
+ *
+ *   mp4_i32 readMeta(MP4HandleImp handle,
+ *                    metaAtom *meta)
+ *
+ * Description:
+ *
+ *   This function parses one META atom.
+ *
+ * Parameters:
+ *
+ *   handle             MP4 library handle
+ *   meta               META pointer
+ *
+ * Return value:
+ *
+ *   Negative integer   Error
+ *   >= 0               Success. Value tells how many bytes were read.
+ *
+ */
+mp4_i32 readMeta(MP4HandleImp handle, metaAtom *meta)
+{
+    mp4_i32 bytesread;
+    mp4_i32 totalbytesread = 0;
+
+
+    if ((meta->atomhdr = (atomHeader *)mp4malloc(sizeof(atomHeader))) == NULL)
+      return -100;
+
+    bytesread = readFullAtomHeader(handle, meta->atomhdr);
+    if (bytesread < 0)
+      return -1;
+    totalbytesread += bytesread;
+
+    if (meta->atomhdr->type != ATOMTYPE_META)
+      return -1;
+
+
+    while ((mp4_u32)totalbytesread < meta->atomhdr->size)
+    {
+      mp4_u32 type;
+
+
+      if (peekData(handle, handle->buf, 8) < 0)
+        return -1;
+      
+      type = u32endian(*((mp4_u32 *)(handle->buf+4)));
+
+      switch (type)
+      {
+      case ATOMTYPE_HDLR:
+
+        if (meta->hdlr) /* HDLR has already been read, more than one is not allowed */
+          return -1;
+
+        if ((meta->hdlr = (handlerAtom *)mp4malloc(sizeof(handlerAtom))) == NULL)
+          return -100;
+
+        bytesread = readHDLR(handle, meta->hdlr);
+        if (bytesread < 0)
+          return -1;
+        totalbytesread += bytesread;
+
+        break;
+          
+      case ATOMTYPE_ID32:
+          
+        if (meta->ID32) /* ID32 has already been read, more than one is not allowed */
+          return -1;
+
+        if ((meta->ID32 = (ID32Atom *)mp4malloc(sizeof(ID32Atom))) == NULL)
+          return -100;
+
+        bytesread = readID32(handle, meta->ID32);
+        if (bytesread < 0)
+          return -1;
+        totalbytesread += bytesread;
+          
+        break;
+        
+      default:
+
+        bytesread = readUnknown(handle);
+        if (bytesread < 0)
+          return -1;
+        totalbytesread += bytesread;
+
+        break;
+      }
+    }
+
+    return totalbytesread;
+}
+
+/*
+ * Function:
+ *
+ *   mp4_i32 readID32(MP4HandleImp handle,
+ *                    ID32Atom *ID32)
+ *
+ * Description:
+ *
+ *   This function parses one ID32 atom.
+ *
+ * Parameters:
+ *
+ *   handle             MP4 library handle
+ *   ID32               ID32 pointer
+ *
+ * Return value:
+ *
+ *   Negative integer   Error
+ *   >= 0               Success. Value tells how many bytes were read.
+ *
+ */
+mp4_i32 readID32(MP4HandleImp handle, ID32Atom *ID32)
+{
+   mp4_i32 bytesread;
+   mp4_i32 totalbytesread = 0;
+
+
+   if ((ID32->atomhdr = (atomHeader *)mp4malloc(sizeof(atomHeader))) == NULL)
+     return -100;
+
+   bytesread = readFullAtomHeader(handle, ID32->atomhdr);
+   if (bytesread < 0)
+     return -1;
+   totalbytesread += bytesread;
+
+   if (ID32->atomhdr->type != ATOMTYPE_ID32)
+     return -1;
+
+   // next 2 bytes: top bit is padding, remaining 15 bits is Packed ISO-639-2/T language code 
+   bytesread = readData(handle, handle->buf, 2);
+   if (bytesread < 0)
+     return -1;
+   ID32->language = u16endian(*((mp4_u16 *)handle->buf));
+   totalbytesread += bytesread;
+   
+   if ( handle->file )
+       {
+       ID32->atomcontentloc = handle->diskReadBufStart + handle->diskReadBufPos;
+       }
+   else
+       {
+       ID32->atomcontentloc = handle->absPosition;
+       }
+   
+   bytesread = discardData(handle, ID32->atomhdr->size - totalbytesread );
+   if (bytesread < 0)
+     return -1;
+   totalbytesread += bytesread;     
+   
+   return totalbytesread;
+}
+
+/*
+ * Function:
+ *
+ *   mp4_i32 freeMETA(metaAtom *meta)
+ *
+ * Description:
+ *
+ *   This function frees memory for META atom.
+ *
+ * Parameters:
+ *
+ *   meta       META atom pointer
+ *
+ * Return value:
+ *
+ *   0          Success
+ *   Negative   Error
+ *
+ */
+mp4_i32 freeMETA(metaAtom *meta)
+{
+  if (meta)
+  {
+    if (freeAtomHeader(meta->atomhdr) < 0)
+      return -1;
+    if (freeHDLR(meta->hdlr) < 0)
+       return -1;
+    if (freeID32(meta->ID32) < 0)
+      return -1;
+
+    mp4free(meta);
+  }
+
+  return 0;
+}
+
+/*
+ * Function:
+ *
+ *   mp4_i32 freeID32(ID32Atom *ID32)
+ *
+ * Description:
+ *
+ *   This function frees memory for ID32 atom.
+ *
+ * Parameters:
+ *
+ *   ID32       ID32 atom pointer
+ *
+ * Return value:
+ *
+ *   0          Success
+ *   Negative   Error
+ *
+ */
+mp4_i32 freeID32(ID32Atom *ID32)
+{
+  if (ID32)
+  {
+    if (freeAtomHeader(ID32->atomhdr) < 0)
+      return -1;
+
+    mp4free(ID32);
+  }
+
+  return 0;
+}
 // End of File

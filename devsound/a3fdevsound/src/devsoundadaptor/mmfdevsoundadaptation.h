@@ -252,21 +252,6 @@ class MDevSoundAdaptationObserver
 
 	};
 
-
-/**
-@publishedAll
-@released
-*  A class representing client application information.
-*
-*  @lib MmfDevSoundAdaptation.lib
-*  @since
-*/
-class TMMFClientConfig
-	{
-	public:
-		TProcessId                  iProcessId; //<<< Application Process Id
-	};
-
 // CLASS DECLARATION
 
 /**
@@ -827,18 +812,12 @@ public: // New functions
 	/**
 	* Sets client configuration
 	* @since
-	* @param TMMFClientConfig& aClientConfig A reference to client
-	*        configuration object.
+    * @param aActualProcessId the effective devsound client (supplied with SetClientThreadInfo)
+    * @param aProcessId the client of DevSound
 	* @return KErrNone if successful, system wide error otherwise
 	*/
-	IMPORT_C TInt SetClientConfig(const TMMFClientConfig& aClientConfig);
-
-	/**
-	* Returns client configuration
-	* @since
-	* @return void
-	*/
-	IMPORT_C const TMMFClientConfig& ClientConfig() const;
+    IMPORT_C TInt SetClientConfig(const TProcessId& aProcessId);
+    IMPORT_C TInt SetClientConfig(const TProcessId& aActualProcessId, const TProcessId& aProcessId);
 
 	/**
 	* Empties the buffers below DevSound without deleting the codec.

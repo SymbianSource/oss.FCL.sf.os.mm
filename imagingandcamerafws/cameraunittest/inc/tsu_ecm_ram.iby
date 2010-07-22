@@ -16,13 +16,8 @@
 #ifndef  TSU_ECM_RAM_IBY
 #define  TSU_ECM_RAM_IBY
 
-file=ABI_DIR\DEBUG_DIR\tsu_ecm_ram.dll 	System\Libs\tsu_ecm_ram.dll
+#include <tsu_ecm_ram_excl_test.iby>
 
 data=EPOCROOT##epoc32\data\c\mm\tsu_ecm_ram.script     	tsu_ecm_ram.script
-
-data=ABI_DIR\DEBUG_DIR\ecamramplugin.dll		testplugins\ecamramplugin.dll
-data=ZRESOURCE\Plugins\ecamramplugin.rsc		testplugins\ecamramplugin.rsc
-
-file=ABI_DIR\DEBUG_DIR\copyfile.exe    copyfile.exe
 
 #endif // TSU_ECM_RAM_IBY

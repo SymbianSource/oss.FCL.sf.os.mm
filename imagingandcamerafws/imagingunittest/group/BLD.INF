@@ -26,19 +26,19 @@ DEFAULT
 
 #include "../tsu_icl_frm_01/group/bld.inf"
 
-#include "../tsu_icl_cod_01/group/BLD.INF"
+#include "../tsu_icl_cod_01/group/bld.inf"
 
-#include "../tsu_icl_cod_02/group/BLD.INF"
+#include "../tsu_icl_cod_02/group/bld.inf"
 
-#include "../TSU_ICL_COD_03/group/BLD.INF"
+#include "../TSU_ICL_COD_03/group/bld.inf"
 
-#include "../TSU_ICL_COD_04/group/BLD.INF"
+#include "../TSU_ICL_COD_04/group/bld.inf"
 
 #include "../tsu_icl_mediasvr/group/bld.inf"
 
 #include "../tsu_icl_btrans_01/group/bld.inf"
 
-#include "../TSU_ICL_TMDAVID/group/BLD.INF"
+#include "../TSU_ICL_TMDAVID/group/bld.inf"
 
 #include "../tsu_icl_imgdisp/group/bld.inf"
 
@@ -48,6 +48,6 @@ DEFAULT
 
 #include "../tsu_icl_imageframe/group/bld.inf"
 
-#include "../tsu_icl_pfm_02/group/BLD.INF"
+#include "../tsu_icl_pfm_02/group/bld.inf"
 
 

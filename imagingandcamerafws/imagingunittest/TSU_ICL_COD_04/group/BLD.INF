@@ -21,9 +21,13 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
 ../MMPFiles/TSU_ICL_COD_04.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // ini file
 ../scripts/TSU_ICL_COD_04.ini	c:/tsu_icl_cod_04.ini

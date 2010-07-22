@@ -160,13 +160,23 @@ private:
 	TBool SurfaceCropRectChangeRequiresRedraw(TRect aOldSurfaceCropRect, TRect aNewSurfaceCropRect, TRect aClientCropRegion);
 	TBool ClientCropRegionChangeRequiresRedraw(TRect aOldClientCropRegion, TRect aNewClientCropRegion, TRect aSurfaceCropRect);
 	TBool IntersectionAreaChanged(TRect aOldRect, TRect aNewRect, TRect aOtherRect);
-
+	void UpdateDeltaForExtDisplay(TReal32 aViewportAspect, const TRect& aVideoExtent, TInt& aDeltaHeight, TInt& aDeltaWidth);
+	TBool IsWideScreenL();
+	TAutoScaleType ExtDisplayAutoScaleTypeL();
+	
     // MExtDisplayConnectionProviderCallback
-    void MedcpcExtDisplayNotifyConnected(TBool aExtDisplayConnected);
+    void MedcpcExtDisplayNotifyConnected(TExtDisplayConnectionProviderConnType aExtDisplayConnType);
 
     // MMediaClientWsEventObserverCallback
     void MmcweoFocusWindowGroupChanged();
     TBool MmcweoIgnoreProcess(TSecureId aId);
+    
+#ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
+    void HideAllClientWindows();
+    TInt HideWindow(RWindowBase* aWindow);
+    void SetHiddenBackgroundSurfaceOnAllClientWindows();
+    TInt SetHiddenBackgroundSurfaceOnClientWindow(TWindowData& aWindowData);
+#endif
     
 private:
 
@@ -189,7 +199,8 @@ private:
 	TBool iClientWindowIsInFocus;
     TBool iExtDisplayConnected;
     TBool iExtDisplaySwitchingSupported;
-	
+    TExtDisplayConnectionProviderConnType iExtDisplayConnType;
+    
     CMediaClientPolicyServerClient* iServerClient;
     
 	friend class CVideoPlayerUtility::CBody;	

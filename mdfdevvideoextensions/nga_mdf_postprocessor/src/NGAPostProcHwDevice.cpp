@@ -99,6 +99,7 @@ CNGAPostProcHwDevice::CNGAPostProcHwDevice()
             iVideoFrameBufSize(0),
             iResourceLost(EFalse),
             iRedrawDone(EFalse),
+			iRedrawSurfaceInUse(EFalse),
             iVBMObserver(NULL),
             count(0),
             iSurfaceMask(surfaceHints::EAllowAllExternals),
@@ -106,6 +107,8 @@ CNGAPostProcHwDevice::CNGAPostProcHwDevice()
             iVideoSurfaceObserver(NULL),
             iVPObserver(NULL),
             iPicSize(0,0),
+			iAspectRatioNum(1),
+			iAspectRatioDenom(1),
             iStepFrameCount(0),
             iPlayRate(KDefPlayRate),
             iKeyFrameMode(EFalse),
@@ -179,7 +182,12 @@ CNGAPostProcHwDevice::~CNGAPostProcHwDevice()
     	if(!iSurfaceId.IsNull())
     	{
     		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::UnregisterSurface"), this);
-    		iWsSession.UnregisterSurface(0, iSurfaceId);
+			TInt numScreens = iWsSession.NumberOfScreens();
+    		for(TInt i=0;i < numScreens;i++)
+    		{
+    			iWsSession.UnregisterSurface(i, iSurfaceId);
+    		}
+    		iWsSession.Flush();
         	iSurfaceHandler->DestroySurface(iSurfaceId);
     	}
         delete iSurfaceHandler;
@@ -407,7 +415,10 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 	    }
 		if(!iFirstPictureUpdated)
 		{
-			iTimeToPost = EPostIt;
+            if(iTimeToPost == EDelayIt)
+            {
+                iTimeToPost = EPostIt;
+            }
 		}
 		switch(iTimeToPost)
 		{
@@ -441,7 +452,10 @@ void CNGAPostProcHwDevice::WritePictureL(TVideoPicture* aPicture)
 				if(!iFirstPictureUpdated)
 				{
 					iFirstPictureUpdated = ETrue;
-					PublishSurfaceCreated();
+                    if(!iSurfaceCreatedEventPublished)
+                    {
+                        PublishSurfaceCreated();
+                    }
 				}
 			}
 			break;
@@ -848,12 +862,12 @@ void CNGAPostProcHwDevice::Redraw()
 { 
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw ++"), this);
 	TInt err = KErrNone;
-	if(iResourceLost && !iRedrawDone)
+	if(iRedrawSurfaceInUse && !iRedrawDone)
 	{
         err = AddHints();
         if (err != KErrNone)
         {
-            PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost -- failed to AddHints %d"), 
+            PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw -- failed to AddHints %d"), 
                          this, err);
             iProxy->MdvppFatalError(this, err);	
             return;   
@@ -862,7 +876,7 @@ void CNGAPostProcHwDevice::Redraw()
 		err = RegisterSurface(iSurfaceId);
 		if (err != KErrNone)
 		{
-		   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost -- failed to Register Surface %d"), 
+		   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:Redraw -- failed to Register Surface %d"), 
 		   				this, err);
 		   	iSurfaceHandler->DestroySurface(iSurfaceId);
 	   		iSurfaceId = TSurfaceId::CreateNullId();
@@ -926,7 +940,10 @@ void CNGAPostProcHwDevice::SetPosition(const TTimeIntervalMicroSeconds& aPlaybac
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetPosition FAILED: Unexpected state"), this);
         return;
     }
-    
+    if (iPPState == EPaused)
+    {	
+        iFirstPictureUpdated = EFalse;
+    }
     iCurrentPlaybackPosition = aPlaybackPosition;  
     
     ReleaseInputQ();
@@ -1404,10 +1421,12 @@ void CNGAPostProcHwDevice::MmvssGetSurfaceParametersL(TSurfaceId& aSurfaceId,
 		{
 			aCropRect.Intersection( iPicSize);
 		}
-	aPixelAspectRatio = TVideoAspectRatio(1,1);
-	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssGetSurfaceParametersL()--  \
-		cropRectWidth = %d cropRectHeight = %d --"), this, aCropRect.Width(), aCropRect.Height());
-
+	aPixelAspectRatio = TVideoAspectRatio(iAspectRatioNum,iAspectRatioDenom);
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssGetSurfaceParametersL()  \
+		cropRectWidth = %d cropRectHeight = %d"), this, aCropRect.Width(), aCropRect.Height());
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssGetSurfaceParametersL()  \
+		PAR Num = %d PAR Denom = %d"), this, aPixelAspectRatio.iNumerator, aPixelAspectRatio.iDenominator);
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssGetSurfaceParametersL() --"), this);
 }
 
 void CNGAPostProcHwDevice::MmvssSurfaceRemovedL(const TSurfaceId& aSurfaceId)
@@ -1416,10 +1435,20 @@ void CNGAPostProcHwDevice::MmvssSurfaceRemovedL(const TSurfaceId& aSurfaceId)
 	if(!aSurfaceId.IsNull())
 	{
 		PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssSurfaceRemovedL(): UnregisterSurface ID = 0x%x"), this, aSurfaceId );
-		iWsSession.UnregisterSurface(0, iSurfaceId);
+		TInt numScreens = iWsSession.NumberOfScreens();
+		for(TInt i=0;i < numScreens;i++)
+		{
+			iWsSession.UnregisterSurface(i, aSurfaceId);
+		}
+		iWsSession.Flush();
 		iSurfaceHandler->DestroySurface(aSurfaceId);
+		if(iSurfaceId == aSurfaceId)
+		{
+			iSurfaceCreatedEventPublished = EFalse;
+			iSurfaceId = TSurfaceId::CreateNullId();
+			iChunk.Close();
+		}
 	}
-		
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvssSurfaceRemovedL() --"), this);
 }
 
@@ -1431,7 +1460,9 @@ void CNGAPostProcHwDevice::MmvpoUpdateVideoProperties(const TYuvFormat& aYuvForm
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvpoUpdateVideoProperties PAR \
 		iAspectRatioNum = %d, iAspectRatioDenom = %d"), this,
 					 aYuvFormat.iAspectRatioNum,aYuvFormat.iAspectRatioDenom);
-					 iPicSize = aPictureSize;
+	iPicSize = aPictureSize;
+	iAspectRatioNum = aYuvFormat.iAspectRatioNum;
+	iAspectRatioDenom = aYuvFormat.iAspectRatioDenom;
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvpoUpdateVideoProperties Picture Size \
 		iWidth = %d, iHeight = %d, iSurfaceCreatedEventPublished = %d"), 
 		this, iPicSize.iWidth,iPicSize.iHeight, iSurfaceCreatedEventPublished?1:0);
@@ -1460,7 +1491,12 @@ void CNGAPostProcHwDevice::MmvroResourcesLost(TUid )
 		ReleaseInputQ();
 		iSessionManager->CancelUpdate();
 		ReleaseProcessQ();
-		iVideoSurfaceObserver->MmvsoRemoveSurface();
+		if(iVideoSurfaceObserver && iSurfaceCreatedEventPublished)
+		{
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvroResourcesLost - Telling client to remove surface"), this);
+			iVideoSurfaceObserver->MmvsoRemoveSurface();
+			iSurfaceCreatedEventPublished = EFalse;
+		}
 	}
 	else if(iResourceLost && iRedrawDone)
 	{
@@ -1506,24 +1542,15 @@ void CNGAPostProcHwDevice::MmvshcSetSurfaceHandle(const TSurfaceId &aSurfaceID)
 
 void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
 {
-    PP_DEBUG(_L("CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface ++"), this);
+    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface ++"), this);
 	
-	TSize 			surfaceSize; 
     TUint8*         lPtr;
     TInt 			offset;
-    if(iPicSize.iWidth > iPicSize.iHeight)
-    {
-    	surfaceSize.iWidth = iPicSize.iWidth;
-    	surfaceSize.iHeight = iPicSize.iWidth;
-    }
-    else
-    {
-    	surfaceSize.iWidth = iPicSize.iHeight;
-    	surfaceSize.iHeight = iPicSize.iHeight;
-    }
+
+    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface -- Creating %d x %d surface"), this, iPicSize.iWidth, iPicSize.iHeight);
 
    	TInt err = KErrNone;
-	SetSurfaceAttributes(surfaceSize, 1); 
+	SetSurfaceAttributes(iPicSize, 1); 
 	
   	err = iSurfaceHandler->CreateSurface(iAttributes, iSurfaceId);
   	if (err != KErrNone)
@@ -1533,16 +1560,7 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
 		iProxy->MdvppFatalError(this, err);	   				
 	    return;
 	}
-	err = iSurfaceHandler->MapSurface(iSurfaceId, iChunk);
-	if (err != KErrNone)
-	{
-	   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvshcRedrawBufferToSurface -- failed to map Surface %d"), 
-	   				this, err);
-	   	iSurfaceHandler->DestroySurface(iSurfaceId);
-	   	iSurfaceId = TSurfaceId::CreateNullId();
-		iProxy->MdvppFatalError(this, err);	   				
-	    return;
-	}
+
 	err = iSurfaceHandler->SurfaceInfo(iSurfaceId, iInfo);
 	if (err != KErrNone)
 	{
@@ -1553,39 +1571,92 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
 		iProxy->MdvppFatalError(this, err);	   				
 	    return;
 	}
+
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvshcRedrawBufferToSurface() \
-		surfaceWidth = %d surfaceHeight = %d --"), this, iInfo().iSize.iWidth, iInfo().iSize.iHeight);
+		surfaceWidth = %d surfaceHeight = %d surfaceStride = %d"), this, iInfo().iSize.iWidth, iInfo().iSize.iHeight, iInfo().iStride);
+
+	TInt redrawBufferSize = aRedrawBuffer.Size();
+	TInt surfaceSize = iInfo().iStride * iInfo().iSize.iHeight;
+
+    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface RedrawBuffer size= %d Surface size = %d"), this, redrawBufferSize, surfaceSize);
+
+	// Check whether redraw buffer will fit onto the surface.
+	// If this check fails then we won't raise a fatal error - We just won't create the redraw surface
+	if (redrawBufferSize > surfaceSize)
+	{
+    	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface Redraw buffer size larger than surface size"), this);
+    	iSurfaceHandler->DestroySurface(iSurfaceId);
+	   	iSurfaceId = TSurfaceId::CreateNullId();
+    	return;
+	}
+
+	err = iSurfaceHandler->MapSurface(iSurfaceId, iChunk);
+	if (err != KErrNone)
+	{
+	   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:MmvshcRedrawBufferToSurface -- failed to map Surface %d"), 
+	   				this, err);
+	   	iSurfaceHandler->DestroySurface(iSurfaceId);
+	   	iSurfaceId = TSurfaceId::CreateNullId();
+		iProxy->MdvppFatalError(this, err);	   				
+	    return;
+	}
 
     if((err = iSurfaceHandler->GetBufferOffset(iSurfaceId, 0, offset)) != KErrNone)
     {
     	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface offset query failed %d"), this, err);
     	iSurfaceHandler->DestroySurface(iSurfaceId);
 	   	iSurfaceId = TSurfaceId::CreateNullId();
+		iChunk.Close();
     	iProxy->MdvppFatalError(this, err);
     	return;
     }
-    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface offset = %d aRedrawBuffer.Size()= %d  --"), this, offset, aRedrawBuffer.Size());
-    
+
+    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface offset = %d"), this, offset);
+
 	lPtr = reinterpret_cast<TUint8*>(iChunk.Base() + offset);
-	memcpy((TAny *)lPtr, (TAny *)aRedrawBuffer.Ptr(), aRedrawBuffer.Size());
-	
+	memcpy((TAny *)lPtr, (TAny *)aRedrawBuffer.Ptr(), redrawBufferSize);
+
+	iRedrawSurfaceInUse = ETrue;
+
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface(): New surface = 0x%x"), this, iSurfaceId);
+
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface error = %d --"), this, err);
 }
 
 TInt CNGAPostProcHwDevice::SetupExternalSurface(const TSurfaceId &aSurfaceID)
 {
+	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface(): aSurfaceID = 0x%x"), this, aSurfaceID );
+
     TInt err = KErrNone;
     
     if(!iSurfaceId.IsNull())
     {
-    	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface Cleaning ReDraw Surface"), this);
-		iVideoSurfaceObserver->MmvsoRemoveSurface();
+		if (iVideoSurfaceObserver && iSurfaceCreatedEventPublished)
+		{
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface - Telling client to remove old surface"), this);
+			iVideoSurfaceObserver->MmvsoRemoveSurface();
+			iSurfaceCreatedEventPublished = EFalse;
+		}
+		else
+		{
+			// We never told the client about the surface, so we must destroy it ourselves
+			PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:SetupExternalSurface - Destroying old surface"), this);
+			TInt numScreens = iWsSession.NumberOfScreens();
+    		for(TInt i=0;i < numScreens;i++)
+    		{
+    			iWsSession.UnregisterSurface(i, iSurfaceId);
+    		}
+   			iWsSession.Flush();
+			iSurfaceHandler->DestroySurface(iSurfaceId);
+		}
+
+		iChunk.Close();
 	}
     
     iSurfaceId            = aSurfaceID;
     iUsingExternalSurface = ETrue;
-    
-    
+    iRedrawSurfaceInUse = EFalse;
+
     // Create the surface handler if it doesn't exist.
     if (!iSurfaceHandler)
     {
@@ -1776,7 +1847,10 @@ TInt CNGAPostProcHwDevice::AttemptToPost()
 				if(!iFirstPictureUpdated)
 				{
 					iFirstPictureUpdated = ETrue;
-					PublishSurfaceCreated();
+                    if(!iSurfaceCreatedEventPublished)
+                    {
+                        PublishSurfaceCreated();
+                    }
 				}	
 			}	// end of postit
 			break;
@@ -2025,7 +2099,13 @@ TInt CNGAPostProcHwDevice::GetExternalBufferID(TVideoPicture *aPicture)
 TInt CNGAPostProcHwDevice::RegisterSurface(const TSurfaceId& aSurfaceId)
 {
 	PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:RegisterSurface(): RegisterSurface ID = 0x%x"), this, aSurfaceId);
-	return(iWsSession.RegisterSurface(0, aSurfaceId));
+	TInt err = KErrNone;
+	TInt numScreens = iWsSession.NumberOfScreens();
+	for(TInt i=0; (i < numScreens && err == KErrNone); i++)
+	{
+		err = iWsSession.RegisterSurface(i, aSurfaceId);
+	}	
+	return(err);
 }
 
 TInt CNGAPostProcHwDevice::IsGceReady()
@@ -2249,6 +2329,16 @@ TInt CNGAPostProcHwDevice::AddHints()
    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AddHints iSurfaceMask 0x%08x ++"), this, iSurfaceMask);
    TInt err = KErrNone;
    iHint.Set(iSurfaceKey,iSurfaceMask,ETrue);
+   err = iSurfaceHandler->AddSurfaceHint(iSurfaceId,iHint);
+   if(err == KErrAlreadyExists)
+   {
+		err = KErrNone;
+		err = iSurfaceHandler->SetSurfaceHint(iSurfaceId,iHint);
+   }
+   PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AddHints. err = %d --"), this,err);
+   iHint.iKey.iUid = surfaceHints::KSurfaceContent;
+   iHint.iValue = surfaceHints::EVideoPlayback;
+   iHint.iMutable = ETrue;
    err = iSurfaceHandler->AddSurfaceHint(iSurfaceId,iHint);
    if(err == KErrAlreadyExists)
    {

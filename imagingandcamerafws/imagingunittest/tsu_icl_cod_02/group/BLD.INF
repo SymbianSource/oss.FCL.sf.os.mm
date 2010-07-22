@@ -23,11 +23,17 @@ DEFAULT
 
 PRJ_MMPFILES
 
+PRJ_EXPORTS
+
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+
 // TSI_WP5 files
 ../mmpfiles/TSU_ICL_COD_02.mmp
 ../mmpfiles/TSU_ICL_COD_02_Recog.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // scripts
 ../scripts/TSU_ICL_COD_02.script		c:/tsu_icl_cod_02.script
@@ -38,7 +44,7 @@ PRJ_EXPORTS
 TSU_ICL_COD_02.iby			/epoc32/rom/include/tsu_icl_cod_02.iby
 
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // test files
 ../TestFiles/wolf.mbm c:/tsu_icl_cod_02/wolf.mbm

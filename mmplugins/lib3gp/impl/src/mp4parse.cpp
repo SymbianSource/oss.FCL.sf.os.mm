@@ -3326,4 +3326,73 @@ extern EXPORT_C void MP4CancelReadFrame(MP4Handle ahandle)
 		}
 	}
 
+extern EXPORT_C MP4Err MP4ParseGetID32Location(MP4Handle apihandle, mp4_u32& location)
+    { 
+    MP4HandleImp handle = (MP4HandleImp)apihandle;
+
+    if (!handle)
+        {
+        return MP4_ERROR;
+        }
+
+    if (!handle->metaDataComplete)
+        {
+        switch (metaDataAvailable(handle))
+            {
+            case 0:
+                return MP4_NOT_AVAILABLE;
+            case 1:
+                handle->cafError = KErrNone;
+                if (readMetaData(handle) < 0)
+                    {
+			      	// Reading of meta data failed, so free up any allocated memory
+			  		freeFTYP(handle->ftyp);
+			  		handle->ftyp = NULL;
+					freeMOOV(handle->moov);
+					handle->moov = NULL;
+                    if (handle->cafError != KErrNone)
+                        {// if CAF/DRM caused the error return it instead of generic errorcode.
+                        return handle->cafError;
+                        }
+                    else
+                        {
+                        return MP4_INVALID_INPUT_STREAM;
+                        }
+                    }
+                handle->metaDataComplete = MP4TRUE;
+                break;
+
+		    case -2:
+                // Reading of FTYP meta data failed, so free up any allocated memory
+                freeFTYP(handle->ftyp);
+                handle->ftyp = NULL;
+                return MP4_ERROR;
+		      
+            case -1:
+            default:
+                return MP4_ERROR;
+            }
+        }    
+
+    if (!handle->moov)
+        return MP4_ERROR;
+
+    metaAtom* meta = handle->moov->meta;
+    if (!meta)
+        return MP4_NOT_AVAILABLE;
+
+    if (!meta->atomhdr)
+        return MP4_NOT_AVAILABLE;
+    
+    if(meta->ID32)
+        {
+        location = meta->ID32->atomcontentloc;     
+        }
+    else
+        {
+        return MP4_NOT_AVAILABLE;
+        }    
+
+    return MP4_OK;
+    }
 // End of File

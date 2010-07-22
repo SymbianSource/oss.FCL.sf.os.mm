@@ -109,6 +109,7 @@ LIBRARY			apparc.lib
 LIBRARY			hal.lib
 LIBRARY			bafl.lib
 LIBRARY			cone.lib
+LIBRARY			centralrepository.lib
 
 #ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
 DEFFILE tsu_mmf_vclnt_01_gce2.def
@@ -120,8 +121,6 @@ DEFFILE tsu_mmf_vclnt_01_gce.def
 DEFFILE	TSU_MMF_VCLNT_01.DEF
 #endif //SYMBIAN_BUILD_GCE
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
-
-MACRO __ENABLE_MEDIA_CLIENT_VIDEO_TRACE__
 
 NOSTRICTDEF
 

@@ -12,11 +12,16 @@
 * Contributors:
 *
 * Description:
-*
+* Surface Manager API
 */
 
 #ifndef __SURFACE_HINTS_LOCAL_H__
 #define __SURFACE_HINTS_LOCAL_H__
+
+//- Include Files  ----------------------------------------------------------
+
+#include <e32cmn.h>
+
 
 //- Namespace ---------------------------------------------------------------
 
@@ -25,7 +30,7 @@ namespace surfaceHints
 
 //- Constants ---------------------------------------------------------------
 
-/** Hint of surface the content.
+/** Hint of the surface content.
     @see TSurfaceContent for possible values
 */
 const TInt KSurfaceContent = 0x1;
@@ -37,17 +42,37 @@ const TInt KSurfaceContent = 0x1;
 */
 const TInt KSurfaceUpdate = 0x2;
 
-/** Hint of the surface content copy protected and can it be
+/** Hint whether the surface content is copy protected and can it be
     shown on external displays.
     @see TSurfaceProtection for possible values.
 */
 const TInt KSurfaceProtection = 0x3;
 
-/** Hint of the color space of the surface content.
-    Value is a pointer to TColorspace stucture.
-    @see TColorspace
-*/
-const TInt KSurfaceColorspace = 0x4;
+
+/** Values used for the KSurfaceContent key */
+enum TSurfaceContent
+    {
+    /** No specific use-case */
+    EGeneric,
+    /** Camera viewfinder frames */
+    EViewFinder,
+    /** Images captured by camera */
+    EStillImage,
+    /** Decoded video frames */
+    EVideoPlayback,
+    /** Video frames from video telephony */
+    EVideoTelephony,
+    /** EGL surface */
+    EGfx,
+    /** Main UI surface */
+    EUi,
+    /** Composition target surface */
+    ECompositionTarget,
+    /** Indicates that the surface has to accessible by ARM.
+        This can be orr'ed with other TSurfaceContent enumerations. */
+    EArmAccess = 0x80000000
+    };
+
 
 /** Values used for the KSurfaceProtection key. The values are bitmasks and can be combined
 * e.g. EAllowAnalogProtectionRequired | EAllowDigitalProtectionRequired.
@@ -94,6 +119,72 @@ enum TSurfaceProtection
     */
     EAllowDigitalProtectionRequired     = 0x00000800,
     };
+
+
+class TSurfaceUpdate
+    {
+    /** Constructor.
+        @param aUpdateRate   How often the surface content is redrawn per second.
+        @param aTearingFree  When ETrue surface updates should be synchronized
+                             with display refresh rate, otherwise surface can
+                             be updated as fast as possible.
+    */
+    inline TSurfaceUpdate(TUint aUpdateRate, TBool aTearingFree);
+
+    /** Converts a value to TSurfaceUpdate */
+    inline TSurfaceUpdate(TInt aValue);
+
+    /** Converts TSurfaceUpdate to a signed integer, so it can be used as
+        a value for KSurfaceUpdate key. */
+    inline operator TInt() const;
+
+    /** Getter for surface update rate.
+        @return updates per second
+    */
+    inline TUint UpdateRate() const;
+
+    /** Getter for surface update synchronization.
+        @return ETrue - updates should be synchronized with display refresh rate,
+                EFalse - surface can be updated as fast as possible.
+    */
+    inline TBool TearingFree() const;
+
+    private:
+        TUint iValue;
+    };
+
+
+//- Forward Declarations ----------------------------------------------------
+
+
+//- Class Definitions -------------------------------------------------------
+
+
+//- Inline Functions --------------------------------------------------------
+
+TSurfaceUpdate::TSurfaceUpdate(TUint aUpdateRate, TBool aTearingFree)
+    : iValue( ( aUpdateRate & 0xFFFF ) | ( aTearingFree ? 0x80000000 : 0x0 ) )
+    {
+    }
+TSurfaceUpdate::TSurfaceUpdate(TInt aValue)
+    : iValue( static_cast<TUint>( aValue ) )
+    {
+    }
+
+TSurfaceUpdate::operator TInt() const
+    {
+    return static_cast<TInt>( iValue );
+    }
+
+TUint TSurfaceUpdate::UpdateRate() const
+    {
+    return ( iValue & 0xFFFF );
+    }
+
+TBool TSurfaceUpdate::TearingFree() const
+    {
+    return ( iValue & 0x80000000 ) ? ETrue : EFalse;
+    }
 
 }; //namespace surfaceHints
 

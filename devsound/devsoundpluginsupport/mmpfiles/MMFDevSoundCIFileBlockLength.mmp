@@ -13,7 +13,7 @@
 // Description:
 //
 
-#include "../src/custominterfaces/cmmfdevsoundcifileblocklengthimpluid.hrh"
+#include "../src/CustomInterfaces/cmmfdevsoundcifileblocklengthimpluid.hrh"
 
 /**
 @file
@@ -29,7 +29,7 @@ UNPAGED
 UID	0x10009D8D   KMmfUidCIFileBlockLengthDll
 VENDORID 0x70000001
 
-SOURCEPATH	../src/custominterfaces
+SOURCEPATH	../src/CustomInterfaces
 
 SOURCE		cmmfdevsoundcifileblocklength.cpp
 

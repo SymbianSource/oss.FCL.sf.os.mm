@@ -24,11 +24,14 @@ PRJ_PLATFORMS
 
 PRJ_EXPORTS
 
+PRJ_MMPFILES
+
+PRJ_TESTEXPORTS
+
 ppm1codec.iby /epoc32/rom/include/ppm1codec.iby
 ppm2codec.iby /epoc32/rom/include/ppm2codec.iby
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 
 ../Group/PPm1Codec.mmp
 ../Group/PPm2Codec.mmp
-

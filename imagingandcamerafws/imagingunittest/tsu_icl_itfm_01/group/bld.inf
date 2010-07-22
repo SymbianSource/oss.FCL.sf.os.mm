@@ -17,11 +17,16 @@
 //
 
 PRJ_MMPFILES
+
+PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
 ../mmpfiles/TSU_ICL_itfm_01.mmp
 ../mmpfiles/TestTransformer.mmp
 ../mmpfiles/TestTransformerExt.mmp
 
-PRJ_EXPORTS
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/tsu_icl_itfm_01_nocap.script			c:/tsu_icl_itfm_01_nocap.script
@@ -43,4 +48,3 @@ PRJ_EXPORTS
 
 // .iby
 ../inc/tsu_icl_itfm_01.iby					/epoc32/rom/include/tsu_icl_itfm_01.iby
-

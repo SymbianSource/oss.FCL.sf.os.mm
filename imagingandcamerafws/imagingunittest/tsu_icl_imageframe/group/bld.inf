@@ -17,9 +17,14 @@
 //
 
 PRJ_MMPFILES
-../mmpfiles/tsu_icl_imageframe.mmp
+
 
 PRJ_EXPORTS
+
+PRJ_TESTMMPFILES
+../mmpfiles/tsu_icl_imageframe.mmp
+
+PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_ICL_ImageFrame.script		c:/tsu_icl_imageframe.script
