@@ -45,7 +45,7 @@ LIBRARY         efsrv.lib
 //LIBRARY         eikcore.lib
 //LIBRARY         eikdlg.lib 
 //LIBRARY         eikcoctl.lib 
-LIBRARY         eikfile.lib
+//LIBRARY         eikfile.lib
 //LIBRARY         eikctl.lib
 LIBRARY		bafl.lib
 //LIBRARY		fbscli.lib 

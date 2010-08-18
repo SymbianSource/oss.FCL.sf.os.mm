@@ -211,7 +211,7 @@ void CMMFFile::ConstructL(const TDesC8& aInitData,TMMFileMode aFileMode)
 		}
 	else
 		{
-//		TODO If the UID is unknown we should reject, but  currently
+//		XXX If the UID is unknown we should reject, but  currently
 //		code also used for older calls that just supply filename.
 //		User::Leave(KErrNotSupported);
 		}

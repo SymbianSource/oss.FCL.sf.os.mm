@@ -14,6 +14,7 @@
 //
 
 #include <f32file.h>
+#include <f32file64.h>
 #include <e32std.h>
 #include <caf/attribute.h>
 #include <caf/bitset.h>
@@ -147,9 +148,10 @@ TInt CF32File::SetAgentProperty(TAgentProperty /*aProperty*/, TInt /*aValue*/)
 CContentFile::~CContentFile()
 	{
 	delete iData;
-
-	if (iLegacyFileOpen)
-		iLegacyFile.Close();
+  
+  iLegacyFile.Close();
+	iFile64.Close(); //For defect EASA-84ZC6J 
+   	
 	delete iFilePath;
 	}
 	
@@ -269,12 +271,35 @@ TInt CContentFile::Size(TInt& aSize)
 RFile& CContentFile::FileL() 
 	{
 	if (!iLegacyFileOpen)
-		{
-  		User::LeaveIfError(iLegacyFile.Open(*iSession, *iFilePath, EFileRead | EFileStream | EFileShareReadersOrWriters));
-		iLegacyFileOpen = ETrue;
+		{//For defect EASA-84ZC6J 
+  		TInt error = iLegacyFile.Open(*iSession, *iFilePath, EFileRead | EFileStream | EFileShareReadersOrWriters);
+		  if ( error == KErrTooBig )
+	        {
+	         User::LeaveIfError(iFile64.Open(*iSession, *iFilePath, EFileRead | EFileStream | EFileShareReadersOrWriters));
+	         iLegacyFileOpen = ETrue;
+	         return iFile64;
+	        }
+	    
+	    else if (error == KErrNone)
+	       {
+	       iLegacyFileOpen = ETrue;
+	       return iLegacyFile;
+	        }
+	    
+	    else 
+	        {
+	        User::Leave(error);
+	        }
 		}
-	return iLegacyFile;
-	}
+	if(iLegacyFile.SubSessionHandle())
+	    {
+	    return iLegacyFile;
+	    }
+	else
+	    {
+	    return iFile64;
+	    }
+}
 	
 TInt CContentFile::Data(CData*& aData)
 	{

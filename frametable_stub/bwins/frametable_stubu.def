@@ -1,0 +1,18 @@
+EXPORTS
+	?LastFrameTime@CFrameTable@@QAEHAAI@Z @ 1 NONAME ; int CFrameTable::LastFrameTime(unsigned int &)
+	?IsSeeking@CFrameTable@@QAEHAAH@Z @ 2 NONAME ; int CFrameTable::IsSeeking(int &)
+	?SetSourceReference@CFrameTable@@QAEHII@Z @ 3 NONAME ; int CFrameTable::SetSourceReference(unsigned int, unsigned int)
+	?FindFrameTimeFromPos@CFrameTable@@QAEHAAI0@Z @ 4 NONAME ; int CFrameTable::FindFrameTimeFromPos(unsigned int &, unsigned int &)
+	?RegisterForEvent@CFrameTable@@QAEHW4TFrameTableEvent@1@PAVMFrameTableEventObserver@@I@Z @ 5 NONAME ; int CFrameTable::RegisterForEvent(enum CFrameTable::TFrameTableEvent, class MFrameTableEventObserver *, unsigned int)
+	?GetLastPosEvent@CFrameTable@@QAEHAAI@Z @ 6 NONAME ; int CFrameTable::GetLastPosEvent(unsigned int &)
+	?Bitrate@CFrameTable@@QAEHXZ @ 7 NONAME ; int CFrameTable::Bitrate(void)
+	?NewL@CFrameTable@@SAPAV1@XZ @ 8 NONAME ; class CFrameTable * CFrameTable::NewL(void)
+	?LastFramePos@CFrameTable@@QAEHAAI@Z @ 9 NONAME ; int CFrameTable::LastFramePos(unsigned int &)
+	?ShrinkTable@CFrameTable@@QAEXXZ @ 10 NONAME ; void CFrameTable::ShrinkTable(void)
+	?SubmitTableEntry@CFrameTable@@QAEHI@Z @ 11 NONAME ; int CFrameTable::SubmitTableEntry(unsigned int)
+	??1CFrameTable@@UAE@XZ @ 12 NONAME ; CFrameTable::~CFrameTable(void)
+	?FindFramePosFromTime@CFrameTable@@QAEHAAI0@Z @ 13 NONAME ; int CFrameTable::FindFramePosFromTime(unsigned int &, unsigned int &)
+	?UnRegisterForEvent@CFrameTable@@QAEHW4TFrameTableEvent@1@PAVMFrameTableEventObserver@@@Z @ 14 NONAME ; int CFrameTable::UnRegisterForEvent(enum CFrameTable::TFrameTableEvent, class MFrameTableEventObserver *)
+	?ResetTable@CFrameTable@@QAEXXZ @ 15 NONAME ; void CFrameTable::ResetTable(void)
+	?InitFrameTable@CFrameTable@@QAEHHH@Z @ 16 NONAME ; int CFrameTable::InitFrameTable(int, int)
+

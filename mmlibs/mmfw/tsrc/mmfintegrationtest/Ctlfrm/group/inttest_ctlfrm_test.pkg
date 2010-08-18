@@ -13,13 +13,40 @@
 // Description:
 //*Files (scripts, data, etc.) To Copy...<src> <destination>
 
+"\epoc32\release\armv5\udeb\tsi_mmfctlfrm.dll"-"c:\sys\bin\tsi_mmfctlfrm.dll"
+
+"\epoc32\release\armv5\udeb\tsi_mmfcustomcommands.dll"-"c:\sys\bin\tsi_mmfcustomcommands.dll"
+
 "\epoc32\release\armv5\urel\tsi_mmfcontroller.dll"-"c:\sys\bin\tsi_mmfcontroller.dll"
+"\epoc32\localisation\101f7bf9\rsc\101f7bf9.rpp"-"c:\localisation\101f7bf9\rsc\101f7bf9.rpp"
+"\epoc32\localisation\group\101f7bf9.info"-"c:\localisation\group\101f7bf9.info"
+"\epoc32\data\z\resource\plugins\tsi_mmfcontroller.rsc"-"c:\resource\plugins\tsi_mmfcontroller.rsc"
+
 "\epoc32\release\armv5\urel\tsi_mmfcontroller2.dll"-"c:\sys\bin\tsi_mmfcontroller2.dll"
-"\epoc32\release\armv5\urel\tsi_mmfctlfrm.dll"-"c:\sys\bin\tsi_mmfctlfrm.dll"
-"\epoc32\release\armv5\urel\tsi_mmfcustomcommands.dll"-"c:\sys\bin\tsi_mmfcustomcommands.dll"
+"\epoc32\localisation\101f7bfb\rsc\101f7bfb.rpp"-"c:\localisation\101f7bfb\rsc\101f7bfb.rpp"
+"\epoc32\localisation\group\101f7bfb.info"-"c:\localisation\group\101f7bfb.info"
+"\epoc32\data\z\resource\plugins\tsi_mmfcontroller2.rsc"-"c:\resource\plugins\tsi_mmfcontroller2.rsc"
+
 "\epoc32\release\armv5\urel\tsi_mmfdatasink.dll"-"c:\sys\bin\tsi_mmfdatasink.dll"
+"\epoc32\localisation\101f7bfd\rsc\101f7bfd.rpp"-"c:\localisation\101f7bfd\rsc\101f7bfd.rpp"
+"\epoc32\localisation\group\101f7bfd.info"-"c:\localisation\group\101f7bfd.info"
+"\epoc32\data\z\resource\plugins\tsi_mmfdatasink.rsc"-"c:\resource\plugins\tsi_mmfdatasink.rsc"
+
 "\epoc32\release\armv5\urel\tsi_mmfdatasource.dll"-"c:\sys\bin\tsi_mmfdatasource.dll"
+"\epoc32\localisation\101f7bff\rsc\101f7bff.rpp"-"c:\localisation\101f7bff\rsc\101f7bff.rpp"
+"\epoc32\localisation\group\101f7bff.info"-"c:\localisation\group\101f7bff.info"
+"\epoc32\data\z\resource\plugins\tsi_mmfdatasource.rsc"-"c:\resource\plugins\tsi_mmfdatasource.rsc"
+
 "\epoc32\release\armv5\urel\tsi_mmfformat.dll"-"c:\sys\bin\tsi_mmfformat.dll"
+"\epoc32\localisation\101ffa10\rsc\101ffa10.rpp"-"c:\localisation\101ffa10\rsc\101ffa10.rpp"
+"\epoc32\localisation\group\101ffa10.info"-"c:\localisation\group\101ffa10.info"
+"\epoc32\data\z\resource\plugins\tsi_mmfformat.rsc"-"c:\resource\plugins\tsi_mmfformat.rsc"
+
+"\epoc32\release\armv5\urel\custommmfaudiocontroller.dll"-"c:\sys\bin\custommmfaudiocontroller.dll"
+"\epoc32\localisation\101f7d29\rsc\101f7d29.rpp"-"c:\localisation\101f7d29\rsc\101f7d29.rpp"
+"\epoc32\localisation\group\101f7d29.info"-"c:\localisation\group\101f7d29.info"
+"\epoc32\data\z\resource\plugins\custommmfaudiocontroller.rsc"-"c:\resource\plugins\custommmfaudiocontroller.rsc"
+
 //"\epoc32\release\armv5\urel\tsi_mmfrecog.dll"-"c:\sys\bin\tsi_mmfrecog.dll"
 
 // script files

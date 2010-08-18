@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <LoudnessData.h>
-#include <mcustominterface.h>
+#include <MCustomInterface.h>
 
 const TUid KUidLoudnessEffect = {0x10207AA8};
 

@@ -20,7 +20,8 @@
 #include <sdevsound_test.iby>
 
 //ini
-data=EPOCROOT##epoc32\data\c\audio.ini        			\audio.ini
+data=EPOCROOT##epoc32\data\c\audio.ini        					\audio.ini
+data=EPOCROOT##epoc32\data\c\sdevsound_audio.ini        		\sdevsound_audio.ini
 data=EPOCROOT##epoc32\data\c\securedrm_testdata.ini             \securedrm_testdata.ini
 data=EPOCROOT##epoc32\data\c\securedrm_audio.ini                \securedrm_audio.ini
 

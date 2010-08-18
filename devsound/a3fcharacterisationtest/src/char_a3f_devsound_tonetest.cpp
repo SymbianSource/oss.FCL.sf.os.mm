@@ -29,7 +29,7 @@ RA3FDevSoundToneSetConfigTest::RA3FDevSoundToneSetConfigTest(const TDesC& aTestN
 RA3FDevSoundToneSetConfigTest* RA3FDevSoundToneSetConfigTest::NewL(const TDesC& aTestName)
 	{
 	RA3FDevSoundToneSetConfigTest * self = new(ELeave)RA3FDevSoundToneSetConfigTest(aTestName);
-	return self; 
+	return self;
 	}
 
 void RA3FDevSoundToneSetConfigTest::DoKickoffTestL()
@@ -150,7 +150,7 @@ RA3FDevSoundToneSetPrioritySettingsTest* RA3FDevSoundToneSetPrioritySettingsTest
 
 void RA3FDevSoundToneSetPrioritySettingsTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KPriority, iPriority)) 
+	if (!GetIntFromConfig(iTestStepName, KPriority, iPriority))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KPriority);
 		StopTest(KErrUnknown);
@@ -198,7 +198,7 @@ void RA3FDevSoundToneSetPrioritySettingsTest::Fsm(TMmfDevSoundEvent aDevSoundEve
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -232,7 +232,7 @@ RA3FDevSoundToneSetVolumeTest* RA3FDevSoundToneSetVolumeTest::NewL(const TDesC& 
 
 void RA3FDevSoundToneSetVolumeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KVolume);
 		StopTest(KErrUnknown);
@@ -290,7 +290,7 @@ void RA3FDevSoundToneSetVolumeTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt a
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -325,19 +325,19 @@ RA3FDevSoundToneVolumeRampTest* RA3FDevSoundToneVolumeRampTest::NewL(const TDesC
 
 void RA3FDevSoundToneVolumeRampTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KVolumeRamp, iVolumeRamp)) 
+	if (!GetIntFromConfig(iTestStepName, KVolumeRamp, iVolumeRamp))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KVolumeRamp);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 			{
 			ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 			StopTest(KErrNotFound);
 			return;
 			}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -443,7 +443,7 @@ RA3FDevSoundToneSetToneRepeatsTest::RA3FDevSoundToneSetToneRepeatsTest(const TDe
 	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0),
 		iFrequencyTone1(0),
-		iRepeatTrailingSilence(0), 
+		iRepeatTrailingSilence(0),
 		iRepeatCount(0)
 	{
 	}
@@ -456,25 +456,25 @@ RA3FDevSoundToneSetToneRepeatsTest* RA3FDevSoundToneSetToneRepeatsTest::NewL(con
 
 void RA3FDevSoundToneSetToneRepeatsTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatCount);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatTrailingSilence);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -529,7 +529,7 @@ void RA3FDevSoundToneSetToneRepeatsTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, T
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -748,19 +748,19 @@ RA3FDevSoundToneSetVolumeWhilePlayingTest* RA3FDevSoundToneSetVolumeWhilePlaying
 
 void RA3FDevSoundToneSetVolumeWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KVolume);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -816,7 +816,7 @@ void RA3FDevSoundToneSetVolumeWhilePlayingTest::Fsm(TMmfDevSoundEvent aDevSoundE
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -888,7 +888,7 @@ RA3FDevSoundToneSetPlayBalanceWhilePlayingTest::RA3FDevSoundToneSetPlayBalanceWh
 	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iVolume(0), iFrequencyTone1(0), iLSpeakerBalance(0),
 		iRSpeakerBalance(0)
-		
+
 	{
 	}
 
@@ -900,36 +900,36 @@ RA3FDevSoundToneSetPlayBalanceWhilePlayingTest* RA3FDevSoundToneSetPlayBalanceWh
 
 void RA3FDevSoundToneSetPlayBalanceWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KVolume);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KLSpeakerBalance, iLSpeakerBalance)) 
+	if (!GetIntFromConfig(iTestStepName, KLSpeakerBalance, iLSpeakerBalance))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KLSpeakerBalance);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KRSpeakerBalance, iRSpeakerBalance)) 
+	if (!GetIntFromConfig(iTestStepName, KRSpeakerBalance, iRSpeakerBalance))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRSpeakerBalance);
 		StopTest(KErrNotFound);
 		return;
-		}	
+		}
 	iTimer = CPeriodic::NewL(CActive::EPriorityHigh);
 	}
 
@@ -980,7 +980,7 @@ void RA3FDevSoundToneSetPlayBalanceWhilePlayingTest::Fsm(TMmfDevSoundEvent aDevS
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -1060,7 +1060,7 @@ void RA3FDevSoundToneSetPlayBalanceWhilePlayingTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0009
  */
 RA3FDevSoundToneSetVolumeWhilePausePlayingTest::RA3FDevSoundToneSetVolumeWhilePausePlayingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iVolume(0),
 		iFrequencyTone1(0),
 		iTimeToEnterPauseElapsed(EFalse)
@@ -1099,7 +1099,7 @@ void RA3FDevSoundToneSetVolumeWhilePausePlayingTest::DoKickoffTestL()
 void RA3FDevSoundToneSetVolumeWhilePausePlayingTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,  TInt aError)
 	{
 	switch (iDevSoundState)
-		{		
+		{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundToneSetVolumeWhilePausePlayingTest"), EFsmIncorrectErrorPassed));
@@ -1255,7 +1255,7 @@ void RA3FDevSoundToneSetVolumeThenInitializeToPlayAudioTest::DoKickoffTestL()
 void RA3FDevSoundToneSetVolumeThenInitializeToPlayAudioTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,  TInt aError)
 	{
 	switch (iDevSoundState)
-		{		
+		{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundToneSetVolumeThenInitializeToPlayAudioTest"), EFsmIncorrectErrorPassed));
@@ -1359,25 +1359,25 @@ RA3FDevSoundToneSetVolumeRampWhilePlayingTest* RA3FDevSoundToneSetVolumeRampWhil
 
 void RA3FDevSoundToneSetVolumeRampWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KVolume, iVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KVolume);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KVolumeRamp, iVolumeRamp)) 
+	if (!GetIntFromConfig(iTestStepName, KVolumeRamp, iVolumeRamp))
 			{
 			ERR_PRINTF2(KMsgErrorGetParameter, &KVolumeRamp);
 			StopTest(KErrNotFound);
@@ -1506,10 +1506,10 @@ void RA3FDevSoundToneSetVolumeRampWhilePlayingTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0012
  */
 RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest::RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0),
 		iFrequencyTone1(0),
-		iRepeatTrailingSilence(0), 
+		iRepeatTrailingSilence(0),
 		iRepeatCount(0)
 	{
 	}
@@ -1519,28 +1519,28 @@ RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest* RA3FDevSoundToneSetToneRepet
 	RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest * self = new(ELeave)RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatCount);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatTrailingSilence);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -1613,7 +1613,7 @@ void RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest::Fsm(TMmfDevSoundEvent a
 			}
 		}
 	}
-	
+
 void RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest::DoTimerCallback()
 	{
 	iTimer->Cancel();
@@ -1635,7 +1635,7 @@ void RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest::ToneFinished(TInt aErro
 		if(iPlayToneTime < ((iDuration*KMicroSecsInOneSec) + KPlayVarianceTime)&& iPlayToneTime > (iDuration*KMicroSecsInOneSec) - KPlayVarianceTime)
 			{
 			INFO_PRINTF1(_L("First play tone succeded."));
-			INFO_PRINTF2(_L("Play time is %Ld microseconds"), iPlayToneTime.Int64());		
+			INFO_PRINTF2(_L("Play time is %Ld microseconds"), iPlayToneTime.Int64());
 			TRAPD(err, iMMFDevSound->PlayToneL(iFrequencyTone1, iDuration*KMicroSecsInOneSec));
 			if (err != KErrNone)
 				{
@@ -1669,7 +1669,7 @@ void RA3FDevSoundToneSetToneRepetitionsWhilePlayingTest::ToneFinished(TInt aErro
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0013
  */
 RA3FDevSoundToneSetDTMFLengthsWhilePlayingTest::RA3FDevSoundToneSetDTMFLengthsWhilePlayingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iFirstToneFinishedCall(EFalse),
 		iToneOnLength(0), iToneOffLength(0),
 		iPauseLength(0), iDTMFString(KNullDesC),
@@ -1685,19 +1685,19 @@ RA3FDevSoundToneSetDTMFLengthsWhilePlayingTest* RA3FDevSoundToneSetDTMFLengthsWh
 
 void RA3FDevSoundToneSetDTMFLengthsWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength)) 
+	if (!GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOnLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength)) 
+	if (!GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOffLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KPauseLength, iPauseLength)) 
+	if (!GetIntFromConfig(iTestStepName, KPauseLength, iPauseLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KPauseLength);
 		StopTest(KErrNotFound);
@@ -1789,7 +1789,7 @@ void RA3FDevSoundToneSetDTMFLengthsWhilePlayingTest::Fsm(TMmfDevSoundEvent aDevS
 			}
 		}
 	}
-	
+
 void RA3FDevSoundToneSetDTMFLengthsWhilePlayingTest::DoTimerCallback()
 	{
 	iTimer->Cancel();
@@ -1861,28 +1861,28 @@ RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest* RA3FDevSoundToneSetTo
 	RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest * self = new(ELeave)RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatCount);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatTrailingSilence);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -1970,7 +1970,7 @@ void RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest::Fsm(TMmfDevSound
 			}
 		}
 	}
-	
+
 
 void RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest::ToneFinished(TInt aError)
 	{
@@ -1986,12 +1986,12 @@ void RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest::ToneFinished(TIn
 			INFO_PRINTF1(_L("Play tone repeats succeded."));
 			INFO_PRINTF2(_L("Play time is %Ld microseconds"), iPlayToneTime.Int64());
 			StopTest();
-			}		
+			}
 		else
 			{
 			ERR_PRINTF1(_L("Play tone repeats did not work as planned."));
 			ERR_PRINTF3(_L("Play time is %Ld microseconds and it should have been %d microseconds"), iPlayToneTime.Int64(), totalExpectedReproductionTime);
-			StopTest(KErrNone, EFail);	
+			StopTest(KErrNone, EFail);
 			}
 		}
 	else
@@ -1999,7 +1999,7 @@ void RA3FDevSoundToneSetToneRepetitionsNotPlayingTonesModeTest::ToneFinished(TIn
 		ERR_PRINTF2(_L("DevSound called ToneFinished with error = %d"), aError);
 		ERR_PRINTF2(_L("Expected error = %d"), KErrUnderflow);
 		StopTest(aError, EFail);
-		}	
+		}
 	}
 
 /*
@@ -2011,7 +2011,7 @@ RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest::RA3FDevSoundToneSetDTMFLe
 		iDTMFString(KNullDesC), iToneOnLength(0),
 		iToneOffLength(0), iPauseLength(0),
 		iDTMFPauses(0), iDTMFTones(0)
-		
+
 	{
 	}
 
@@ -2020,16 +2020,16 @@ RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest* RA3FDevSoundToneSetDTMFLe
 	RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest * self = new(ELeave)RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength)) 
+	if (!GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOnLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength)) 
+	if (!GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOffLength);
 		StopTest(KErrNotFound);
@@ -2145,7 +2145,7 @@ void RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest::Fsm(TMmfDevSoundEven
 			}
 		}
 	}
-	
+
 void RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest::ToneFinished(TInt aError)
 	{
 	INFO_PRINTF1(_L("========== DevSound ToneFinished() callback =========="));
@@ -2180,8 +2180,8 @@ void RA3FDevSoundToneSetDTMFLengthsNotPlayingTonesModeTest::ToneFinished(TInt aE
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0016
  */
 RA3FDevSoundToneSetConfigWhilePlayingTest::RA3FDevSoundToneSetConfigWhilePlayingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
-		iVolume(0), iFrequencyTone1(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
+		iVolume(0), iFrequencyTone1(0),
 		iSampleRate(0), iChannels(0)
 	{
 	}
@@ -2191,28 +2191,28 @@ RA3FDevSoundToneSetConfigWhilePlayingTest* RA3FDevSoundToneSetConfigWhilePlaying
 	RA3FDevSoundToneSetConfigWhilePlayingTest * self = new(ELeave)RA3FDevSoundToneSetConfigWhilePlayingTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetConfigWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KSampleRate, iSampleRate)) 
+	if (!GetIntFromConfig(iTestStepName, KSampleRate, iSampleRate))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KSampleRate);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KChannel, iChannels)) 
+	if (!GetIntFromConfig(iTestStepName, KChannel, iChannels))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KChannel);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -2330,13 +2330,13 @@ RA3FDevSoundToneSetPriorityWhilePlayingTest* RA3FDevSoundToneSetPriorityWhilePla
 
 void RA3FDevSoundToneSetPriorityWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -2452,7 +2452,7 @@ void RA3FDevSoundToneSetPriorityWhilePlayingTest::DoTimerCallback()
 	{
 	INFO_PRINTF1(_L("TimerEvent called"));
 	iTimer->Cancel();
-	INFO_PRINTF1(_L("Starting another devsound client using the highest priority"));	
+	INFO_PRINTF1(_L("Starting another devsound client using the highest priority"));
 	iDevsoundToneClient->SetPriority(KMaximumPriority);
 	TInt err = iDevsoundToneClient->InitTonePlay(iFrequencyTone1, iDuration*KMicroSecsInOneSec);
 	if(err != KErrNone)
@@ -2490,7 +2490,7 @@ RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::RA3FDevSoundToneSetConfig
 RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue* RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::NewL(const TDesC& aTestName)
 	{
 	RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue * self = new(ELeave)RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue(aTestName);
-	return self; 
+	return self;
 	}
 
 void RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::DoKickoffTestL()
@@ -2511,6 +2511,11 @@ void RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::DoKickoffTestL()
 
 void RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
+#ifdef MM_TB101_L
+		//Reason: Check remains since this is a valid test case, but we need to know why we are not testing invalid rates.
+		INFO_PRINTF1(_L("MM_TB101_L defined: All sample rates are valid for MM_TB101_L (HW), therefore no invalid rates can be tested."));
+		StopTest(KErrNotSupported, EPass);
+#else
 	switch(iDevSoundState)
 		{
 		case EStateCreated:
@@ -2566,7 +2571,7 @@ void RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::Fsm(TMmfDevSoundEven
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -2581,6 +2586,7 @@ void RA3FDevSoundToneSetConfigTestToInvalidSampleRateValue::Fsm(TMmfDevSoundEven
 			StopTest(aError, EFail);
 			}
 		}
+#endif// MM_TB101_L
 	}
 
 /*
@@ -2596,7 +2602,7 @@ RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest::RA3FDevSoundToneSetConfi
 RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest* RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest::NewL(const TDesC& aTestName)
 	{
 	RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest * self = new(ELeave)RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest(aTestName);
-	return self; 
+	return self;
 	}
 
 void RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest::DoKickoffTestL()
@@ -2671,7 +2677,7 @@ void RA3FDevSoundToneSetConfigTestToInvalidChannelValueTest::Fsm(TMmfDevSoundEve
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -2704,22 +2710,22 @@ RA3FDevSoundToneSetDTMFLengthsToNegativeTest* RA3FDevSoundToneSetDTMFLengthsToNe
 	RA3FDevSoundToneSetDTMFLengthsToNegativeTest * self = new(ELeave)RA3FDevSoundToneSetDTMFLengthsToNegativeTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetDTMFLengthsToNegativeTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength) ) 
+	if ( !GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOnLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength) ) 
+	if ( !GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOffLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KPauseLength, iPauseLength) ) 
+	if ( !GetIntFromConfig(iTestStepName, KPauseLength, iPauseLength) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KPauseLength);
 		StopTest(KErrNotFound);
@@ -2808,15 +2814,15 @@ void RA3FDevSoundToneSetDTMFLengthsToNegativeTest::ToneFinished(TInt aError)
 	{
 	INFO_PRINTF1(_L("========== DevSound ToneFinished() callback =========="));
 	INFO_PRINTF3(KMsgErrorDevSoundCallback, &KToneFinishedText, aError);
-		
+
 	if (aError == KErrUnderflow)
 		{
 		iEndTime.HomeTime();
 		iPlayToneTime = iEndTime.MicroSecondsFrom(iStartTime);
 		if(iPlayToneTime <= KPlayVarianceTime)
 			{
-			INFO_PRINTF2(_L("Setting DTMF tone lengths to negative gives a reproduction time of %Ld microseconds which is the expected result"), iPlayToneTime.Int64());	
-			StopTest(aError, EPass);	
+			INFO_PRINTF2(_L("Setting DTMF tone lengths to negative gives a reproduction time of %Ld microseconds which is the expected result"), iPlayToneTime.Int64());
+			StopTest(aError, EPass);
 			}
 		}
 	else
@@ -2831,7 +2837,7 @@ void RA3FDevSoundToneSetDTMFLengthsToNegativeTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0021
  */
 RA3FDevSoundToneSetDTMFToneOnLengthToMinusOneTest::RA3FDevSoundToneSetDTMFToneOnLengthToMinusOneTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iFirstToneFinishedCall(EFalse),
 		iToneOnLength(0), iToneOffLength(0),
 		iPauseLength(0), iDTMFString(KNullDesC)
@@ -2845,19 +2851,19 @@ RA3FDevSoundToneSetDTMFToneOnLengthToMinusOneTest* RA3FDevSoundToneSetDTMFToneOn
 
 void RA3FDevSoundToneSetDTMFToneOnLengthToMinusOneTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength)) 
+	if (!GetIntFromConfig(iTestStepName, KToneOnLength, iToneOnLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOnLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength)) 
+	if (!GetIntFromConfig(iTestStepName, KToneOffLength, iToneOffLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KToneOffLength);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KPauseLength, iPauseLength)) 
+	if (!GetIntFromConfig(iTestStepName, KPauseLength, iPauseLength))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KPauseLength);
 		StopTest(KErrNotFound);
@@ -2943,7 +2949,7 @@ void RA3FDevSoundToneSetDTMFToneOnLengthToMinusOneTest::Fsm(TMmfDevSoundEvent aD
 			}
 		}
 	}
-	
+
 void RA3FDevSoundToneSetDTMFToneOnLengthToMinusOneTest::DoTimerCallback()
 	{
 	iTimer->Cancel();
@@ -2988,28 +2994,28 @@ RA3FDevSoundToneSetToneRepetitionsRepeatTrailingSilenceToNegativeTest* RA3FDevSo
 	RA3FDevSoundToneSetToneRepetitionsRepeatTrailingSilenceToNegativeTest * self = new(ELeave)RA3FDevSoundToneSetToneRepetitionsRepeatTrailingSilenceToNegativeTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetToneRepetitionsRepeatTrailingSilenceToNegativeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatCount);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatTrailingSilence);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -3082,7 +3088,7 @@ void RA3FDevSoundToneSetToneRepetitionsRepeatTrailingSilenceToNegativeTest::Fsm(
 			}
 		}
 	}
-	
+
 
 void RA3FDevSoundToneSetToneRepetitionsRepeatTrailingSilenceToNegativeTest::ToneFinished(TInt aError)
 	{
@@ -3131,28 +3137,28 @@ RA3FDevSoundToneSetToneRepetitionsRepeatCountToKMdaRepeatForeverTest* RA3FDevSou
 	RA3FDevSoundToneSetToneRepetitionsRepeatCountToKMdaRepeatForeverTest * self = new(ELeave)RA3FDevSoundToneSetToneRepetitionsRepeatCountToKMdaRepeatForeverTest(aTestName);
 	return self;
 	}
-	
+
 void RA3FDevSoundToneSetToneRepetitionsRepeatCountToKMdaRepeatForeverTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatCount, iRepeatCount))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatCount);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence)) 
+	if (!GetIntFromConfig(iTestStepName, KRepeatTrailingSilence, iRepeatTrailingSilence))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KRepeatTrailingSilence);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -3227,7 +3233,7 @@ void RA3FDevSoundToneSetToneRepetitionsRepeatCountToKMdaRepeatForeverTest::Fsm(T
 			}
 		}
 	}
-	
+
 
 void RA3FDevSoundToneSetToneRepetitionsRepeatCountToKMdaRepeatForeverTest::DoTimerCallback()
 	{
@@ -3348,7 +3354,7 @@ void RA3FDevSoundToneCapsTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -3424,7 +3430,7 @@ void RA3FDevSoundToneConfigDefaultTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TI
 			break;
 			}
 		case EStateInitializing:
-			{		
+			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				TMMFCapabilities capabilitiesGet;
@@ -3498,7 +3504,7 @@ RA3FDevSoundToneMaxVolumeTest* RA3FDevSoundToneMaxVolumeTest::NewL(const TDesC& 
 
 void RA3FDevSoundToneMaxVolumeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExVolume);
 		StopTest(KErrNotFound);
@@ -3534,7 +3540,7 @@ void RA3FDevSoundToneMaxVolumeTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,  TInt 
 			break;
 			}
 		case EStateInitializing:
-			{		
+			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				INFO_PRINTF1(_L("Calling CMMFDevSound::MaxVolume"));
@@ -3588,7 +3594,7 @@ RA3FDevSoundToneVolumeTest* RA3FDevSoundToneVolumeTest::NewL(const TDesC& aTestN
 
 void RA3FDevSoundToneVolumeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExVolume);
 		StopTest(KErrNotFound);
@@ -3644,7 +3650,7 @@ void RA3FDevSoundToneVolumeTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aErr
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -3680,13 +3686,13 @@ RA3FDevSoundToneQueryCapsWhilePlayingTest* RA3FDevSoundToneQueryCapsWhilePlaying
 
 void RA3FDevSoundToneQueryCapsWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -3817,13 +3823,13 @@ RA3FDevSoundToneConfigWhilePlayingTest* RA3FDevSoundToneConfigWhilePlayingTest::
 
 void RA3FDevSoundToneConfigWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -3992,19 +3998,19 @@ RA3FDevSoundToneMaxVolumeWhilePlayingTest* RA3FDevSoundToneMaxVolumeWhilePlaying
 
 void RA3FDevSoundToneMaxVolumeWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExVolume);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -4141,19 +4147,19 @@ RA3FDevSoundToneVolumeWhilePlayingTest* RA3FDevSoundToneVolumeWhilePlayingTest::
 
 void RA3FDevSoundToneVolumeWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExVolume);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -4290,13 +4296,13 @@ RA3FDevSoundToneQueryCapsWhilePausePlayingTest* RA3FDevSoundToneQueryCapsWhilePa
 
 void RA3FDevSoundToneQueryCapsWhilePausePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -4479,13 +4485,13 @@ RA3FDevSoundToneConfigWhilePausePlayingTest* RA3FDevSoundToneConfigWhilePausePla
 
 void RA3FDevSoundToneConfigWhilePausePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -4676,19 +4682,19 @@ RA3FDevSoundToneMaxVolumeWhilePausePlayingTest* RA3FDevSoundToneMaxVolumeWhilePa
 
 void RA3FDevSoundToneMaxVolumeWhilePausePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExVolume);
 		StopTest(KErrNotFound);
@@ -4846,19 +4852,19 @@ RA3FDevSoundToneVolumeWhilePausePlayingTest* RA3FDevSoundToneVolumeWhilePausePla
 
 void RA3FDevSoundToneVolumeWhilePausePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume)) 
+	if (!GetIntFromConfig(iTestStepName, KExVolume, iExVolume))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExVolume);
 		StopTest(KErrNotFound);
@@ -5001,7 +5007,7 @@ void RA3FDevSoundToneVolumeWhilePausePlayingTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0036
  */
 RA3FDevSoundTonePlayToneOnceTest::RA3FDevSoundTonePlayToneOnceTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0)
 	{
 	}
@@ -5014,13 +5020,13 @@ RA3FDevSoundTonePlayToneOnceTest* RA3FDevSoundTonePlayToneOnceTest::NewL(const T
 
 void RA3FDevSoundTonePlayToneOnceTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -5123,7 +5129,7 @@ void RA3FDevSoundTonePlayToneOnceTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0037
  */
 RA3FDevSoundTonePlayDualToneTest::RA3FDevSoundTonePlayDualToneTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0),
 		iFrequencyTone2(0)
 	{
@@ -5135,19 +5141,19 @@ RA3FDevSoundTonePlayDualToneTest* RA3FDevSoundTonePlayDualToneTest::NewL(const T
 	}
 void RA3FDevSoundTonePlayDualToneTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone2);
 		StopTest(KErrNotFound);
@@ -5202,7 +5208,7 @@ void RA3FDevSoundTonePlayDualToneTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TIn
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -5253,7 +5259,7 @@ void RA3FDevSoundTonePlayDualToneTest::ToneFinished(TInt aError)
 RA3FDevSoundTonePlayDTMFToneTest::RA3FDevSoundTonePlayDTMFToneTest(const TDesC& aTestName)
 	:	RA3FDevSoundTestBase(aTestName),iDTMFString(KNullDesC),
 		iDTMFPauses(0), iDTMFTones(0)
-		
+
 	{
 	}
 
@@ -5432,7 +5438,7 @@ void RA3FDevSoundTonePlayToneSequenceTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				iMMFDevSound->SetVolume(iMMFDevSound->MaxVolume());
-				TUint8* tablePointer = const_cast<TUint8*>(&(KFixedSequenceTestSequenceDataX[0])); 
+				TUint8* tablePointer = const_cast<TUint8*>(&(KFixedSequenceTestSequenceDataX[0]));
 				TPtrC8 KFixedSequenceData(tablePointer, sizeof(KFixedSequenceTestSequenceDataX));
 				INFO_PRINTF1(_L("Calling CMMFDevSound::PlayToneSequenceL"));
 				TRAPD(err, iMMFDevSound->PlayToneSequenceL(KFixedSequenceData));
@@ -5470,7 +5476,7 @@ void RA3FDevSoundTonePlayToneSequenceTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0040
  */
 RA3FDevSoundToneNewToneRequestWhilePlayingTest::RA3FDevSoundToneNewToneRequestWhilePlayingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0)
 	{
 	}
@@ -5483,13 +5489,13 @@ RA3FDevSoundToneNewToneRequestWhilePlayingTest* RA3FDevSoundToneNewToneRequestWh
 
 void RA3FDevSoundToneNewToneRequestWhilePlayingTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -5546,7 +5552,7 @@ void RA3FDevSoundToneNewToneRequestWhilePlayingTest::Fsm(TMmfDevSoundEvent aDevS
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -5623,7 +5629,7 @@ void RA3FDevSoundToneNewToneRequestWhilePlayingTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0041
  */
 RA3FDevSoundTonePreemptionTest::RA3FDevSoundTonePreemptionTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0)
 	{
 	}
@@ -5636,13 +5642,13 @@ RA3FDevSoundTonePreemptionTest* RA3FDevSoundTonePreemptionTest::NewL(const TDesC
 
 void RA3FDevSoundTonePreemptionTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -5704,7 +5710,7 @@ void RA3FDevSoundTonePreemptionTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt 
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -5717,7 +5723,7 @@ void RA3FDevSoundTonePreemptionTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt 
 			{
 			if(aDevSoundEvent == EEventTimerComplete)
 				{
-				INFO_PRINTF1(_L("Starting lower priority devsound client"));	
+				INFO_PRINTF1(_L("Starting lower priority devsound client"));
 				iDevsoundToneClient->SetPriority(KMaximumPriority);
 				TInt err = iDevsoundToneClient->InitTonePlay(iFrequencyTone1, iDuration*KMicroSecsInOneSec);
 				if(err != KErrNone)
@@ -5801,7 +5807,7 @@ void RA3FDevSoundTonePreemptionTest::ClientToneFinishedCallback(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0042
  */
 RA3FDevSoundToneRejectionTest::RA3FDevSoundToneRejectionTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0)
 	{
 	}
@@ -5814,13 +5820,13 @@ RA3FDevSoundToneRejectionTest* RA3FDevSoundToneRejectionTest::NewL(const TDesC& 
 
 void RA3FDevSoundToneRejectionTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -5979,7 +5985,7 @@ void RA3FDevSoundToneRejectionTest::ClientToneFinishedCallback(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0043
  */
 RA3FDevSoundTonePlayToneOnceAndStopTest::RA3FDevSoundTonePlayToneOnceAndStopTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0),
 		iToneStopped(EFalse)
 	{
@@ -5993,13 +5999,13 @@ RA3FDevSoundTonePlayToneOnceAndStopTest* RA3FDevSoundTonePlayToneOnceAndStopTest
 
 void RA3FDevSoundTonePlayToneOnceAndStopTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -6092,7 +6098,7 @@ void RA3FDevSoundTonePlayToneOnceAndStopTest::Fsm(TMmfDevSoundEvent aDevSoundEve
 			StopTest(aError, EFail);
 			}
 		}
-	
+
 	}
 
 void RA3FDevSoundTonePlayToneOnceAndStopTest::DoTimerCallback()
@@ -6101,7 +6107,7 @@ void RA3FDevSoundTonePlayToneOnceAndStopTest::DoTimerCallback()
 	INFO_PRINTF1(_L("DevSound Event: EEventTimerComplete"));
 	if(!iToneStopped)
 		{
-		Fsm(EEventTimerComplete, KErrNone); 
+		Fsm(EEventTimerComplete, KErrNone);
 		iToneStopped = ETrue;
 		}
 	else
@@ -6133,7 +6139,7 @@ void RA3FDevSoundTonePlayToneOnceAndStopTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0044
  */
 RA3FDevSoundTonePlayDualToneOnceAndStopTest::RA3FDevSoundTonePlayDualToneOnceAndStopTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iFrequencyTone1(0),
 		iFrequencyTone2(0), iToneStopped(EFalse)
 	{
@@ -6147,19 +6153,19 @@ RA3FDevSoundTonePlayDualToneOnceAndStopTest* RA3FDevSoundTonePlayDualToneOnceAnd
 
 void RA3FDevSoundTonePlayDualToneOnceAndStopTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone2);
 		StopTest(KErrNotFound);
@@ -6223,7 +6229,7 @@ void RA3FDevSoundTonePlayDualToneOnceAndStopTest::Fsm(TMmfDevSoundEvent aDevSoun
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -6260,7 +6266,7 @@ void RA3FDevSoundTonePlayDualToneOnceAndStopTest::DoTimerCallback()
 	INFO_PRINTF1(_L("DevSound Event: EEventTimerComplete"));
 	if(!iToneStopped)
 		{
-		Fsm(EEventTimerComplete, KErrNone); 
+		Fsm(EEventTimerComplete, KErrNone);
 		iToneStopped = ETrue;
 		}
 	else
@@ -6318,7 +6324,7 @@ void RA3FDevSoundTonePlayDTMFStringOnceAndStopTest::DoKickoffTestL()
 void RA3FDevSoundTonePlayDTMFStringOnceAndStopTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
 	switch(iDevSoundState)
-		{		
+		{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayDTMFStringOnceAndStopTest"), EFsmIncorrectErrorPassed));
@@ -6407,7 +6413,7 @@ void RA3FDevSoundTonePlayDTMFStringOnceAndStopTest::DoTimerCallback()
 	INFO_PRINTF1(_L("DevSound Event: EEventTimerComplete"));
 	if(!iToneStopped)
 		{
-		Fsm(EEventTimerComplete, KErrNone); 
+		Fsm(EEventTimerComplete, KErrNone);
 		iToneStopped = ETrue;
 		}
 	else
@@ -6486,7 +6492,7 @@ void RA3FDevSoundTonePlayToneSequenceOnceAndStopTest::Fsm(TMmfDevSoundEvent aDev
 				if (!iToneStopped)
 					{
 					iMMFDevSound->SetVolume(iMMFDevSound->MaxVolume());
-					TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0])); 
+					TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0]));
 					TPtrC8 KFixedSequenceData(tablePointer,  sizeof(KFixedSequenceTestSequenceDataX));
 					INFO_PRINTF1(_L("Calling CMMFDevSound::PlayToneSequenceL"));
 					TRAPD(err, iMMFDevSound->PlayToneSequenceL(KFixedSequenceData));
@@ -6505,12 +6511,12 @@ void RA3FDevSoundTonePlayToneSequenceOnceAndStopTest::Fsm(TMmfDevSoundEvent aDev
 					INFO_PRINTF1(_L("Calling CMMFDevSound::Stop succeeded"));
 					StopTest(aError);
 					}
-				
+
 				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -6547,7 +6553,7 @@ void RA3FDevSoundTonePlayToneSequenceOnceAndStopTest::DoTimerCallback()
 	INFO_PRINTF1(_L("DevSound Event: EEventTimerComplete"));
 	if(!iToneStopped)
 		{
-		Fsm(EEventTimerComplete, KErrNone); 
+		Fsm(EEventTimerComplete, KErrNone);
 		iToneStopped = ETrue;
 		}
 	else
@@ -6592,13 +6598,13 @@ RA3FDevSoundTonePlayToneOncePauseTest* RA3FDevSoundTonePlayToneOncePauseTest::Ne
 
 void RA3FDevSoundTonePlayToneOncePauseTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -6743,7 +6749,7 @@ void RA3FDevSoundTonePlayToneOncePauseTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0048
  */
 RA3FDevSoundTonePlayDualToneOncePauseTest::RA3FDevSoundTonePlayDualToneOncePauseTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0),iFrequencyTone1(0),
 		iFrequencyTone2(0), iPaused(EFalse),
 		iSamplesPlayedPaused(0)
@@ -6758,19 +6764,19 @@ RA3FDevSoundTonePlayDualToneOncePauseTest* RA3FDevSoundTonePlayDualToneOncePause
 
 void RA3FDevSoundTonePlayDualToneOncePauseTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone2);
 		StopTest(KErrNotFound);
@@ -6916,7 +6922,7 @@ void RA3FDevSoundTonePlayDualToneOncePauseTest::ToneFinished(TInt aError)
  * MM-A3F-DEVSOUND-CHRTZ-TONE-0049
  */
 RA3FDevSoundTonePlayDTMFStringOncePauseTest::RA3FDevSoundTonePlayDTMFStringOncePauseTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDTMFString(KNullDesC),iPaused(EFalse),
 		iSamplesPlayedPaused(0),iDTMFPauses(0),
 		iDTMFTones(0)
@@ -6956,7 +6962,7 @@ void RA3FDevSoundTonePlayDTMFStringOncePauseTest::DoKickoffTestL()
 void RA3FDevSoundTonePlayDTMFStringOncePauseTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
 	switch (iDevSoundState)
-		{		
+		{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayDTMFStringOncePauseTest"), EFsmIncorrectErrorPassed));
@@ -7135,7 +7141,7 @@ void RA3FDevSoundTonePlayToneSequenceOncePauseTest::Fsm(TMmfDevSoundEvent aDevSo
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
-				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) ); 
+				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) );
 				TPtrC8 KFixedSequenceData(tablePointer, sizeof(KFixedSequenceTestSequenceDataX));
 				INFO_PRINTF1(_L("Calling CMMFDevSound::PlayToneSequenceL"));
 				TRAPD(err, iMMFDevSound->PlayToneSequenceL(KFixedSequenceData));
@@ -7152,7 +7158,7 @@ void RA3FDevSoundTonePlayToneSequenceOncePauseTest::Fsm(TMmfDevSoundEvent aDevSo
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -7254,13 +7260,13 @@ RA3FDevSoundTonePlayToneOnceInitializedToPlayAudioTest* RA3FDevSoundTonePlayTone
 
 void RA3FDevSoundTonePlayToneOnceInitializedToPlayAudioTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -7351,19 +7357,19 @@ RA3FDevSoundTonePlayDualToneOnceInitializedToPlayAudioTest* RA3FDevSoundTonePlay
 
 void RA3FDevSoundTonePlayDualToneOnceInitializedToPlayAudioTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone2);
 		StopTest(KErrNotFound);
@@ -7374,7 +7380,7 @@ void RA3FDevSoundTonePlayDualToneOnceInitializedToPlayAudioTest::DoKickoffTestL(
 void RA3FDevSoundTonePlayDualToneOnceInitializedToPlayAudioTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
 	switch(iDevSoundState)
-		{		
+		{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayDualToneOnceInitializedToPlayAudioTest"), EFsmIncorrectErrorPassed));
@@ -7466,7 +7472,7 @@ void RA3FDevSoundTonePlayDTMFStringOnceInitializedToPlayAudioTest::DoKickoffTest
 void RA3FDevSoundTonePlayDTMFStringOnceInitializedToPlayAudioTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
 	switch(iDevSoundState)
-	{		
+	{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayDTMFStringOnceInitializedToPlayAudioTest"), EFsmIncorrectErrorPassed));
@@ -7577,7 +7583,7 @@ void RA3FDevSoundTonePlayToneSequenceOnceInitializedToPlayAudioTest::Fsm(TMmfDev
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
-				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) ); 
+				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) );
 				TPtrC8 KFixedSequenceData(tablePointer,  sizeof(KFixedSequenceTestSequenceDataX));
 				INFO_PRINTF1(_L("Calling CMMFDevSound::PlayToneSequenceL"));
 				TRAPD(err,  iMMFDevSound->PlayToneSequenceL(KFixedSequenceData));
@@ -7592,7 +7598,7 @@ void RA3FDevSoundTonePlayToneSequenceOnceInitializedToPlayAudioTest::Fsm(TMmfDev
 					ERR_PRINTF2(_L("Expected error = %d"), KErrNotSupported);
 					StopTest(err, EFail);
 					}
-				}	
+				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
@@ -7631,13 +7637,13 @@ RA3FDevSoundTonePlayToneOnceInitializedToRecordAudioTest* RA3FDevSoundTonePlayTo
 
 void RA3FDevSoundTonePlayToneOnceInitializedToRecordAudioTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -7728,19 +7734,19 @@ RA3FDevSoundTonePlayDualToneOnceInitializedToRecordAudioTest* RA3FDevSoundTonePl
 
 void RA3FDevSoundTonePlayDualToneOnceInitializedToRecordAudioTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone2);
 		StopTest(KErrNotFound);
@@ -7751,7 +7757,7 @@ void RA3FDevSoundTonePlayDualToneOnceInitializedToRecordAudioTest::DoKickoffTest
 void RA3FDevSoundTonePlayDualToneOnceInitializedToRecordAudioTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
 	switch(iDevSoundState)
-		{		
+		{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayDualToneOnceInitializedToRecordAudioTest"), EFsmIncorrectErrorPassed));
@@ -7843,7 +7849,7 @@ void RA3FDevSoundTonePlayDTMFStringOnceInitializedToRecordAudioTest::DoKickoffTe
 void RA3FDevSoundTonePlayDTMFStringOnceInitializedToRecordAudioTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 	{
 	switch(iDevSoundState)
-	{		
+	{
 		case EStateCreated:
 			{
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayDTMFStringOnceInitializedToRecordAudioTest"), EFsmIncorrectErrorPassed));
@@ -7954,7 +7960,7 @@ void RA3FDevSoundTonePlayToneSequenceOnceInitializedToRecordAudioTest::Fsm(TMmfD
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
-				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) ); 
+				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) );
 				TPtrC8 KFixedSequenceData(tablePointer,  sizeof(KFixedSequenceTestSequenceDataX));
 				INFO_PRINTF1(_L("Calling CMMFDevSound::PlayToneSequenceL"));
 				TRAPD(err,  iMMFDevSound->PlayToneSequenceL(KFixedSequenceData));
@@ -7969,7 +7975,7 @@ void RA3FDevSoundTonePlayToneSequenceOnceInitializedToRecordAudioTest::Fsm(TMmfD
 					ERR_PRINTF2(_L("Expected error = %d"), KErrNotSupported);
 					StopTest(err, EFail);
 					}
-				}	
+				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
@@ -8008,13 +8014,13 @@ RA3FDevSoundTonePlayToneWithoutCallingInitializeTest* RA3FDevSoundTonePlayToneWi
 
 void RA3FDevSoundTonePlayToneWithoutCallingInitializeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
@@ -8048,7 +8054,7 @@ void RA3FDevSoundTonePlayToneWithoutCallingInitializeTest::Fsm(TMmfDevSoundEvent
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -8083,19 +8089,19 @@ RA3FDevSoundTonePlayDualToneWithoutCallingInitializeTest* RA3FDevSoundTonePlayDu
 
 void RA3FDevSoundTonePlayDualToneWithoutCallingInitializeTest::DoKickoffTestL()
 	{
-	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration)) 
+	if (!GetIntFromConfig(iTestStepName, KDuration, iDuration))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone1, iFrequencyTone1))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone1);
 		StopTest(KErrNotFound);
 		return;
 		}
-	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2)) 
+	if (!GetIntFromConfig(iTestStepName, KFrequencyTone2, iFrequencyTone2))
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KFrequencyTone2);
 		StopTest(KErrNotFound);
@@ -8129,7 +8135,7 @@ void RA3FDevSoundTonePlayDualToneWithoutCallingInitializeTest::Fsm(TMmfDevSoundE
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -8199,7 +8205,7 @@ void RA3FDevSoundTonePlayDTMFStringWithoutCallingInitializeTest::Fsm(TMmfDevSoun
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -8244,7 +8250,7 @@ void RA3FDevSoundTonePlayToneSequenceWithoutCallingInitializeTest::Fsm(TMmfDevSo
 			__ASSERT_ALWAYS((aError == KErrNone), Panic(_L("RA3FDevSoundTonePlayToneSequenceWithoutCallingInitializeTest"), EFsmIncorrectErrorPassed));
 			if (aDevSoundEvent == EEventInitialize)
 				{
-				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) ); 
+				TUint8* tablePointer = const_cast<TUint8*>( &(KFixedSequenceTestSequenceDataX[0] ) );
 				TPtrC8 KFixedSequenceData(tablePointer,  sizeof(KFixedSequenceTestSequenceDataX));
 				INFO_PRINTF1(_L("Calling CMMFDevSound::PlayToneSequenceL"));
 				TRAPD(err, iMMFDevSound->PlayToneSequenceL(KFixedSequenceData));
@@ -8263,7 +8269,7 @@ void RA3FDevSoundTonePlayToneSequenceWithoutCallingInitializeTest::Fsm(TMmfDevSo
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{
@@ -8337,7 +8343,7 @@ void RA3FDevSoundTonePlayToneSequenceUsingInvalidDescriptorTest::Fsm(TMmfDevSoun
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{				
+				{
 				INFO_PRINTF1(_L("Calling iMMFDevSound->PlayToneSequenceL with an invalid descriptor as argument"));
 				TRAPD(err, iMMFDevSound->PlayToneSequenceL(iInvalidToneSequence));
 				if (err != KErrNone)
@@ -8349,7 +8355,7 @@ void RA3FDevSoundTonePlayToneSequenceUsingInvalidDescriptorTest::Fsm(TMmfDevSoun
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
 				ERR_PRINTF2(_L("DevSound called CMMFDevSound::InitializeComplete with error = %d"), aError);
-				StopTest(aError);	
+				StopTest(aError);
 				}
 			else
 				{

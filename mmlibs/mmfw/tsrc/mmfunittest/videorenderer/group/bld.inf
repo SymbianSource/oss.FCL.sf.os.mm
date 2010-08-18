@@ -20,8 +20,8 @@ PRJ_TESTEXPORTS
 ../scripts/tsu_mmf_videorenderer.script			c:/mm/tsu_mmf_videorenderer.script
 ../scripts/tsu_mmf_videorenderer_debug.script	c:/mm/tsu_mmf_videorenderer_debug.script
 
-../inc/tsu_mmf_videorenderer.iby /epoc32/rom/include/tsu_mmf_videorenderer.iby
-../inc/tsu_mmf_videorenderer_excl_test.iby /epoc32/rom/include/tsu_mmf_videorenderer_excl_test.iby
+../group/tsu_mmf_videorenderer.iby /epoc32/rom/include/tsu_mmf_videorenderer.iby
+../group/tsu_mmf_videorenderer_excl_test.iby /epoc32/rom/include/tsu_mmf_videorenderer_excl_test.iby
 
 PRJ_TESTMMPFILES
 ../mmpfiles/tsu_mmf_videorenderer.mmp

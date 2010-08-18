@@ -35,7 +35,7 @@ PRJ_TESTEXPORTS
 ../data/textInput.dummy		c:/vclntitestdata/textinput.dummy
 
 //iby files
-../group/tsu_mmf_vclnt.iby 		/epoc32/rom/include/tsu_mmf_vclnt.iby
-../group/tsu_mmf_vclnt_excl_test.iby 	/epoc32/rom/include/tsu_mmf_vclnt_excl_test.iby
+../group/tsi_mmf_vclnt.iby 		/epoc32/rom/include/tsi_mmf_vclnt.iby
+../group/tsi_mmf_vclnt_excl_test.iby 	/epoc32/rom/include/tsi_mmf_vclnt_excl_test.iby
 
 

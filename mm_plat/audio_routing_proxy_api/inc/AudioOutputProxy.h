@@ -22,7 +22,7 @@
 //  INCLUDES
 #include "AudioOutput.h"
 #include <mmf/common/mmfcontrollerframework.h>
-#include <mcustomcommand.h>
+#include <MCustomCommand.h>
 
 // FORWARD DECLARATIONS
 class CCustomCommandUtility;

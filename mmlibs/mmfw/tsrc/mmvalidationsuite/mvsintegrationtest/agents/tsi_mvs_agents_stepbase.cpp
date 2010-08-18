@@ -1123,7 +1123,7 @@ void RTestStepMVSVideoAgent::InitWservL()
     iWindow->SetRequiredDisplayMode(EColor16MA);	    
     iWindow->SetSizeErr(iScreen->SizeInPixels());
     
-    // TODO - this forcing of transparency may not be needed, as there is 
+    // XXX - this forcing of transparency may not be needed, as there is 
     //        a defect in the graphics component right now
     // force the transparency change to take place
     iWindow->SetBackgroundColor(TRgb(0x000000, 0)); 
@@ -1249,7 +1249,7 @@ void RTestMVSVideoAgentSetScrIdAndPlayBase::InitWservL()
     // surface
     iWindow->SetRequiredDisplayMode(EColor16MA);	
     
-    // TODO - this forcing of transparency may not be needed, as there is 
+    // XXX - this forcing of transparency may not be needed, as there is 
     //        a defect in the graphics component right now
     // force the transparency change to take place
     iWindow->SetBackgroundColor(TRgb(0x000000, 0)); 
@@ -1609,7 +1609,7 @@ void RTestStepMVSAgentsAPRBase::InitWservL()
     // surface
     iWindow->SetRequiredDisplayMode(EColor16MA);	
     
-    // TODO - this forcing of transparency may not be needed, as there is 
+    // XXX - this forcing of transparency may not be needed, as there is 
     //        a defect in the graphics component right now
     // force the transparency change to take place
     iWindow->SetBackgroundColor(TRgb(0x000000, 0));     

@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteExifImageDisplay@@YAPAVCTestSuiteExifImageDisplay@@XZ @ 1 NONAME ; class CTestSuiteExifImageDisplay * __cdecl NewTestSuiteExifImageDisplay(void)
-

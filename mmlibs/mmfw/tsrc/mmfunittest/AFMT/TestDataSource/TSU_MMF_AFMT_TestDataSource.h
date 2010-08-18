@@ -55,7 +55,7 @@ public:
 	virtual TBool CanCreateSourceBuffer();
 	virtual CMMFBuffer* CreateSourceBufferL(TMediaId /*aMediaId*/, TBool &aReference);
 
-	//[TBD] optimal source buffer size creation may depend on the sink buffer & vice versa
+	//XXX optimal source buffer size creation may depend on the sink buffer & vice versa
 	virtual CMMFBuffer* CreateSourceBufferL(TMediaId aMediaId, CMMFBuffer& /*aSinkBuffer*/, TBool &aReference);
 
 	virtual TInt SourceThreadLogon(MAsyncEventHandler& /*aEventHandler*/);

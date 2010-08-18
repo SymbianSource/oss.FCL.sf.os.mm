@@ -15,21 +15,39 @@
 
 "\epoc32\release\armv5\udeb\TSU_MMF_ACLNT_01.DLL"-"c:\sys\bin\TSU_MMF_ACLNT_01.DLL"
 "\epoc32\release\armv5\urel\RTAUtils.exe"-"c:\sys\bin\RTAUtils.exe"
+"\epoc32\release\armv5\urel\rtaserver.exe"-"c:\sys\bin\rtaserver.exe"
+"\epoc32\release\armv5\urel\rtaarchive.dll"-"c:\sys\bin\rtaarchive.dll"
+"\epoc32\release\armv5\urel\rtaclient.dll"-"c:\sys\bin\rtaclient.dll"
+"\epoc32\release\armv5\urel\rtaparser.dll"-"c:\sys\bin\rtaparser.dll"
+"\epoc32\release\armv5\urel\rtavirtualfile.dll"-"c:\sys\bin\rtavirtualfile.dll"
+"\epoc32\release\armv5\urel\caf.dll"-"c:\sys\bin\caf.dll"
+"\epoc32\release\armv5\urel\cafutils.dll"-"c:\sys\bin\cafutils.dll"
+"\epoc32\release\armv5\urel\apgrfx.dll"-"c:\sys\bin\apgrfx.dll"
+"\epoc32\release\armv5\urel\apmime.dll"-"c:\sys\bin\apmime.dll"
 
 //scripts
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01.script"-"c:\tsu_mmf_aclnt_01.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_1.script"-"c:\TSU_MMF_ACLNT_01_POS_1.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_2.script"-"c:\TSU_MMF_ACLNT_01_POS_2.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_3.script"-"c:\TSU_MMF_ACLNT_01_POS_3.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_4.script"-"c:\TSU_MMF_ACLNT_01_POS_4.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_5.script"-"c:\TSU_MMF_ACLNT_01_POS_5.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_6.script"-"c:\TSU_MMF_ACLNT_01_POS_6.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_POS_7.script"-"c:\TSU_MMF_ACLNT_01_POS_7.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_tone.script"-"c:\TSU_MMF_ACLNT_01_tone.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_PREEMPTION.script"-"c:\tsu_mmf_aclnt_01_preemption.script"
-"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_NOTIFICATION.script"-"c:\tsu_mmf_aclnt_01_notification.script"
+//"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_NOTIFICATION.script"-"c:\tsu_mmf_aclnt_01_notification.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_01_Alloc.script"-"c:\tsu_mmf_aclnt_01_alloc.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_02_Alloc.script"-"c:\tsu_mmf_aclnt_02_alloc.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_03_Alloc.script"-"c:\tsu_mmf_aclnt_03_alloc.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_04_Alloc.script"-"c:\tsu_mmf_aclnt_04_alloc.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_05_Alloc.script"-"c:\tsu_mmf_aclnt_05_alloc.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_RF_ALLOC.script"-"c:\tsu_mmf_aclnt_rf_alloc.script"
+
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_DRM.script"-"c:\tsu_mmf_aclnt_drm.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\TSU_MMF_ACLNT_DRM_ALLOC.script"-"c:\tsu_mmf_aclnt_drm_alloc.script"
-"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\tsu_mmf_aclnt_securedrmtestdata.script"-"c:\tsu_mmf_aclnt_securedrmtestdata.script"
+
+
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\tsu_mmf_aclnt_securedrm.script"-"c:\tsu_mmf_aclnt_securedrm.script"
 
 //ini
@@ -123,3 +141,18 @@
 
 // Test case: MM-MMF-ACLNT-U-0012-CP
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\TSU_MMF_ACLNT_01\data\small.wav"-"c:\resource\small.wav"
+
+//RTA data (For DRM scripts)
+"\epoc32\data\c\rta\rta.ini"-"c:\rta\rta.ini"
+
+"\epoc32\data\c\rta\audiocontent.xml"-"c:\rta\audiocontent.xml"
+"\epoc32\data\c\rta\audiorights.xml"-"c:\rta\audiorights.xml"
+"\epoc32\data\c\rta\audiocontentnorights.xml"-"c:\rta\audiocontentnorights.xml"
+"\epoc32\data\c\rta\midicontent.xml"-"c:\rta\midicontent.xml"
+"\epoc32\data\c\rta\midirights.xml"-"c:\rta\midirights.xml"
+"\epoc32\data\c\rta\singletonecontent.xml"-"c:\rta\singletonecontent.xml"
+"\epoc32\data\c\rta\singletonerights.xml"-"c:\rta\singletonerights.xml"
+
+
+//securedrm test data generation scripts
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\aclnt\scripts\te_tsu_mmf_aclnt_securedrmtestdata.script"-"c:\testdata\scripts\te_tsu_mmf_aclnt_securedrmtestdata.script"

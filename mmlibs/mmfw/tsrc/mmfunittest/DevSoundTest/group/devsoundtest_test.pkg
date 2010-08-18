@@ -48,7 +48,7 @@
 
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_DEVSOUND_SUITE_debug.script"-"c:\TSU_MMF_DEVSOUND_SUITE_debug.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_DEVSOUND_SUITE_Alloc.script"-"c:\TSU_MMF_DEVSOUND_SUITE_Alloc.script"
-"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE.script"-"c:\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script"-"c:\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script"
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_DEVSOUND_SUITE_PREEMPTION.script"-"c:\TSU_MMF_DEVSOUND_SUITE_PREEMPTION.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_SDEVSOUND_SUITE.script"-"c:\TSU_MMF_SDEVSOUND_SUITE.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\scripts\TSU_MMF_DEVSOUND_SUITE_NOCAP.script"-"c:\TSU_MMF_DEVSOUND_SUITE_NOCAP.script"

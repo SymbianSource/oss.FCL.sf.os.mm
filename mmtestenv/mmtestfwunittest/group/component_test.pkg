@@ -23,9 +23,7 @@
 "\epoc32\release\armv5\urel\TSU_MmTsth12.DLL"-"c:\sys\bin\TSU_MmTsth12.DLL"
 "\epoc32\release\armv5\urel\TSU_MmTsth13.DLL"-"c:\sys\bin\TSU_MmTsth13.DLL"
 "\epoc32\release\armv5\urel\TSU_MmTsth20.DLL"-"c:\sys\bin\TSU_MmTsth20.DLL"
-"\epoc32\release\armv5\urel\TSU_MmTsth21.DLL"-"c:\sys\bin\TSU_MmTsth21.DLL"
 "\epoc32\release\armv5\urel\TSU_MmTsth22.DLL"-"c:\sys\bin\TSU_MmTsth22.DLL"
-
 
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth00.script"-"c:\TSU_MmTsth00.script"
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth01.script"-"c:\TSU_MmTsth01.script"
@@ -36,7 +34,6 @@
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth12.script"-"c:\TSU_MmTsth12.script"
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth13.script"-"c:\TSU_MmTsth13.script"
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth20.script"-"c:\TSU_MmTsth20.script"
-"\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth21.script"-"c:\TSU_MmTsth21.script"
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth22.script"-"c:\TSU_MmTsth22.script"
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth02_dummy.script"-"c:\TSU_MmTsth02_dummy.script"
 "\sf\os\mm\mmtestenv\mmtestfwunittest\scriptFiles\TSU_MmTsth11_config.ini"-"c:\TSU_MmTsth11_config.ini"

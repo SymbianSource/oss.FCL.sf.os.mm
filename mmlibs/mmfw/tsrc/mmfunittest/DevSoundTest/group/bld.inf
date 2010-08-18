@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2007-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -32,6 +32,9 @@ PRJ_TESTEXPORTS
 
 #ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
 ../scripts/tsu_mmf_devsound_suite_truepause.script	c:/mm/tsu_mmf_devsound_suite_truepause.script
+../scripts/tsu_mmf_devsound_suite_truepause_ogg.script	c:/mm/tsu_mmf_devsound_suite_truepause_ogg.script
+../scripts/tsu_mmf_devsound_suite_truepause_preemption.script	c:/mm/tsu_mmf_devsound_suite_truepause_preemption.script
+../scripts/tsu_mmf_devsound_suite_truepause_neg.script	c:/mm/tsu_mmf_devsound_suite_truepause_neg.script
 #else
 ../scripts/tsu_mmf_devsound_suite_nona3f.script	c:/mm/tsu_mmf_devsound_suite_nona3f.script
 #endif
@@ -49,6 +52,8 @@ PRJ_TESTEXPORTS
 ../scripts/TSU_MMF_DEVSOUND_SUITE_NOCAP.script	c:/mm/tsu_mmf_devsound_suite_nocap.script
 ../scripts/TSU_MMF_DEVSOUND_SUITE_MMDDCAP.script	c:/mm/tsu_mmf_devsound_suite_mmddcap.script
 ../scripts/TSU_MMF_DEVSOUND_SUITE_UECAP.script	c:/mm/tsu_mmf_devsound_suite_uecap.script
+../scripts/TSU_MMF_DEVSOUND_SUITE_debug_reference_HW.script	c:/mm/TSU_MMF_DEVSOUND_SUITE_debug_reference_HW.script
+../scripts/TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script c:/mm/TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script
 
 // DEVSOUND data files
 ../TestFiles/PCM_08_16_m.raw		c:/tsu_mmf_devsound_suite/input/pcm_08_16_m.raw

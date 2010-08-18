@@ -30,7 +30,6 @@
 #include <e32cons.h>
 #include <customInterfaceUtility.h>
 #include <SoundDevice.h>
-#include <ConfigurationComponentsFactory.h>
 #include <RestrictedAudioOutput.h>
 
 
@@ -315,7 +314,6 @@ NONSHARABLE_CLASS(CRestrictedAOTestClass) : public CScriptBase,
     // reference to TestModuleIf
     CTestModuleIf& iTestModuleIf;
 
-    	CConfigurationComponentsFactory* iFactory;
 			CMMFDevSound*	iDevSound;
 			CRestrictedAudioOutput* iRestrictedAudioOutput;
 

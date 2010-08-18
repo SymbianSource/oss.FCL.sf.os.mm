@@ -191,7 +191,7 @@ private: // New functions
 	void CreateEncodeObjectL(TBool aIsFile, const TDesC& aFilename, TInt aUid);
 
 	//from MAsyncEventHandler
-	virtual TInt SendEventToClient(const TMMFEvent& /*aEvent*/) {return KErrNone;}//FIXME - can we do better here?
+	virtual TInt SendEventToClient(const TMMFEvent& /*aEvent*/) {return KErrNone;}//XXX - can we do better here?
 
 
 protected:	

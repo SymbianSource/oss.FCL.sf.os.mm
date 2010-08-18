@@ -60,10 +60,8 @@
 ../runmmfdevsoundinttests.bat
 ../runa3fdevsoundinttests.bat
 ../runa3fdevsoundlonginttests.bat
-../runmmpacketvideotests.bat
 ../runmmfdevvideointtests.bat
 ../runMMFSecureDrmUnitTests.bat
 ../runMMFSecureDrmIntTests.bat
 ../runmmfaclntsecuredrmunittests.bat
-../runomxilcoreconftests.bat
 ../run3gplibrarytests.bat

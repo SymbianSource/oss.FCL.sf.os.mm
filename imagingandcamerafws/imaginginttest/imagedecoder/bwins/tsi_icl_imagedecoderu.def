@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuiteImageDecoder@@XZ @ 1 NONAME ; class CTestSuiteImageDecoder * NewTestSuiteL(void)
-

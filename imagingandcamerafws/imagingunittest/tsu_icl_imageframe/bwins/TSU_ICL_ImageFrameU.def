@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuiteImageFrame@@XZ @ 1 NONAME ; class CTestSuiteImageFrame * NewTestSuiteL(void)
-

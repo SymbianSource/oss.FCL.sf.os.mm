@@ -23,8 +23,8 @@
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0001
  */
 RA3FDevSoundRecordConfigurationSetConfigTest::RA3FDevSoundRecordConfigurationSetConfigTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName),  
-	iSampleRate(0), 
+	: 	RA3FDevSoundTestBase(aTestName),
+	iSampleRate(0),
 	iChannels(0)
 	{
 	}
@@ -37,13 +37,13 @@ RA3FDevSoundRecordConfigurationSetConfigTest* RA3FDevSoundRecordConfigurationSet
 
 void RA3FDevSoundRecordConfigurationSetConfigTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KSampleRate, iSampleRate) ) 
+	if ( !GetIntFromConfig(iTestStepName, KSampleRate, iSampleRate) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KSampleRate);
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KChannel, iChannels) ) 
+	if ( !GetIntFromConfig(iTestStepName, KChannel, iChannels) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KChannel);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -109,12 +109,12 @@ void RA3FDevSoundRecordConfigurationSetConfigTest::Fsm(TMmfDevSoundEvent aDevSou
 					StopTest(err);
 					break;
 					}
-				
+
 				INFO_PRINTF1(_L("Getting DevSound capabilities for verifying."));
 				TMMFCapabilities getCapabilities = iMMFDevSound->Config();
 				if ((capabilities.iRate != getCapabilities.iRate)||(capabilities.iChannels != getCapabilities.iChannels))
 					{
-					ERR_PRINTF3(_L("Configuration of DevSound object does not match with set capabilities! Rate = %u Channels = %u "), 
+					ERR_PRINTF3(_L("Configuration of DevSound object does not match with set capabilities! Rate = %u Channels = %u "),
 							getCapabilities.iRate, getCapabilities.iChannels);
 					StopTest(err, EFail);
 					}
@@ -123,7 +123,7 @@ void RA3FDevSoundRecordConfigurationSetConfigTest::Fsm(TMmfDevSoundEvent aDevSou
 					INFO_PRINTF3(_L("DevSound configuration is a match rate = %u channels = %u"), getCapabilities.iRate, getCapabilities.iChannels);
 					StopTest();
 					}
-				
+
 				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
@@ -150,7 +150,7 @@ void RA3FDevSoundRecordConfigurationSetConfigTest::Fsm(TMmfDevSoundEvent aDevSou
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0002
  */
 RA3FDevSoundRecordConfigurationSetPriorityTest::RA3FDevSoundRecordConfigurationSetPriorityTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
+	: 	RA3FDevSoundTestBase(aTestName),
 		iPriority(EMdaPriorityNormal)
 	{
 	}
@@ -163,7 +163,7 @@ RA3FDevSoundRecordConfigurationSetPriorityTest* RA3FDevSoundRecordConfigurationS
 
 void RA3FDevSoundRecordConfigurationSetPriorityTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KPriority, iPriority) ) 
+	if ( !GetIntFromConfig(iTestStepName, KPriority, iPriority) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KPriority);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -242,7 +242,7 @@ void RA3FDevSoundRecordConfigurationSetPriorityTest::Fsm(TMmfDevSoundEvent aDevS
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0003
  */
 RA3FDevSoundRecordConfigurationSetGainTest::RA3FDevSoundRecordConfigurationSetGainTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
+	: 	RA3FDevSoundTestBase(aTestName),
 		iGain(0)
 	{
 	}
@@ -261,7 +261,7 @@ void RA3FDevSoundRecordConfigurationSetGainTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	
+
 	TPtrC fourccCode;
 	if ( !GetStringFromConfig(iTestStepName, KFourccCode, fourccCode) )
 		{
@@ -303,17 +303,17 @@ void RA3FDevSoundRecordConfigurationSetGainTest::Fsm(TMmfDevSoundEvent aDevSound
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
-				INFO_PRINTF2( _L("Setting the input gain to %d using iMMFDevSound->SetGain"),iGain);	
+				INFO_PRINTF2( _L("Setting the input gain to %d using iMMFDevSound->SetGain"),iGain);
 				iMMFDevSound->SetGain(iGain);
-				
+
 				INFO_PRINTF1(_L("Call Gain() for verifying."));
 				TInt getGain = iMMFDevSound->Gain();
-				
+
 				if (iGain != getGain)
 					{
-					ERR_PRINTF2(_L("Configuration of DevSound object does not match with set gain! Gain = %d"), 
+					ERR_PRINTF2(_L("Configuration of DevSound object does not match with set gain! Gain = %d"),
 							getGain);
-					ERR_PRINTF2(_L("Expected Gain = %d"), 
+					ERR_PRINTF2(_L("Expected Gain = %d"),
 							iGain);
 					StopTest(aError, EFail);
 					}
@@ -322,7 +322,7 @@ void RA3FDevSoundRecordConfigurationSetGainTest::Fsm(TMmfDevSoundEvent aDevSound
 					INFO_PRINTF2(_L("Gain has the expected value = %d"), getGain);
 					StopTest();
 					}
-				
+
 				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
 				{
@@ -349,7 +349,7 @@ void RA3FDevSoundRecordConfigurationSetGainTest::Fsm(TMmfDevSoundEvent aDevSound
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0004
  */
 RA3FDevSoundRecordConfigurationSetRecordBalanceTest::RA3FDevSoundRecordConfigurationSetRecordBalanceTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
+	: 	RA3FDevSoundTestBase(aTestName),
 		iLRecordBalance(0), iRRecordBalance(0)
 	{
 	}
@@ -415,8 +415,8 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceTest::Fsm(TMmfDevSoundEvent 
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
-				INFO_PRINTF3(_L("Calling iMMFDevSound->SetRecordBalanceL using the corresponding values %d and %d"),iLRecordBalance,iRRecordBalance);			
+				{
+				INFO_PRINTF3(_L("Calling iMMFDevSound->SetRecordBalanceL using the corresponding values %d and %d"),iLRecordBalance,iRRecordBalance);
 				TRAPD(err,iMMFDevSound->SetRecordBalanceL(iLRecordBalance, iRRecordBalance));
 				if (err != KErrNone)
 					{
@@ -424,7 +424,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceTest::Fsm(TMmfDevSoundEvent 
 					StopTest(err);
 					break;
 					}
-				
+
 				INFO_PRINTF1(_L("Call GetRecordBalanceL for verifying."));
 				TInt getLRecordBalance;
 				TInt getRRecordBalance;
@@ -437,13 +437,13 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceTest::Fsm(TMmfDevSoundEvent 
 					}
 				if ((iLRecordBalance != getLRecordBalance)||(iRRecordBalance != getRRecordBalance))
 					{
-					ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"), 
+					ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"),
 							getLRecordBalance, getRRecordBalance);
 					StopTest(aError, EFail);
 					}
 				else
 					{
-					INFO_PRINTF3(_L("Balance configuration matches left balance = %d right balance = %d"), 
+					INFO_PRINTF3(_L("Balance configuration matches left balance = %d right balance = %d"),
 							getLRecordBalance, getRRecordBalance);
 					StopTest();
 					}
@@ -473,7 +473,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceTest::Fsm(TMmfDevSoundEvent 
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0005
  */
 RA3FDevSoundRecordSetGainWhileRecordingTest::RA3FDevSoundRecordSetGainWhileRecordingTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	: 	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iCalledSetGain(EFalse)
 	{
 	}
@@ -486,7 +486,7 @@ RA3FDevSoundRecordSetGainWhileRecordingTest* RA3FDevSoundRecordSetGainWhileRecor
 
 void RA3FDevSoundRecordSetGainWhileRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -499,7 +499,7 @@ void RA3FDevSoundRecordSetGainWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -555,12 +555,12 @@ void RA3FDevSoundRecordSetGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSoun
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF2(_L("Calling SetGain to initial value of %d"), iMMFDevSound->MaxGain()/2);
 				iMMFDevSound->SetGain(iMMFDevSound->MaxGain()/2);
-				
+
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -570,7 +570,7 @@ void RA3FDevSoundRecordSetGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSoun
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -593,7 +593,7 @@ void RA3FDevSoundRecordSetGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSoun
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -614,7 +614,7 @@ void RA3FDevSoundRecordSetGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSoun
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -639,7 +639,7 @@ void RA3FDevSoundRecordSetGainWhileRecordingTest::DoTimerCallback()
 		{
 		INFO_PRINTF2(_L("Calling SetGain to value of %d"), iMMFDevSound->MaxGain());
 		iMMFDevSound->SetGain(iMMFDevSound->MaxGain());
-		
+
 		INFO_PRINTF2(_L("Calling Gain to verify gain value"), iMMFDevSound->MaxGain());
 		TInt gain = iMMFDevSound->Gain();
 		if(gain != iMMFDevSound->MaxGain())
@@ -724,14 +724,14 @@ void RA3FDevSoundSetRecordGainBeyondMaxLimitConfigurationTest::Fsm(TMmfDevSoundE
 			break;
 			}
 		case EStateInitializing:
-			{			
+			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				TInt maxGain = iMMFDevSound->MaxGain();
-				INFO_PRINTF2(_L("MaxGain returns a value of %d"),maxGain);			
-				INFO_PRINTF2(_L("Call iMMFDevSound->SetGain using the gain value %d"),iGain + maxGain);			
+				INFO_PRINTF2(_L("MaxGain returns a value of %d"),maxGain);
+				INFO_PRINTF2(_L("Call iMMFDevSound->SetGain using the gain value %d"),iGain + maxGain);
 				iMMFDevSound->SetGain(iGain+iMMFDevSound->MaxGain());
-				
+
 				INFO_PRINTF1(_L("Call Gain() for verifying."));
 				if(iMMFDevSound->Gain() == iMMFDevSound->MaxGain())
 					{
@@ -831,10 +831,10 @@ void RA3FDevSoundSetRecordGainToNegativeValueConfigurationTest::Fsm(TMmfDevSound
 			break;
 			}
 		case EStateInitializing:
-			{			
+			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{			
-				INFO_PRINTF2(_L("Call iMMFDevSound->SetGain using the negative gain value %d"),iGain);			
+				{
+				INFO_PRINTF2(_L("Call iMMFDevSound->SetGain using the negative gain value %d"),iGain);
 				iMMFDevSound->SetGain(iGain);
 				INFO_PRINTF1(_L("Call Gain() for verifying."));
 				TInt gainGet = iMMFDevSound->Gain();
@@ -900,7 +900,7 @@ void RA3FDevSoundSetRecordBalanceToValuesBeyondUpperLimitConfigurationTest::DoKi
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	
+
 	TPtrC fourccCode;
 	if ( !GetStringFromConfig(iTestStepName, KFourccCode, fourccCode) )
 		{
@@ -939,10 +939,10 @@ void RA3FDevSoundSetRecordBalanceToValuesBeyondUpperLimitConfigurationTest::Fsm(
 			break;
 			}
 		case EStateInitializing:
-			{			
+			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
-				INFO_PRINTF3(_L("Calling SetRecordBalanceL using values beyond upper boundaries: left = %d right = %d"), iLRecordBalance, iRRecordBalance);			
+				INFO_PRINTF3(_L("Calling SetRecordBalanceL using values beyond upper boundaries: left = %d right = %d"), iLRecordBalance, iRRecordBalance);
 				TRAPD(err,iMMFDevSound->SetRecordBalanceL(iLRecordBalance, iRRecordBalance));
 				if (err != KErrNone)
 					{
@@ -950,7 +950,7 @@ void RA3FDevSoundSetRecordBalanceToValuesBeyondUpperLimitConfigurationTest::Fsm(
 					StopTest(err);
 					break;
 					}
-				
+
 				INFO_PRINTF1(_L("Call GetRecordBalanceL() for verifying."));
 				TRAP(err,iMMFDevSound->GetRecordBalanceL(iLRecordBalance, iRRecordBalance));
 				if (err != KErrNone)
@@ -1074,7 +1074,7 @@ void RA3FDevSoundSetRecordBalanceToNegativeValuesConfigurationTest::Fsm(TMmfDevS
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
-				INFO_PRINTF3(_L("Calling CMMFDevSound::SetRecordBalanceL using negative values %d and %d"),iLRecordBalance, iRRecordBalance);			
+				INFO_PRINTF3(_L("Calling CMMFDevSound::SetRecordBalanceL using negative values %d and %d"),iLRecordBalance, iRRecordBalance);
 				TRAPD(err,iMMFDevSound->SetRecordBalanceL(iLRecordBalance, iRRecordBalance));
 				if (err != KErrNone)
 					{
@@ -1131,7 +1131,7 @@ void RA3FDevSoundSetRecordBalanceToNegativeValuesConfigurationTest::Fsm(TMmfDevS
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0010
  */
 RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayAudioTest::RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayAudioTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
+	: 	RA3FDevSoundTestBase(aTestName),
 		iGain(0), iInitializedToRecord(EFalse)
 	{
 	}
@@ -1150,7 +1150,7 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayAudioTest::DoKickoffTes
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	
+
 	TPtrC fourccCode;
 	if ( !GetStringFromConfig(iTestStepName, KFourccCode, fourccCode) )
 		{
@@ -1195,9 +1195,9 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayAudioTest::Fsm(TMmfDevS
 				if (iInitializedToRecord == EFalse)
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to play audio."));
-					INFO_PRINTF2( _L("Setting the input gain to %d using iMMFDevSound->SetGain"),iGain);	
+					INFO_PRINTF2( _L("Setting the input gain to %d using iMMFDevSound->SetGain"),iGain);
 					iMMFDevSound->SetGain(iGain);
-					
+
 					INFO_PRINTF1(_L("Calling CMMFDevSound::InitializeL to Record Audio"));
 					TRAPD(err, iMMFDevSound->InitializeL(*this,iFourCCCode,EMMFStateRecording));
 					if (err != KErrNone)
@@ -1213,17 +1213,17 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayAudioTest::Fsm(TMmfDevS
 					INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 					INFO_PRINTF1(_L("Call Gain() for verifying."));
 					TInt getGain = iMMFDevSound->Gain();
-					
+
 					if (iGain != getGain)
 						{
-						ERR_PRINTF2(_L("Configuration of DevSound object does not match with set gain! Gain = %d"), 
+						ERR_PRINTF2(_L("Configuration of DevSound object does not match with set gain! Gain = %d"),
 								getGain);
 						ERR_PRINTF2(_L("Expected Gain = %d"), iGain);
 						StopTest(aError, EFail);
 						}
 					else
 						{
-						INFO_PRINTF2(_L("Gain value is as expected = %d"), 
+						INFO_PRINTF2(_L("Gain value is as expected = %d"),
 								getGain);
 						StopTest();
 						}
@@ -1254,7 +1254,7 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayAudioTest::Fsm(TMmfDevS
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0011
  */
 RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayTonesTest::RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayTonesTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
+	: 	RA3FDevSoundTestBase(aTestName),
 		iGain(0), iInitializedToRecord(EFalse)
 	{
 	}
@@ -1273,7 +1273,7 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayTonesTest::DoKickoffTes
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	
+
 	TPtrC fourccCode;
 	if ( !GetStringFromConfig(iTestStepName, KFourccCode, fourccCode) )
 		{
@@ -1318,9 +1318,9 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayTonesTest::Fsm(TMmfDevS
 				if (iInitializedToRecord == EFalse)
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to play tones."));
-					INFO_PRINTF2( _L("Setting the input gain to %d using iMMFDevSound->SetGain"),iGain);	
+					INFO_PRINTF2( _L("Setting the input gain to %d using iMMFDevSound->SetGain"),iGain);
 					iMMFDevSound->SetGain(iGain);
-					
+
 					INFO_PRINTF1(_L("Calling CMMFDevSound::InitializeL to Record Audio"));
 					TRAPD(err, iMMFDevSound->InitializeL(*this,iFourCCCode,EMMFStateRecording));
 					if (err != KErrNone)
@@ -1336,17 +1336,17 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayTonesTest::Fsm(TMmfDevS
 					INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 					INFO_PRINTF1(_L("Call Gain() for verifying."));
 					TInt getGain = iMMFDevSound->Gain();
-					
+
 					if (iGain != getGain)
 						{
-						ERR_PRINTF2(_L("Configuration of DevSound object does not match with set gain! Gain = %d"), 
+						ERR_PRINTF2(_L("Configuration of DevSound object does not match with set gain! Gain = %d"),
 								getGain);
 						ERR_PRINTF2(_L("Expected Gain = %d"), iGain);
 						StopTest(aError, EFail);
 						}
 					else
 						{
-						INFO_PRINTF2(_L("Gain value is as expected = %d"), 
+						INFO_PRINTF2(_L("Gain value is as expected = %d"),
 								getGain);
 						StopTest();
 						}
@@ -1377,9 +1377,9 @@ void RA3FDevSoundRecordConfigurationSetGainWhenInitToPlayTonesTest::Fsm(TMmfDevS
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0012
  */
 RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
-		iLRecordBalance(0), 
-		iRRecordBalance(0), 
+	: 	RA3FDevSoundTestBase(aTestName),
+		iLRecordBalance(0),
+		iRRecordBalance(0),
 		iInitializedToRecord(EFalse)
 	{
 	}
@@ -1404,7 +1404,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::DoK
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	
+
 	TPtrC fourccCode;
 	if ( !GetStringFromConfig(iTestStepName, KFourccCode, fourccCode) )
 		{
@@ -1449,8 +1449,8 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::Fsm
 				if (iInitializedToRecord == EFalse)
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to play audio."));
-					
-					INFO_PRINTF3(_L("Calling iMMFDevSound->SetRecordBalanceL using the corresponding values %d and %d"),iLRecordBalance,iRRecordBalance);			
+
+					INFO_PRINTF3(_L("Calling iMMFDevSound->SetRecordBalanceL using the corresponding values %d and %d"),iLRecordBalance,iRRecordBalance);
 					TRAPD(err,iMMFDevSound->SetRecordBalanceL(iLRecordBalance, iRRecordBalance));
 					if (err != KErrNone)
 						{
@@ -1458,7 +1458,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::Fsm
 						StopTest(err);
 						break;
 						}
-					
+
 					INFO_PRINTF1(_L("Calling CMMFDevSound::InitializeL to Record Audio"));
 					TRAP(err, iMMFDevSound->InitializeL(*this,iFourCCCode,EMMFStateRecording));
 					if (err != KErrNone)
@@ -1472,7 +1472,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::Fsm
 				else
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-					
+
 					INFO_PRINTF1(_L("Call GetRecordBalanceL for verifying."));
 					TInt getLRecordBalance;
 					TInt getRRecordBalance;
@@ -1485,17 +1485,17 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::Fsm
 						}
 					if ((iLRecordBalance != getLRecordBalance)||(iRRecordBalance != getRRecordBalance))
 						{
-						ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"), 
+						ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"),
 								getLRecordBalance, getRRecordBalance);
 						StopTest(aError, EFail);
 						}
 					else
 						{
-						INFO_PRINTF3(_L("Balance values are as expected, Left = %d Right = %d"), 
+						INFO_PRINTF3(_L("Balance values are as expected, Left = %d Right = %d"),
 								getLRecordBalance, getRRecordBalance);
 						StopTest();
 						}
-					
+
 					}
 				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
@@ -1523,9 +1523,9 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayAudioTest::Fsm
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0013
  */
 RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest(const TDesC& aTestName)
-	: 	RA3FDevSoundTestBase(aTestName), 
-		iLRecordBalance(0), 
-		iRRecordBalance(0), 
+	: 	RA3FDevSoundTestBase(aTestName),
+		iLRecordBalance(0),
+		iRRecordBalance(0),
 		iInitializedToRecord(EFalse)
 	{
 	}
@@ -1550,7 +1550,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::DoK
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	
+
 	TPtrC fourccCode;
 	if ( !GetStringFromConfig(iTestStepName, KFourccCode, fourccCode) )
 		{
@@ -1595,8 +1595,8 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::Fsm
 				if (iInitializedToRecord == EFalse)
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to play tones."));
-					
-					INFO_PRINTF3(_L("Calling iMMFDevSound->SetRecordBalanceL using the corresponding values %d and %d"),iLRecordBalance,iRRecordBalance);			
+
+					INFO_PRINTF3(_L("Calling iMMFDevSound->SetRecordBalanceL using the corresponding values %d and %d"),iLRecordBalance,iRRecordBalance);
 					TRAPD(err,iMMFDevSound->SetRecordBalanceL(iLRecordBalance, iRRecordBalance));
 					if (err != KErrNone)
 						{
@@ -1604,7 +1604,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::Fsm
 						StopTest(err);
 						break;
 						}
-					
+
 					INFO_PRINTF1(_L("Calling CMMFDevSound::InitializeL to Record Audio"));
 					TRAP(err, iMMFDevSound->InitializeL(*this,iFourCCCode,EMMFStateRecording));
 					if (err != KErrNone)
@@ -1618,7 +1618,7 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::Fsm
 				else
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-					
+
 					INFO_PRINTF1(_L("Call GetRecordBalanceL for verifying."));
 					TInt getLRecordBalance;
 					TInt getRRecordBalance;
@@ -1631,17 +1631,17 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::Fsm
 						}
 					if ((iLRecordBalance != getLRecordBalance)||(iRRecordBalance != getRRecordBalance))
 						{
-						ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"), 
+						ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"),
 								getLRecordBalance, getRRecordBalance);
 						StopTest(aError, EFail);
 						}
 					else
 						{
-						INFO_PRINTF3(_L("Balance values are as expected, Left = %d Right = %d"), 
+						INFO_PRINTF3(_L("Balance values are as expected, Left = %d Right = %d"),
 								getLRecordBalance, getRRecordBalance);
 						StopTest();
 						}
-					
+
 					}
 				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
@@ -1669,9 +1669,9 @@ void RA3FDevSoundRecordConfigurationSetRecordBalanceWhenInitToPlayTonesTest::Fsm
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0014
  */
 RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest::RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0),
-		iSampleRate(0), 
+		iSampleRate(0),
 		iChannels(0),
 		iCallConfig(EFalse)
 	{
@@ -1685,19 +1685,19 @@ RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest* RA3FDevSoundCallSetCo
 
 void RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KSampleRate, iSampleRate) ) 
+	if ( !GetIntFromConfig(iTestStepName, KSampleRate, iSampleRate) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KSampleRate);
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KChannel, iChannels) ) 
+	if ( !GetIntFromConfig(iTestStepName, KChannel, iChannels) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KChannel);
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -1710,7 +1710,7 @@ void RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -1766,9 +1766,9 @@ void RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest::Fsm(TMmfDevSound
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -1778,7 +1778,7 @@ void RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest::Fsm(TMmfDevSound
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -1860,7 +1860,7 @@ void RA3FDevSoundCallSetConfigLWhileRecordingConfigurationTest::DoTimerCallback(
 		iCallConfig = ETrue;
 		}
 	}
-	
+
 /*
  *========================================================================================================
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0015
@@ -1918,13 +1918,13 @@ void RA3FDevSoundQueryRecordCapabilitiesTest::Fsm(TMmfDevSoundEvent aDevSoundEve
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
+				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF1(_L("Calling query method Capabilities()"));
 				TMMFCapabilities capabilities = iMMFDevSound->Capabilities();
 				PrintSupportedCapabilities(capabilities.iRate, capabilities.iChannels);
-			
+
 				StopTest();
 				}
 			else if (aDevSoundEvent == EEventInitComplete && aError != KErrNone)
@@ -2143,11 +2143,11 @@ void RA3FDevSoundQueryRecordBalanceTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, T
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
+				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				TInt getLRecordBalance = 0;
 				TInt getRRecordBalance = 0;
-				
+
 				INFO_PRINTF1(_L("Calling query method GetRecordBalanceL()"));
 				TRAPD(err,iMMFDevSound->GetRecordBalanceL(getLRecordBalance, getRRecordBalance));
 				if (err != KErrNone)
@@ -2247,11 +2247,11 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesTest::Fsm(TMmfDevSoundEvent 
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
+				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF1(_L("Calling query method GetSupportedOutputDataTypesL()"));
-				
+
 				TMMFPrioritySettings prioritySettings;
 				TRAPD(err,iMMFDevSound->GetSupportedOutputDataTypesL(iSupportedFourCCs,prioritySettings));
 				if (err != KErrNone)
@@ -2382,9 +2382,9 @@ void RA3FDevSoundQueryRecordMaxGainTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, T
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
+				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF1(_L("Calling query method MaxGain()"));
 				TInt maxGain = iMMFDevSound->MaxGain();
 				INFO_PRINTF2(_L("Record Max Gain  %d"), maxGain);
@@ -2483,13 +2483,13 @@ void RA3FDevSoundQueryRecordSamplesRecordedTest::Fsm(TMmfDevSoundEvent aDevSound
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
+				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF1(_L("Calling query method SamplesRecorded()"));
 				TInt samplesRecorded = iMMFDevSound->SamplesRecorded();
 				INFO_PRINTF2(_L("Samples Recorded  %d"), samplesRecorded);
-				
+
 				if(samplesRecorded == iExSamplesRecorded)
 					{
 					INFO_PRINTF1(_L("Samples Recorded match the expected value"));
@@ -2578,12 +2578,12 @@ void RA3FDevSoundQueryRecordGainTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt
 		case EStateInitializing:
 			{
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
-				{	
+				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-				
+
 				INFO_PRINTF1(_L("Calling query method Gain()"));
 				INFO_PRINTF2(_L("Current Gain = %d"),iMMFDevSound->Gain());
-				if(iMMFDevSound->Gain() == iMMFDevSound->MaxGain()/2)
+				if(iMMFDevSound->Gain() == (iMMFDevSound->MaxGain()+1)/2)
 					{
 					INFO_PRINTF2(_L("Gain equals the expected default value of MaxGain/2 = %d"),iMMFDevSound->MaxGain()/2);
 					StopTest();
@@ -2619,8 +2619,8 @@ void RA3FDevSoundQueryRecordGainTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0022
  */
 RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
-		iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName),
+		iDuration(0),
 		iQueryRecordingSettings(EFalse),
 		iExCapChannels(0),
 		iExCapRate(0)
@@ -2635,19 +2635,19 @@ RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest* RA3FDevSoundQueryRecordCa
 
 void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KExCapChannels, iExCapChannels) ) 
+	if ( !GetIntFromConfig(iTestStepName, KExCapChannels, iExCapChannels) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExCapChannels);
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KExCapRate, iExCapRate) ) 
+	if ( !GetIntFromConfig(iTestStepName, KExCapRate, iExCapRate) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KExCapRate);
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -2660,7 +2660,7 @@ void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -2717,7 +2717,7 @@ void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::Fsm(TMmfDevSoundEven
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -2727,7 +2727,7 @@ void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::Fsm(TMmfDevSoundEven
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -2750,7 +2750,7 @@ void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::Fsm(TMmfDevSoundEven
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -2771,7 +2771,7 @@ void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::Fsm(TMmfDevSoundEven
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -2824,7 +2824,7 @@ void RA3FDevSoundQueryRecordCapabilitiesWhileRecordingTest::DoTimerCallback()
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0023
  */
 RA3FDevSoundQueryRecordConfigWhileRecordingTest::RA3FDevSoundQueryRecordConfigWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iQueryRecordingSettings(EFalse), iExCapRate(0),
 		iExCapChannels(0)
 	{
@@ -2838,7 +2838,7 @@ RA3FDevSoundQueryRecordConfigWhileRecordingTest* RA3FDevSoundQueryRecordConfigWh
 
 void RA3FDevSoundQueryRecordConfigWhileRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -2851,7 +2851,7 @@ void RA3FDevSoundQueryRecordConfigWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -2920,7 +2920,7 @@ void RA3FDevSoundQueryRecordConfigWhileRecordingTest::Fsm(TMmfDevSoundEvent aDev
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -2930,7 +2930,7 @@ void RA3FDevSoundQueryRecordConfigWhileRecordingTest::Fsm(TMmfDevSoundEvent aDev
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -3045,7 +3045,7 @@ void RA3FDevSoundQueryRecordConfigWhileRecordingTest::DoTimerCallback()
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0024
  */
 RA3FDevSoundQueryRecordBalanceWhileRecordingTest::RA3FDevSoundQueryRecordBalanceWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iQueryRecordingSettings(EFalse),
 		iExLRecordBalance(0),
 		iExRRecordBalance(0)
@@ -3072,7 +3072,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -3085,7 +3085,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -3142,7 +3142,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -3152,7 +3152,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -3175,7 +3175,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -3196,7 +3196,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -3220,7 +3220,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::DoTimerCallback()
 	if(!iQueryRecordingSettings)
 		{
 		INFO_PRINTF1(_L("Calling query method GetRecordBalanceL() while recording"));
-		
+
 		TInt getLRecordBalance = 0;
 		TInt getRRecordBalance = 0;
 		TRAPD(err, iMMFDevSound->GetRecordBalanceL(getLRecordBalance, getRRecordBalance));
@@ -3256,7 +3256,7 @@ void RA3FDevSoundQueryRecordBalanceWhileRecordingTest::DoTimerCallback()
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0025
  */
 RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iQueryRecordingSettings(EFalse),
 		iCurrentTypeInTest(0)
 	{
@@ -3270,7 +3270,7 @@ RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest* RA3FDevSoundQ
 
 void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -3283,7 +3283,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::DoKickof
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -3342,7 +3342,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::Fsm(TMmf
 					{
 					INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 					INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-					TRAPD(err, iMMFDevSound->RecordInitL()); 
+					TRAPD(err, iMMFDevSound->RecordInitL());
 					if (err != KErrNone)
 						{
 						ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -3403,7 +3403,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::Fsm(TMmf
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -3424,7 +3424,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::Fsm(TMmf
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -3448,7 +3448,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::DoTimerC
 	if(!iQueryRecordingSettings)
 		{
 		INFO_PRINTF1(_L("Calling query method GetSupportedOutputDataTypesL() while recording"));
-		
+
 		TMMFPrioritySettings prioritySettings;
 		TRAPD(err,iMMFDevSound->GetSupportedOutputDataTypesL(iSupportedFourCCs,prioritySettings));
 		if (err != KErrNone)
@@ -3467,9 +3467,9 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::DoTimerC
 				}
 			INFO_PRINTF3(_L("Supported Input Data types: 0x%x  %S "), fourCC.FourCC(), &name);
 			}
-		
+
 		iQueryRecordingSettings = ETrue;
-		
+
 		}
 	else
 		{
@@ -3510,7 +3510,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::BufferTo
 		{
 		INFO_PRINTF1(_L("DevSound Event: EEventBTBE"));
 		Fsm(EEventBTBE, KErrNone);
-		}	
+		}
 	}
 
 /*
@@ -3518,7 +3518,7 @@ void RA3FDevSoundQueryRecordSupportedOutputDataTypesWhileRecordingTest::BufferTo
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0026
  */
 RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::RA3FDevSoundQueryRecordMaxGainWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iQueryRecordingSettings(EFalse),
 		iExGain(0)
 	{
@@ -3538,7 +3538,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound);
 		return;
 		}
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -3551,7 +3551,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -3608,7 +3608,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -3618,7 +3618,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -3641,7 +3641,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -3662,7 +3662,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDe
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -3686,7 +3686,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::DoTimerCallback()
 	if(!iQueryRecordingSettings)
 		{
 		INFO_PRINTF1(_L("Calling query method MaxGain() while recording"));
-		
+
 		TInt maxGain = iMMFDevSound->MaxGain();
 		INFO_PRINTF2(_L("Record Max Gain  %d"), maxGain);
 		if(maxGain == iExGain)
@@ -3713,7 +3713,7 @@ void RA3FDevSoundQueryRecordMaxGainWhileRecordingTest::DoTimerCallback()
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0027
  */
 RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iQueryRecordingSettings(EFalse)
 	{
 	}
@@ -3726,7 +3726,7 @@ RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest* RA3FDevSoundQueryRecor
 
 void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -3739,7 +3739,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -3796,7 +3796,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::Fsm(TMmfDevSoundE
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -3806,7 +3806,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::Fsm(TMmfDevSoundE
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -3829,7 +3829,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::Fsm(TMmfDevSoundE
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -3850,7 +3850,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::Fsm(TMmfDevSoundE
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -3874,7 +3874,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::DoTimerCallback()
 	if(!iQueryRecordingSettings)
 		{
 		INFO_PRINTF1(_L("Calling query method SamplesRecorded() while recording"));
-		
+
 		TInt samplesRecorded = iMMFDevSound->SamplesRecorded();
 		INFO_PRINTF2(_L("Samples Recorded  %d"), samplesRecorded);
 		if(samplesRecorded > 0)
@@ -3887,7 +3887,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::DoTimerCallback()
 			StopTest(KErrNone, EFail);
 			}
 		iQueryRecordingSettings = ETrue;
-		
+
 		}
 	else
 		{
@@ -3902,7 +3902,7 @@ void RA3FDevSoundQueryRecordSamplesRecordedWhileRecordingTest::DoTimerCallback()
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0028
  */
 RA3FDevSoundQueryRecordGainWhileRecordingTest::RA3FDevSoundQueryRecordGainWhileRecordingTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName), iDuration(0),
 		iQueryRecordingSettings(EFalse)
 	{
 	}
@@ -3915,7 +3915,7 @@ RA3FDevSoundQueryRecordGainWhileRecordingTest* RA3FDevSoundQueryRecordGainWhileR
 
 void RA3FDevSoundQueryRecordGainWhileRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -3928,7 +3928,7 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -3985,7 +3985,7 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSo
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -3995,7 +3995,7 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSo
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -4018,7 +4018,7 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSo
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -4039,7 +4039,7 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::Fsm(TMmfDevSoundEvent aDevSo
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -4063,9 +4063,9 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::DoTimerCallback()
 	if(!iQueryRecordingSettings)
 		{
 		INFO_PRINTF1(_L("Calling query method Gain() while recording"));
-		
+
 		INFO_PRINTF2(_L("Current Gain = %d"), iMMFDevSound->Gain());
-		if(iMMFDevSound->Gain() == iMMFDevSound->MaxGain()/2)
+		if(iMMFDevSound->Gain() == (iMMFDevSound->MaxGain()+1)/2)
 			{
 			INFO_PRINTF2(_L("Gain equals the expected default value of MaxGain/2 = %d"),iMMFDevSound->MaxGain()/2);
 			}
@@ -4075,7 +4075,7 @@ void RA3FDevSoundQueryRecordGainWhileRecordingTest::DoTimerCallback()
 			StopTest(KErrNone, EFail);
 			}
 		iQueryRecordingSettings = ETrue;
-		
+
 		}
 	else
 		{
@@ -4102,7 +4102,7 @@ RA3FDevSoundRecordingTest* RA3FDevSoundRecordingTest::NewL(const TDesC& aTestNam
 
 void RA3FDevSoundRecordingTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -4115,7 +4115,7 @@ void RA3FDevSoundRecordingTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -4172,7 +4172,7 @@ void RA3FDevSoundRecordingTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aErro
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -4182,7 +4182,7 @@ void RA3FDevSoundRecordingTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aErro
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -4205,7 +4205,7 @@ void RA3FDevSoundRecordingTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aErro
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -4226,7 +4226,7 @@ void RA3FDevSoundRecordingTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aErro
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -4257,8 +4257,8 @@ void RA3FDevSoundRecordingTest::DoTimerCallback()
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0030
  */
 RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
-		iDuration(0), 
+	:	RA3FDevSoundTestBase(aTestName),
+		iDuration(0),
 		iRecordAgainToConfirmInitializedState(EFalse)
 	{
 	}
@@ -4271,7 +4271,7 @@ RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest* RA3FDevSoundLeavePaus
 
 void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -4284,10 +4284,10 @@ void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
-	
+
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
 	TInt err = iFile.Replace(iFs, fileNameType, EFileWrite);
 	if (err != KErrNone)
@@ -4342,7 +4342,7 @@ void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::Fsm(TMmfDevSound
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -4352,7 +4352,7 @@ void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::Fsm(TMmfDevSound
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -4460,7 +4460,7 @@ void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::BufferToBeEmptie
 				{
 				INFO_PRINTF1(_L("To test whether or not Devsound is in the initialized state, a new record process is launched"));
 				INFO_PRINTF1(_L("iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -4471,7 +4471,7 @@ void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::BufferToBeEmptie
 				iDevSoundState = EStateRecording;
 				iRecordAgainToConfirmInitializedState = ETrue;
 				INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-				StartTimer(iDuration * KMicroSecsInOneSec);		
+				StartTimer(iDuration * KMicroSecsInOneSec);
 				}
 			else
 				{
@@ -4496,7 +4496,7 @@ void RA3FDevSoundLeavePauseStateToInitializedToRecordAudioTest::BufferToBeEmptie
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0031
  */
 RA3FDevSoundRecordPreemptionTest::RA3FDevSoundRecordPreemptionTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0),
 		iOtherClientStarted(EFalse),
 		iOtherFilename(KNullDesC),
@@ -4512,7 +4512,7 @@ RA3FDevSoundRecordPreemptionTest* RA3FDevSoundRecordPreemptionTest::NewL(const T
 
 void RA3FDevSoundRecordPreemptionTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -4525,7 +4525,7 @@ void RA3FDevSoundRecordPreemptionTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	// Get the filename of the second audio file to record
@@ -4591,7 +4591,7 @@ void RA3FDevSoundRecordPreemptionTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TIn
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				INFO_PRINTF1(_L("iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -4601,7 +4601,7 @@ void RA3FDevSoundRecordPreemptionTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TIn
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -4668,7 +4668,7 @@ void RA3FDevSoundRecordPreemptionTest::DoTimerCallback()
 	INFO_PRINTF1(_L("TimerEvent called"));
 	if(!iOtherClientStarted)
 		{
-		INFO_PRINTF1(_L("Initializing higher priority devsound client..."));	
+		INFO_PRINTF1(_L("Initializing higher priority devsound client..."));
 		iDevsoundRecordClient->SetPriority(KMaximumPriority);
 		TInt err = iDevsoundRecordClient->InitializeRecordClient(iOtherFilename);
 		if (err != KErrNone)
@@ -4719,12 +4719,12 @@ void RA3FDevSoundRecordPreemptionTest::ClientBufferToBeEmptiedCallback(TInt aErr
 		{
 		INFO_PRINTF1(_L("Second DevSound instance called BufferToBeEmptied."));
 		}
-	else if(iOtherClientStarted && aError == KErrGeneral) 
+	else if(iOtherClientStarted && aError == KErrGeneral)
 		{
 		INFO_PRINTF1(_L("Second DevSound instance BufferToBeEmptied callback received a NULL CMMFBuffer"));
 		StopTest(aError);
 		}
-	if(iOtherClientStarted && aError == KErrUnknown) 
+	if(iOtherClientStarted && aError == KErrUnknown)
 		{
 		INFO_PRINTF1(_L("***** Second DevSound instance :Unknown behaviour: Last buffer flag set before calling CMMFDevSound->Pause()"));
 		StopTest(aError);
@@ -4766,7 +4766,7 @@ void RA3FDevSoundRecordPreemptionTest::RecordError(TInt aError)
 	if (aError == KErrUnderflow)
 		{
 		ERR_PRINTF1(_L("First instance of DevSound was not preempted"));
-		StopTest(aError);	
+		StopTest(aError);
 		}
 	else if(aError == KErrInUse || aError == KErrDied || aError == KErrAccessDenied)
 		{
@@ -4777,14 +4777,14 @@ void RA3FDevSoundRecordPreemptionTest::RecordError(TInt aError)
 		ERR_PRINTF2(_L("First instance of DevSound called RecordError() with unexpected error code: %d"), aError);
 		StopTest(aError, EFail);
 		}
-	}	
+	}
 
 /*
  *========================================================================================================
  * MM-A3F-DEVSOUND-CHRTZ-REC-RAW-0032
  */
 RA3FDevSoundRecordRejectionTest::RA3FDevSoundRecordRejectionTest(const TDesC& aTestName)
-	:	RA3FDevSoundTestBase(aTestName), 
+	:	RA3FDevSoundTestBase(aTestName),
 		iDuration(0), iOtherClientStarted(EFalse),
 		iOtherFilename(KNullDesC)
 	{
@@ -4798,7 +4798,7 @@ RA3FDevSoundRecordRejectionTest* RA3FDevSoundRecordRejectionTest::NewL(const TDe
 
 void RA3FDevSoundRecordRejectionTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -4811,7 +4811,7 @@ void RA3FDevSoundRecordRejectionTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	// Get the filename of the second audio file to record
@@ -4877,7 +4877,7 @@ void RA3FDevSoundRecordRejectionTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				INFO_PRINTF1(_L("iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -4887,7 +4887,7 @@ void RA3FDevSoundRecordRejectionTest::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
@@ -4954,7 +4954,7 @@ void RA3FDevSoundRecordRejectionTest::DoTimerCallback()
 	INFO_PRINTF1(_L("TimerEvent called"));
 	if(!iOtherClientStarted)
 		{
-		INFO_PRINTF1(_L("Starting lower priority devsound client..."));	
+		INFO_PRINTF1(_L("Starting lower priority devsound client..."));
 		iDevsoundRecordClient->SetPriority(KMinimumPriority);
 		TInt err = iDevsoundRecordClient->InitializeRecordClient(iOtherFilename);
 		if (err != KErrNone)
@@ -5016,7 +5016,7 @@ void RA3FDevSoundRecordRejectionTest::ClientBufferToBeEmptiedCallback(TInt aErro
 	{
 	INFO_PRINTF2(_L("In rejection, BufferToBeEmptied Callback of 2nd DevSound client should not be called %d"), aError);
 	StopTest(aError, EFail);
-	}	
+	}
 
 /*
  *========================================================================================================
@@ -5077,7 +5077,7 @@ void RA3FDevSoundRecordDataWithoutRecordInitTest::Fsm(TMmfDevSoundEvent aDevSoun
 			if (aDevSoundEvent == EEventInitComplete && aError == KErrNone)
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
-		
+
 				INFO_PRINTF1(_L("Calling RecordData without RecordInitL"));
 				iMMFDevSound->RecordData();
 				StopTest(KErrNone, EFail);
@@ -5119,7 +5119,7 @@ RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest* RA3FDevSoundRecordCallingR
 
 void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::DoKickoffTestL()
 	{
-	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) ) 
+	if ( !GetIntFromConfig(iTestStepName, KDuration, iDuration) )
 		{
 		ERR_PRINTF2(KMsgErrorGetParameter, &KDuration);
 		StopTest(KErrNotFound, ETestSuiteError);
@@ -5132,7 +5132,7 @@ void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::DoKickoffTestL()
 		StopTest(KErrNotFound, ETestSuiteError);
 		return;
 		}
-	// Open file for recording using RFile 
+	// Open file for recording using RFile
 	TFileName fileNameType;
 	fileNameType.Copy(filename);
 	INFO_PRINTF2(_L("Opening file for recording %S"), &fileNameType);
@@ -5189,7 +5189,7 @@ void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::Fsm(TMmfDevSoundEvent
 				{
 				INFO_PRINTF1(_L("DevSound Initialized to record audio."));
 				INFO_PRINTF1(_L("Calling iMMFDevSound->RecordInitL()"));
-				TRAPD(err, iMMFDevSound->RecordInitL()); 
+				TRAPD(err, iMMFDevSound->RecordInitL());
 				if (err != KErrNone)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL left with error = %d"), err);
@@ -5199,13 +5199,13 @@ void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::Fsm(TMmfDevSoundEvent
 				else
 					{
 					INFO_PRINTF2(_L("Starting timer %d uS"), (iDuration * KMicroSecsInOneSec));
-					StartTimer((iDuration * KMicroSecsInOneSec));		
+					StartTimer((iDuration * KMicroSecsInOneSec));
 					}
 				INFO_PRINTF1(_L("DevSound State: EStateRecording"));
 				iDevSoundState = EStateRecording;
-				
+
 				INFO_PRINTF1(_L("Second call to iMMFDevSound->RecordInitL()"));
-				TRAP(err, iMMFDevSound->RecordInitL()); 
+				TRAP(err, iMMFDevSound->RecordInitL());
 				if (err == KErrNotReady)
 					{
 					ERR_PRINTF2(_L("DevSound RecordInitL was called more than once, error is the expected= %d"), err);
@@ -5236,7 +5236,7 @@ void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::Fsm(TMmfDevSoundEvent
 				{
 				// Write buffer to file
 				INFO_PRINTF1(_L("Writing data to file"));
-				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+				CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 				iAsyncWriteBTFAO->Start(buffer);
 				}
 			else if(aDevSoundEvent == EEventTimerComplete)
@@ -5257,7 +5257,7 @@ void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::Fsm(TMmfDevSoundEvent
 				{
 				if (aDevSoundEvent == EEventBTBE)
 					{
-					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);			
+					CMMFDataBuffer* buffer = static_cast <CMMFDataBuffer*> (iBuffer);
 					iAsyncWriteBTFAO->Start(buffer);
 					}
 				else
@@ -5283,6 +5283,6 @@ void RA3FDevSoundRecordCallingRecordInitLMoreThanOnceTest::DoTimerCallback()
 	Fsm(EEventTimerComplete, KErrNone);
 	}
 
-	
+
 
 

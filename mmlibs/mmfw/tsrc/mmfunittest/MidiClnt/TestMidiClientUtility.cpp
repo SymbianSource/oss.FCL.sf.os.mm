@@ -962,7 +962,7 @@ TVerdict CTestMidiClntSetTempo::DoTestL(CMidiClientUtility* aMidi)
 			break;
 		case ETestBeatsHighOutOfRange:
 			expErr = KErrArgument;
-			//microBeatsPerMinute = 1000001*1000000; FIXME overflow warning
+			//microBeatsPerMinute = 1000001*1000000; XXX overflow warning
 			microBeatsPerMinute = 1000001;
 			break;
 		default:
@@ -1342,8 +1342,8 @@ TVerdict CTestMidiClntMimeType::DoTestL(CMidiClientUtility* aMidi)
 			return EInconclusive;
 		}
 
-	//TRAPD(err, 	TDesC8 mimeType = aMidi->MimeTypeL());//FIXME: TDesC8 mimeType has to be define above
-	TRAPD(err, 	aMidi->MimeTypeL());//FIXME: TDesC8 mimeType has to be define above
+	//TRAPD(err, 	TDesC8 mimeType = aMidi->MimeTypeL());//XXX: TDesC8 mimeType has to be define above
+	TRAPD(err, 	aMidi->MimeTypeL());//XXX: TDesC8 mimeType has to be define above
 	if (expErr != err)
 		{
 		ERR_PRINTF3(_L("MimeTypeL gave error %d (expected %d)"),err, expErr);
@@ -1772,7 +1772,7 @@ TVerdict CTestSendMipMessage::DoTestL(CMidiClientUtility* aMidi)
 			break;
 
 		case ETestUnsupported:
-			// TODO : values defined as unsupported?
+			// XXX : values defined as unsupported?
 			mipEntry1.iChannel = 0;
 			mipEntry1.iMIPValue = 0;
 			mipEntry2.iChannel = 0;
@@ -1783,7 +1783,7 @@ TVerdict CTestSendMipMessage::DoTestL(CMidiClientUtility* aMidi)
 			break;
 
 		case ETestCorrupt:
-			// TODO : values defined as corrupt?
+			// XXX : values defined as corrupt?
 			mipEntry1.iChannel = -1;
 			mipEntry1.iMIPValue = -1;
 			mipEntry2.iChannel = -1;
@@ -3055,7 +3055,7 @@ TVerdict CTestSetRepeats::DoTestL(CMidiClientUtility* aMidi)
 			// we modify the test spec to go with this?
 		case ETestOutOfRange:
 			expErr = KErrArgument;
-			//repeats = 9999;			// ** TBD : max. range of repeats?
+			//repeats = 9999;			// ** XXX : max. range of repeats?
 			repeats = -1;
 			silentTime = 1000000;
 			break;
@@ -4005,7 +4005,7 @@ TVerdict CTestLoadCustomInstrumentData::DoTestL(CMidiClientUtility* aMidi)
 	const TDesC8* ptrInstrument = &KNullDesC8;
 	const TDesC8* ptrBadInstrument = &KNullDesC8;
 
-	// TODO::When we have a MIDI instrument / controller load the instrument
+	// XXX::When we have a MIDI instrument / controller load the instrument
 	// into the descriptor here.
 
 	// expected results

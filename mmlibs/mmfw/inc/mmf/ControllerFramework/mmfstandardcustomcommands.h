@@ -18,7 +18,7 @@
 
 #include <mmf/common/mmfcontroller.h>
 #include <mmf/common/mmfvideo.h>
-#include "mmf/common/mmcaf.h"
+#include <mmf/common/mmcaf.h>
 
 class CMMFVideoFrameMessage;
 class CFbsBitmap;

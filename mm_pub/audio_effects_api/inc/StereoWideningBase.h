@@ -24,7 +24,7 @@
 #include <e32base.h>
 #include <AudioEffectBase.h>
 #include <StereoWideningData.h>
-#include <mcustominterface.h>
+#include <MCustomInterface.h>
 
 const TUid KUidStereoWideningEffect = {0x10203836};
 

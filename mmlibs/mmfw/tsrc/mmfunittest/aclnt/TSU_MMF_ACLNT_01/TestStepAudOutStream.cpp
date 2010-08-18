@@ -1790,7 +1790,7 @@ TVerdict CTestStepAudOutStreamPosition::DoTestStepL()
 	else 
 		 iTestStepResult = EPass;
 
-	//try cotinuing playing and get positions while playing if there is more time. TBD
+	//xxx try cotinuing playing and get positions while playing if there is more time.
 
 	INFO_PRINTF1(_L("finished with this test step"));
 	// test steps return a result

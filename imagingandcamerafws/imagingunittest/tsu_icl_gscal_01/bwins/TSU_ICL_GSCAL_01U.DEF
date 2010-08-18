@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteGifScalerL@@YAPAVCTestSuiteGifScaler@@XZ @ 1 NONAME ; class CTestSuiteGifScaler * __cdecl NewTestSuiteGifScalerL(void)
-

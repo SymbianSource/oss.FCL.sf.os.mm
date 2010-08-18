@@ -30,7 +30,6 @@ PRJ_TESTMMPFILES
 ../MMPFiles/TSU_MmTsth12.mmp
 ../MMPFiles/TSU_MmTsth13.mmp
 ../MMPFiles/TSU_MmTsth20.mmp
-../MMPFiles/TSU_MmTsth21.mmp
 ../MMPFiles/TSU_MmTsth22.mmp
 
 PRJ_TESTEXPORTS
@@ -54,7 +53,6 @@ PRJ_TESTEXPORTS
 ../scriptFiles/TSU_MmTsth12.script		c:/tsu_mmtsth12.script
 ../scriptFiles/TSU_MmTsth13.script		c:/tsu_mmtsth13.script
 ../scriptFiles/TSU_MmTsth20.script		c:/tsu_mmtsth20.script
-../scriptFiles/TSU_MmTsth21.script		c:/tsu_mmtsth21.script
 ../scriptFiles/TSU_MmTsth22.script		c:/tsu_mmtsth22.script
 
 // extra files

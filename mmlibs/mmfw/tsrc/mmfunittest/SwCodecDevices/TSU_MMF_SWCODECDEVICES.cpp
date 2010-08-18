@@ -136,7 +136,7 @@ TVerdict CTest_MMF_SwCodecDevices_U_0001::DoTestStepL()
 	const TInt srcBufferSize   = theEncode.SourceBufferSize();
 	const TInt sinkBufferSize  = theEncode.SinkBufferSize();
 	const TInt codedBufferSize = 76*4* KNumFramesInABuffer; // number of coded buffers * size of coded buffer 63*2 
-	iNumCodedFrames =  KNumFramesInABuffer;                                // claculate these constants soon <TODO GK>
+	iNumCodedFrames =  KNumFramesInABuffer;                                //XXX claculate these constants soon <GK>
 	
 	iScratchData    = CMMFDescriptorBuffer::NewL( codedBufferSize);
 
@@ -845,7 +845,7 @@ TVerdict CTest_MMF_SwCodecDevices_U_0002::DoTestStepL()
 	 const TInt srcBufferSize  = theCodec.SourceBufferSize();
 	 const TInt sinkBufferSize = theCodec.SinkBufferSize();
 	 const TInt codedBufferSize = 76*4* KNumFramesInABuffer; // number of coded buffers * size of coded buffer 63*2 
-	 iNumCodedFrames =  KNumFramesInABuffer;                                // claculate these constants soon <TODO GK>
+	 iNumCodedFrames =  KNumFramesInABuffer;                                //XXX claculate these constants soon <GK>
 	
 	 iScratchData    = CMMFDescriptorBuffer::NewL( codedBufferSize);
 

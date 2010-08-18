@@ -2708,7 +2708,7 @@ CTestStepAudInStreamTestReqStop::CTestStepAudInStreamTestReqStop(CTestSuite* aSu
 
 void CTestStepAudInStreamTestReqStop::KickoffTestL()
 	{
-	INFO_PRINTF1(_L("DEF095804 CMdaAudioInputStream loses incomplete buffers from DevSound"));
+	INFO_PRINTF1(_L("DEF095804 CMdaAudioInputStream loses not complete buffers from DevSound"));
 	INFO_PRINTF1(_L("Calls RequestStop to ensure no data is lost."));
 
 	CTestStepAudInStreamAsyncTestStep::KickoffTestL();
@@ -2822,7 +2822,7 @@ CTestStepAudInStreamTestReqStopThenStop::CTestStepAudInStreamTestReqStopThenStop
 
 void CTestStepAudInStreamTestReqStopThenStop::KickoffTestL()
 	{
-	INFO_PRINTF1(_L("DEF095804 CMdaAudioInputStream loses incomplete buffers from DevSound"));
+	INFO_PRINTF1(_L("DEF095804 CMdaAudioInputStream loses not complete buffers from DevSound"));
 	INFO_PRINTF1(_L("Calls RequestStop then Stop to ensure correct operation."));
 
 	CTestStepAudInStreamAsyncTestStep::KickoffTestL();
