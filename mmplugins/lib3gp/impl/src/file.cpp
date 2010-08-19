@@ -1388,26 +1388,54 @@ mp4_i32 initMetaDataFiles(MP4HandleImp handle)
   TFileName path;
   TInt error;
 
-  // Create a directory for the files
-  if ( handle->fileName )
-    {
-    filename = (TText *)handle->fileName;
+  TDriveList driveList;
+  TBool pathSet = EFalse;
+  
+  // As ram drive access is faster, try to set temp file directory to available ram drive.
+  if (((RFs *)(handle->fs))->DriveList(driveList) == KErrNone)
+	{
+	for ( TInt i = 0; i < driveList.Length(); i++ )
+		{
+		TDriveInfo driveInfo;
+		if (((RFs *)(handle->fs))->Drive(driveInfo, i) == KErrNone)
+			{
+			if (driveInfo.iType == EMediaRam)
+				{
+				TChar driveLetter;
+				((RFs *)(handle->fs))->DriveToChar(i, driveLetter);
+				path.Append(driveLetter);
+				path.Append(_L(":"));
+				path.Append(KTmpDirectoryName);
+				pathSet = ETrue;
+				break;
+				}
+			}
+		}
+	}
+	  
+  // If no ram drive was found create a directory for the files on current drive
+  if (!pathSet)
+	{
+	if ( handle->fileName )
+		{
+		filename = (TText *)handle->fileName;
     
-    TParse fp;
-    path = KTmpDirectoryName;
-    if (((RFs *)(handle->fs))->Parse(filename, fp) != KErrNone)
-        return -1;
-    path.Insert(0, fp.Drive());
-    }
-  else
-    {
-    TChar drive;
-    if (((RFs *)(handle->fs))->DriveToChar(handle->fileHandleDrive, drive ) != KErrNone )
-        return -1;
-    path.Append( drive );
-    path.Append( _L(":") );
-    path.Append( KTmpDirectoryName );
-    }
+		TParse fp;
+		path = KTmpDirectoryName;
+		if (((RFs *)(handle->fs))->Parse(filename, fp) != KErrNone)
+			return -1;
+		path.Insert(0, fp.Drive());
+		}
+	else
+		{
+		TChar drive;
+		if (((RFs *)(handle->fs))->DriveToChar(handle->fileHandleDrive, drive ) != KErrNone )
+			return -1;
+		path.Append( drive );
+		path.Append( _L(":") );
+		path.Append( KTmpDirectoryName );
+		}
+	}
     
   // Try to delete the temp folder from leftovers
   // If other instance is using it then delete will just fail

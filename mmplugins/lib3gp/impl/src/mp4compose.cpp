@@ -1095,16 +1095,6 @@ extern EXPORT_C MP4Err MP4ComposeSetFlags(MP4Handle apihandle,
 {
   MP4HandleImp handle = (MP4HandleImp)apihandle;
   handle->flags |= flags;
-  
-  PRINT((_L("Flags: %X"), handle->flags));
-  PRINT((_L("Heap memory max size: %d"), User::Heap().MaxLength()));
-
-  if (User::Heap().MaxLength() >= 0xC00000) 
-     {
-     handle->flags &= ~MP4_FLAG_LONGCLIP; // unset the flag as we have enough memory
-     }
-
-  PRINT((_L("Flags: %X"), handle->flags));
 
   if (handle->flags & MP4_FLAG_METADATALAST)
   {

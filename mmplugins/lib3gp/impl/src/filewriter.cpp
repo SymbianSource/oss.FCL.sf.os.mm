@@ -141,7 +141,7 @@ void CFileWriter::UpdateOutputFileSize()
     
     while (iOutputFileSize >= iSetSize) 
         {
-        iSetSize += iOutputBufferSize * (iMaxOutputBufHardLimit >> 1);
+        iSetSize += static_cast<TInt64>(iOutputBufferSize) * (static_cast<TInt64>(iMaxOutputBufHardLimit) >> 1); 
         PRINT((_L("e_cfilewriter_updateoutputfilesize_setsize 1")));                     
         iOutputFile->SetSize( iSetSize );
         PRINT((_L("e_cfilewriter_updateoutputfilesize_setsize 0")));                     

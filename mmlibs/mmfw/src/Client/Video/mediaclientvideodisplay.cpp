@@ -149,8 +149,11 @@ EXPORT_C void CMediaClientVideoDisplay::AddDisplayWindowL(const RWindowBase* aWi
 	}
 
 /**
-Removes a window that is currently being used to display the video picture. The window must 
+Removes a window that is currently being used to display the video picture. The window must
 have previously been added with AddDisplayWindowL(). 
+
+Note Depending on underlying implementation it may also remove any graphics resources associated
+with video playback on this window. 
 
 Note removing the last window on a display will deregister the display
 	
