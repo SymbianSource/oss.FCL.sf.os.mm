@@ -33,7 +33,9 @@ PRJ_TESTEXPORTS
 ../scripts/TSU_ICL_COD_04.ini	c:/tsu_icl_cod_04.ini
 
 // scripts
-../scripts/TSU_ICL_COD_04.script	c:/tsu_icl_cod_04.script
+../scripts/TSU_ICL_COD_04_part1.script	c:/tsu_icl_cod_04_part1.script
+../scripts/TSU_ICL_COD_04_part2.script	c:/tsu_icl_cod_04_part2.script
+
 ../scripts/TSU_ICL_COD_04_alloc.script	c:/tsu_icl_cod_04_alloc.script
 ../scripts/TSU_ICL_COD_04b.script	c:/tsu_icl_cod_04b.script
 

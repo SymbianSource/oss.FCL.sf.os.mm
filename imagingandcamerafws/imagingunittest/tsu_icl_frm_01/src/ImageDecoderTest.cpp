@@ -141,6 +141,7 @@ RCImageDecoderDecodeTest::RCImageDecoderDecodeTest(CTestSuite* aSuite, TContentM
 
 void RCImageDecoderDecodeTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -438,6 +439,7 @@ RCImageDecoderIntentTest::RCImageDecoderIntentTest(CTestSuite* aSuite, TBool aMi
 
 void RCImageDecoderIntentTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -1247,6 +1249,7 @@ RCImageDecoderMaskDecodeTest::RCImageDecoderMaskDecodeTest(CTestSuite* aSuite, T
 
 TVerdict RCImageDecoderMaskDecodeTest::OpenL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -1391,6 +1394,7 @@ TVerdict RThreadedDecodeCancelTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -1522,6 +1526,7 @@ TVerdict RTImageOpenOTB::DoTestStepL()
     TMMFileSource fs(iFileName);
 	TInt err;
 	CImageDecoder* imageDecoder = NULL;
+	User::LeaveIfError(FbsStartup());
     TInt error = RFbsSession::Connect();
     if (error != KErrNone)
         {
@@ -1709,6 +1714,13 @@ TVerdict RFwExtPNGDecNotSupportedTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install(iScheduler);
 
+  User::LeaveIfError(FbsStartup());
+  User::LeaveIfError(iFileSession.Connect());
+  TInt error = RFbsSession::Connect();
+  if (error != KErrNone)
+      {
+      return EInconclusive;
+      }
 	if (iThreaded)
 		{
 		iOptions = CImageDecoder::EOptionAlwaysThread;
@@ -1717,7 +1729,7 @@ TVerdict RFwExtPNGDecNotSupportedTest::OpenL()
 	INFO_PRINTF2(_L("Testing PNG plugin: Implementation Uid = 0x%X"), KPNGDecoder);
 
 	// Check that the test file is there.
-	User::LeaveIfError(iFileSession.Connect());
+	
 	if (!CheckForFile(iFileSession, KTestPNGFile))
 		{
 		iTestStepResult = EFail;
@@ -2222,11 +2234,11 @@ RFwExtDecSupportedTest::RFwExtDecSupportedTest(CTestSuite* aSuite,
 
 TVerdict RFwExtDecSupportedTest::OpenL()
 	{
-	User::LeaveIfError(RFbsSession::Connect());
-
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install(iScheduler);
 
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 	
 	if(iThreaded)

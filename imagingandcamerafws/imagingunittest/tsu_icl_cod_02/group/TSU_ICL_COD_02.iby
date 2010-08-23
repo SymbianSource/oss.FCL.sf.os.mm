@@ -19,21 +19,13 @@
 REM Test code
 
 file=ABI_DIR\DEBUG_DIR\TSU_ICL_COD_02.dll 	System\Libs\TSU_ICL_COD_02.dll 
+file=ABI_DIR\DEBUG_DIR\tsu_icl_cod_02_recog.dll 	System\Libs\tsu_icl_cod_02_recog.dll
 
 REM Scripts
 
 data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_02.script   	   	\TSU_ICL_COD_02.script
 data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_02_Recog.script   	\TSU_ICL_COD_02_Recog.script
 data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_02_Recog_ALLOC.script   \TSU_ICL_COD_02_Recog_ALLOC.script
-
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\wolf.mbm   	   	\tsu_icl_cod_02\wolf.mbm
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\a.txt   	   	\tsu_icl_cod_02\a.txt
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\b.txt   	   	\tsu_icl_cod_02\b.txt
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\g.txt   	   	\tsu_icl_cod_02\g.txt
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\gif.txt   	   	\tsu_icl_cod_02\gif.txt
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\i.txt   	   	\tsu_icl_cod_02\i.txt
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\m.txt   	   	\tsu_icl_cod_02\m.txt
-data=EPOCROOT##epoc32\data\c\tsu_icl_cod_02\r.txt   	   	\tsu_icl_cod_02\r.txt
 
 #endif __TSU_ICL_COD_02_IBY__
 

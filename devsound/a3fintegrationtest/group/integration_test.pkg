@@ -55,5 +55,7 @@
 "\sf\os\mm\devsound\a3fintegrationtest\data\PCM_44.1k_16b_signed_st_Test2.pcm"-"e:\inttest\a3f\tsi_a3f_devsound\pcm_44.1k_16b_signed_st_test2.pcm"
 "\sf\os\mm\devsound\a3fintegrationtest\data\8bitmupcm.raw"-"e:\inttest\a3f\tsi_a3f_devsound\8bitmupcm.raw"
 
+
+// note: 181min.wav is pre-copied to f:\inttest\a3f\tsi_a3f_devsound\181min.wav
 // To be uncommented if long playback test (MM-A3F-DEVSOUND-PLAY-PCM-LONG-I-0001) required
 //"\sf\os\mm\devsound\a3fintegrationtest\data\181min.wav"-"e:\inttest\a3f\tsi_a3f_devsound\181min.wav"

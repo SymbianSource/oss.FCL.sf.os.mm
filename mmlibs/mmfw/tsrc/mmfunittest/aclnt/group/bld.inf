@@ -25,6 +25,13 @@ PRJ_TESTEXPORTS
 
 // test scripts
 ../scripts/TSU_MMF_ACLNT_01.script		c:/mm/tsu_mmf_aclnt_01.script
+../scripts/TSU_MMF_ACLNT_01_POS_1.script		c:/mm/TSU_MMF_ACLNT_01_POS_1.script
+../scripts/TSU_MMF_ACLNT_01_POS_2.script		c:/mm/TSU_MMF_ACLNT_01_POS_2.script
+../scripts/TSU_MMF_ACLNT_01_POS_3.script		c:/mm/TSU_MMF_ACLNT_01_POS_3.script
+../scripts/TSU_MMF_ACLNT_01_POS_4.script		c:/mm/TSU_MMF_ACLNT_01_POS_4.script
+../scripts/TSU_MMF_ACLNT_01_POS_5.script		c:/mm/TSU_MMF_ACLNT_01_POS_5.script
+../scripts/TSU_MMF_ACLNT_01_POS_6.script		c:/mm/TSU_MMF_ACLNT_01_POS_6.script
+../scripts/TSU_MMF_ACLNT_01_POS_7.script		c:/mm/TSU_MMF_ACLNT_01_POS_7.script
 ../scripts/TSU_MMF_ACLNT_01_tone.script		c:/mm/TSU_MMF_ACLNT_01_tone.script
 ../scripts/TSU_MMF_ACLNT_01_PREEMPTION.script		c:/mm/tsu_mmf_aclnt_01_preemption.script
 ../scripts/TSU_MMF_ACLNT_01_NOTIFICATION.script		c:/mm/tsu_mmf_aclnt_01_notification.script
@@ -38,7 +45,7 @@ PRJ_TESTEXPORTS
 ../scripts/TSU_MMF_ACLNT_DRM.script			c:/mm/tsu_mmf_aclnt_drm.script
 ../scripts/TSU_MMF_ACLNT_DRM_ALLOC.script		c:/mm/tsu_mmf_aclnt_drm_alloc.script
 ../scripts/tsu_mmf_aclnt_securedrmtestdata.ini		c:/mm/tsu_mmf_aclnt_securedrmtestdata.ini
-../scripts/tsu_mmf_aclnt_securedrmtestdata.script	c:/mm/tsu_mmf_aclnt_securedrmtestdata.script
+../scripts/te_tsu_mmf_aclnt_securedrmtestdata.script	c:/mm/te_tsu_mmf_aclnt_securedrmtestdata.script
 ../scripts/tsu_mmf_aclnt_securedrm.ini		c:/mm/tsu_mmf_aclnt_securedrm.ini
 ../scripts/tsu_mmf_aclnt_securedrm.script	c:/mm/tsu_mmf_aclnt_securedrm.script
 

@@ -135,6 +135,17 @@ EXPORT_C TBool TInputInfo::HasAlphaL() const
 	return iInputInfoImpl.HasAlphaL();
 	}
 
-	}//namespace ImageProcessor
+/**
+Retrieves access to a custom extension.
 
+@param  aExtension
+        The UID of the extension to be retrieved
+
+@return Extension corresponding to the UID given as a parameter.
+*/
+EXPORT_C TAny* TInputInfo::Extension(TUid /*aExtension*/) const 
+    {
+    return NULL;    
+    }
+    }//namespace ImageProcessor
 //EOF

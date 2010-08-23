@@ -297,6 +297,7 @@ TVerdict CTestImageDecFileHandleSource::TestStep_I_0802_0803L()
     __MM_HEAP_MARK;
 
     TInt err = KErrNone;
+    User::LeaveIfError(FbsStartup());
     err = RFbsSession::Connect();
     if (err != KErrNone)
         {
@@ -502,6 +503,7 @@ TVerdict CTestImageDecFileSourceExtendedBitmap::TestStep_I_0804L()
     __MM_HEAP_MARK;
 
     TInt err = KErrNone;
+    User::LeaveIfError(FbsStartup());
     err = RFbsSession::Connect();
     if (err != KErrNone)
         {

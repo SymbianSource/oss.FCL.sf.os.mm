@@ -2091,15 +2091,23 @@ TInt	CTestStepConversion::RetrieveFrameInfoL(const TDesC& aFilename)
 // Need to do this BEFORE doing any allocation testing !
 TInt CTestStepConversion::DummyHalCall()
 	{
-	TInt err = RFbsSession::Connect();
-	if (err != KErrNone)
-		{
-		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
-		return err;
-		}
+    TInt err1 = FbsStartup();
+    if (err1 != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err1);
+        return EInconclusive;
+        }
+
+    err1 = RFbsSession::Connect();
+    if (err1 != KErrNone)
+        {
+        INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err1);
+        return EInconclusive;
+        }
 		
 	TInt displayMode = EColor256;
 	CFbsScreenDevice* screenDevice = NULL;	
+	TInt err;
 	while(displayMode < EColorLast) 
 		{
 		TRAP(err, screenDevice = CFbsScreenDevice::NewL(_L("NotUsed"),(TDisplayMode)displayMode));

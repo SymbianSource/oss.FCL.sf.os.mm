@@ -25,7 +25,7 @@ PRJ_TESTEXPORTS
 ../data/audiorights2.xml	c:/securedrm/audiorights2.xml
 ../data/small.wav	   		c:/securedrm/small.wav
 ../scripts/securedrm_testdata.ini			c:/securedrm_testdata.ini
-../scripts/TSI_MMF_SECUREDRM_TESTDATA.script	c:/tsi_mmf_securedrm_testdata.script
+../scripts/te_tsi_mmf_securedrm_testdata.script		c:/te_tsi_mmf_securedrm_testdata.script
 
 
 // SecureDRM scripts

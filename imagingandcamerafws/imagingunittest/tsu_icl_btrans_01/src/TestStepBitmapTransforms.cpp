@@ -120,6 +120,7 @@ TVerdict CTestStepBitmapTransforms::DoTestStepPreambleL()
 
 	if (iConnectToFbs)
 		{
+	        User::LeaveIfError(FbsStartup());
 		// [ connect to the bitmap server and check the error code]
 		TInt errCode = RFbsSession::Connect();
 		if( errCode != KErrNone )

@@ -491,7 +491,7 @@ void CTestSuiteUnitMMFAudClient::InitialiseL()
 	AddTestStepL(CTestStepAudInStreamTestBitrate::NewL());
 	
 	// Test Stop procedures of InputStream
-	// DEF095804 CMdaAudioInputStream loses incomplete buffers from DevSound
+	// DEF095804 CMdaAudioInputStream loses not complete buffers from DevSound
 	AddTestStepL(CTestStepAudInStreamTestReqStop::NewL(this));
 	AddTestStepL(CTestStepAudInStreamTestReqStopThenStop::NewL(this));
 	//PDEF121312:CMMFMdaAudioInputStream::BufferToBeEmptied() might delete an invalid pointer 

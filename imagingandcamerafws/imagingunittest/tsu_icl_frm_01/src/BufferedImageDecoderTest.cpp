@@ -70,6 +70,7 @@ RCBufferedImageDecoderDecodeTest::RCBufferedImageDecoderDecodeTest(CTestSuite* a
 
 void RCBufferedImageDecoderDecodeTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -265,6 +266,7 @@ RCBufferedImageDecoderFunctionTest::RCBufferedImageDecoderFunctionTest(CTestSuit
 
 void RCBufferedImageDecoderFunctionTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 

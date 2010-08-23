@@ -13,9 +13,9 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSU_ICL_COD_01.dll"-"c:\sys\bin\TSU_ICL_COD_01.dll"
+"\epoc32\release\armv5\udeb\TSU_ICL_COD_01.dll"-"c:\sys\bin\TSU_ICL_COD_01.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_01\scripts\TSU_ICL_COD_01.script"-"c:\TSU_ICL_COD_01.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_01\scripts\TSU_ICL_COD_01_alloc.script"-"c:\TSU_ICL_COD_01_alloc.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_01\scripts\TSU_ICL_COD_01b_alloc.script"-"c:\TSU_ICL_COD_01b_alloc.script"
@@ -24,7 +24,7 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_01\scripts\TSU_ICL_COD_01.ini"-"c:\TSU_ICL_COD_01.ini"
 
 
-\\ TImage test files
+// TImage test files
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_01\timagetestfiles\mbm12bpp_8.mbm"-"c:\timage\mbm12bpp_8.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_01\timagetestfiles\mbm16bpp_1.mbm"-"c:\timage\mbm16bpp_1.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_01\timagetestfiles\mbm1bpp_2.mbm"-"c:\timage\mbm1bpp_2.mbm"
@@ -118,7 +118,7 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_01\timagetestfiles\ref\qvga_exif_thumb.mbm"-"c:\timage\ref\qvga_exif_thumb.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_01\timagetestfiles\ref\qvga_jfif_thumb.mbm"-"c:\timage\ref\qvga_jfif_thumb.mbm"
 
-\\ mm_testadta
+// mm_testadta
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_01\timagetestfiles\16bpp555.bmp"-"c:\timage\bmp\16bpp555.bmp"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_01\timagetestfiles\16bpp565.bmp"-"c:\timage\bmp\16bpp565.bmp"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_01\timagetestfiles\16bpp565_badmask.bmp"-"c:\timage\bmp\16bpp565_badmask.bmp"

@@ -426,7 +426,7 @@ START_TESTCASE  MM-TSI-ICL-COD-05-0068
 RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_52Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini GIF_ANIMATED_TRANSPARENCY_NOMASKDECODE_3
 END_TESTCASE  MM-TSI-ICL-COD-05-0068 
 
-TART_TESTCASE  MM-TSI-ICL-COD-05-0069 
+START_TESTCASE  MM-TSI-ICL-COD-05-0069 
 //!@SYMTestCaseID		MM-TSI-ICL-COD-05-0069
 //!@SYMTestCaseDesc		Decode all frames of a multiple frame source image into a separate, single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a separate mask, then verify each frame against a reference file.
 //!@SYMTestType			CIT
@@ -446,7 +446,7 @@ TART_TESTCASE  MM-TSI-ICL-COD-05-0069
 //!						6. Repeat 2. through to 5. until all frames and masks have been decoded and verified.
 //!						7. Performance timing figures are also included, but these are not checked in the test.
 //!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference files.
-S
+
 RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_53Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini GIF_ANIMATED_TRANSPARENCY_MASKDECODE_3
 END_TESTCASE  MM-TSI-ICL-COD-05-0069 
 

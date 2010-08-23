@@ -20,10 +20,12 @@
 
 // scripts
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_wav.script" - "c:\char_mmf_audiorec_wav.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_wav_1.script" - "c:\char_mmf_audiorec_wav_1.script"
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_wav_2.script" - "c:\char_mmf_audiorec_wav_2.script"
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_ogg.script" - "c:\char_mmf_audiorec_ogg.script"
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_ogg_overflow.script" - "c:\char_mmf_audiorec_ogg_overflow.script"
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_panic_emu_debug.script" - "c:\char_mmf_audiorec_panic_emu_debug.script"
-"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_wav_notification.script" - "c:\char_mmf_audiorec_wav_notification.script"
+//"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_wav_notification.script" - "c:\char_mmf_audiorec_wav_notification.script"
 
 //#ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_ogg_notification.script" - "c:\char_mmf_audiorec_ogg_notification.script"
@@ -31,6 +33,9 @@
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_aac.script" - "c:\char_mmf_audiorec_aac.script"
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_amr_notification.script" - "c:\char_mmf_audiorec_amr_notification.script"
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\record\scripts\char_mmf_audiorec_aac_notification.script" - "c:\char_mmf_audiorec_aac_notification.script"
+
+//Data
+"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\data\maintst2.wav"-"c:\char\mmf\data\maintst2.wav"
 
 //PV Resource files
 //"\sf\os\mm\mmlibs\mmfw\tsrc\mmfcharacterisationvalidation\clientutils\audio\data\hwdev0x1027290aamrencopt.rsc"-"c:\resource\a3f\hwdev0x1027290a.rsc"

@@ -1862,6 +1862,7 @@ void RStepBaseImageDecoder::KickoffTestL()
     iUM = new (ELeave) CUtilityMembers();
 
     User::LeaveIfError(iUM->iFs.Connect());
+    User::LeaveIfError(FbsStartup());
     User::LeaveIfError(RFbsSession::Connect());
 
     // derived test step class to implement

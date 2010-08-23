@@ -25,5 +25,5 @@ delay 5000
 //!@SYMTestPriority           2
 //!@SYMTestActions            audioRec[0] call OpenFileL and RecordL. audioRec[0] has MultimediaDD capability.
 //!@SYMTestExpectedResults    Check whether KErrPermissionDenied is returned.
-RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0021-HP \audio.ini
+RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0021-HP \sdevsound_audio.ini
 TEST_COMPLETE

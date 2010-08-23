@@ -13,15 +13,16 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSU_ICL_COD_04.dll"-"c:\sys\bin\TSU_ICL_COD_04.dll"
+"\epoc32\release\armv5\udeb\TSU_ICL_COD_04.dll"-"c:\sys\bin\TSU_ICL_COD_04.dll"
 
-\\ REM test scripts
-"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\scripts\TSU_ICL_COD_04.script"-"c:\TSU_ICL_COD_04.script"
+// REM test scripts
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\scripts\TSU_ICL_COD_04_part1.script"-"c:\TSU_ICL_COD_04_part1.script"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\scripts\TSU_ICL_COD_04_part2.script"-"c:\TSU_ICL_COD_04_part2.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\scripts\TSU_ICL_COD_04_alloc.script"-"c:\TSU_ICL_COD_04_alloc.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\scripts\TSU_ICL_COD_04b.script"-"c:\TSU_ICL_COD_04b.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\scripts\TSU_ICL_COD_04.ini"-"c:\TSU_ICL_COD_04.ini"
 
-\\ testfiles
+// testfiles
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\TestFiles\DecodeThumbnail.mbm"-"c:\tsu_icl_cod_04\decodethumbnail.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\TestFiles\EncodeTestSource.mbm"-"c:\tsu_icl_cod_04\encodetestsource.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\TestFiles\EncodeThumbnail.mbm"-"c:\tsu_icl_cod_04\encodethumbnail.mbm"
@@ -34,7 +35,7 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\TestFiles\TestCorruptThumbnailHeader.mbm"-"c:\tsu_icl_cod_04\testcorruptthumbnailheader.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_04\TestFiles\TestNoExifReference.mbm"-"c:\tsu_icl_cod_04\testnoexifreference.mbm"
 
-\\mm_testdata
+//mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_04\testfiles\1103018943-tazpvdft.jpg"-"c:\tsu_icl_cod_04\1103018943-tazpvdft.jpg"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_04\testfiles\1103018943-tazpvdft_ref.jpg"-"c:\tsu_icl_cod_04\1103018943-tazpvdft_ref.jpg"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_04\testfiles\289_8981100000300165521f.jpg"-"c:\tsu_icl_cod_04\289_8981100000300165521f.jpg"

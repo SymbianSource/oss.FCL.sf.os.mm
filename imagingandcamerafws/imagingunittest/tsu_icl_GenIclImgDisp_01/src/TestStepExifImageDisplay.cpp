@@ -594,6 +594,7 @@ TVerdict CTestStepImgDisplayGeneric::DoTestStepL()
 TVerdict CTestStepImgDisplayGeneric::DoTestStepFbsL()
 	{
 	iLastError = KErrNone;
+	User::LeaveIfError(FbsStartup());
 	// [ connect to the bitmap server and check the error code]
 	User::LeaveIfError(RFbsSession::Connect());
 	iFbsConnection = ETrue;

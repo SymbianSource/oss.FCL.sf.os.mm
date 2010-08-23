@@ -15,7 +15,7 @@
 
 "\epoc32\release\armv5\urel\tsu_icl_mediasvr.dll"-"c:\sys\bin\tsu_icl_mediasvr.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_mediasvr\scripts\TSU_ICL_MediaSvr.script"-"c:\TSU_ICL_MediaSvr.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_mediasvr\scripts\TSU_ICL_MediaSvr_alloc.script"-"c:\TSU_ICL_MediaSvr_alloc.script"
 
@@ -31,7 +31,7 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_mediasvr\TestFiles\mbm8bppm.mbm"-"c:\mediasvrtest\mbm8bppm.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_mediasvr\TestFiles\stress\mbm24bpp.mbm"-"c:\mediasvrtest\stress\mbm24bpp.mbm"
 
-\\ mm_testdata
+// mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mediasvr\testfiles\bmp1bpp.bmp"-"c:\mediasvrtest\bmp1bpp.bmp"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mediasvr\testfiles\bmp24bpp.bmp"-"c:\mediasvrtest\bmp24bpp.bmp"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_mediasvr\testfiles\bmp4bpp.bmp"-"c:\mediasvrtest\bmp4bpp.bmp"

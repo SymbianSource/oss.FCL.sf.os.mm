@@ -115,10 +115,10 @@ PRJ_TESTMMPFILES
 // i.e. tests where no user input is required.  The default will apply if neither "manual"
 // or "support" is specified.
 
-../group/TImageViewer.mmp
-../group/TImageDisplay.mmp
-../group/TImageTran.mmp
-../group/tphotoeditor.mmp
+//../group/TImageViewer.mmp
+//../group/TImageDisplay.mmp
+//../group/TImageTran.mmp
+//../group/tphotoeditor.mmp
 
 PRJ_TESTEXPORTS
 // specify the source file followed by its destination here
@@ -127,10 +127,11 @@ PRJ_TESTEXPORTS
 // Romkit include files - additional test files
 ../group/ImageConversionTest.iby			/epoc32/rom/include/imageconversiontest.iby
 ../group/ImageConversionProfile.iby			/epoc32/rom/include/imageconversionprofile.iby
-../group/TImageViewer.iby					/epoc32/rom/include/timageviewer.iby
-../group/TImageDisplay.iby					/epoc32/rom/include/timagedisplay.iby
-../group/timagetran.iby					/epoc32/rom/include/timagetran.iby
-../group/tphotoeditor.iby					/epoc32/rom/include/tphotoeditor.iby
+
+//../group/TImageViewer.iby					/epoc32/rom/include/timageviewer.iby
+//../group/TImageDisplay.iby					/epoc32/rom/include/timagedisplay.iby
+//../group/timagetran.iby					/epoc32/rom/include/timagetran.iby
+//../group/tphotoeditor.iby					/epoc32/rom/include/tphotoeditor.iby
 
 
 PRJ_TESTEXPORTS

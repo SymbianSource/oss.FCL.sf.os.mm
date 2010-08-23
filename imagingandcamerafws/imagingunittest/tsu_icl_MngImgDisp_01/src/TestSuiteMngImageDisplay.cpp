@@ -291,6 +291,7 @@ void CTestSuiteMngImageDisplay::AddTestStepL(CTestStepMngImageDisplay* aPtrTestS
 */
 void CTestSuiteMngImageDisplay::InitialiseL( )
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError( RFbsSession::Connect() );
 	iFBSSession = ETrue;
 	

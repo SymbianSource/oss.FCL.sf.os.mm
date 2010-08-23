@@ -1,6 +1,0 @@
-<step passrate="100" harness="GENERIC" enabled="true" name="Create GENERIC log dir" significant="false">
-            <command>makedir</command>
-            <params>
-              <param dir="c:\logs\testresults\tsu_dvbh_hai"/>
-            </params>
-</step>

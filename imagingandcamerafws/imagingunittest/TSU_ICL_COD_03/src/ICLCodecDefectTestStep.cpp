@@ -658,8 +658,10 @@ TVerdict RPngDecodeFailureTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 
+	User::LeaveIfError(RFbsSession::Connect());
 	//Open and load the file
 	TFileName fileName;
 	GetTestFileNameL(fileName, KCorruptPngFile);
@@ -692,6 +694,7 @@ TVerdict RPngDecodeFailureTest::DoTestStepL()
 
 void RPngDecodeFailureTest::Close()
 	{
+    RFbsSession::Disconnect();
 	delete iSourceData; iSourceData = NULL;
 	delete iScheduler; iScheduler = NULL;
 	iFileSession.Close();
@@ -763,7 +766,7 @@ TVerdict RTestStep_5002::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -891,7 +894,7 @@ TVerdict RTestStep_5004::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 
 	// We expect to find these plugins
@@ -1071,7 +1074,7 @@ TVerdict RTestStep_5006::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -1171,7 +1174,7 @@ TVerdict RTestStep_5008::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -1267,7 +1270,7 @@ TVerdict RTestStep_5010::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -1380,7 +1383,7 @@ TVerdict RTestStep_5012::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -1496,7 +1499,7 @@ TVerdict RTestStep_5014::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -1594,7 +1597,7 @@ TVerdict RTestStep_5016::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -1970,7 +1973,7 @@ TVerdict RTestStep_5020::OpenL()
 	
 	iListener = new (ELeave) CActiveListener;
 	iStatus = &iListener->iStatus;
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -2110,8 +2113,10 @@ TVerdict RTestStep_5021::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KCommentJpg);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -2225,7 +2230,7 @@ TVerdict RTestStep_5022::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -2334,7 +2339,7 @@ TVerdict RTestStep_5023::OpenL()
 
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -2795,7 +2800,7 @@ TVerdict RTestStep_5025::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -2927,7 +2932,7 @@ TVerdict RTestStep_5026::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 	
@@ -3081,7 +3086,7 @@ TVerdict RTestStep_5027::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -3189,7 +3194,7 @@ TVerdict RTestStep_5028::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -3359,7 +3364,7 @@ TVerdict RTestStep_5058::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -3476,7 +3481,7 @@ TVerdict RTestStep_5059::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -3582,7 +3587,7 @@ TVerdict RTestStep_5060::OpenL()
 	CleanupStack::PushL( iScheduler );		
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
-		
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -3689,8 +3694,9 @@ TVerdict RTestStep_5061::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	iSourceBitmap = new (ELeave) CFbsBitmap;
 	iReferenceBitmap = new (ELeave) CFbsBitmap;
@@ -3826,11 +3832,13 @@ TVerdict RTestStep_5062::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 
+	User::LeaveIfError(FbsStartup());
+	User::LeaveIfError(RFbsSession::Connect());
+	User::LeaveIfError(iFileSession.Connect());
+	    
 	iListener = new (ELeave) CActiveListener;
 	iStatus = &iListener->iStatus;
 			
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
 
 	return (iTestStepResult=EPass);
 	}
@@ -4106,12 +4114,13 @@ TVerdict RTestStep_5064::OpenL()
 	
 	iAS = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install(iAS);
-	
-	iListener = new (ELeave) CActiveListener;
-	iStatus = &iListener->iStatus;
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
+	    
+	iListener = new (ELeave) CActiveListener;
+	iStatus = &iListener->iStatus;
 
 	GetTestFileNameL(iSourceFile, KReductionFactorTestGif);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -4241,8 +4250,11 @@ TVerdict RTestStep_5065::OpenL()
 	CleanupStack::PushL( iScheduler );		
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+	
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
+    
 	return (iTestStepResult=EPass);
 	}
 
@@ -4347,8 +4359,10 @@ TVerdict RTestStep_5066::OpenL()
 	CleanupStack::PushL( iScheduler );		
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
-	User::LeaveIfError(RFbsSession::Connect());		
-	User::LeaveIfError(iFileSession.Connect());
+
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	return (iTestStepResult=EPass);
 	}
@@ -4462,8 +4476,9 @@ TVerdict RTestStep_5067::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	iSourceBitmap = new (ELeave) CFbsBitmap;
 	iReferenceBitmap = new (ELeave) CFbsBitmap;
@@ -4573,8 +4588,9 @@ TVerdict RTestStep_5068::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KPeaceGifImage);
 	iSourceImage = new(ELeave) CFbsBitmap;
@@ -4707,8 +4723,9 @@ TVerdict RTestStep_5069::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	iSourceBitmap = new (ELeave) CFbsBitmap;
 	iReferenceBitmap = new (ELeave) CFbsBitmap;
@@ -4830,8 +4847,9 @@ TVerdict RTestStep_5070::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KJFIFWithThumbnailMbm);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -5016,7 +5034,8 @@ TVerdict RTestStep_5071::OpenL()
 	
 	iListener = new (ELeave) CActiveListener;
 	iStatus = &iListener->iStatus;
-
+	
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -5219,7 +5238,8 @@ TVerdict RTestStep_5072::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
+	User::LeaveIfError(FbsStartup());
+	 User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KErrArgumentGif);
@@ -5309,8 +5329,9 @@ TVerdict RTestStep_5073::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KPeaceGifImage);
 	iSourceImage = new(ELeave) CFbsBitmap;
@@ -5431,6 +5452,7 @@ TVerdict RTestStep_5074::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -5532,6 +5554,7 @@ TVerdict RTestStep_5075::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -5684,6 +5707,7 @@ TVerdict RTestStep_5076::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -5776,6 +5800,7 @@ TVerdict RTestStep_5077::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -5885,6 +5910,7 @@ TVerdict RTestStep_5078::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 		
@@ -5986,8 +6012,9 @@ TVerdict RTestStep_5079::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(iFileSession.Connect());
-	User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFileCorrupt,KLzwStreamCorruptGif);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFileCorrupt);
@@ -6087,8 +6114,9 @@ TVerdict RTestStep_5080::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KSmallFirstFrameGif);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -6218,8 +6246,9 @@ TVerdict RTestStep_5081::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KSmallFirstFrameGif);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -6428,8 +6457,9 @@ TVerdict RTestStep_5082::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KFrameGifSizeAnim);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -6715,8 +6745,9 @@ TVerdict RTestStep_5083::OpenL()
 	CActiveScheduler::Install( iScheduler );
 	CleanupStack::Pop(iScheduler);
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KCorruptRLEBitmap);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -6819,8 +6850,9 @@ TVerdict RTestStep_5086::OpenL()
 	iListener = new (ELeave) CActiveListener;
 	iStatus = &iListener->iStatus;
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KClockZeroSubBlockGif);
 	INFO_PRINTF2(_L("Source: %S"),&iSourceFile);
@@ -6913,8 +6945,9 @@ void RTestStep_5088::KickoffTestL()
 	{
 	INFO_PRINTF1(_L("INC097489: SWSV_633_91_R6A01_Image: GIF 256 color picture \"Damaged\" after editing in Pic..."));
 		
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	TFileName defaultPath = static_cast<CICLCodecDefectTestSuite*>(iSuite)->DefaultPath();
 	TParse parse;
@@ -7226,6 +7259,7 @@ TVerdict RTestStep_5089::OpenL()
     {
     CActiveScheduler* iScheduler = new (ELeave) CActiveScheduler();
     CActiveScheduler::Install(iScheduler);
+    User::LeaveIfError(FbsStartup());
     User::LeaveIfError( iFileSession.Connect() );
     User::LeaveIfError( RFbsSession::Connect() );
     iFbsConnected = ETrue;
@@ -7349,8 +7383,9 @@ TVerdict RTestStep_5090::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, KStreamFFFFJpg);
 		
@@ -7448,8 +7483,11 @@ TVerdict RTestStep_5091::OpenL()
 	INFO_PRINTF1(_L("DEF099679: CImageDecoder::ReducedSize() does not check upper boundary"));
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+	
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
+    
 	iSourceBitmap = new(ELeave) CFbsBitmap;
 	iDestnBitmap = new(ELeave) CFbsBitmap;
 	return iTestStepResult;
@@ -7701,8 +7739,9 @@ TVerdict RTestStep_5092::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, K24BppPng);
 	i16MuBitmap = new(ELeave) CFbsBitmap;
@@ -7827,8 +7866,9 @@ TVerdict RTestStep_5093::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
-	User::LeaveIfError(iFileSession.Connect());    
-	User::LeaveIfError(RFbsSession::Connect());    
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());    
     return EPass;
     }
     
@@ -7927,8 +7967,9 @@ TVerdict RTestStep_5094::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	GetTestFileNameL(iSourceFile, K24BppPng);
 	i16MxBitmap = new(ELeave) CFbsBitmap;
@@ -8080,8 +8121,9 @@ TVerdict RTestStep_5095::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install(iScheduler);
 
-	User::LeaveIfError(iFileSession.Connect());    
-	User::LeaveIfError(RFbsSession::Connect());    
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());  
 	return EPass;
 	}
     
@@ -8188,6 +8230,8 @@ TVerdict RTestStep_5096::OpenL()
 	INFO_PRINTF1(_L("PDEF111303 AQP: Coverity tool for ICL - FORWARD NULL Reference in ICL"));
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
+	
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 	GetTestFileNameL(iSourceFile, KCorruptWMFFile);
@@ -8261,8 +8305,9 @@ TVerdict RTestStep_5097::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
-	User::LeaveIfError(iFileSession.Connect());    
-	User::LeaveIfError(RFbsSession::Connect());    
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());  
     return EPass;
     }
     
@@ -8352,8 +8397,9 @@ TVerdict RTestStep_5098::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 		
 	iSourceBitmap = new(ELeave) CFbsBitmap;
 	iDestnBitmap = new(ELeave) CFbsBitmap;		
@@ -8532,7 +8578,10 @@ TVerdict RTestStep_5100::OpenL()
 	
 	INFO_PRINTF1(_L("PDEF111193: iDecoder = CImageDecoder::FileNewL(iFs, aFile); is slow"));
 	
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
+    
 	GetTestFileNameL(iSourceFile, KPerformanceEnhanceTestJPG);	
 	return iTestStepResult;
 	}
@@ -8631,8 +8680,10 @@ TVerdict RTestStep_5101::OpenL()
 	INFO_PRINTF1(_L("PDEF112298: Mbm Bitmap is not encoded to JPEG correctly using CImageEncoder"));
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFs.Connect());
+	
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFs.Connect());
 
 	iListener = new (ELeave) CActiveListener;		
 	return iTestStepResult;
@@ -8827,8 +8878,9 @@ TVerdict RTestStep_5110::OpenL()
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFileSession.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFileSession.Connect());
 
 	return iTestStepResult;
 	}
@@ -8931,6 +8983,8 @@ TVerdict RTestStep_5111::OpenL()
 
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
+	
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -9468,6 +9522,7 @@ TVerdict RTestStep_5103::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );	
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFileSession.Connect());
 
@@ -9645,8 +9700,9 @@ RTestStep_5104::RTestStep_5104(CTestSuite* aSuite)
 
 TVerdict RTestStep_5104::OpenL()
 	{
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFs.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFs.Connect());
 
 	iScheduler = new(ELeave) CActiveScheduler();
 	CActiveScheduler::Install(iScheduler);
@@ -9744,8 +9800,9 @@ TVerdict RTestStep_5112::OpenL()
 	{
 	INFO_PRINTF1(_L("INC116806: Media files: Open image folder containing gif89 images results in a Main crash"));
 	
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFs.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFs.Connect());
 
 	iScheduler = new(ELeave) CActiveScheduler();
 	CActiveScheduler::Install(iScheduler);
@@ -9872,6 +9929,7 @@ TVerdict RTestStep_5113::OpenL()
 	{
 	INFO_PRINTF1(_L("INC117891: 5.0 LWS: Browser crashes while loading the page"));
 	
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFs.Connect());
 
@@ -9949,6 +10007,7 @@ TVerdict RTestStep_5114::OpenL()
 	{
 	INFO_PRINTF1(_L("PDEF123012: 5.0 :Browser crashes while loading the homepage for www.refdesk.com"));
 	
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFs.Connect());
 
@@ -10050,8 +10109,9 @@ RTestStep_5106* RTestStep_5106::NewL(CTestSuite* aSuite)
 
 TVerdict RTestStep_5106::OpenL()
 	{
-	User::LeaveIfError(RFbsSession::Connect());
-	User::LeaveIfError(iFs.Connect());
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError(RFbsSession::Connect());
+    User::LeaveIfError(iFs.Connect());
 
 	iScheduler = new(ELeave) CActiveScheduler();
 	CActiveScheduler::Install(iScheduler);
@@ -10135,6 +10195,7 @@ RTestStep_5107* RTestStep_5107::NewL(CTestSuite* aSuite)
 
 TVerdict RTestStep_5107::OpenL()
     {
+	User::LeaveIfError(FbsStartup());
     User::LeaveIfError(RFbsSession::Connect());
     User::LeaveIfError(iFs.Connect());
 

@@ -92,6 +92,7 @@ TVerdict CTestImageDecDrmEnableAgentUI::TestStep_I_0761L()
     __MM_HEAP_MARK;
 
     TInt err = KErrNone;
+    User::LeaveIfError(FbsStartup());
     err = RFbsSession::Connect();
     if (err != KErrNone)
         {

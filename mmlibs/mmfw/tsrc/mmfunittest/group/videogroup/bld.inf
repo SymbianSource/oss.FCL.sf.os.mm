@@ -17,15 +17,16 @@
 #include "../../DevVideo/group/bld.inf"
 
 #ifdef SYMBIAN_BUILD_GCE
-
 #include "../../videorenderer/group/bld.inf"
-
 #endif
 
 #ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT 
-
 #include "../../subtitlegraphic/group/bld.inf"
 #include "../../devsubtitle/group/bld.inf"
 #include "../../srtdecoder/group/bld.inf"
-
 #endif
+
+#include "../../avictrl/group/bld.inf"
+
+#include "../../vclnt/group/bld.inf"
+

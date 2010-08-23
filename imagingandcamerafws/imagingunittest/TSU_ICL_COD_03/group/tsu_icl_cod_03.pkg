@@ -13,9 +13,9 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\tsu_icl_cod_03.dll"-"c:\sys\bin\tsu_icl_cod_03.dll"
+"\epoc32\release\armv5\udeb\tsu_icl_cod_03.dll"-"c:\sys\bin\tsu_icl_cod_03.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_03\scripts\TSU_ICL_COD_03.script"-"c:\TSU_ICL_COD_03.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_03\scripts\TSU_ICL_COD_03_alloc.script"-"c:\TSU_ICL_COD_03_alloc.script"
 
@@ -144,7 +144,7 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_03\TestFiles\refbut4.mbm"-"c:\tsu_icl_cod_03\refbut4.mbm"
 
 
-\\ mm_testdata
+// mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\__scale__1_444834624.gif"-"c:\tsu_icl_cod_03\__scale__1_444834624.gif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\00000023.tif"-"c:\tsu_icl_cod_03\00000023.tif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\00000026.tif"-"c:\tsu_icl_cod_03\00000026.tif"
@@ -317,3 +317,5 @@
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\zero-len-comment-1.gif"-"c:\tsu_icl_cod_03\zero-len-comment-1.gif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\zero-len-comment-2.gif"-"c:\tsu_icl_cod_03\zero-len-comment-2.gif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\00000077.gif"-"c:\tsu_icl_cod_03\00000077.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\secret.gif"-"c:\tsu_icl_cod_03\secret.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\3178500m.tif"-"c:\tsu_icl_cod_03\3178500m.tif"

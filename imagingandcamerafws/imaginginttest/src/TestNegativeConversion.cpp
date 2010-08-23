@@ -174,7 +174,14 @@ TVerdict	CTestNegativeConversion::Step0503_HP()
 	TVerdict result = EFail ;
 	TInt	theRes = KErrNone;
 
-	TInt err = RFbsSession::Connect();
+	TInt err = FbsStartup();
+	if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err);
+        return EInconclusive;
+        }
+
+	err = RFbsSession::Connect();
 	if (err != KErrNone)
 		{
 		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
@@ -208,12 +215,19 @@ TVerdict	CTestNegativeConversion::Step0020_CP()
 	TVerdict result = EFail ;
 	TInt	theRes = KErrNone;
 
-	TInt err = RFbsSession::Connect();
-	if (err != KErrNone)
-		{
-		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
-		return EInconclusive;
-		}
+    TInt err = FbsStartup();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err);
+        return EInconclusive;
+        }
+
+    err = RFbsSession::Connect();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
+        return EInconclusive;
+        }
 
 	//try to open corrupted file
 	TRAP_IGNORE(theRes = OpenImageForDecodeFromBufferL(iFileNameSrc, iImageTypeUid));
@@ -246,12 +260,19 @@ TVerdict	CTestNegativeConversion::Step0504_HP()
 	TVerdict result = EFail ;
 	TInt	theRes = KErrNone;
 
-	TInt err = RFbsSession::Connect();
-	if (err != KErrNone)
-		{
-		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
-		return EInconclusive;
-		}
+    TInt err = FbsStartup();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err);
+        return EInconclusive;
+        }
+
+    err = RFbsSession::Connect();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
+        return EInconclusive;
+        }
 
 	TRAP_IGNORE(theRes = OpenImageForDecodeFromBufferL(iFileNameSrc));
 		
@@ -620,12 +641,19 @@ TVerdict	CTestNegativeConversion::Step0513_HP()
 	TVerdict result = EFail ;
 	TInt	theRes = KErrNone;
 	
-	TInt err = RFbsSession::Connect();
-	if (err != KErrNone)
-		{
-		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
-		return EInconclusive;
-		}
+    TInt err = FbsStartup();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err);
+        return EInconclusive;
+        }
+
+    err = RFbsSession::Connect();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
+        return EInconclusive;
+        }
 
 	TRAP_IGNORE(theRes = OpenImageForDecodeFromBufferL( iFileNameSrc ));
 
@@ -662,12 +690,19 @@ TVerdict	CTestNegativeConversion::Step0602_HP()
 		return EInconclusive;
 	
 	__MM_HEAP_MARK;
-	err = RFbsSession::Connect();
-	if (err != KErrNone)
-		{
-		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
-		return EInconclusive;
-		}
+    TInt err1 = FbsStartup();
+    if (err1 != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err1);
+        return EInconclusive;
+        }
+
+    err1 = RFbsSession::Connect();
+    if (err1 != KErrNone)
+        {
+        INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err1);
+        return EInconclusive;
+        }
 
 	CRightsDatabase* database = CRightsDatabase::NewL(EFalse); // clear current database
 	delete database; // delete database object
@@ -1063,6 +1098,7 @@ TVerdict    CTestNegativeConversion::Step0700_CP()
 
     CleanupStack::PopAndDestroy(3, theImageEncoder);
     
+    RFbsSession::Disconnect();
     return EPass;
     }
 

@@ -54,6 +54,8 @@
 #include <omxilcompref.iby>
 #include <omxilcore.iby>
 #include <avi.iby>
+#include <mmfaudiowavtestcontroller.iby>
+#include <mmfaudiotonetestcontroller.iby>
 
 #ifdef SYMBIAN_GRAPHICS_USE_GCE
 #include <videorenderer.iby>

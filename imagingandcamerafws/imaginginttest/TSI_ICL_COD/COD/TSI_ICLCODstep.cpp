@@ -63,6 +63,7 @@ RIclCodStep::RIclCodStep(const TIclCodPicType aType, const TInt aNum)
 
 TVerdict RIclCodStep::OpenL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	User::LeaveIfError(iFs.Connect());
 	iScheduler = new (ELeave) CActiveScheduler;	

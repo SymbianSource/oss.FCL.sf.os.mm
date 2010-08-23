@@ -61,7 +61,7 @@ LIBRARY					mediaclientaudio.lib
 LIBRARY					CustomInterfaceUtility.lib
 LIBRARY					CustomCommandUtility.lib
 
-LIBRARY    		ConfigurationComponentsFactory.lib
+LIBRARY			  RestrictedAudioOutputProxy.lib
 LIBRARY				RestrictedAudioOutput.lib
 LIBRARY				MmfDevSound.lib
 

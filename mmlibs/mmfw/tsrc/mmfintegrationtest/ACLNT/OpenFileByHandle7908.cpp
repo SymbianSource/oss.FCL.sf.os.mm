@@ -67,7 +67,7 @@ TVerdict CTestMmfAclntOpenFile7908::DoTestStepL()
 		
 	TInt failCount = 0;//total fail count for all the steps = sum of fail counts in each step
 	TInt stepFailCount; //fail count in each step
-	TVerdict iAllocTestStepResult = EPass; // TODO check?? assume pass
+	TVerdict iAllocTestStepResult = EPass; // XXX check?? assume pass
 	
 	err = PerformTestStep(1, stepFailCount);
 	failCount += stepFailCount;

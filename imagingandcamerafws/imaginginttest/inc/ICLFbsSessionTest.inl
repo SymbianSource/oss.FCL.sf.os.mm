@@ -40,6 +40,7 @@ inline CICLFbsSessionTest::~CICLFbsSessionTest()
  */	
 inline void CICLFbsSessionTest::ConnectToSessionL()
 	{ 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect()); 
 	}		
 

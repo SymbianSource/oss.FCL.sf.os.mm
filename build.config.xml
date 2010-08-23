@@ -130,17 +130,18 @@
   	<layer name="video_test_layer">
 			<module name="video_multimedia_test_component">
 				<unit name="mdfunittestcodecapi" unitID="sos.mdfunittestcodecapi" bldFile="&layer_real_source_path;/mmdevicefw/mdfunittest/codecapi/video/group" mrp=""/>
-				<unit name="mdfunittestcodecapiPU" unitID="sos.mdfunittestcodecapiPU" bldFile="&layer_real_source_path;/mmdevicefw/mdfunittest/codecapi/PU/video/group" mrp=""/>				
+				<unit name="mdfunittestcodecapiPU" unitID="sos.mdfunittestcodecapiPU" bldFile="&layer_real_source_path;/mmdevicefw/mdfunittest/codecapi/PU/video/group" mrp=""/>
+				<unit name="mdfunittestmain" unitID="sos.mdfunittestmain" bldFile="&layer_real_source_path;/mmdevicefw/mdfunittest/codecapi/codecapi/group" mrp=""/>				
 				<unit name="lib3gpunittest" unitID="sos.lib3gpunittest" bldFile="&layer_real_source_path;/mmplugins/lib3gpunittest/group" mrp=""/>				
 				<unit name="cameraunittest" unitID="sos.cameraunittest" bldFile="&layer_real_source_path;/imagingandcamerafws/cameraunittest/group" mrp=""/>				
+				<unit name="cameraplugin" unitID="sos.cameraplugin" bldFile="&layer_real_source_path;/mmplugins/cameraplugins/group" mrp=""/>
 				<unit name="VideoUnitTest" unitID="sos.VideoUnitTest" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmfunittest/group/VideoGroup" mrp=""/>
 				<unit name="xvidcore" unitID="sos.xvidcore" bldFile="sf\xvidhwdevice\group" mrp=""/>
 				<unit name="xvidpu" unitID="sos.xvidpu" bldFile="sf\xvidpu\group" mrp=""/>			
-				<!--unit name="dvbhreceiverhai" unitID="sos.dvbhreceiverhai" bldFile="&layer_real_source_path;/mmhais/dvbhreceiverhai/hai/dvbh/group" mrp=""/-->
-				<!--unit name="dvbhunittest" unitID="sos.dvbhunittest" bldFile="&layer_real_source_path;/mmhais/dvbhunittest/hai/dvbh/group" mrp=""/-->				
-				<!--unit name="mvsintegrationtest" unitID="sos.mvsintegrationtest" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmvalidationsuite/mvsintegrationtest/group" mrp=""/-->
 				<unit name="VideoIntegrationTest" unitID="sos.VideoIntegrationTest" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmfintegrationtest/group/VideoGroup" mrp=""/>				
-			</module>			
+				<unit name="mvsintegrationtest" unitID="sos.mvsintegrationtest" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmvalidationsuite/mvsintegrationtest/group" mrp=""/>
+				<unit name="mvsintegrationtestagnts" unitID="sos.mvsintegrationtestagnt" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmvalidationsuite/mmvalidationsuiteagents/group" mrp=""/>
+				</module>			
     </layer>   
   	<layer name="imaging_test_layer">
 			<module name="imaging_multimedia_test_component">

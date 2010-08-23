@@ -45,8 +45,8 @@ PRJ_MMPFILES
 
 
 //Image Display
-#include "../imagedisplay/mng/group/bld_include.inf" 
+#include "../imagedisplay/mng/group/bld.inf" 
 
 // BitmapTransforms
-#include "../bitmaptransform/refplugin/group/bld_include.inf" 
+#include "../bitmaptransform/refplugin/group/bld.inf" 
 

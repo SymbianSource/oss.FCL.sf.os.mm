@@ -61,7 +61,7 @@ TEST_COMPLETE
 //!@SYMTestPriority           2
 //!@SYMTestActions            audioUtil[0] call PlayFileL. audioUtil[0] has no MultimediaDD capability
 //!@SYMTestExpectedResults    Check that the callback was called correctly and with no errors.
-RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0011-HP \audio.ini
+RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0011-HP \sdevsound_audio.ini
 TEST_COMPLETE
 
 //!@SYMTestCaseID             MM-MMF-SDEVSOUND-I-0013-HP
@@ -70,7 +70,7 @@ TEST_COMPLETE
 //!@SYMTestPriority           2
 //!@SYMTestActions            audioRec[0] call OpenFileL and RecordL. audioRec[0] has no UserEnv capability (NONE capability).
 //!@SYMTestExpectedResults    Check whether KErrPermissionDenied is returned. (Earlier returned no errors as recording behaviour has changed)
-RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0013-HP \audio.ini
+RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0013-HP \sdevsound_audio.ini
 TEST_COMPLETE
 
 //!@SYMTestCaseID             MM-MMF-SDEVSOUND-I-0035-HP

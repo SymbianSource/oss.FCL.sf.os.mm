@@ -25,5 +25,5 @@ delay 1000
 //!@SYMTestPriority           2
 //!@SYMTestActions            audioRec[0] call OpenFileL and RecordL. audioRec[0] has UserEnvironment capability.
 //!@SYMTestExpectedResults    Check that the callback was called correctly and with no errors.
-RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0022-HP \audio.ini
+RUN_TEST_STEP -1 TSI_MMF_SDEVSOUND MM-MMF-SDEVSOUND-I-0022-HP \sdevsound_audio.ini
 TEST_COMPLETE

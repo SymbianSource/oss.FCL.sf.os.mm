@@ -491,7 +491,7 @@ void RTestVclnt2AviPlayerStep::InitWservL()
 
     iWindow->SetRequiredDisplayMode(EColor16MA); // Need to use alpha.
     iWindow->SetSizeErr(iScreen->SizeInPixels());
-    // TODO: This will not be needed when surfaces are displayed above the window background colour.
+    // XXX: This will not be needed when surfaces are displayed above the window background colour.
     iWindow->SetBackgroundColor(TRgb(0x000000, 0)); // use transparent black as the background colour.
     iWindow->BeginRedraw();
     iWindow->EndRedraw();

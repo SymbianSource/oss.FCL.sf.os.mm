@@ -944,7 +944,7 @@
 "\sf\os\mm\imagingandcamerafws\imaginginttest\te_tsi_icl_cod_5\testdata\mng\ref\subframes_16mu_image_display_decode_frame_5.mbm"-"c:\te_tsi_icl_cod_05\mng\ref\subframes_16mu_image_display_decode_frame_5.mbm"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\te_tsi_icl_cod_5\testdata\mng\ref\subframes_16mu_image_display_decode_frame_5_mask.mbm"-"c:\te_tsi_icl_cod_05\mng\ref\subframes_16mu_image_display_decode_frame_5_mask.mbm"
 
-\\ PDEF128541: Certain image cannot be seen on MO during share image.
+// PDEF128541: Certain image cannot be seen on MO during share image.
 "\sf\os\mm\imagingandcamerafws\imaginginttest\te_tsi_icl_cod_5\testdata\bmp\ref\8bpp_bmp_16m_no_mask_decode.mbm"-"c:\te_tsi_icl_cod_05\bmp\ref\8bpp_bmp_16m_no_mask_decode.mbm"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\te_tsi_icl_cod_5\testdata\bmp\ref\8bpp_bmp_16mu_no_mask_decode.mbm"-"c:\te_tsi_icl_cod_05\bmp\ref\8bpp_bmp_16mu_no_mask_decode.mbm"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\te_tsi_icl_cod_5\testdata\bmp\ref\8bpp_bmp_16ma_no_mask_decode.mbm"-"c:\te_tsi_icl_cod_05\bmp\ref\8bpp_bmp_16ma_no_mask_decode.mbm"

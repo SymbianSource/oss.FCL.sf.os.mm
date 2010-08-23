@@ -675,7 +675,6 @@ void CTestSuiteImageDisplay::AddTestStepL(CTestStepImageDisplay* aPtrTestStep)
 */
 void CTestSuiteImageDisplay::InitialiseL( )
 	{
-	User::LeaveIfError( RFbsSession::Connect() );
 	iFBSSession = ETrue;
 	
 	//[ set the default path ]

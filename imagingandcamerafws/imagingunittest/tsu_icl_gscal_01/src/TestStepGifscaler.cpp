@@ -131,7 +131,7 @@ TVerdict CTestStepGifScaler::DoTestStepPreambleL()
 	{
 	//[ mark the heap and unmark at the end of postamble ]
 	__MM_HEAP_MARK;
-
+	User::LeaveIfError(FbsStartup());
 	// [ connect to the bitmap server and check the error code]
 	TInt errCode = RFbsSession::Connect();
 	if( errCode != KErrNone )

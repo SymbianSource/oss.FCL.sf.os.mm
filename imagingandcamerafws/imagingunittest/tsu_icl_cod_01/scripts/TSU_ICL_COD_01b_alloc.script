@@ -33,12 +33,6 @@ TEST_COMPLETE
 RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-10d1-HP, TSU_ICL_COD_01.ini 
 TEST_COMPLETE 
 
-// alloc tests for decode using extensions (Image19)
-// On HW this is SMOKE_TEST testing one randomly selected file.
-//! @SYMTestCaseID MM-ICL-COD-U-1081-HP
-
-RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-1081-HP, TSU_ICL_COD_01.ini
-TEST_COMPLETE 
 
 // alloc tests for decode for codec without extensions (Image20)
 //! @SYMTestCaseID MM-ICL-COD-U-1082-HP
@@ -62,4 +56,11 @@ TEST_COMPLETE
 //! @SYMTestCaseID MM-ICL-COD-U-1085-HP
 
 RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-1085-HP, TSU_ICL_COD_01.ini
+TEST_COMPLETE 
+
+// alloc tests for decode using extensions (Image19)
+// On HW this is SMOKE_TEST testing one randomly selected file.
+//! @SYMTestCaseID MM-ICL-COD-U-1081-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_01, MM-ICL-COD-U-1081-HP, TSU_ICL_COD_01.ini
 TEST_COMPLETE 

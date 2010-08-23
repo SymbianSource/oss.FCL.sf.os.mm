@@ -70,6 +70,7 @@ CTestStepMediaSvr::CTestStepMediaSvr()
 TVerdict CTestStepMediaSvr::DoTestStepPreambleL()
 	{
 	// connect to the bitmap server and check the error code
+    User::LeaveIfError(FbsStartup());
 	TInt errCode = RFbsSession::Connect();
 	if( errCode != KErrNone )
 		{

@@ -172,6 +172,7 @@ void CTestSuiteExifImageDisplay::AddTestStepL(CTestStepIclImageDisplay* aPtrTest
 */
 void CTestSuiteExifImageDisplay::InitialiseL( )
 	{
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError( RFbsSession::Connect() );
 	iFBSSession = ETrue;
 	

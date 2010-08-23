@@ -80,6 +80,7 @@ RCImageEncoderPrivEncodeTest::RCImageEncoderPrivEncodeTest(CTestSuite* aSuite, T
 
 void RCImageEncoderPrivEncodeTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -216,6 +217,7 @@ RCImageEncoderPrivCustomTest::RCImageEncoderPrivCustomTest(CTestSuite* aSuite, T
 
 void RCImageEncoderPrivCustomTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 

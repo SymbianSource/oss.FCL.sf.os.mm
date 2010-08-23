@@ -19,13 +19,13 @@
  @file
 */
 
-target mmfaudiocontroller.dll
+target mmfaudiowavtestcontroller.dll
 CAPABILITY ALL -TCB
 targettype plugin
 UNPAGED
 
 // ECom Dll recognition UID followed by the unique UID for this dll
-UID 0x10009D8D 0x101F55BF
+UID 0x10009D8D 0x2002C397
 VENDORID 0x70000001
 
 SOURCEPATH		../../src/Plugin/Controller/Audio
@@ -36,8 +36,8 @@ USERINCLUDE		../../src/Plugin/Controller/Audio
 
 OS_LAYER_SYSTEMINCLUDE_SYMBIAN
 
-start resource 101F55BF.rss
-target mmfaudiocontroller.rsc
+start resource 2002C397.rss
+target mmfaudiowavtestcontroller.rsc
 end
 
 LIBRARY euser.lib

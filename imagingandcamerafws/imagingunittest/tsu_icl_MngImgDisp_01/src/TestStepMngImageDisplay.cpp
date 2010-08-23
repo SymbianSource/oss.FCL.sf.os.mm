@@ -85,6 +85,7 @@ TVerdict CTestStepMngImageDisplay::DoTestStepPreambleL()
 
 	if (!iFbsConnection)
 		{
+        User::LeaveIfError(FbsStartup());
 		User::LeaveIfError(RFbsSession::Connect());
 		iFbsConnection = ETrue;
 		}
@@ -119,7 +120,7 @@ TVerdict CTestStepMngImageDisplay::DoTestStepPostambleL()
 	//[ Destroy the scheduler ]
 	delete iScheduler ;
 	iScheduler = NULL;
-	
+	RFbsSession::Disconnect();
     // [ umark the heap which was marked in preamble ]
 	__MM_HEAP_MARKEND;
 
@@ -572,6 +573,7 @@ TVerdict CTestStepMngImageDisplay::DoTestStepFbsL()
 	// [ connect to the bitmap server and check the error code]
 	if (!iFbsConnection)
 		{
+        User::LeaveIfError(FbsStartup());
 		User::LeaveIfError(RFbsSession::Connect());
 		iFbsConnection = ETrue;
 		}

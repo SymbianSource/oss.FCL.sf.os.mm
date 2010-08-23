@@ -112,6 +112,17 @@ The function can leave if there is insufficient memeory
 */
 TVerdict CTestStepBitmapTransforms::DoTestStepPreambleL()
 	{
+	if(!iAllocTest)
+	{
+     User::LeaveIfError(FbsStartup());
+     TInt errCode = RFbsSession::Connect();
+     if( errCode != KErrNone)
+         {
+         //[ log failed to connect to bitmap server ]
+         Log(_L("Failed to connect to bitmap server in teststep preamble = %d"), errCode );
+         return EFail;
+         }
+	 }
 	// [Test if this build support alloc testing]
 	if(iAllocTest)
 		{
@@ -229,7 +240,7 @@ TVerdict CTestStepBitmapTransforms::DoTestStepPostambleL()
 	//[ Destroy the scheduler ]
 	delete iScheduler ;
 	iScheduler = NULL;
-	
+	RFbsSession::Disconnect();
 	return EPass;
 	}
 

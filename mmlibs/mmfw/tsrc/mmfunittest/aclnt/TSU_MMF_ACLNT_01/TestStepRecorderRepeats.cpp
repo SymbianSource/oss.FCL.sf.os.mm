@@ -187,7 +187,7 @@ void CTestStepRecorderRepeats::MoscoStateChangeEvent(CBase* /*aObject*/,
 TVerdict CTestStepRecorderRepeats::DoTestStepL()
 	{
 	// use the following test to check that test silence > KMaxTInt is supported
-	// commented out because it will take > 35 minutes
+	// removed because it will take > 35 minutes
 
 	/*
 	iRecorder = CMMFMdaAudioRecorderUtility::NewL(*this);

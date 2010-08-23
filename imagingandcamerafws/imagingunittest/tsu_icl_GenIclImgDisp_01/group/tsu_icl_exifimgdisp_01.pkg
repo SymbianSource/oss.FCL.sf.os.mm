@@ -15,7 +15,7 @@
 
 "\epoc32\release\armv5\urel\tsu_icl_GenIclImgDisp_01.dll"-"c:\sys\bin\tsu_icl_GenIclImgDisp_01.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\scripts\TSU_ICL_ExifImgDisp_01.script"-"c:\TSU_ICL_ExifImgDisp_01.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\scripts\TSU_ICL_ExifImgDisp_01_ALLOC.script"-"c:\TSU_ICL_ExifImgDisp_01_ALLOC.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\scripts\TSU_ICL_ExifImgDisp_01_Panic.script"-"c:\TSU_ICL_ExifImgDisp_01_Panic.script"
@@ -23,7 +23,7 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\scripts\TSU_ICL_GenIclImgDisp_01_Alloc.script"-"c:\TSU_ICL_GenIclImgDisp_01_Alloc.script"
 
 
-\\ testfiles
+// testfiles
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\TestFiles\ref\auto_rot_main.mbm"-"c:\tsu_icl_exifimgdisp_01\ref\auto_rot_main.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\TestFiles\ref\auto_rot_thumb.mbm"-"c:\tsu_icl_exifimgdisp_01\ref\auto_rot_thumb.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\TestFiles\ref\auto_rot_thumb1.mbm"-"c:\tsu_icl_exifimgdisp_01\ref\auto_rot_thumb1.mbm"
@@ -68,8 +68,19 @@
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\TestFiles\ref\wmf3_8_Arm.mbm"-"c:\tsu_icl_exifimgdisp_01\ref\wmf3_8_arm.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\TestFiles\ref\wmf3_8_NE.mbm"-"c:\tsu_icl_exifimgdisp_01\ref\wmf3_8_ne.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_GenIclImgDisp_01\TestFiles\ref\wmf3_8_h6.mbm"-"c:\tsu_icl_exifimgdisp_01\ref\wmf3_8_h6.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\icoepoc.mbm"-"c:\icl\refimages\icoepoc.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\bmp8bpp_8.mbm"-"c:\icl\refimages\bmp8bpp_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_1.mbm"-"c:\icl\refimages\trans_1.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_1.mbm"-"c:\icl\refimages\trans_1.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_8.mbm"-"c:\icl\refimages\trans_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\tif3_4.mbm"-"c:\icl\refimages\tif3_4.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\jfif444.mbm"-"c:\icl\refimages\jfif444.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\operator.mbm"-"c:\icl\refimages\operator.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\png4_8.mbm"-"c:\icl\refimages\png4_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\sun.mbm"-"c:\icl\refimages\sun.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_03\TestFiles\WMFRef\DibPatternBrush.mbm"-"c:\tsu_icl_cod_03\wmfref\dibpatternbrush.mbm"
 
-\\ mm_testdata
+// mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_geniclimgdisp_01\testfiles\auto_rot_1.jpeg"-"c:\tsu_icl_exifimgdisp_01\auto_rot_1.jpeg"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_geniclimgdisp_01\testfiles\auto_rot_2.jpeg"-"c:\tsu_icl_exifimgdisp_01\auto_rot_2.jpeg"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_geniclimgdisp_01\testfiles\auto_rot_3.jpeg"-"c:\tsu_icl_exifimgdisp_01\auto_rot_3.jpeg"
@@ -83,3 +94,18 @@
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_geniclimgdisp_01\testfiles\genicl\anmatcat.gif"-"c:\tsu_icl_exifimgdisp_01\genicl\anmatcat.gif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_geniclimgdisp_01\testfiles\genicl\clock.gif"-"c:\tsu_icl_exifimgdisp_01\genicl\clock.gif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_geniclimgdisp_01\testfiles\genicl\png2.png"-"c:\tsu_icl_exifimgdisp_01\genicl\png2.png"
+
+// mm_testdata
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\icoepoc.ico"-"c:\icl\testimages\icoepoc.ico"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\bmp8bpp_8.bmp"-"c:\icl\testimages\bmp8bpp_8.bmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\trans_1.gif"-"c:\icl\testimages\trans_1.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\trans_8.gif"-"c:\icl\testimages\trans_8.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\tif3_4.tif"-"c:\icl\testimages\tif3_4.tif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\jfif444.jpg"-"c:\icl\testimages\jfif444.jpg"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\clock.gif"-"c:\icl\testimages\clock.gif"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\operator.ota"-"c:\icl\testimages\operator.ota"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\png4_8.png"-"c:\icl\testimages\png4_8.png"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\sun.wbmp"-"c:\icl\testimages\sun.wbmp"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\wmf3_8.wmf"-"c:\icl\testimages\wmf3_8.wmf"
+"\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_03\testfiles\wmf\dibpatternbrush.wmf"-"c:\tsu_icl_cod_03\wmf\dibpatternbrush.wmf"
+

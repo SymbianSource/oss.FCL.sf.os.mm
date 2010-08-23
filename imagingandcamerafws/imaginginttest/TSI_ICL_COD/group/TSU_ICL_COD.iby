@@ -16,7 +16,7 @@
 #ifndef __TSU_ICL_COD_IBY__
 #define __TSU_ICL_COD_IBY__
 
-file=ABI_DIR\BUILD_DIR\TSI_ICL_COD.DLL 		System\Libs\TSU_ICL_COD.DLL
+file=ABI_DIR\BUILD_DIR\TSI_ICL_COD.DLL 		System\Libs\TSI_ICL_COD.DLL
 
 // scripts
 data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_COD_00.script        	TSI_ICL_COD_00.script

@@ -221,6 +221,12 @@ TVerdict RPngWriteCodecTest::OpenL()
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+    User::LeaveIfError(FbsStartup());
+    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+        User::LeaveIfError(errCode);
+        }
 	return verdict;
 	}
 
@@ -228,10 +234,17 @@ void RPngWriteCodecTest::Close()
 	{
 	delete iScheduler;
 	iScheduler = NULL;
+	RFbsSession::Disconnect();
 	}
 
 TVerdict RPngWriteCodecTest::DoTestStepL()
 	{
+     User::LeaveIfError(FbsStartup());
+     TInt errCode = RFbsSession::Connect();
+     if( errCode != KErrNone)
+         {
+         User::LeaveIfError(errCode);
+         }
 	switch (iPngTestId)
 		{
 		case ECOD_0201:
@@ -1005,6 +1018,7 @@ TVerdict RPngWriteCodecTest::MM_ICL_COD_U_0501_L()
 	TPtrC file22(KFile22);
 	
 	RFs fSession;
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(fSession.Connect());
 	CleanupClosePushL(fSession);
 
@@ -1412,6 +1426,12 @@ TVerdict RPngWriteSubCodecTest::OpenL()
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install(iScheduler);
 
+	    User::LeaveIfError(FbsStartup());
+	    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+            User::LeaveIfError(errCode);
+        }
 	return verdict;
 	}
 
@@ -1419,6 +1439,7 @@ void RPngWriteSubCodecTest::Close()
 	{
 	delete iScheduler;
 	iScheduler = NULL;
+	RFbsSession::Disconnect();
 	}
 
 void RPngWriteSubCodecTest::SetTestFileNameL(TDes& aFileName, const TDesC& aPathNameAndExtn) const
@@ -2004,6 +2025,12 @@ TVerdict RCodecDataTest::OpenL()
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+    User::LeaveIfError(FbsStartup());
+    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+            User::LeaveIfError(errCode);
+        }
 	// Connect to file server
 	User::LeaveIfError(iFs.Connect());
 
@@ -2129,6 +2156,7 @@ void RCodecDataTest::Close()
 		iPluginData[cnt].iInfoStrings.Reset();
 	iPluginData.Reset();
 	iFs.Close();
+	RFbsSession::Disconnect();
 	delete iScheduler;
 	}
 
@@ -2434,6 +2462,13 @@ TVerdict RRecogAllocTest::OpenL()
 	// [Pop iScheduler ] 
 	CleanupStack::Pop( iScheduler);
 	
+//    User::LeaveIfError(FbsStartup());
+//    TInt errCode = RFbsSession::Connect();
+//    if( errCode != KErrNone)
+//        {
+//        INFO_PRINTF1(_L("Shiva 5"));
+//            User::LeaveIfError(errCode);
+//        }
 	// Connect to file server
 	User::LeaveIfError(iFs.Connect());
 
@@ -2508,8 +2543,14 @@ TVerdict RRecogAllocTest::DoTestStepL()
 		__UHEAP_FAILNEXT(failCount);
 		__MM_HEAP_MARK;
 		
+		User::LeaveIfError(FbsStartup());
 		err = RFbsSession::Connect();
+	    if( err != KErrNone)
+	        {
 
+	            User::LeaveIfError(err);
+	        }
+		
 		if (err == KErrNone)
 			{
 			TRAP(err, VerifyMimeTypesL(iFileName, mimeType, confidenceLevel));
@@ -2604,6 +2645,12 @@ TVerdict RRecogNegTest::OpenL()
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+    User::LeaveIfError(FbsStartup());
+    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+            User::LeaveIfError(errCode);
+        }
 	// Connect to file server
 	User::LeaveIfError(iFs.Connect());
 
@@ -2623,6 +2670,7 @@ void RRecogNegTest::Close()
 	{
 	iFileNames.Reset();
 	iFs.Close();
+	RFbsSession::Disconnect();
 	delete iScheduler;
 	}
 
@@ -2731,6 +2779,12 @@ TVerdict RRecogNonStandardMimeTest::OpenL()
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+    User::LeaveIfError(FbsStartup());
+    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+            User::LeaveIfError(errCode);
+        }
 	// Connect to file server
 	User::LeaveIfError(iFs.Connect());
 	
@@ -2740,6 +2794,7 @@ TVerdict RRecogNonStandardMimeTest::OpenL()
 void RRecogNonStandardMimeTest::Close()
 	{
 	iFs.Close();
+	RFbsSession::Disconnect();
 	delete iScheduler;	
 	}
 	
@@ -2774,6 +2829,12 @@ TVerdict RRecogNonStandardWBMTest::OpenL()
 	iTestStepResult = EPass;
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
+    User::LeaveIfError(FbsStartup());
+    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+            User::LeaveIfError(errCode);
+        }
 	// Connect to file server
 	User::LeaveIfError(iFs.Connect());
 	return iTestStepResult;
@@ -2782,6 +2843,7 @@ TVerdict RRecogNonStandardWBMTest::OpenL()
 void RRecogNonStandardWBMTest::Close()
 	{
 	iFs.Close();
+	RFbsSession::Disconnect();
 	delete iScheduler;	
 	}
 	
@@ -2933,6 +2995,12 @@ TVerdict RRecogNonStandardWMFTest::OpenL()
 	iTestStepResult = EPass;
 	iScheduler = new(ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
+    User::LeaveIfError(FbsStartup());
+    TInt errCode = RFbsSession::Connect();
+    if( errCode != KErrNone)
+        {
+            User::LeaveIfError(errCode);
+        }
 	// Connect to file server
 	User::LeaveIfError(iFs.Connect());
 	return iTestStepResult;
@@ -2941,6 +3009,7 @@ TVerdict RRecogNonStandardWMFTest::OpenL()
 void RRecogNonStandardWMFTest::Close()
 	{
 	iFs.Close();
+	RFbsSession::Disconnect();
 	delete iScheduler;	
 	}
 	

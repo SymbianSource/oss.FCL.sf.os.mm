@@ -139,7 +139,7 @@ void CTestStep_MMF_ACOD::GetComparisonFilenameFromCodecUidL(TInt aCodecUID, TDes
 			aFilename.Append(KPCM16ToPCM16BComparisonFile);
 			break;
 
-		//[< Fix Me GK ]
+		//xxx GK
 		//case KMMFUidHwDevicePCM16toPCMU16B ://KMMFUidHwDevicePCM16toPCMU16B:
 		//	aFilename.Copy(KComparisonFilesDir);
 		//	aFilename.Append(KPCM16ToPCMU16BComparisonFile);

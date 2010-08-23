@@ -13,19 +13,19 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSU_ICL_ImgDisp_01.dll"-"c:\sys\bin\TSU_ICL_ImgDisp_01.dll"
+"\epoc32\release\armv5\udeb\TSU_ICL_ImgDisp_01.dll"-"c:\sys\bin\TSU_ICL_ImgDisp_01.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_imgdisp\scripts\TSU_ICL_ImgDisp_01.script"-"c:\TSU_ICL_ImgDisp_01.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_imgdisp\scripts\TSU_ICL_ImgDisp_01_ALLOC.script"-"c:\TSU_ICL_ImgDisp_01_ALLOC.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_imgdisp\scripts\TSU_ICL_ImgDisp_01_Panic.script"-"c:\TSU_ICL_ImgDisp_01_Panic.script"
 
-\\ mm_testdata
+// mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_imgdisp\testfiles\empty.mng"-"c:\tsu_icl_imgdisp_01\empty.mng"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_imgdisp\testfiles\simple_b.mng"-"c:\tsu_icl_imgdisp_01\simple_b.mng"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_imgdisp\testfiles\wolf.jpg"-"c:\tsu_icl_imgdisp_01\wolf.jpg"
 
-\\testfiles 
+//testfiles 
 "\sf\os\\mm\imagingandcamerafws\imagingunittest\tsu_icl_imgdisp\TestFiles\ImgDispl.content"-"c:\tsu_icl_imgdisp_01\ImgDispl.content"
 "\sf\os\\mm\imagingandcamerafws\imagingunittest\tsu_icl_imgdisp\TestFiles\ImgDispl.contentrights"-"c:\tsu_icl_imgdisp_01\ImgDispl.content"
 "\sf\os\\mm\imagingandcamerafws\imagingunittest\tsu_icl_imgdisp\TestFiles\dummy.idp"-"c:\tsu_icl_imgdisp_01\dummy.idp"

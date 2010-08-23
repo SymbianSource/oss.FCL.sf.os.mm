@@ -23,7 +23,8 @@ file=ABI_DIR\DEBUG_DIR\TSU_ICL_COD_04.dll 	System\Libs\TSU_ICL_COD_04.dll
 
 REM Scripts
 
-data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_04.script   		\TSU_ICL_COD_04.script
+data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_04_part1.script   		\TSU_ICL_COD_04_part1.script
+data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_04_part2.script   		\TSU_ICL_COD_04_part2.script
 data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_04_alloc.script 	\TSU_ICL_COD_04_alloc.script
 data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_04b.script   		\TSU_ICL_COD_04b.script
 data=EPOCROOT##epoc32\data\c\TSU_ICL_COD_04.ini   		\TSU_ICL_COD_04.ini

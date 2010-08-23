@@ -95,6 +95,7 @@ RCImageEncoderEncodeTest::RCImageEncoderEncodeTest(CTestSuite* aSuite, TContentM
 
 void RCImageEncoderEncodeTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -324,6 +325,7 @@ void RCImageEncoderStaticTest::TestStepL()
 	
 	if(iTestNumber == 3)
 		{
+        User::LeaveIfError(FbsStartup());
 		User::LeaveIfError(iFileSession.Connect());
 		User::LeaveIfError(RFbsSession::Connect());
 		
@@ -390,6 +392,7 @@ TVerdict RThreadedEncodeCancelTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -887,6 +890,7 @@ TVerdict RFwExtEncSupportedTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install(iScheduler);
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 	
@@ -1362,6 +1366,7 @@ TVerdict RThreadedFileEncodeCancelAfterConvertTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -1462,6 +1467,7 @@ TVerdict RThreadedFileHandleEncodeCancelAfterConvertTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -1570,6 +1576,7 @@ TVerdict RThreadedFileEncodeDeleteTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -1649,6 +1656,7 @@ TVerdict RThreadedFileHandleEncodeDeleteTest::OpenL()
 	iScheduler = new (ELeave) CActiveScheduler;
 	CActiveScheduler::Install( iScheduler );
 
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 

@@ -138,12 +138,19 @@ TVerdict	CTestPositiveConversion::Step0001_0010_CP()
 		return EInconclusive;
 	
 	__MM_HEAP_MARK;
-	TInt err = RFbsSession::Connect();
-	if (err != KErrNone)
-		{
-		INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
-		return EInconclusive;
-		}
+    TInt err = FbsStartup();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("FbsStartup failed, err = %d"), err);
+        return EInconclusive;
+        }
+
+    err = RFbsSession::Connect();
+    if (err != KErrNone)
+        {
+        INFO_PRINTF2(_L("RFbsSession::Connect() failed, err = %d"), err);
+        return EInconclusive;
+        }
 
 	if(iImageTypeUid == KImageTypeWBMPUid ||
 		iImageTypeUid == KImageTypeOTAUid)

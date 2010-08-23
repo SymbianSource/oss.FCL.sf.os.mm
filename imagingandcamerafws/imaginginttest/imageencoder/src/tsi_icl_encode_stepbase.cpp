@@ -819,6 +819,7 @@ void RStepBaseImageEncoder::KickoffTestL()
 	__MM_HEAP_MARK	
 
 	User::LeaveIfError(iFs.Connect());
+	User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 
 	// derived test step class to implement

@@ -27,6 +27,11 @@ PRJ_TESTMMPFILES
 
 PRJ_TESTEXPORTS
 
+
+// iby
+tsu_icl_mediasvr.iby			/epoc32/rom/include/tsu_icl_mediasvr.iby
+
+
 // test scripts
 ../scripts/TSU_ICL_MediaSvr.script	c:/tsu_icl_mediasvr.script
 ../scripts/TSU_ICL_MediaSvr_alloc.script	c:/tsu_icl_mediasvr_alloc.script

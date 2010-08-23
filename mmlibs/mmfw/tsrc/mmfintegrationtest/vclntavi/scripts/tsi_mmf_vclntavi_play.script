@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2005-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -29,6 +29,7 @@ LOAD_SUITE tsi_mmf_vclntavi.dll
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0001-CP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 10000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0002-CP
@@ -39,6 +40,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNotSupported
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0002-CP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0003-CP
@@ -49,6 +51,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNotSupported
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0003-CP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0004-HP
@@ -59,6 +62,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0004-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 10000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0005-HP
@@ -69,6 +73,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0005-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0007-HP
@@ -79,6 +84,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0007-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0008-HP
@@ -90,6 +96,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0008-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0009-HP
@@ -100,6 +107,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0009-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0010-HP
@@ -111,6 +119,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0010-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0011-HP
@@ -121,6 +130,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0011-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0012-HP
@@ -132,6 +142,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0012-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0013-HP
@@ -142,6 +153,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNotSupported
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0013-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0014-HP
@@ -152,6 +164,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0014-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0015-HP
@@ -162,6 +175,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNotSupported
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0015-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0016-HP
@@ -172,6 +186,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0016-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0017-HP
@@ -182,6 +197,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0017-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0018-HP
@@ -192,6 +208,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0018-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0019-HP
@@ -202,6 +219,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0019-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0020-HP
@@ -212,6 +230,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0020-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0021-HP
@@ -222,6 +241,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0021-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0022-HP
@@ -232,6 +252,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0022-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0030-HP
@@ -242,6 +263,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0030-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0032-HP
@@ -252,6 +274,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0032-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0034-HP
@@ -262,6 +285,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0034-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-0036-HP
@@ -272,6 +296,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-0036-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 /////////////////////////////// NEGATIVE TESTS /////////////////////////////////////
 
@@ -284,6 +309,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1001-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1002-HP
@@ -294,6 +320,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1002-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 10000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1003-HP
@@ -304,6 +331,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1003-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1004-HP
@@ -314,6 +342,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1004-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1005-HP
@@ -325,6 +354,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1005-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1006-HP
@@ -336,6 +366,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1006-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1007-HP
@@ -347,6 +378,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1007-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1008-HP
@@ -358,6 +390,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1008-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1009-HP
@@ -368,6 +401,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNone
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1009-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1010-HP
@@ -378,6 +412,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrCorrupt
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1010-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1011-HP
@@ -388,6 +423,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrCorrupt
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1011-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1012-HP
@@ -398,6 +434,7 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNotSupported
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1012-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
+DELAY 5000
 
 //
 //!@SYMTestCaseID             MM-MMF-VCLNTAVI-I-1013-HP
@@ -408,4 +445,4 @@ TEST_COMPLETE
 //!@SYMTestExpectedResults    KErrNotFound
 RUN_TEST_STEP 200000 TSI_MMF_VCLNTAVI MM-MMF-VCLNTAVI-I-1013-HP c:\vclntavi\video_avi.ini
 TEST_COMPLETE
-
+DELAY 5000

@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2005-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -22,13 +22,6 @@ file=ABI_DIR\BUILD_DIR\tsi_mmf_vclntavi.dll 	System\Libs\tsi_mmf_vclntavi.dll
 #ifdef SYMBIAN_GRAPHICS_USE_GCE
 #include <vclntavi.iby>
 #endif
-// include regardless if using gce or not
-#ifndef SAMPLEGRAPHICSURFACE_DLL
-file=ABI_DIR\BUILD_DIR\samplegraphicsurface.dll sys\bin\samplegraphicsurface.dll
-ECOM_PLUGIN(10285C4A.dll, 10285C4A.rsc)
-#define SAMPLEGRAPHICSURFACE_DLL
-#endif // SAMPLEGRAPHICSURFACE_DLL
-
 
 //data files
 //exported using copydatatocf.bat and usbldr.pm, so removed from iby file

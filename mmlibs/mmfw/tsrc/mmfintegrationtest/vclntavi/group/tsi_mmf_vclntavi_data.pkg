@@ -16,6 +16,7 @@
 
 //ini
 "\epoc32\data\c\vclntavi\video_avi.ini" - "c:\vclntavi\video_avi.ini"
+"\epoc32\data\c\vclntavi\video_avi_bc.ini" - "c:\vclntavi\video_avi_bc.ini"
 
 //scripts
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play.script" - "c:\tsi_mmf_vclntavi_play.script"
@@ -40,12 +41,14 @@
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_alloc_bc.script" - "c:\tsi_mmf_vclntavi_alloc_bc.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr_bc.script" - "c:\tsi_mmf_vclntavi_apr_bc.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr_alloc_bc.script" - "c:\tsi_mmf_vclntavi_apr_alloc_bc.script"
-"\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play_secdisp_bc.script" - "c:\tsi_mmf_vclntavi_play_secdisp_bc.script"
+// For winscw use only
+// "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play_secdisp_bc.script" - "c:\tsi_mmf_vclntavi_play_secdisp_bc.script"
 
 // Old BC controller
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_surf_noGCE.script" - "c:\tsi_mmf_vclntavi_surf_noGCE.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles.script" - "c:\tsi_mmf_vclntavi_subtitles.script"
-"\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_udeb.script" - "c:\tsi_mmf_vclntavi_subtitles_udeb.script"
+// For winscw use only
+// "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_udeb.script" - "c:\tsi_mmf_vclntavi_subtitles_udeb.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_urel.script" - "c:\tsi_mmf_vclntavi_subtitles_urel.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_alloc.script" - "c:\tsi_mmf_vclntavi_subtitles_alloc.script"
 

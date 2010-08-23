@@ -617,6 +617,7 @@ copy %EPOCROOT%epoc32\data\c\AclntITestData\test2.raw 		%1\inttest\MMF\AclntITes
 copy %EPOCROOT%epoc32\data\c\AclntITestData\test3.raw 		%1\inttest\MMF\AclntITestData\test3.raw
 
 copy %EPOCROOT%epoc32\data\c\audio.ini	     		  %1\inttest\MMF\AclntITestData\audio.ini
+copy %EPOCROOT%epoc32\data\c\sdevsound_audio.ini	     		  %1\inttest\MMF\AclntITestData\sdevsound_audio.ini
 copy %EPOCROOT%epoc32\data\c\AclntITestData\Audio.content		%1\inttest\mmf\aclnt\Audio.content
 copy %EPOCROOT%epoc32\data\c\AclntITestData\Audio.contentrights	%1\inttest\mmf\aclnt\Audio.contentrights
 copy %EPOCROOT%epoc32\data\c\AclntITestData\AudioContentNoRights.content	%1\inttest\mmf\aclnt\AudioContentNoRights.content

@@ -1,0 +1,55 @@
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// ICL Codec Testing Scripts
+// 
+//
+
+PRINT Run all the ICL codec tests 
+PRINT 
+
+LOAD_SUITE TSU_ICL_COD_04.dll
+
+
+//PDEF128742:Image transform can not handle illegal exif when original image is to preserved 
+//! @SYMTestCaseID MM-ICL-COD-U-3057-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3057-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//CR1329 tests : MM-ICL-COD-U-3060-HP to MM-ICL-COD-U-3063-HP
+//! @SYMTestCaseID MM-ICL-COD-U-3060-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3060-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3061-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3061-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3062-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3062-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-COD-U-3063-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3063-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE
+
+//DEF110487: Decoding jpeg file with height of 17 pixels to image frame buffer errors with -9
+//! @SYMTestCaseID MM-ICL-COD-U-3056-HP
+
+RUN_TEST_STEP -1, TSU_ICL_COD_04, MM-ICL-COD-U-3056-HP, c:\TSU_ICL_COD_04.ini  
+TEST_COMPLETE

@@ -13,12 +13,7 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSU_ICL_ITFM_01.dll"-"c:\sys\bin\TSU_ICL_ITFM_01.dll"
-"\epoc32\release\armv5\urel\TestTransformerExt.dll"-"c:\sys\bin\TestTransformerExt.dll"
-"\epoc32\release\armv5\urel\testtransformer.dll"-"c:\sys\bin\testtransformer.dll"
-
-
-// REM Scripts
-"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\scripts\TSU_ICL_ITFM_01_nocap.script "-"c:\TSU_ICL_ITFM_01_nocap.script "
-"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\scripts\TSU_ICL_ITFM_01_nocap_ALLOC.script "-"c:\TSU_ICL_ITFM_01_nocap_ALLOC.script "
-"\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_ITFM_01\scripts\TSU_ICL_ITFM_01_panic_nocap.script"-"c:\TSU_ICL_ITFM_01_panic_nocap.script"
+"\epoc32\release\armv5\udeb\TSU_ICL_ITFM_01.dll"-"c:\sys\bin\TSU_ICL_ITFM_01.dll"
+"\epoc32\release\armv5\udeb\TestTransformerExt.dll"-"c:\sys\bin\TestTransformerExt.dll"
+"\epoc32\release\armv5\udeb\testtransformer.dll"-"c:\sys\bin\testtransformer.dll"
+"\epoc32\release\armv5\udeb\TestFrameworkNone.exe"-"c:\TestFrameworkNone.exe"

@@ -20,7 +20,7 @@
 
 #include <mmf/server/mmfclip.h>
 #include <mmf/server/mmfdatabuffer.h>
-#include "mmf/common/mmcaf.h"
+#include <mmf/common/mmcaf.h>
 
 class CReadWriteRequest;
 class CTransferBufferCopy;

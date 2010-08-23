@@ -425,6 +425,7 @@ CTestStepTransformGeneric::~CTestStepTransformGeneric()
 
 void CTestStepTransformGeneric::Cleanup()
 	{
+    RFbsSession::Disconnect();
 	delete iSourceBuf; iSourceBuf = NULL;
 	delete iDestBuf; iDestBuf = NULL;
 	}
@@ -478,6 +479,13 @@ TVerdict CTestStepTransformGeneric::DoTestStepL()
 		}
 	else
 		{
+	    
+	         User::LeaveIfError(FbsStartup());
+	         TInt errCode = RFbsSession::Connect();
+	         if( errCode != KErrNone)
+	             {
+	             User::LeaveIfError(errCode);
+	             }
 		verdict = DoTestStepFbsL();
 		}
 

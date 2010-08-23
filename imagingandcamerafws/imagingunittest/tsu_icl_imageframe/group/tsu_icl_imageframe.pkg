@@ -13,7 +13,7 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSU_ICL_ImageFrame.dll"-"c:\sys\bin\TSU_ICL_ImageFrame.dll"
+"\epoc32\release\armv5\udeb\TSU_ICL_ImageFrame.dll"-"c:\sys\bin\TSU_ICL_ImageFrame.dll"
 
 // REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_imageframe\scripts\TSU_ICL_ImageFrame.script"-"c:\TSU_ICL_ImageFrame.script"

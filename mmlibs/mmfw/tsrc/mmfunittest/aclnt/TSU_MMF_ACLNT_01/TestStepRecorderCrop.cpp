@@ -67,7 +67,7 @@ const TInt KExpectedDeviation	 = (256000); //200000
 // Orig duration = 1000120 Us, 90% = 900108 Us; @8KHz, 16bits, 1 channel = 14400 bytes (aligned to sample)
 const TInt KExpectedCropSize1	 = 14400 + 44;
 
-// Second crop - original duration is still taken from source (known bug) = 10000120 Us.
+// Second crop - original duration is still taken from source (known error) = 10000120 Us.
 //Therefore crop point = 40% of 10000120 Us = 400048 Us.
 //Crop from begining to 400048Us with @8KHz, 16bits, 1 channel = 6400 bytes (aligned to sample).
 //New file = KExpectedCropSize1 - 6400 = 8046

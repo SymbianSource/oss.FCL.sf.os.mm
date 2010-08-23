@@ -1,9 +1,9 @@
-// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2010 Nokia Corporation and\or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
 // which accompanies this distribution, and is available
-// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+// at the URL "http:\\www.eclipse.org\legal\epl-v10.html".
 //
 // Initial Contributors:
 // Nokia Corporation - initial contribution.
@@ -13,15 +13,28 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\tsu_icl_cod_02.dll"-"c:\sy\bin\tsu_icl_cod_02.dll"
-"\epoc32\release\armv5\urel\tsu_icl_cod_02_recog.dll"-"c:\sys\bin\tsu_icl_cod_02_recog.dll"
+"\epoc32\release\armv5\udeb\tsu_icl_cod_02.dll"-"c:\sys\bin\tsu_icl_cod_02.dll"
+"\epoc32\release\armv5\udeb\tsu_icl_cod_02_recog.dll"-"c:\sys\bin\tsu_icl_cod_02_recog.dll"
+"\epoc32\release\armv5\udeb\TestFrameworkRecognizer.exe"-"c:\TestFrameworkRecognizer.exe"
 
-\\ REM test scripts
+
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_02\scripts\TSU_ICL_COD_02.script"-"c:\TSU_ICL_COD_02.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_02\scripts\TSU_ICL_COD_02_Recog.script"-"c:\TSU_ICL_COD_02_Recog.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\TSU_ICL_COD_02\scripts\TSU_ICL_COD_02_Recog_ALLOC.script"-"c:\TSU_ICL_COD_02_Recog_ALLOC.script"
 
-\\ mm_testdata
+// testdata
+
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\wolf.mbm"-"c:\tsu_icl_cod_02\wolf.mbm"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\A.txt"-"c:\tsu_icl_cod_02\a.txt"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\B.txt"-"c:\tsu_icl_cod_02\b.txt"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\G.txt"-"c:\tsu_icl_cod_02\g.txt"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\Gif.txt"-"c:\tsu_icl_cod_02\gif.txt"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\I.txt"-"c:\tsu_icl_cod_02\i.txt"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\M.txt"-"c:\tsu_icl_cod_02\m.txt"
+"\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_cod_02\TestFiles\R.txt"-"c:\tsu_icl_cod_02\r.txt"
+
+// mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_02\testfiles\00000064.png"-"c:\icl\validation\png\00000064.png"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_02\testfiles\00000316.png"-"c:\icl\validation\png\00000316.png"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_cod_02\testfiles\bmp1bpp_1.bmp"-"c:\tsu_icl_cod_02\bmp1bpp_1.bmp"

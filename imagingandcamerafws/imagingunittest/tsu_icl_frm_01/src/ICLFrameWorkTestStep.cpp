@@ -2470,6 +2470,7 @@ RCImageDecoderPrivDecodeTest::RCImageDecoderPrivDecodeTest(CTestSuite* aSuite, T
 
 void RCImageDecoderPrivDecodeTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -2834,6 +2835,7 @@ RCImageDecoderPrivCustomTest::RCImageDecoderPrivCustomTest(CTestSuite* aSuite, T
 
 void RCImageDecoderPrivCustomTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -3488,6 +3490,7 @@ RCImageDecoderPrivAsyncDecodeTest::RCImageDecoderPrivAsyncDecodeTest(CTestSuite*
 
 void RCImageDecoderPrivAsyncDecodeTest::SetupL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(iFileSession.Connect());
 	User::LeaveIfError(RFbsSession::Connect());
 
@@ -3702,6 +3705,7 @@ void RCImageDecoderAsyncDecodeTest::TestStepL()
 	{
 	// don't need to push this to cleanup stack because we should
 	// always call Cleanup() if this function leaves
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 
 	iSourceDataPtr.SetLength(0);
@@ -3850,6 +3854,7 @@ void RCImageEncoderAsyncEncodeTest::TimerExpired()
 
 void RCImageEncoderAsyncEncodeTest::TestStepL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 
 	iImageEncoder = CImageEncoder::DataNewL(

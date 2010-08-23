@@ -13,9 +13,9 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSI_ICL_FRM_00.dll"-"c:\sys\bin\TSI_ICL_FRM_00.dll"
+"\epoc32\release\armv5\udeb\TSI_ICL_FRM_00.dll"-"c:\sys\bin\TSI_ICL_FRM_00.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imaginginttest\scriptfiles\TSI_ICL_FRM_00.script"-"c:\TSI_ICL_FRM_00.script"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\scriptfiles\TSI_ICL_FRM_FS.script"-"c:\TSI_ICL_FRM_FS.script"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\scriptfiles\TSI_ICL_FRM_DRM.script"-"c:\TSI_ICL_FRM_DRM.script"
@@ -25,25 +25,26 @@
 "\sf\os\mm\imagingandcamerafws\imaginginttest\scriptfiles\TSI_ICL_FRM_YUV_ALLOC.script"-"c:\TSI_ICL_FRM_YUV_ALLOC.script"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\scriptfiles\TSI_ICL_FRM_00.ini"-"c:\icl\TSI_ICL_FRM_00.ini"
 
-\\ testdata
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\jfif444_8.mbm""-"c:\icl\refimages\jfif444_8.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\jfif444.mbm""-"c:\icl\refimages\jfif444.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_1.mbm""-"c:\icl\refimages\trans_1.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_8.mbm""-"c:\icl\refimages\trans_8.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\operator.mbm""-"c:\icl\refimages\operator.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\bmp8bpp_8.mbm""-"c:\icl\refimages\bmp8bpp_8.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\sun.mbm""-"c:\icl\refimages\sun.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\png4_8.mbm""-"c:\icl\refimages\png4_8.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\tif3_4.mbm""-"c:\icl\refimages\tif3_4.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\wmf3_8.mbm""-"c:\icl\refimages\wmf3_8.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\icoepoc.mbm""-"c:\icl\refimages\icoepoc.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm24bpp_4.mbm""-"c:\icl\refimages\mbm24bpp_4.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm24bpp_4.mbm""-"c:\icl\testimages\mbm24bpp_4.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\textfile.mbm""-"c:\icl\refimages\textfile.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\img_1705.mbm""-"c:\icl\refimages\img_1705.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\Preview.ppm"-"c:\icl\refimages\preview.ppm"
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\preview.mbm""-"c:\icl\refimages\preview.mbm""
-"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm_datanewl_0300.mbm""-"c:\icl\refimages\mbm_datanewl_0300.mbm""
+// testdata
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\jfif444_8.mbm"-"c:\icl\refimages\jfif444_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\minimum.mbm"-"c:\icl\refimages\minimum.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\jfif444.mbm"-"c:\icl\refimages\jfif444.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_1.mbm"-"c:\icl\refimages\trans_1.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\trans_8.mbm"-"c:\icl\refimages\trans_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\operator.mbm"-"c:\icl\refimages\operator.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\bmp8bpp_8.mbm"-"c:\icl\refimages\bmp8bpp_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\sun.mbm"-"c:\icl\refimages\sun.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\png4_8.mbm"-"c:\icl\refimages\png4_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\tif3_4.mbm"-"c:\icl\refimages\tif3_4.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\wmf3_8.mbm"-"c:\icl\refimages\wmf3_8.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\icoepoc.mbm"-"c:\icl\refimages\icoepoc.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm24bpp_4.mbm"-"c:\icl\refimages\mbm24bpp_4.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm24bpp_4.mbm"-"c:\icl\testimages\mbm24bpp_4.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\textfile.mbm"-"c:\icl\refimages\textfile.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\img_1705.mbm"-"c:\icl\refimages\img_1705.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\Preview.ppm"-"c:\icl\testimages\preview.ppm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\preview.mbm"-"c:\icl\refimages\preview.mbm"
+"\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm_datanewl_0300.mbm""-"c:\icl\refimages\mbm_datanewl_0300.mbm"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\mbm_datanewl_0300.uic"-"c:\icl\refimages\mbm_datanewl_0300.uic"
 
 // data 
@@ -237,7 +238,7 @@
 "\sf\os\mm\imagingandcamerafws\imaginginttest\data\refimages\mbm\auto_rot_4_ref160_dec1.mbm"-"c:\icl\refimages\mbm\auto_rot_4_ref160_dec1.mbm"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\data\refimages\mbm\auto_rot_4_refarto160.mbm"-"c:\icl\refimages\mbm\auto_rot_4_refarto160.mbm"
 
-\\mm_testdata
+//mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\back.gif"-"c:\icl\testimages\back.gif"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\bmp8bpp_8.bmp"-"c:\icl\testimages\bmp8bpp_8.bmp"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\clock.gif"-"c:\icl\testimages\clock.gif"
@@ -264,7 +265,7 @@
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\wmf3_8.wmf"-"c:\icl\testimages\wmf3_8.wmf"
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\inttest\icl\src\data\wmf3_9.wmf"-"c:\icl\testimages\wmf3_9.wmf"
 
-\\ SYMBIAN_CAF_V2
+// SYMBIAN_CAF_V2
 "\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\Image.contentrights"-"c:\icl\testimages\Image.contentrights"
 "\sf\os\mm\imagingandcamerafws\imaginginttest\src\Data\Image.content"-"c:\icl\testimages\Image.content"
 

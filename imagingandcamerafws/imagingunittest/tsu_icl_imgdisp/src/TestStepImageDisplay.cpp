@@ -83,6 +83,8 @@ TVerdict CTestStepImageDisplay::DoTestStepPreambleL()
 	//[ mark the heap and unmark at the end of postamble ]
 	__MM_HEAP_MARK;
 
+    User::LeaveIfError(FbsStartup());
+    User::LeaveIfError( RFbsSession::Connect() );
 	iScheduler = new(ELeave)CActiveScheduler;
     //[ push the scheduler on the stack ]
 	CleanupStack::PushL( iScheduler );
@@ -410,6 +412,7 @@ TVerdict CTestStepImgDisplayGeneric::DoTestStepFbsL()
 	{
 
 	// [ connect to the bitmap server and check the error code]
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 	iFbsConnection = ETrue;
 

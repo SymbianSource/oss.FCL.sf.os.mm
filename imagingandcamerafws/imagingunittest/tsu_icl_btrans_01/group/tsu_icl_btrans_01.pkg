@@ -13,18 +13,18 @@
 // Description:
 //
 
-"\epoc32\release\armv5\urel\TSU_ICL_BTRANS_01.dll"-"c:\sys\bin\TSU_ICL_BTRANS_01.dll"
+"\epoc32\release\armv5\udeb\TSU_ICL_BTRANS_01.dll"-"c:\sys\bin\TSU_ICL_BTRANS_01.dll"
 
-\\ REM test scripts
+// REM test scripts
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_btrans_01\scripts\TSU_ICL_BTRANS_01.script"-"c:\TSU_ICL_BTRANS_01.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_btrans_01\scripts\TSU_ICL_BTRANS_01_ALLOC.script"-"c:\TSU_ICL_BTRANS_01_ALLOC.script"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_btrans_01\scripts\TSU_ICL_BTRANS_01_Panic.script"-"c:\TSU_ICL_BTRANS_01_Panic.script"
 
-\\ mm_testdata
+// mm_testdata
 "\sf\os\mm_testdata\mm_testimagedata\sf\os\mm\imagingandcamerafws\imagingfws\test\excludedfiles\unittest\icl\tsu_icl_btrans_01\testfiles\bmp8bpp_8.bmp"-"c:\btrans\bmp8bpp_8.bmp"
 
 
-\\ test files
+// test files
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_btrans_01\TestFiles\EColor16IclBtrans.mbm"-"c:\ecolor16iclbtrans.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_btrans_01\TestFiles\EColor16MIclBtrans.mbm"-"c:\ecolor16miclbtrans.mbm"
 "\sf\os\mm\imagingandcamerafws\imagingunittest\tsu_icl_btrans_01\TestFiles\EColor16MUIclBtrans.mbm"-"c:\ecolor16muiclbtrans.mbm"

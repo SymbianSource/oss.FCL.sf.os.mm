@@ -17,7 +17,6 @@
 "\epoc32\release\armv5\udeb\tsi_mmf_devsound.dll"-"c:\sys\bin\tsi_mmf_devsound.dll"
 
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\devsound\scripts\tsi_mmf_devsound_debug.script"-"c:\tsi_mmf_devsound_debug.script"
-"\sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\devsound\scripts\tsi_mmf_devsound_alloc.script"-"c:\tsi_mmf_devsound_alloc.script"
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\devsound\scripts\tsi_mmf_devsound.ini"-"c:\mm\tsi_mmf_devsound.ini"
 
 "\sf\os\mm\mmlibs\mmfw\tsrc\mmfintegrationtest\devsound\data\small.ogg"-"c:\tsi_mmf_devsound\small.ogg"

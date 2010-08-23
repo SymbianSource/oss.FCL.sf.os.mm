@@ -91,6 +91,8 @@ TInt64 ScaleTimeByMachineL(TInt64 aExecTime, TInt aDestMedia = TPerformanceTestP
 			mulCoef = 1.0;
 			break;				
 			
+
+	         
 		default:
 			{
 			User::Leave(KErrGeneral);

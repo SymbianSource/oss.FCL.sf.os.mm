@@ -378,6 +378,7 @@ TFileName RTImageOpenAndDecode::GetRefFilename()
 */
 TVerdict RTImageOpenAndDecode::OpenL()
     {
+    User::LeaveIfError(FbsStartup());
     TInt err = RFbsSession::Connect();
     if (err != KErrNone)
         {

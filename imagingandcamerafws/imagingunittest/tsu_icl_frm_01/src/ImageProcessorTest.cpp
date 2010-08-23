@@ -54,6 +54,7 @@ RCImageProcessorUtilityTest::RCImageProcessorUtilityTest(const TDesC& aTestName)
 
 TVerdict RCImageProcessorUtilityTest::OpenL()
 	{
+    User::LeaveIfError(FbsStartup());
 	User::LeaveIfError(RFbsSession::Connect());
 
 	iTestData.Reset();

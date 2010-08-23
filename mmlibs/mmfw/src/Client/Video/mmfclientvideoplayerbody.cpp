@@ -1007,7 +1007,7 @@ void CVideoPlayerUtility::CBody::GetFrameL(TDisplayMode aDisplayMode, TBool aUse
 
 MMMFDRMCustomCommand* CVideoPlayerUtility::CBody::GetDRMCustomCommand()
 	{
-	// TODO: check controller supports MMMFDRMCustomCommandImplementor
+	// XXX: check controller supports MMMFDRMCustomCommandImplementor
 	TInt error = iDRMCustomCommands.EvaluateIntent(ContentAccess::EPeek);
 	if (error==KErrNone)
 		{

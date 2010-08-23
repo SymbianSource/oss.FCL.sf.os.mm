@@ -217,7 +217,6 @@ PRJ_MMPFILES
 
 //plugin
 ../MMPFiles/plugin_common/MmfStdSourceAndSinkPlugin.mmp
-../MMPFiles/plugin_common/MmfAudioController.mmp //replaces wav controller
 ../MMPFiles/plugin_common/MMFLinearAudioCodecs.mmp
 ../MMPFiles/plugin_common/Gsm610.mmp
 ../MMPFiles/plugin_common/mmfaudiooutput.mmp 
@@ -234,3 +233,8 @@ PRJ_MMPFILES
 // Effects
 #include "../Effect/group/Effect.inf"
 
+PRJ_TESTMMPFILES
+../MMPFiles/plugin_common/MmfAudioController.mmp //test wav controller
+
+PRJ_TESTEXPORTS
+../inc/mmfaudiowavtestcontroller.iby       /epoc32/rom/include/mmfaudiowavtestcontroller.iby
