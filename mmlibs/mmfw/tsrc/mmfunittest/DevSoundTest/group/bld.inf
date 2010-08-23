@@ -52,6 +52,8 @@ PRJ_TESTEXPORTS
 ../scripts/TSU_MMF_DEVSOUND_SUITE_NOCAP.script	c:/mm/tsu_mmf_devsound_suite_nocap.script
 ../scripts/TSU_MMF_DEVSOUND_SUITE_MMDDCAP.script	c:/mm/tsu_mmf_devsound_suite_mmddcap.script
 ../scripts/TSU_MMF_DEVSOUND_SUITE_UECAP.script	c:/mm/tsu_mmf_devsound_suite_uecap.script
+../scripts/TSU_MMF_DEVSOUND_SUITE_debug_reference_HW.script	c:/mm/TSU_MMF_DEVSOUND_SUITE_debug_reference_HW.script
+../scripts/TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script c:/mm/TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script
 
 // DEVSOUND data files
 ../TestFiles/PCM_08_16_m.raw		c:/tsu_mmf_devsound_suite/input/pcm_08_16_m.raw

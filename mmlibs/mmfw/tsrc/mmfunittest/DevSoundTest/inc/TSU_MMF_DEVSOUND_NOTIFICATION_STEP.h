@@ -717,4 +717,11 @@ private:
 	TFixedArray<fp,20> iStateHandlers;
 	};
 
+class CTestStepDevSound0051:public CTestStepDevSoundNotification
+	{
+public:
+	CTestStepDevSound0051();
+	TVerdict DoTestStepL();
+	};
+
 #endif// __TSU_MMF_DEVSOUND_NOTIFICATION_STEP_H__

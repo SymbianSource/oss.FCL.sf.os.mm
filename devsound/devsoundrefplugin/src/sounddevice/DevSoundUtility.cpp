@@ -11,14 +11,7 @@
 // Contributors:
 //
 // Description:
-// MMF\SoundDev\src\SoundDevice\DevSoundUtility.cpp
-// File:		DevSoundUtility.cpp
-// Author:		Vasudevan Ramachandraiah
-// Date:		July 16, 2002
 // Class that provides API to list ECOM plugin implementation IDs
-// (c) Nokia Inc.
-// Revisions:
-// Date:			Author			Description
 // 
 //
 

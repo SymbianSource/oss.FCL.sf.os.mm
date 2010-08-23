@@ -285,7 +285,7 @@ TVerdict CTestStepDevSound::TestInitialize(TMMFState aMode)
 	{
 	iCallbackError = KErrNone;
 	iExpectedValue = KErrNone;
-	INFO_PRINTF1(_L("Initializing DevSound"));
+	INFO_PRINTF2(_L("Initializing DevSound aMode=%d"), aMode);
 
 	ResetCallbacks();
 	// Initialize
@@ -324,8 +324,8 @@ TVerdict CTestStepDevSound::TestInitialize(TMMFState aMode)
 TVerdict CTestStepDevSound::TestInitialize(TUid aHwDeviceUid, TMMFState aMode)
 	{
 	iCallbackError = KErrNone;
-	iExpectedValue = KErrNone;
-	INFO_PRINTF1(_L("Initializing DevSound"));
+
+	INFO_PRINTF3(_L("Initializing DevSound aHwDeviceUid=0x%x aMode=%d"), aHwDeviceUid, aMode);
 
 	ResetCallbacks();
 	// Initialize
@@ -375,8 +375,8 @@ TVerdict CTestStepDevSound::TestInitialize(TUid aHwDeviceUid, TMMFState aMode)
 TVerdict CTestStepDevSound::TestInitialize(TFourCC& aDataType, TMMFState aMode)
 	{
 	iCallbackError = KErrNone;
-	iExpectedValue = KErrNone;
-	INFO_PRINTF1(_L("Initializing DevSound"));
+
+	INFO_PRINTF3(_L("Initializing DevSound aDataType=0x%x aMode=%d"), aDataType.FourCC(), aMode);
 
 	ResetCallbacks();
 	// Initialize
@@ -492,7 +492,7 @@ TVerdict CTestStepDevSound::TestPlayTone(TInt aFreq, TTimeIntervalMicroSeconds a
 
 	ResetCallbacks();
 
-	INFO_PRINTF1(_L("Playing Simple Tone"));
+	INFO_PRINTF3(_L("Playing Simple Tone aFreq=%d aDur=%d"), aFreq, aDur.Int64());
 	TRAPD(err, iMMFDevSound->PlayToneL(aFreq, aDur));
 	if (err)
 		{
@@ -542,7 +542,7 @@ TVerdict CTestStepDevSound::TestPlayDTMFString(TPtrC aDTMFString)
 
 	// Set request active
 	iAL->InitialiseActiveListener();
-	INFO_PRINTF1(_L("Playing DTMF String"));
+	INFO_PRINTF2(_L("Playing DTMF String %S"), &aDTMFString);
 	TRAPD(err, iMMFDevSound->PlayDTMFStringL(aDTMFString));
 	// Start the active scheduler and catch the callback
  	CActiveScheduler::Start();
@@ -935,6 +935,8 @@ TVerdict CTestStepDevSound::TestDigitalPlayback(TInt aNumSamples, TDesC& aFilena
  */
 TVerdict CTestStepDevSound::TestDigitalPlayback(TInt aNumSamples, TDesC& aFilename, TFourCC& aDataType)
 	{
+	INFO_PRINTF4(_L("TestDigitalPlayback aNumSamples=%d aFilename=%S aDataType=0x%x"), aNumSamples, &aFilename, aDataType.FourCC());
+
 	//Initialize
 	TVerdict initOK = TestInitialize(aDataType, EMMFStatePlaying);
 	if (initOK != EPass)
@@ -1054,6 +1056,8 @@ TVerdict CTestStepDevSound::TestDigitalRecord(TInt aNumSamples, TDesC& aFilename
  */
 TVerdict CTestStepDevSound::TestDigitalRecord(TInt aNumSamples, TDesC& aFilename, TFourCC& aDataType)
 	{
+	INFO_PRINTF4(_L("TestDigitalRecord aNumSamples=%d aFilename=%S aDataType=0x%x"), aNumSamples, &aFilename, aDataType.FourCC());
+
 	//Initialize
 	TVerdict initOK = TestInitialize(aDataType, EMMFStateRecording);
 	if (initOK != EPass)
@@ -1605,8 +1609,8 @@ CTestStepDevSoundInitializeFourCCPlay::CTestStepDevSoundInitializeFourCCPlay()
 TVerdict CTestStepDevSoundInitializeFourCCPlay::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing Initialize with fourCC code Play"));
-	TFourCC pcm8(' ','P','U','8'); //use unsigned pcm8 fourcc code
-	return TestInitialize(pcm8, EMMFStatePlaying);
+	TFourCC pcm(' ','P','1','6'); //use pcm16 fourcc code
+	return TestInitialize(pcm, EMMFStatePlaying);
 	}
 
 /**
@@ -1678,8 +1682,8 @@ CTestStepDevSoundInitializeFourCCRecord::CTestStepDevSoundInitializeFourCCRecord
 TVerdict CTestStepDevSoundInitializeFourCCRecord::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing Initialize with fourCC code Record"));
-	TFourCC pcm8(' ','P','U','8'); //use unsigned pcm8 fourcc code
-	return TestInitialize(pcm8, EMMFStateRecording);
+	TFourCC pcm(' ', 'P', '1', '6'); //use pcm16 fourcc code
+	return TestInitialize(pcm, EMMFStateRecording);
 	}
 
 /**
@@ -1914,9 +1918,9 @@ TVerdict CTestStepDevSoundDTMFTonesInvalidStrings::DoTestStepL(void)
 		{
 		return EInconclusive;
 		}
-	iExpectedValue = KErrCorrupt;
+	//iExpectedValue = KErrCorrupt; //Return KErrUnderFlow by Nokia adaption
 	TestPlayDTMFString(dtmfString);
-	if (iCallbackError != iExpectedValue)
+	if (iCallbackError == KErrNone)
 		{
 		return EFail;
 		}
@@ -1952,9 +1956,9 @@ TVerdict CTestStepDevSoundSimpleToneInvalidFreq::DoTestStepL(void)
 		return EInconclusive;
 		}
 	TestSetVolume(iMMFDevSound->MaxVolume());
-	iExpectedValue = KErrArgument;
+	//iExpectedValue = KErrArgument; //Return KErrUnderFlow by Nokia adaption 
 	TestPlayTone(freq, dur);
-	if (iCallbackError == iExpectedValue)
+	if (iCallbackError != KErrNone)
 		{
 		return EPass;
 		}
@@ -1991,9 +1995,9 @@ TVerdict CTestStepDevSoundSimpleToneInvalidDuration::DoTestStepL(void)
 		}
 
 	TestSetVolume(iMMFDevSound->MaxVolume());
-	iExpectedValue = KErrArgument;
+    //iExpectedValue = KErrArgument; //Return KErrUnderFlow by Nokia adaption 
 	TestPlayTone(freq, dur);
-	if (iCallbackError == iExpectedValue)
+	if (iCallbackError != KErrNone)
 		{
 		return EPass;
 		}
@@ -3935,7 +3939,8 @@ CTestStepDevSoundPlayEOFPCM8::CTestStepDevSoundPlayEOFPCM8()
  */
 TVerdict CTestStepDevSoundPlayEOFPCM8::DoTestStepL(void)
 	{
-	INFO_PRINTF1(_L("Testing DevSound Digital Audio Playback to EOF"));
+	INFO_PRINTF1(_L("Testing DevSound Digital Audio Playback with PU8 to EOF"));
+	iExpectedValue = KErrNone;
 	iCallbackError = KErrNone;
 
 	TFileName filename(KInputTestFileNamePCM8);
@@ -3964,7 +3969,7 @@ TVerdict CTestStepDevSoundPlayGarbageEOF::DoTestStepL(void)
 	INFO_PRINTF1(_L("Testing DevSound Digital Audio Playback to EOF"));
 	iCallbackError = KErrNone;
 
-	TFileName filename = _L("C:\\TSU_MMF_DEVSOUND_SUITE\\Input\\garbage.raw");
+	TFileName filename = _L("Z:\\TSU_MMF_DEVSOUND_SUITE\\Input\\garbage.raw");
 	return TestDigitalPlayback (-1, filename);
 	}
 
@@ -4186,7 +4191,7 @@ CTestStepDevSoundRecord10BuffersPCM16::CTestStepDevSoundRecord10BuffersPCM16()
  */
 TVerdict CTestStepDevSoundRecord10BuffersPCM16::DoTestStepL(void)
 	{
-	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record (1 buffer)"));
+	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record (10 buffer)"));
 	iCallbackError = KErrNone;
 
 	TFileName filename(KOutputTestFileName10BufPCM16);
@@ -4212,6 +4217,7 @@ CTestStepDevSoundRecord1BufferPCM8::CTestStepDevSoundRecord1BufferPCM8()
 TVerdict CTestStepDevSoundRecord1BufferPCM8::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record pcm8(1 buffer)"));
+	iExpectedValue = KErrNone;
 	iCallbackError = KErrNone;
 
 	TFileName filename(KOutputTestFileName1BufPCM8);
@@ -4238,6 +4244,7 @@ CTestStepDevSoundRecord10BuffersPCM8::CTestStepDevSoundRecord10BuffersPCM8()
 TVerdict CTestStepDevSoundRecord10BuffersPCM8::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record pcm8(10 buffer)"));
+	iExpectedValue = KErrNone;
 	iCallbackError = KErrNone;
 
 	TFileName filename(KOutputTestFileName10BufPCM8);
@@ -5192,7 +5199,6 @@ CTestStepDevSoundEmptyBuffersNeg1::CTestStepDevSoundEmptyBuffersNeg1()
  */
 TVerdict CTestStepDevSoundEmptyBuffersNeg1::DoTestStepL(void)
 	{
-
 	iTestStepResult = EFail;
 
 	INFO_PRINTF1(_L("Testing EmptyBuffers in record mode"));
@@ -8662,125 +8668,111 @@ void RA3FDevSoundTestPlay::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 				INFO_PRINTF1(_L("Calling CMMFDevSound::IsResumeSupported"));
 				TBool isResumeSupported = iMMFDevSound->IsResumeSupported();
 				#ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
-
-                TInt err;
-                                    
-                if(iInitAfterPauseClause)
-                    {
-                    INFO_PRINTF1(_L("Calling CMMFDevSound::PlayInitL"));
-                    TRAP(err,iMMFDevSound->PlayInitL());
-                    }
-                else
-                    {
-                    if (!isResumeSupported)
-                        {
-                        INFO_PRINTF1(_L("Resume Not Supported - Calling CMMFDevSound::PlayInitL"));
+				if(isResumeSupported)
+					{
+					TInt err;
+					                    
+					if(iInitAfterPauseClause)
+						{
+                        INFO_PRINTF1(_L("Calling CMMFDevSound::PlayInitL"));
                         TRAP(err,iMMFDevSound->PlayInitL());
-                        }
-                    else //resume is supported
-                        {
+						}
+			        else
+						{
                         INFO_PRINTF1(_L("Calling CMMFDevSound::Resume"));               
                         err=iMMFDevSound->Resume();
-                        }
-                    }
-                if (err == iErrExpected)
-                    {
-                    if (!isResumeSupported)
-                        {
-                        INFO_PRINTF2(_L("CMMFDevSound::PlayInitL returned %d as expected"), err);
-                        }
-                    else //resume is supported
-                        {
-                        INFO_PRINTF2(_L("CMMFDevSound::Resume returned %d as expected"), err);
-                        }
-                    if(iCompletePlayBack)
-                        {
-                        iDevSoundState = EStatePlaying;
-                        iTimer->Cancel();
-                        if(iVolumeBalanceClause)
-                            {
-                            INFO_PRINTF1(_L("Call iMMFDevSound::Volume for verifying."));
-                            if (iVolume == iMMFDevSound->Volume())
-                                {
-                                INFO_PRINTF1(_L("CMMFDevSound::Volume returned equal previous set value as expected"));
-                                }
-                            else
-                                {
-                                ERR_PRINTF2(_L("CMMFDevSound::Volume returned different set value = %d"), iVolume);
-                                StopTest (KErrGeneral);
-                                break;
-                                }
-                            // Check the low-level a3f volume. Should have been applied by now
-                            MTestSetVolIf *volIf = static_cast<MTestSetVolIf*>(iMMFDevSound->CustomInterface(KUidTestSetVolIf));
-                            if (volIf)
-                                {
-                                TInt vol = volIf->Vol(iMMFDevSound->MaxVolume());
-                                if (vol == iVolume)
-                                    {
-                                    INFO_PRINTF1(_L("Low-level volume returned equal previous set value as expected"));
-                                    }
-                                else
-                                    {
-                                    ERR_PRINTF3(_L("Low-level volume returned different set value = %d (expect %d)"), vol, iVolume);
-                                    StopTest (KErrGeneral);
-                                    break;
-                                    }
-                                }
+						}
+					if (err == iErrExpected)
+						{
+						INFO_PRINTF2(_L("CMMFDevSound::Resume returned %d as expected"), err);
+						if(iCompletePlayBack)
+							{
+							iDevSoundState = EStatePlaying;
+							iTimer->Cancel();
+							if(iVolumeBalanceClause)
+								{
+								INFO_PRINTF1(_L("Call iMMFDevSound::Volume for verifying."));
+								if (iVolume == iMMFDevSound->Volume())
+									{
+									INFO_PRINTF1(_L("CMMFDevSound::Volume returned equal previous set value as expected"));
+									}
+								else
+									{
+									ERR_PRINTF2(_L("CMMFDevSound::Volume returned different set value = %d"), iVolume);
+									StopTest (KErrGeneral);
+									break;
+									}
+						        // Check the low-level a3f volume. Should have been applied by now
+						        MTestSetVolIf *volIf = static_cast<MTestSetVolIf*>(iMMFDevSound->CustomInterface(KUidTestSetVolIf));
+						        if (volIf)
+						            {
+						            TInt vol = volIf->Vol(iMMFDevSound->MaxVolume());
+	                                if (vol == iVolume)
+	                                    {
+	                                    INFO_PRINTF1(_L("Low-level volume returned equal previous set value as expected"));
+	                                    }
+	                                else
+	                                    {
+	                                    ERR_PRINTF3(_L("Low-level volume returned different set value = %d (expect %d)"), vol, iVolume);
+	                                    StopTest (KErrGeneral);
+	                                    break;
+	                                    }
+						            }
 
-                            INFO_PRINTF1(_L("Call iMMFDevSound::GetPlayBalanceL for verifying."));
-                            TInt getLSpeakerBalance = 0;
-                            TInt getRSpeakerBalance = 0;
-                            TRAP(err,iMMFDevSound->GetPlayBalanceL(getLSpeakerBalance, getRSpeakerBalance));
-                            if (err != KErrNone)
-                                {
-                                ERR_PRINTF2(_L("Getting balance failed ! Left with error = %d"), err);
-                                StopTest(err);
-                                break;
-                                }
-                            if ((iLSpeakerBalance == getLSpeakerBalance) && (iRSpeakerBalance == getRSpeakerBalance))
-                                {
-                                INFO_PRINTF1(_L("Balance configuration returned previous set values as expected"));
-                                }
-                            else
-                                {
-                                ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LSpeakerBalance = %d RSpeakerBalance = %d"), 
-                                        getLSpeakerBalance, getRSpeakerBalance);
-                                StopTest(KErrGeneral);
-                                break;
-                                }
-                            }
-                        if (iConfigClause)
-                            {
-                            if(iCapabilitiesSet.iRate == iMMFDevSound->Config().iRate &&
-                                    iCapabilitiesSet.iChannels == iMMFDevSound->Config().iChannels)
-                                {
-                                INFO_PRINTF1(_L("CMMFDevSound::Config does not change as expected"));
-                                }
-                            else
-                                {
-                                ERR_PRINTF1(_L("CMMFDevSound::Config returned different set value"));
-                                StopTest (KErrGeneral);
-                                }
-                            }
-                        }
-                    else
-                        {
-                        StopTest();
-                        }
-                    }
-                else
-                    if (!isResumeSupported)
-                        {
-                        ERR_PRINTF2(_L("CMMFDevSound::PlayInitL failed with %d"), err);
-                        ERR_PRINTF2(_L("Expected error %d"), iErrExpected);
-                        StopTest(KErrGeneral , EFail);
-                        }
-                    else //resume is supported
-                        {
-                        ERR_PRINTF2(_L("CMMFDevSound::Resume failed with %d"), err);
-                        ERR_PRINTF2(_L("Expected error %d"), iErrExpected);
-                        StopTest(KErrGeneral , EFail);
-                        }
+								INFO_PRINTF1(_L("Call iMMFDevSound::GetPlayBalanceL for verifying."));
+								TInt getLSpeakerBalance = 0;
+								TInt getRSpeakerBalance = 0;
+								TRAP(err,iMMFDevSound->GetPlayBalanceL(getLSpeakerBalance, getRSpeakerBalance));
+								if (err != KErrNone)
+									{
+									ERR_PRINTF2(_L("Getting balance failed ! Left with error = %d"), err);
+									StopTest(err);
+									break;
+									}
+								if ((iLSpeakerBalance == getLSpeakerBalance) && (iRSpeakerBalance == getRSpeakerBalance))
+									{
+									INFO_PRINTF1(_L("Balance configuration returned previous set values as expected"));
+									}
+								else
+									{
+									ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LSpeakerBalance = %d RSpeakerBalance = %d"), 
+											getLSpeakerBalance, getRSpeakerBalance);
+									StopTest(KErrGeneral);
+									break;
+									}
+								}
+							if (iConfigClause)
+								{
+								if(iCapabilitiesSet.iRate == iMMFDevSound->Config().iRate &&
+										iCapabilitiesSet.iChannels == iMMFDevSound->Config().iChannels)
+									{
+									INFO_PRINTF1(_L("CMMFDevSound::Config does not change as expected"));
+									}
+								else
+									{
+									ERR_PRINTF1(_L("CMMFDevSound::Config returned different set value"));
+									StopTest (KErrGeneral);
+									}
+								}
+							}
+						else
+							{
+							StopTest();
+							}
+						}
+					else
+						{
+						ERR_PRINTF2(_L("CMMFDevSound::Resume failed with %d"), err);
+						ERR_PRINTF2(_L("Expected error %d"), iErrExpected);
+						StopTest(KErrGeneral , EFail);
+						}
+					}
+				else
+					{
+					ERR_PRINTF1(_L("Devsound is expected to support resume"));
+					ERR_PRINTF3(_L("Received value is %d when the expected value is %d"), isResumeSupported, ETrue);
+					StopTest(KErrNotSupported,EFail);
+					}
 				#else
 				if(!isResumeSupported)
 					{
@@ -9030,49 +9022,30 @@ void RA3FDevSoundTestRecord::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 						{
 						INFO_PRINTF1(_L("Checking if resume is supported before receiving last buffer"));
 						TBool isResumeSupported = iMMFDevSound->IsResumeSupported();
-						TInt err = KErrNone;
-                        if (!isResumeSupported)
-                            {
-                            INFO_PRINTF1(_L("Resume Not Supported - Calling CMMFDevSound::RecordInitL()"));
-                            iMMFDevSound->RecordData();
-                            TRAP(err,iMMFDevSound->RecordInitL());
-                            }
-                        else
-                            {
-                            INFO_PRINTF1(_L("Calling CMMFDevSound::Resume"));
-                            iMMFDevSound->RecordData();
-                            err = iMMFDevSound->Resume();
-                            }
-                        if (err == KErrNone)
-                            {
-                            if (!isResumeSupported)
-                                {
-                                INFO_PRINTF2(_L("CMMFDevSound::RecordInitL returned %d as expected"), err);
-                                iDevSoundState = EStateRecording;
-                                isSecondTimeRecording = ETrue;
-                                }
-                            else
-                                {
-                                INFO_PRINTF2(_L("CMMFDevSound::Resume returned %d as expected"), err);
-                                iDevSoundState = EStateRecording;
-                                isSecondTimeRecording = ETrue;
-                                }
-                            }
-                        else
-                            {
-                            if (!isResumeSupported)
-                                {
-                                ERR_PRINTF2(_L("CMMFDevSound::RecordInitL before last buffer flag failed with %d"), err);
-                                ERR_PRINTF2(_L("Expected value %d"), KErrNone);
-                                StopTest(err, EFail);
-                                }
-                            else
-                                {
-                                ERR_PRINTF2(_L("CMMFDevSound::Resume before last buffer flag failed with %d"), err);
-                                ERR_PRINTF2(_L("Expected value %d"), KErrNone);
-                                StopTest(err, EFail);
-                                }
-                            }
+						if(isResumeSupported)
+							{
+							INFO_PRINTF1(_L("Calling CMMFDevSound::Resume"));
+							iMMFDevSound->RecordData();
+							TInt err = iMMFDevSound->Resume();
+							if (err == KErrNone)
+								{
+								INFO_PRINTF2(_L("CMMFDevSound::Resume returned %d as expected"), err);
+								iDevSoundState = EStateRecording;
+								isSecondTimeRecording = ETrue;
+								}
+							else
+								{
+								ERR_PRINTF2(_L("CMMFDevSound::Resume before last buffer flag failed with %d"), err);
+								ERR_PRINTF2(_L("Expected value %d"), KErrNone);
+								StopTest(err, EFail);
+								}
+							}
+						else
+							{
+							ERR_PRINTF1(_L("Devsound is expected to support resume"));
+							ERR_PRINTF3(_L("Received value is %d when the expected value is %d"), isResumeSupported, ETrue);
+							StopTest(KErrNotSupported,EFail);
+							}
 						isSecondTimeRecording = ETrue;
 						}
 					}
@@ -9101,10 +9074,11 @@ void RA3FDevSoundTestRecord::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 				{
 				if(iGainBalanceClause)
 					{
-					if (iGain > iMMFDevSound->MaxGain())
-					    {
-                        iGain = iMMFDevSound->MaxGain();
-					    }
+                    if (iGain > iMMFDevSound->MaxGain()) 
+                           { 
+                           iGain = iMMFDevSound->MaxGain(); 
+                           } 
+
 					INFO_PRINTF2(_L("Setting DevSound gain = %d"), iGain);
 					iMMFDevSound->SetGain(iGain);
 					if (iGain != iMMFDevSound->Gain())
@@ -9162,135 +9136,112 @@ void RA3FDevSoundTestRecord::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 				TBool isResumeSupported = iMMFDevSound->IsResumeSupported();
 				if(iPCMFormatClause)
 					{
-                    if (iRecordDataPriorToResume)
-                        {
-                        INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
-                        iMMFDevSound->RecordData();
-                        }
-                    TInt err = KErrNone;
-                    if(iInitAfterPauseClause)
-                        {
-                        INFO_PRINTF1(_L("Calling CMMFDevSound::RecordInit()"));
-                        iMMFDevSound->RecordInitL();
-                        }
-                    else
-                        {
-                        if (!isResumeSupported)
-                            {
-                            INFO_PRINTF1(_L("Resume Not Supported - Calling CMMFDevSound::RecordInitL()"));
-                            TRAP(err,iMMFDevSound->RecordInitL());
-                            }
-                        else //resume is supported
-                            {
-                            INFO_PRINTF1(_L("Calling CMMFDevSound::Resume()"));
-                            err = iMMFDevSound->Resume();
-                            }
-                        }
-                    if(iResumeAfterResume)
-                        {
-                        if (!isResumeSupported)
-                            {
-                            INFO_PRINTF1(_L("Resume Not Supported - Calling CMMFDevSound::RecordInitL()"));
-                            TRAP(err,iMMFDevSound->RecordInitL());
-                            }
-                        else
-                            {
-                            INFO_PRINTF1(_L("Calling CMMFDevSound::Resume()"));
-                            err = iMMFDevSound->Resume();
-                            }
-                        }
-                    if (iTestStepName != _L("MM-MMF-DEVSOUND-U-0088-HP"))
-                        {
-                        INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
-                        iMMFDevSound->RecordData(); 
-                        }
-                    if (err == KErrNone)
-                        {
-                        if (!isResumeSupported)
-                            {
-                            INFO_PRINTF2(_L("CMMFDevSound::RecordInitL returned %d as expected"), err);
-                            }
-                        else
-                            {
-                            INFO_PRINTF2(_L("CMMFDevSound::Resume returned %d as expected"), err);
-                            }
-                        iDevSoundState = EStateRecording;
-                        iFollowingResume = ETrue;
-                        isSecondTimeRecording = ETrue;
-                        if (iRecordDataFollowingResume)
-                            {
-                            INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
-                            iMMFDevSound->RecordData();							    
-                            }
-                        if (iCheckForNoDataAfterResume)
-                            {
-                            INFO_PRINTF1(_L("Wait for a while and check we get no extra buffer requests"));
-                            iTimer->Cancel(); // just in case cancel current timeout
-                            StartTimer(2000000); // wait for 2s
-                            }
-                        if(iGainBalanceClause)
-                            {
-                            INFO_PRINTF1(_L("Call iMMFDevSound::Gain for verifying."));
-                            if (iGain == iMMFDevSound->Gain())
-                                {
-                                INFO_PRINTF1(_L("CMMFDevSound::Gain returned equal previous set value as expected"));
-                                }
-                            else
-                                {
-                                ERR_PRINTF2(_L("CMMFDevSound::Gain returned different set value = %d"), iGain);
-                                StopTest (KErrGeneral);
-                                break;
-                                }
-                            INFO_PRINTF1(_L("Call GetRecordBalanceL for verifying."));
-                            TInt getLRecordBalance = 0;
-                            TInt getRRecordBalance = 0;
-                            TRAP(err,iMMFDevSound->GetRecordBalanceL(getLRecordBalance, getRRecordBalance));
-                            if (err != KErrNone)
-                                {
-                                ERR_PRINTF2(_L("Getting balance failed ! Left with error = %d"), err);
-                                StopTest(err);
-                                break;
-                                }
-                            if ((iLRecordBalance == getLRecordBalance) && (iRRecordBalance == getRRecordBalance))
-                                {
-                                INFO_PRINTF1(_L("Balance configuration returned previous set values as expected"));
-                                }
-                            else
-                                {
-                                ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"), 
-                                        getLRecordBalance, getRRecordBalance);
-                                StopTest(KErrGeneral);
-                                }
-                            }
-                        if (iConfigClause)
-                            {
-                            if(iCapabilitiesSet.iRate == iMMFDevSound->Config().iRate &&
-                                    iCapabilitiesSet.iChannels == iMMFDevSound->Config().iChannels)
-                                {
-                                INFO_PRINTF1(_L("CMMFDevSound::Config returned as expected"));
-                                }
-                            else
-                                {
-                                ERR_PRINTF1(_L("CMMFDevSound::Config returned different set value"));
-                                StopTest (KErrGeneral);
-                                }
-                            }
-                        }
-                    else
-                        {
-                        if (!isResumeSupported)
-                            {
-                            ERR_PRINTF2(_L("CMMFDevSound::RecordInitL failed with %d"), err);
-                            ERR_PRINTF2(_L("Expected error %d"), KErrNone);
-                            StopTest(err , EFail);
-                            }
-                        else //resume is supported
-                            {
-                            ERR_PRINTF2(_L("CMMFDevSound::Resume failed with %d"), err);
-                            ERR_PRINTF2(_L("Expected error %d"), KErrNone);
-                            StopTest(err, EFail);
-                            }
-                        }
+					if(isResumeSupported)
+						{
+						if (iRecordDataPriorToResume)
+						    {
+						    INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
+						    iMMFDevSound->RecordData();
+						    }
+						TInt err = KErrNone;
+						if(iInitAfterPauseClause)
+						    {
+						    INFO_PRINTF1(_L("Calling CMMFDevSound::RecordInit()"));
+						    iMMFDevSound->RecordInitL();
+						    }
+						else
+						    {
+						    INFO_PRINTF1(_L("Calling CMMFDevSound::Resume()"));
+						    err = iMMFDevSound->Resume();
+						    }
+						if(iResumeAfterResume)
+						    {
+						    INFO_PRINTF1(_L("Calling CMMFDevSound::Resume()"));
+						    err = iMMFDevSound->Resume();
+						    }
+						if (iTestStepName != _L("MM-MMF-DEVSOUND-U-0088-HP"))
+						    {
+						    INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
+						    iMMFDevSound->RecordData(); 
+						    }
+						if (err == KErrNone)
+							{
+							INFO_PRINTF2(_L("CMMFDevSound::Resume returned %d as expected"), err);
+							iDevSoundState = EStateRecording;
+							iFollowingResume = ETrue;
+							isSecondTimeRecording = ETrue;
+							if (iRecordDataFollowingResume)
+							    {
+	                            INFO_PRINTF1(_L("Calling CMMFDevSound::RecordData()"));
+	                            iMMFDevSound->RecordData();							    
+							    }
+							if (iCheckForNoDataAfterResume)
+							    {
+							    INFO_PRINTF1(_L("Wait for a while and check we get no extra buffer requests"));
+							    iTimer->Cancel(); // just in case cancel current timeout
+							    StartTimer(2000000); // wait for 2s
+							    }
+							if(iGainBalanceClause)
+								{
+								INFO_PRINTF1(_L("Call iMMFDevSound::Gain for verifying."));
+								if (iGain == iMMFDevSound->Gain())
+									{
+									INFO_PRINTF1(_L("CMMFDevSound::Gain returned equal previous set value as expected"));
+									}
+								else
+									{
+									ERR_PRINTF2(_L("CMMFDevSound::Gain returned different set value = %d"), iGain);
+									StopTest (KErrGeneral);
+									break;
+									}
+								INFO_PRINTF1(_L("Call GetRecordBalanceL for verifying."));
+								TInt getLRecordBalance = 0;
+								TInt getRRecordBalance = 0;
+								TRAP(err,iMMFDevSound->GetRecordBalanceL(getLRecordBalance, getRRecordBalance));
+								if (err != KErrNone)
+									{
+									ERR_PRINTF2(_L("Getting balance failed ! Left with error = %d"), err);
+									StopTest(err);
+									break;
+									}
+								if ((iLRecordBalance == getLRecordBalance) && (iRRecordBalance == getRRecordBalance))
+									{
+									INFO_PRINTF1(_L("Balance configuration returned previous set values as expected"));
+									}
+								else
+									{
+									ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LRecordBalance = %d RRecordBalance = %d"), 
+											getLRecordBalance, getRRecordBalance);
+									StopTest(KErrGeneral);
+									}
+								}
+							if (iConfigClause)
+								{
+								if(iCapabilitiesSet.iRate == iMMFDevSound->Config().iRate &&
+										iCapabilitiesSet.iChannels == iMMFDevSound->Config().iChannels)
+									{
+									INFO_PRINTF1(_L("CMMFDevSound::Config returned as expected"));
+									}
+								else
+									{
+									ERR_PRINTF1(_L("CMMFDevSound::Config returned different set value"));
+									StopTest (KErrGeneral);
+									}
+								}
+							}
+						else
+							{
+							ERR_PRINTF2(_L("CMMFDevSound::Resume failed with %d"), err);
+							ERR_PRINTF2(_L("Expected error %d"), KErrNone);
+							StopTest(err, EFail);
+							}
+						}
+					else
+						{
+						ERR_PRINTF1(_L("Devsound::IsResumeSupported did not return as expected"));
+						ERR_PRINTF3(_L("Received value is %d when the expected value is %d"), isResumeSupported, ETrue);
+						StopTest(KErrGeneral,EFail);
+						}
 					}
 				else
 					{
@@ -9601,62 +9552,71 @@ void RA3FDevSoundTestTone::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 					}
 				INFO_PRINTF1(_L("Checking if resume is supported"));
 				TBool isResumeSupported = iMMFDevSound->IsResumeSupported();
-                INFO_PRINTF2(_L("CMMFDevSound::IsResumeSupported returned %d as expected"),isResumeSupported);
-                INFO_PRINTF1(_L("Calling CMMFDevSound::Resume"));
-                TInt expectedErr = KErrNotSupported;
-                if(iPlayToneType == EPlayToneSequence)
-                    {
-                    expectedErr = KErrNone;
-                    }
-                TInt err = iMMFDevSound->Resume();
-                if(err == expectedErr)
-                    {
-                    if(iPlayToneType != EPlayToneSequence)
-                        {
-                        StopTest();
-                        }
-                    INFO_PRINTF2(_L("CMMFDevSound::Resume returned = %d as expected"), err);
-                    if(iVolumeBalanceClause)
-                        {
-                        INFO_PRINTF1(_L("Call iMMFDevSound::Volume for verifying."));
-                        if (iVolume == iMMFDevSound->Volume())
-                            {
-                            INFO_PRINTF1(_L("CMMFDevSound::Volume returned equal previous set value as expected"));
-                            }
-                        else
-                            {
-                            ERR_PRINTF2(_L("CMMFDevSound::Volume returned different set value = %d"), iVolume);
-                            StopTest (KErrGeneral);
-                            break;
-                            }
-                        INFO_PRINTF1(_L("Call iMMFDevSound::GetPlayBalanceL for verifying."));
-                        TInt getLSpeakerBalance = 0;
-                        TInt getRSpeakerBalance = 0;
-                        TRAP(err,iMMFDevSound->GetPlayBalanceL(getLSpeakerBalance, getRSpeakerBalance));
-                        if (err != KErrNone)
-                            {
-                            ERR_PRINTF2(_L("Getting balance failed ! Left with error = %d"), err);
-                            StopTest(err);
-                            break;
-                            }
-                        if ((iLSpeakerBalance == getLSpeakerBalance) && (iRSpeakerBalance == getRSpeakerBalance))
-                            {
-                            INFO_PRINTF1(_L("Balance configuration returned previous set values as expected"));
-                            }
-                        else
-                            {
-                            ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LSpeakerBalance = %d RSpeakerBalance = %d"), 
-                                    getLSpeakerBalance, getRSpeakerBalance);
-                            StopTest(KErrGeneral);
-                            break;
-                            }
-                        }
-                    }
-                else
-                    {
-                    ERR_PRINTF3(_L("CMMFDevSound::Resume returned with error = %d, when the expected error is = %d"), err, expectedErr);
-                    StopTest (KErrGeneral, EFail);
-                    }
+				if(isResumeSupported)
+					{
+					INFO_PRINTF2(_L("CMMFDevSound::IsResumeSupported returned %d as expected"),isResumeSupported);
+					INFO_PRINTF1(_L("Calling CMMFDevSound::Resume"));
+					TInt expectedErr = KErrNotSupported;
+					if(iPlayToneType == EPlayToneSequence)
+						{
+						expectedErr = KErrNone;
+						}
+					TInt err = iMMFDevSound->Resume();
+					if(err == expectedErr)
+						{
+						if(iPlayToneType != EPlayToneSequence)
+							{
+							StopTest();
+							}
+						INFO_PRINTF2(_L("CMMFDevSound::Resume returned = %d as expected"), err);
+						if(iVolumeBalanceClause)
+							{
+							INFO_PRINTF1(_L("Call iMMFDevSound::Volume for verifying."));
+							if (iVolume == iMMFDevSound->Volume())
+								{
+								INFO_PRINTF1(_L("CMMFDevSound::Volume returned equal previous set value as expected"));
+								}
+							else
+								{
+								ERR_PRINTF2(_L("CMMFDevSound::Volume returned different set value = %d"), iVolume);
+								StopTest (KErrGeneral);
+								break;
+								}
+							INFO_PRINTF1(_L("Call iMMFDevSound::GetPlayBalanceL for verifying."));
+							TInt getLSpeakerBalance = 0;
+							TInt getRSpeakerBalance = 0;
+							TRAP(err,iMMFDevSound->GetPlayBalanceL(getLSpeakerBalance, getRSpeakerBalance));
+							if (err != KErrNone)
+								{
+								ERR_PRINTF2(_L("Getting balance failed ! Left with error = %d"), err);
+								StopTest(err);
+								break;
+								}
+							if ((iLSpeakerBalance == getLSpeakerBalance) && (iRSpeakerBalance == getRSpeakerBalance))
+								{
+								INFO_PRINTF1(_L("Balance configuration returned previous set values as expected"));
+								}
+							else
+								{
+								ERR_PRINTF3(_L("Configuration of DevSound object does not match with set balance! LSpeakerBalance = %d RSpeakerBalance = %d"), 
+										getLSpeakerBalance, getRSpeakerBalance);
+								StopTest(KErrGeneral);
+								break;
+								}
+							}
+						}
+					else
+						{
+						ERR_PRINTF3(_L("CMMFDevSound::Resume returned with error = %d, when the expected error is = %d"), err, expectedErr);
+						StopTest (KErrGeneral, EFail);
+						}
+					}
+				else
+					{
+					ERR_PRINTF1(_L("CMMFDevSound did not support resume"));
+					ERR_PRINTF3(_L("Received value is %d when the expected value is %d"), isResumeSupported, ETrue);
+					StopTest(KErrGeneral,EFail);
+					}
 				}
 			else
 				{
@@ -11269,18 +11229,7 @@ void RA3FDevSoundPlayPauseFlushResumeTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,
 				//Stage 4 DevSound halted correctly, resuming playback
 				INFO_PRINTF1(_L("Stage 4: No calls to BufferToBeFilled during paused stage, resuming playback to ensure it completes properly"));
 				iDevSoundState = EStatePlaying;
-				INFO_PRINTF1(_L("Calling CMMFDevSound::IsResumeSupported"));
-				TBool isResumeSupported = iMMFDevSound->IsResumeSupported();
-				if (!isResumeSupported)
-				    {
-                    INFO_PRINTF1(_L("Resume Not Supported - Calling CMMFDevSound::PlayInitL"));  
-                    iMMFDevSound->PlayInitL();
-				    }
-				else // resume is supported 
-				    {
-                    INFO_PRINTF1(_L("Calling CMMFDevSound::Resume"));
-                    iMMFDevSound->Resume();
-				    }
+				iMMFDevSound->Resume();
 				}
 			else
 				{

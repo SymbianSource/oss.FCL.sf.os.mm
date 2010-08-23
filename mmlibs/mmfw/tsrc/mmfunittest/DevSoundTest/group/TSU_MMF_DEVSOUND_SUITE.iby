@@ -43,11 +43,20 @@ data=EPOCROOT##epoc32\data\c\tsu_mmf_truepause_devsound.ini					\tsu_mmf_truepau
 
 data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_SUITE_debug.script		\TSU_MMF_DEVSOUND_SUITE_debug.script
 data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_SUITE_Alloc.script		\TSU_MMF_DEVSOUND_SUITE_Alloc.script
-data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE.script	\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE.script
+
 
 #ifndef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
 data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_SUITE_PREEMPTION.script	\TSU_MMF_DEVSOUND_SUITE_PREEMPTION.script
 #endif // SYMBIAN_MULTIMEDIA_A3FDEVSOUND
+
+#ifdef MM_TB101_L
+// include specific TB10.1 (Sirocco) Tests
+data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script		\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE_notsupported.script
+#else
+// include tests that would not run on TB10.1 branch (Pre TB10.1 HW ref tests)
+data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_SUITE_debug_reference_HW.script		\TSU_MMF_DEVSOUND_SUITE_debug_reference_HW.script
+data=EPOCROOT##epoc32\data\c\mm\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE.script	\TSU_MMF_DEVSOUND_NOTIFICATION_SUITE.script
+#endif
 
 //REM Test files for DEVSOUND_SUITE tests
 ECOM_PLUGIN(tsu_mmf_devsound_testdevice.dll,101f9f50.rsc)
