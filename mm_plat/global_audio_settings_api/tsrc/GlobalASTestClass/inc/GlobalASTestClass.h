@@ -132,7 +132,7 @@ NONSHARABLE_CLASS(CGlobalASTestClass) : public CScriptBase,
 		TInt RingingAlertTone2( CStifItemParser& aItem );
 		TInt IsRingingAlertTone2Enabled( CStifItemParser& aItem );
 		TInt KeypadAlertTone( CStifItemParser& aItem );
-
+        TInt IsSilenceModeActive(CStifItemParser& aItem);
     private:    // Data
 
 		// reference to TestModuleIf

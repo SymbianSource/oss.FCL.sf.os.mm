@@ -57,6 +57,7 @@ class TGlobalAudioSettings
 		HBufC *iRingingTone1Name;
 		HBufC *iRingingTone2Name;
 		CGlobalAudioSettings::TGASKeypadVolume iKeyPadVolume;
+		TBool iSilenceMode;
     };
 
 #endif      // GlobalAudioSETTINGSDATA_H

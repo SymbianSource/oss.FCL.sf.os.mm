@@ -53,7 +53,8 @@ public:
           EGASVideoCallToneName,
           EGASRingingTone1Name,
           EGASRingingTone2Name,
-          EGASKeyPadVolume
+          EGASKeyPadVolume,
+          EGASSilenceMode
         };
 
 public:

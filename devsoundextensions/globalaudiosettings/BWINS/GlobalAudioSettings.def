@@ -21,4 +21,5 @@ EXPORTS
 	?KeyPadToneVolume@CGlobalAudioSettings@@QAE?AW4TGASKeypadVolume@1@XZ @ 20 NONAME ; enum CGlobalAudioSettings::TGASKeypadVolume CGlobalAudioSettings::KeyPadToneVolume(void)
 	?MessageAlertTone@CGlobalAudioSettings@@QAEAAVTDesC16@@XZ @ 21 NONAME ; class TDesC16 & CGlobalAudioSettings::MessageAlertTone(void)
 	?EmailAlertTone@CGlobalAudioSettings@@QAEAAVTDesC16@@XZ @ 22 NONAME ; class TDesC16 & CGlobalAudioSettings::EmailAlertTone(void)
+	?IsSilenceModeEnabled@CGlobalAudioSettings@@QAEHXZ @ 23 NONAME ; int CGlobalAudioSettings::IsSilenceModeEnabled(void)
 

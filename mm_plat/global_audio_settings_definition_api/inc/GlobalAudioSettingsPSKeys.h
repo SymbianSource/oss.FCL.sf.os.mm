@@ -150,8 +150,15 @@ const TUint32 KGASRingingTone2Name=0x0000000b;
 *  EGASKeypadVolumeLevel3 = "volume level 3"
 */
 const TUint32 KGASKeypadToneVolume=0x0000000c;
-
-
+/**
+* This key is required for the Global Audio Settings to determine whether the
+* silent mode is active or not
+*
+* Possible integer values:
+* 0 = "Silent mode Disabled". Silent mode is disabled
+* 1 = "Warning Tones Enabled". Silent mode is enabled
+*/
+const TUint32 KGASSilenceMode = 0x0000000d;
 #endif      // GLOBALAUDIOSETTINGSPSKEYS_H
 
 // End of file

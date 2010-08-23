@@ -137,7 +137,11 @@ void CGlobalAudioSettingsImpl::ConstructL()
                                                                             iGlobalAudioSettingsData);
     iKeypadToneObserverAO->Subscribe();  
                 
-                
+    iSilenceModeObserverAO = CSilenceModeObserverAO::NewL(
+                                                                                iGlobalAudioSettings,
+                                                                                iAudioSettingsObserver,
+                                                                                iGlobalAudioSettingsData);
+     iSilenceModeObserverAO->Subscribe();  
 	                    
     RProperty publicSilenceProperty;
 	User::LeaveIfError(publicSilenceProperty.Attach(KGASPSUidGlobalAudioSettings, KGASPublicSilence));
@@ -163,6 +167,7 @@ CGlobalAudioSettingsImpl::~CGlobalAudioSettingsImpl()
         delete iRingingTone1ObserverAO;
         delete iRingingTone2ObserverAO;
         delete iKeypadToneObserverAO;
+        delete iSilenceModeObserverAO;
         delete iCAudioClientsListManagerAO;
         delete iPausedClientsListManagerAO;
         iAudioClientsListObserverArray.Close();
@@ -311,6 +316,11 @@ TBool CGlobalAudioSettingsImpl::IsMessageAlertToneEnabled()
  CGlobalAudioSettings::TGASKeypadVolume CGlobalAudioSettingsImpl::KeyPadToneVolume()
      {
      return (CGlobalAudioSettings::TGASKeypadVolume)iGlobalAudioSettingsData.iKeyPadVolume;
+     }
+ 
+ TBool CGlobalAudioSettingsImpl::IsSilenceModeEnabled()
+     {
+      return iGlobalAudioSettingsData.iSilenceMode;
      }
 // -----------------------------------------------------------------------------
 // CGlobalAudioSettingsImpl::RegisterAudioClientsListObserver
@@ -1408,6 +1418,102 @@ void CKeypadToneObserverAO::DoCancel()
     }
 
 TInt CKeypadToneObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+
+/////////////////////////////////////////////////////////////////////
+//  CSilenceModeObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CSilenceModeObserverAO::CSilenceModeObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CSilenceModeObserverAO::~CSilenceModeObserverAO()
+    {
+    Cancel();
+    iSilenceModeProperty.Close();
+    }
+
+CSilenceModeObserverAO* CSilenceModeObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CSilenceModeObserverAO* self = new (ELeave) CSilenceModeObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CSilenceModeObserverAO::ConstructL()
+    {
+    
+    
+    User::LeaveIfError(iSilenceModeProperty.Attach(KGASPSUidGlobalAudioSettings, KGASSilenceMode));
+   
+    User::LeaveIfError(iSilenceModeProperty.Get(iGlobalAudioSettingsData.iSilenceMode));
+    RDebug::Printf("in constructL,silence mode %d",iGlobalAudioSettingsData.iSilenceMode);
+  
+    }
+    
+void CSilenceModeObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iSilenceModeProperty.Subscribe(iStatus);
+        }
+    }
+
+void CSilenceModeObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CSilenceModeObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+       
+            status=iSilenceModeProperty.Get(  iGlobalAudioSettingsData.iSilenceMode);
+            RDebug::Printf("value of silent mode :%d",iGlobalAudioSettingsData.iSilenceMode);
+        
+        
+        if( status == KErrNone)
+            {
+            MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASSilenceMode;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CKeypadToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CSilenceModeObserverAO::DoCancel()
+    {
+    iSilenceModeProperty.Cancel();
+    }
+
+TInt CSilenceModeObserverAO::RunError(TInt /*aError*/)
     {
     return KErrNone;
     }

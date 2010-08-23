@@ -42,7 +42,7 @@ class CVideoCallToneObserverAO;
 class CRingingTone1ObserverAO;
 class CRingingTone2ObserverAO;
 class CKeypadToneObserverAO;
-
+class CSilenceModeObserverAO;
 /**
 *  Defines functions that client uses to set phone profile settings.
 *
@@ -251,7 +251,13 @@ NONSHARABLE_CLASS(CGlobalAudioSettingsImpl): public CBase
         * is returned
         */
          CGlobalAudioSettings::TGASKeypadVolume KeyPadToneVolume();
-
+         /**
+         * Returns silent mode status.
+         *
+         * 
+         * @return TBool aEnable. ETrue if the silent mode is enabled else EFalse.
+         */
+         TBool IsSilenceModeEnabled();
         /**
         * Registers audio clients list observer.
         *
@@ -337,6 +343,7 @@ NONSHARABLE_CLASS(CGlobalAudioSettingsImpl): public CBase
         CRingingTone1ObserverAO* iRingingTone1ObserverAO;
         CRingingTone2ObserverAO* iRingingTone2ObserverAO;
         CKeypadToneObserverAO* iKeypadToneObserverAO;
+        CSilenceModeObserverAO* iSilenceModeObserverAO;
     };
 
 
@@ -646,6 +653,34 @@ private:
     CGlobalAudioSettings& iGlobalAudioSettings;
     MAudioSettingsObserver&   iAudioSettingsObserver;
     RProperty iKeypadToneVolumeProperty;
+    TGlobalAudioSettings& iGlobalAudioSettingsData;
+    };
+
+NONSHARABLE_CLASS(CSilenceModeObserverAO) : public CActive
+    {
+public:
+    // Ist Phase constr and Destr
+    static CSilenceModeObserverAO* NewL(CGlobalAudioSettings &aGlobalAudioSettings,
+                                         MAudioSettingsObserver& aAudioSettingsObserver,
+                                         TGlobalAudioSettings& aGlobalAudioSettingsData);
+    ~CSilenceModeObserverAO();
+    void Subscribe();
+
+protected:
+    // From CActive
+    void RunL();
+    void DoCancel();
+    TInt RunError(TInt aError);
+
+private:
+    // Constr and IInd phase constr
+    CSilenceModeObserverAO(CGlobalAudioSettings &aGlobalAudioSettings,
+                                                 MAudioSettingsObserver& aAudioSettingsObserver,
+                                                 TGlobalAudioSettings& aGlobalAudioSettingsData);
+    void ConstructL();
+    CGlobalAudioSettings& iGlobalAudioSettings;
+    MAudioSettingsObserver&   iAudioSettingsObserver;
+    RProperty iSilenceModeProperty;
     TGlobalAudioSettings& iGlobalAudioSettingsData;
     };
 #endif // GLOBALAUDIOSETTINGSIMPL_H

@@ -305,6 +305,14 @@ class CGlobalAudioSettings : public CBase
         IMPORT_C TGASKeypadVolume KeyPadToneVolume();
         
         /**
+        * Returns silent mode status.
+        *
+        * 
+        * @return TBool aEnable. ETrue if the silent mode is enabled else EFalse.
+        */
+        
+        IMPORT_C TBool IsSilenceModeEnabled();
+        /**
         * Registers audio clients list observer.
         *
         * When registered successfully, the observer will start receiveing

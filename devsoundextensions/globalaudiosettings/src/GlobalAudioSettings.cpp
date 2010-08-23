@@ -165,6 +165,11 @@ EXPORT_C CGlobalAudioSettings::TGASKeypadVolume CGlobalAudioSettings::KeyPadTone
     {
     return (iBody->KeyPadToneVolume());
     }
+
+EXPORT_C TBool CGlobalAudioSettings::IsSilenceModeEnabled()
+    {
+    return (iBody->IsSilenceModeEnabled());
+    }
 // -----------------------------------------------------------------------------
 // CGlobalAudioSettings::RegisterAudioClientsListObserver
 // 

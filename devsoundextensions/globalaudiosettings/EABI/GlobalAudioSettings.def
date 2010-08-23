@@ -27,4 +27,5 @@ EXPORTS
 	_ZTI26CAudioClientsListManagerAO @ 26 NONAME
 	_ZTV20CGlobalAudioSettings @ 27 NONAME
 	_ZTV26CAudioClientsListManagerAO @ 28 NONAME
+	_ZN20CGlobalAudioSettings20IsSilenceModeEnabledEv @ 29 NONAME
 

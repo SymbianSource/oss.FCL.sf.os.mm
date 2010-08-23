@@ -78,7 +78,8 @@ TInt CGlobalASTestClass::RunMethodL( CStifItemParser& aItem )
         ENTRY( "IsRingingAlertTone1Enabled", CGlobalASTestClass::IsRingingAlertTone1Enabled ),
         ENTRY( "GetRingingTone2Name", CGlobalASTestClass::RingingAlertTone2 ),
         ENTRY( "IsRingingAlertTone2Enabled", CGlobalASTestClass::IsRingingAlertTone2Enabled ),
-        ENTRY( "GetKeypadToneVolume", CGlobalASTestClass::KeypadAlertTone )
+        ENTRY( "GetKeypadToneVolume", CGlobalASTestClass::KeypadAlertTone ),
+        ENTRY( "IsSilenceModeActive", CGlobalASTestClass::IsSilenceModeActive )
         		
         };
 
@@ -105,6 +106,7 @@ TInt CGlobalASTestClass::CreateGlobalAS( CStifItemParser& /*aItem*/ )
 		{
 		TRAP(status,iPhoneProfileSettings = CGlobalAudioSettings::NewL(*this));
 		}
+		CActiveScheduler::Start();
 	return status;
 	}
 
@@ -352,7 +354,7 @@ TInt CGlobalASTestClass::GetPausedClientsList( CStifItemParser& /*aItem*/ )
 void CGlobalASTestClass::SettingsChanged(CGlobalAudioSettings& /*aGlobalAudioSettings*/, MAudioSettingsObserver::TGASEventId aSetting)
 	{
    RDebug::Printf("settings changed %d",aSetting);
-   // CActiveScheduler::Stop();
+    CActiveScheduler::Stop();
 	}
 
 void CGlobalASTestClass::Event( const CGlobalAudioSettings& /*aGlobalAudioSettings*/, TUint aEvent )
@@ -541,6 +543,21 @@ TInt CGlobalASTestClass::KeypadAlertTone(CStifItemParser& /*aItem*/)
         {
     TInt volume=iPhoneProfileSettings->KeyPadToneVolume();
     RDebug::Print(_L("enable:%d"),volume);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+
+TInt CGlobalASTestClass::IsSilenceModeActive(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::IsSilenceProfileActive");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+    TInt enable=iPhoneProfileSettings->IsSilenceModeEnabled();
+    RDebug::Print(_L("enable:%d"),enable);
         }
     else
         status=KErrNotFound;
