@@ -116,6 +116,55 @@ EXPORT_C TBool CGlobalAudioSettings::IsPublicSilenceEnabled()
 	return (iBody->IsPublicSilenceEnabled());
 	}
 
+EXPORT_C TDesC& CGlobalAudioSettings::MessageAlertTone()
+    {
+    return (iBody->MessageAlertTone());
+    }
+
+EXPORT_C TBool CGlobalAudioSettings::IsMessageAlertToneEnabled()
+    {
+    return (iBody->IsMessageAlertToneEnabled());
+    }
+EXPORT_C TDesC& CGlobalAudioSettings::EmailAlertTone()
+    {
+    return (iBody->EmailAlertTone());
+    }
+EXPORT_C TBool CGlobalAudioSettings::IsEmailAlertToneEnabled()
+    {
+    return (iBody->IsEmailAlertToneEnabled());
+    }
+EXPORT_C CGlobalAudioSettings::TGASRingingType CGlobalAudioSettings::RingingType()
+    {
+     return (iBody->RingingType());
+    }
+EXPORT_C TDesC& CGlobalAudioSettings::VideoCallAlertTone()
+    {
+    return (iBody->VideoCallAlertTone());
+    }
+EXPORT_C TBool CGlobalAudioSettings::IsVideoCallAlertToneEnabled()
+    {
+    return (iBody->IsVideoCallAlertToneEnabled());
+    }
+EXPORT_C TDesC& CGlobalAudioSettings::RingingAlertTone1()
+    {
+    return (iBody->RingingAlertTone1());
+    }
+EXPORT_C TBool CGlobalAudioSettings::IsRingingAlertTone1Enabled()
+    {
+    return (iBody->IsRingingAlertTone1Enabled());
+    }
+EXPORT_C TDesC& CGlobalAudioSettings::RingingAlertTone2()
+    {
+    return (iBody->RingingAlertTone2());
+    }
+EXPORT_C TBool CGlobalAudioSettings::IsRingingAlertTone2Enabled()
+    {
+    return (iBody->IsRingingAlertTone2Enabled());
+    }
+EXPORT_C CGlobalAudioSettings::TGASKeypadVolume CGlobalAudioSettings::KeyPadToneVolume()
+    {
+    return (iBody->KeyPadToneVolume());
+    }
 // -----------------------------------------------------------------------------
 // CGlobalAudioSettings::RegisterAudioClientsListObserver
 // 

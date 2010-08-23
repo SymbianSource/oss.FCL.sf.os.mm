@@ -31,6 +31,8 @@
 #define PRINT_MESSAGE
 #endif // _DEBUG
 
+const TInt KMaxLength=256;
+_LIT( KNoSound, "z:\\resource\\No_Sound.wav" );
 // ============================ MEMBER FUNCTIONS ===============================
 
 // -----------------------------------------------------------------------------
@@ -51,7 +53,7 @@ CGlobalAudioSettingsImpl::CGlobalAudioSettingsImpl(
 // 
 // -----------------------------------------------------------------------------
 //
-EXPORT_C CGlobalAudioSettingsImpl* CGlobalAudioSettingsImpl::NewL(
+CGlobalAudioSettingsImpl* CGlobalAudioSettingsImpl::NewL(
                                         CGlobalAudioSettings &aGlobalAudioSettings,
                                         MAudioSettingsObserver& aAudioSettingsObserver)
 	{
@@ -93,7 +95,50 @@ void CGlobalAudioSettingsImpl::ConstructL()
                         	                iAudioSettingsObserver,
                         	                iGlobalAudioSettingsData);
 	iVibraObserverAO->Subscribe();
-
+	iRingingTypeObserverAO = CRingingTypeObserverAO::NewL(
+	                                            iGlobalAudioSettings,
+	                                            iAudioSettingsObserver,
+	                                            iGlobalAudioSettingsData);
+    iRingingTypeObserverAO->Subscribe();
+     
+	iMessageToneObserverAO = CMessageToneObserverAO::NewL(
+	                                            iGlobalAudioSettings,
+	                                            iAudioSettingsObserver,
+	                                            iGlobalAudioSettingsData);
+	iMessageToneObserverAO->Subscribe();
+	iEmailToneObserverAO = CEmailToneObserverAO::NewL(
+	                                                iGlobalAudioSettings,
+	                                                iAudioSettingsObserver,
+	                                                iGlobalAudioSettingsData);
+	iEmailToneObserverAO->Subscribe();   
+	
+	
+    iVideoCallObserverAO = CVideoCallToneObserverAO::NewL(
+                                                            iGlobalAudioSettings,
+                                                            iAudioSettingsObserver,
+                                                            iGlobalAudioSettingsData);
+    iVideoCallObserverAO->Subscribe();  
+        
+    iRingingTone1ObserverAO = CRingingTone1ObserverAO::NewL(
+                                                                    iGlobalAudioSettings,
+                                                                    iAudioSettingsObserver,
+                                                                    iGlobalAudioSettingsData);
+    iRingingTone1ObserverAO->Subscribe();
+	
+    iRingingTone2ObserverAO = CRingingTone2ObserverAO::NewL(
+                                                                            iGlobalAudioSettings,
+                                                                            iAudioSettingsObserver,
+                                                                            iGlobalAudioSettingsData);
+    iRingingTone2ObserverAO->Subscribe();  
+	
+    iKeypadToneObserverAO = CKeypadToneObserverAO::NewL(
+                                                                            iGlobalAudioSettings,
+                                                                            iAudioSettingsObserver,
+                                                                            iGlobalAudioSettingsData);
+    iKeypadToneObserverAO->Subscribe();  
+                
+                
+	                    
     RProperty publicSilenceProperty;
 	User::LeaveIfError(publicSilenceProperty.Attach(KGASPSUidGlobalAudioSettings, KGASPublicSilence));
 	User::LeaveIfError(publicSilenceProperty.Get(iGlobalAudioSettingsData.iPublicSilence));
@@ -105,12 +150,19 @@ void CGlobalAudioSettingsImpl::ConstructL()
     }
     
 // Destructor
-EXPORT_C CGlobalAudioSettingsImpl::~CGlobalAudioSettingsImpl()
+CGlobalAudioSettingsImpl::~CGlobalAudioSettingsImpl()
     {
         delete iWarningTonesObserverAO;
         delete iMessagingTonesObserverAO;
         delete iSilentProfileObserverAO;
         delete iVibraObserverAO;
+        delete iRingingTypeObserverAO;
+        delete iMessageToneObserverAO;
+        delete iEmailToneObserverAO;
+        delete iVideoCallObserverAO;
+        delete iRingingTone1ObserverAO;
+        delete iRingingTone2ObserverAO;
+        delete iKeypadToneObserverAO;
         delete iCAudioClientsListManagerAO;
         delete iPausedClientsListManagerAO;
         iAudioClientsListObserverArray.Close();
@@ -121,7 +173,7 @@ EXPORT_C CGlobalAudioSettingsImpl::~CGlobalAudioSettingsImpl()
 // Static function for creating an instance of the EnvironmentalReverb object.
 // -----------------------------------------------------------------------------
 //
-EXPORT_C TBool CGlobalAudioSettingsImpl::IsWarningTonesEnabled()
+ TBool CGlobalAudioSettingsImpl::IsWarningTonesEnabled()
 	{
 	if(iGlobalAudioSettingsData.iWarningTones)
 	    return(ETrue);
@@ -134,7 +186,7 @@ EXPORT_C TBool CGlobalAudioSettingsImpl::IsWarningTonesEnabled()
 // 
 // -----------------------------------------------------------------------------
 //
-EXPORT_C TBool CGlobalAudioSettingsImpl::IsMessageTonesEnabled()
+TBool CGlobalAudioSettingsImpl::IsMessageTonesEnabled()
 	{
 	if(iGlobalAudioSettingsData.iMessageTones)
 	    return(ETrue);
@@ -147,7 +199,7 @@ EXPORT_C TBool CGlobalAudioSettingsImpl::IsMessageTonesEnabled()
 // 
 // -----------------------------------------------------------------------------
 //
-EXPORT_C TBool CGlobalAudioSettingsImpl::IsSilentProfileEnabled()
+TBool CGlobalAudioSettingsImpl::IsSilentProfileEnabled()
 	{
 	if(iGlobalAudioSettingsData.iSilentProfile)
 	    return(ETrue);
@@ -160,7 +212,7 @@ EXPORT_C TBool CGlobalAudioSettingsImpl::IsSilentProfileEnabled()
 // 
 // -----------------------------------------------------------------------------
 //
-EXPORT_C TBool CGlobalAudioSettingsImpl::IsVibraEnabled()
+ TBool CGlobalAudioSettingsImpl::IsVibraEnabled()
 	{
 	if(iGlobalAudioSettingsData.iVibra)
 	    return(ETrue);
@@ -173,7 +225,7 @@ EXPORT_C TBool CGlobalAudioSettingsImpl::IsVibraEnabled()
 // 
 // -----------------------------------------------------------------------------
 //
-EXPORT_C TBool CGlobalAudioSettingsImpl::IsPublicSilenceEnabled()
+TBool CGlobalAudioSettingsImpl::IsPublicSilenceEnabled()
 	{
 	if(iGlobalAudioSettingsData.iPublicSilence)
 	    return(ETrue);
@@ -181,6 +233,85 @@ EXPORT_C TBool CGlobalAudioSettingsImpl::IsPublicSilenceEnabled()
 	    return(EFalse);
 	}
 
+
+
+
+TDesC& CGlobalAudioSettingsImpl::MessageAlertTone()
+    {
+     return *iGlobalAudioSettingsData.iMessageToneName;
+    
+    }
+
+TBool CGlobalAudioSettingsImpl::IsMessageAlertToneEnabled()
+    {
+     if(iGlobalAudioSettingsData.iMessageToneName->CompareF(KNoSound)==0)
+         return EFalse;
+     else
+         return ETrue;
+    
+    }
+ TDesC& CGlobalAudioSettingsImpl::EmailAlertTone()
+    {
+    return *iGlobalAudioSettingsData.iEmailToneName;
+        
+    }
+ TBool CGlobalAudioSettingsImpl::IsEmailAlertToneEnabled()
+     {
+      if(iGlobalAudioSettingsData.iEmailToneName->CompareF(KNoSound)==0)
+          return EFalse;
+      else
+          return ETrue;
+     
+     }
+  CGlobalAudioSettings::TGASRingingType CGlobalAudioSettingsImpl::RingingType()
+    {
+    CGlobalAudioSettings::TGASRingingType type;
+   type= ( CGlobalAudioSettings::TGASRingingType)iGlobalAudioSettingsData.iRingingType;
+ 
+      return type;
+    }
+  
+  TDesC& CGlobalAudioSettingsImpl::VideoCallAlertTone()
+      {
+      return *iGlobalAudioSettingsData.iVideoCallToneName;
+      }
+  TBool CGlobalAudioSettingsImpl::IsVideoCallAlertToneEnabled()
+      {
+       if(iGlobalAudioSettingsData.iVideoCallToneName->CompareF(KNoSound)==0)
+           return EFalse;
+       else
+           return ETrue;
+      
+      }
+  TDesC& CGlobalAudioSettingsImpl::RingingAlertTone1()
+     {
+     return *iGlobalAudioSettingsData.iRingingTone1Name;
+     }
+  TBool CGlobalAudioSettingsImpl::IsRingingAlertTone1Enabled()
+      {
+       if(iGlobalAudioSettingsData.iRingingTone1Name->CompareF(KNoSound)==0)
+           return EFalse;
+       else
+           return ETrue;
+      
+      }
+  TDesC& CGlobalAudioSettingsImpl::RingingAlertTone2()
+     {
+     return *iGlobalAudioSettingsData.iRingingTone2Name;
+     }
+  
+  TBool CGlobalAudioSettingsImpl::IsRingingAlertTone2Enabled()
+      {
+       if(iGlobalAudioSettingsData.iRingingTone2Name->CompareF(KNoSound)==0)
+           return EFalse;
+       else
+           return ETrue;
+      
+      }
+ CGlobalAudioSettings::TGASKeypadVolume CGlobalAudioSettingsImpl::KeyPadToneVolume()
+     {
+     return (CGlobalAudioSettings::TGASKeypadVolume)iGlobalAudioSettingsData.iKeyPadVolume;
+     }
 // -----------------------------------------------------------------------------
 // CGlobalAudioSettingsImpl::RegisterAudioClientsListObserver
 // 
@@ -319,7 +450,8 @@ void CWarningTonesObserverAO::RunL()
         status = iWarningTonesProperty.Get(iGlobalAudioSettingsData.iWarningTones);
         if(status == KErrNone)
             {
-            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, MAudioSettingsObserver::KWarningTones );
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASWarningTones;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
             }
 #ifdef PRINT_MESSAGE
         else
@@ -402,7 +534,8 @@ void CMessagingTonesObserverAO::RunL()
         status = iMessagingTonesProperty.Get(iGlobalAudioSettingsData.iMessageTones);
         if(status == KErrNone)
             {
-            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, MAudioSettingsObserver::KMessageTones);
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASMessageTones;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
             }
 #ifdef PRINT_MESSAGE
         else
@@ -485,7 +618,8 @@ void CSilentProfileObserverAO::RunL()
         status = iSilentProfileProperty.Get(iGlobalAudioSettingsData.iSilentProfile);
         if(status == KErrNone)
             {
-            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, MAudioSettingsObserver::KSilentProfile);
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASSilentProfile;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
             }
 #ifdef PRINT_MESSAGE
         else
@@ -569,7 +703,8 @@ void CVibraObserverAO::RunL()
         status = iVibraProperty.Get(iGlobalAudioSettingsData.iVibra);
         if( status == KErrNone)
             {
-            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, MAudioSettingsObserver::KVibra);
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASVibra;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings,id);
             }
 #ifdef PRINT_MESSAGE
         else
@@ -589,5 +724,692 @@ TInt CVibraObserverAO::RunError(TInt /*aError*/)
 	{
 	return KErrNone;
 	}
+
+//////////////////////////////////////////////////////////////////////
+//  CRingingTypeObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CRingingTypeObserverAO::CRingingTypeObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CRingingTypeObserverAO::~CRingingTypeObserverAO()
+    {
+    Cancel();
+    iRingingTypeProperty.Close();
+    }
+
+CRingingTypeObserverAO* CRingingTypeObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CRingingTypeObserverAO* self = new (ELeave) CRingingTypeObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CRingingTypeObserverAO::ConstructL()
+    {
+    User::LeaveIfError(iRingingTypeProperty.Attach(KGASPSUidGlobalAudioSettings, KGASRingingType));
+    TInt value=KErrNone;
+    User::LeaveIfError(iRingingTypeProperty.Get(value));
+    iGlobalAudioSettingsData.iRingingType=(CGlobalAudioSettings::TGASRingingType)value;
+    
+    }
+    
+void CRingingTypeObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iRingingTypeProperty.Subscribe(iStatus);
+        }
+    }
+
+void CRingingTypeObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CRingingTypeObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        TInt value=KErrNone;
+        status=(iRingingTypeProperty.Get(value));
+        iGlobalAudioSettingsData.iRingingType=(CGlobalAudioSettings::TGASRingingType)value;
+        if( status == KErrNone)
+            {
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASRingingType;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CRingingTypeObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CRingingTypeObserverAO::DoCancel()
+    {
+    iRingingTypeProperty.Cancel();
+    }
+
+TInt CRingingTypeObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+//////////////////////////////////////////////////////////////////////
+//  CMessageToneObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CMessageToneObserverAO::CMessageToneObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CMessageToneObserverAO::~CMessageToneObserverAO()
+    {
+    Cancel();
+    iMessageToneNameProperty.Close();
+    if( iGlobalAudioSettingsData.iMessageToneName)
+        {
+          delete  iGlobalAudioSettingsData.iMessageToneName;
+          iGlobalAudioSettingsData.iMessageToneName=NULL;
+        }
+    }
+
+CMessageToneObserverAO* CMessageToneObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CMessageToneObserverAO* self = new (ELeave) CMessageToneObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CMessageToneObserverAO::ConstructL()
+    {
+    iGlobalAudioSettingsData.iMessageToneName=HBufC::NewL(KMaxLength);
+    User::LeaveIfError(iMessageToneNameProperty.Attach(KGASPSUidGlobalAudioSettings, KGASMessageToneName));
+    TPtr16 ptr=iGlobalAudioSettingsData.iMessageToneName->Des();
+    User::LeaveIfError(iMessageToneNameProperty.Get(ptr));
+    
+    }
+    
+void CMessageToneObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iMessageToneNameProperty.Subscribe(iStatus);
+        }
+    }
+
+void CMessageToneObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CMessageToneObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        delete iGlobalAudioSettingsData.iMessageToneName;
+        iGlobalAudioSettingsData.iMessageToneName=NULL;
+        iGlobalAudioSettingsData.iMessageToneName=HBufC::NewL(KMaxLength);
+        TPtr16 ptr=iGlobalAudioSettingsData.iMessageToneName->Des();
+        status = iMessageToneNameProperty.Get(ptr);
+        if( status == KErrNone)
+            {
+            MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASMessageToneName;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CMessageToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CMessageToneObserverAO::DoCancel()
+    {
+    iMessageToneNameProperty.Cancel();
+    }
+
+TInt CMessageToneObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+
+/////////////////////////////////////////////////////////////////////
+//  CEmailToneObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CEmailToneObserverAO::CEmailToneObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CEmailToneObserverAO::~CEmailToneObserverAO()
+    {
+    Cancel();
+    iEmailToneNameProperty.Close();
+    
+    if(iGlobalAudioSettingsData.iEmailToneName)
+        {
+        delete  iGlobalAudioSettingsData.iEmailToneName;
+        iGlobalAudioSettingsData.iEmailToneName=NULL;
+        }
+   
+    }
+
+CEmailToneObserverAO* CEmailToneObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CEmailToneObserverAO* self = new (ELeave) CEmailToneObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CEmailToneObserverAO::ConstructL()
+    {
+    
+    iGlobalAudioSettingsData.iEmailToneName=HBufC::NewL(KMaxLength);
+    User::LeaveIfError(iEmailToneNameProperty.Attach(KGASPSUidGlobalAudioSettings, KGASEmailToneName));
+    TPtr16 ptr=iGlobalAudioSettingsData.iEmailToneName->Des();
+    User::LeaveIfError(iEmailToneNameProperty.Get(ptr));
+    
+    }
+    
+void CEmailToneObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iEmailToneNameProperty.Subscribe(iStatus);
+        }
+    }
+
+void CEmailToneObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CEmailToneObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        delete iGlobalAudioSettingsData.iEmailToneName;
+        iGlobalAudioSettingsData.iEmailToneName=NULL;
+        iGlobalAudioSettingsData.iEmailToneName=HBufC::NewL(KMaxLength);
+        TPtr16 ptr=iGlobalAudioSettingsData.iEmailToneName->Des();
+        status = iEmailToneNameProperty.Get(ptr);
+        if( status == KErrNone)
+            {
+            MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASEmailToneName;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CEmailToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CEmailToneObserverAO::DoCancel()
+    {
+    iEmailToneNameProperty.Cancel();
+    }
+
+TInt CEmailToneObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+
+/////////////////////////////////////////////////////////////////////
+//  CVideoCallToneObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CVideoCallToneObserverAO::CVideoCallToneObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CVideoCallToneObserverAO::~CVideoCallToneObserverAO()
+    {
+    Cancel();
+    iVideoCallToneNameProperty.Close();
+    if( iGlobalAudioSettingsData.iVideoCallToneName)
+        {
+    delete  iGlobalAudioSettingsData.iVideoCallToneName;
+    iGlobalAudioSettingsData.iVideoCallToneName=NULL;
+        }
+     
+    
+    }
+
+CVideoCallToneObserverAO* CVideoCallToneObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CVideoCallToneObserverAO* self = new (ELeave) CVideoCallToneObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CVideoCallToneObserverAO::ConstructL()
+    {
+    
+    iGlobalAudioSettingsData.iVideoCallToneName=HBufC::NewL(KMaxLength);
+    User::LeaveIfError(iVideoCallToneNameProperty.Attach(KGASPSUidGlobalAudioSettings, KGASVideoCallToneName));
+    TPtr16 ptr=iGlobalAudioSettingsData.iVideoCallToneName->Des();
+    User::LeaveIfError(iVideoCallToneNameProperty.Get(ptr));
+    
+    }
+    
+void CVideoCallToneObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iVideoCallToneNameProperty.Subscribe(iStatus);
+        }
+    }
+
+void CVideoCallToneObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CVideocallToneObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        delete iGlobalAudioSettingsData.iVideoCallToneName;
+        iGlobalAudioSettingsData.iVideoCallToneName=NULL;
+        iGlobalAudioSettingsData.iVideoCallToneName=HBufC::NewL(KMaxLength);
+        TPtr16 ptr=iGlobalAudioSettingsData.iVideoCallToneName->Des();
+        status = iVideoCallToneNameProperty.Get(ptr);
+        if( status == KErrNone)
+            {
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASVideoCallToneName;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CVideoCallToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CVideoCallToneObserverAO::DoCancel()
+    {
+    iVideoCallToneNameProperty.Cancel();
+    }
+
+TInt CVideoCallToneObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+/////////////////////////////////////////////////////////////////////
+//  CRingingToneObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CRingingTone1ObserverAO::CRingingTone1ObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CRingingTone1ObserverAO::~CRingingTone1ObserverAO()
+    {
+    Cancel();
+    iRingingTone1NameProperty.Close();
+    if( iGlobalAudioSettingsData.iRingingTone1Name)
+        {
+        delete  iGlobalAudioSettingsData.iRingingTone1Name;
+        iGlobalAudioSettingsData.iRingingTone1Name=NULL;
+        }
+    }
+
+CRingingTone1ObserverAO* CRingingTone1ObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CRingingTone1ObserverAO* self = new (ELeave) CRingingTone1ObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CRingingTone1ObserverAO::ConstructL()
+    {
+    
+    iGlobalAudioSettingsData.iRingingTone1Name=HBufC::NewL(KMaxLength);
+    User::LeaveIfError(iRingingTone1NameProperty.Attach(KGASPSUidGlobalAudioSettings, KGASRingingTone1Name));
+    TPtr16 ptr=iGlobalAudioSettingsData.iRingingTone1Name->Des();
+    User::LeaveIfError(iRingingTone1NameProperty.Get(ptr));
+    
+    }
+    
+void CRingingTone1ObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iRingingTone1NameProperty.Subscribe(iStatus);
+        }
+    }
+
+void CRingingTone1ObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CRingingTone1ObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        delete iGlobalAudioSettingsData.iRingingTone1Name;
+        iGlobalAudioSettingsData.iRingingTone1Name=NULL;
+        iGlobalAudioSettingsData.iRingingTone1Name=HBufC::NewL(KMaxLength);
+        TPtr16 ptr=iGlobalAudioSettingsData.iRingingTone1Name->Des();
+        status = iRingingTone1NameProperty.Get(ptr);
+        if( status == KErrNone)
+            {
+            MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASRingingTone1Name;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CRingingToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CRingingTone1ObserverAO::DoCancel()
+    {
+    iRingingTone1NameProperty.Cancel();
+    }
+
+TInt CRingingTone1ObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+////////////////////////////////////////////////////////////////////
+//  CRingingToneObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CRingingTone2ObserverAO::CRingingTone2ObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CRingingTone2ObserverAO::~CRingingTone2ObserverAO()
+    {
+    Cancel();
+    iRingingTone2NameProperty.Close();
+    if(iGlobalAudioSettingsData.iRingingTone2Name)
+        {
+    delete iGlobalAudioSettingsData.iRingingTone2Name;
+    iGlobalAudioSettingsData.iRingingTone2Name=NULL;
+        }
+     
+    
+    }
+
+CRingingTone2ObserverAO* CRingingTone2ObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CRingingTone2ObserverAO* self = new (ELeave) CRingingTone2ObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CRingingTone2ObserverAO::ConstructL()
+    {
+    
+    iGlobalAudioSettingsData.iRingingTone2Name=HBufC::NewL(KMaxLength);
+    User::LeaveIfError(iRingingTone2NameProperty.Attach(KGASPSUidGlobalAudioSettings, KGASRingingTone2Name));
+    TPtr16 ptr=iGlobalAudioSettingsData.iRingingTone2Name->Des();
+    User::LeaveIfError(iRingingTone2NameProperty.Get(ptr));
+    
+    }
+    
+void CRingingTone2ObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iRingingTone2NameProperty.Subscribe(iStatus);
+        }
+    }
+
+void CRingingTone2ObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CRingingTone2ObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        delete iGlobalAudioSettingsData.iRingingTone2Name;
+        iGlobalAudioSettingsData.iRingingTone2Name=NULL;
+        iGlobalAudioSettingsData.iRingingTone2Name=HBufC::NewL(KMaxLength);
+        TPtr16 ptr=iGlobalAudioSettingsData.iRingingTone2Name->Des();
+        status = iRingingTone2NameProperty.Get(ptr);
+        if( status == KErrNone)
+            {
+        MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASRingingTone2Name;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CRingingToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CRingingTone2ObserverAO::DoCancel()
+    {
+    iRingingTone2NameProperty.Cancel();
+    }
+
+TInt CRingingTone2ObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
+
+/////////////////////////////////////////////////////////////////////
+//  CKeypadToneObserverAO                                                //
+//////////////////////////////////////////////////////////////////////
+CKeypadToneObserverAO::CKeypadToneObserverAO(
+                        CGlobalAudioSettings &aGlobalAudioSettings,
+                        MAudioSettingsObserver& aAudioSettingsObserver,
+                        TGlobalAudioSettings& aGlobalAudioSettingsData)
+:CActive(EPriorityStandard),
+ iGlobalAudioSettings(aGlobalAudioSettings),
+ iAudioSettingsObserver(aAudioSettingsObserver),
+ iGlobalAudioSettingsData(aGlobalAudioSettingsData)
+    {
+    CActiveScheduler::Add(this);
+    }
+
+CKeypadToneObserverAO::~CKeypadToneObserverAO()
+    {
+    Cancel();
+    iKeypadToneVolumeProperty.Close();
+    }
+
+CKeypadToneObserverAO* CKeypadToneObserverAO::NewL(
+                            CGlobalAudioSettings &aGlobalAudioSettings,
+                            MAudioSettingsObserver& aAudioSettingsObserver,
+                            TGlobalAudioSettings& aGlobalAudioSettingsData)
+    {
+    CKeypadToneObserverAO* self = new (ELeave) CKeypadToneObserverAO(
+                                            aGlobalAudioSettings,
+                                            aAudioSettingsObserver, 
+                                            aGlobalAudioSettingsData);
+    CleanupStack::PushL(self);
+    self->ConstructL();
+    CleanupStack::Pop();
+    return self;
+    }
+
+void CKeypadToneObserverAO::ConstructL()
+    {
+    
+    
+    User::LeaveIfError(iKeypadToneVolumeProperty.Attach(KGASPSUidGlobalAudioSettings, KGASKeypadToneVolume));
+    TInt value=KErrNone;
+    User::LeaveIfError(iKeypadToneVolumeProperty.Get(value));
+    iGlobalAudioSettingsData.iKeyPadVolume=(CGlobalAudioSettings::TGASKeypadVolume)value;
+    }
+    
+void CKeypadToneObserverAO::Subscribe()
+    {
+    if (!IsActive())
+        {
+        SetActive();
+        
+        iKeypadToneVolumeProperty.Subscribe(iStatus);
+        }
+    }
+
+void CKeypadToneObserverAO::RunL()
+    {
+    TInt status(iStatus.Int());
+#ifdef PRINT_MESSAGE
+    RDebug::Print(_L(" CKeypadToneObserverAO::RunL:iStatus[%d]"), status);
+#endif // PRINT_MESSAGE
+    if ( status == KErrNone )
+        {
+        Subscribe();
+        TInt value=KErrNone;
+            status=iKeypadToneVolumeProperty.Get(value);
+            iGlobalAudioSettingsData.iKeyPadVolume=(CGlobalAudioSettings::TGASKeypadVolume)value;
+        
+        
+        if( status == KErrNone)
+            {
+            MAudioSettingsObserver::TGASEventId id=MAudioSettingsObserver::EGASKeyPadVolume;
+            iAudioSettingsObserver.SettingsChanged(iGlobalAudioSettings, id);
+            }
+#ifdef PRINT_MESSAGE
+        else
+            {
+            RDebug::Print(_L(" CKeypadToneObserverAO::RunL:Property.Get Error[%d]"), status);
+            }
+#endif // PRINT_MESSAGE
+        }
+    }
+
+void CKeypadToneObserverAO::DoCancel()
+    {
+    iKeypadToneVolumeProperty.Cancel();
+    }
+
+TInt CKeypadToneObserverAO::RunError(TInt /*aError*/)
+    {
+    return KErrNone;
+    }
 
 //End of file

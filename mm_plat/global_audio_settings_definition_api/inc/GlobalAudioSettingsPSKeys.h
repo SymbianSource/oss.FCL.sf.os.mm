@@ -80,6 +80,78 @@ const TUint32 KGASVibra = 0x00000004;
 */
 const TUint32 KGASPublicSilence = 0x00000005;
 
+/**
+* This key is required for the Global Audio Settings to determine the ringing type
+* selected
+*
+* Possible text values:
+* z:\\resource\\No_Sound.wav = "Message tone is disabled". 
+* filename of the tone selected= "Message tone is enabled". 
+*/
+const TUint32 KGASRingingType=0x00000006;
+
+/**
+* This key is required for the Global Audio Settings to determine the message alert tone
+* selected
+*
+* Possible text values:
+* z:\\resource\\No_Sound.wav = "Message tone is disabled". 
+* filename of the tone selected= "Message tone is enabled". 
+*/
+const TUint32 KGASMessageToneName=0x00000007;
+
+/**
+* This key is required for the Global Audio Settings to determine the email alert tone
+* selected
+*
+* Possible text values:
+* z:\\resource\\No_Sound.wav = "Email alert tone is disabled". 
+* filename of the tone selected= "Email alert tone is enabled". 
+*/
+const TUint32 KGASEmailToneName=0x00000008;
+
+/**
+* This key is required for the Global Audio Settings to determine the video call tone
+* selected
+*
+* Possible text values:
+* z:\\resource\\No_Sound.wav = "Video call tone is disabled". 
+* filename of the tone selected= "Video call tone is enabled". 
+*/
+const TUint32 KGASVideoCallToneName=0x00000009;
+/**
+* This key is required for the Global Audio Settings to determine the ringing tone
+* selected
+*
+* Possible text values:
+* z:\\resource\\No_Sound.wav = "Ringing tone1 is disabled". 
+* filename of the tone selected= "Ringing tone1 is enabled". 
+*/
+const TUint32 KGASRingingTone1Name=0x0000000a;
+
+/**
+* This key is required for the Global Audio Settings to determine the ringing tone
+* for alternate line selected
+*
+* Possible text values:
+* z:\\resource\\No_Sound.wav = "Ringing tone2 is disabled". 
+* filename of the tone selected= "Ringing tone2 tone is enabled". 
+*/
+const TUint32 KGASRingingTone2Name=0x0000000b;
+
+/**
+* This key is required for the Global Audio Settings to determine the keypad volume
+* selected
+*
+* Possible text values:
+* EGASKeypadVolumeOff="No volume"
+* EGASKeypadVolumeLevel1 = "Volume level 1"
+* EGASKeypadVolumeLevel2 = "volume level 2"
+*  EGASKeypadVolumeLevel3 = "volume level 3"
+*/
+const TUint32 KGASKeypadToneVolume=0x0000000c;
+
+
 #endif      // GLOBALAUDIOSETTINGSPSKEYS_H
 
 // End of file

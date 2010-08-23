@@ -66,7 +66,20 @@ TInt CGlobalASTestClass::RunMethodL( CStifItemParser& aItem )
         ENTRY( "RegisterAudioClientsListObserver", CGlobalASTestClass::RegisterAudioClientsListObserver ),
         ENTRY( "UnregisterAudioClientsListObserver", CGlobalASTestClass::UnregisterAudioClientsListObserver ),
         ENTRY( "GetAudioClientsList", CGlobalASTestClass::GetAudioClientsList ),
-        ENTRY( "GetPausedClientsList", CGlobalASTestClass::GetPausedClientsList )
+        ENTRY( "GetPausedClientsList", CGlobalASTestClass::GetPausedClientsList ),
+        ENTRY( "RingingType", CGlobalASTestClass::GetRingingType ),
+        ENTRY( "GetMessageToneName", CGlobalASTestClass::MessageAlertTone ),
+        ENTRY( "IsMessageAlertToneEnabled", CGlobalASTestClass::IsMessageAlertToneEnabled ),
+        ENTRY( "GetEmailToneName", CGlobalASTestClass::EmailAlertTone ),
+        ENTRY( "IsEmailAlertToneEnabled", CGlobalASTestClass::IsEmailAlertToneEnabled ),
+        ENTRY( "GetVideoCallToneName", CGlobalASTestClass::VideoCallAlertTone ),
+        ENTRY( "IsVideoCallAlertToneEnabled", CGlobalASTestClass::IsVideoCallAlertToneEnabled ),
+        ENTRY( "GetRingingTone1Name", CGlobalASTestClass::RingingAlertTone1 ),
+        ENTRY( "IsRingingAlertTone1Enabled", CGlobalASTestClass::IsRingingAlertTone1Enabled ),
+        ENTRY( "GetRingingTone2Name", CGlobalASTestClass::RingingAlertTone2 ),
+        ENTRY( "IsRingingAlertTone2Enabled", CGlobalASTestClass::IsRingingAlertTone2Enabled ),
+        ENTRY( "GetKeypadToneVolume", CGlobalASTestClass::KeypadAlertTone )
+        		
         };
 
     const TInt count = sizeof( KFunctions ) /
@@ -336,14 +349,202 @@ TInt CGlobalASTestClass::GetPausedClientsList( CStifItemParser& /*aItem*/ )
 
 
 
-void CGlobalASTestClass::SettingsChanged(CGlobalAudioSettings& /*aGlobalAudioSettings*/, TUint /*aSetting*/)
+void CGlobalASTestClass::SettingsChanged(CGlobalAudioSettings& /*aGlobalAudioSettings*/, MAudioSettingsObserver::TGASEventId aSetting)
 	{
-    iLog->Log(_L("CGlobalASTestClass:SettingsChanged"));
+   RDebug::Printf("settings changed %d",aSetting);
+   // CActiveScheduler::Stop();
 	}
 
 void CGlobalASTestClass::Event( const CGlobalAudioSettings& /*aGlobalAudioSettings*/, TUint aEvent )
     {
     iLog->Log(_L("CGlobalASTestClass From MAudioClientsListObserver[%d]"), aEvent);
     }
+TInt CGlobalASTestClass::GetRingingType(CStifItemParser& /*aItem*/ )
+    {
+    RDebug::Printf("CGlobalASTestClass::GetRingingType");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   TInt type= iPhoneProfileSettings->RingingType();
+   RDebug::Printf("ringing type is %d",type);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
 
+TInt CGlobalASTestClass::MessageAlertTone(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   // TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+   
+   // RDebug::Print(_L("filename %S"),&filename);
+    TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+    RDebug::Print(_L("enable:%S"),&filename);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::IsMessageAlertToneEnabled(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   // TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+   
+   // RDebug::Print(_L("filename %S"),&filename);
+    TBool enable=iPhoneProfileSettings->IsMessageAlertToneEnabled();
+    RDebug::Print(_L("enable:%d"),enable);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::EmailAlertTone(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+    TFileName filename=iPhoneProfileSettings->EmailAlertTone();
+  RDebug::Print(_L("enable:%S"),&filename);
+
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::IsEmailAlertToneEnabled(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   // TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+   
+   // RDebug::Print(_L("filename %S"),&filename);
+    TBool enable=iPhoneProfileSettings->IsEmailAlertToneEnabled();
+    RDebug::Print(_L("enable:%d"),enable);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::VideoCallAlertTone(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+    TFileName filename=iPhoneProfileSettings->VideoCallAlertTone();
+    RDebug::Print(_L("enable:%S"),&filename);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::IsVideoCallAlertToneEnabled(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   // TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+   
+   // RDebug::Print(_L("filename %S"),&filename);
+    TBool enable=iPhoneProfileSettings->IsVideoCallAlertToneEnabled();
+    RDebug::Print(_L("enable:%d"),enable);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::RingingAlertTone1(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+    TFileName filename=iPhoneProfileSettings->RingingAlertTone1();
+    RDebug::Print(_L("enable:%S"),&filename);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::IsRingingAlertTone1Enabled(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   // TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+   
+   // RDebug::Print(_L("filename %S"),&filename);
+    TBool enable=iPhoneProfileSettings->IsRingingAlertTone1Enabled();
+    RDebug::Print(_L("enable:%d"),enable);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::RingingAlertTone2(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+    TFileName filename=iPhoneProfileSettings->RingingAlertTone2();
+    RDebug::Print(_L("enable:%S"),&filename);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::IsRingingAlertTone2Enabled(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+   // TFileName filename=iPhoneProfileSettings->MessageAlertTone();
+   
+   // RDebug::Print(_L("filename %S"),&filename);
+    TBool enable=iPhoneProfileSettings->IsRingingAlertTone2Enabled();
+    RDebug::Print(_L("enable:%d"),enable);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
+TInt CGlobalASTestClass::KeypadAlertTone(CStifItemParser& /*aItem*/)
+    {
+    RDebug::Printf("CGlobalASTestClass::MessageAlertTone");
+    TInt status(KErrNone);
+    if(iPhoneProfileSettings)
+        {
+    TInt volume=iPhoneProfileSettings->KeyPadToneVolume();
+    RDebug::Print(_L("enable:%d"),volume);
+        }
+    else
+        status=KErrNotFound;
+    
+    return status;
+    }
 //  End of File
