@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteImageTransformL@@YAPAVCTestSuiteImageTransform@@XZ @ 1 NONAME ; class CTestSuiteImageTransform * NewTestSuiteImageTransformL(void)
-

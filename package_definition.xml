@@ -399,15 +399,6 @@
    </component>
   </collection>
   <collection id="imagingandcamerafws" name="Imaging and Camera Frameworks" level="app-if">
-   <component id="imagingfws" name="Imaging Frameworks" introduced="7.0s" purpose="mandatory">
-    <unit bldFile="imagingandcamerafws/imagingfws/group" mrp="imagingandcamerafws/imagingfws/group/multimedia_icl.mrp"/>
-   </component>
-   <component id="imagingunittest" name="Imaging Unit Tests" introduced="7.0s" purpose="development" filter="test">
-    <unit mrp="imagingandcamerafws/imagingunittest/group/multimedia_unittest_icl_source.mrp" bldFile="imagingandcamerafws/imagingunittest/group"/>
-   </component>
-   <component id="imaginginttest" name="Imaging Integration Tests" introduced="7.0s" purpose="development" filter="test">
-    <unit mrp="imagingandcamerafws/imaginginttest/group/multimedia_inttest_icl_source.mrp" bldFile="imagingandcamerafws/imaginginttest/group"/>
-   </component>
    <component id="camerafw" name="Camera Framework" introduced="7.0s" purpose="optional">
     <unit bldFile="imagingandcamerafws/camerafw/group" mrp="imagingandcamerafws/camerafw/group/multimedia_ecam_framework.mrp"/>
    </component>
@@ -424,9 +415,6 @@
    </component>
   </collection>
   <collection id="mmplugins" name="Multimedia Plugins" level="middleware">
-   <component id="imagingplugins" name="Imaging Plugins" introduced="7.0s" purpose="optional" class="plugin">
-    <unit bldFile="mmplugins/imagingplugins/group" mrp="mmplugins/imagingplugins/group/multimedia_icl_plugin.mrp"/>
-   </component>
    <component id="cameraplugins" name="Camera Plugins" introduced="7.0s" purpose="optional" class="plugin">
     <unit bldFile="mmplugins/cameraplugins/group" mrp="mmplugins/cameraplugins/group/multimedia_ecam_plugins.mrp"/>
    </component>
