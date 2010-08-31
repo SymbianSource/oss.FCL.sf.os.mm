@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -18,10 +18,14 @@
 
 // debug build
 
-file=ABI_DIR\DEBUG_DIR\tsu_mdf_videocodecs.dll	System\Libs\tsu_mdf_videocodecs.dll
+#include <TSU_MDF_VIDEOCODECS_excl_test.iby>
 
 data=EPOCROOT##epoc32\data\c\tsu_mdf_videocodecs_01.script	tsu_mdf_videocodecs_01.script
 data=EPOCROOT##epoc32\data\c\tsu_mdf_videocodecs_cov.script	tsu_mdf_videocodecs_cov.script
 data=EPOCROOT##epoc32\data\c\tsu_mdf_videocodecs_cov_panic.script	tsu_mdf_videocodecs_cov_panic.script
+
+// Test files
+data=EPOCROOT##epoc32\data\c\mm\mmf\testfiles\mdf\clock.gif	\mm\mmf\testfiles\mdf\clock.gif
+data=EPOCROOT##epoc32\data\c\mm\mmf\testfiles\mdf\decodervideotest.in	\mm\mmf\testfiles\mdf\decodervideotest.in
 
 #endif // TSU_MDF_VIDEOCODECS_IBY

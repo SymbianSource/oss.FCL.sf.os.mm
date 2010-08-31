@@ -216,8 +216,8 @@ TVerdict CTestStep_MMF_BASECL_DataPath::DoTestStepPostambleL()
 	delete iTestAsyncEventHandler;
 	delete iActiveScheduler;
 
-// free ecom resources This should fix EFail on test 200
-// this line is currently commented out as the ECom fix is in mainline
+// xxx free ecom resources This should fix EFail on test 200
+// this line is currently removed as the ECom fix is in mainline
 // but not yet in a hurricane build
 //	REComSession::FinalClose(); 
 

@@ -5919,8 +5919,8 @@ TVerdict CTestStep_MMF_SRSSNK_U_0002::DoTestStepL()
 
 
 	// Test valid uid, invalid descriptor.
-	// Note using a thread ID of 0 behaves differently on Jetstream so this
-	// test has been commented out.
+	// Note using a thread ID of 0 behaves differently on streaming so this
+	// test has been removed.
 	// configDes().iDesThreadId = 0;
 
 	// TNewSourceTestStep testStep5(KUidMmfDescriptorSource, configDes);
@@ -5928,7 +5928,7 @@ TVerdict CTestStep_MMF_SRSSNK_U_0002::DoTestStepL()
 
 	// Test invalid (sink) uid.
 	// Note that ECom has no way of validating that Uids are of the correct type,
-	// so this test is commented out. (It causes an unhandled exception)
+	// so this test is removed. (It causes an unhandled exception)
 	// TNewSourceTestStep testStep6(KUidMmfDescriptorSink, configDes);
 	// DoTest(testStep6, _L("Construct descriptor source"), KErrNotFound);
 
@@ -6099,7 +6099,7 @@ TVerdict CTestStep_MMF_SRSSNK_U_0004::DoTestStepL()
 
 	// Test invalid (source) uid.
 	// Note that ECom has no way of validating that Uids are of the correct type,
-	// so this test is commented out. (It causes an unhandled exception)
+	// so this test is removed. (It causes an unhandled exception)
 	// TNewSinkTestStep testStep6(KUidMmfDescriptorSource, configDes);
 	// DoTest(testStep6, _L("Construct descriptor sink"), KErrNotFound);
 
@@ -10629,7 +10629,7 @@ TVerdict CTestStep_MMF_SRSSNK_U_0201::DoTestStepL()
 	// Test that the audio source is initialised correctly.
 	CMMFAudioInput* sourceAudioInput = STATIC_CAST(CMMFAudioInput*, source);
 
-	// [TBD] These fns. go bang after construction. This is not good.
+	// XXX These fns. go bang after construction. This is not good.
 	// They are ok, provided we have logged on and called SourcePrimeL().
 	#ifndef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
 	if (sourceAudioInput->SoundDevice().Volume() != 0)
@@ -10940,8 +10940,8 @@ TVerdict CTestStep_MMF_SRSSNK_U_0204::DoTestStepL()
 	TAudioInputFillBuffer2TestStep testStep3(source, validBuffer, dummySink);
 	DoTest(testStep3, _L("Audio Input: FillBufferL"), KErrNone,expectedAllocs);
 
-	// Valid fill buffer. (Make multiple requests at once)
-	// Commented out because the audio input currently doesn't support multiple requests.
+	// XXX Valid fill buffer. (Make multiple requests at once)
+	// removed below lines because the audio input currently doesn't support multiple requests.
 	// TAudioInputFillBuffer3TestStep testStep4(source, validBuffer, dummySink);
 	// DoTest(testStep4, _L("Audio Input: FillBufferL"), KErrNone);
 
@@ -10956,8 +10956,8 @@ TVerdict CTestStep_MMF_SRSSNK_U_0204::DoTestStepL()
 	TAudioInputFillBuffer5TestStep testStep6(validBuffer, dummySink);
 	DoTest(testStep6, _L("Audio Input: FillBufferL"), KErrNone);
 
-	// Valid fill buffer. (Make multiple requests at once)
-	// Commented out because the audio input currently doesn't support multiple requests.
+	// xxx Valid fill buffer. (Make multiple requests at once)
+	// removed below lines because the audio input currently doesn't support multiple requests.
 	// TAudioInputFillBuffer6TestStep testStep7(validBuffer, dummySink);
 	// DoTest(testStep7, _L("Audio Input: FillBufferL"), KErrNone);
 
@@ -11412,8 +11412,8 @@ TVerdict CTestStep_MMF_SRSSNK_U_0209::DoTestStepL()
 	TAudioOutputEmptyBuffer2TestStep testStep3(sink, validBuffer, dummySource);
 	DoTest(testStep3, _L("Audio Output: EmptyBufferL"), KErrNone, KDevSoundAllocs);
 
-	// Valid empty buffer. (Make multiple requests at once)
-	// Commented out because the audio output currently doesn't support multiple requests.
+	// xxx Valid empty buffer. (Make multiple requests at once)
+	// removed below lines because the audio output currently doesn't support multiple requests.
 	// TAudioOutputFillBuffer3TestStep testStep4(sink, validBuffer, dummySource);
 	// DoTest(testStep4, _L("Audio Output: EmptyBufferL"), KErrNone);
 
@@ -11435,8 +11435,8 @@ TVerdict CTestStep_MMF_SRSSNK_U_0209::DoTestStepL()
 	//	TAudioOutputEmptyBuffer5TestStep testStep6(validBuffer, dummySource, *realFormat);
 	//	DoTest(testStep6, _L("Audio Output: EmptyBufferL"), KErrNone, 0);
 
-	// Valid empty buffer. (Make multiple requests at once)
-	// Commented out because the audio output currently doesn't support multiple requests.
+	// xxx Valid empty buffer. (Make multiple requests at once)
+	// removed below lines because the audio output currently doesn't support multiple requests.
 	// TAudioOutputEmptyBuffer6TestStep testStep7(validBuffer, dummySource);
 	// DoTest(testStep7, _L("Audio Output: EmptyBufferL"), KErrNone);
 

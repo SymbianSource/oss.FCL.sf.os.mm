@@ -32,7 +32,6 @@ file=ABI_DIR\BUILD_DIR\TSU_MmTsth11.DLL 		System\Libs\TSU_MmTsth11.DLL
 file=ABI_DIR\BUILD_DIR\TSU_MmTsth12.DLL 		System\Libs\TSU_MmTsth12.DLL
 file=ABI_DIR\BUILD_DIR\TSU_MmTsth13.DLL 		System\Libs\TSU_MmTsth13.DLL
 file=ABI_DIR\BUILD_DIR\TSU_MmTsth20.DLL 		System\Libs\TSU_MmTsth20.DLL
-file=ABI_DIR\BUILD_DIR\TSU_MmTsth21.DLL 		System\Libs\TSU_MmTsth21.DLL
 file=ABI_DIR\BUILD_DIR\TSU_MmTsth22.DLL 		System\Libs\TSU_MmTsth22.DLL
 
 data=EPOCROOT##epoc32\data\c\TestFramework.script       \TestFramework.script
@@ -45,7 +44,6 @@ data=EPOCROOT##epoc32\data\c\TSU_MmTsth11.script     	\TSU_MmTsth11.script
 data=EPOCROOT##epoc32\data\c\TSU_MmTsth12.script     	\TSU_MmTsth12.script
 data=EPOCROOT##epoc32\data\c\TSU_MmTsth13.script     	\TSU_MmTsth13.script
 data=EPOCROOT##epoc32\data\c\TSU_MmTsth20.script     	\TSU_MmTsth20.script
-data=EPOCROOT##epoc32\data\c\TSU_MmTsth21.script     	\TSU_MmTsth21.script
 data=EPOCROOT##epoc32\data\c\TSU_MmTsth22.script     	\TSU_MmTsth22.script
 
 data=EPOCROOT##epoc32\data\c\TSU_MmTsth02_dummy.script	\TSU_MmTsth02_dummy.script

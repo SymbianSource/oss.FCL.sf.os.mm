@@ -16,9 +16,7 @@
 #ifndef  TSU_ECM_API_IBY
 #define  TSU_ECM_API_IBY
 
-// debug build
-
-file=ABI_DIR\DEBUG_DIR\TSU_ECM_API.dll 	System\Libs\TSU_ECM_API.dll
+#include <tsu_ecm_api_excl_test.iby>
 
 data=EPOCROOT##epoc32\data\c\mm\TSU_ECM_API.script     	TSU_ECM_API.script
 

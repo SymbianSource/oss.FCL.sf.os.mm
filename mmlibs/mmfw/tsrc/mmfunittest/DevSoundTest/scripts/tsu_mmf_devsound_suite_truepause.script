@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2008-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -47,82 +47,6 @@ delay 1000
 //!
 PRINT Resume Audio Playback - When pause playing PCM audio call Resume() after IsResumeSupported() 
 RUN_TEST_STEP 60000, TSU_MMF_DEVSOUND_SUITE, MM-MMF-DEVSOUND-U-0081-HP, c:\tsu_mmf_truepause_devsound.ini
-TEST_COMPLETE
-
-//! @SYMTestCaseID			MM-MMF-DEVSOUND-U-0082-HP
-//! @SYMREQ				REQ11453
-//!					REQ11455
-//! @SYMPREQ				1540
-//! @SYMTestCaseDec			Resume Audio Playback Rejection - Rejection scenario is between 2 instances that play audio
-//! @SYMTestPriority			Normal
-//! @SYMTestType			Normal Usecase
-//! @SYMTestActions			1. Create a DevSound instance.
-//!					2. Open files to be played by DevSound instances.
-//!					3. Create a CPeriodic instance.
-//!					4. Create a second DevSound instance to play audio using low priority settings.
-//!					5. Initialise the first devsound instance to play audio and set its priority using a high value.
-//!					5.1 Wait for InitializeComplete(KErrNone) callback response.
-//!					6. Call PlayInitL() method for first DevSound instance and star timer events each 2 seconds.
-//!					7. Wait for BufferToBeFilled(..) callback of first DevSound instance to fill the buffer with data.
-//!					To continue receiving BTBF callbacks, is mandatory to call PlayData() method.
-//!					8. On timer event call Pause() method.
-//!					9. Wait for another timer event set the second devsound's priority to the lowest value, call IsResumeSupported() then Resume().
-//! @SYMTestExpectedResults		Second DevSound instance PlayError() callback shall return aError = KErrInUse, KErrDied or KErrAccessDenied
-//!					First DevSound IsResumeSupported() will return ETrue.
-//!					First DevSound Resume()(will return KErrNone) is supported for PCM.
-//!
-PRINT Resume Audio Playback Rejection - Rejection scenario is between 2 instances that play audio
-RUN_TEST_STEP 60000, TSU_MMF_DEVSOUND_SUITE, MM-MMF-DEVSOUND-U-0082-HP, c:\tsu_mmf_truepause_devsound.ini
-TEST_COMPLETE
-
-//! @SYMTestCaseID			MM-MMF-DEVSOUND-U-0083-HP
-//! @SYMREQ				REQ11453
-//!					REQ11455
-//! @SYMPREQ				1540
-//! @SYMTestCaseDec			Resume Audio Playback Pre-emption - Pre-emption scenario is between 2 instances that play audio
-//! @SYMTestPriority			Normal
-//! @SYMTestType			Normal Usecase
-//! @SYMTestActions			1. Create a DevSound instance.
-//!					2. Open files to be played by DevSound instances.
-//!					3. Create a CPeriodic instance.
-//!					4. Create a second DevSound instance to play audio using high priority settings.
-//!					5. Initialise the first devsound instance to play audio and set its priority using a low value.					
-//!					6. Call PlayInitL() method for first DevSound instance and star timer events each 2 seconds.
-//!					7. Wait for BufferToBeFilled(..) callback of first DevSound instance to fill the buffer with data.
-//!					To continue receiving BTBF callbacks, is mandatory to call PlayData() method.
-//!					8. On timer event call Pause() method.
-//!					9. Wait for another timer event set the second devsound's priority to the highest value, call IsResumeSupported() then Resume().
-//! @SYMTestExpectedResults		First DevSound instance PlayError() callback shall return aError = KErrInUse, KErrDied or KErrAccessDenied.
-//!					First DevSound IsResumeSupported() will return ETrue.
-//!					First DevSound Resume must return with KErrNotReady.
-//!
-PRINT Resume Audio Playback Pre-emption - Pre-emption scenario is between 2 instances that play audio
-RUN_TEST_STEP 60000, TSU_MMF_DEVSOUND_SUITE, MM-MMF-DEVSOUND-U-0083-HP, c:\tsu_mmf_truepause_devsound.ini
-TEST_COMPLETE
-
-//! @SYMTestCaseID			MM-MMF-DEVSOUND-U-0084-HP
-//! @SYMREQ				REQ11453
-//!					REQ11455
-//! @SYMPREQ				1540
-//! @SYMTestCaseDec			Resume Audio Playback - When stop() is called after pause(), BufferToBeFilled() callback does not receive anymore.
-//! @SYMTestPriority			Normal
-//! @SYMTestType			Alternative Usecase
-//! @SYMTestActions			1. Create a DevSound instance.
-//!					2. Open files to be played by DevSound instance (must be PCM).
-//!					3. Create a CPeriodic instance.
-//!					4. Initialise a DevSound instance to play audio.
-//!					4.1 Wait for InitializeComplete(KErrNone) callback response.
-//!					5. Call PlayInitL() method for DevSound instance and star timer events each 2 seconds.
-//!					6. Wait for BufferToBeFilled(..) callback of DevSound instance to fill the buffer with data. To continue receiving BTBF callbacks, is mandatory to call PlayData() method.
-//!					7. On timer event call Pause() method.
-//!					8. Wait for another timer event call Stop() method.
-//!					9. Wait for last timer event, then call IsResumeSupported() and Resume().
-//! @SYMTestExpectedResults		After call Stop() method, BufferToBeFilled() must never occurr.
-//!					DevSound IsResumeSupported() will return ETrue.
-//!					DevSound Resume must return with KErrNotReady.
-//!
-PRINT Resume Audio Playback - When stop() is called after pause(), BufferToBeFilled() callback does not receive anymore.
-RUN_TEST_STEP 60000, TSU_MMF_DEVSOUND_SUITE, MM-MMF-DEVSOUND-U-0084-HP, c:\tsu_mmf_truepause_devsound.ini
 TEST_COMPLETE
 
 //! @SYMTestCaseID			MM-MMF-DEVSOUND-U-0085-HP
@@ -307,31 +231,6 @@ TEST_COMPLETE
 //!					Output is recorded at c:\mm\mmf\testfiles\truepause_devsound_test_data\record_2.raw
 PRINT Resume Record audio - Pause and Immediate resume.
 RUN_TEST_STEP 60000, TSU_MMF_DEVSOUND_SUITE, MM-MMF-DEVSOUND-U-0089-HP, c:\tsu_mmf_truepause_devsound.ini
-TEST_COMPLETE
-
-//! @SYMTestCaseID			MM-MMF-DEVSOUND-U-0090-HP
-//! @SYMREQ				REQ11453
-//!					REQ11455
-//! @SYMPREQ				1540
-//! @SYMTestCaseDec			Resume Record audio - Pause and resume for non PCM.
-//! @SYMTestPriority			Normal
-//! @SYMTestType			Exception Usecase
-//! @SYMTestActions			1. Create a Devsound instance.
-//!					2. Create a CPeriodic instance.
-//!					3. Open the audio files to be recorded and initialize the Devsound instance to record audio(non PCM).
-//!					3.1 Wait for InitializeComplete(KErrNone) callback response.
-//!					4. Start the CPeriodic instance.
-//!					5. Call RecodInitL() to start the recording process.
-//!					6. Wait for BufferToBeEmptied(..) callback to retrieve the buffered data from DevSound. To continue receiving BTBE callbacks, is mandatory to call RecordData() method.
-//!					7. On the CPeriodic timer event, use Pause() to temporarily stop the record process.
-//!					7.1  Continue RecordData()/BufferToBeEmptied() loop until last buffer flag is set. 
-//!					8. After last buffer is received, call IsResumeSupported() and Resume().
-//!					10. Close file session.	
-//! @SYMTestExpectedResults		IsResumeSupported() will return EFalse.
-//!					Resume()(will return KErrNotSupported) is supported for non PCM.
-//!					Output is recorded at c:\mm\mmf\testfiles\truepause_devsound_test_data\record_3.ogg
-PRINT Resume Record audio - Pause and resume for non PCM.
-RUN_TEST_STEP 60000, TSU_MMF_DEVSOUND_SUITE, MM-MMF-DEVSOUND-U-0090-HP, c:\tsu_mmf_truepause_devsound.ini
 TEST_COMPLETE
 
 //! @SYMTestCaseID			MM-MMF-DEVSOUND-U-0091-HP

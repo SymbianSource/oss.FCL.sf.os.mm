@@ -177,7 +177,7 @@ TVerdict CTestMmfAclntDoConv::DoTestL(CMdaAudioConvertUtility* aConverter)
 	INFO_PRINTF1( _L("Convert CMdaAudioConvertUtility"));
 	CActiveScheduler::Start();
 
-	// TODO Improve test. e.g. check that a valid AU file is written
+	// XXX Improve test. e.g. check that a valid AU file is written
 	if(iError == KErrNone)
 		{
 		ret = EPass;
@@ -192,7 +192,7 @@ TVerdict CTestMmfAclntDoConv::DoTestL(CMdaAudioConvertUtility* aConverter)
 		{
 		CActiveScheduler::Start();
 
-		// TODO Improve test. e.g. check that a valid AU file is written
+		// XXX Improve test. e.g. check that a valid AU file is written
 		if(iError == KErrNone)
 			{
 			ret = EPass;
@@ -1653,9 +1653,8 @@ TVerdict CTestMmfAclntConvertCrop::DoTestStepL()
 	INFO_PRINTF1( _L("TestConverter : Config"));
 	TVerdict ret = EFail;
 
-	TPtrC fromFilename, fromFilename2;
-	if ((!GetStringFromConfig(_L("SectionOne"), _L("cropAudioFile"), fromFilename))
-		|| (!GetStringFromConfig(_L("SectionOne"), _L("PCM16"), fromFilename2))
+	TPtrC fromFilename;
+	if ((!GetStringFromConfig(_L("SectionOne"), _L("PCM16"), fromFilename))
 		|| (!GetStringFromConfig(_L("SectionFour"), _L("configAudio"), iToFilename))
 		|| (!GetStringFromConfig(_L("SectionFour"), _L("configAudio11"), iToFilename2)))
 		return EInconclusive;
@@ -1671,7 +1670,7 @@ TVerdict CTestMmfAclntConvertCrop::DoTestStepL()
 		iAudioSettings.iSampleRate = KInvalidNumber;
 		iAudioSettings.iChannels = KInvalidNumber;
 		//to keep CCover happy
-		converter->OpenL(fromFilename2, iToFilename2) ;
+		converter->OpenL(fromFilename, iToFilename2) ;
 			//&location, iFormat, iCodec, &iAudioSettings);
 		}
 	else

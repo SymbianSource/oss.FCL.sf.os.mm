@@ -24,6 +24,7 @@
 // Include files
 #include <e32base.h>
 #include <a3f/mmfdevsoundcustominterfaceextensions.h>
+#include "ciextnserverpluginwrapper.h"
 
 // Forward declarations
 class MCustomInterface;
@@ -97,6 +98,12 @@ private:
      */
     MCustomInterface*               iMCustomInterface;
 
+    /**
+     * Reference to MCustomInterface interface
+     * Not own.
+     */
+    CIExtnServerPluginWrapper*       iCiExtnServerPluginWrapper;
+    
     /**
      * Uid of the plugin object passed by the framework via PassDestructorKey()
      */

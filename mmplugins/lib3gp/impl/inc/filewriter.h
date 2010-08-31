@@ -21,10 +21,10 @@
 #include "mp4atom.h"
 
 // CONSTANTS
-const TInt KFileWriterBufferSizeSmall = 65536;
-const TInt KFileWriterBufferSizeLarge = (4*65536);  
-const TInt KFileWriterSoftBufLimit = 12;
-const TInt KFileWriterHardBufLimit = 16;
+const TInt KFileWriterBufferSizeSmall = 2048;
+const TInt KFileWriterBufferSizeLarge = (2*65536);  
+const TInt KFileWriterSoftBufLimit = 10;
+const TInt KFileWriterHardBufLimit = 15;
 const TInt KFileWriterMinBufferCount = 4; // shouldn't be less than 4
 
 // FORWARD DECLARATIONS
@@ -50,7 +50,7 @@ NONSHARABLE_CLASS(CFileWriter) : public CActive
         /**
         * Two-phased constructor.
         */
-        static CFileWriter* NewL( RFile64& aFile, TInt aInitSetSize = 0, TInt aOutputBufferSizeSmall = KFileWriterBufferSizeSmall, TInt aOutputBufferSizeLarge = KFileWriterBufferSizeLarge );
+        static CFileWriter* NewL( RFile64& aFile );
 
         /**
         * Destructor.
@@ -89,12 +89,7 @@ NONSHARABLE_CLASS(CFileWriter) : public CActive
         * @since 3.0
         * @param aHandle MP4Handle.
         */
-        void SetOutputBufferCount( MP4Handle aHandle ); 
-
-        inline TInt64 OutputFileSize() const
-			{
-			return iOutputFileSize;
-			}    
+        void SetOutputBufferCount( MP4Handle aHandle );        
 
     protected: // Functions from base classes
         
@@ -113,7 +108,7 @@ private:
         /**
         * C++ default constructor.
         */
-        CFileWriter( TInt aInitSetSize, TInt aOutputBufferSizeSmall, TInt aOutputBufferSizeLarge );
+        CFileWriter();
 
         /**
         * By default Symbian 2nd phase constructor is private.
@@ -133,12 +128,6 @@ private:
         * @since 2.6
         */
         void AllocateBuffersL();
-		
-		/**
-		* Updates output file size and reserves extra space for following writing if iSetSize is set.
-		* Takes into account if the position in the file was changed.
-		*/
-        void UpdateOutputFileSize();
 
 private:
         // Whether we are flushing after async write.
@@ -150,24 +139,16 @@ private:
         // Flag whether init has been done
         TBool iMemReadyForWriting;
 
-        // Write error code.
-        TInt iError;
-        
-        // Current set file size
-        TInt64 iSetSize;
-        // Current output file size
-	    TInt64 iOutputFileSize;		
-
-        TInt iOutputBufferSizeSmall;
-        TInt iOutputBufferSizeLarge;
-        
+		// Write error code.
+	    TInt iError;
         // Output buffer size.
         TInt iOutputBufferSize;
         // Hard limit for max output buffers
         TInt iMaxOutputBufHardLimit;
         // Soft limit for max output buffers
         TInt iMaxOutputBufSoftLimit;
-
+        // Current output file size
+		TInt64 iOutputFileSize;
 
         // Output file for writes.
         RFile64* iOutputFile;

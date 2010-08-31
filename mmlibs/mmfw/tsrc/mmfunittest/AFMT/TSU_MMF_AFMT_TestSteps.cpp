@@ -1566,7 +1566,7 @@ TVerdict CTest_MMF_AFMT_U_0084::RunEmptyBufferTestL()
 		User::Leave(KErrCorrupt); //should never get here
 		}
 		
-		// pretty sure the process is incomplete but we do not care since
+		// pretty sure the process is not completed but we do not care since
 		// we are interested in writing one good buffer of data to the sink
 	    CleanupStack::Pop(dstBuffer);
 

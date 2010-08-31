@@ -88,7 +88,7 @@ TPtrC CTestSuiteA3FDevSound::GetVersion() const
  */
 void CTestSuiteA3FDevSound::InitialiseL()
 	{
-	const TUint32 KMMFFourCCCodeInvalid = 0x414d5111;
+	const TUint32 KMMFFourCCCodeInvalid = 0x414d5121;
 	TFourCC fourCCCodePCM8(KMMFFourCCCodePCM8);
 	TFourCC fourCCCodePCMU8(KMMFFourCCCodePCMU8);
 	TFourCC fourCCCodePCM16(KMMFFourCCCodePCM16);
@@ -150,7 +150,7 @@ void CTestSuiteA3FDevSound::InitialiseL()
 
 	// DevSound PCM - Long Play test cases
 
-	AddTestStepL(RStepA3FDevSoundPlaySimple::NewL(_L("MM-A3F-DEVSOUND-PLAY-PCM-LONG-I-0001"), _L("SectionPCM-Long-0001"), fourCCCodePCMU8));
+	AddTestStepL(RStepA3FDevSoundPlaySimple::NewL(_L("MM-A3F-DEVSOUND-PLAY-PCM-LONG-I-0001"), _L("SectionPCM-Long-0001"), fourCCCodePCM16));
 
 	// DevSound PCM - Record test cases
 

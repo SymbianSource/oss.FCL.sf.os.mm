@@ -381,7 +381,7 @@ START_TESTCASE MM-3GP-COMP-U-0115-CP
 //!                     8. Close one of composers.
 //!						9. Repeat Step 7 - 8 until all composers are closed. 
 //! @SYMTestExpectedResults 	Test should complete without any error
-RUN_TEST_STEP  !Heap=0xC00000 -1 tsu_3gplibrary 3GPComposeMultiComposers C:\mm\tsu_3gp_compose_api_te.ini MM-3GP-COMP-U-0115-CP-1
+RUN_TEST_STEP -1 tsu_3gplibrary 3GPComposeMultiComposers C:\mm\tsu_3gp_compose_api_te.ini MM-3GP-COMP-U-0115-CP-1
 END_TESTCASE MM-3GP-COMP-U-0115-CP
 
 RUN_UTILS DeleteDirectory C:\3gplibrary\temp\MM-3GP-COMP-U-0116-CP\

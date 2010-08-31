@@ -14,15 +14,16 @@
 //
 
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 ../group/tsu_dvbh_hai.mmp
 
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 ../scripts/tsu_dvbh_hai.script c:/tsu_dvbh_hai.script
 ../scripts/tsu_dvbh_hai_panic_debug.script c:/tsu_dvbh_hai_panic_debug.script
 
 // .iby
 ../group/tsu_dvbh_hai.iby /epoc32/rom/include/tsu_dvbh_hai.iby
+../group/tsu_dvbh_hai_excl_test.iby /epoc32/rom/include/tsu_dvbh_hai_excl_test.iby
 
 

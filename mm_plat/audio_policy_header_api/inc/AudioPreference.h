@@ -113,7 +113,6 @@ const TUint KAudioPrefAlarmClock                            = 0x01220001;
 const TUint KAudioPrefCalendarAlarm                         = 0x01210001;
 const TUint KAudioPrefNewSMS                                = 0x01120001;
 const TUint KAudioPrefNewSpecialMessage                     = 0x01110001;
-const TUint KAudioPrefNewEmail                              = 0x01110002;
 const TUint KAudioPrefVideoRecording                        = 0x00950001;
 const TUint KAudioPrefVoiceRecStart                         = 0x00930001;
 const TUint KAudioPrefVoiceRecStop                          = 0x00910001;

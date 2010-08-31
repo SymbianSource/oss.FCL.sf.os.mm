@@ -1981,7 +1981,7 @@ TInt CMMFMdaAudioPlayerUtility::GetBalance(TInt& aBalance)
 	
 MMMFDRMCustomCommand* CMMFMdaAudioPlayerUtility::GetDRMCustomCommand()
 	{
-	// TODO: check controller supports MMMFDRMCustomCommandImplementor
+	// XXX: check controller supports MMMFDRMCustomCommandImplementor
 	if (iDRMCustomCommands.IsSupported())
 		{
 		return static_cast<MMMFDRMCustomCommand*>(&iDRMCustomCommands);

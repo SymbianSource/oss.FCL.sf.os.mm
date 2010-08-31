@@ -14,7 +14,7 @@
 //
 
 
-PRJ_MMPFILES
+PRJ_TESTMMPFILES
 ../group/TSU_ECM_API.mmp
 ../group/TSU_ECM_ADV.mmp
 ../group/ECamUnitTestPlugin.mmp
@@ -22,7 +22,7 @@ PRJ_MMPFILES
 ../group/copyfile.mmp
 ../group/tsu_ecm_ram.mmp
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 ../scripts/TSU_ECM_API.script c:/mm/tsu_ecm_api.script
 ../scripts/TSU_ECM_ADV_ALLOC.script c:/mm/tsu_ecm_adv_alloc.script
 ../scripts/TSU_ECM_ADV.script c:/mm/tsu_ecm_adv.script
@@ -30,5 +30,8 @@ PRJ_EXPORTS
 
 // .iby
 ../inc/tsu_ecm_api.iby	/epoc32/rom/include/tsu_ecm_api.iby
+../inc/tsu_ecm_api_excl_test.iby	/epoc32/rom/include/tsu_ecm_api_excl_test.iby
 ../inc/tsu_ecm_adv.iby	/epoc32/rom/include/tsu_ecm_adv.iby
+../inc/tsu_ecm_adv_excl_test.iby	/epoc32/rom/include/tsu_ecm_adv_excl_test.iby
 ../inc/tsu_ecm_ram.iby	/epoc32/rom/include/tsu_ecm_ram.iby
+../inc/tsu_ecm_ram_excl_test.iby	/epoc32/rom/include/tsu_ecm_ram_excl_test.iby

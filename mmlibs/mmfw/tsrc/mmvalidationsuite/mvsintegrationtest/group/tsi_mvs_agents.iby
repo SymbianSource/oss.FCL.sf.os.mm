@@ -1,4 +1,4 @@
-// Copyright (c) 2006-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -16,8 +16,7 @@
 #ifndef TSI_MVS_AGENTS_IBY
 #define TSI_MVS_AGENTS_IBY
 
-// debug build
-file=ABI_DIR\DEBUG_DIR\tsi_mvs_agents.dll 	System\Libs\tsi_mvs_agents.dll
+#include <tsi_mvs_agents_excl_test.iby>
 
 //ini
 data=EPOCROOT##epoc32\data\c\mvs\tsi_mvs_agents.ini	\mvs\tsi_mvs_agents.ini
@@ -37,8 +36,5 @@ data=EPOCROOT##epoc32\data\c\mvs\tsi_mvs_videoagent_surf.script     \tsi_mvs_vid
 data=EPOCROOT##epoc32\data\c\mvs\tsi_mvs_videoagent_surf_bc.script  \tsi_mvs_videoagent_surf_bc.script
 data=EPOCROOT##epoc32\data\c\mvs\tsi_mvs_agents_bc.ini	\mvs\tsi_mvs_agents_bc.ini
 #endif // SYMBIAN_GRAPHICS_USE_GCE
-
-//data files
-//exported using copydatatocf.bat and usbldr.pm, so removed from iby file
 
 #endif

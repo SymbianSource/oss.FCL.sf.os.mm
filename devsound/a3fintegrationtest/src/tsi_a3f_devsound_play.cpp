@@ -2610,8 +2610,8 @@ void RStepA3FDevSoundPlayEOFPlayMultipleTimes::PlayError(TInt aError)
 				ERR_PRINTF2(_L("Could not Open the File: Error = %d"), err);
 				StopTest(err);
 				}
-            iPlayState = EStatePlayStart;
-            Fsm(EEventPlayStart, KErrNone);
+			iPlayState = EStatePlayInitializing;
+			Fsm(EEventInitCompletePlay, KErrNone);
 			}
 		else
 			{
@@ -2625,50 +2625,6 @@ void RStepA3FDevSoundPlayEOFPlayMultipleTimes::PlayError(TInt aError)
 		}
 
 	}
-
-/*
- *
- * InitializeComplete
- *
- */
-void RStepA3FDevSoundPlayEOFPlayMultipleTimes::InitializeComplete(TInt aError)
-    {
-    INFO_PRINTF2(_L("Initialize returned with = %d"), aError);
-    if (aError == KErrNone)
-        {
-        TTimeIntervalMicroSeconds time;
-        TInt err = iMMFDevSound->GetTimePlayed(time);
-        if (err != KErrNone)
-            {
-            INFO_PRINTF2(_L("CMMFDevSound::GetTimePlayed unexpectedly returned %d - abort test"), err);
-            StopTest(err, EFail);
-            return;
-            }
-        
-        // checking low 32bits should be enough - sample played should never exceed 4000-ish seconds
-        INFO_PRINTF2(_L("Time played is %d after Play-Initialisation"), I64LOW(time.Int64()));
-        if (I64LOW(time.Int64()) != 0)
-            {
-            INFO_PRINTF1(_L("Time played is not 0 after Play-Initialisation - abort test"));
-            StopTest(KErrNone, EFail);
-            return;
-            }
-        
-        TInt samples = iMMFDevSound->SamplesPlayed();
-        INFO_PRINTF2(_L("Sample played is %d after Play-Initialisation"), samples);
-        if (samples != 0)
-            {
-            INFO_PRINTF1(_L("Sample played is not 0 after Play-Initialisation - abort test"));
-            StopTest(KErrNone, EFail);
-            return;
-            }
-        
-        // This is to trigger iMMFDevSound->PlayInitL as next step in the base Fsm
-        iPlayState = EStatePlayInitializing;
-        Fsm(EEventInitCompletePlay, KErrNone);
-        }
-    }
-
 
 //
 // RStepA3FDevSoundInititalizeDuringInitialize

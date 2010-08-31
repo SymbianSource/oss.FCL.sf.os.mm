@@ -1,0 +1,22 @@
+EXPORTS
+	_ZN11CFrameTable10ResetTableEv @ 1 NONAME
+	_ZN11CFrameTable11ShrinkTableEv @ 2 NONAME
+	_ZN11CFrameTable12LastFramePosERj @ 3 NONAME
+	_ZN11CFrameTable13LastFrameTimeERj @ 4 NONAME
+	_ZN11CFrameTable14InitFrameTableEii @ 5 NONAME
+	_ZN11CFrameTable15GetLastPosEventERj @ 6 NONAME
+	_ZN11CFrameTable16RegisterForEventENS_16TFrameTableEventEP24MFrameTableEventObserverj @ 7 NONAME
+	_ZN11CFrameTable16SubmitTableEntryEj @ 8 NONAME
+	_ZN11CFrameTable18SetSourceReferenceEjj @ 9 NONAME
+	_ZN11CFrameTable18UnRegisterForEventENS_16TFrameTableEventEP24MFrameTableEventObserver @ 10 NONAME
+	_ZN11CFrameTable20FindFramePosFromTimeERjS0_ @ 11 NONAME
+	_ZN11CFrameTable20FindFrameTimeFromPosERjS0_ @ 12 NONAME
+	_ZN11CFrameTable4NewLEv @ 13 NONAME
+	_ZN11CFrameTable7BitrateEv @ 14 NONAME
+	_ZN11CFrameTable9IsSeekingERi @ 15 NONAME
+	_ZN11CFrameTableD0Ev @ 16 NONAME
+	_ZN11CFrameTableD1Ev @ 17 NONAME
+	_ZN11CFrameTableD2Ev @ 18 NONAME
+	_ZTI11CFrameTable @ 19 NONAME
+	_ZTV11CFrameTable @ 20 NONAME
+

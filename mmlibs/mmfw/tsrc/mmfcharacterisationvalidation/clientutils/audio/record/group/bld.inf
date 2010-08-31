@@ -23,6 +23,8 @@ PRJ_TESTEXPORTS
 ../group/char_mmf_audiorec.iby		/epoc32/rom/include/char_mmf_audiorec.iby
 
 ../scripts/char_mmf_audiorec_wav.script		c:/char/mmf/char_mmf_audiorec_wav.script
+../scripts/char_mmf_audiorec_wav_1.script		c:/char/mmf/char_mmf_audiorec_wav_1.script
+../scripts/char_mmf_audiorec_wav_2.script		c:/char/mmf/char_mmf_audiorec_wav_2.script
 ../scripts/char_mmf_audiorec_ogg.script		c:/char/mmf/char_mmf_audiorec_ogg.script
 
 #ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND

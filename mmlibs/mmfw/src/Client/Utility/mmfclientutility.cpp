@@ -2235,12 +2235,7 @@ CMMFFindAndOpenController::CConfig::~CConfig()
 	}
 
 void CMMFFindAndOpenController::UseSecureDRMProcessL(TBool& aIsSecureDrmProcess)
-    {
-    if(iHasDrmCapability)//if client has DRM capability, we never use Secure DRM Process
-        {
-        aIsSecureDrmProcess = EFalse;
-        return;
-        }       
+    {       
     TBool isDataProtected = EFalse;
     ContentAccess::CContent* content = NULL;
     TControllerMode mode = iCurrentConfig->iControllerMode;
@@ -2288,8 +2283,72 @@ void CMMFFindAndOpenController::UseSecureDRMProcessL(TBool& aIsSecureDrmProcess)
         User::Leave(error);
         }
 
+    if(!isDataProtected)
+        {
+        CleanupStack::PopAndDestroy(content);
+        return;//returning cause if data is not protected, we need not evaluate the type of rights.
+        }
+    
+    RArray<TAgent> agents;
+    TAgent drmAgent;
+
+    CManager* manager = CManager::NewLC();
+    CleanupClosePushL( agents );
+    manager->ListAgentsL( agents );
+    
+    for ( TInt i = 0; i < agents.Count(); i++ )
+        {
+        if ( agents[i].Name().Compare( content->Agent().Name() ) == 0 )  
+            {
+            drmAgent = agents[i];
+            break;
+            }
+        }
+    
+    CleanupStack::PopAndDestroy( &agents );        
+    RStreamablePtrArray<CRightsInfo> infoArray;
+    CRightsManager*  rightsManager = manager->CreateRightsManagerL(drmAgent);
+    CleanupStack::PushL(rightsManager);
+    
+    if(iFileName.Length())
+        {
+        if(iUniqueId)
+            {
+            TVirtualPathPtr pathPtr(iFileName, *iUniqueId);
+            TRAP(error,rightsManager->ListRightsL(infoArray, pathPtr) );
+            }
+        else
+            {
+            TRAP(error,rightsManager->ListRightsL(infoArray, iFileName ) ); 
+            }
+        }
+    else if (iUseFileHandle && iOwnFileHandle) 
+        {
+        if(iUniqueId)
+            {
+            TRAP(error,rightsManager->ListRightsL(infoArray, iFileHandle, *iUniqueId) );
+            }
+        else
+            {
+            TRAP(error,rightsManager->ListRightsL(infoArray, iFileHandle, KNullDesC) );
+          }
+        }
+    
+    if(error)
+        {
+        infoArray.Close();
+        User::Leave(error);
+        }
+    TInt consumableRights = 0;
+    if(infoArray.Count() > 0)
+        consumableRights = (ContentAccess::ERightsTypeConsumable) &  infoArray[0]->RightsType();
+    
+    
+    CleanupStack::PopAndDestroy( rightsManager );
+    infoArray.Close();
+    CleanupStack::PopAndDestroy( manager );
     CleanupStack::PopAndDestroy(content);
-    if(isDataProtected && !iHasDrmCapability && mode == EPlayback)
+    if(isDataProtected && !iHasDrmCapability && mode == EPlayback && !consumableRights)
         {//only when the Data is protected and client does not have the DRM capability, we need secure DRM process
         aIsSecureDrmProcess = ETrue;
         }

@@ -18,7 +18,7 @@
 
 
 #include <e32base.h>
-#include "mmf/common/mmcaf.h"
+#include <mmf/common/mmcaf.h>
 #include <mmf/common/mmfstandardcustomcommands.h>
 
 /**

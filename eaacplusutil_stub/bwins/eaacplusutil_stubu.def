@@ -1,0 +1,9 @@
+EXPORTS
+	?Config@CEAacPlusUtil@@QAEHAAVTEAacPlusFrameLenConfig@1@@Z @ 1 NONAME ; int CEAacPlusUtil::Config(class CEAacPlusUtil::TEAacPlusFrameLenConfig &)
+	??1CEAacPlusUtil@@UAE@XZ @ 2 NONAME ; CEAacPlusUtil::~CEAacPlusUtil(void)
+	?GetAacFrameInfo@CEAacPlusUtil@@QAEHPBEAAHAAVTEAacPlusFrameInfo@1@@Z @ 3 NONAME ; int CEAacPlusUtil::GetAacFrameInfo(unsigned char const *, int &, class CEAacPlusUtil::TEAacPlusFrameInfo &)
+	?GetAacFrameInfo@CEAacPlusUtil@@QAEHPBEAAHAAVTEAacPlusFrameInfo@1@PAEH@Z @ 4 NONAME ; int CEAacPlusUtil::GetAacFrameInfo(unsigned char const *, int &, class CEAacPlusUtil::TEAacPlusFrameInfo &, unsigned char *, int)
+	?NewL@CEAacPlusUtil@@SAPAV1@XZ @ 5 NONAME ; class CEAacPlusUtil * CEAacPlusUtil::NewL(void)
+	?GetAacFrameLength@CEAacPlusUtil@@QAEHPBEHAAH@Z @ 6 NONAME ; int CEAacPlusUtil::GetAacFrameLength(unsigned char const *, int, int &)
+	?GetAacFormatType@CEAacPlusUtil@@QAEHPBEHAAW4TEAacPlusFormatType@1@@Z @ 7 NONAME ; int CEAacPlusUtil::GetAacFormatType(unsigned char const *, int, enum CEAacPlusUtil::TEAacPlusFormatType &)
+

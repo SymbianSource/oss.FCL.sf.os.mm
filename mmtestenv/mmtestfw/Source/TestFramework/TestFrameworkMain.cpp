@@ -60,9 +60,6 @@ _LIT(KTxtBuild,"urel");
 #endif
 
 
-//A temporary fix: 20 seconds delay for Techview to get completely loaded.
-const TInt KTechViewLoadDelay = 20000000;
-
 /**
  *
  * max length of command line
@@ -249,9 +246,6 @@ void CTestFrameworkMain::RunTestScriptL(const TDesC& aCmdLine)
 	TLex lex(aCmdLine);
 	TPtrC token=lex.NextToken();
 	
-	// Default is to have 20 second startup delay
-	TBool delayRequired = ETrue;
-
 	// if there is no input filename on the cmd line, panic
 	if (token.Length() == 0) 
 		UsageL();
@@ -315,23 +309,17 @@ void CTestFrameworkMain::RunTestScriptL(const TDesC& aCmdLine)
 					break;
 				case 'Q':
 				case 'q':
-
 					{
-					// Remove the default 20 second delay on startup
-					delayRequired = EFalse;
+					// This flag has been removed.  This block is just to ensure that if used it wont panic
 					}
-					break;	
+					break;
+
 				default:
 					UsageL();
 					return;
 				}
 
 			token.Set(lex.NextToken());
-			}
-
-		if(delayRequired)
-			{
-			User::After(KTechViewLoadDelay);
 			}
 
 		// save the input filename

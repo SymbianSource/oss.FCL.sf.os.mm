@@ -13,7 +13,7 @@
 // Description:
 //
 
-PRJ_EXPORTS
+PRJ_TESTEXPORTS
 
 // interop scripts
 ../scripts/tsu_3gp_interop_te.ini		c:/mm/tsu_3gp_interop_te.ini

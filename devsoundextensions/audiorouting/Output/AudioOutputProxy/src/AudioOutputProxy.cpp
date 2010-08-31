@@ -192,13 +192,7 @@ void CAudioOutputProxy::SetSecureOutputL(TBool aSecureOutput)
 	{
 	iSecureOutput = aSecureOutput;
 	TPckgC<TBool> outputPckg(aSecureOutput);
-	TInt err = KErrNone;
-        //ou1cimx1#454515 CAudioOutputConfigurator::SetSecureOutputL() is deprecated
-	err = iCustomCommand->CustomCommandSync(iMessageHandler, EAofSetSecureOutput, outputPckg, KNullDesC8);
-	if(err != KErrNone)
-		{
-			User::Leave(err);
-		}
+	iCustomCommand->CustomCommandSync(iMessageHandler, EAofSetSecureOutput, outputPckg, KNullDesC8);
 	}
 
 // ---------------------------------------------------------

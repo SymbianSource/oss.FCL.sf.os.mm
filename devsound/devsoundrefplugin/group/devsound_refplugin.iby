@@ -38,10 +38,6 @@ data=ZRESOURCE\DevSound\FixedSequence.rsc   Resource\DevSound\FixedSequence.rsc
 
 #endif // SYMBIAN_MULTIMEDIA_A3FDEVSOUND
 
-
-// Audio Tone Controller dll
-ECOM_PLUGIN(mmfaudiotonecontroller.dll,101f7d95.rsc)
-
 //sw codec wrapper dll
 file=ABI_DIR\BUILD_DIR\MMFSwCodecWrapper.dll	System\Libs\MMFSwCodecWrapper.dll
 file=ABI_DIR\BUILD_DIR\mmfswaudiodevice.dll		System\Libs\mmfswaudiodevice.dll

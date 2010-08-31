@@ -1530,7 +1530,7 @@ void CMMFMdaAudioRecorderUtility::OpenDesL(TDes8& aDescriptor)
 * ConvertDescriptor
 * aParam aDescriptor
 * This method converts a TDesC8 to a TDes8
-* and is here to fix an interface bug
+* and is here to fix an interface error
 *
 **/
 void CMMFMdaAudioRecorderUtility::ConvertDescriptor(const TDesC8& aDescriptor )

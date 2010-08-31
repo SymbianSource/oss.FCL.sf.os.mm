@@ -31,12 +31,7 @@ const TUid KTelAudRtngServerUid = {0x10207A93};
 
 const TInt KTelAudRtngServerStackSize=0x2000;			//  8KB
 const TInt KTelAudRtngServerInitHeapSize=0x1000;		//  4KB
-#if defined __WINSCW__      
-//Telephoney Audio routing server requires only 1MB data for emulator
-const TInt KTelAudRtngServerMaxHeapSize=0x100000;      // 1MB
-#else
 const TInt KTelAudRtngServerMaxHeapSize=0x1000000;		// 16MB
-#endif
     
 // ================= MEMBER FUNCTIONS =======================
 

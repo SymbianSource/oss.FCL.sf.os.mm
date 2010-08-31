@@ -148,7 +148,8 @@ void CMMFMidiTestController::RemoveSourceSinkL()
 	{
 	}
 
-void CMMFMidiTestController::ResetL() //FIXME - replacement for RemoveSourceSink()
+
+void CMMFMidiTestController::ResetL() //XXX - replacement for RemoveSourceSink()
 	{
 	}
 

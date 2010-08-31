@@ -18,7 +18,7 @@
 
 #include <caf/content.h>
 #include <caf/data.h>
-#include "mmf/common/mmcaf.h"
+#include <mmf/common/mmcaf.h>
 
 // Abstract class providing generic file access
 class MGenericFile

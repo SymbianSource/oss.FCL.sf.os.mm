@@ -23,6 +23,7 @@
 
 //  INCLUDES
 #include <e32std.h>
+#include <GlobalAudioSettings.h>
 
 // CLASS DECLARATION
 
@@ -40,7 +41,8 @@ class TGlobalAudioSettings
         * Constructor.
         */
         TGlobalAudioSettings() : iWarningTones(EFalse),iMessageTones(EFalse),iSilentProfile(EFalse),
-                                 iVibra(EFalse),iPublicSilence(EFalse)
+                                 iVibra(EFalse),iPublicSilence(EFalse),iMessageToneName(NULL),iEmailToneName(NULL),iRingingType(CGlobalAudioSettings::EGASRingingTypeRinging),iVideoCallToneName(NULL),
+                                 iRingingTone1Name(NULL),iRingingTone2Name(NULL),iKeyPadVolume(CGlobalAudioSettings::EGASKeypadVolumeOff)
         {}
 
 		TBool iWarningTones;
@@ -48,6 +50,14 @@ class TGlobalAudioSettings
 		TBool iSilentProfile;
 		TBool iVibra;
 		TBool iPublicSilence;
+		HBufC *iMessageToneName;
+		HBufC *iEmailToneName;
+		CGlobalAudioSettings::TGASRingingType iRingingType;
+		HBufC *iVideoCallToneName;
+		HBufC *iRingingTone1Name;
+		HBufC *iRingingTone2Name;
+		CGlobalAudioSettings::TGASKeypadVolume iKeyPadVolume;
+		TBool iSilenceMode;
     };
 
 #endif      // GlobalAudioSETTINGSDATA_H

@@ -82,7 +82,7 @@ NONSHARABLE_CLASS(CGlobalASTestClass) : public CScriptBase,
 
 
 		// From MAudioSettingsObserver
-		void SettingsChanged(CGlobalAudioSettings& aGlobalAudioSettings, TUint aSetting);
+		void SettingsChanged(CGlobalAudioSettings& aGlobalAudioSettings, MAudioSettingsObserver::TGASEventId aSetting);
 		// From MAudioClientsListObserver
 		void Event( const CGlobalAudioSettings& aGlobalAudioSettings, TUint aEvent );
 
@@ -120,7 +120,19 @@ NONSHARABLE_CLASS(CGlobalASTestClass) : public CScriptBase,
 		TInt UnregisterAudioClientsListObserver( CStifItemParser& aItem );
 		TInt GetAudioClientsList( CStifItemParser& aItem );
 		TInt GetPausedClientsList( CStifItemParser& aItem );
-
+		TInt GetRingingType( CStifItemParser& aItem );
+		TInt MessageAlertTone( CStifItemParser& aItem );
+		TInt IsMessageAlertToneEnabled( CStifItemParser& aItem );
+		TInt EmailAlertTone( CStifItemParser& aItem );
+		TInt IsEmailAlertToneEnabled( CStifItemParser& aItem );
+		TInt VideoCallAlertTone( CStifItemParser& aItem );
+		TInt IsVideoCallAlertToneEnabled( CStifItemParser& aItem );
+		TInt RingingAlertTone1( CStifItemParser& aItem );
+		TInt IsRingingAlertTone1Enabled( CStifItemParser& aItem );
+		TInt RingingAlertTone2( CStifItemParser& aItem );
+		TInt IsRingingAlertTone2Enabled( CStifItemParser& aItem );
+		TInt KeypadAlertTone( CStifItemParser& aItem );
+        TInt IsSilenceModeActive(CStifItemParser& aItem);
     private:    // Data
 
 		// reference to TestModuleIf

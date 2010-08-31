@@ -271,7 +271,7 @@ public:
 
 
 private:
-	RPointerArray< T >  todo;
+	RPointerArray< T >  iQueue;
 	};
 
 
@@ -289,8 +289,8 @@ RMMRCFifoOrderQueue<T>::RMMRCFifoOrderQueue( )
 template <class T>
 RMMRCFifoOrderQueue<T>::~RMMRCFifoOrderQueue( )
 	{
-	todo.Reset();
-	todo.Close();
+	iQueue.Reset();
+	iQueue.Close();
 	}
 	
 /**
@@ -300,7 +300,7 @@ template <class T>
 TInt RMMRCFifoOrderQueue<T>::Count( ) const
 	{
 	
-	TInt iNum = todo.Count();
+	TInt iNum = iQueue.Count();
 	return iNum;
 	}	
 
@@ -310,7 +310,7 @@ TInt RMMRCFifoOrderQueue<T>::Count( ) const
 template <class T>
 void RMMRCFifoOrderQueue<T>::ResetAndDestroy( )
 	{
-	todo.ResetAndDestroy();
+	iQueue.ResetAndDestroy();
 	}
 
 /**
@@ -319,31 +319,31 @@ void RMMRCFifoOrderQueue<T>::ResetAndDestroy( )
 template <class T>
 void RMMRCFifoOrderQueue<T>::PushL( T const* const aElement )
 	{
-	TInt numElements = todo.Count();
+	TInt numElements = iQueue.Count();
 	
 	if( numElements == 0 )
 		{
-		todo.Append(aElement); //TODO: We need to check the error here
+		iQueue.Append(aElement); //iQueue: We need to check the error here
 		return;
 		}
 	
 	for(TInt i(0); i<numElements ; ++i)
 		{
-		if(aElement->HasMultimediaCapability() && !(todo[i]->HasMultimediaCapability()))
+		if(aElement->HasMultimediaCapability() && !(iQueue[i]->HasMultimediaCapability()))
 			{
-			todo.Insert(aElement, i);
+			iQueue.Insert(aElement, i);
 			return;
 			}
-		else if(aElement->HasMultimediaCapability() == todo[i]->HasMultimediaCapability())	
+		else if(aElement->HasMultimediaCapability() == iQueue[i]->HasMultimediaCapability())	
 			{
-			if (aElement->GetPriority() > todo[i]->GetPriority())
+			if (aElement->GetPriority() > iQueue[i]->GetPriority())
 			 	{
-				todo.Insert(aElement,i);
+				iQueue.Insert(aElement,i);
 				return;
 			 	}			
 			}
 		}
-	todo.Insert(aElement,numElements);
+	iQueue.Insert(aElement,numElements);
 	}
 	
 /**
@@ -353,8 +353,8 @@ template <class T>
 T* RMMRCFifoOrderQueue<T>::PopAndRemoveForPause( TInt aIndex )
 	{
 	T* aux = NULL;
-	aux = todo[aIndex];
-	todo.Remove(aIndex);	
+	aux = iQueue[aIndex];
+	iQueue.Remove(aIndex);	
 	return aux;
 	}
 
@@ -365,9 +365,9 @@ T* RMMRCFifoOrderQueue<T>::PopAndRemoveForPause( TInt aIndex )
 template <class T>
 T* RMMRCFifoOrderQueue<T>::operator[] ( TInt aIndex ) const
 	{
-	if(todo.Count() != 0)
+	if(iQueue.Count() != 0)
 		{
-		return todo[aIndex];
+		return iQueue[aIndex];
 		}
 	else
 		{

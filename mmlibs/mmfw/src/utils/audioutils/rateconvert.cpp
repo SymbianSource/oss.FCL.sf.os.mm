@@ -219,7 +219,7 @@ TInt CChannelAndSampleRateConvert::SizeOfUpsampleBuffer(TInt aBufferLength)
 	TInt rawValue = aBufferLength;
 	ASSERT(iFromRate < iToRate); // should not be called otherwise
 	// upsample - will generate more data. use floats to avoid extra round error
-	rawValue = TInt(rawValue * TReal(iToRate) / TReal(iFromRate) + 0.5) + 4*sizeof(TInt16); // add some fudge factor just in case
+	rawValue = TInt(rawValue * TReal(iToRate) / TReal(iFromRate) + 0.5) + 4*sizeof(TInt16); // add some buffer extra buffer
 	rawValue = NextPowerUp(rawValue); // when upscaling always give nice power
 	return rawValue;	
 	}

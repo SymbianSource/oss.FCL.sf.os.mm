@@ -1010,21 +1010,12 @@ TInt CAudioRoutingTestClass::SetAudioOutputL()
 
 TInt CAudioRoutingTestClass::SetSecureOutputL()
    {
-  TInt err;
 	if(iAudioOutput)
 		{
-		TRAP(err,iAudioOutput->SetSecureOutputL(EFalse));
+		iAudioOutput->SetSecureOutputL(EFalse);
 		}
-	if(err == KErrNotSupported)
-	   {
-	   iLog->Log(_L("SetsecureoutputL is deprecated,so not supported"));
-	   return KErrNone;
-	   }
-	else
-	   {
-	   return KErrGeneral;
-	   }
-
+	iLog->Log(_L("iAudioOutput - SetSecureOutputL "));
+	return KErrNone;
    }
 
 TInt CAudioRoutingTestClass::UnregisterObserver()
