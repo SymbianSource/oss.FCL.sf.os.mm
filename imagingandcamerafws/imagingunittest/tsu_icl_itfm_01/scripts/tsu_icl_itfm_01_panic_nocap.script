@@ -1,0 +1,43 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSU_ICL_itfm_01
+// 
+//
+
+PRINT Run all the itfm unit panic tests 
+PRINT 
+
+//
+LOAD_SUITE TSU_ICL_itfm_01.dll
+
+// Panic tests
+
+// EIllegalCallSequence = 1
+//! @SYMTestCaseID MM-ICL-ITFM-U-0200-HP
+
+RUN_PANIC_STEP 30000, TSU_ICL_itfm_01, MM-ICL-ITFM-U-0200-HP ,ImageTransform, 1
+TEST_COMPLETE 
+
+// EReqAlreadyActive = 42
+//! @SYMTestCaseID MM-ICL-ITFM-U-0201-HP
+
+RUN_PANIC_STEP 30000, TSU_ICL_itfm_01, MM-ICL-ITFM-U-0201-HP ,E32USER-CBase, 42
+TEST_COMPLETE 
+
+// 
+//! @SYMTestCaseID MM-ICL-ITFM-U-0203-HP
+
+RUN_TEST_STEP 30000, TSU_ICL_itfm_01, MM-ICL-ITFM-U-0203-HP
+TEST_COMPLETE 
+

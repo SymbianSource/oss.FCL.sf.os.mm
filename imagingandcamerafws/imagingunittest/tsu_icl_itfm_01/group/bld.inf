@@ -1,0 +1,46 @@
+
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// bld.inf for TSU_ICL_itfm_01 - ICL Transform Test harness
+// 
+//
+
+PRJ_MMPFILES
+../mmpfiles/TSU_ICL_itfm_01.mmp
+../mmpfiles/TestTransformer.mmp
+../mmpfiles/TestTransformerExt.mmp
+
+PRJ_EXPORTS
+
+// test scripts
+../scripts/tsu_icl_itfm_01_nocap.script			c:/tsu_icl_itfm_01_nocap.script
+
+../scripts/tsu_icl_itfm_01_nocap_alloc.script		c:/tsu_icl_itfm_01_nocap_alloc.script
+
+../scripts/tsu_icl_itfm_01_panic_nocap.script		c:/tsu_icl_itfm_01_panic_nocap.script
+
+// test files
+../TestFiles/mbmProg.mbm					c:/tsu_icl_itfm_01/mbmprog.mbm
+
+../TestFiles/Ref/mbmProg_100x100_m.mbm		c:/tsu_icl_itfm_01/ref/mbmprog_100x100_m.mbm
+
+../TestFiles/Ref/mbmProg_160x90.mbm		c:/tsu_icl_itfm_01/ref/mbmprog_160x90.mbm
+
+../TestFiles/Test.txt						c:/tsu_icl_itfm_01/test.txt
+
+../TestFiles/TooShort.txt					c:/tsu_icl_itfm_01/tooshort.txt
+
+// .iby
+../inc/tsu_icl_itfm_01.iby					/epoc32/rom/include/tsu_icl_itfm_01.iby
+

@@ -91,7 +91,7 @@ CMMFBuffer* MMFTestDataSource::CreateSourceBufferL(TMediaId /*aMediaId*/, TBool 
 	return NULL;	
 	}
 	
-	//XXX optimal source buffer size creation may depend on the sink buffer & vice versa
+	//[TBD] optimal source buffer size creation may depend on the sink buffer & vice versa
 CMMFBuffer* MMFTestDataSource::CreateSourceBufferL(TMediaId aMediaId, CMMFBuffer& /*aSinkBuffer*/, TBool &aReference)
 	{
 	return CreateSourceBufferL(aMediaId, aReference);

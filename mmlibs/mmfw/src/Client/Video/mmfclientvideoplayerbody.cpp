@@ -657,10 +657,6 @@ void CVideoPlayerUtility::CBody::SetDisplayWindowL(RWsSession& aWs, CWsScreenDev
  			iDirectScreenAccess->Cancel();
   			AbortNow(RDirectScreenAccess::ETerminateCancel);
  			}
-
-		// try to remove the display window first no matter it is active or not.
-		// This method won't leave
-		RemoveDisplayWindow(aWindow);
 		
 		// When using surfaces for CVPU we use DoAddDisplayWindowL() which requires clip rectangle and video extent
 		// as arguments. Video extent is not supported by CVPU so aWindowRect is used instead. This function
@@ -670,7 +666,16 @@ void CVideoPlayerUtility::CBody::SetDisplayWindowL(RWsSession& aWs, CWsScreenDev
 		TRect clipRectRelativeToWindow;		
 		ConvertFromRelativeToDisplayToRelativeToWindow(aWindow, aWindowRect, aClipRect, windowRectRelativeToWindow, clipRectRelativeToWindow);
 
-        DoAddDisplayWindowL(aWs, aScreenDevice.GetScreenNumber(), aWindow, clipRectRelativeToWindow, windowRectRelativeToWindow, NULL);
+		// check if display for window already exists and if so do an update else create a new display
+		TRAPD(err, CMediaClientVideoDisplayBody::FindDisplayWithWindowL(iActiveDisplays, aWindow));
+		if (err == KErrNone)
+		    {
+		    DoUpdateDisplayWindowL(aWs, aWindow, clipRectRelativeToWindow, windowRectRelativeToWindow, NULL);
+		    }
+		else
+		    {
+		    DoAddDisplayWindowL(aWs, aScreenDevice.GetScreenNumber(), aWindow, clipRectRelativeToWindow, windowRectRelativeToWindow, NULL);
+		    }
 		}
 #else
 	PrepareDSAL(aWs, aScreenDevice, aWindow);
@@ -1007,7 +1012,7 @@ void CVideoPlayerUtility::CBody::GetFrameL(TDisplayMode aDisplayMode, TBool aUse
 
 MMMFDRMCustomCommand* CVideoPlayerUtility::CBody::GetDRMCustomCommand()
 	{
-	// XXX: check controller supports MMMFDRMCustomCommandImplementor
+	// TODO: check controller supports MMMFDRMCustomCommandImplementor
 	TInt error = iDRMCustomCommands.EvaluateIntent(ContentAccess::EPeek);
 	if (error==KErrNone)
 		{
@@ -1593,6 +1598,38 @@ void CVideoPlayerUtility::CBody::DoAddDisplayWindowL(RWsSession& aWs, TInt aDisp
 		}
 #endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
 	}
+
+void CVideoPlayerUtility::CBody::DoUpdateDisplayWindowL(RWsSession& aWs, RWindowBase& aWindow,
+                                const TRect& aClipRect, const TRect& aVideoExtent, RWindow* aWindow2)
+    {
+    iWs = &aWs;
+
+    // check opening the source is complete and the client has been recieved an MvpuoOpenComplete() callback
+    if (!iControllerOpen)
+        {
+        User::Leave(KErrNotReady);
+        }
+
+    CMediaClientVideoDisplayBody* display = NULL;
+    TRAPD(err, display = CMediaClientVideoDisplayBody::FindDisplayWithWindowL(iActiveDisplays, aWindow));
+    User::LeaveIfError(err);
+
+    display->UpdateDisplayWindowL(&aWindow, aClipRect, iCropRegion, aVideoExtent, iGlobalScaleWidth, iGlobalScaleHeight,
+                                iGlobalRotation, iGlobalAutoScaleType, iGlobalHorizPos, iGlobalVertPos, aWindow2);
+
+#ifdef SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+    if (iSubtitleUtility)
+        {
+        // subtitles were enabled already, so update subtitles on this window
+        TMMFSubtitleWindowConfig config;
+        config.iWindowId = aWindow.WsHandle();
+        config.iWindowClipRect = aClipRect;
+        config.iDisplayMode = aWindow.DisplayMode();
+        config.iRotation = iGlobalRotation;
+        iSubtitleUtility->UpdateSubtitleConfig(config); // ignore error from add subtitle config because the window can still display video properly
+        }
+#endif //SYMBIAN_MULTIMEDIA_SUBTITLE_SUPPORT
+    }
 
 void CVideoPlayerUtility::CBody::RemoveDisplayWindow(RWindowBase& aWindow)
 	{

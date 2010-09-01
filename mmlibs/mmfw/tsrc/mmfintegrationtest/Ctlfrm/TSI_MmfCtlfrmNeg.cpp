@@ -278,7 +278,7 @@ RTestMmfCtlfrmI0513::RTestMmfCtlfrmI0513()
 
 TVerdict RTestMmfCtlfrmI0513::DoTestStepL()
 	{
-	//XXX : we may have problems here. the only controller we have is the
+	// *** TODO : we may have problems here. the only controller we have is the
 	// Audio Controller and this does not yet support removal of sources/sinks,
 	// whether it's playing or not...
 

@@ -164,7 +164,7 @@ public:
 	This method may leave with one of the system-wide error codes.
 
 	@param  aMessage
-	        The message will be completed when an event occurs.
+	        The message to be completed when an event occurs.
 
 	@return A pointer to the newly created event receiver.
 
@@ -196,14 +196,14 @@ private:
 	Constructor.
 
 	@param  aMessage
-	        The message will be completed when an event occurs.
+	        The message to be completed when an event occurs.
 
 	@since  7.0s
 	*/
 	CMMFEventReceiver(const TMMFMessage& aMessage);
 private:
 	/** 
-	The message will be completed when an event occurs.
+	The message to be completed when an event occurs.
 	*/
 	TMMFMessage iMessage;
 	};
@@ -429,7 +429,7 @@ private:
 	@param  aMessage
 	        The request to be handled.
 
-	@return ETrue if the message will be completed now, EFalse if the message will be completed 
+	@return ETrue if the message is to be completed now, EFalse if the message will be completed 
 	        later.
 	*/
 	TBool ReceiveEventsL(TMMFMessage& aMessage);
@@ -442,7 +442,7 @@ private:
 	@param  aMessage
 	        The request to be handled.
 
-	@return ETrue if the message will be completed now, EFalse if the message will be completed later.
+	@return ETrue if the message is to be completed now, EFalse if the message will be completed later.
 	*/
 	TBool CancelReceiveEvents(TMMFMessage& aMessage);
 
@@ -454,7 +454,7 @@ private:
 	@param  aMessage
 	        The request to be handled.
 
-	@return ETrue if the message will be completed now, EFalse if the message will be completed later.
+	@return ETrue if the message is to be completed now, EFalse if the message will be completed later.
 	*/
 	TBool LoadControllerL(TMMFMessage& aMessage);
 private:

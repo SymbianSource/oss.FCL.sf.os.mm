@@ -1,0 +1,35 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// bld.inf for TSU_ICL_ImgDisp_01 - ICL ImageDisplay Framework Test harness
+// 
+//
+
+PRJ_MMPFILES
+// ..\mmpfiles\ImgDisp_TestPlugin.mmp
+../mmpfiles/tsi_icl_ImgDisp_01.mmp
+
+PRJ_EXPORTS
+
+// test scripts
+../scripts/TSI_ICL_ImgDisp_01.script		c:/tsi_icl_imgdisp_01.script
+../TestFiles/dummy.idp 				c:/tsi_icl_imgdisp_01/dummy.idp
+../TestFiles/ref/frame_1.mbm 			c:/tsi_icl_imgdisp_01/ref/frame_1.mbm
+../TestFiles/ref/frame_2.mbm 			c:/tsi_icl_imgdisp_01/ref/frame_2.mbm
+../TestFiles/ref/scaled_digit_9.mbm c:/tsi_icl_imgdisp_01/ref/scaled_digit_9.mbm 
+../TestFiles/ref/scaled_digit_8.mbm c:/tsi_icl_imgdisp_01/ref/scaled_digit_8.mbm 
+
+../TestFiles/empty 				c:/tsi_icl_imgdisp_01/empty
+
+// .iby
+../inc/tsi_icl_ImgDisp_01.iby	/epoc32/rom/include/tsi_icl_imgdisp_01.iby

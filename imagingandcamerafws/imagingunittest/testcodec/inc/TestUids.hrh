@@ -1,0 +1,66 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __TestUids_h__
+#define __TestUids_h__
+
+#define KTestDecoderDllUidValue				0x101F7BF5
+#define KTestDecoderImplementationUidValue		0x101F7BF6
+#define KTestEncoderImplementationUidValue		0x101F7C01
+#define	KFailTestDecoderImplementationUidValue		0x101F7C08
+
+#define KExtendedTestDecoderDllUidValue			0x101F7C03
+#define KExtendedTestDecoderImplementationUidValue	0x101F7C04
+#define KExtendedTestEncoderImplementationUidValue	0x101F7C05
+
+#define KBadVerTestDllUidValue						0x101F7C0F
+#define KBadVerTestDecoderImplementationUidValue	0x101F7C10
+#define KBadVerTestEncoderImplementationUidValue	0x101F7C11
+
+#define KTestAsyncDecoderImplementationUidValue		0x101F7C1A
+#define KTestAsyncEncoderImplementationUidValue		0x101F7C1C
+
+#define KTestExifDummyDecoderImplementationUidValue  0x102070C2
+#define KTestExifDummyEncoderImplementationUidValue  0x102070C3
+
+#define KTestDummyDecoderImplementationHWUidValue	0x10273800
+#define KTestDummyDecoderImplementationSWUidValue	0x10273801
+#define KTestDummyDecoderClassUidValue			0x10273802
+#define KTestDummyZeroPropCountDecoderImplementationUidValue	0x10273805
+#define KTestDummyOnlyPropDecoderImplementationUidValue		0x1027380B
+
+#define KTestFwExtDllValue											0x102833E3
+#define KTestFwExtDecoderImplementationUidValue						0x102833E4
+#define KTestFwExtEncoderImplementationUidValue						0x102833E5
+#define KTestDummyDecoderExtCropUidValue							0x102833E6
+#define KTestDummyDecoderExtStreamUidValue							0x102833E7
+#define KTestDummyDecoderExtRotationUidValue						0x102833E8
+#define KTestDummyDecoderExtMirrorHorizontalAxisUidValue			0x102833E9
+#define KTestDummyDecoderExtMirrorVerticalAxisUidValue				0x102833EA
+#define KTestDummyDecoderExtScalingUidValue							0x102833EB
+#define KTestDummyEncoderExtStreamUidValue							0x102833EC
+#define KTestDummyEncoderExtRotationUidValue						0x102833ED
+#define KTestDummyEncoderExtMirrorHorizontalAxisUidValue			0x102833EE
+#define KTestDummyEncoderExtMirrorVerticalAxisUidValue				0x102833EF
+#define KTestDummyEncoderExtUseWithSetThumbnailUidValue 			0x102833F0
+//#define KTestJpegDecoderExtAllUidValue							0x102833F1
+//#define KTestJpegEncoderExtAllUidValue							0x102833F2
+#define KTestDummyEncoderExtMirrorHorizontalVerticalAxisUidValue	0x102833F6
+#define KTestDummyDecoderExtMirrorHorizontalVerticalAxisUidValue	0x102833F7
+//#define KTestJpegEncoderExtInvalidUidValue						0x102833F8
+//#define KTestJpegDecoderExtInvalidUidValue						0x102833F9
+
+#endif
+

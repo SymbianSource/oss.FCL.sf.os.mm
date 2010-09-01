@@ -212,7 +212,7 @@ TVerdict CTestStepResetController::DoTestStepL( void )
 
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -367,7 +367,7 @@ TVerdict CTestStepRemoveDataSink::DoTestStepL( void )
 
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -524,7 +524,7 @@ TVerdict CTestStepRemoveDataSource::DoTestStepL( void )
 
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -585,7 +585,7 @@ TVerdict CTestStepMemoryAllocation::DoTestStepL( void )
 
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();

@@ -13,7 +13,7 @@
 // Description:
 //
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 ../scripts/tsu_mdf_codecapi_01.script c:/tsu_mdf_codecapi_01.script
 
 // Export test file
@@ -22,5 +22,5 @@ PRJ_TESTEXPORTS
 // .iby
 TSU_MDF_CODECAPI.iby	/epoc32/rom/include/tsu_mdf_codecapi.iby
 
-PRJ_TESTMMPFILES
+PRJ_MMPFILES
 ../mmpfiles/tsu_mdf_codecapi.mmp

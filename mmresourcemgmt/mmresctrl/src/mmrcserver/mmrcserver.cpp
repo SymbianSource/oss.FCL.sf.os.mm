@@ -224,6 +224,17 @@ EXPORT_C TInt StartMMRCServer(RThread& aServerThread)
 	// Need to check that the server exists.
 	if ( findCountServer.Next(name) != KErrNone )
 		{
+#if (defined (__WINS__) || defined (__WINSCW__) )
+		  // Create the thread for the server. Don't allocate a separate
+          // heap but use client thread's heap instead. This saves memory
+          // space in the single process model used in the emulator.
+		res = aServerThread.Create(KMMRCServerName,
+			CMMRCServer::ThreadFunction,
+			KMMRCServerStackSize,
+			NULL,
+			NULL
+			);
+#else
 		  // Create the thread for the server.
 		res = aServerThread.Create(KMMRCServerName,
 			CMMRCServer::ThreadFunction,
@@ -232,6 +243,7 @@ EXPORT_C TInt StartMMRCServer(RThread& aServerThread)
 			KMMRCServerMaxHeapSize,
 			NULL
 			);
+#endif	
 			
 		// The thread has been created OK so get it started - however
 		// we need to make sure that it has started before we continue.

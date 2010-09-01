@@ -1,0 +1,242 @@
+EXPORTS
+	?NewL@CICLFrameworkTestSuite@@SAPAV1@XZ @ 1 NONAME ; public: static class CICLFrameworkTestSuite * __cdecl CICLFrameworkTestSuite::NewL(void)
+	?ReservedVirtual4@CImageReadCodec@@EAEXXZ @ 2 NONAME ; void CImageReadCodec::ReservedVirtual4(void)
+	?FrameInfoStringsL@CImageDecoder@@QAEPAVCFrameInfoStrings@@H@Z @ 3 NONAME ; class CFrameInfoStrings * CImageDecoder::FrameInfoStringsL(int)
+	?SetSource@CImageWriteCodec@@QAEXPBVCFbsBitmap@@@Z @ 4 NONAME ; void CImageWriteCodec::SetSource(class CFbsBitmap const *)
+	?DataNewL@CImageEncoder@@SAPAV1@AAPAVHBufC8@@W4TOptions@1@VTUid@@22@Z @ 5 NONAME ; class CImageEncoder * CImageEncoder::DataNewL(class HBufC8 * &, enum CImageEncoder::TOptions, class TUid, class TUid, class TUid)
+	??0CImageProcessorReadCodecExtension@@IAE@XZ @ 6 NONAME ; CImageProcessorReadCodecExtension::CImageProcessorReadCodecExtension(void)
+	?GetImageTypesL@CImageEncoder@@SAXAAV?$RPointerArray@VCImageTypeDescription@@@@@Z @ 7 NONAME ; void CImageEncoder::GetImageTypesL(class RPointerArray<class CImageTypeDescription> &)
+	?ConstructL@CImageWriteCodec@@IAEXXZ @ 8 NONAME ; void CImageWriteCodec::ConstructL(void)
+	?MaskProcessor@CImageMaskProcessorReadCodec@@IBEPAVCImageProcessor@@XZ @ 9 NONAME ; class CImageProcessor * CImageMaskProcessorReadCodec::MaskProcessor(void) const
+	??0CImageDecoder@@IAE@XZ @ 10 NONAME ; CImageDecoder::CImageDecoder(void)
+	?Pos@CImageProcessorReadCodec@@IAEAAVTPoint@@XZ @ 11 NONAME ; class TPoint & CImageProcessorReadCodec::Pos(void)
+	?GetBufferSize@TImageConvStreamedDecode@@QBEHVTUid@@AAVTSize@@H@Z @ 12 NONAME ; int TImageConvStreamedDecode::GetBufferSize(class TUid, class TSize &, int) const
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTDesC16@@W4TIntent@ContentAccess@@W4TOptions@1@VTUid@@44@Z @ 13 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFs &, class TDesC16 const &, enum ContentAccess::TIntent, enum CImageDecoder::TOptions, class TUid, class TUid, class TUid)
+	??1CImplementationInformationType@@UAE@XZ @ 14 NONAME ; CImplementationInformationType::~CImplementationInformationType(void)
+	??0TScalerCaps@@QAE@XZ @ 15 NONAME ; TScalerCaps::TScalerCaps(void)
+	??0CImageMaskProcessorReadCodec@@IAE@XZ @ 16 NONAME ; CImageMaskProcessorReadCodec::CImageMaskProcessorReadCodec(void)
+	?ReservedVirtual4@CImageWriteCodec@@EAEXXZ @ 17 NONAME ; void CImageWriteCodec::ReservedVirtual4(void)
+	?ReservedVirtual2@CImageDecoder@@EAEXXZ @ 18 NONAME ; void CImageDecoder::ReservedVirtual2(void)
+	??0TScalerCaps@@QAE@HHH@Z @ 19 NONAME ; TScalerCaps::TScalerCaps(int, int, int)
+	?ConstructL@CImageProcessorReadCodec@@IAEXXZ @ 20 NONAME ; void CImageProcessorReadCodec::ConstructL(void)
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTMMSource@@ABVTDesC8@@W4TOptions@1@@Z @ 21 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFs &, class TMMSource const &, class TDesC8 const &, enum CImageDecoder::TOptions)
+	?Complete@CImageReadCodec@@UAEXXZ @ 22 NONAME ; void CImageReadCodec::Complete(void)
+	?DisplayName@CFileExtensionMIMEType@@QBEABVTDesC16@@XZ @ 23 NONAME ; class TDesC16 const & CFileExtensionMIMEType::DisplayName(void) const
+	?DataNewL@CImageEncoder@@SAPAV1@AAPAVHBufC8@@ABVTDesC8@@W4TOptions@1@@Z @ 24 NONAME ; class CImageEncoder * CImageEncoder::DataNewL(class HBufC8 * &, class TDesC8 const &, enum CImageEncoder::TOptions)
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTDesC16@@ABVTDesC8@@W4TIntent@ContentAccess@@W4TOptions@1@@Z @ 25 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFs &, class TDesC16 const &, class TDesC8 const &, enum ContentAccess::TIntent, enum CImageDecoder::TOptions)
+	?ConstructL@CImageProcessorReadCodecExtension@@IAEXXZ @ 26 NONAME ; void CImageProcessorReadCodecExtension::ConstructL(void)
+	?AddBlocks@TImageConvStreamedEncode@@QAEXAAVTRequestStatus@@ABVCImageFrame@@ABH@Z @ 27 NONAME ; void TImageConvStreamedEncode::AddBlocks(class TRequestStatus &, class CImageFrame const &, int const &)
+	??0CImageEncoder@@IAE@XZ @ 28 NONAME ; CImageEncoder::CImageEncoder(void)
+	?AppendBlocks@TImageConvStreamedEncode@@QAEXAAVTRequestStatus@@ABVCImageFrame@@H@Z @ 29 NONAME ; void TImageConvStreamedEncode::AppendBlocks(class TRequestStatus &, class CImageFrame const &, int)
+	?String@CFrameInfoStrings@@QBE?BVTPtrC16@@H@Z @ 30 NONAME ; class TPtrC16 const CFrameInfoStrings::String(int) const
+	?ImageType@CImageDecoder@@QBEXHAAVTUid@@0@Z @ 31 NONAME ; void CImageDecoder::ImageType(int, class TUid &, class TUid &) const
+	?ReservedVirtual2@CImageEncoder@@EAEXXZ @ 32 NONAME ; void CImageEncoder::ReservedVirtual2(void)
+	?ReductionFactor@CImageDecoder@@QBEHABVTSize@@0@Z @ 33 NONAME ; int CImageDecoder::ReductionFactor(class TSize const &, class TSize const &) const
+	?InitFrameL@TImageConvStreamedDecode@@QAEXVTUid@@HW4TNavigation@TDecodeStreamCaps@@@Z @ 34 NONAME ; void TImageConvStreamedDecode::InitFrameL(class TUid, int, enum TDecodeStreamCaps::TNavigation)
+	?GetInterfaceImplementationsL@CImageEncoder@@SAXPBVTUid@@HAAV?$RArray@VTUid@@@@@Z @ 35 NONAME ; void CImageEncoder::GetInterfaceImplementationsL(class TUid const *, int, class RArray<class TUid> &)
+	?CurrentFrame@CImageReadCodec@@IBEHXZ @ 36 NONAME ; int CImageReadCodec::CurrentFrame(void) const
+	?GetFrameData@CFrameImageData@@QAEPAVTFrameDataBlock@@H@Z @ 37 NONAME ; class TFrameDataBlock * CFrameImageData::GetFrameData(int)
+	?NewL@CFrameInfoStrings@@SAPAV1@XZ @ 38 NONAME ; class CFrameInfoStrings * CFrameInfoStrings::NewL(void)
+	?ImplementationUid@CFileExtensionMIMEType@@QBE?AVTUid@@XZ @ 39 NONAME ; class TUid CFileExtensionMIMEType::ImplementationUid(void) const
+	?MaxDownscaleLimit@TScalerCaps@@QBEHXZ @ 40 NONAME ; int TScalerCaps::MaxDownscaleLimit(void) const
+	??1CFrameInfoStrings@@UAE@XZ @ 41 NONAME ; CFrameInfoStrings::~CFrameInfoStrings(void)
+	?NewL@CFrameImageData@@SAPAV1@AAVCImageDataArray@@H@Z @ 42 NONAME ; class CFrameImageData * CFrameImageData::NewL(class CImageDataArray &, int)
+	??0CImageMaskProcessorReadCodecExtension@@IAE@XZ @ 43 NONAME ; CImageMaskProcessorReadCodecExtension::CImageMaskProcessorReadCodecExtension(void)
+	?BlockStreamerL@CImageDecoder@@QAEPAVTImageConvStreamedDecode@@XZ @ 44 NONAME ; class TImageConvStreamedDecode * CImageDecoder::BlockStreamerL(void)
+	?OperationL@CImageDecoder@@QAEPAVTImageConvOperation@@XZ @ 45 NONAME ; class TImageConvOperation * CImageDecoder::OperationL(void)
+	?FileNewL@CImageEncoder@@SAPAV1@AAVRFs@@ABVTDesC16@@ABVTDesC8@@W4TOptions@1@@Z @ 46 NONAME ; class CImageEncoder * CImageEncoder::FileNewL(class RFs &, class TDesC16 const &, class TDesC8 const &, enum CImageEncoder::TOptions)
+	?Convert@CImageDecoder@@UAEXPAVTRequestStatus@@AAVCFbsBitmap@@H@Z @ 47 NONAME ; void CImageDecoder::Convert(class TRequestStatus *, class CFbsBitmap &, int)
+	?ImplementationUid@CImplementationInformationType@@QBE?AVTUid@@XZ @ 48 NONAME ; class TUid CImplementationInformationType::ImplementationUid(void) const
+	?FrameCount@CImageDecoder@@QBEHXZ @ 49 NONAME ; int CImageDecoder::FrameCount(void) const
+	?Reserved_2@CFrameImageData@@EAEXXZ @ 50 NONAME ; void CFrameImageData::Reserved_2(void)
+	?GetImageSubTypesL@CImageEncoder@@SAXVTUid@@AAV?$RPointerArray@VCImageTypeDescription@@@@@Z @ 51 NONAME ; void CImageEncoder::GetImageSubTypesL(class TUid, class RPointerArray<class CImageTypeDescription> &)
+	??0CImageReadCodec@@IAE@XZ @ 52 NONAME ; CImageReadCodec::CImageReadCodec(void)
+	?ReservedVirtual1@CImageReadCodec@@EAEXXZ @ 53 NONAME ; void CImageReadCodec::ReservedVirtual1(void)
+	??1CImageWriteCodec@@UAE@XZ @ 54 NONAME ; CImageWriteCodec::~CImageWriteCodec(void)
+	?Prepare@CImageEncoder@@QAEXPAVTRequestStatus@@@Z @ 55 NONAME ; void CImageEncoder::Prepare(class TRequestStatus *)
+	?NumberOfImageComments@CImageDecoder@@QBEHXZ @ 56 NONAME ; int CImageDecoder::NumberOfImageComments(void) const
+	??1CImageMaskProcessorReadCodec@@UAE@XZ @ 57 NONAME ; CImageMaskProcessorReadCodec::~CImageMaskProcessorReadCodec(void)
+	?Plugin@CImageDecoder@@IBEPAVCImageDecoderPlugin@@XZ @ 58 NONAME ; class CImageDecoderPlugin * CImageDecoder::Plugin(void) const
+	?NewLC@CFileExtensionMIMEType@@SAPAV1@ABVTDesC8@@0ABVTDesC16@@VTUid@@22@Z @ 59 NONAME ; class CFileExtensionMIMEType * CFileExtensionMIMEType::NewLC(class TDesC8 const &, class TDesC8 const &, class TDesC16 const &, class TUid, class TUid, class TUid)
+	?Drive@CImplementationInformationType@@QAE?AVTDriveUnit@@XZ @ 60 NONAME ; class TDriveUnit CImplementationInformationType::Drive(void)
+	?GetInterfaceImplementationsL@CImageDecoder@@SAXABV?$RArray@VTUid@@@@AAV2@@Z @ 61 NONAME ; void CImageDecoder::GetInterfaceImplementationsL(class RArray<class TUid> const &, class RArray<class TUid> &)
+	?GetImageTypesL@CImageDecoder@@SAXAAV?$RPointerArray@VCImageTypeDescription@@@@@Z @ 62 NONAME ; void CImageDecoder::GetImageTypesL(class RPointerArray<class CImageTypeDescription> &)
+	?DataNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTDesC8@@W4TOptions@1@VTUid@@33@Z @ 63 NONAME ; class CImageDecoder * CImageDecoder::DataNewL(class RFs &, class TDesC8 const &, enum CImageDecoder::TOptions, class TUid, class TUid, class TUid)
+	?SetEncoderThreadPriority@CImageEncoder@@QAEHW4TThreadPriority@@@Z @ 64 NONAME ; int CImageEncoder::SetEncoderThreadPriority(enum TThreadPriority)
+	?SetPos@CImageProcessorReadCodec@@IAEXABVTPoint@@@Z @ 65 NONAME ; void CImageProcessorReadCodec::SetPos(class TPoint const &)
+	?SetScalingL@TImageConvScaler@@QAEXHW4TScalerQuality@1@@Z @ 66 NONAME ; void TImageConvScaler::SetScalingL(int, enum TImageConvScaler::TScalerQuality)
+	??0TImageConvStreamedEncode@@AAE@XZ @ 67 NONAME ; TImageConvStreamedEncode::TImageConvStreamedEncode(void)
+	?CustomAsync@CImageEncoder@@IAEXPAVTRequestStatus@@H@Z @ 68 NONAME ; void CImageEncoder::CustomAsync(class TRequestStatus *, int)
+	?RemoveFrameData@CFrameImageData@@QAEXH@Z @ 69 NONAME ; void CFrameImageData::RemoveFrameData(int)
+	?GetCapabilities@TImageConvStreamedDecode@@QBEXVTUid@@HAAVTDecodeStreamCaps@@@Z @ 70 NONAME ; void TImageConvStreamedDecode::GetCapabilities(class TUid, int, class TDecodeStreamCaps &) const
+	?FileNewL@CImageEncoder@@SAPAV1@AAVRFile@@W4TOptions@1@VTUid@@22@Z @ 71 NONAME ; class CImageEncoder * CImageEncoder::FileNewL(class RFile &, enum CImageEncoder::TOptions, class TUid, class TUid, class TUid)
+	?FileNewL@CImageEncoder@@SAPAV1@AAVRFile@@ABVTDesC8@@W4TOptions@1@@Z @ 72 NONAME ; class CImageEncoder * CImageEncoder::FileNewL(class RFile &, class TDesC8 const &, enum CImageEncoder::TOptions)
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTDesC16@@W4TOptions@1@VTUid@@33@Z @ 73 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFs &, class TDesC16 const &, enum CImageDecoder::TOptions, class TUid, class TUid, class TUid)
+	?SubType@CImageTypeDescription@@QBE?AVTUid@@XZ @ 74 NONAME ; class TUid CImageTypeDescription::SubType(void) const
+	?InitFrameL@CImageWriteCodec@@UAEXAAVTBufPtr8@@ABVCFbsBitmap@@@Z @ 75 NONAME ; void CImageWriteCodec::InitFrameL(class TBufPtr8 &, class CFbsBitmap const &)
+	?GetMimeTypeFileL@CImageDecoder@@SAXAAVRFs@@ABVTDesC16@@AAVTDes8@@@Z @ 76 NONAME ; void CImageDecoder::GetMimeTypeFileL(class RFs &, class TDesC16 const &, class TDes8 &)
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFile@@W4TIntent@ContentAccess@@W4TOptions@1@VTUid@@33@Z @ 77 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFile &, enum ContentAccess::TIntent, enum CImageDecoder::TOptions, class TUid, class TUid, class TUid)
+	?CustomSyncL@CImageEncoder@@IAEXH@Z @ 78 NONAME ; void CImageEncoder::CustomSyncL(int)
+	?SetImageProcessor@CImageProcessorReadCodec@@IAEXPAVCImageProcessor@@@Z @ 79 NONAME ; void CImageProcessorReadCodec::SetImageProcessor(class CImageProcessor *)
+	?IsImageHeaderProcessingComplete@CImageDecoder@@QBEHXZ @ 80 NONAME ; int CImageDecoder::IsImageHeaderProcessingComplete(void) const
+	?ReservedVirtual3@CImageWriteCodec@@EAEXXZ @ 81 NONAME ; void CImageWriteCodec::ReservedVirtual3(void)
+	?AddOperationL@TImageConvOperation@@QAEXW4TOperation@1@@Z @ 82 NONAME ; void TImageConvOperation::AddOperationL(enum TImageConvOperation::TOperation)
+	?Cancel@CImageDecoder@@QAEXXZ @ 83 NONAME ; void CImageDecoder::Cancel(void)
+	?ReservedVirtual1@CImageDecoder@@EAEXXZ @ 84 NONAME ; void CImageDecoder::ReservedVirtual1(void)
+	?InsertImageData@CFrameImageData@@QAEHPBVTImageDataBlock@@H@Z @ 85 NONAME ; int CFrameImageData::InsertImageData(class TImageDataBlock const *, int)
+	?SetDecoderThreadPriority@CImageDecoder@@QAEHW4TThreadPriority@@@Z @ 86 NONAME ; int CImageDecoder::SetDecoderThreadPriority(enum TThreadPriority)
+	?NewL@CFrameImageData@@SAPAV1@XZ @ 87 NONAME ; class CFrameImageData * CFrameImageData::NewL(void)
+	?GetMimeTypeDataL@CImageDecoder@@SAXABVTDesC8@@AAVTDes8@@@Z @ 88 NONAME ; void CImageDecoder::GetMimeTypeDataL(class TDesC8 const &, class TDes8 &)
+	?GetImageData@CFrameImageData@@QBEPBVTImageDataBlock@@H@Z @ 89 NONAME ; class TImageDataBlock const * CFrameImageData::GetImageData(int) const
+	?ScalingCoefficient@CImageMaskProcessorReadCodecExtension@@MBEHABVTSize@@0@Z @ 90 NONAME ; int CImageMaskProcessorReadCodecExtension::ScalingCoefficient(class TSize const &, class TSize const &) const
+	?ImageType@CImageTypeDescription@@QBE?AVTUid@@XZ @ 91 NONAME ; class TUid CImageTypeDescription::ImageType(void) const
+	?ContinueConvert@CImageDecoder@@UAEXPAVTRequestStatus@@@Z @ 92 NONAME ; void CImageDecoder::ContinueConvert(class TRequestStatus *)
+	?GetImplementationInformationL@CImageDecoder@@SAPAVCImplementationInformationType@@VTUid@@@Z @ 93 NONAME ; class CImplementationInformationType * CImageDecoder::GetImplementationInformationL(class TUid)
+	?Cancel@CImageEncoder@@QAEXXZ @ 94 NONAME ; void CImageEncoder::Cancel(void)
+	?Size@TScalerCaps@@QBEIXZ @ 95 NONAME ; unsigned int TScalerCaps::Size(void) const
+	?ReservedVirtual1@CImageEncoder@@EAEXXZ @ 96 NONAME ; void CImageEncoder::ReservedVirtual1(void)
+	?Format@CFrameInfoStrings@@QBE?BVTPtrC16@@XZ @ 97 NONAME ; class TPtrC16 const CFrameInfoStrings::Format(void) const
+	?GetInterfaceImplementationsL@CImageDecoder@@SAXPBVTUid@@HAAV?$RArray@VTUid@@@@@Z @ 98 NONAME ; void CImageDecoder::GetInterfaceImplementationsL(class TUid const *, int, class RArray<class TUid> &)
+	?Reserved_4@CFrameImageData@@EAEXXZ @ 99 NONAME ; void CFrameImageData::Reserved_4(void)
+	?SetThumbnail@CImageEncoder@@QAEXH@Z @ 100 NONAME ; void CImageEncoder::SetThumbnail(int)
+	?ReservedVirtual3@CImageReadCodec@@EAEXXZ @ 101 NONAME ; void CImageReadCodec::ReservedVirtual3(void)
+	?ImageSubType@CFileExtensionMIMEType@@QBE?AVTUid@@XZ @ 102 NONAME ; class TUid CFileExtensionMIMEType::ImageSubType(void) const
+	?InitFrameL@TImageConvStreamedEncode@@QAEXVTUid@@HABVTSize@@1W4TNavigation@TEncodeStreamCaps@@PBVCFrameImageData@@@Z @ 103 NONAME ; void TImageConvStreamedEncode::InitFrameL(class TUid, int, class TSize const &, class TSize const &, enum TEncodeStreamCaps::TNavigation, class CFrameImageData const *)
+	?GetPluginPropertiesL@CImageEncoder@@SAXVTUid@@AAV?$RArray@VTUid@@@@@Z @ 104 NONAME ; void CImageEncoder::GetPluginPropertiesL(class TUid, class RArray<class TUid> &)
+	??0TImageConvScaler@@AAE@XZ @ 105 NONAME ; TImageConvScaler::TImageConvScaler(void)
+	?FrameCommentL@CImageDecoder@@QBEPAVHBufC16@@HH@Z @ 106 NONAME ; class HBufC16 * CImageDecoder::FrameCommentL(int, int) const
+	??0TDecodeStreamCaps@@QAE@HABVTSize@@HHW4TNavigation@0@@Z @ 107 NONAME ; TDecodeStreamCaps::TDecodeStreamCaps(int, class TSize const &, int, int, enum TDecodeStreamCaps::TNavigation)
+	??1CImageTypeDescription@@UAE@XZ @ 108 NONAME ; CImageTypeDescription::~CImageTypeDescription(void)
+	?ReducedSize@CImageDecoder@@QBEHABVTSize@@HAAV2@@Z @ 109 NONAME ; int CImageDecoder::ReducedSize(class TSize const &, int, class TSize &) const
+	?Plugin@CImageEncoder@@IBEPAVCImageEncoderPlugin@@XZ @ 110 NONAME ; class CImageEncoderPlugin * CImageEncoder::Plugin(void) const
+	?Depth@CFrameInfoStrings@@QBE?BVTPtrC16@@XZ @ 111 NONAME ; class TPtrC16 const CFrameInfoStrings::Depth(void) const
+	??1CFileExtensionMIMEType@@UAE@XZ @ 112 NONAME ; CFileExtensionMIMEType::~CFileExtensionMIMEType(void)
+	?NewLC@CFrameInfoStrings@@SAPAV1@XZ @ 113 NONAME ; class CFrameInfoStrings * CFrameInfoStrings::NewLC(void)
+	?FileExtension@CFileExtensionMIMEType@@QBEABVTDesC16@@XZ @ 114 NONAME ; class TDesC16 const & CFileExtensionMIMEType::FileExtension(void) const
+	?GetSupportedFormatsL@TImageConvStreamedEncode@@QBEXAAV?$RArray@VTUid@@@@AAVTUid@@@Z @ 115 NONAME ; void TImageConvStreamedEncode::GetSupportedFormatsL(class RArray<class TUid> &, class TUid &) const
+	?CustomAsync@CImageDecoder@@IAEXPAVTRequestStatus@@H@Z @ 116 NONAME ; void CImageDecoder::CustomAsync(class TRequestStatus *, int)
+	?Size@TDecodeStreamCaps@@QBEIXZ @ 117 NONAME ; unsigned int TDecodeStreamCaps::Size(void) const
+	?Navigation@TEncodeStreamCaps@@QBE?AW4TNavigation@1@XZ @ 118 NONAME ; enum TEncodeStreamCaps::TNavigation TEncodeStreamCaps::Navigation(void) const
+	?GetDestinationSize@CImageDecoder@@QAEHAAVTSize@@H@Z @ 119 NONAME ; int CImageDecoder::GetDestinationSize(class TSize &, int)
+	?ReservedVirtual4@CImageDecoder@@EAEXXZ @ 120 NONAME ; void CImageDecoder::ReservedVirtual4(void)
+	?OptimalBlocksPerRequest@TDecodeStreamCaps@@QBEHXZ @ 121 NONAME ; int TDecodeStreamCaps::OptimalBlocksPerRequest(void) const
+	?IsFilename@TImageParameterData@@QBEHXZ @ 122 NONAME ; int TImageParameterData::IsFilename(void) const
+	?Size@TEncodeStreamCaps@@QBEIXZ @ 123 NONAME ; unsigned int TEncodeStreamCaps::Size(void) const
+	?GetFileTypesL@CImageDecoder@@SAXAAV?$RPointerArray@VCFileExtensionMIMEType@@@@@Z @ 124 NONAME ; void CImageDecoder::GetFileTypesL(class RPointerArray<class CFileExtensionMIMEType> &)
+	?SourceDataPtr@TImageParameterData@@QBEPBVTDesC8@@XZ @ 125 NONAME ; class TDesC8 const * TImageParameterData::SourceDataPtr(void) const
+	??1CImageMaskProcessorReadCodecExtension@@UAE@XZ @ 126 NONAME ; CImageMaskProcessorReadCodecExtension::~CImageMaskProcessorReadCodecExtension(void)
+	?Pos@CImageProcessorReadCodec@@IBEABVTPoint@@XZ @ 127 NONAME ; class TPoint const & CImageProcessorReadCodec::Pos(void) const
+	?OptimalBlocksPerRequest@TEncodeStreamCaps@@QBEHXZ @ 128 NONAME ; int TEncodeStreamCaps::OptimalBlocksPerRequest(void) const
+	?ReducedSize@CImageReadCodec@@UBEHABVTSize@@HAAV2@@Z @ 129 NONAME ; int CImageReadCodec::ReducedSize(class TSize const &, int, class TSize &) const
+	?GetMimeTypeL@CIclRecognizerUtil@@QAEHABVTDesC8@@ABVTDesC16@@AAVTDes8@@@Z @ 130 NONAME ; int CIclRecognizerUtil::GetMimeTypeL(class TDesC8 const &, class TDesC16 const &, class TDes8 &)
+	?SourceFilenamePtr@TImageParameterData@@QBEPBVTDesC16@@XZ @ 131 NONAME ; class TDesC16 const * TImageParameterData::SourceFilenamePtr(void) const
+	?ReservedVirtual4@CImageEncoder@@EAEXXZ @ 132 NONAME ; void CImageEncoder::ReservedVirtual4(void)
+	?GetImageSubTypesL@CImageDecoder@@SAXVTUid@@AAV?$RPointerArray@VCImageTypeDescription@@@@@Z @ 133 NONAME ; void CImageDecoder::GetImageSubTypesL(class TUid, class RPointerArray<class CImageTypeDescription> &)
+	??0TImageConvOperation@@AAE@XZ @ 134 NONAME ; TImageConvOperation::TImageConvOperation(void)
+	?ImplementationUid@CImageDecoder@@QBE?AVTUid@@XZ @ 135 NONAME ; class TUid CImageDecoder::ImplementationUid(void) const
+	?StreamSizeInBlocks@TDecodeStreamCaps@@QBEHXZ @ 136 NONAME ; int TDecodeStreamCaps::StreamSizeInBlocks(void) const
+	?AppendImageData@CFrameImageData@@QAEHPBVTImageDataBlock@@@Z @ 137 NONAME ; int CFrameImageData::AppendImageData(class TImageDataBlock const *)
+	?AppendImageBuffer@CFrameImageData@@QAEHPBVHBufC8@@@Z @ 138 NONAME ; int CFrameImageData::AppendImageBuffer(class HBufC8 const *)
+	?Description@CImageTypeDescription@@QBEABVTDesC16@@XZ @ 139 NONAME ; class TDesC16 const & CImageTypeDescription::Description(void) const
+	?ClearOperationStack@TImageConvOperation@@QAEXXZ @ 140 NONAME ; void TImageConvOperation::ClearOperationStack(void)
+	?GetCapabilities@TImageConvScaler@@QBEXAAVTScalerCaps@@@Z @ 141 NONAME ; void TImageConvScaler::GetCapabilities(class TScalerCaps &) const
+	??1CImageReadCodec@@UAE@XZ @ 142 NONAME ; CImageReadCodec::~CImageReadCodec(void)
+	??1CImageProcessorReadCodecExtension@@UAE@XZ @ 143 NONAME ; CImageProcessorReadCodecExtension::~CImageProcessorReadCodecExtension(void)
+	??0TDecodeStreamCaps@@QAE@XZ @ 144 NONAME ; TDecodeStreamCaps::TDecodeStreamCaps(void)
+	?Complete@TImageConvStreamedEncode@@QAEXAAVTRequestStatus@@@Z @ 145 NONAME ; void TImageConvStreamedEncode::Complete(class TRequestStatus &)
+	?Source@CImageWriteCodec@@QBEPBVCFbsBitmap@@XZ @ 146 NONAME ; class CFbsBitmap const * CImageWriteCodec::Source(void) const
+	?SetDetailsL@CFrameInfoStrings@@QAEXABVTDesC16@@@Z @ 147 NONAME ; void CFrameInfoStrings::SetDetailsL(class TDesC16 const &)
+	?ReservedVirtual2@CImageWriteCodec@@EAEXXZ @ 148 NONAME ; void CImageWriteCodec::ReservedVirtual2(void)
+	?Reserved_1@CFrameImageData@@EAEXXZ @ 149 NONAME ; void CFrameImageData::Reserved_1(void)
+	?MinBlockSizeInPixels@TDecodeStreamCaps@@QBEABVTSize@@XZ @ 150 NONAME ; class TSize const & TDecodeStreamCaps::MinBlockSizeInPixels(void) const
+	?CustomSyncL@CImageDecoder@@IAEXH@Z @ 151 NONAME ; void CImageDecoder::CustomSyncL(int)
+	?GetNewDataPosition@CImageReadCodec@@UAEXAAH0@Z @ 152 NONAME ; void CImageReadCodec::GetNewDataPosition(int &, int &)
+	?Version@CImplementationInformationType@@QBEHXZ @ 153 NONAME ; int CImplementationInformationType::Version(void) const
+	??0TEncodeStreamCaps@@QAE@XZ @ 154 NONAME ; TEncodeStreamCaps::TEncodeStreamCaps(void)
+	?ImageProcessor@CImageProcessorReadCodec@@IBEPAVCImageProcessor@@XZ @ 155 NONAME ; class CImageProcessor * CImageProcessorReadCodec::ImageProcessor(void) const
+	?Convert@CImageDecoder@@UAEXPAVTRequestStatus@@AAVCFbsBitmap@@1H@Z @ 156 NONAME ; void CImageDecoder::Convert(class TRequestStatus *, class CFbsBitmap &, class CFbsBitmap &, int)
+	?GetBlocks@TImageConvStreamedDecode@@QAEXAAVTRequestStatus@@AAVCImageFrame@@HHAAH@Z @ 157 NONAME ; void TImageConvStreamedDecode::GetBlocks(class TRequestStatus &, class CImageFrame &, int, int, int &)
+	?Version@TDecodeStreamCaps@@QBEIXZ @ 158 NONAME ; unsigned int TDecodeStreamCaps::Version(void) const
+	?SetAgentProperty@CImageDecoder@@QAEHW4TAgentProperty@ContentAccess@@H@Z @ 159 NONAME ; int CImageDecoder::SetAgentProperty(enum ContentAccess::TAgentProperty, int)
+	?GetSupportedFormatsL@TImageConvStreamedDecode@@QBEXAAV?$RArray@VTUid@@@@AAVTUid@@@Z @ 160 NONAME ; void TImageConvStreamedDecode::GetSupportedFormatsL(class RArray<class TUid> &, class TUid &) const
+	??0TImageConvStreamedDecode@@AAE@XZ @ 161 NONAME ; TImageConvStreamedDecode::TImageConvStreamedDecode(void)
+	?Version@TEncodeStreamCaps@@QBEIXZ @ 162 NONAME ; unsigned int TEncodeStreamCaps::Version(void) const
+	??0TEncodeStreamCaps@@QAE@HABVTSize@@HW4TNavigation@0@@Z @ 163 NONAME ; TEncodeStreamCaps::TEncodeStreamCaps(int, class TSize const &, int, enum TEncodeStreamCaps::TNavigation)
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTDesC16@@ABVTDesC8@@W4TOptions@1@@Z @ 164 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFs &, class TDesC16 const &, class TDesC8 const &, enum CImageDecoder::TOptions)
+	?Version@TScalerCaps@@QBEIXZ @ 165 NONAME ; unsigned int TScalerCaps::Version(void) const
+	?SetFormatL@CFrameInfoStrings@@QAEXABVTDesC16@@@Z @ 166 NONAME ; void CFrameInfoStrings::SetFormatL(class TDesC16 const &)
+	?ScalingCoefficient@CImageProcessorReadCodecExtension@@MBEHABVTSize@@0@Z @ 167 NONAME ; int CImageProcessorReadCodecExtension::ScalingCoefficient(class TSize const &, class TSize const &) const
+	?GetFrameData@CFrameImageData@@QBEPBVTFrameDataBlock@@H@Z @ 168 NONAME ; class TFrameDataBlock const * CFrameImageData::GetFrameData(int) const
+	?GetPluginPropertiesL@CImageDecoder@@SAXVTUid@@AAV?$RArray@VTUid@@@@@Z @ 169 NONAME ; void CImageDecoder::GetPluginPropertiesL(class TUid, class RArray<class TUid> &)
+	?ReductionFactor@CImageReadCodec@@UBEHABVTSize@@0@Z @ 170 NONAME ; int CImageReadCodec::ReductionFactor(class TSize const &, class TSize const &) const
+	?GetNextBlocks@TImageConvStreamedDecode@@QAEXAAVTRequestStatus@@AAVCImageFrame@@HAAH2@Z @ 171 NONAME ; void TImageConvStreamedDecode::GetNextBlocks(class TRequestStatus &, class CImageFrame &, int, int &, int &)
+	?PowerOfTwoScalingOnly@TScalerCaps@@QBEHXZ @ 172 NONAME ; int TScalerCaps::PowerOfTwoScalingOnly(void) const
+	??1CImageProcessorReadCodec@@UAE@XZ @ 173 NONAME ; CImageProcessorReadCodec::~CImageProcessorReadCodec(void)
+	?DataType@CImplementationInformationType@@QBEABVTDesC8@@XZ @ 174 NONAME ; class TDesC8 const & CImplementationInformationType::DataType(void) const
+	?AppendFrameData@CFrameImageData@@QAEHPBVTFrameDataBlock@@@Z @ 175 NONAME ; int CFrameImageData::AppendFrameData(class TFrameDataBlock const *)
+	?Count@CFrameInfoStrings@@QBEHXZ @ 176 NONAME ; int CFrameInfoStrings::Count(void) const
+	?GetReducedSize@CImageProcessorReadCodecExtension@@MBEHABVTSize@@HAAV2@@Z @ 177 NONAME ; int CImageProcessorReadCodecExtension::GetReducedSize(class TSize const &, int, class TSize &) const
+	?FileNewL@CImageEncoder@@SAPAV1@AAVRFs@@ABVTDesC16@@W4TOptions@1@VTUid@@33@Z @ 178 NONAME ; class CImageEncoder * CImageEncoder::FileNewL(class RFs &, class TDesC16 const &, enum CImageEncoder::TOptions, class TUid, class TUid, class TUid)
+	?AllocL@CFrameImageData@@QBEPAV1@XZ @ 179 NONAME ; class CFrameImageData * CFrameImageData::AllocL(void) const
+	?Dimensions@CFrameInfoStrings@@QBE?BVTPtrC16@@XZ @ 180 NONAME ; class TPtrC16 const CFrameInfoStrings::Dimensions(void) const
+	?OperationL@CImageEncoder@@QAEPAVTImageConvOperation@@XZ @ 181 NONAME ; class TImageConvOperation * CImageEncoder::OperationL(void)
+	?MIMEType@CFileExtensionMIMEType@@QBEABVTDesC8@@XZ @ 182 NONAME ; class TDesC8 const & CFileExtensionMIMEType::MIMEType(void) const
+	?Capabilities@TImageConvOperation@@QBEIXZ @ 183 NONAME ; unsigned int TImageConvOperation::Capabilities(void) const
+	?FrameData@CImageDecoder@@QBEABVCFrameImageData@@H@Z @ 184 NONAME ; class CFrameImageData const & CImageDecoder::FrameData(int) const
+	?SetImageTypeL@CImageDecoder@@QAEXH@Z @ 185 NONAME ; void CImageDecoder::SetImageTypeL(int)
+	?ReservedVirtual3@CImageDecoder@@EAEXXZ @ 186 NONAME ; void CImageDecoder::ReservedVirtual3(void)
+	?ConstructL@CImageMaskProcessorReadCodecExtension@@IAEXXZ @ 187 NONAME ; void CImageMaskProcessorReadCodecExtension::ConstructL(void)
+	?GetReducedSize@CImageMaskProcessorReadCodecExtension@@MBEHABVTSize@@HAAV2@@Z @ 188 NONAME ; int CImageMaskProcessorReadCodecExtension::GetReducedSize(class TSize const &, int, class TSize &) const
+	??1CImageDecoder@@UAE@XZ @ 189 NONAME ; CImageDecoder::~CImageDecoder(void)
+	?SetScalingL@TImageConvScaler@@QAEXABVTSize@@W4TScalerQuality@1@H@Z @ 190 NONAME ; void TImageConvScaler::SetScalingL(class TSize const &, enum TImageConvScaler::TScalerQuality, int)
+	?Details@CFrameInfoStrings@@QBE?BVTPtrC16@@XZ @ 191 NONAME ; class TPtrC16 const CFrameInfoStrings::Details(void) const
+	?OpaqueData@CImplementationInformationType@@QBEABVTDesC8@@XZ @ 192 NONAME ; class TDesC8 const & CImplementationInformationType::OpaqueData(void) const
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTMMSource@@W4TOptions@1@VTUid@@33@Z @ 193 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFs &, class TMMSource const &, enum CImageDecoder::TOptions, class TUid, class TUid, class TUid)
+	?Reserved_3@CFrameImageData@@EAEXXZ @ 194 NONAME ; void CFrameImageData::Reserved_3(void)
+	?BlockStreamerL@CImageEncoder@@QAEPAVTImageConvStreamedEncode@@XZ @ 195 NONAME ; class TImageConvStreamedEncode * CImageEncoder::BlockStreamerL(void)
+	?SetDecoderL@CFrameInfoStrings@@QAEXABVTDesC16@@@Z @ 196 NONAME ; void CFrameInfoStrings::SetDecoderL(class TDesC16 const &)
+	?ProcessFrameHeaderL@CImageReadCodec@@UAE?AW4TFrameState@@AAVTBufPtr8@@@Z @ 197 NONAME ; enum TFrameState CImageReadCodec::ProcessFrameHeaderL(class TBufPtr8 &)
+	?Prepare@CImageDecoder@@QAEXPAVTRequestStatus@@@Z @ 198 NONAME ; void CImageDecoder::Prepare(class TRequestStatus *)
+	?ReservedVirtual2@CImageReadCodec@@EAEXXZ @ 199 NONAME ; void CImageReadCodec::ReservedVirtual2(void)
+	?GetImageData@CFrameImageData@@QAEPAVTImageDataBlock@@H@Z @ 200 NONAME ; class TImageDataBlock * CFrameImageData::GetImageData(int)
+	??0CImageProcessorReadCodec@@IAE@XZ @ 201 NONAME ; CImageProcessorReadCodec::CImageProcessorReadCodec(void)
+	?InsertFrameData@CFrameImageData@@QAEHPBVTFrameDataBlock@@H@Z @ 202 NONAME ; int CFrameImageData::InsertFrameData(class TFrameDataBlock const *, int)
+	?ReservedVirtual3@CImageEncoder@@EAEXXZ @ 203 NONAME ; void CImageEncoder::ReservedVirtual3(void)
+	?DisplayName@CImplementationInformationType@@QBEABVTDesC16@@XZ @ 204 NONAME ; class TDesC16 const & CImplementationInformationType::DisplayName(void) const
+	?ConstructL@CImageMaskProcessorReadCodec@@IAEXXZ @ 205 NONAME ; void CImageMaskProcessorReadCodec::ConstructL(void)
+	?NewL@CIclRecognizerUtil@@SAPAV1@XZ @ 206 NONAME ; class CIclRecognizerUtil * CIclRecognizerUtil::NewL(void)
+	??1CImageEncoder@@UAE@XZ @ 207 NONAME ; CImageEncoder::~CImageEncoder(void)
+	?SetMaskProcessor@CImageMaskProcessorReadCodec@@IAEXPAVCImageProcessor@@@Z @ 208 NONAME ; void CImageMaskProcessorReadCodec::SetMaskProcessor(class CImageProcessor *)
+	??0CImageWriteCodec@@IAE@XZ @ 209 NONAME ; CImageWriteCodec::CImageWriteCodec(void)
+	?FrameInfoStringsLC@CImageDecoder@@QAEPAVCFrameInfoStrings@@H@Z @ 210 NONAME ; class CFrameInfoStrings * CImageDecoder::FrameInfoStringsLC(int)
+	?ImageCommentL@CImageDecoder@@QBEPAVHBufC16@@H@Z @ 211 NONAME ; class HBufC16 * CImageDecoder::ImageCommentL(int) const
+	?SetDimensionsL@CFrameInfoStrings@@QAEXABVTDesC16@@@Z @ 212 NONAME ; void CFrameInfoStrings::SetDimensionsL(class TDesC16 const &)
+	?MaxUpscaleLimit@TScalerCaps@@QBEHXZ @ 213 NONAME ; int TScalerCaps::MaxUpscaleLimit(void) const
+	??1CFrameImageData@@UAE@XZ @ 214 NONAME ; CFrameImageData::~CFrameImageData(void)
+	?MinBlockSizeInPixels@TEncodeStreamCaps@@QBEABVTSize@@XZ @ 215 NONAME ; class TSize const & TEncodeStreamCaps::MinBlockSizeInPixels(void) const
+	?ContinueProcessingHeaderL@CImageDecoder@@QAEXXZ @ 216 NONAME ; void CImageDecoder::ContinueProcessingHeaderL(void)
+	?Decoder@CFrameInfoStrings@@QBE?BVTPtrC16@@XZ @ 217 NONAME ; class TPtrC16 const CFrameInfoStrings::Decoder(void) const
+	?ReservedVirtual1@CImageWriteCodec@@EAEXXZ @ 218 NONAME ; void CImageWriteCodec::ReservedVirtual1(void)
+	?ConstructL@CImageReadCodec@@IAEXXZ @ 219 NONAME ; void CImageReadCodec::ConstructL(void)
+	?SetDepthL@CFrameInfoStrings@@QAEXABVTDesC16@@@Z @ 220 NONAME ; void CFrameInfoStrings::SetDepthL(class TDesC16 const &)
+	?ImageType@CFileExtensionMIMEType@@QBE?AVTUid@@XZ @ 221 NONAME ; class TUid CFileExtensionMIMEType::ImageType(void) const
+	?Navigation@TDecodeStreamCaps@@QBE?AW4TNavigation@1@XZ @ 222 NONAME ; enum TDecodeStreamCaps::TNavigation TDecodeStreamCaps::Navigation(void) const
+	?InitFrameHeader@CImageReadCodec@@UAEXAAVTFrameInfo@@AAVCFrameImageData@@@Z @ 223 NONAME ; void CImageReadCodec::InitFrameHeader(class TFrameInfo &, class CFrameImageData &)
+	?GetInterfaceImplementationsL@CImageEncoder@@SAXABV?$RArray@VTUid@@@@AAV2@@Z @ 224 NONAME ; void CImageEncoder::GetInterfaceImplementationsL(class RArray<class TUid> const &, class RArray<class TUid> &)
+	?FileNewL@CImageDecoder@@SAPAV1@AAVRFile@@ABVTDesC8@@W4TIntent@ContentAccess@@W4TOptions@1@@Z @ 225 NONAME ; class CImageDecoder * CImageDecoder::FileNewL(class RFile &, class TDesC8 const &, enum ContentAccess::TIntent, enum CImageDecoder::TOptions)
+	?ImplementationUid@CImageEncoder@@QBE?AVTUid@@XZ @ 226 NONAME ; class TUid CImageEncoder::ImplementationUid(void) const
+	?Convert@CImageEncoder@@QAEXPAVTRequestStatus@@ABVCFbsBitmap@@PBVCFrameImageData@@@Z @ 227 NONAME ; void CImageEncoder::Convert(class TRequestStatus *, class CFbsBitmap const &, class CFrameImageData const *)
+	?MaxBlocksPerRequest@TDecodeStreamCaps@@QBEHXZ @ 228 NONAME ; int TDecodeStreamCaps::MaxBlocksPerRequest(void) const
+	?NumberOfFrameComments@CImageDecoder@@QBEHH@Z @ 229 NONAME ; int CImageDecoder::NumberOfFrameComments(int) const
+	?FrameDataCount@CFrameImageData@@QBEHXZ @ 230 NONAME ; int CFrameImageData::FrameDataCount(void) const
+	?GetFileTypesL@CImageEncoder@@SAXAAV?$RPointerArray@VCFileExtensionMIMEType@@@@@Z @ 231 NONAME ; void CImageEncoder::GetFileTypesL(class RPointerArray<class CFileExtensionMIMEType> &)
+	?SetClippingRectL@CImageDecoder@@QAEXPBVTRect@@@Z @ 232 NONAME ; void CImageDecoder::SetClippingRectL(class TRect const *)
+	?RemoveImageData@CFrameImageData@@QAEXH@Z @ 233 NONAME ; void CFrameImageData::RemoveImageData(int)
+	?DataNewL@CImageDecoder@@SAPAV1@AAVRFs@@ABVTDesC8@@1W4TOptions@1@@Z @ 234 NONAME ; class CImageDecoder * CImageDecoder::DataNewL(class RFs &, class TDesC8 const &, class TDesC8 const &, enum CImageDecoder::TOptions)
+	?FrameInfo@CImageDecoder@@QBEABVTFrameInfo@@H@Z @ 235 NONAME ; class TFrameInfo const & CImageDecoder::FrameInfo(int) const
+	?MaxBlocksPerRequest@TEncodeStreamCaps@@QBEHXZ @ 236 NONAME ; int TEncodeStreamCaps::MaxBlocksPerRequest(void) const
+	?ImageDataCount@CFrameImageData@@QBEHXZ @ 237 NONAME ; int CFrameImageData::ImageDataCount(void) const
+	?MustPreserveAspectRatio@TScalerCaps@@QBEHXZ @ 238 NONAME ; int TScalerCaps::MustPreserveAspectRatio(void) const
+	?GetCapabilities@TImageConvStreamedEncode@@QBEXVTUid@@AAVTEncodeStreamCaps@@@Z @ 239 NONAME ; void TImageConvStreamedEncode::GetCapabilities(class TUid, class TEncodeStreamCaps &) const
+	?ScalerL@CImageDecoder@@QAEPAVTImageConvScaler@@XZ @ 240 NONAME ; class TImageConvScaler * CImageDecoder::ScalerL(void)
+

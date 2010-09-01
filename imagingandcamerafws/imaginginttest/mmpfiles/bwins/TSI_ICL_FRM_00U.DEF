@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuite_TSI_ICL_FRM_00L@@YAPAVCTestSuite_TSI_ICL_FRM_00@@XZ @ 1 NONAME ; class CTestSuite_TSI_ICL_FRM_00 * __cdecl NewTestSuite_TSI_ICL_FRM_00L(void)
+

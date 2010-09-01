@@ -1,0 +1,58 @@
+EXPORTS
+	??0CImageDisplayPlugin@@IAE@XZ @ 1 NONAME ; CImageDisplayPlugin::CImageDisplayPlugin(void)
+	??0TDescriptorDataSource@@QAE@ABVTPtrC8@@@Z @ 2 NONAME ; TDescriptorDataSource::TDescriptorDataSource(class TPtrC8 const &)
+	??1CImageDisplay@@UAE@XZ @ 3 NONAME ; CImageDisplay::~CImageDisplay(void)
+	??1CImageDisplayPlugin@@UAE@XZ @ 4 NONAME ; CImageDisplayPlugin::~CImageDisplayPlugin(void)
+	?AsyncCallbackImageReady@CImageDisplayPlugin@@IAEXPBVCFbsBitmap@@IABVTRect@@H@Z @ 5 NONAME ; void CImageDisplayPlugin::AsyncCallbackImageReady(class CFbsBitmap const *, unsigned int, class TRect const &, int)
+	?CallbackIsRunning@CImageDisplayPlugin@@IBEHXZ @ 6 NONAME ; int CImageDisplayPlugin::CallbackIsRunning(void) const
+	?CancelCallback@CImageDisplayPlugin@@IAEXXZ @ 7 NONAME ; void CImageDisplayPlugin::CancelCallback(void)
+	?DataBuf@TDescriptorDataSource@@QBEABVTPtrC8@@XZ @ 8 NONAME ; class TPtrC8 const & TDescriptorDataSource::DataBuf(void) const
+	?DestinationSizeInPixels@CImageDisplayPlugin@@IBEABVTSize@@XZ @ 9 NONAME ; class TSize const & CImageDisplayPlugin::DestinationSizeInPixels(void) const
+	?DisplayMode@CImageDisplayPlugin@@IBE?AW4TDisplayMode@@XZ @ 10 NONAME ; enum TDisplayMode CImageDisplayPlugin::DisplayMode(void) const
+	?ExtensionInterface@CImageDisplay@@QAEHVTUid@@AAPAX@Z @ 11 NONAME ; int CImageDisplay::ExtensionInterface(class TUid, void * &)
+	?ExtensionInterface@CImageDisplayPlugin@@MAEHVTUid@@AAPAX@Z @ 12 NONAME ; int CImageDisplayPlugin::ExtensionInterface(class TUid, void * &)
+	?GetBitmap@CImageDisplay@@QBEXAAPBVCFbsBitmap@@0@Z @ 13 NONAME ; void CImageDisplay::GetBitmap(class CFbsBitmap const * &, class CFbsBitmap const * &) const
+	?GetBitmap@CImageDisplayPlugin@@MBEXAAPBVCFbsBitmap@@0@Z @ 14 NONAME ; void CImageDisplayPlugin::GetBitmap(class CFbsBitmap const * &, class CFbsBitmap const * &) const
+	?ImageStatus@CImageDisplay@@QBEIXZ @ 15 NONAME ; unsigned int CImageDisplay::ImageStatus(void) const
+	?ImageStatus@CImageDisplayPlugin@@MBEIXZ @ 16 NONAME ; unsigned int CImageDisplayPlugin::ImageStatus(void) const
+	?MaintainAspectRatio@CImageDisplayPlugin@@IBEHXZ @ 17 NONAME ; int CImageDisplayPlugin::MaintainAspectRatio(void) const
+	?NewL@CImageDisplay@@SAPAV1@AAVMIclImageDisplayObserver@@AAVRFs@@@Z @ 18 NONAME ; class CImageDisplay * CImageDisplay::NewL(class MIclImageDisplayObserver &, class RFs &)
+	?NewL@CImageDisplayPlugin@@CAPAV1@VTUid@@AAVCImageDisplayFramework@@@Z @ 19 NONAME ; class CImageDisplayPlugin * CImageDisplayPlugin::NewL(class TUid, class CImageDisplayFramework &)
+	?NumFrames@CImageDisplay@@QBEHAAH@Z @ 20 NONAME ; int CImageDisplay::NumFrames(int &) const
+	?NumFrames@CImageDisplayPlugin@@MBEHAAH@Z @ 21 NONAME ; int CImageDisplayPlugin::NumFrames(int &) const
+	?Options@CImageDisplayPlugin@@IBEIXZ @ 22 NONAME ; unsigned int CImageDisplayPlugin::Options(void) const
+	?Pause@CImageDisplay@@QAEXXZ @ 23 NONAME ; void CImageDisplay::Pause(void)
+	?Play@CImageDisplay@@QAEXXZ @ 24 NONAME ; void CImageDisplay::Play(void)
+	?RecommendedImageSizes@CImageDisplay@@QBEABV?$RArray@VTSize@@@@XZ @ 25 NONAME ; class RArray<class TSize> const & CImageDisplay::RecommendedImageSizes(void) const
+	?ReservedVirtual1@CImageDisplayPlugin@@EAEXXZ @ 26 NONAME ; void CImageDisplayPlugin::ReservedVirtual1(void)
+	?ReservedVirtual2@CImageDisplayPlugin@@EAEXXZ @ 27 NONAME ; void CImageDisplayPlugin::ReservedVirtual2(void)
+	?ReservedVirtual3@CImageDisplayPlugin@@EAEXXZ @ 28 NONAME ; void CImageDisplayPlugin::ReservedVirtual3(void)
+	?ReservedVirtual4@CImageDisplayPlugin@@EAEXXZ @ 29 NONAME ; void CImageDisplayPlugin::ReservedVirtual4(void)
+	?Reset@CImageDisplay@@QAEXXZ @ 30 NONAME ; void CImageDisplay::Reset(void)
+	?ResetSourceRect@CImageDisplay@@QAEXXZ @ 31 NONAME ; void CImageDisplay::ResetSourceRect(void)
+	?SetDisplayMode@CImageDisplay@@QAEXW4TDisplayMode@@@Z @ 32 NONAME ; void CImageDisplay::SetDisplayMode(enum TDisplayMode)
+	?SetImageSource@CImageDisplay@@QAEHABVTMMSource@@@Z @ 33 NONAME ; int CImageDisplay::SetImageSource(class TMMSource const &)
+	?SetOptions@CImageDisplay@@QAEHI@Z @ 34 NONAME ; int CImageDisplay::SetOptions(unsigned int)
+	?SetPluginUid@CImageDisplay@@QAEXVTUid@@@Z @ 35 NONAME ; void CImageDisplay::SetPluginUid(class TUid)
+	?SetSizeInPixels@CImageDisplay@@QAEXABVTSize@@H@Z @ 36 NONAME ; void CImageDisplay::SetSizeInPixels(class TSize const &, int)
+	?SetSourceImageType@CImageDisplay@@QAEXVTUid@@0@Z @ 37 NONAME ; void CImageDisplay::SetSourceImageType(class TUid, class TUid)
+	?SetSourceMimeType@CImageDisplay@@QAEXABVTDesC8@@@Z @ 38 NONAME ; void CImageDisplay::SetSourceMimeType(class TDesC8 const &)
+	?SetSourceRect@CImageDisplay@@QAEXABVTRect@@@Z @ 39 NONAME ; void CImageDisplay::SetSourceRect(class TRect const &)
+	?SetupL@CImageDisplay@@QAEXXZ @ 40 NONAME ; void CImageDisplay::SetupL(void)
+	?SourceData@CImageDisplayPlugin@@IBEABVTDesC8@@XZ @ 41 NONAME ; class TDesC8 const & CImageDisplayPlugin::SourceData(void) const
+	?SourceDataId@CImageDisplayPlugin@@IBEABVTDesC16@@XZ @ 42 NONAME ; class TDesC16 const & CImageDisplayPlugin::SourceDataId(void) const
+	?SourceDataIntent@CImageDisplayPlugin@@IBE?AW4TIntent@ContentAccess@@XZ @ 43 NONAME ; enum ContentAccess::TIntent CImageDisplayPlugin::SourceDataIntent(void) const
+	?SourceFileHandle@CImageDisplayPlugin@@IBEAAVRFile@@XZ @ 44 NONAME ; class RFile & CImageDisplayPlugin::SourceFileHandle(void) const
+	?SourceFilename@CImageDisplayPlugin@@IBEABVTDesC16@@XZ @ 45 NONAME ; class TDesC16 const & CImageDisplayPlugin::SourceFilename(void) const
+	?SourceImageSubType@CImageDisplayPlugin@@IBE?BVTUid@@XZ @ 46 NONAME ; class TUid const CImageDisplayPlugin::SourceImageSubType(void) const
+	?SourceImageType@CImageDisplayPlugin@@IBE?BVTUid@@XZ @ 47 NONAME ; class TUid const CImageDisplayPlugin::SourceImageType(void) const
+	?SourceMimeType@CImageDisplayPlugin@@IBEABVTDesC8@@XZ @ 48 NONAME ; class TDesC8 const & CImageDisplayPlugin::SourceMimeType(void) const
+	?SourceRect@CImageDisplayPlugin@@IBEHAAVTRect@@@Z @ 49 NONAME ; int CImageDisplayPlugin::SourceRect(class TRect &) const
+	?SourceType@CImageDisplayPlugin@@IBE?AW4TImageSourceType@1@XZ @ 50 NONAME ; enum CImageDisplayPlugin::TImageSourceType CImageDisplayPlugin::SourceType(void) const
+	?StopPlay@CImageDisplay@@QAEXXZ @ 51 NONAME ; void CImageDisplay::StopPlay(void)
+	?ValidBitmap@CImageDisplay@@QBEHXZ @ 52 NONAME ; int CImageDisplay::ValidBitmap(void) const
+	?ValidBitmap@CImageDisplayPlugin@@MBEHXZ @ 53 NONAME ; int CImageDisplayPlugin::ValidBitmap(void) const
+	?GetMimeTypeL@CImgDisplayMimeTypeRecognizer@@QAEHABVTDesC8@@ABVTDesC16@@AAVTDes8@@@Z @ 54 NONAME ; int CImgDisplayMimeTypeRecognizer::GetMimeTypeL(class TDesC8 const &, class TDesC16 const &, class TDes8 &)
+	?NewL@CImgDisplayMimeTypeRecognizer@@SAPAV1@XZ @ 55 NONAME ; class CImgDisplayMimeTypeRecognizer * CImgDisplayMimeTypeRecognizer::NewL(void)
+	?GetFileTypesL@CImgDisplayMimeTypeRecognizer@@QAEXAAV?$RPointerArray@VCFileExtensionMIMEType@@@@@Z @ 56 NONAME ; void CImgDisplayMimeTypeRecognizer::GetFileTypesL(class RPointerArray<class CFileExtensionMIMEType> &)
+

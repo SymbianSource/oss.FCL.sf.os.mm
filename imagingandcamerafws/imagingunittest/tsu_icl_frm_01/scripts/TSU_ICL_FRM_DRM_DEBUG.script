@@ -1,0 +1,118 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSU_ICL_FRM_DRM.script
+// Unit tests for PREQ777.
+// 
+//
+
+LOAD_SUITE TSU_ICL_FRM_01.DLL
+
+### Positive Testing ###
+//! @SYMTestCaseID MM-ICL-FRM-U-6001-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6001-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-6002-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6002-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-6004-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6004-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-6005-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6005-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-6006-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6006-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-6008-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-6008-HP
+TEST_COMPLETE
+
+### Negative Testing ###
+//! @SYMTestCaseID MM-ICL-FRM-U-7001-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7001-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7002-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7002-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7003-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7003-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7004-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7004-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7005-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7005-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7006-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7006-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7007-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7007-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-7008-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7008-HP
+TEST_COMPLETE
+
+#### other tests ####
+// INC061633: NTT - CImageDecoder: KNullDesC should be KDefaultContentObject
+//! @SYMTestCaseID MM-ICL-FRM-U-7020-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7020-HP
+TEST_COMPLETE
+
+// DEF088101: ICL CAF result of ExecuteIntent not checked for conversion
+//! @SYMTestCaseID MM-ICL-FRM-U-7106-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7106-HP
+TEST_COMPLETE
+
+
+// DEF090885: Rights can be cosumed prior to successful decoding of an image
+//! @SYMTestCaseID MM-ICL-FRM-U-7108-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7108-HP
+TEST_COMPLETE
+
+// DEF090885: Rights can be cosumed prior to successful decoding of an image
+//! @SYMTestCaseID MM-ICL-FRM-U-7109-HP
+
+RUN_TEST_STEP -1 TSU_ICL_FRM_01 		MM-ICL-FRM-U-7109-HP
+TEST_COMPLETE
+

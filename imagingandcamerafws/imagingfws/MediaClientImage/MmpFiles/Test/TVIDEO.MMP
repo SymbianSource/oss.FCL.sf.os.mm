@@ -1,0 +1,71 @@
+// Copyright (c) 1997-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#define KUidApp                                 268435564
+#define KUidAppUnicode                          268450254
+#define KUidMediaServerVideoTestClientDefine    268450181
+
+TARGET     	TVideo.exe
+TARGETTYPE	exe
+
+UID      KUidAppUnicode KUidMediaServerVideoTestClientDefine
+VENDORID 0x70000001
+CAPABILITY NONE
+
+SOURCEPATH	../../Source/Test/TVideo
+
+USERINCLUDE     ../../Source/Test/TVideo
+
+// SYSTEMINCLUDE STATEMENTS NEED TO BE UPDATED FOR HEADER RELOCATION BEFORE THIS MMP
+// IS PERMANTELY ADDED TO A BLD.INF
+SYSTEMINCLUDE	/epoc32/include
+SYSTEMINCLUDE	/epoc32/include/techview
+
+SOURCE          TVideo.cpp
+
+START RESOURCE	TVIDEO.RSS
+HEADER
+targetpath	/resource/apps
+lang		sc
+end
+
+LIBRARY         euser.lib efsrv.lib gdi.lib fbscli.lib 
+LIBRARY         apparc.lib ws32.lib cone.lib bitgdi.lib
+LIBRARY		eikcore.lib eikdlg.lib eikfile.lib eikcoctl.lib 
+LIBRARY		hal.lib 
+LIBRARY         mediaclientimage.lib
+
+sourcepath	../../source/test/tvideo
+START RESOURCE	tvideo_reg.rss
+TARGETPATH	/private/10003a3f/apps
+END
+
+start resource TVideo_loc.RSS
+targetpath /resource/apps
+lang sc
+end
+
+START BITMAP TVideoicon.mbm
+HEADER
+sourcepath ../../source/Test/TVideo
+targetpath /resource/apps
+source c8 ap24.bmp ap24m.bmp ap32.bmp ap32m.bmp ap48.bmp ap48m.bmp
+end 
+
+
+START WINS
+BASEADDRESS     0x4F200000
+END
+

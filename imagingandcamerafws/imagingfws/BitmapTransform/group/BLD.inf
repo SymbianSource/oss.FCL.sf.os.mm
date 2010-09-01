@@ -1,0 +1,31 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRJ_EXPORTS
+../inc/BitmapTransforms.h SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(bitmaptransforms.h)
+../inc/BitmapTransforms.inl SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(bitmaptransforms.inl)
+../inc/BitmTrans/BitmTransPlugin.h	SYMBIAN_OS_LAYER_PLATFORM_EXPORT_PATH(bitmtrans/bitmtransplugin.h)
+../inc/BitmTrans/BitmTransUids.hrh	/epoc32/include/bitmtrans/bitmtransuids.hrh
+../inc/BitmTrans/BitmTransPanic.h	SYMBIAN_OS_LAYER_PUBLIC_EXPORT_PATH(bitmtrans/bitmtranspanic.h)
+
+
+// ROM  buildsupport
+../inc/BitmapTransforms.iby  /epoc32/rom/include/bitmaptransforms.iby
+
+PRJ_MMPFILES
+../MmpFiles/BitmapTransforms.mmp
+
+
+

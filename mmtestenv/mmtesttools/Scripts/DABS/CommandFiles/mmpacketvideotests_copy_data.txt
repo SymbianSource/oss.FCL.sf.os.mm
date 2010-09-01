@@ -1,0 +1,9 @@
+md e:\logs\
+md e:\logs\testresults\
+md e:\logs\testresults\omxil\
+md c:\tsi_a3f_devsound_aac\
+copy z:\tsi_a3f_devsound_aac_play.ini c:\tsi_a3f_devsound_aac\tsi_a3f_devsound_aac_play.ini
+copy e:\inttest\a3f\tsi_a3f_devsound_aac\*.* c:\tsi_a3f_devsound_aac\
+md c:\omxil\
+md c:\omxil\testfiles\
+copy e:\unittest\omxil\testfiles\*.* c:\omxil\testfiles\

@@ -1,0 +1,32 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __IMAGECONVERSIONPROFILE_IBY__
+#define __IMAGECONVERSIONPROFILE_IBY__
+
+file=ABI_DIR\DEBUG_DIR\TProfImage.exe					TProfImage.exe
+
+file=ABI_DIR\BUILD_DIR\TImageViewer.app				System\Apps\TImageViewer\TImageViewer.app
+data=ZSYSTEM\APPS\TImageViewer\TImageViewer.rsc			System\Apps\TImageViewer\TImageViewer.rsc
+data=ZSYSTEM\APPS\TImageViewer\TImageViewer.aif			System\Apps\TImageViewer\TImageViewer.aif
+
+data=EPOCROOT##epoc32\data\c\TImage\Prof\bmp1bpp.bmp		\TImage\Prof\bmp1bpp.bmp
+data=EPOCROOT##epoc32\data\c\TImage\Prof\bmp24bpp.bmp		\TImage\Prof\bmp24bpp.bmp
+data=EPOCROOT##epoc32\data\c\TImage\Prof\jfif10.jpg		\TImage\Prof\jfif10.jpg
+data=EPOCROOT##epoc32\data\c\TImage\Prof\jfifProg.jpg		\TImage\Prof\jfifProg.jpg
+data=EPOCROOT##epoc32\data\c\TImage\Prof\png1.png		\TImage\Prof\png1.png
+data=EPOCROOT##epoc32\data\c\TImage\Prof\png3.png		\TImage\Prof\png3.png
+
+#endif

@@ -1,0 +1,75 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the MBM Bitmap Decoder Implementation
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include <icl/icl_uids.hrh>
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KMBMCodecDllUidValue;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KMBMDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "MBM";
+					default_data = {0x37, 0x0, 0x0, 0x10, 0x42, 0x0, 0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x39, 0x64, 0x39, 0x47};
+					opaque_data = {2, 0, 0, 0x10, 0x1F, 0x45, 0xCC, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0x2E, 0x6D, 0x62, 0x6D, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x78, 0x2D, 0x65, 0x70, 0x6F, 0x63, 0x2D, 0x6D, 0x62, 0x6D, 0x0D, 2, 0x10, 0x27, 0x37, 0xFB, 0x10, 0x27, 0x38, 0x10};
+					// 2 0x0000 0x101F45CC 0x00000000 0x00000000 1 .mbm 1 image/x-epoc-mbm 2 KSwCodecUidValue KDecodeToReducedSizeSupportUidValue
+					}
+				};
+			},
+
+		INTERFACE_INFO
+			{
+			interface_uid = KEncoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KMBMEncoderImplementationUidValue;
+					version_no = 1;
+					display_name = "MBM";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {	2, 0, 0,
+									0x10, 0x1F, 0x45, 0xCC,
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,
+									0x2E, 0x6D, 0x62, 0x6D, 0x0D, // .mbm
+									1,
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x78, 0x2D, 0x65, 0x70, 0x6F, 0x63, 0x2D, 0x6D, 0x62, 0x6D, 0x0D, // image/x-epoc-mbm
+									2,
+									0x10, 0x27, 0x37, 0xFB, // KSwCodecUidValue
+									0x10, 0x28, 0x5D, 0x1B // KUidAlphaChannelEncodeSupported
+									};
+					}
+				};
+			}
+		};
+	}
+

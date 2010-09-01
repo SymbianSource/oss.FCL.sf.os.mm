@@ -18,7 +18,9 @@
 
 #include "mmf/utils/rateconvert.h" // if we need to resample
 
-#include <hal.h>
+#ifdef SYMBIAN_SOUNDADAPTER_BYTESPLAYED
+	#include <hal.h>
+#endif
 
 _LIT(KPddFileName,"SOUNDSC.PDD");
 _LIT(KLddFileName,"ESOUNDSC.LDD");
@@ -35,43 +37,7 @@ GLDEF_C void Panic(TSoundAdapterPanicCodes aPanicCode)
 	{
 	User::Panic(KSoundAdapterPanicCategory, aPanicCode);
 	}
-
-
-const TText8 *RMdaDevSound::CBody::TState::Name() const
-	{
-	#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	 
-	switch(iState)
-		{
-		case ENotReady:				return _S8("ENotReady");
-		case EStopped:				return _S8("EStopped");
-		case ERecording:			return _S8("ERecording");
-		case ERecordingPausedInHw:	return _S8("ERecordingPausedInHw");
-		case ERecordingPausedInSw:	return _S8("ERecordingPausedInSw");
-		case EPlaying:				return _S8("EPlaying");
-		case EPlayingPausedInHw: 	return _S8("EPlayingPausedInHw");
-		case EPlayingPausedInSw:	return _S8("EPlayingPausedInSw");
-		case EPlayingUnderrun:		return _S8("EPlayingUnderrun");
-		}
-	return _S8("CorruptState");
-	#else
-	return _S8("");
-	#endif
-	}
-
 	
-
-RMdaDevSound::CBody::TState &RMdaDevSound::CBody::TState::operator=(TStateEnum aNewState)
-	{
-    if(iState != aNewState)
-        {
-        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-        RDebug::Printf("RMdaDevSound state %s -> %s", Name(), TState(aNewState).Name());
-        #endif
-        iState = aNewState;
-        }
-	return *this;
-	}
-
 RMdaDevSound::CBody* RMdaDevSound::CBody::NewL()
 	{
 	CBody* self = new(ELeave) CBody();
@@ -83,26 +49,21 @@ RMdaDevSound::CBody* RMdaDevSound::CBody::NewL()
 
 RMdaDevSound::CBody::~CBody()
 	{
-	for(TInt i = 0; i < KPlaySharedChunkBuffers; i++)
+	for(TInt i = 0; i < KNumPlayers; i++)
 		{
 		delete iPlayers[i];
 		iPlayers[i] = NULL;
 		}
-	delete iRecorder;
-	iRecorder = NULL;
-	delete iPlayFormatData.iConverter;
-	delete iRecordFormatData.iConverter;
-	iPlayChunk.Close();
+	iBufferRemaining.Close();
+	delete iPlayData.iConverter;
+	delete iRecordData.iConverter;
+	iChunk.Close();
 	iPlaySoundDevice.Close();
-	iRecordChunk.Close();
 	iRecordSoundDevice.Close();
-	iConvertedPlayData.Close();
-	iSavedTrailingData.Close();
-	iBufferedRecordData.Close();
 	}
 	
 RMdaDevSound::CBody::CBody()
-	:iState(ENotReady), iBufferOffset(-1)
+	:iState(ENotReady), iBufferIndex(-1), iBufferOffset(-1), iSecondPhaseData(0,0)
 	{
 	
 	}
@@ -138,17 +99,13 @@ void RMdaDevSound::CBody::ConstructL()
     	{
     	User::Leave(err);
     	}
-	for(TInt i=0; i<KPlaySharedChunkBuffers; i++)
+	for(TInt i=0; i<KNumPlayers; i++)
 		{
 		iPlayers[i] = new(ELeave) CPlayer(CActive::EPriorityUserInput, *this, i);
-		iFreePlayers.Push(iPlayers[i]);
 		}
-	
-	iRecorder = new(ELeave) CRecorder(CActive::EPriorityUserInput, *this);
-	
-	TInt tmp;
-	User::LeaveIfError(HAL::Get(HAL::ENanoTickPeriod, tmp));
-	iNTickPeriodInUsec = tmp;
+#ifdef SYMBIAN_SOUNDADAPTER_BYTESPLAYED
+	User::LeaveIfError(HAL::Get(HALData::EFastCounterFrequency,iFCFrequency));
+#endif
 	}
 
 TInt RMdaDevSound::CBody::Open(TInt /*aUnit*/)
@@ -172,22 +129,8 @@ TInt RMdaDevSound::CBody::Open(TInt /*aUnit*/)
 		}
 	else
 	    {
-		TSoundFormatsSupportedV02Buf capsBuf;
-		iPlaySoundDevice.Caps(capsBuf);
-		TInt minBufferSize = KMinBufferSize;
-		#ifdef SYMBIAN_FORCE_32BIT_LENGTHS
-		minBufferSize = Max(minBufferSize, 4); // force to 32-bit buffer align
-		#endif
-		iRequestMinSize = Max(capsBuf().iRequestMinSize, minBufferSize); 
-		// work out mask so that x&iRequestMinMask is equiv to x/iRequestMinSize*iRequestMinSize
-		iRequestMinMask = ~(iRequestMinSize-1); // assume iRequestMinSize is power of 2
-		iSavedTrailingData.Close();
-		iSavedTrailingData.Create(iRequestMinSize);
-	
-	    iState = EStopped;
-		iBytesPlayed = 0;
+	    iState = EOpened;
 	    }
-
 	return err;
 	}
 		
@@ -217,65 +160,12 @@ void RMdaDevSound::CBody::SetVolume(TInt aLogarithmicVolume)
 void RMdaDevSound::CBody::CancelPlayData()
 	{
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-    RDebug::Printf("RMdaDevSound::CBody::CancelPlayData: state %s", iState.Name());
+        RDebug::Print(_L("RMdaDevSound::CBody::CancelPlayData:"));
     #endif	
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-
-    // If there is a client request, cancel it
-    // Must do this before canceling players because otherwise they may just restart!
-    if(iClientPlayStatus)
-        {
-        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-        RDebug::Printf("msp PlayCancelled complete iClientPlayStatus");
-		#endif
-        User::RequestComplete(iClientPlayStatus, KErrCancel); // Call also sets iClientPlayStatus to NULL
-        }
-    
-    // Discard any buffered data
-    iClientPlayData.Set(0,0);
-	// Discard any saved trailing data (ie. data saved due driver requiring all requests to be a multiple of iRequestMinSize).
-	iSavedTrailingData.SetLength(0);
-
-    // Emulator RSoundSc PDD when running without a soundcard has a major
-    // issue with cancelling whilst paused. It will not clear the pending
-    // list (because the timer is not active) and therefore this list will
-    // later overflow causing hep corruption.
-    // This means that, for now, we MUST Resume before calling CancelPlayData
-    // to avoid kernel panics...
-    
-    // The device driver will not cancel a request which is in progress...
-    // So, if we are paused in hw, we must resume before cancelling the
-    // player otherwise it will hang in CActive::Cancel
-    if(iState == EPlayingPausedInHw)
-        {
-        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-        RDebug::Printf("msp Resume to avoid hang");
-        #endif
-        (void) iPlaySoundDevice.Resume();
-        }
-    
-    // Update state
-	iState = EStopped;
-	
-
-    // The RSoundSc driver will not cancel a request which is in progress (or paused).
-    // If we just loop across the players, cancelling each individual request and waiting for it to complete,
-    // several of them will actually play, which is both wrong and time consuming....
-    // Issue a block cancel upfront to avoid this
-    iPlaySoundDevice.CancelPlayData();
- 
-	// Cancel all players
-	for (TUint playerIndex=0; playerIndex<KPlaySharedChunkBuffers; ++playerIndex)
-	    {
-	    // If the player is active it will call PlayRequestCompleted with aDueToCancelCommand true
-	    // to update the iFreePlayers and iActivePlayRequestSizes FIFOs.
-        iPlayers[playerIndex]->Cancel();
-	    }
-	
-	iBufferOffset = -1;
-	iBufferLength = 0;
-	
-	return;
+	iPlaySoundDevice.CancelPlayData();
+	iPauseDeviceDriverOnNewData = EFalse;
+	SoundDeviceError(KErrNone);//cancel the players
 	}
 	
 TInt RMdaDevSound::CBody::RecordLevel()
@@ -294,135 +184,64 @@ void RMdaDevSound::CBody::CancelRecordData()
 	{
 	__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-    RDebug::Printf("RMdaDevSound::CBody::CancelRecordData: state %s", iState.Name());
+        RDebug::Print(_L("RMdaDevSound::CBody::CancelRecordData:"));
     #endif
-
-    // Stop recorder object (and its request)
-    iRecorder->Cancel();
-    
-    // Stop driver from recording
-    iRecordSoundDevice.CancelRecordData();
-             
-    // If there is a client request, cancel it
-    if(iClientRecordStatus)
-   		{
-        User::RequestComplete(iClientRecordStatus, KErrNone); // Call also sets iClientPlayStatus to NULL
-        }
-
-    iState = EStopped;
-    return;
+	iRecordSoundDevice.CancelRecordData();
+	SoundDeviceError(KErrNone);
 	}
 	
 void RMdaDevSound::CBody::FlushRecordBuffer()
 	{
 	__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-        RDebug::Print(_L("RMdaDevSound::CBody::FlushRecordBuffer - implemented by calling PauseRecordBuffer"));
+        RDebug::Print(_L("RMdaDevSound::CBody::FlushRecordBuffer"));
     #endif
-
-	PauseRecordBuffer();
+	
+	if(iState == ERecording)
+	    {
+		iRecordSoundDevice.Pause();//this is equivalent call in the new sound driver
+    	}
 	}
 	
 TInt RMdaDevSound::CBody::BytesPlayed()
 	{
-    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-    RDebug::Printf("RMdaDevSound::BytesPlayed %s", iState.Name());
-	#endif
-
-	return I64LOW(BytesPlayed64());
-	}
-
-
-TUint64 RMdaDevSound::CBody::BytesPlayed64()
-	{
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-
-	TUint64 currentBytesPlayed = KMaxTUint64;
-
-	switch(iState)
-	{
-	case ENotReady:
-		Panic(EDeviceNotOpened);
-		break;
-
-	case EStopped:
-		currentBytesPlayed = iBytesPlayed;
-		break;
-
-	case ERecording:
-	case ERecordingPausedInHw:
-	case ERecordingPausedInSw:
-		Panic(EBadState);
-		break;
-
-	case EPlayingPausedInHw: // ie. Play request pending on h/w and paused
-		// Paused, so use pause time
-        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-		RDebug::Printf("EPlayingPausedInHw: iPausedBytes %x %x", I64HIGH(iPausedBytesPlayed), I64LOW(iPausedBytesPlayed));
-		#endif
-		currentBytesPlayed = iPausedBytesPlayed;
-		break;
-
-	case EPlayingPausedInSw: // ie. Driver not playing or paused
-		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	 
-		RDebug::Printf("EPlayingPausedInSw: iPausedBytesPlayed %x %x", I64HIGH(iPausedBytesPlayed), I64LOW(iPausedBytesPlayed));
-		#endif
-		currentBytesPlayed = iPausedBytesPlayed;
-		break;
-	case EPlayingUnderrun:
-		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	 
-		RDebug::Printf("EPlayingUnderrun: iBytesPlayed %x %x", I64HIGH(iBytesPlayed), I64LOW(iBytesPlayed));
-		#endif
-		currentBytesPlayed = iBytesPlayed;
-	    break;
-
-	case EPlaying:
+	TInt currentBytesPlayed = 0;
+#ifdef SYMBIAN_SOUNDADAPTER_BYTESPLAYED
+	if(iTimerActive)
 		{
-		// Playing so calculate time since last update to iBytesPlayed
-		TUint32 curTime = CurrentTimeInMsec();
-		TUint32 curRequestSize = iActivePlayRequestSizes.Peek();
-
-		TUint32 extraPlayTime = (curTime >= iStartTime) ? (curTime-iStartTime) : (KMaxTUint32 - (iStartTime-curTime));
-        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	 
-		RDebug::Printf("iStartTime %d curTime %d extraPlayTime %d", iStartTime, curTime, extraPlayTime);
-		
-		RDebug::Printf("iPlayFormatData.iSampleRate %d KBytesPerSample %d iNTickPeriodInUsec %d",
-					   iPlayFormatData.iSampleRate, KBytesPerSample, iNTickPeriodInUsec);
-        #endif
-		TUint32 extraBytesPlayed = TUint32((TUint64(extraPlayTime) * iPlayFormatData.iSampleRate * iPlayFormatData.iRequestedChannels * KBytesPerSample)/1000);
-		if(extraBytesPlayed > curRequestSize)
+		TUint32 endTime = User::FastCounter();
+		TUint timePlayed = 0;
+		if(endTime<iStartTime)
 			{
-            #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	 
-			RDebug::Printf("caping extraBytes played from %d to %d", extraBytesPlayed, curRequestSize);
-            #endif
-			extraBytesPlayed = curRequestSize;
+			timePlayed = (KMaxTUint32-iStartTime)+endTime;
 			}
+		else
+			{
+			timePlayed = endTime-iStartTime;
+			}	
+        TUint64 bytesPlayed = iPlayData.iSampleRate*KBytesPerSample;    //A TUint64 is used because during the multiplying segment of the calculation we regularly overflow what a TUint32 can handle
+        bytesPlayed = (bytesPlayed * timePlayed)/iFCFrequency;  //The division brings it back into TUint32 territory, however.  We cannot do this before the multiplication without risking significant loss of accuracy
 
-		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-		RDebug::Printf("iBytesPlayed %d extraBytesPlayed %d (curRequestSize %d) -> currentBytesPlayed %x %x",
-                iBytesPlayed, extraBytesPlayed, curRequestSize, I64HIGH(currentBytesPlayed), I64LOW(currentBytesPlayed));
+		currentBytesPlayed = iBytesPlayed+I64LOW(bytesPlayed);
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+            RDebug::Printf("EstimatedBytesPlayed[%d]  Driver's bytesPlayed[%d]", currentBytesPlayed, iBytesPlayed);
         #endif
-
-		currentBytesPlayed = iBytesPlayed + extraBytesPlayed;
-		break;
 		}
+	else
+		{
+		currentBytesPlayed = iPlaySoundDevice.BytesTransferred();
+		}		
 	
-	default:
-		Panic(EBadState);
-		break;
-	}
- 
-
-    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-	RDebug::Printf("iPlayFormatData.iConverter %x", iPlayFormatData.iConverter);
-    #endif
-
-	if (iPlayFormatData.iConverter)
+#else
+	currentBytesPlayed = iPlaySoundDevice.BytesTransferred();
+#endif
+	if (iPlayData.iConverter)
 		{
 		// need to scale bytes played to fit with requested rate and channels, not actual
-		if (iPlayFormatData.iActualChannels != iPlayFormatData.iRequestedChannels)
+		if (iPlayData.iActualChannels != iPlayData.iRequestedChannels)
 			{
-			if (iPlayFormatData.iActualChannels == 2)
+			if (iPlayData.iActualChannels == 2)
 				{
 				// requested was mono, we have stereo
 				currentBytesPlayed /= 2;
@@ -433,307 +252,99 @@ TUint64 RMdaDevSound::CBody::BytesPlayed64()
 				currentBytesPlayed *= 2;
 				}
 			}
-		if (iPlayFormatData.iSampleRate != iPlayFormatData.iActualRate)
+		if (iPlayData.iSampleRate != iPlayData.iActualRate)
 			{
-			currentBytesPlayed = TUint64(currentBytesPlayed*
-					TReal(iPlayFormatData.iSampleRate)/TReal(iPlayFormatData.iActualRate)); // don't round
+			currentBytesPlayed = TInt(currentBytesPlayed*
+					TReal(iPlayData.iSampleRate)/TReal(iPlayData.iActualRate)); // don't round
 			}
 		}
-
-    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-	RDebug::Printf("currentBytesPlayed %x %x", I64HIGH(currentBytesPlayed), I64LOW(currentBytesPlayed));
-    #endif
 	return currentBytesPlayed;
 	}
 
 void RMdaDevSound::CBody::ResetBytesPlayed()
 	{
-    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-    RDebug::Printf("RMdaDevSound::CBody::ResetBytesPlayed %s", iState.Name());
-	#endif
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-	iBytesPlayed = 0;
-	iPlaySoundDevice.ResetBytesTransferred();
-	return;
+	return iPlaySoundDevice.ResetBytesTransferred();
 	}
 	
 void RMdaDevSound::CBody::PausePlayBuffer()
 	{
-#ifdef SYMBIAN_SOUNDADAPTER_DEBUG   
-    RDebug::Printf("RMdaDevSound::CBody::PausePlayBuffer %s", iState.Name());
-#endif  
-	switch(iState)
+	if (iState == EPlaying)
 		{
-		case ENotReady:
-			Panic(EDeviceNotOpened);
-			break;
-
-		case EStopped:
-			// Driver is not playing so pause in s/w
-			break;
-
-		case ERecording:
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			Panic(EBadState);
-			break;
-
-		case EPlayingPausedInHw: // ie. Play request pending on h/w and paused
-		case EPlayingPausedInSw: // ie. Driver not playing or paused
-			// Already paused so nothing to do.
-			break;
-		case EPlayingUnderrun:
-			iState = EPlayingPausedInSw;
-			break;
-			
-		case EPlaying:
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG   
+            RDebug::Print(_L("RMdaDevSound::CBody::PausePlayBuffer() offset = %d length = %d"), iBufferOffset, iBufferLength);
+        #endif
+		__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
+		// If iPlayerStatus is NULL, we're not playing currently any data, and the device driver won't pause properly. In this case,
+		// we set a reminder to ourselves to pause the driver once we have data later
+		if (iPlayerStatus == NULL)
 			{
-			iPauseTime = CurrentTimeInMsec();
-			iPausedBytesPlayed = BytesPlayed64();
+			iPauseDeviceDriverOnNewData = ETrue;
+			}
+		else
+			{
 			TInt res = iPlaySoundDevice.Pause();
 			#ifdef SYMBIAN_SOUNDADAPTER_DEBUG   
-			RDebug::Printf("iPlaySoundDevice.Pause res = %d", res);
+				RDebug::Printf("iPlaySoundDevice.Pause res = %d", res);
 			#endif
- 			if(res == KErrNone)
-				{
-				iState = EPlayingPausedInHw;
-				}
-			else
-				{
-			    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG    
-				RDebug::Printf("msp PausePlayBuffer hw pause unexpectedly failed, doing sw pause");
-				#endif
-				iState = EPlayingPausedInSw;
-				}
-			break;
+			(void)res;
 			}
-		
-		default:
-			Panic(EBadState);
-			break;
-		}
-	
-	return;
+		iState = EPaused;
+		iTimerActive = EFalse;
+		}		
 	}
 	
 void RMdaDevSound::CBody::ResumePlaying()
 	{
+	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
+	iPauseDeviceDriverOnNewData = EFalse;
 	#ifdef SYMBIAN_SOUNDADAPTER_DEBUG   
-	RDebug::Printf("RMdaDevSound::CBody::ResumePlaying %s", iState.Name());
+		RDebug::Printf("RMdaDevSound::CBody::ResumePlaying");
 	#endif	
-    __ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-
-	switch(iState)
+	if (iFlushCalledDuringPause)
 		{
-		case ENotReady:
-			Panic(EDeviceNotOpened);
-			break;
-				
-		case EStopped:
-			// No change
-			break;
-	
-		case ERecording:
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			Panic(EBadState);
-			break;
-			
-		case EPlaying:
-			// No change
-			break;
-
-		case EPlayingPausedInHw: // ie. Play request pending on h/w and paused
-			{
-			// Re-enable reporting of KErrUnderflow (will re-raise KErrUnderflow if nothing to start playing).
-			iUnderFlowReportedSinceLastPlayOrRecordRequest = EFalse;
-
-			TInt res = iPlaySoundDevice.Resume();
-#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-			RDebug::Printf("ResumePlayBuffer EPlayingPausedInHw res = %d", res);
-#endif
-			if(res == KErrNone)
-				{
-				// Resume ok so a pending request will complete
-				iState = EPlaying;
-	            // Update iStartTime to allow for time spent paused
-	            TUint32 curTime = CurrentTimeInMsec();
-	            TUint32 timePaused = (curTime >= iPauseTime) ? (curTime-iPauseTime) : (KMaxTUint32 - (iPauseTime-curTime));
-	            iStartTime += timePaused; // nb. It is harmless if this wraps.
-				}
-			else
-				{
-				// Resume failed, therefore driver is not playing
-                // No need to update iStartTime/iPauseTime because these are only used within a driver request
-                // Change state to Stopped
-                iState = EStopped;
-                //  Attempt to start a new (pending) request.
-                StartPlayersAndUpdateState();
-				}
-			break;
-			}
-		case EPlayingPausedInSw: // ie. Driver not playing/paused
-			{
-			// Driver not playing
-			// Re-enable reporting of KErrUnderflow (will re-raise KErrUnderflow if nothing to start playing).
-			iUnderFlowReportedSinceLastPlayOrRecordRequest = EFalse;
-			// No need to update iStartTime/iPauseTime because these are only used within a driver request
-			// Change state to Stopped
-            iState = EStopped;
-            //	Attempt to start a new (pending) request.
-			StartPlayersAndUpdateState();
-			break;
-			}
-		case EPlayingUnderrun:
-			break;
-				
-		default:
-			Panic(EBadState);
-			break;
+		// if we resume having called flush, we can't just keep going as the driver does not work
+		// that way. Instead we cancel so that buffer play completes and a new buffer will be passed
+		iFlushCalledDuringPause = EFalse;
+		PlayCancelled();
 		}
-	
-	return;	
+	else
+		{
+		iState = EPlaying;
+		iPlaySoundDevice.Resume();
+		}
 	}
 
 void RMdaDevSound::CBody::PauseRecordBuffer()
 	{
-    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG   
-    RDebug::Printf("RMdaDevSound::CBody::PauseRecordBuffer %s", iState.Name());
-    #endif
-	
-	switch(iState)
-		{
-		case ENotReady:
-			Panic(EDeviceNotOpened);
-			break;
-			
-		case EStopped:
-			// Driver is not recording so pause in s/w
-		    // Do not pause because that will cause problems when CAudioDevice::Pause calls
-			break;
-
-		case ERecording:
-			{
-			TInt res = iRecordSoundDevice.Pause();
-			#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-			RDebug::Printf("PauseRecordBuffer EPlaying res = %d", res);
-			#endif
-			if(res == KErrNone)
-				{
-				iState = ERecordingPausedInHw;
-				}
-			else
-				{
-				#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-				RDebug::Printf("PauseRecordBuffer hw pause unexpectedly failed, doing sw pause");
-				#endif
-				iState = ERecordingPausedInSw;
-				}
-			break;
-			}
-		
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			// Already paused so nothing to do.
-			break;
-			
-		case EPlaying:
-		case EPlayingPausedInHw: // ie. Play request pending on h/w and paused
-            Panic(EBadState);
-            break;
-		    
-		case EPlayingPausedInSw: 
-		    // This is an ugly hack to maintain compatibility with CAudioDevice::Pause which
-		    // calls both PausePlayBuffer and PauseRecordBuffer whilst in stopped, then later calls ResumePlaying
-		    break;
-		case EPlayingUnderrun: // ie. Play request pending on h/w and paused
-			Panic(EBadState);
-		    break;
-		    
-		default:
-			Panic(EBadState);
-			break;
-		}
-
-	return;	
+	if(iState == ERecording)
+	    {	
+		__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+            RDebug::Printf("RMdaDevSound::CBody::PauseRecordBuffer");
+        #endif
+		iRecordSoundDevice.Pause();
+	    }
 	}
 
 void RMdaDevSound::CBody::ResumeRecording()
 	{
-    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG   
-    RDebug::Printf("RMdaDevSound::CBody::ResumeRecording %s", iState.Name());
-    #endif
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-
-	switch(iState)
-		{
-		case ENotReady:
-			Panic(EDeviceNotOpened);
-			break;
-				
-		case EStopped:
-			// No change
-			break;
-	
-		case ERecording:
-			// No change
-			break;
-
-		case ERecordingPausedInHw:
-			{
-			TInt res = iRecordSoundDevice.Resume();
-			#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-			RDebug::Printf("ResumeRecordBuffer ERecordingPausedInHw res = %d", res);
-			#endif
-			if(res == KErrNone)
-				{
-				// Resume ok so a pending request will complete
-				iState = ERecording;
-				}
-			else
-				{
-				iState = EStopped;
-				// Resume failed, so attempt to start a new (pending) request.
-				// If this works, it will update the state to ERecording.
-				StartRecordRequest();
-				}
-			break;
-			}
-		case ERecordingPausedInSw:
-			{
-			// Update state to stopped and attempt to start any pending request
-			iState = EStopped;
-			// If this works, it will update the state to ERecording.
-			StartRecordRequest();
-			break;
-			}
-
-		case EPlaying:
-		case EPlayingPausedInHw: // ie. Play request pending on h/w and paused
-		case EPlayingPausedInSw: // ie. Driver not playing/paused
-		case EPlayingUnderrun:
-		default:
-			Panic(EBadState);
-			break;
-		}
-		
-		return; 
-
-
+	iRecordSoundDevice.Resume();
 	}
 
 TInt RMdaDevSound::CBody::GetTimePlayed(TTimeIntervalMicroSeconds& aTimePlayed)
 	{
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
+	TTimeIntervalMicroSecondsBuf aTimePlayedBuf;
+	TInt err;
+	err = iPlaySoundDevice.TimePlayed(aTimePlayedBuf);
+	if (err == KErrNone)
+	  {
+	    aTimePlayed = aTimePlayedBuf();
+	  }
 
-
-	TUint64 bytesPlayed = BytesPlayed64();
-
-	TUint64 timePlayed = 1000 * 1000 * bytesPlayed / (iPlayFormatData.iSampleRate * iPlayFormatData.iRequestedChannels * KBytesPerSample);
-
-	aTimePlayed = TTimeIntervalMicroSeconds(timePlayed);
-
-	return KErrNone;
+	return err;
 	}
 
 	
@@ -794,138 +405,6 @@ void RMdaDevSound::CBody::GetFormat(TCurrentSoundFormatBuf& aFormat,
 	aFormat().iRate = aFormatData.iSampleRate;
 	}
 	
-void RMdaDevSound::CBody::StartPlayersAndUpdateState()
-	{
-	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-
-	switch(iState)
-		{
-		case ENotReady:
-			Panic(EDeviceNotOpened);
-			break;
-				
-		case EStopped:
- 			// Allow following code to queue more driver play requests and check for stopped
-			break;
-	
-		case ERecording:
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			Panic(EBadState);
-			break;
-			
-		case EPlaying:
-           // Allow following code to queue more driver play requests  and check for stopped
-		    break;
-		case EPlayingPausedInHw: // ie. Play request pending on h/w and paused
-			// Allow following code to queue more driver play requests
-			break;
-		
-		case EPlayingPausedInSw:
-			// Paused but driver not playing+paused, therefore do not queue new requests until ResumePlaying
-			return;
-		case EPlayingUnderrun:
-			break;
-				
-		default:
-			Panic(EBadState);
-			break;
-		}
-
-	// iState is now either EStopped, EPlaying or EPlayingPausedInHw
-    __ASSERT_DEBUG(((iState == EStopped) || (iState == EPlaying) || (iState == EPlayingPausedInHw) || (iState == EPlayingUnderrun)), Panic(EBadState));
-
-	while( (iClientPlayData.Length() != 0) && (! iFreePlayers.IsEmpty()))
-		{
-		// More data to play and more players,  so issue another request 
-
-		bool wasIdle = iFreePlayers.IsFull();
-		// Get a free player		
-		CPlayer *player = iFreePlayers.Pop();
-		// Calculate length of request
-		TUint32 lengthToPlay = iClientPlayData.Length();
-		if(lengthToPlay > iDeviceBufferLength)
-		    {
-            lengthToPlay = iDeviceBufferLength;
-		    }
-
-		// Remember request length, so we can update bytes played when it finishes
-		iActivePlayRequestSizes.Push(lengthToPlay);
-
-		// Find offset to copy data to
-		TUint playerIndex = player->GetPlayerIndex();
-		ASSERT(playerIndex < KPlaySharedChunkBuffers);
-		TUint chunkOffset = iPlayBufferConfig.iBufferOffsetList[playerIndex];
-
-		// Copy data
-		TPtr8 destPtr(iPlayChunk.Base()+ chunkOffset, 0, iDeviceBufferLength);
-		destPtr.Copy(iClientPlayData.Mid(0, lengthToPlay));
-
-		// Update iClientPlayData to remove the data just queued
-		iClientPlayData.Set(iClientPlayData.Right(iClientPlayData.Length()-lengthToPlay));
-
-		// Start the CPlayer
-		player->PlayData(chunkOffset, lengthToPlay);
-		if(wasIdle)
-			{
-			iState = EPlaying;
-			iStartTime = CurrentTimeInMsec();
-			
-			}
-		
-		}
-
-	// Check if the client request is now complete
-	if(iClientPlayData.Length() == 0 && iClientPlayStatus)
-		{
-		// We have queued all the client play data to the driver so we can now complete the client request.
-		// If actual playback fails, we will notify the client via the Play Error notification mechanism.
-		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-		RDebug::Printf("RMdaDevSound::CBody::StartPlayersAndUpdateState completing client request");
-		#endif
-		User::RequestComplete(iClientPlayStatus, KErrNone); // This call also sets iClientPlayStatus to NULL
-		}
-	
-    //nb. iState is now either EStopped, EPlaying or EPlayingPausedInHw (see previous switch and assert)
-	if(iState != EPlayingPausedInHw)
-	    {
-        if(iFreePlayers.IsFull())
-            {
-            // Free fifo is full, therefore there are no active players
-            iState = EPlayingUnderrun;
-			if(! iUnderFlowReportedSinceLastPlayOrRecordRequest)
-				{
-				// We report KErrUnderflow if we have not already reported it since the last PlayData call.
-				// Note that 
-				// i) We do NOT report driver underflows.
-				// ii) We report underflow when we run out of data to pass to the driver.
-				// iii) We throttle this reporting
-				// iv) We WILL report KErrUnderflow if already stopped and asked to play a zero length buffer
-				// The last point is required because the client maps a manual stop command into a devsound play with a 
-				// zero length buffer and the last buffer flag set, this in turn is mapped to a Playdata calll with an empty buffer
-				// which is expected to complete ok and cause a KErrUnderflow error to be reported...
-				iUnderFlowReportedSinceLastPlayOrRecordRequest = ETrue;
-				#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-		        RDebug::Printf("RMdaDevSound::CBody::StartPlayersAndUpdateState stopped and iUnderFlowReportedSinceLastPlayOrRecordRequest false so raising KErrUnderflow");
-				#endif
-				
-				// Discard any saved trailing data (ie. data saved due driver requiring all requests to be a multiple of iRequestMinSize).
-				// This maybe because client is delibrately letting us underflow to play silence. In that case we do not want to
-				// play the trailing data at the beginning of the new data issued after the silence...
-				iSavedTrailingData.SetLength(0);
-
-				SoundDeviceError(KErrUnderflow);
-				}
-            }
-        else
-            {
-            // Free fifo not full, therefore there are active players
-            iState = EPlaying;
-            }
-	    }
-	return;
-	}
-
 TInt RMdaDevSound::CBody::SetFormat(const TCurrentSoundFormatBuf& aFormat, 
 									RSoundSc& aSoundDevice,
 									TFormatData &aFormatData)
@@ -935,7 +414,6 @@ TInt RMdaDevSound::CBody::SetFormat(const TCurrentSoundFormatBuf& aFormat,
 	
 	delete aFormatData.iConverter; 
 	aFormatData.iConverter = NULL; // setting this to NULL indicates we are not using converter. No other flag
-	iConvertedPlayData.Close();
 	
 	TInt wantedRate = aFormat().iRate;
 	for(TInt index = 0; index < KNumSampleRates; index++ )
@@ -951,11 +429,6 @@ TInt RMdaDevSound::CBody::SetFormat(const TCurrentSoundFormatBuf& aFormat,
 	
 	if(err == KErrNone)
 		{
-		// Assume, for now, we support the requested channels and rate
-		aFormatData.iActualChannels = aFormatData.iRequestedChannels;
-		aFormatData.iActualRate = aFormatData.iSampleRate;
-
-		// Attempt to configure driver
 		formatBuf().iChannels = aFormat().iChannels;
 		formatBuf().iEncoding = ESoundEncoding16BitPCM;
 		formatBuf().iDataFormat = ESoundDataFormatInterleaved;
@@ -1155,86 +628,11 @@ TInt RMdaDevSound::CBody::NegotiateFormat(const TCurrentSoundFormatBuf& aFormat,
 																		   aFormatData.iRequestedChannels));
 			}
 		}
-	if(err != KErrNone)
-		{
-		delete aFormatData.iConverter;
-		aFormatData.iConverter= NULL;
-		iConvertedPlayData.Close();
-		}
 	
 	return err;
 	}
 
-void RMdaDevSound::CBody::StartRecordRequest()
-	{
-	__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
 	
-	iRecorder->RecordData(iBufferLength);
-	}
-
-// Note both InRecordMode and InPlayMode return EFalse for ENotReady and EStopped
-TBool RMdaDevSound::CBody::InRecordMode()const
-	{
-	switch(iState)
-		{
-		case ENotReady:
-		case EStopped:
-			return EFalse;
-			
-		case ERecording:
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			return ETrue;
-			
-		case EPlaying:
-		case EPlayingPausedInHw: 
-		case EPlayingPausedInSw:
-		case EPlayingUnderrun:
-			return EFalse;
-			
-		default:
-			Panic(EBadState);
-			break;
-		}
-	return EFalse;
-	}
-
-TBool RMdaDevSound::CBody::InPlayMode() const
-	{
-	switch(iState)
-		{
-		case ENotReady:
-		case EStopped:
-			return EFalse;
-			
-		case ERecording:
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			return EFalse;
-			
-		case EPlaying:
-		case EPlayingPausedInHw: 
-		case EPlayingPausedInSw:
-		case EPlayingUnderrun:
-			return ETrue;
-			
-		default:
-			Panic(EBadState);
-			break;
-		}
-	
-	return EFalse;
-	}
-
-
-TUint32 RMdaDevSound::CBody::CurrentTimeInMsec() const
-	{
-	TUint64 tmp = User::NTickCount();
-	tmp *= iNTickPeriodInUsec;
-	tmp /= 1000;
-	return TUint32(tmp);
-	}
-
 void RMdaDevSound::CBody::PlayFormatsSupported(TSoundFormatsSupportedBuf& aFormatsSupported)
 	{
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
@@ -1244,13 +642,13 @@ void RMdaDevSound::CBody::PlayFormatsSupported(TSoundFormatsSupportedBuf& aForma
 void RMdaDevSound::CBody::GetPlayFormat(TCurrentSoundFormatBuf& aFormat)
 	{
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-	GetFormat(aFormat, iPlaySoundDevice, iPlayFormatData);
+	GetFormat(aFormat, iPlaySoundDevice, iPlayData);
 	}
 	
 TInt RMdaDevSound::CBody::SetPlayFormat(const TCurrentSoundFormatBuf& aFormat)
 	{
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
-	return SetFormat(aFormat, iPlaySoundDevice, iPlayFormatData);
+	return SetFormat(aFormat, iPlaySoundDevice, iPlayData);
 	}
 
 void RMdaDevSound::CBody::RecordFormatsSupported(TSoundFormatsSupportedBuf& aFormatsSupported)
@@ -1262,13 +660,13 @@ void RMdaDevSound::CBody::RecordFormatsSupported(TSoundFormatsSupportedBuf& aFor
 void RMdaDevSound::CBody::GetRecordFormat(TCurrentSoundFormatBuf& aFormat)
 	{
 	__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
-	GetFormat(aFormat, iRecordSoundDevice, iRecordFormatData);	
+	GetFormat(aFormat, iRecordSoundDevice, iRecordData);	
 	}
 
 TInt RMdaDevSound::CBody::SetRecordFormat(const TCurrentSoundFormatBuf& aFormat)
 	{
 	__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
-	return SetFormat(aFormat, iRecordSoundDevice, iRecordFormatData);
+	return SetFormat(aFormat, iRecordSoundDevice, iRecordData);
 	}
 	
 void RMdaDevSound::CBody::Close()
@@ -1276,169 +674,80 @@ void RMdaDevSound::CBody::Close()
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
         RDebug::Printf("void RMdaDevSound::CBody::Close() started");
     #endif
+	iBufferIndex = -1;
 	iBufferOffset = -1;
 	iBufferLength = 0;
-
-	if(iPlaySoundDevice.Handle() != KNullHandle)
-	    {
-        // Make sure all player objects are idle
-        CancelPlayData();
-        iPlayChunk.Close();
-        iPlaySoundDevice.Close();
-	    }
-
-    if(iRecordSoundDevice.Handle() != KNullHandle)
-        {
-        CancelRecordData();
-        iRecordChunk.Close();
-        iRecordSoundDevice.Close();
-        }
-	
+	iCurrentPlayer = 0;
+	iTimerActive = EFalse;
+	iChunk.Close();
+	iPlaySoundDevice.Close();
+	iRecordSoundDevice.Close();
 	iState = ENotReady;
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
         RDebug::Printf("void RMdaDevSound::CBody::Close() ended");
     #endif
 	}
-
+		
 TInt RMdaDevSound::CBody::Handle()
 	{//This method is actually used to check whether the device is opened. Below logic should work
 	if(iPlaySoundDevice.Handle())
 		{
 		return iPlaySoundDevice.Handle();
 		}
-	if(iRecordSoundDevice.Handle())
-		{
-		return iRecordSoundDevice.Handle();
-		}
 	return 0;
 	}
-
 
 void RMdaDevSound::CBody::PlayData(TRequestStatus& aStatus, const TDesC8& aData)
 	{
 	#ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-    RDebug::Printf("RMdaDevSound::CBody::PlayData(0x%x,%d) State=%s Handle=%d.",&aStatus, 
-                   aData.Length(), iState.Name(), iPlayChunk.Handle());
+        RDebug::Printf("RMdaDevSound::CBody::PlayData(0x%x,%d) State=%d Current=%d. Handle=%d.",&aStatus, 
+                aData.Length(), iState, iCurrentPlayer, iChunk.Handle());
+        RDebug::Printf("KPlayMaxSharedChunkBuffersMask=0x%x KNumPlayersMask=0x%x", 
+                KPlayMaxSharedChunkBuffersMask, KNumPlayersMask);
 	#endif
-	
 	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
 	aStatus = KRequestPending;
-
-	if((iClientPlayStatus != NULL) || InRecordMode())
+	iPlayerStatus = &aStatus;//store the status of datapath player
+	//No support for simultaneous play and record in RMdaDevSound
+	if(iState == ERecording)
 		{
-		// We only support one outstanding request
-		// No support for simultaneous play and record in RMdaDevSound
-		TRequestStatus *pRequest = &aStatus;
-		User::RequestComplete(pRequest, KErrInUse);
+		SoundDeviceError(KErrInUse);
 		return;
 		}
-	iClientPlayStatus = &aStatus;//store the status of datapath player
-
-	if(iPlayFormatData.iConverter || iSavedTrailingData.Length() != 0)
-		{
-		// Need a conversion buffer
-        // Needs to hold any trailing data truncated from the previous request (due
-        // to alignment requirements) and either the new data, or the new rate adapted data
-		TUint32 spaceRequired = iSavedTrailingData.Length();
-		if(iPlayFormatData.iConverter)
-			{
-			// Doing rate conversion so also need space for the converted data
-			spaceRequired += iPlayFormatData.iConverter->MaxConvertBufferSize(aData.Length());
-			}
-		else
-			{
-			// Not doing rate adaptation therefore only need to allow for the new incoming data
-			spaceRequired += aData.Length();
-			}
-		// Check if existing buffer exists and is big enough
-		if(iConvertedPlayData.MaxLength() < spaceRequired)
-			{
-			iConvertedPlayData.Close();
-			TInt err = iConvertedPlayData.Create(spaceRequired);
-			if(err)
-				{
-				User::RequestComplete(iClientPlayStatus, err);
-				return;
-				}
-			}
-
-		// Truncate iConvertedPlayData and copy in saved trailing data (if any)
-		iConvertedPlayData = iSavedTrailingData;
-		iSavedTrailingData.SetLength(0);
-		
-		// Now append rate adapted data or incoming data
-		if (iPlayFormatData.iConverter)
-			{
-            // The convertor will panic if it fails to convert any data, therefore
-            // we avoid passing it an empty source buffer
-			if(aData.Length() != 0)
-				{
-                TPtr8 destPtr((TUint8 *)iConvertedPlayData.Ptr()+iConvertedPlayData.Length(), 0, iConvertedPlayData.MaxLength()-iConvertedPlayData.Length());
-				TInt len = iPlayFormatData.iConverter->Convert(aData, destPtr);
-				iConvertedPlayData.SetLength(iConvertedPlayData.Length() + destPtr.Length());
-				if(len != aData.Length())
-					{
-					#ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-					RDebug::Printf("RMdaDevSound::CBody::PlayData converted %d	but expected to convert %d", len, aData.Length());
-					#endif
-					}
-				}
-			}
-		else
-			{
-			iConvertedPlayData.Append(aData);
-			}
-		iClientPlayData.Set(iConvertedPlayData);
-		}
-	else
-		{
-		// Do not need a conversion buffer so just aim the descriptor at the data
-		iClientPlayData.Set(aData);
-		}
-	iUnderFlowReportedSinceLastPlayOrRecordRequest = EFalse;
-
-	// All driver requests must be an exact multiple of iRequestMinSize
-	TUint32 trailingDataLen = iClientPlayData.Length() % iRequestMinSize;
-	if(trailingDataLen)
-		{
-		// Not a multiple of iRequestMinSize, so need to truncate current request, and save trailing bytes for 
-		// inclusion at the beginning of the next request
-		iSavedTrailingData = iClientPlayData.Right(trailingDataLen);
-		iClientPlayData.Set(iClientPlayData.Left(iClientPlayData.Length()-trailingDataLen));
-		}
-
-    #ifdef SYMBIAN_FORCE_32BIT_LENGTHS
-	if (iClientPlayData.Length()%4 != 0)
-	    {
-        // simulate the limitation of some hardware, where -6 is generated if the
-        // buffer length is not divisible by 4.
-        TRequestStatus *pRequest = &aStatus;
-        User::RequestComplete(pRequest, KErrArgument);
-	}
-    #endif
-
-	iRecordChunk.Close();
-	if(!iPlayChunk.Handle())
+	const TDes8* data = static_cast<const TDes8*>(&aData);
+	
+	if(!iChunk.Handle())
 		{
 		//This is where we setup to play. 
 		//Configure the shared chunk for two buffers with iBufferSize each
-		iPlayBufferConfig.iNumBuffers = KPlaySharedChunkBuffers;
-		iDeviceBufferLength = KPlaySharedChunkBufferSize;
-		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-		RDebug::Printf("iDeviceBufferLength %d", iDeviceBufferLength);
-		#endif
-		iPlayBufferConfig.iFlags = 0;//data will be continuous
+		iBufferConfig.iNumBuffers = KPlayMaxSharedChunkBuffers;
+		iDeviceBufferLength = data->MaxLength();
+		iBufferConfig.iFlags = 0;//data will be continuous
 		// If required, use rate converter etc
-		iPlayBufferConfig.iBufferSizeInBytes = iDeviceBufferLength;
+		if (iPlayData.iConverter)
+			{
+			iDeviceBufferLength = iPlayData.iConverter->MaxConvertBufferSize(iDeviceBufferLength, ETrue);
+			}
+		iBufferConfig.iBufferSizeInBytes = iDeviceBufferLength;
         #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-            RDebug::Printf("number of buffers: [%d]",iPlayBufferConfig.iNumBuffers);
-            RDebug::Printf("BufferSize in Bytes [%d]",iPlayBufferConfig.iBufferSizeInBytes);
+            RDebug::Printf("number of buffers: [%d]",iBufferConfig.iNumBuffers);
+            RDebug::Printf("BufferSize in Bytes [%d]",iBufferConfig.iBufferSizeInBytes);
         #endif
-		TPckg<TPlaySharedChunkBufConfig> bufferConfigBuf(iPlayBufferConfig);
-		TInt error = iPlaySoundDevice.SetBufferChunkCreate(bufferConfigBuf,iPlayChunk);
+		TPckg<TPlaySharedChunkBufConfig> bufferConfigBuf(iBufferConfig);
+		TInt error = iPlaySoundDevice.SetBufferChunkCreate(bufferConfigBuf,iChunk);
 		if(error == KErrNone)
 			{
 			iPlaySoundDevice.GetBufferConfig(bufferConfigBuf);
+			TSoundFormatsSupportedV02Buf modnumber;
+			iPlaySoundDevice.Caps(modnumber);
+			TInt minBufferSize = KMinBufferSize;
+            #ifdef SYMBIAN_FORCE_32BIT_LENGTHS
+                minBufferSize = Max(minBufferSize, 4); // force to 32-bit buffer align
+            #endif
+			iRequestMinSize = Max(modnumber().iRequestMinSize, minBufferSize); 
+			error = iBufferRemaining.Create(iRequestMinSize);
+			// work out mask so that x&iRequestMinMask is equiv to x/iRequestMinSize*iRequestMinSize
+			iRequestMinMask = ~(iRequestMinSize-1); // assume iRequestMinSize is power of 2
 			}
 		if (error)
 			{
@@ -1446,43 +755,114 @@ void RMdaDevSound::CBody::PlayData(TRequestStatus& aStatus, const TDesC8& aData)
 			return;
 			}
 		}
+	
+	iBufferIndex = (iBufferIndex+1) & KPlayMaxSharedChunkBuffersMask;
+	
+	TPtr8 dataPtr(iChunk.Base()+ iBufferConfig.iBufferOffsetList[iBufferIndex], 0, iDeviceBufferLength);
 
-    StartPlayersAndUpdateState();
+	__ASSERT_DEBUG(!(iBufferRemaining.Length()>0 && iPlayData.iConverter), 
+		Panic(EPanicPartialBufferConverterNotSupported)); // can't deal with conversion with restrictions on buffer size
+	
+	if (iBufferRemaining.Length() != 0)
+		{
+		// This checks if any data was left over from last times rounding and adds it to the dataPtr
+		dataPtr.Copy(iBufferRemaining);
+		iBufferRemaining.SetLength(0);
+		}
+		
+	if (iPlayData.iConverter)
+		{
+		iPlayData.iConverter->Convert(aData, dataPtr);
+		ASSERT(iSecondPhaseData.Length()==0); // assume this below, so check 
+		ASSERT(iBufferRemaining.Length()==0);
+		}
+	else
+		{
+		TInt dataLength = aData.Length();
 
-	return;	
+		TInt lengthAlreadyInDeviceBuffer = dataPtr.Length();
+		TInt desiredDeviceBufferLength = (lengthAlreadyInDeviceBuffer + dataLength) & iRequestMinMask;
+		if (desiredDeviceBufferLength > dataPtr.MaxLength())
+			{
+			// the buffer would be two long to do in one go, so do as two phases
+			desiredDeviceBufferLength = (lengthAlreadyInDeviceBuffer + (dataLength/2)) & iRequestMinMask;
+			}
+
+		TInt lengthToCopy = desiredDeviceBufferLength - lengthAlreadyInDeviceBuffer;
+		lengthToCopy = Max(lengthToCopy, 0); // ensure lengthToCopy is not negative
+		
+		TInt remainingToBeCopied = dataLength - lengthToCopy;
+		TInt secondPhaseLength = remainingToBeCopied & iRequestMinMask;
+		TInt remainingForNextRun = remainingToBeCopied - secondPhaseLength;
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG			
+            RDebug::Printf("dataLength: [%d]",dataLength);
+            RDebug::Printf("lengthAlreadyInDeviceBuffer: [%d]",lengthAlreadyInDeviceBuffer);
+            RDebug::Printf("desiredDeviceBufferLength: [%d]",desiredDeviceBufferLength);
+            RDebug::Printf("lengthToCopy: [%d]",lengthToCopy);
+            RDebug::Printf("remainingToBeCopied: [%d]",remainingToBeCopied);
+            RDebug::Printf("secondPhaseLength: [%d]",secondPhaseLength);
+            RDebug::Printf("remainingForNextRun: [%d]",remainingForNextRun);
+        #endif
+		dataPtr.Append(aData.Left(lengthToCopy));
+		iSecondPhaseData.Set(aData.Mid(lengthToCopy, secondPhaseLength));
+		iBufferRemaining.Copy(aData.Mid(lengthToCopy + secondPhaseLength, remainingForNextRun));
+		iHaveSecondPhaseData = secondPhaseLength>0;
+		}
+			
+	if(iState == EOpened || iState == EPlayBuffersFlushed)
+		{
+		if(dataPtr.Length() > 0 && iSecondPhaseData.Length()==0)
+			{
+			// Note: if we have identified second phase, don't call BufferEmptied() here as we can't cope with a new PlayData() call
+			//Make sure that next player do not overtake the current player, especially when recovering from underflow
+			TInt otherPlayer = (iCurrentPlayer+1) & KNumPlayersMask;
+			iPlayers[otherPlayer]->Deque();
+			CActiveScheduler::Add(iPlayers[otherPlayer]);
+			//Beginning we need to give two play requests for an uninterrupted playback	with the new driver
+			BufferEmptied();
+			}
+		iState = EPlaying;
+		}
+    #ifdef _DEBUG
+        TInt cachePlayer = iCurrentPlayer; // TODO: remove
+    #endif
+	iPlayers[iCurrentPlayer]->PlayData(iBufferConfig.iBufferOffsetList[iBufferIndex], dataPtr.Length());
+	ASSERT(iCurrentPlayer==cachePlayer); // check have not changed since previous calc
+	iCurrentPlayer = (iCurrentPlayer+1) & KNumPlayersMask;
+	#ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+        RDebug::Printf("RMdaDevSound::CBody::PlayData() Exit. Current=%d, Handle=%d.", 
+                iCurrentPlayer, iChunk.Handle());
+	#endif
 	}
 
 void RMdaDevSound::CBody::RecordData(TRequestStatus& aStatus, TDes8& aData)
 	{
 	__ASSERT_DEBUG(iRecordSoundDevice.Handle(), Panic(EDeviceNotOpened));
 	aStatus = KRequestPending;
-	if((iClientPlayStatus != NULL) || InPlayMode())
+	iRecorderStatus = &aStatus;
+	//No support for simultaneous play and record in RMdaDevSound
+	if(iState == EPlaying)
 		{
-		// We only support one outstanding request
-		// No support for simultaneous play and record in RMdaDevSound
-		TRequestStatus *pRequest = &aStatus;
-		User::RequestComplete(pRequest, KErrInUse);
+		SoundDeviceError(KErrInUse);
 		return;
 		}
-	iClientRecordStatus = &aStatus;
-	iClientRecordData = &aData;
-	iUnderFlowReportedSinceLastPlayOrRecordRequest = EFalse;
 
-	iPlayChunk.Close();
-	if(!iRecordChunk.Handle())
+	iData = &aData;
+	
+	if(!iChunk.Handle())
 		{
 		//Configure the shared chunk for two buffers with iBufferSize each
 		iRecordBufferConfig.iNumBuffers = KRecordMaxSharedChunkBuffers;
-		iDeviceBufferLength = KRecordSharedChunkBufferSize; // initial size - resize if needs be
-		if (iRecordFormatData.iConverter)
+		iDeviceBufferLength = iData->MaxLength(); // initial size - resize if needs be
+		if (iRecordData.iConverter)
 			{
 			// if number of channels used differs from request, resize buffer
 			// assume we have nice rounded values for buffer.
-			if (iRecordFormatData.iActualChannels>iRecordFormatData.iRequestedChannels)
+			if (iRecordData.iActualChannels>iRecordData.iRequestedChannels)
 				{
 				iDeviceBufferLength *= 2; // will record at stereo and convert to mono 
 				}
-			else if (iRecordFormatData.iActualChannels<iRecordFormatData.iRequestedChannels)
+			else if (iRecordData.iActualChannels<iRecordData.iRequestedChannels)
 				{
 				iDeviceBufferLength /= 2; // will record at mono and convert to stereo 
 				}
@@ -1490,7 +870,7 @@ void RMdaDevSound::CBody::RecordData(TRequestStatus& aStatus, TDes8& aData)
 		iRecordBufferConfig.iBufferSizeInBytes = iDeviceBufferLength;
 		iRecordBufferConfig.iFlags = 0;
 		TPckg<TRecordSharedChunkBufConfig> bufferConfigBuf(iRecordBufferConfig);
-		TInt error = iRecordSoundDevice.SetBufferChunkCreate(bufferConfigBuf,iRecordChunk);
+		TInt error = iRecordSoundDevice.SetBufferChunkCreate(bufferConfigBuf,iChunk);
 		if(error == KErrNone)
 			{
 			iRecordSoundDevice.GetBufferConfig(bufferConfigBuf);
@@ -1505,129 +885,150 @@ void RMdaDevSound::CBody::RecordData(TRequestStatus& aStatus, TDes8& aData)
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
         RDebug::Printf("RMdaDevSound::CBody::RecordData,iBufferOffset[%d]",iBufferOffset);
     #endif
-
-	switch(iState)
-		{
-		case ENotReady:
-			Panic(EBadState);
-			break;
-
-		case EStopped:
-		case ERecording:
-			// Either idle or recording is in progress, therefore we can issue another request			
-			StartRecordRequest();
-			break;
-			
-		case ERecordingPausedInHw:
-			// Driver is paused, therefore we can issue a request which will immediately return buffered data
-			// or be aborted (in the driver) with KErrCancelled if there is no more data). nb. That KErrCancelled should not be
-			// returned to the client because the old RMdaDevSound driver would have completed with KErrNone and zero data length.
-			StartRecordRequest();
-			break;
-
-		case ERecordingPausedInSw:
-			// Paused in s/w but driver is not paused, therefore can not issue a new request to driver because
-			// it would re-start recording.
-			// This implies we were paused whilst the h/w was not recording, so there is no buffered data.
-			
-			// Complete the request with KErrNone and no data.
-			iClientRecordData->SetLength(0);
-			User::RequestComplete(iClientRecordStatus, KErrNone);
-			break;
-			
-		case EPlaying:
-		case EPlayingPausedInHw:
-		case EPlayingPausedInSw: 
-		case EPlayingUnderrun:
-			Panic(EBadState);
-			break;
-			
-		default:
-			Panic(EBadState);
-			break;
-		}
+	iPlayers[iCurrentPlayer]->RecordData(iBufferLength);
 	}
 	
+void RMdaDevSound::CBody::SoundDeviceError(TInt aError, TInt /*aPlayerIndex*/)
+// This is called by CPlayer objects when there is an error in RunL
+	{
+    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+	RDebug::Print(_L("RMdaDevSound::CBody::SoundDeviceError: aError[%d]"), aError);
+    #endif	
+
+	//When we get an underflow from one of the players and the other player is active, we are 
+	//bound to get an underflow from the other player too. So we ignore the first and process
+	//the second
+	TInt otherPlayerIndex = (iCurrentPlayer+1) & KNumPlayersMask;
+	if (iPlayers[otherPlayerIndex]->IsActive() && aError==KErrUnderflow)
+		{
+		return;
+		}
+	SoundDeviceError(aError);
+	}
 /**
-	Notify client of error.
-	
-	Note that we continue playing/recording if possible.
-	
-	We do not maintain information which could map the error back to a particular client play/record request
-	and therefore we have to notify the client of error every time it happens.
-	
-	nb. A client play/record request is completed with KErrNone if it queues ok - All errors are reported via the Notify*Error
-	mechanism.
+   Note for maintainers: Please note that this method is called from
+   CancelPlayData and CancelRecordData with KErrNone as a parameter in order to
+   cancel the players and reset the internal state.
  */
 void RMdaDevSound::CBody::SoundDeviceError(TInt aError)
 	{
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-	RDebug::Printf("RMdaDevSound::CBody::SoundDeviceError: Error[%d] state %s", aError, iState.Name());
+	RDebug::Print(_L("RMdaDevSound::CBody::SoundDeviceError: Error[%d] CurrentPlayer[%d]"), aError, iCurrentPlayer);
     #endif
 
-	ASSERT(aError != KErrNone);
-	
-	if(iClientPlayErrorStatus)
+	for (TInt i=0; i<KNumPlayers; i++)
+		{
+		if(KErrNone == aError)
+			{
+			// If we are here, SoundDeviceError(KErrNone) has been called from
+			// CancelPlayData or CancelRecordData to maje sure the players are
+			// cancel and their state reset
+			iPlayers[i]->Stop();
+			}
+		else
+			{
+			if (!iPlayers[i]->IsActive())
+				{
+				iPlayers[i]->ResetPlayer();
+				}
+			}
+		}
+
+	iBufferRemaining.SetLength(0);
+	if(iPlayErrorStatus && aError!=KErrNone)//error receiver is only for errors
 		{
         #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
             RDebug::Printf("RMdaDevSound::CBody::SoundDeviceError Completing iPlayerErrorStatus");
         #endif
-
-		User::RequestComplete(iClientPlayErrorStatus, aError); // nb call also sets iClientPlayErrorStatus to NULL
+		User::RequestComplete(iPlayErrorStatus, aError);
+		iPlayErrorStatus = NULL;
 		}
-
-  	if(iClientRecordErrorStatus)
+	if(iPlayerStatus)
 		{
         #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-            RDebug::Printf("RMdaDevSound::CBody::SoundDeviceError Completing iClientRecordErrorStatus");
+            RDebug::Printf("RMdaDevSound::CBody::SoundDeviceError Completing iPlayerStatus");
         #endif
-		User::RequestComplete(iClientRecordErrorStatus, aError); // nb call also sets iClientRecordErrorStatus to NULL
+		User::RequestComplete(iPlayerStatus, KErrNone); // effectively buffer emptied
+		iPlayerStatus = NULL;
 		}
-
-	return;
+  	if(iRecordErrorStatus && aError!=KErrNone)
+		{
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+            RDebug::Printf("RMdaDevSound::CBody::SoundDeviceError Completing iRecordErrorStatus");
+        #endif
+		User::RequestComplete(iRecordErrorStatus, aError);
+		iRecordErrorStatus = NULL;
+		}
+  	else if(iRecorderStatus)
+		{
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+            RDebug::Printf("RMdaDevSound::CBody::SoundDeviceError Completing iRecorderStatus");
+        #endif
+		User::RequestComplete(iRecorderStatus, aError);
+		iRecorderStatus = NULL;
+		}
+  	iBufferIndex = -1;
+	iCurrentPlayer = 0;
+	iBufferOffset = -1;
+	iBufferLength = 0;
+	iTimerActive = EFalse;
+	iState = EOpened;
 	}
 
 void RMdaDevSound::CBody::NotifyRecordError(TRequestStatus& aStatus)
 	{
 	aStatus = KRequestPending;
-	iClientRecordErrorStatus = &aStatus;
+	iRecordErrorStatus = &aStatus;
 	}
 
 void RMdaDevSound::CBody::NotifyPlayError(TRequestStatus& aStatus)
 	{
 	aStatus = KRequestPending;
-	iClientPlayErrorStatus = &aStatus;
+	iPlayErrorStatus = &aStatus;
 	}
 
 void RMdaDevSound::CBody::CancelNotifyPlayError()
 	{
-	if(iClientPlayErrorStatus)
+	if(iPlayErrorStatus)
 		{
-		User::RequestComplete(iClientPlayErrorStatus, KErrCancel);
+		User::RequestComplete(iPlayErrorStatus, KErrCancel);
 		}
 	}
 
 void RMdaDevSound::CBody::CancelNotifyRecordError()
 	{
-	if(iClientRecordErrorStatus)
+	if(iRecordErrorStatus)
 		{
-		User::RequestComplete(iClientRecordErrorStatus, KErrCancel);
+		User::RequestComplete(iRecordErrorStatus, KErrCancel);
 		}
-	else
-	    {
-		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-        RDebug::Printf("msp BufferEmptied but iClientPlayStatus==NULL");
-		#endif
-	    }
 	}
 
 void RMdaDevSound::CBody::FlushPlayBuffer()
 	{
-	#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-    RDebug::Printf("RMdaDevSound::CBody::FlushPlayBuffer calling CancelPlayData");
-	#endif	
-	CancelPlayData();
+	__ASSERT_DEBUG(iPlaySoundDevice.Handle(), Panic(EDeviceNotOpened));
+	//There is no equivalent of FlushPlaybuffer in the new sound driver. So use CancelPlayData
+	//to simulate the original behavior
+	if ((iState == EPlaying) || (iState == EPaused))
+		{
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+            RDebug::Print(_L("RMdaDevSound::CBody::FlushPlayBuffers in Playing or Paused state"));
+        #endif
+
+		if (iState == EPaused)
+			{
+			iFlushCalledDuringPause = ETrue;
+			}
+
+
+		iPlaySoundDevice.CancelPlayData();
+		iBufferRemaining.SetLength(0);
+		iState = EPlayBuffersFlushed;			
+		}
+
 	}
+
+
+
 
 RSoundSc& RMdaDevSound::CBody::PlaySoundDevice()
 	{
@@ -1639,11 +1040,22 @@ RSoundSc& RMdaDevSound::CBody::RecordSoundDevice()
 	return iRecordSoundDevice;
 	}
 	
-const RMdaDevSound::CBody::TState &RMdaDevSound::CBody::State() const
+RMdaDevSound::CBody::TState RMdaDevSound::CBody::State()
 	{
 	return iState;
 	}
 
+void RMdaDevSound::CBody::BufferEmptied()
+	{
+	if(iPlayerStatus)
+		{
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+            RDebug::Print(_L("***Buffer Emptied***"));
+        #endif
+		User::RequestComplete(iPlayerStatus, KErrNone);
+		iPlayerStatus = NULL;
+		}
+	}
 
 void RMdaDevSound::CBody::BufferFilled(TInt aBufferOffset)
 	{
@@ -1652,15 +1064,15 @@ void RMdaDevSound::CBody::BufferFilled(TInt aBufferOffset)
     #endif	
 
 	ASSERT(aBufferOffset>=0 || aBufferOffset==KErrCancel);
-	ASSERT(iClientRecordData); // request should not get this without
+	ASSERT(iData); // request should not get this without
 
 	if(aBufferOffset==KErrCancel)
 		{
 		//we can get KErrCancel when we call pause and there is no more data left with the driver
 		//we send the empty buffer to the HwDevice, where this should trigger the shutdown mechanism
-		iClientRecordData->SetLength(0);
-		User::RequestComplete(iClientRecordStatus, KErrNone);
-		iClientRecordStatus = NULL;
+		iData->SetLength(0);
+		User::RequestComplete(iRecorderStatus, KErrNone);
+		iRecorderStatus = NULL;
 		return;
 		}
 		
@@ -1669,14 +1081,14 @@ void RMdaDevSound::CBody::BufferFilled(TInt aBufferOffset)
 	//expects that the buffer size should always be even. Base suggested that we fix in multimedia
 	//as it is quite complicated to fix in overthere.
 	iBufferLength = iBufferLength & 0xfffffffe;
-	TPtr8 dataPtr(iRecordChunk.Base()+ iBufferOffset, iBufferLength, iClientRecordData->MaxLength());
-	if (iRecordFormatData.iConverter)
+	TPtr8 dataPtr(iChunk.Base()+ iBufferOffset, iBufferLength, iData->MaxLength());
+	if (iRecordData.iConverter)
 		{
-		iRecordFormatData.iConverter->Convert(dataPtr, *iClientRecordData);
+		iRecordData.iConverter->Convert(dataPtr, *iData);
 		}
 	else
 		{
-		iClientRecordData->Copy(dataPtr);
+		iData->Copy(dataPtr);
 		}
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
         RDebug::Print(_L("RMdaDevSound::CBody::BufferFilled: BufferOffset[%d] BufferLen[%d]"), iBufferOffset, iBufferLength);
@@ -1685,124 +1097,52 @@ void RMdaDevSound::CBody::BufferFilled(TInt aBufferOffset)
 		{
 		iRecordSoundDevice.ReleaseBuffer(iBufferOffset);
 		}
-	if(iClientRecordStatus)
+	if(iRecorderStatus)
 		{
-		User::RequestComplete(iClientRecordStatus, KErrNone);
-		iClientRecordStatus = NULL;
+		User::RequestComplete(iRecorderStatus, KErrNone);
+		iRecorderStatus = NULL;
 		}
-	else
-	    {
-        RDebug::Printf("msp PlayCancelled but iClientPlayStatus==NULL");
-	    }
 	}
-		
-/*
-	This function is called to notify us that a CPlayer's request has completed and what its status was.
-
-	It is important to note that:-
-	1) RSoundSc driver PlayData requests are guaranteed to complete in order, oldest first
-	2) If we are overloaded, it is possible for more than one request to complete before any CPlayer::RunL is ran. In
-	this situation the CPlayer::RunL functions, and hence this callback, maybe invoked in non-oldest first order
-
-	but
-
-	a) It is impossible for callback for the second oldest CPlayer to occur before the driver request for the oldest has
-	been complete (because of 1)
-	b) We will always get exactly one callback for every complete request.
-
-	Therefore this callback notifies us of two subtly separate things:-
-
-	i) The oldest request has been completed (so we can reduce can increase the bytes played counter by its length
-	ii) CPlayer aPlayerIndex is free for re-use
-
-	but we can not assume that aPlayerIndex is the oldest request, therefore we save the play request lengths outside of
-	the CPlayer object.
-*/
-void RMdaDevSound::CBody::PlayRequestHasCompleted(CPlayer *aPlayer, TInt aStatus, TBool aDueToCancelCommand)
+							
+void RMdaDevSound::CBody::PlayCancelled()
 	{
-	// CPlayer is done so put it on the free queue
-	iFreePlayers.Push(aPlayer);
+    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+        RDebug::Print(_L("RMdaDevSound::CBody::PlayCancelled:"));
+    #endif	
 
-	TUint32 bytesPlayed = iActivePlayRequestSizes.Pop();
-	// Request has finished therefore now timing the following request to simulate bytes played
-    iStartTime = CurrentTimeInMsec();
-	if(aDueToCancelCommand)
-	    {
-        // Callback due to CPlayer::Cancel/DoCancel being called, therefore we
-        // do not want to update bytes played, process state, report a error or start new players
-        return;
-	    }
-	
-	// Update iBytesPlayed by the length of the oldest request (which might not be the one that CPlayer was 
-	// handling).
-	iBytesPlayed += bytesPlayed;
-	#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-    RDebug::Printf("PlayRequestHasCompleted increasing iBytesPlayed by %d to %d", bytesPlayed, iBytesPlayed);
-	#endif
-	
-    // Process state
-	switch(iState)
+	for (TInt index=0; index<KNumPlayers; index++)
 		{
-		case ENotReady:
-			Panic(EDeviceNotOpened);
-			break;
-				
-		case EStopped:
-			// Will happen if we are doing CancelPlayData processing with active players
-			break;
-		
-		case ERecording:
-		case ERecordingPausedInHw:
-		case ERecordingPausedInSw:
-			Panic(EBadState);
-			break;
-			
-		case EPlaying:
-			// Normal situation
-			break;
-
-		case EPlayingPausedInHw: 
-			// H/W was/is paused, but there must have been an already complete request that we had not 
-			// processed yet.
-			// There must be at least one more pending request on h/w, otherwise the h/w would have refused to pause
-			// I would expect this be rare, but it happens quite often...
-            #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-			ASSERT(iActivePlayRequestSizes.Length() != 0);
-            #endif
-			// Need to update the start and pause time to now because we have just updated the actual iBytesPlayed
-			// and logically the h/w is paused at the beginning of the next request
-			iStartTime = CurrentTimeInMsec();
-			iPauseTime = iStartTime;
-			break;
-		
-		case EPlayingPausedInSw:
-			// This will happen if there is only a single hw request outstanding, and the hardware has finished it, but the
-			// corresponding RunL has not run yet (in which case PausePlayBuffer will have attempted to use h/w pause,
-			// but the driver call would have failed, and the state changed to EPlayingPausedInSw).
-			iStartTime = CurrentTimeInMsec();
-			iPauseTime = iStartTime;
-			return;
-		case EPlayingUnderrun:
-			break;
-				
-		default:
-			Panic(EBadState);
-			break;
+		iPlayers[index]->Cancel();
 		}
-
-
-	// If we have an error, report it to the client
-	// We NEVER report driver underflow, instead we report KErrUnderflow if we run out of data to pass to driver.
-	if( (aStatus != KErrNone) && (aStatus != KErrUnderflow) )
+	iBufferIndex = -1;
+	iCurrentPlayer = 0;
+	iBufferOffset = -1;
+	iBufferLength = 0;
+	iTimerActive = EFalse;
+	if(iPlayerStatus)
 		{
-		SoundDeviceError(aStatus);
+		User::RequestComplete(iPlayerStatus, KErrNone);
+		iPlayerStatus = NULL;
 		}
-
-    // If appropriate start more players
-	StartPlayersAndUpdateState();
-	return;
+	}
+	
+void RMdaDevSound::CBody::UpdateTimeAndBytesPlayed()
+	{
+	iBytesPlayed = iPlaySoundDevice.BytesTransferred();
+	iStartTime = User::FastCounter();
+	iTimerActive=ETrue;
+	}
+	
+TBool RMdaDevSound::CBody::TimerActive()
+	{
+	return iTimerActive;
 	}
 
+TBool RMdaDevSound::CBody::FlushCalledDuringPause()
+	{
+	return iFlushCalledDuringPause;
+	}
+	
 RMdaDevSound::CBody::CPlayer::CPlayer(TInt aPriority, RMdaDevSound::CBody& aParent, TInt aIndex):
 	CActive(aPriority), iParent(aParent), iIndex(aIndex), iBufferOffset(-1), iBufferLength(0)
 	{
@@ -1814,82 +1154,135 @@ RMdaDevSound::CBody::CPlayer::~CPlayer()
 	Cancel();
 	}
 
-
 void RMdaDevSound::CBody::CPlayer::RunL()
 	{
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-    RDebug::Printf("****RMdaDevSound::CBody::CPlayer(%d)::RunL: Error[%d] ParentState[%s]", 
-                     iIndex, iStatus.Int(), iParent.State().Name());
-	RDebug::Printf("iActivePlayRequestSizes.Length() = %d iFreePlayers.Length() = %d (including this one as active)", 
-					iParent.iActivePlayRequestSizes.Length(), 
-					iParent.iFreePlayers.Length());
+        RDebug::Print(_L("****RMdaDevSound::CBody::CPlayer(%d)::RunL: Error[%d] ParentState[%d] Outstanding[%d], pending[%d]"), 
+                            iIndex, iStatus.Int(), iParent.State(), iParent.iHaveSecondPhaseData, iRequestPending);
     #endif
-	iParent.PlayRequestHasCompleted(this, iStatus.Int(), EFalse);
-	return;
+
+	//this is required to avoid receiving the request completions in the order diff. from the 
+	//issued order
+	Deque();
+	CActiveScheduler::Add(this);
+	
+	TInt error = iStatus.Int();
+	
+	// It's fine to schedule buffers to the driver in the paused state (i.e. iRequestPending == EFalse)
+	if(!iRequestPending && (iParent.State() == EPlaying || iParent.State() == EPaused) && error == KErrNone)
+		{
+		//this is from playdata
+		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+		RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::RunL: Playing BufferOffset[%d] BufferLength[%d]"), iIndex, iBufferOffset, iBufferLength);
+		#endif
+		//Make sure the length is even. We may get odd for the last partial buffer.
+		iBufferLength = iBufferLength & 0xfffffffe;
+
+		PlaySoundDevice();
+		//Need this for the first time only
+		if(!iParent.TimerActive())
+			{
+			iParent.UpdateTimeAndBytesPlayed();
+			}
+		iRequestPending = ETrue;
+		}
+	// TODO: The case below shouldn't be valid under EPaused state, i.e. the driver shouldn't complete playback if it was paused. However due to a current problem in the driver we have to handle this case
+	else if (iRequestPending && (iParent.State() == EPlaying || iParent.State() == EPaused) && error == KErrNone) //this is from driver
+		{		
+		#ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+		RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::RunL: Buffer emptied successfully"), iIndex);
+		#endif
+		if (iParent.iHaveSecondPhaseData)
+			{
+			TPtr8 dataPtr(iParent.iChunk.Base()+ iParent.iBufferConfig.iBufferOffsetList[iParent.iBufferIndex], 0, iParent.iDeviceBufferLength);
+			dataPtr.Copy(iParent.iSecondPhaseData);
+							
+			PlaySoundDevice();
+			iParent.iCurrentPlayer = (iParent.iCurrentPlayer+1) & KNumPlayersMask;
+			iParent.UpdateTimeAndBytesPlayed();
+			iParent.iHaveSecondPhaseData = EFalse;			
+			}
+		else
+			{
+			iRequestPending = EFalse;
+			iParent.UpdateTimeAndBytesPlayed();
+			iParent.BufferEmptied();
+			}
+		}
+	else if(iParent.State() == EPlayBuffersFlushed && error == KErrCancel)
+		{
+		iRequestPending = EFalse;
+		if (!iParent.FlushCalledDuringPause())
+			{
+			iParent.PlayCancelled();
+			}
+		}
+	else if(iParent.State() == ERecording && (error >= 0 || error == KErrCancel))
+		{//we can get KErrCancel when we call pause and there is no more data left with the driver
+		iParent.BufferFilled(error);
+		}
+	else 
+		{
+        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+            RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::RunL: Error[%d] Outstanding[%d], pending[%d]"), 
+						  iIndex, error, iParent.iHaveSecondPhaseData,iRequestPending);
+        #endif
+		iParent.SoundDeviceError(error, iIndex);
+		}
 	}
 
 TInt RMdaDevSound::CBody::CPlayer::RunError(TInt aError)
 	{
-	iParent.PlayRequestHasCompleted(this, aError, EFalse);
+	iParent.SoundDeviceError(aError, iIndex);
 	return KErrNone;
 	}
-
+	
 void RMdaDevSound::CBody::CPlayer::DoCancel()
 	{
+	//nothing to do
 #ifdef SYMBIAN_SOUNDADAPTER_DEBUG
 	RDebug::Printf("RMdaDevSound::CBody::CPlayer(%d)::DoCancel", iIndex);
 #endif
-	if(iStatus == KRequestPending)
-	    {
-        // Avoid cancelling requests which have already completed.
-        // It wastes time, and might provoke a sound driver problem
-	    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-        RDebug::Printf("RMdaDevSound::CBody::CPlayer::DoCancel - would have cancelled driver request");
-		#endif
-        iParent.PlaySoundDevice().Cancel(iStatus);
-	    }
-	iParent.PlayRequestHasCompleted(this, KErrCancel, ETrue);
 	}
 
-void RMdaDevSound::CBody::CPlayer::PlayData(TUint aChunkOffset, TInt aLength)
+void RMdaDevSound::CBody::CPlayer::ResetPlayer()
 	{
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-	RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::PlayData : IsActive[%d]"),
-				  iIndex,    IsActive());
-	RDebug::Printf("iActivePlayRequestSizes.Length() = %d iFreePlayers.Length() = %d (inc this player)", 
-					iParent.iActivePlayRequestSizes.Length(), 
-					iParent.iFreePlayers.Length());
-    #endif	
+	RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::ResetPlayer: IsActive[%d] pending[%d] iBufferOffset[%d] iBufferLength[%d]"), iIndex, IsActive(), iRequestPending, iBufferOffset, iBufferLength);
+    #endif
+
+	iRequestPending = EFalse;
+	iBufferOffset = -1;
+	iBufferLength = 0;
+	}
+
+void RMdaDevSound::CBody::CPlayer::Stop()
+	{
+    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+	RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::Stop: IsActive[%d] pending[%d] iBufferOffset[%d] iBufferLength[%d]"), iIndex, IsActive(), iRequestPending, iBufferOffset, iBufferLength);
+    #endif
+
+	ResetPlayer();
+	Cancel();
+	}
 	
-	iBufferOffset = aChunkOffset;
+void RMdaDevSound::CBody::CPlayer::PlayData(TInt aBufferOffset, TInt aLength)
+	{
+    #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
+	RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::PlayData : IsActive[%d]"), iIndex,    IsActive());
+    #endif	
+
+	ASSERT(!IsActive()); // TODO: remove or replace redundant test
+	iBufferOffset = aBufferOffset;
 	iBufferLength = aLength;
 
-    //Make sure the length is a multiple of 4 to work around an h6 limitation.
-	iBufferLength = iBufferLength & 0xfffffffc;
-
-	// Issue the RSoundSc request
-	iParent.PlaySoundDevice().PlayData(iStatus, iBufferOffset, iBufferLength, EFalse);
+	iStatus = KRequestPending;
 	SetActive();
-	return;
+	TRequestStatus* status = &iStatus;
+	User::RequestComplete(status, KErrNone);
 	}
 	
-TUint RMdaDevSound::CBody::CPlayer::GetPlayerIndex() const
-	{
-	return iIndex;
-	}
-
-RMdaDevSound::CBody::CRecorder::CRecorder(TInt aPriority, RMdaDevSound::CBody& aParent):
-    CActive(aPriority), iParent(aParent), iBufferOffset(-1), iBufferLength(0)
-    {
-    CActiveScheduler::Add(this);
-    }
-
-RMdaDevSound::CBody::CRecorder::~CRecorder()
-    {
-    Cancel();
-    }
-
-void RMdaDevSound::CBody::CRecorder::RecordData(TInt& aBufferLength)
+void RMdaDevSound::CBody::CPlayer::RecordData(TInt& aBufferLength)
 	{
 	if (!IsActive())
 	    {
@@ -1902,43 +1295,34 @@ void RMdaDevSound::CBody::CRecorder::RecordData(TInt& aBufferLength)
 	    }
 	}
 
-void RMdaDevSound::CBody::CRecorder::RunL()
+void RMdaDevSound::CBody::CPlayer::PlaySoundDevice()
 	{
     #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-    RDebug::Printf("****RMdaDevSound::CBody::CRecorder()::RunL: Error[%d] ParentState[%s]", 
-                     iStatus.Int(), iParent.State().Name());
-    #endif
+	RDebug::Print(_L("RMdaDevSound::CBody::CPlayer(%d)::PlaySoundDevice : IsActive[%d]"), iIndex, IsActive());
+    #endif	
 
-	
-	TInt error = iStatus.Int();
-	
-	if((error >= 0) || (error == KErrCancel))
-		{//we can get KErrCancel when we call pause and there is no more data left with the driver
-		iParent.BufferFilled(error);
-		}
-	else 
+#ifdef SYMBIAN_FORCE_32BIT_LENGTHS
+	if (iBufferLength%4 != 0)
 		{
-        #ifdef SYMBIAN_SOUNDADAPTER_DEBUG	
-            RDebug::Print(_L("RMdaDevSound::CBody::CPlayer()::RunL: Error[%d]"), error);
-        #endif
-		iParent.SoundDeviceError(error);
+		// simulate the limitation of some hardware, where -6 is generated if the
+		// buffer length is not divisible by 4.
+		TRequestStatus*status = &iStatus;
+		User::RequestComplete(status, KErrArgument);
 		}
-	}
-
-	
-TInt RMdaDevSound::CBody::CRecorder::RunError(TInt aError)
-    {
-    iParent.SoundDeviceError(aError);
-    return KErrNone;
-    }
-
-void RMdaDevSound::CBody::CRecorder::DoCancel()
-    {
-#ifdef SYMBIAN_SOUNDADAPTER_DEBUG
-    RDebug::Printf("RMdaDevSound::CBody::CRecorder()::DoCancel");
+	else
 #endif
-    iParent.RecordSoundDevice().Cancel(iStatus);
-    }
+		{
+		iParent.PlaySoundDevice().PlayData(iStatus, iBufferOffset, iBufferLength, EFalse);
+		// Pause was called when there was no data available. Now that we have data available, we should pause the driver
+		if (iParent.iPauseDeviceDriverOnNewData)
+			{
+			#ifdef SYMBIAN_SOUNDADAPTER_DEBUG
+				RDebug::Printf("Pausing the driver after receiving data to play");
+			#endif			
+			iParent.PlaySoundDevice().Pause();
+			iParent.iPauseDeviceDriverOnNewData = EFalse;
+			}
+		}
+	SetActive();
 
-
-// End of file
+	}

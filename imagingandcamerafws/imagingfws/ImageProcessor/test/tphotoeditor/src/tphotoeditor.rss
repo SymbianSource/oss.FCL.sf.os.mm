@@ -1,0 +1,970 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+NAME TPER
+
+#include <techview/eikon.rh>
+#include <techview/eikon.rsg>
+#include <uiklafgt/eikcore.rsg>
+
+#include "tphotoeditor.hrh"
+
+RESOURCE RSS_SIGNATURE { }
+
+RESOURCE TBUF { buf=""; }
+
+RESOURCE EIK_APP_INFO
+	{
+	hotkeys=r_photoeditor_hotkeys;
+	menubar=r_photoeditor_menubar;
+	}
+
+RESOURCE HOTKEYS r_photoeditor_hotkeys
+    {
+    plain=
+    	{
+		HOTKEY { command=EPhotoEditorCmdPanUp; key='8'; },		
+		HOTKEY { command=EPhotoEditorCmdPanDown; key='2'; },		
+		HOTKEY { command=EPhotoEditorCmdPanLeft; key='4'; },		
+		HOTKEY { command=EPhotoEditorCmdPanRight; key='6'; },		
+		HOTKEY { command=EPhotoEditorCmdForward; key='3'; },		
+		HOTKEY { command=EPhotoEditorCmdBackward; key='1'; },
+		HOTKEY { command=EPhotoEditorCmdSwitchView; key='5'; },
+		HOTKEY { command=EPhotoEditorCmdRefresh; key='7'; }
+		
+		};
+    control=
+        {
+        HOTKEY { command=EPhotoEditorCmdOpenFile; key='o'; },
+        HOTKEY { command=EPhotoEditorCmdOpenDRMFile; key='d'; },
+        HOTKEY { command=EPhotoEditorCmdOpenGallery; key='g'; },
+        HOTKEY { command=EPhotoEditorCmdSaveAs; key='a'; },
+        HOTKEY { command=EPhotoEditorCmdInsertFrame; key='f'; },
+        HOTKEY { command=EPhotoEditorCmdInsertClipart; key='c'; },
+        HOTKEY { command=EPhotoEditorCmdInsertDRMClipart; key='r'; },
+		HOTKEY { command=EPhotoEditorCmdZoomIn; key='m'; },
+		HOTKEY { command=EPhotoEditorCmdUndo; key='z'; },
+		HOTKEY { command=EPhotoEditorCmdCancel; key='x'; },
+		HOTKEY { command=EPhotoEditorCmdExit; key='e'; }
+		};
+    shift_control=
+		{
+		HOTKEY { command=EPhotoEditorCmdZoomOut; key='m'; },
+		HOTKEY { command=EPhotoEditorCmdZoomReset; key='r'; },
+		HOTKEY { command=EPhotoEditorCmdUndoAll; key='z'; }
+		};		
+    }
+
+RESOURCE MENU_BAR r_photoeditor_menubar
+    {
+    titles=
+        {
+        MENU_TITLE { menu_pane=r_photoeditor_file_menu; txt="File"; },
+        MENU_TITLE { menu_pane=r_photoeditor_view_menu; txt="View"; },
+        MENU_TITLE { menu_pane=r_photoeditor_geometricaloperation_menu; txt="GeomOper"; },
+        MENU_TITLE { menu_pane=r_photoeditor_photoart_menu; txt="PhotoArt"; },
+        MENU_TITLE { menu_pane=r_photoeditor_clearshot_menu; txt="ClearShot"; }
+        };
+    }
+
+RESOURCE MENU_PANE r_photoeditor_file_menu
+	{
+	items=
+		{
+		MENU_ITEM { command=EPhotoEditorCmdOpenFile; txt="Open File"; },
+		MENU_ITEM { command=EPhotoEditorCmdOpenDRMFile; txt="Open DRM File"; },
+		MENU_ITEM { command=EPhotoEditorCmdOpenGallery; txt="Open Gallery"; },
+		MENU_ITEM { command=EPhotoEditorCmdSaveAs; txt="Save as"; flags=EEikMenuItemSeparatorAfter;},
+		MENU_ITEM { cascade=r_photoeditor_insert_menu; txt="Insert..."; flags=EEikMenuItemSeparatorAfter;},
+		MENU_ITEM { command=EPhotoEditorCmdCancel; txt="Cancel"; },
+		MENU_ITEM { cascade=r_photoeditor_undo_menu; txt="Undo..."; flags=EEikMenuItemSeparatorAfter;},
+		MENU_ITEM { command=EPhotoEditorCmdExit; txt="Close"; }
+		};
+    }
+
+RESOURCE MENU_PANE r_photoeditor_insert_menu
+{
+items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdInsertFrame; txt="Insert Frame"; },
+	MENU_ITEM { command=EPhotoEditorCmdInsertClipart; txt="Insert Clipart"; },
+	MENU_ITEM { command=EPhotoEditorCmdInsertDRMClipart; txt="Insert DRM Clipart"; }
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_undo_menu
+{
+items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdUndo; txt="Undo"; },
+	MENU_ITEM { command=EPhotoEditorCmdUndoAll; txt="Undo All"; }
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_view_menu
+{
+items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdZoomIn; txt="Zoom In"; },
+	MENU_ITEM { command=EPhotoEditorCmdZoomOut; txt="Zoom Out"; },
+	MENU_ITEM { command=EPhotoEditorCmdZoomReset; txt="Zoom Reset"; },
+	MENU_ITEM { cascade=r_photoeditor_pan_menu; txt="Pan..."; flags=EEikMenuItemSeparatorAfter;},
+	MENU_ITEM { command=EPhotoEditorCmdForward; txt="Gallery Forward"; },
+	MENU_ITEM { command=EPhotoEditorCmdBackward; txt="Gallery Backward"; flags=EEikMenuItemSeparatorAfter;},
+	MENU_ITEM { command=EPhotoEditorCmdSwitchView; txt="Switch View";},
+	MENU_ITEM { command=EPhotoEditorCmdRefresh; txt="Refresh";}
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_pan_menu
+{
+items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdPanUp; txt="Pan Up"; },
+	MENU_ITEM { command=EPhotoEditorCmdPanDown; txt="Pan Down"; },
+	MENU_ITEM { command=EPhotoEditorCmdPanLeft; txt="Pan Left"; },
+	MENU_ITEM { command=EPhotoEditorCmdPanRight; txt="Pan Right"; }
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_geometricaloperation_menu
+	{
+	items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdRotate90; txt="Rotate 90 degrees clockwise"; },
+	MENU_ITEM { command=EPhotoEditorCmdRotate180; txt="Rotate 180 degrees clockwis"; },
+	MENU_ITEM { command=EPhotoEditorCmdRotate270; txt="Rotate 270 degrees clockwis"; },
+	MENU_ITEM { command=EPhotoEditorCmdHorizontalFlip; txt="Horizontal Flip"; },
+	MENU_ITEM { command=EPhotoEditorCmdVerticalFlip; txt="Vertical Flip"; }
+	};
+}
+
+
+RESOURCE MENU_PANE r_photoeditor_photoart_menu
+{
+items=
+	{
+	MENU_ITEM { cascade=r_photoeditor_basicphotoart_menu; txt="Basic PhotoArt..."; },
+	MENU_ITEM { cascade=r_photoeditor_advancedphotoart_menu; txt="Advanced PhotoArt..."; },
+	MENU_ITEM { cascade=r_photoeditor_funnyphotoart_menu; txt="Funny PhotoArt..."; }
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_basicphotoart_menu
+	{
+	items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdSepia; txt="Sepia"; },
+	MENU_ITEM { command=EPhotoEditorCmdGrayscale; txt="Grayscale"; },
+	MENU_ITEM { command=EPhotoEditorCmdNegative; txt="Negative"; },
+	MENU_ITEM { command=EPhotoEditorCmdGrayscaleNegative; txt="GrayscaleNegative"; },
+	MENU_ITEM { command=EPhotoEditorCmdOily; txt="Oily"; },
+	MENU_ITEM { command=EPhotoEditorCmdPaint; txt="Paint"; },
+	MENU_ITEM { command=EPhotoEditorCmdMilky; txt="Milky"; },
+	MENU_ITEM { command=EPhotoEditorCmdFog; txt="Fog"; },
+	MENU_ITEM { command=EPhotoEditorCmdMirror; txt="Mirror"; },
+	MENU_ITEM { command=EPhotoEditorCmdMagicPen; txt="MagicPen"; }
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_advancedphotoart_menu
+	{
+	items=
+		{
+		MENU_ITEM { command=EPhotoEditorCmdBrightness; txt="Brightness"; },
+		MENU_ITEM { command=EPhotoEditorCmdSharpness; txt="Sharpness..."; },
+		MENU_ITEM { command=EPhotoEditorCmdRotation; txt="Rotation"; },
+		MENU_ITEM { command=EPhotoEditorCmdContrast; txt="Contrast"; },
+		MENU_ITEM { command=EPhotoEditorCmdRgbColorAdjust; txt="RgbColorAdjust"; },
+		MENU_ITEM { command=EPhotoEditorCmdNoise; txt="Noise"; },
+		MENU_ITEM { command=EPhotoEditorCmdDespeckle; txt="Despeckle"; },
+		MENU_ITEM { command=EPhotoEditorCmdBlur; txt="Blur"; },
+		MENU_ITEM { command=EPhotoEditorCmdColorization; txt="Colorization"; },
+		MENU_ITEM { command=EPhotoEditorCmdSpotlight; txt="Spotlight"; }
+		};
+	}
+
+RESOURCE MENU_PANE r_photoeditor_funnyphotoart_menu
+{
+items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdAntique; txt="Antique"; },
+	MENU_ITEM { command=EPhotoEditorCmdEmboss; txt="Emboss"; },
+	MENU_ITEM { command=EPhotoEditorCmdSolarize; txt="Solarize"; },
+	MENU_ITEM { command=EPhotoEditorCmdPosterize; txt="Posterize"; },
+	MENU_ITEM { command=EPhotoEditorCmdStamp; txt="Stamp"; },
+	MENU_ITEM { command=EPhotoEditorCmdCartoon; txt="Cartoon"; },
+	MENU_ITEM { command=EPhotoEditorCmdMoonlight; txt="Moonlight"; },
+	MENU_ITEM { command=EPhotoEditorCmdSketch; txt="Sketch"; },
+	MENU_ITEM { command=EPhotoEditorCmdFrostedGlass; txt="FrostedGlass"; },
+	MENU_ITEM { command=EPhotoEditorCmdCustomTransformation; txt="CustomTransformation"; }
+	};
+}
+
+RESOURCE MENU_PANE r_photoeditor_clearshot_menu
+	{
+	items=
+	{
+	MENU_ITEM { command=EPhotoEditorCmdColorBoost; txt="ColorBoost"; },
+	MENU_ITEM { command=EPhotoEditorCmdLocalBoost; txt="LocalBoost"; },
+	MENU_ITEM { command=EPhotoEditorCmdWhiteBalance; txt="WhiteBalance"; },
+	MENU_ITEM { command=EPhotoEditorCmdAutoLevels; txt="AutoLevels"; },
+	MENU_ITEM { command=EPhotoEditorCmdLevels; txt="Levels"; },
+	MENU_ITEM { command=EPhotoEditorCmdExposure; txt="Exposure"; }
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_save_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_NO_YES;
+items=
+    {
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_encodeoptions_dialog
+{
+title="Encode Options";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+		{
+		prompt="Output Format?";
+		type=EEikCtChoiceList;
+		id=EEncodeOptionOutputFormat;
+		control=CHOICELIST {};
+		},
+   	DLG_LINE
+	    {
+	    prompt="Width";
+		type=EEikCtNumberEditor;
+		id=EEncodeOptionWidth;
+		control=NUMBER_EDITOR
+			{
+			min=0;
+			max=10000;
+			};
+	    },
+    DLG_LINE
+	    {
+	    prompt="Height";
+		type=EEikCtNumberEditor;
+		id=EEncodeOptionHeight;
+		control=NUMBER_EDITOR
+			{
+			min=0;
+			max=10000;
+			};
+	    },
+    DLG_LINE
+	    {
+	    prompt="Jpeg Quality";
+		type=EEikCtNumberEditor;
+		id=EEncodeOptionJpegQuality;
+		control=NUMBER_EDITOR
+			{
+			min=1;
+			max=100;
+			};
+	    },	    
+    DLG_LINE
+		{
+		prompt="Maintain Aspect Ratio?";
+		type=EEikCtChoiceList;
+		id=EEncodeOptionMaintainAspectRatio;
+		control=CHOICELIST {array_id=r_maintain_aspect_ratio_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_clipart_dialog
+{
+title="Clipart Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+    	{
+	    prompt="The scale of the clipart image";
+		type=EEikCtNumberEditor;
+		id=EEffectClipartScale;
+		control=NUMBER_EDITOR
+			{
+			min=0;
+			max=65535;
+			};
+    	},	
+    DLG_LINE
+	    {
+	    prompt="The X coordinate of the position of clipart";
+		type=EEikCtNumberEditor;
+		id=EEffectClipartAx;
+		control=NUMBER_EDITOR
+			{
+			min=0;
+			max=5000;
+			};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="The Y coordinate of the position of clipart";
+		type=EEikCtNumberEditor;
+		id=EEffectClipartAy;
+		control=NUMBER_EDITOR
+			{
+			min=0;
+			max=5000;
+			};
+	    },	
+	
+	DLG_LINE
+	    {
+	    prompt="The angle of the clipart image";
+		type=EEikCtNumberEditor;
+		id=EEffectClipartAngle;
+		control=NUMBER_EDITOR
+			{
+			min=0;
+			max=360;
+			};
+	    }
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_level_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+        {
+		type=EEikCtChoiceList;
+		id=EEffectLevel;
+		control=CHOICELIST {};
+        }
+	};
+}
+
+
+RESOURCE DIALOG r_photoeditor_rotation_dialog
+{
+title="Rotation Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+	    {
+	    prompt="Angle 0 - 360";
+		type=EEikCtChoiceList;
+		id=EEffectRotationAngle;
+		control=CHOICELIST {};
+	    },
+    DLG_LINE
+		{
+		prompt="Scale Mode";
+		type=EEikCtChoiceList;
+		id=EEffectRotationMode;
+		control=CHOICELIST {array_id=r_rotation_mode_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_rgbcoloradjust_dialog
+{
+title="RgbColorAdjust Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+	    {
+	    prompt="Red Level -100 - 100(%)";
+		type=EEikCtChoiceList;
+		id=EEffectRgbColorAdjustRed;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Green Level -100 - 100(%)";
+		type=EEikCtChoiceList;
+		id=EEffectRgbColorAdjustGreen;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Blue Level -100 - 100(%)";
+		type=EEikCtChoiceList;
+		id=EEffectRgbColorAdjustBlue;
+		control=CHOICELIST	{};
+	    }  
+	    
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_noise_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectNoiseMode;
+		control=CHOICELIST {array_id=r_noise_mode_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_despeckle_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectDespeckleMode;
+		control=CHOICELIST {array_id=r_despeckle_mode_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_blur_dialog
+{
+title="Blur Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		prompt="Blur Mode";
+		type=EEikCtChoiceList;
+		id=EEffectBlurMode;
+		control=CHOICELIST {array_id=r_blur_mode_array;};
+		},
+	DLG_LINE
+	    {
+	    prompt="Ax: ";
+		type=EEikCtChoiceList;
+		id=EEffectBlurAx;
+		control=CHOICELIST	{};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="Ay: ";
+		type=EEikCtChoiceList;
+		id=EEffectBlurAy;
+		control=CHOICELIST	{};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="Bx: ";
+		type=EEikCtChoiceList;
+		id=EEffectBlurBx;
+		control=CHOICELIST	{};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="By: ";
+		type=EEikCtChoiceList;
+		id=EEffectBlurBy;
+		control=CHOICELIST	{};
+	    }
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_colorization_dialog
+{
+title="Stamp Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+	    {
+	    prompt="Luminance Level -100 - 200";
+		type=EEikCtChoiceList;
+		id=EEffectColorizationLuminance;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Chrominance Level -100 - 200";
+		type=EEikCtChoiceList;
+		id=EEffectColorizationChrominance;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Red Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectColorizationRed;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Green Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectColorizationGreen;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Blue Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectColorizationBlue;
+		control=CHOICELIST	{};
+	    }
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_spotlight_dialog
+{
+title="Spotlight Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+	    {
+	    prompt="The X coordinate of the spotlight center";
+		type=EEikCtChoiceList;
+		id=EEffectCenterX;
+		control=CHOICELIST	{};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="The Y coordinate of the spotlight center";
+		type=EEikCtChoiceList;
+		id=EEffectCenterY;
+		control=CHOICELIST	{};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="The radius of the spotlight circle";
+		type=EEikCtChoiceList;
+		id=EEffectRadius;
+		control=CHOICELIST	{};
+	    },	
+	DLG_LINE
+	    {
+	    prompt="The fraction of the transition region %";
+		type=EEikCtChoiceList;
+		id=EEffectTransSize;
+		control=CHOICELIST	{};
+	    }
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_stamp_dialog
+{
+title="Stamp Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+	    {
+	    prompt="Smooth Level 0 - 6";
+		type=EEikCtChoiceList;
+		id=EEffectStampSmoothness;
+		control=CHOICELIST	{};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Threshold Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectStampThreshold;
+		control=CHOICELIST	{};
+	    }  
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_sketch_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectSketchMode;
+		control=CHOICELIST {array_id=r_sketch_mode_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_cartoon_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectCartoonMode;
+		control=CHOICELIST {array_id=r_maintain_aspect_ratio_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_frostedglass_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectFrostedGlassMode;
+		control=CHOICELIST {array_id=r_frostedglass_mode_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_localboost_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectLocalBoostMode;
+		control=CHOICELIST {array_id=r_localboost_mode_array;};
+		}
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_whitebalance_dialog
+{
+title="WhiteBalance Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+	    {
+	    prompt="WhiteBalance Mode";
+		type=EEikCtChoiceList;
+		id=EEffectWhiteBalanceMode;
+		control=CHOICELIST {array_id=r_whitebalance_mode_array;};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Red Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectWhiteBalanceRed;
+		control=CHOICELIST {};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Green Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectWhiteBalanceGreen;
+		control=CHOICELIST {};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Blue Level 0 - 255";
+		type=EEikCtChoiceList;
+		id=EEffectWhiteBalanceBlue;
+		control=CHOICELIST {};
+	    }
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_levels_dialog
+{
+title="Levels Parameters";
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+    DLG_LINE
+	    {
+	    prompt="White Level 0 - 100(%)";
+		type=EEikCtChoiceList;
+		id=EEffectLevelsWhite;
+		control=CHOICELIST {};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Gray Level 0 - 100(%)";
+		type=EEikCtChoiceList;
+		id=EEffectLevelsGray;
+		control=CHOICELIST {};
+	    },
+	 DLG_LINE
+	    {
+	    prompt="Black Level 0 - 100(%)";
+		type=EEikCtChoiceList;
+		id=EEffectLevelsBlack;
+		control=CHOICELIST {};
+	    }  
+	    
+	};
+}
+
+RESOURCE DIALOG r_photoeditor_boolean_dialog
+{
+flags=EEikDialogFlagWait;
+buttons=R_EIK_BUTTONS_CANCEL_OK;
+items=
+    {
+	DLG_LINE
+		{
+		type=EEikCtChoiceList;
+		id=EEffectMode;
+		control=CHOICELIST 
+			{
+			array_id=r_cartoon_mode_array;
+			};
+		}
+	};
+}
+
+//RESOURCE DIALOG r_photoeditor_panorama_dialog
+//{
+//title="Select images for panorama";
+//flags=EEikDialogFlagWait;
+//buttons=R_EIK_BUTTONS_CANCEL_OK;
+//items=
+//	{
+//	DLG_LINE
+//		{
+//		type=EEikCtChoiceList;
+//		id=EPanoramaFileList;
+//		control=CHOICELIST {};
+//		//control=CHOICELIST {array_id=r_whitebalance_mode_array;};
+//		}
+//	};
+//}
+
+RESOURCE ARRAY r_maintain_aspect_ratio_array
+{
+items=
+	{
+	LBUF { txt="EFalse"; },
+	LBUF { txt="ETrue"; }
+	};
+}
+
+
+RESOURCE ARRAY r_rotation_mode_array
+{
+items=
+	{
+	LBUF { txt="ERotationScaleModeIgnore"; },
+	LBUF { txt="ERotationScaleModeFitInside"; },
+	LBUF { txt="ERotationScaleModeFitOutside"; }
+	};
+}
+
+RESOURCE ARRAY r_noise_mode_array
+{
+items=
+	{
+	LBUF { txt="ENoiseLevelMinimum"; },
+	LBUF { txt="ENoiseLevelMedium"; },
+	LBUF { txt="ENoiseLevelMax"; }
+	};
+}
+
+RESOURCE ARRAY r_despeckle_mode_array
+{
+items=
+	{
+	LBUF { txt="EDespeckleLevelMinimum"; },
+	LBUF { txt="EDespeckleLevelLow"; },
+	LBUF { txt="EDespeckleLevelHigh"; },
+	LBUF { txt="EDespeckleLevelMax"; }
+	};
+}
+
+RESOURCE ARRAY r_blur_mode_array
+{
+items=
+	{
+	LBUF { txt="EBlurLevelMinimum"; },
+	LBUF { txt="EBlurLevelLow"; },
+	LBUF { txt="EBlurLevelHigh"; },
+	LBUF { txt="EBlurLevelMax"; }
+	};
+}
+
+//start with 1
+RESOURCE ARRAY r_frostedglass_mode_array
+{
+items=
+	{
+	LBUF { txt="EFrostedLevelMinimum"; },
+	LBUF { txt="EFrostedLevelLow"; },
+	LBUF { txt="EFrostedLevelMedium"; },
+	LBUF { txt="EFrostedLevelHigh"; },
+	LBUF { txt="EFrostedLevelMax"; }
+	};
+}
+
+
+RESOURCE ARRAY r_cartoon_mode_array
+{
+items=
+	{
+	LBUF { txt="EFalse"; },
+	LBUF { txt="ETrue"; }
+	};
+}
+
+RESOURCE ARRAY r_sketch_mode_array
+{
+items=
+	{
+	LBUF { txt="ESketchModeGray"; },
+	LBUF { txt="ESketchColor"; }
+	};
+}
+
+RESOURCE ARRAY r_localboost_mode_array
+{
+items=
+	{
+	LBUF { txt="ELocalBoostMax"; },
+	LBUF { txt="ELocalBoostMedium"; },
+	LBUF { txt="ELocalBoostMinimum"; }
+	};
+}
+
+RESOURCE ARRAY r_whitebalance_mode_array
+{
+items=
+	{
+	LBUF { txt="EWhiteBalanceMeanMode"; },
+	LBUF { txt="EWhiteBalanceMaxMode"; },
+	LBUF { txt="EWhiteBalanceManualMode"; },
+	LBUF { txt="EWhiteBalanceClusterMode"; }
+	};
+}
+
+RESOURCE TBUF r_photoeditor_text_Title { buf="PREQ1920 TPhotoEditor"; }
+RESOURCE TBUF r_confirm_text_Title { buf="Do you want to save your applied effects?"; }
+RESOURCE TBUF r_gallery_empty_folder 	{ buf ="Empty folder"; }
+RESOURCE TBUF r_gallery_start_folder 	{ buf ="Start of folder"; }
+RESOURCE TBUF r_gallery_end_folder   	{ buf ="End of folder"; }
+
+//Effects
+RESOURCE TBUF r_brightness_text_Title { buf="Brightness Level"; }
+RESOURCE TBUF r_sharpness_text_Title { buf="Sharpness Level"; }
+RESOURCE TBUF r_contrast_text_Title { buf="Contrast Level"; }
+RESOURCE TBUF r_noise_text_Title { buf="Noise Level"; }
+RESOURCE TBUF r_despeckle_text_Title { buf="Despeckle Level"; }
+RESOURCE TBUF r_emboss_text_Title { buf="Emboss Level"; }
+RESOURCE TBUF r_solarize_text_Title { buf="Solarize Level"; }
+RESOURCE TBUF r_posterize_text_Title { buf="Posterize Level"; }
+RESOURCE TBUF r_cartoon_text_Title { buf="Distinct Edges?"; }
+RESOURCE TBUF r_moonlight_text_Title { buf="Moonlight Clock 1 - 24 (affect only at night time (17-7))"; }
+RESOURCE TBUF r_sketch_text_Title { buf="Sketch Mode"; }
+RESOURCE TBUF r_frostedglass_text_Title { buf="FrostedGlass Level"; }
+RESOURCE TBUF r_colorboost_text_Title { buf="ColorBoost Level"; }
+RESOURCE TBUF r_localboost_text_Title { buf="LocalBoost Level"; }
+RESOURCE TBUF r_exposure_text_Title { buf="Exposure Level"; }
+
+RESOURCE TBUF r_prompt_text_0 { buf="Open File"; }
+RESOURCE TBUF r_prompt_text_1 { buf="Open DRM File"; }
+RESOURCE TBUF r_prompt_text_2 { buf="Open Photo Gallery"; }
+RESOURCE TBUF r_prompt_text_3 { buf="Save As"; }
+RESOURCE TBUF r_prompt_text_4 { buf="Insert Frame Effect"; }
+RESOURCE TBUF r_prompt_text_5 { buf="Insert Clipart Effect"; }
+RESOURCE TBUF r_prompt_text_6 { buf="Insert DRM Clipart"; }
+RESOURCE TBUF r_prompt_text_7 { buf="Cancel Current Operation"; }
+RESOURCE TBUF r_prompt_text_8 { buf="Undo"; }
+RESOURCE TBUF r_prompt_text_9 { buf="UndoAll"; }
+
+RESOURCE TBUF r_prompt_text_10 { buf="Zoom In"; }
+RESOURCE TBUF r_prompt_text_11 { buf="Zoom Out"; }
+RESOURCE TBUF r_prompt_text_12 { buf="Pan Up"; }
+RESOURCE TBUF r_prompt_text_13 { buf="Pan Down"; }
+RESOURCE TBUF r_prompt_text_14 { buf="Pan Left"; }
+RESOURCE TBUF r_prompt_text_15 { buf="Pan Right"; }
+RESOURCE TBUF r_prompt_text_16 { buf="Gallery Forward"; }
+RESOURCE TBUF r_prompt_text_17 { buf="Gallery Backward"; }
+
+RESOURCE TBUF r_prompt_text_18 { buf="Rotate 90 degree clockwise"; }
+RESOURCE TBUF r_prompt_text_19 { buf="Rotate 180 degree clockwise"; }
+RESOURCE TBUF r_prompt_text_20 { buf="Rotate 270 degree clockwise"; }
+RESOURCE TBUF r_prompt_text_21 { buf="Horizontal Flip"; }
+RESOURCE TBUF r_prompt_text_22 { buf="Vertical Flip"; }
+
+RESOURCE TBUF r_prompt_text_23 { buf="Sepia Effect"; }
+RESOURCE TBUF r_prompt_text_24 { buf="Grayscale Effect"; }
+RESOURCE TBUF r_prompt_text_25 { buf="Negative Effect"; }
+RESOURCE TBUF r_prompt_text_26 { buf="GrayscaleNegative Effect"; }
+RESOURCE TBUF r_prompt_text_27 { buf="Oily Effect"; }
+RESOURCE TBUF r_prompt_text_28 { buf="Paint Effect"; }
+RESOURCE TBUF r_prompt_text_29 { buf="Milky Effect"; }
+RESOURCE TBUF r_prompt_text_30 { buf="Fog Effect"; }
+RESOURCE TBUF r_prompt_text_31 { buf="Mirror Effect"; }
+RESOURCE TBUF r_prompt_text_32 { buf="MagicPen Effect"; }
+
+RESOURCE TBUF r_prompt_text_33 { buf="Brightness Effect"; }
+RESOURCE TBUF r_prompt_text_35 { buf="Rotation Effect"; }
+RESOURCE TBUF r_prompt_text_36 { buf="Contrast Effect"; }
+RESOURCE TBUF r_prompt_text_37 { buf="RgbColorAdjust Effect"; }
+RESOURCE TBUF r_prompt_text_38 { buf="Noise Effect"; }
+RESOURCE TBUF r_prompt_text_39 { buf="Despeckle Effect"; }
+RESOURCE TBUF r_prompt_text_40 { buf="Blur Effect"; }
+RESOURCE TBUF r_prompt_text_41 { buf="Colorization Effect"; }
+RESOURCE TBUF r_prompt_text_42 { buf="Spotlight Effect"; }
+
+RESOURCE TBUF r_prompt_text_43 { buf="Emboss Effect"; }
+RESOURCE TBUF r_prompt_text_44 { buf="Solarize Effect"; }
+RESOURCE TBUF r_prompt_text_45 { buf="Posterize Effect"; }
+RESOURCE TBUF r_prompt_text_46 { buf="Stamp Effect"; }
+RESOURCE TBUF r_prompt_text_47 { buf="Cartoon Effect"; }
+RESOURCE TBUF r_prompt_text_48 { buf="Moonlight Effect"; }
+RESOURCE TBUF r_prompt_text_49 { buf="Sketch Effect"; }
+RESOURCE TBUF r_prompt_text_50 { buf="FrostedGlass Effect"; }
+RESOURCE TBUF r_prompt_text_51 { buf="CustomTransforation Effect"; }
+
+RESOURCE TBUF r_prompt_text_52 { buf="AutoLevels Effect"; }
+RESOURCE TBUF r_prompt_text_53 { buf="ColorBoost Effect"; }
+RESOURCE TBUF r_prompt_text_54 { buf="Exposure Effect"; }
+RESOURCE TBUF r_prompt_text_55 { buf="Level Effect"; }
+RESOURCE TBUF r_prompt_text_56 { buf="LocalBoost Effect"; }
+RESOURCE TBUF r_prompt_text_57 { buf="WhiteBalance Effect"; }
+
+RESOURCE TBUF r_prompt_text_58 { buf="Switch to File View"; }
+RESOURCE TBUF r_prompt_text_59 { buf="Switch to Gallery View"; }
+RESOURCE TBUF r_prompt_text_60 { buf="Zoom Reset"; }
+
+RESOURCE TBUF r_prompt_text_61 { buf="Sharpness"; }
+
+RESOURCE TBUF r_prompt_text_65 { buf="Antique Effect"; }
+
+RESOURCE TBUF r_prompt_text_66 { buf="Already Zoomed to Original Size"; }
+RESOURCE TBUF r_prompt_text_67 { buf="Select effect mode"; }

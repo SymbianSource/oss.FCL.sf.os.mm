@@ -1,0 +1,50 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT Run all the ICL unit tests for file handle 
+PRINT 
+//=====================================================
+LOAD_SUITE TSU_ICL_FRM_01.dll
+
+//! @SYMTestCaseID MM-ICL-FRM-U-5350-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5350-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-5352-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5352-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-5380-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5380-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-5390-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5390-HP
+TEST_COMPLETE
+
+//=====================================================
+//! @SYMTestCaseID MM-ICL-FRM-U-5450-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5450-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-5452-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5452-HP
+TEST_COMPLETE

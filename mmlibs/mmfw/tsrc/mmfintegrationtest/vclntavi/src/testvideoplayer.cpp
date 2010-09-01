@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2005-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -1131,10 +1131,22 @@ TVerdict RTestVclntPlayWindow::DoTestL(CVideoPlayerUtility* aPlayer)
     TSize clipSize(176, 144);
     TRect clipRect(clipOrigin, clipSize);
     
+    // first call tests creation of display instance
     TRAPD(err, aPlayer->SetDisplayWindowL(iWs, *iScreen, *iWindow, rect, clipRect));
+    INFO_PRINTF1(_L("Test : Made first call to SetDisplayWindowL()"));
     if(err)
         {
-        ERR_PRINTF2(_L("SetDisplayWindowL() failed, error %d"), err);
+        ERR_PRINTF2(_L("First call to SetDisplayWindowL() failed, error %d"), err);
+        CActiveScheduler::Stop();
+        return EFail;
+        }
+
+    // second call tests update of display instance
+    TRAP(err, aPlayer->SetDisplayWindowL(iWs, *iScreen, *iWindow, rect, clipRect));
+    INFO_PRINTF1(_L("Test : Made second call to SetDisplayWindowL()"));
+    if(err)
+        {
+        ERR_PRINTF2(_L("Second call to SetDisplayWindowL() failed, error %d"), err);
         ret = EFail;
         }
     else
@@ -1143,7 +1155,6 @@ TVerdict RTestVclntPlayWindow::DoTestL(CVideoPlayerUtility* aPlayer)
         }
 
     CActiveScheduler::Stop();
-        
     return ret;
     }
 
@@ -1819,7 +1830,7 @@ TVerdict RTestVclntPlayAviFileHandle::DoTestStepL()
         
         TInt failCount = 1;
         TBool completed = EFalse;
-        iAllocTestStepResult = EPass; // XXX check?? assume pass
+        iAllocTestStepResult = EPass; // TODO check?? assume pass
         TBool reachedEnd = EFalse; // Note: declare outside loop to help with debugging
         for(;;)    
             {

@@ -1,0 +1,48 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+
+#ifndef TSI_ICL_IMAGEDECODER_IBY
+#define TSI_ICL_IMAGEDECODER_IBY
+
+
+file=ABI_DIR\DEBUG_DIR\tsi_icl_imagedecoder.dll   System\Libs\tsi_icl_imagedecoder.dll
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_perf.ini             \icl\imagedecoder\tsi_icl_imagedecoder_perf.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_perf.script          \icl\imagedecoder\tsi_icl_imagedecoder_perf.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_extinterface.ini     \icl\imagedecoder\tsi_icl_imagedecoder_extinterface.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_extinterface.script  \icl\imagedecoder\tsi_icl_imagedecoder_extinterface.script
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_extinterface_panic.script  \icl\imagedecoder\tsi_icl_imagedecoder_extinterface_panic.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_crop.ini             \icl\imagedecoder\tsi_icl_imagedecoder_crop.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_crop.script          \icl\imagedecoder\tsi_icl_imagedecoder_crop.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_scale.ini            \icl\imagedecoder\tsi_icl_imagedecoder_scale.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_scale.script         \icl\imagedecoder\tsi_icl_imagedecoder_scale.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini         \icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_rotation.script      \icl\imagedecoder\tsi_icl_imagedecoder_rotation.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_stream.ini         \icl\imagedecoder\tsi_icl_imagedecoder_stream.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_stream.script      \icl\imagedecoder\tsi_icl_imagedecoder_stream.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini       \icl\imagedecoder\tsi_icl_imagedecoder_multipleop.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_multipleop.script    \icl\imagedecoder\tsi_icl_imagedecoder_multipleop.script
+
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_autorotate.ini         \icl\imagedecoder\tsi_icl_imagedecoder_autorotate.ini
+data=EPOCROOT##epoc32\data\c\icl\imagedecoder\tsi_icl_imagedecoder_autorotate.script      \icl\imagedecoder\tsi_icl_imagedecoder_autorotate.script
+
+#endif // TSI_ICL_IMAGEDECODER_IBY

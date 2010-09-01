@@ -16,8 +16,11 @@
 #ifndef  TSU_DVBH_HAI_IBY
 #define  TSU_DVBH_HAI_IBY
 
-//Testscripts & other ibys
-#include <tsu_dvbh_hai_excl_test.iby>
+// debug build
+
+#include <dvbhreceiverstub.iby>
+
+file=ABI_DIR\DEBUG_DIR\TSU_DVBH_HAI.dll 	Sys\bin\TSU_DVBH_HAI.dll
 
 data=EPOCROOT##epoc32\data\c\tsu_dvbh_hai.script     	tsu_dvbh_hai.script
 data=EPOCROOT##epoc32\data\c\tsu_dvbh_hai_panic_debug.script  tsu_dvbh_hai_panic_debug.script

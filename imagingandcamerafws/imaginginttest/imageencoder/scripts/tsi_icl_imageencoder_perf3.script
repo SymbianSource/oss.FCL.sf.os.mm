@@ -1,0 +1,141 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageEncoder.xls
+// 
+//
+
+
+PRINT Test result log for tsi_icl_imageencoder_perf3.script
+LOAD_SUITE tsi_icl_imageencoder.dll
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0800-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0800-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0810-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0810-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0820-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0820-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0830-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0830-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0840-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0840-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0850-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0850-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0860-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0860-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0870-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0870-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0880-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0880-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0890-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0890-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0900-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0900-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0910-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0910-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0920-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0920-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0930-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0930-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0940-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0940-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0950-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0950-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0960-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0960-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0970-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0970-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0980-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0980-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-0990-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-0990-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-1000-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-1000-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-1010-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-1010-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-1020-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-1020-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-PERF-I-1030-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-PERF-I-1030-HP c:\icl\imageencoder\tsi_icl_imageencoder_perf.ini
+TEST_COMPLETE

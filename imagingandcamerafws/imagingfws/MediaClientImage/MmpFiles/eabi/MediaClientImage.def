@@ -1,0 +1,55 @@
+EXPORTS
+	_Z32ImageReadUtilSourcePort_Reservedv @ 1 NONAME
+	_ZN16CMdaBitmapScaler13CancelScalingEv @ 2 NONAME
+	_ZN16CMdaBitmapScaler4NewLEv @ 3 NONAME
+	_ZN16CMdaBitmapScaler6ScaleLER21MMdaImageUtilObserverR10CFbsBitmap5TSizei @ 4 NONAME
+	_ZN16CMdaBitmapScaler6ScaleLER21MMdaImageUtilObserverR10CFbsBitmapS3_i @ 5 NONAME
+	_ZN16CMdaBitmapScalerD0Ev @ 6 NONAME
+	_ZN16CMdaBitmapScalerD1Ev @ 7 NONAME
+	_ZN16CMdaBitmapScalerD2Ev @ 8 NONAME
+	_ZN16CMdaImageUtility5CloseEv @ 9 NONAME
+	_ZN17CMdaBitmapRotator14CancelRotationEv @ 10 NONAME
+	_ZN17CMdaBitmapRotator4NewLEv @ 11 NONAME
+	_ZN17CMdaBitmapRotator7RotateLER21MMdaImageUtilObserverR10CFbsBitmapNS_14TRotationAngleE @ 12 NONAME
+	_ZN17CMdaBitmapRotator7RotateLER21MMdaImageUtilObserverR10CFbsBitmapS3_NS_14TRotationAngleE @ 13 NONAME
+	_ZN17CMdaBitmapRotatorD0Ev @ 14 NONAME
+	_ZN17CMdaBitmapRotatorD1Ev @ 15 NONAME
+	_ZN17CMdaBitmapRotatorD2Ev @ 16 NONAME
+	_ZN24CMdaImageDataReadUtility13FrameCommentLEi @ 17 NONAME
+	_ZN24CMdaImageDataReadUtility14CancelConvertLEv @ 18 NONAME
+	_ZN24CMdaImageDataReadUtility8ConvertLER10CFbsBitmapS1_i @ 19 NONAME
+	_ZN24CMdaImageDataReadUtility8ConvertLER10CFbsBitmapi @ 20 NONAME
+	_ZN25CMdaImageDataWriteUtility14CancelConvertLEv @ 21 NONAME
+	_ZN25CMdaImageDataWriteUtility8ConvertLER10CFbsBitmapRK5TRecti @ 22 NONAME
+	_ZN25CMdaImageDataWriteUtility8ConvertLER10CFbsBitmapS1_i @ 23 NONAME
+	_ZN25CMdaImageDataWriteUtility8ConvertLER10CFbsBitmapi @ 24 NONAME
+	_ZN28CMdaImageBitmapToDescUtility4NewLER21MMdaImageUtilObserverP10CMdaServer @ 25 NONAME
+	_ZN28CMdaImageBitmapToDescUtility7CreateLER5TDes8P14TMdaClipFormatP11TMdaPackageS5_ @ 26 NONAME
+	_ZN28CMdaImageBitmapToFileUtility4NewLER21MMdaImageUtilObserverP10CMdaServer @ 27 NONAME
+	_ZN28CMdaImageBitmapToFileUtility7CreateLERK7TDesC16P14TMdaClipFormatP11TMdaPackageS6_ @ 28 NONAME
+	_ZN28CMdaImageDescToBitmapUtility4NewLER21MMdaImageUtilObserverP10CMdaServer @ 29 NONAME
+	_ZN28CMdaImageDescToBitmapUtility5OpenLERK6TDesC8P14TMdaClipFormatP11TMdaPackageS6_ @ 30 NONAME
+	_ZN28CMdaImageFileToBitmapUtility4NewLER21MMdaImageUtilObserverP10CMdaServer @ 31 NONAME
+	_ZN28CMdaImageFileToBitmapUtility5OpenLERK7TDesC16P14TMdaClipFormatP11TMdaPackageS6_ @ 32 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtility14CancelConvertLEv @ 33 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtility4NewLER21MMdaImageUtilObserverP10CMdaServer @ 34 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtility5OpenLER10CFbsBitmap @ 35 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtility8ConvertLER10CFbsBitmapS1_i @ 36 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtility8ConvertLER10CFbsBitmapi @ 37 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtilityD0Ev @ 38 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtilityD1Ev @ 39 NONAME
+	_ZN30CMdaImageBitmapToBitmapUtilityD2Ev @ 40 NONAME
+	_ZNK16CMdaImageUtility10FrameCountEv @ 41 NONAME
+	_ZNK16CMdaImageUtility9FrameInfoEiR10TFrameInfo @ 42 NONAME
+	_ZTI16CMdaBitmapScaler @ 43 NONAME ; #<TI>#
+	_ZTI16CMdaImageUtility @ 44 NONAME ; #<TI>#
+	_ZTI17CMdaBitmapRotator @ 45 NONAME ; #<TI>#
+	_ZTI24CMdaImageDataReadUtility @ 46 NONAME ; #<TI>#
+	_ZTI25CMdaImageDataWriteUtility @ 47 NONAME ; #<TI>#
+	_ZTI30CMdaImageBitmapToBitmapUtility @ 48 NONAME ; #<TI>#
+	_ZTV16CMdaBitmapScaler @ 49 NONAME ; #<VT>#
+	_ZTV16CMdaImageUtility @ 50 NONAME ; #<VT>#
+	_ZTV17CMdaBitmapRotator @ 51 NONAME ; #<VT>#
+	_ZTV24CMdaImageDataReadUtility @ 52 NONAME ; #<VT>#
+	_ZTV25CMdaImageDataWriteUtility @ 53 NONAME ; #<VT>#
+	_ZTV30CMdaImageBitmapToBitmapUtility @ 54 NONAME ; #<VT>#

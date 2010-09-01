@@ -87,7 +87,6 @@ copy E:\inttest\MMF\sdevsoundinttestdata\mainTst.wav C:\sdevsoundinttestdata\mai
 copy E:\inttest\MMF\AclntITestData\mainTst.wav C:\TSU_MMF_DEVSOUND_SUITE\input\mainTst.wav
 
 copy E:\inttest\MMF\AclntITestData\audio.ini  c:\audio.ini
-copy E:\inttest\MMF\AclntITestData\sdevsound_audio.ini  c:\sdevsound_audio.ini
 
 REM *** Test framework with ALL -TCB capabilities ***
 testframework TSI_MMF_SDevSound_01.script

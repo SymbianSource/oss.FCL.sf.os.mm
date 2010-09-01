@@ -1,0 +1,56 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// imageconversionresolver.dll Image file type resolver library
+// 
+//
+
+/**
+ @file
+*/
+
+target imageconversionresolver.dll
+CAPABILITY 	ProtServ
+targettype plugin
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID	0x10009D8D  0x101F45DB
+VENDORID 0x70000001
+
+USERINCLUDE	../resolver
+USERINCLUDE	../inc
+USERINCLUDE	../src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	../resolver
+SOURCE		ImageConversionResolver.cpp
+SOURCE		ImageConversionResolverProxy.cpp
+SOURCEPATH	../src
+SOURCE		ImageConvResolvrUtils.cpp
+SOURCE		ImageResolverAPI.cpp
+
+SOURCEPATH	../resolver
+
+start resource 101F45DB.rss
+target imageconversionresolver.rsc
+end
+
+LIBRARY	euser.lib
+LIBRARY estor.lib
+
+START	WINS
+BASEADDRESS	0x4F620000
+END
+
+SMPSAFE

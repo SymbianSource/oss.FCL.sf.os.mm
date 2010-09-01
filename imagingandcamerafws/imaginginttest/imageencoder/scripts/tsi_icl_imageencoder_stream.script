@@ -1,0 +1,171 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageEncoder.xls
+// 
+//
+
+
+PRINT Test result log for tsi_icl_imageencoder_stream.script
+LOAD_SUITE tsi_icl_imageencoder.dll
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0080-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0080-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0100-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0100-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0110-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0110-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0120-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0120-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0130-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0130-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0140-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0140-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0150-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0150-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0160-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0160-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0170-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0170-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0180-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0180-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0190-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0190-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0200-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0200-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0201-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0201-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0220-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0220-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0225-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0225-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0230-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0230-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0240-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0240-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0270-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0270-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0280-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0280-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0300-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0300-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0310-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0310-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0320-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0320-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0330-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0330-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0340-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0340-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0350-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0350-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0360-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0360-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0370-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0370-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0430-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0430-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0440-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0440-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-STRM-I-0450-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-STRM-I-0450-HP c:\icl\imageencoder\tsi_icl_imageencoder_stream.ini
+TEST_COMPLETE

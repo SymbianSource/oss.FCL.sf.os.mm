@@ -25,8 +25,8 @@ delay 1000
 //!@SYMTestPriority           4
 //!@SYMTestActions            1. Create audio player utility 2. Open an audio file with no controller to support the audio file format.
 //!@SYMTestExpectedResults    The MapcInitComplete() callback function should pass KErrNotSupported.
-//RUN_TEST_STEP -1 char_mmf_audioplay MM-MMF-APLCLNT-CHRTZ-NONE-I-0003 \char\mmf\char_mmf_audioplay.ini
-//TEST_COMPLETE 
+RUN_TEST_STEP -1 char_mmf_audioplay MM-MMF-APLCLNT-CHRTZ-NONE-I-0003 \char\mmf\char_mmf_audioplay.ini
+TEST_COMPLETE 
 
 //!@SYMTestCaseID             MM-MMF-APLCLNT-CHRTZ-NONE-I-0004
 //!@SYMTestCaseDesc           Open an audio file providing the incorrect path i.e. no such file exists in that path.

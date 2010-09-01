@@ -1,0 +1,110 @@
+// bld_TImageTestExport.inf
+
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+// TImage test files
+../timagetestfiles/mbm12bpp_8.mbm    c:/timage/mbm12bpp_8.mbm
+../timagetestfiles/mbm16bpp_1.mbm    c:/timage/mbm16bpp_1.mbm
+../timagetestfiles/mbm1bpp_2.mbm    c:/timage/mbm1bpp_2.mbm
+../timagetestfiles/mbm24bpp_4.mbm    c:/timage/mbm24bpp_4.mbm
+../timagetestfiles/mbm2bpp_8.mbm    c:/timage/mbm2bpp_8.mbm
+../timagetestfiles/mbm4bppc_1.mbm    c:/timage/mbm4bppc_1.mbm
+../timagetestfiles/mbm4bppm_2.mbm    c:/timage/mbm4bppm_2.mbm
+../timagetestfiles/mbm8bppc_4.mbm    c:/timage/mbm8bppc_4.mbm
+../timagetestfiles/mbm8bppm_8.mbm    c:/timage/mbm8bppm_8.mbm
+../timagetestfiles/mbm32bpp_1.mbm    c:/timage/mbm32bpp_1.mbm
+../timagetestfiles/imagevid_8.mbm    c:/timage/imagevid_8.mbm
+
+../timagetestfiles/anon/otabitmap.mbm    c:/timage/anon/otabitmap.mbm
+../timagetestfiles/anon/wirelessbitmap.mbm    c:/timage/anon/wirelessbitmap.mbm
+
+../timagetestfiles/ref/bmp1bpp_1.mbm    c:/timage/ref/bmp1bpp_1.mbm
+../timagetestfiles/ref/bmp24bpp_2.mbm    c:/timage/ref/bmp24bpp_2.mbm
+../timagetestfiles/ref/bmp4bpp_4.mbm    c:/timage/ref/bmp4bpp_4.mbm
+../timagetestfiles/ref/bmp8bpp_8.mbm    c:/timage/ref/bmp8bpp_8.mbm
+../timagetestfiles/ref/bmprle4_1.mbm    c:/timage/ref/bmprle4_1.mbm
+../timagetestfiles/ref/bmprle8_2.mbm    c:/timage/ref/bmprle8_2.mbm
+../timagetestfiles/ref/bmpOffset_1.mbm  c:/timage/ref/bmpoffset_1.mbm
+../timagetestfiles/ref/icoepoc.mbm      c:/timage/ref/icoepoc.mbm
+../timagetestfiles/ref/icoiexplore.mbm  c:/timage/ref/icoiexplore.mbm
+../timagetestfiles/ref/jfif10_4.mbm    c:/timage/ref/jfif10_4.mbm
+../timagetestfiles/ref/jfif100_8.mbm    c:/timage/ref/jfif100_8.mbm
+../timagetestfiles/ref/jfif30_1.mbm    c:/timage/ref/jfif30_1.mbm
+../timagetestfiles/ref/jfif420_2.mbm    c:/timage/ref/jfif420_2.mbm
+../timagetestfiles/ref/jfif422_4.mbm    c:/timage/ref/jfif422_4.mbm
+../timagetestfiles/ref/jfif444_8.mbm    c:/timage/ref/jfif444_8.mbm
+../timagetestfiles/ref/jfif60_1.mbm    c:/timage/ref/jfif60_1.mbm
+../timagetestfiles/ref/jfifMono_2.mbm    c:/timage/ref/jfifmono_2.mbm
+../timagetestfiles/ref/jfifProg_1.mbm    c:/timage/ref/jfifprog_1.mbm
+../timagetestfiles/ref/jfifProg_4.mbm    c:/timage/ref/jfifprog_4.mbm
+../timagetestfiles/ref/jfifProg_res_int_red_1.mbm    c:/timage/ref/jfifprog_res_int_red_1.mbm
+../timagetestfiles/ref/mbm12bpp_8.mbm    c:/timage/ref/mbm12bpp_8.mbm
+../timagetestfiles/ref/mbm16bpp_1.mbm    c:/timage/ref/mbm16bpp_1.mbm
+../timagetestfiles/ref/mbm1bpp_2.mbm    c:/timage/ref/mbm1bpp_2.mbm
+../timagetestfiles/ref/mbm24bpp_4.mbm    c:/timage/ref/mbm24bpp_4.mbm
+../timagetestfiles/ref/mbm2bpp_8.mbm    c:/timage/ref/mbm2bpp_8.mbm
+../timagetestfiles/ref/mbm4bppc_1.mbm    c:/timage/ref/mbm4bppc_1.mbm
+../timagetestfiles/ref/mbm4bppm_2.mbm    c:/timage/ref/mbm4bppm_2.mbm
+../timagetestfiles/ref/mbm8bppc_4.mbm    c:/timage/ref/mbm8bppc_4.mbm
+../timagetestfiles/ref/mbm8bppm_8.mbm    c:/timage/ref/mbm8bppm_8.mbm
+../timagetestfiles/ref/mbm32bpp_1.mbm    c:/timage/ref/mbm32bpp_1.mbm
+../timagetestfiles/ref/office.mbm    c:/timage/ref/office.mbm
+../timagetestfiles/ref/png1_1.mbm    c:/timage/ref/png1_1.mbm
+../timagetestfiles/ref/png2_2.mbm    c:/timage/ref/png2_2.mbm
+../timagetestfiles/ref/pngs3_4.mbm    c:/timage/ref/pngs3_4.mbm
+../timagetestfiles/ref/pngs4_8.mbm    c:/timage/ref/pngs4_8.mbm
+../timagetestfiles/ref/png1bpp_g0.mbm	c:/timage/ref/png1bpp_g0.mbm
+../timagetestfiles/ref/png1bpp_g3.mbm	c:/timage/ref/png1bpp_g3.mbm
+../timagetestfiles/ref/png2bpp_g0.mbm	c:/timage/ref/png2bpp_g0.mbm
+../timagetestfiles/ref/png2bpp_g3.mbm	c:/timage/ref/png2bpp_g3.mbm
+../timagetestfiles/ref/png3bpp_1.mbm	c:/timage/ref/png3bpp_1.mbm
+../timagetestfiles/ref/png4bpp_c3.mbm	c:/timage/ref/png4bpp_c3.mbm
+../timagetestfiles/ref/png4bpp_g0.mbm	c:/timage/ref/png4bpp_g0.mbm
+../timagetestfiles/ref/png4bpp_g3.mbm	c:/timage/ref/png4bpp_g3.mbm
+../timagetestfiles/ref/png6bpp_1.mbm	c:/timage/ref/png6bpp_1.mbm
+../timagetestfiles/ref/pngs8bpp_c2.mbm	c:/timage/ref/pngs8bpp_c2.mbm
+../timagetestfiles/ref/png8bpp_c3.mbm	c:/timage/ref/png8bpp_c3.mbm
+../timagetestfiles/ref/png8bpp_g0.mbm	c:/timage/ref/png8bpp_g0.mbm
+../timagetestfiles/ref/png24bpp_1.mbm	c:/timage/ref/png24bpp_1.mbm
+../timagetestfiles/ref/pngs48bpp_1.mbm	c:/timage/ref/pngs48bpp_1.mbm
+../timagetestfiles/ref/pngGreatWave.mbm	c:/timage/ref/pnggreatwave.mbm
+../timagetestfiles/ref/problem.mbm	c:/timage/ref/problem.mbm
+../timagetestfiles/ref/tif1_1.mbm    c:/timage/ref/tif1_1.mbm
+../timagetestfiles/ref/tif2_2.mbm    c:/timage/ref/tif2_2.mbm
+../timagetestfiles/ref/tif3_4.mbm    c:/timage/ref/tif3_4.mbm
+../timagetestfiles/ref/imagevid_8.mbm    c:/timage/ref/imagevid_8.mbm
+../timagetestfiles/ref/trans_1.mbm    c:/timage/ref/trans_1.mbm
+../timagetestfiles/ref/line-13.mbm    c:/timage/ref/line-13.mbm
+../timagetestfiles/ref/wmf1_2.mbm    c:/timage/ref/wmf1_2.mbm
+../timagetestfiles/ref/wmf2_4.mbm    c:/timage/ref/wmf2_4.mbm
+../timagetestfiles/ref/wmf3_8.mbm    c:/timage/ref/wmf3_8.mbm
+../timagetestfiles/ref/wmf4_1.mbm    c:/timage/ref/wmf4_1.mbm
+../timagetestfiles/ref/wmf5_2.mbm    c:/timage/ref/wmf5_2.mbm
+../timagetestfiles/ref/wmf6_4.mbm    c:/timage/ref/wmf6_4.mbm
+../timagetestfiles/ref/wmf7_1.mbm    c:/timage/ref/wmf7_1.mbm
+../timagetestfiles/ref/scaled0.mbm    c:/timage/ref/scaled0.mbm
+../timagetestfiles/ref/scaled1.mbm    c:/timage/ref/scaled1.mbm
+../timagetestfiles/ref/scaled2.mbm    c:/timage/ref/scaled2.mbm
+../timagetestfiles/ref/scaled3.mbm    c:/timage/ref/scaled3.mbm
+../timagetestfiles/ref/scaled4.mbm    c:/timage/ref/scaled4.mbm
+../timagetestfiles/ref/scaled5.mbm    c:/timage/ref/scaled5.mbm
+../timagetestfiles/ref/qvga_24bpp.mbm     c:/timage/ref/qvga_24bpp.mbm
+../timagetestfiles/ref/mbm24bpp.mbm	c:/timage/bmp/mbm24bpp.mbm
+../timagetestfiles/16bpp565.mbm c:/timage/bmp/16bpp565.mbm
+../timagetestfiles/16bpp555.mbm c:/timage/bmp/16bpp555.mbm
+../timagetestfiles/ref/jpeg_multiscan.mbm c:/timage/ref/jpeg_multiscan.mbm
+../timagetestfiles/ref/qvga_exif_thumb.mbm c:/timage/ref/qvga_exif_thumb.mbm
+../timagetestfiles/ref/qvga_jfif_thumb.mbm c:/timage/ref/qvga_jfif_thumb.mbm

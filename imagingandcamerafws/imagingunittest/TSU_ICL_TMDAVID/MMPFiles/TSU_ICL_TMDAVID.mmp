@@ -1,0 +1,49 @@
+
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// TSU_ICL_COD_02.mmp
+// 
+//
+
+TARGET        	tsu_icl_tmdavid.dll
+CAPABILITY ALL -TCB
+TARGETTYPE    	dll
+UID           	0x1000008d 0x101F7C09
+VENDORID 0x70000001
+
+SOURCEPATH		../src
+SOURCE			IclTestSuite.cpp
+SOURCE			IclMdaVidTestStep.cpp
+SOURCE			TMDACORV.CPP
+SOURCE			TMDAVID5.CPP
+
+USERINCLUDE		../src
+USERINCLUDE		../../../../mmlibs/mmfw/inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY			euser.lib  
+LIBRARY			testframeworkclient.lib 
+LIBRARY			mediaclientimage.lib
+LIBRARY			efsrv.lib
+LIBRARY			fbscli.lib
+
+
+DEFFILE	TSU_ICL_TMDAVID.DEF
+NOSTRICTDEF
+#ifdef EABI
+NOEXPORTLIBRARY
+#endif
+
+SMPSAFE

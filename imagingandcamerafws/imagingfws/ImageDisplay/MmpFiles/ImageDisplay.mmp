@@ -1,0 +1,55 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+TARGET	imagedisplay.dll
+TARGETTYPE	DLL
+CAPABILITY ALL -TCB
+VENDORID 0x70000001
+
+UID	0x10000008   0x101F7C45
+
+SOURCEPATH		../src
+SOURCE			ImageDisplayMain.cpp
+SOURCE			ImageDisplay.cpp
+SOURCE			ImageDisplayFramework.cpp
+SOURCE			ImageDisplayPlugin.cpp
+SOURCE			ImageDisplayRecognizer.cpp
+
+SOURCEPATH		../src/Resolver
+SOURCE			ImageDisplayResolvrUtils.cpp
+SOURCE			ImageDisplayResolverAPI.cpp
+
+
+USERINCLUDE		../inc
+USERINCLUDE		../inc/icl
+USERINCLUDE		../src
+USERINCLUDE		../src/Resolver
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY			euser.lib
+LIBRARY			estor.lib
+LIBRARY			ecom.lib
+LIBRARY			efsrv.lib
+LIBRARY			caf.lib
+LIBRARY			mmcommon.lib
+LIBRARY			imageconversion.lib
+LIBRARY			cafutils.lib
+
+START	WINS
+BASEADDRESS	0x4F6F0000
+END
+
+SMPSAFE

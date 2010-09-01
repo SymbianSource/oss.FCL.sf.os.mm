@@ -783,10 +783,10 @@ TInt CSimpleSoundPlayer::ExecuteL(CParameters *aParams)
 			return ETrue;
 			//break;
 		case KPlayerActionStopPlayUrl:
-		   CUrlParameters *p;
-			 p = static_cast<CUrlParameters *>(aParams);
-			 OpenUrlL(p->GetUrl() , p->GetIapId() , p->GetMimeType() );
-			 break;
+			CUrlParameters *p ;
+			p = static_cast<CUrlParameters *>(aParams);
+			OpenUrlL(p->GetUrl() , p->GetIapId() , p->GetMimeType() );
+			break;
 		case KPlayerActionStopPlayFileHandler:
 			Stop();
 		//	OpenFileHandlerL((static_cast<CFileNameParameters*>(aParams) )->GetFileName() , ETrue);

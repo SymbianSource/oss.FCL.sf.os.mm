@@ -18,7 +18,7 @@
 #endif
 
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 
 // .iby files
 ../Rom/mmfIntTests.iby			/epoc32/rom/include/mmfinttests.iby
@@ -45,11 +45,11 @@ PRJ_TESTEXPORTS
 ../Rom/miscUnitTests.iby			/epoc32/rom/include/miscunittests.iby
 ../Rom/miscIntTests.iby			/epoc32/rom/include/miscinttests.iby
 
+../Rom/omxilunittests.iby		/epoc32/rom/include/omxilunittests.iby
+
 ../Rom/misc.iby 	/epoc32/rom/include/misc.iby
 ../Rom/miscOpt.iby	/epoc32/rom/include/miscopt.iby
 ../Rom/miscOptTests.iby /epoc32/rom/include/miscopttests.iby
-
-../Rom/mmmwunittests.iby /epoc32/rom/include/mmmwunittests.iby
 
 // .bat files
 ../Scripts/run3gplibrarytests.bat	c:/run3gplibrarytests.bat
@@ -224,6 +224,18 @@ PRJ_TESTEXPORTS
 ../Scripts/runmmfvideorendererunittests.bat		c:/runmmfvideorendererunittests.bat
 #endif // SYMBIAN_GRAPHICS_USE_GCE
 ../Scripts/runMMFVideoNoGCETests.bat	c:/runmmfvideonogcetests.bat
+// OMX IL
+
+// only use if A3F is created
+#ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND
+../Scripts/runmilifunittests.bat				c:/runmilifunittests.bat
+../Scripts/runmmpacketvideotests.bat			c:/runmmpacketvideotests.bat
+#endif //SYMBIAN_MULTIMEDIA_A3FDEVSOUND
+
+../Scripts/runomxilcomppcmrendererunittests.bat	c:/runomxilcomppcmrendererunittests.bat
+../Scripts/runomxilcontentpipeunittests.bat		c:/runomxilcontentpipeunittests.bat
+../Scripts/runomxilcoreconftests.bat			c:/runomxilcoreconftests.bat
+../Scripts/runomxilcoreconftestswinscwudeb.bat	c:/omxil/runomxilcoreconftestswinscwudeb.bat
 
 ../RTA/rta.ini			/epoc32/winscw/c/rta/rta.ini
 ../RTA/rta.script			/epoc32/winscw/c/rta/rta.script

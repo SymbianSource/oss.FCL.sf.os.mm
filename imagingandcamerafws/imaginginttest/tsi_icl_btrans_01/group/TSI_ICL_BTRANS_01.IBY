@@ -1,0 +1,31 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __TSI_ICL_BTRANS_IBY__
+#define __TSI_ICL_BTRANS_IBY__
+
+// debug build
+
+file=ABI_DIR\BUILD_DIR\TSI_ICL_BTRANS_01.dll 	System\Libs\TSI_ICL_BTRANS_01.dll
+
+data=EPOCROOT##epoc32\data\c\MM\TSI_ICL_BTRANS_01.script     	\MM\TSI_ICL_BTRANS_01.script
+data=EPOCROOT##epoc32\data\c\MM\TSI_ICL_BTRANS_01_Panic.script  \MM\TSI_ICL_BTRANS_01_Panic.script
+data=EPOCROOT##epoc32\data\c\MM\TSI_ICL_BTRANS_01_Alloc.script  \MM\TSI_ICL_BTRANS_01_Alloc.script
+data=EPOCROOT##epoc32\data\c\TImage\bmp8bpp_8.bmp        	\TImage\bmp8bpp_8.bmp
+data=EPOCROOT##epoc32\data\c\TImage\imagevid_8.mbm        	\TImage\imagevid_8.mbm
+
+
+
+#endif

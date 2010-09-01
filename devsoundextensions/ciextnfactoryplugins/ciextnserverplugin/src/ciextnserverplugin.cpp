@@ -59,11 +59,7 @@ TInt CCIExtnServerPlugin::Setup( MCustomInterface& aInterface )
     {
     DEB_TRACE0(_L("*CI* CCIExtnServerPlugin::Setup"));
     TInt status(KErrNone);
-    TRAPD(err, iCiExtnServerPluginWrapper = CIExtnServerPluginWrapper::NewL(aInterface));
-    if (err == KErrNone)
-        {
-        iMCustomInterface = iCiExtnServerPluginWrapper->GetInterface();
-        }
+    iMCustomInterface = &aInterface;
     TRAP_IGNORE(InitializeMsgHndlrPluginsL());
     return status;
     }
@@ -111,7 +107,6 @@ void CCIExtnServerPlugin::Release()
     iMCIMsgHndlrIntfcList.Reset();
     iMCIMsgHndlrIntfcList.Close();
 
-    iCiExtnServerPluginWrapper->Release();
 
     REComSession::DestroyedImplementation(iDestructorKey);
 

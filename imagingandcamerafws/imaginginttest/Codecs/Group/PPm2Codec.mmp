@@ -1,0 +1,59 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+// if __CONTINUE_CONVERT is not defined, a ContinueConvert() operation restarts from the top
+MACRO __CONTINUE_CONVERT
+
+TARGET		ppm2codec.dll
+CAPABILITY ALL -TCB
+TARGETTYPE	plugin
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID	0x10009D8D 0x101F45F2
+
+USERINCLUDE	../PPM2
+USERINCLUDE	../inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	../PPM2
+SOURCE		PPM2Codec.cpp
+SOURCE		PPM2Convert.cpp
+SOURCE		PPM2Proxy.cpp
+
+
+START RESOURCE 101F45F2.rss
+#ifdef SYMBIAN_SECURE_ECOM
+target ppm2codec.rsc
+#endif
+end
+
+START RESOURCE 101F45F2_extra.rss
+#ifdef __SECURE_DATA__
+targetpath resource/icl
+#endif
+header
+END
+
+LIBRARY	euser.lib
+LIBRARY	imageconversion.lib
+LIBRARY	bafl.lib
+LIBRARY	fbscli.lib
+
+START	WINS
+//BASEADDRESS	0x4F640000
+END
+
+SMPSAFE

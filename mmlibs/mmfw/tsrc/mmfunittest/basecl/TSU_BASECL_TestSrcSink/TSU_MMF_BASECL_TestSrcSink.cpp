@@ -400,7 +400,7 @@ void CMMF_TSU_BASECL_TestSink::EmptyBufferL(CMMFBuffer* aBuffer, MDataSource* aS
 
 	if (buf)
 		{
-		//XXX Remove this line when DP EInitializeSink state has been removed
+		//FIXME Remove this line when DP EInitializeSink state has been removed
 		//This is still present in the dataPath and may remain in for Typhoon
 		//Probably won't be removed till Jetstream
 		if ((buf->FrameNumber() == 0) && (buf->Data().Length() == 0)) 

@@ -1,4 +1,4 @@
-// Copyright (c) 2004-2010 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -19,31 +19,120 @@ DEFAULT
 // WINS ARMI THUMB
 // MINT
 
-#include "videoGroup/bld.inf"
-
 #ifdef SYMBIAN_MULTIMEDIA_CODEC_API
 #include "../devsound/group/bld.inf"
+#include "../devvideo/group/bld.inf"
 #endif // SYMBIAN_MULTIMEDIA_CODEC_API
 
 #ifdef SYMBIAN_VARIABLE_BITRATE_CODEC // use system wide flag to trigger model controler build
 #define SYMBIAN_MMF_MODEL_CONTROLLERS
 #endif
 
-#include "../SDevsound/group/bld.inf"
-#include "../ACLNT/group/bld.inf"
-#include "../CTLFRM/group/bld.inf"
-#include "../SecureDRM/group/bld.inf"
-
+//#ifdef SYMBIAN_MMF_MODEL_CONTROLLERS //This is commented as this test harness needs to be built for 9.2 as well.
+#include "../vclntavi/group/bld.inf"
+//#endif
 
 PRJ_MMPFILES
 
-PRJ_TESTEXPORTS
-// common
-../group/IntTest_Mmf.iby			/epoc32/rom/include/inttest_mmf.iby
-../group/IntTest_Mmf_excl_test.iby			/epoc32/rom/include/inttest_mmf_excl_test.iby
+// Server for Capability testing
+../mmpfiles/DSCapTestServer.mmp
+../ACLNT/CapTestServer/group/CapTestServer.mmp
+../SDevSound/SDSCapTestServer/group/SDSCapTestServer.mmp
+../SDevSound/SDSCapTestServer/group/SDSMMDDTestServer.mmp
 
+
+// TSI_WP5 files
+// Add ../SoundDev build instructions - NOTE - Must be inserted here in MMP list
+../mmpfiles/TSI_MMFACLNT.mmp
+../mmpfiles/TSI_MMFUseOldCodecAudioController.mmp
+../mmpfiles/TSI_MMFVCLNT.mmp
+
+// MMF Controller files
+../mmpfiles/TSI_MMFDataSink.mmp
+../mmpfiles/TSI_MMFDataSource.mmp
+../mmpfiles/TSI_MMFCustomCommands.mmp
+../mmpfiles/TSI_MMFController.mmp
+../mmpfiles/TSI_MMFController2.mmp
+../mmpfiles/TSI_MMFCTLFRM.mmp
+../mmpfiles/TSI_MMFFORMAT.mmp
+
+// MMF recognizer files
+#ifndef SYMBIAN_USE_MMF_RUF_RECOGNIZER
+../mmpfiles/TSI_MMFRECOG.mmp
+#endif
+
+// Secure DEVSOUND
+../mmpfiles/TSI_MMF_SDEVSOUND.mmp
 
 PRJ_EXPORTS
+// common
+../group/IntTest_Mmf.iby			/epoc32/rom/include/inttest_mmf.iby
+
+// ACLNT scripts
+../scriptFiles/TSI_MMF_ACLNT_00.script		c:/tsi_mmf_aclnt_00.script
+../scriptFiles/TSI_MMF_ACLNT_01.script		c:/tsi_mmf_aclnt_01.script
+../scriptFiles/TSI_MMF_ACLNT_02.script		c:/tsi_mmf_aclnt_02.script
+../scriptFiles/TSI_MMF_ACLNT_03.script		c:/tsi_mmf_aclnt_03.script
+../scriptFiles/TSI_MMF_ACLNT_04.script		c:/tsi_mmf_aclnt_04.script
+../scriptFiles/TSI_MMF_ACLNT_Panic.script	c:/tsi_mmf_aclnt_panic.script
+../scriptFiles/audio.ini			c:/audio.ini
+../scriptFiles/tsi_mmf_aclnt_00_not_ne.script			c:/tsi_mmf_aclnt_00_not_ne.script
+../scriptFiles/TSI_MMF_ACLNT_00_PREEMPTION.script		c:/tsi_mmf_aclnt_00_preemption.script
+../scriptFiles/TSI_MMF_ACLNT_01_PREEMPTION.script		c:/tsi_mmf_aclnt_01_preemption.script
+../scriptFiles/TSI_MMF_ACLNT_03_PREEMPTION.script		c:/tsi_mmf_aclnt_03_preemption.script
+
+#ifdef SYMBIAN_MULTIMEDIA_A3FDEVSOUND	
+../scriptFiles/tsi_mmf_aclnt_00_truepause.script		c:/tsi_mmf_aclnt_00_truepause.script
+../scriptFiles/tsi_mmf_aclnt_03_truepause.script		c:/tsi_mmf_aclnt_03_truepause.script
+#else
+../scriptFiles/tsi_mmf_aclnt_00_nona3f.script		c:/tsi_mmf_aclnt_00_nona3f.script
+../scriptFiles/tsi_mmf_aclnt_03_nona3f.script		c:/tsi_mmf_aclnt_03_nona3f.script
+#endif
+
+// VCLNT scripts
+../scriptFiles/TSI_MMF_VCLNT_WM.script		c:/tsi_mmf_vclnt_wm.script
+../scriptFiles/video.ini			c:/video.ini
+
+// CTLFRM scripts
+../scriptFiles/TSI_MMF_CTLFRM.script		c:/tsi_mmf_ctlfrm.script
+../scriptFiles/TSI_MMF_CTLFRM_POS.script	c:/tsi_mmf_ctlfrm_pos.script
+../scriptFiles/TSI_MMF_CTLFRM_NEG.script	c:/tsi_mmf_ctlfrm_neg.script
+../scriptFiles/TSI_MMF_CTLFRM_PREEMPTION.script	c:/tsi_mmf_ctlfrm_preemption.script
+../scriptFiles/TSI_MMF_CTLFRM_POS_PREEMPTION.script	c:/tsi_mmf_ctlfrm_pos_preemption.script
+../scriptFiles/TSI_MMF_CTLFRM_NEG_PREEMPTION.script	c:/tsi_mmf_ctlfrm_neg_preemption.script
+
+#ifndef SYMBIAN_USE_MMF_RUF_RECOGNIZER
+// RECOG scripts
+../scriptFiles/TSI_MMF_RECOG.script		c:/tsi_mmf_recog.script
+../scriptFiles/TSI_MMF_RECOG_ALLOC.script	c:/tsi_mmf_recog_alloc.script
+#endif
+
+// Secure DevSound scripts
+../scriptFiles/TSI_MMF_SDEVSOUND_01.script	c:/tsi_mmf_sdevsound_01.script
+../scriptFiles/TSI_MMF_SDEVSOUND_01_Panic.script	c:/tsi_mmf_sdevsound_01_panic.script
+../scriptFiles/TSI_MMF_ACLNT_SD.script		c:/tsi_mmf_aclnt_sd.script
+../scriptFiles/TSI_MMF_ACLNT_SD_NOCAP.script	c:/tsi_mmf_aclnt_sd_nocap.script
+../scriptFiles/TSI_MMF_ACLNT_SD_MMDDCAP.script	c:/tsi_mmf_aclnt_sd_mmddcap.script
+../scriptFiles/TSI_MMF_ACLNT_SD_UECAP.script	c:/tsi_mmf_aclnt_sd_uecap.script
+../scriptFiles/TSI_MMF_SDEVSOUND_NOCAP.script	c:/tsi_mmf_sdevsound_nocap.script
+../scriptFiles/TSI_MMF_SDEVSOUND_MMDDCAP.script	c:/tsi_mmf_sdevsound_mmddcap.script
+../scriptFiles/TSI_MMF_SDEVSOUND_UECAP.script	c:/tsi_mmf_sdevsound_uecap.script
+../scriptFiles/TSI_MMF_ACLNT_SD_PREEMPTION.script		c:/tsi_mmf_aclnt_sd_preemption.script
+../scriptFiles/TSI_MMF_SDEVSOUND_01_PREEMPTION.script	c:/tsi_mmf_sdevsound_01_preemption.script
+
+// VCLNT scripts (additional)
+../scriptFiles/TSI_MMF_VCLNT_OF.script		c:/tsi_mmf_vclnt_of.script
+../scriptFiles/TSI_MMF_VCLNT_OF_ALLOC.script	c:/tsi_mmf_vclnt_of_alloc.script
+
+// ACLNT scripts (additional)
+../scriptFiles/TSI_MMF_ACLNT_OF.script		c:/tsi_mmf_aclnt_of.script
+../scriptFiles/TSI_MMF_ACLNT_OF_ALLOC.script	c:/tsi_mmf_aclnt_of_alloc.script
+
+../scriptFiles/TSI_MMF_ACLNT_FS.script		c:/tsi_mmf_aclnt_fs.script
+../scriptFiles/TSI_MMF_ACLNT_DRM.script		c:/tsi_mmf_aclnt_drm.script
+
+// ACLNT scripts for Audio Resource Notification Tests
+../scriptFiles/TSI_MMF_ACLNT_ARN.script		c:/tsi_mmf_aclnt_arn.script
 
 #ifdef SYMBIAN_MMF_MODEL_CONTROLLERS
 // ACLNT for Ogg-Vorbis
@@ -57,10 +146,123 @@ PRJ_EXPORTS
 
 #endif
 
+// SecureDRM scripts
+../scriptFiles/TSI_MMF_SECUREDRM_VIDEO_MMDDCAP.script	c:/tsi_mmf_securedrm_video_mmddcap.script
+../scriptFiles/TSI_MMF_SECUREDRM_AUDIO.script	c:/tsi_mmf_securedrm_audio.script
+../scriptFiles/TSI_MMF_SECUREDRM_AUDIO_MMDDCAP.script	c:/tsi_mmf_securedrm_audio_mmddcap.script
+../scriptFiles/TSI_MMF_SECUREDRM_TESTDATA.script	c:/tsi_mmf_securedrm_testdata.script
+../scriptFiles/securedrm_audio.ini				c:/securedrm_audio.ini
+../scriptFiles/securedrm_video.ini				c:/securedrm_video.ini
+../scriptFiles/securedrm_testdata.ini			c:/securedrm_testdata.ini
+
+// audio test files
+
+../ACLNT/Data/16bitmPcm.wav		c:/aclntitestdata/16bitmpcm.wav
+../ACLNT/Data/8bitmAlaw.wav		c:/aclntitestdata/8bitmalaw.wav
+../ACLNT/Data/8bitmPcm.wav		c:/aclntitestdata/8bitmpcm.wav
+../ACLNT/Data/8bitmPcm-6144bytes.wav    c:/aclntitestdata/8bitmpcm-6144bytes.wav
+../ACLNT/Data/8bitmuLaw.wav		c:/aclntitestdata/8bitmulaw.wav
+../ACLNT/Data/8bitmUPCM.raw		c:/aclntitestdata/8bitmupcm.raw
+../ACLNT/Data/Gsm610.wav		c:/aclntitestdata/gsm610.wav
+../ACLNT/Data/IMAD.wav			c:/aclntitestdata/imad.wav
+../ACLNT/Data/IMAS.wav			c:/aclntitestdata/imas.wav
+../ACLNT/Data/PCMU16BE.wav		c:/aclntitestdata/pcmu16be.wav
+../ACLNT/Data/PCMU16.wav		c:/aclntitestdata/pcmu16.wav
+../ACLNT/Data/mainTst.wav		c:/aclntitestdata/maintst.wav
+../ACLNT/Data/small.wav			c:/aclntitestdata/small.wav
+../ACLNT/Data/small.au			c:/aclntitestdata/small.au
+../ACLNT/Data/test.wav			c:/aclntitestdata/test.wav
+../ACLNT/Data/test16m2.au		c:/aclntitestdata/test16m2.au
+../ACLNT/Data/test16m2.wav		c:/aclntitestdata/test16m2.wav
+../ACLNT/Data/test2.wav			c:/aclntitestdata/test2.wav
+../ACLNT/Data/unsupported.wav		c:/aclntitestdata/unsupported.wav
+../ACLNT/Data/alf-noproblem.wav		c:/aclntitestdata/alf-noproblem.wav
+../ACLNT/Data/100khzSRate1KhzTone.wav	c:/aclntitestdata/100khzsrate1khztone.wav
+../ACLNT/Data/7.33khzSRate1KhzTone.wav	c:/aclntitestdata/7.33khzsrate1khztone.wav
+../ACLNT/Data/OneSample.wav		c:/aclntitestdata/onesample.wav
+../ACLNT/Data/sequence1.sqn		c:/aclntitestdata/sequence1.sqn
+../ACLNT/Data/sequence2.sqn		c:/aclntitestdata/sequence2.sqn
+../ACLNT/Data/16bitmPcm.xxx		c:/aclntitestdata/16bitmpcm.xxx
+../ACLNT/Data/explo.wav			c:/aclntitestdata/explo.wav
+../ACLNT/Data/drmwavfile.drm		c:/aclntitestdata/drmwavfile.drm
+
+//TruePause
+../ACLNT/Data/imad2.wav			c:/aclntitestdata/imad2.wav
+
+../ACLNT/Data/Pcm16bitMono.wav		c:/aclntitestdata/pcm16bitmono.wav
+../ACLNT/Data/PCM16bitStereo.wav	c:/aclntitestdata/pcm16bitstereo.wav
+../ACLNT/Data/PCM16bitMono.au		c:/aclntitestdata/pcm16bitmono.au
+../ACLNT/Data/PCM16bitStereo.au		c:/aclntitestdata/pcm16bitstereo.au
+
+../ACLNT/Data/PCM8BitMono.wav		c:/aclntitestdata/pcm8bitmono.wav
+../ACLNT/Data/PCM8BitStereo.wav		c:/aclntitestdata/pcm8bitstereo.wav	
+../ACLNT/Data/PCM8bitMono.au		c:/aclntitestdata/pcm8bitmono.au
+../ACLNT/Data/PCM8bitStereo.au		c:/aclntitestdata/pcm8bitstereo.au
+
+../ACLNT/Data/8bitmuPcm.wav		c:/aclntitestdata/8bitmupcm.wav
+../ACLNT/Data/mainTst2.wav		c:/aclntitestdata/maintst2.wav
+../ACLNT/Data/main.wav			c:/aclntitestdata/main.wav
+../ACLNT/Data/test.raw			c:/aclntitestdata/test.raw
+//..\aclnt\data\noexist.wav		C:\AclntITestData\noexist.wav
+../ACLNT/Data/pcm8mono44khz.wav         c:/aclntitestdata/pcm8mono44khz.wav
+../ACLNT/Data/pcm16mono44khz.wav         c:/aclntitestdata/pcm16mono44khz.wav
+../ACLNT/Data/pcm16mono48khz.wav         c:/aclntitestdata/pcm16mono48khz.wav
+../ACLNT/Data/pcm16mono12khz.wav         c:/aclntitestdata/pcm16mono12khz.wav
+../ACLNT/Data/pcm16mono24khz.wav         c:/aclntitestdata/pcm16mono24khz.wav
+
+../ACLNT/Data/A.txt		c:/aclntitestdata/a.txt
+../ACLNT/Data/B.txt		c:/aclntitestdata/b.txt
+../ACLNT/Data/G.txt		c:/aclntitestdata/g.txt
+../ACLNT/Data/Gif.txt		c:/aclntitestdata/gif.txt
+../ACLNT/Data/I.txt		c:/aclntitestdata/i.txt
+../ACLNT/Data/M.txt		c:/aclntitestdata/m.txt
+../ACLNT/Data/R.txt		c:/aclntitestdata/r.txt
+
+../ACLNT/Data/recog_wav.wav	c:/aclntitestdata/recog_wav.wav
+../ACLNT/Data/recog_wav.au	c:/aclntitestdata/recog_wav.au
+../ACLNT/Data/recog_wav		c:/aclntitestdata/recog_wav
+../ACLNT/Data/recog_au.au	c:/aclntitestdata/recog_au.au
+../ACLNT/Data/recog_au.wav	c:/aclntitestdata/recog_au.wav
+../ACLNT/Data/recog_raw.wav	c:/aclntitestdata/recog_raw.wav
+
+// SYMBIAN_CAF_V2
+../ACLNT/Data/Audio.content			c:/aclntitestdata/audio.content
+../ACLNT/Data/Audio.contentrights		c:/aclntitestdata/audio.contentrights
 #ifdef SYMBIAN_MMF_MODEL_CONTROLLERS
 ../ACLNT/Data/AudioOgg.content			c:/aclntitestdata/audioogg.content
 ../ACLNT/Data/AudioOgg.contentrights		c:/aclntitestdata/audioogg.contentrights
 #endif
+
+// video test files
+../vclnt/data/LongVideo.dummy		c:/vclntitestdata/longvideo.dummy
+../vclnt/data/ShortVideo.dummy		c:/vclntitestdata/shortvideo.dummy
+../vclnt/data/DRMVideo.drm		c:/vclntitestdata/drmvideo.drm
+
+// controller framework test files
+
+../Ctlfrm/data/test.wav			c:/tsimmfctlfrmdata/test.wav
+../Ctlfrm/data/test2.wav		c:/tsimmfctlfrmdata/test2.wav
+../Ctlfrm/data/Test.abc			c:/aclntitestdata/test.abc
+../Ctlfrm/data/Test.xyz			c:/aclntitestdata/test.xyz
+
+
+// Secure DEVSOUND data files
+../SDevSound/data/PCM_08_16_m.raw		c:/sdevsoundinttestdata/pcm_08_16_m.raw
+../SDevSound/data/8bitmPcm.wav			c:/sdevsoundinttestdata/8bitmpcm.wav
+../SDevSound/data/mainTst.wav			c:/sdevsoundinttestdata/maintst.wav
+
+// Media Access by File Handle test files
+../ACLNT/Data/textOutput.wav			c:/aclntitestdata/textoutput.wav
+../ACLNT/Data/textInput.wav			c:/aclntitestdata/textinput.wav
+../vclnt/data/textOutput.dummy			c:/vclntitestdata/textoutput.dummy
+../vclnt/data/textInput.dummy			c:/vclntitestdata/textinput.dummy
+
+// Used by  SYMBIAN_CAF_V2 and SYMBIAN_MMF_AUTOPAUSE_RESUME
+../ACLNT/Data/mainTst3.wav			c:/aclntitestdata/maintst3.wav
+
+// Audio Resource Notification test data files
+../ACLNT/Data/test2.raw				c:/aclntitestdata/test2.raw
+../ACLNT/Data/test3.raw				c:/aclntitestdata/test3.raw
 
 #ifdef SYMBIAN_MMF_MODEL_CONTROLLERS
 // ACLNT for Ogg-Vorbis
@@ -69,3 +271,11 @@ PRJ_EXPORTS
 ../ACLNT/Data/MainTst3.ogg		c:/aclntitestdata/maintst3.ogg
 ../ACLNT/Data/small.ogg			c:/aclntitestdata/small.ogg
 #endif
+
+// SecureDRM test data
+../SecureDRM/data/audiocontent2.xml	c:/securedrm/audiocontent2.xml
+../SecureDRM/data/audiorights2.xml	c:/securedrm/audiorights2.xml
+../SecureDRM/data/videocontent2.xml	c:/securedrm/videocontent2.xml
+../SecureDRM/data/videorights2.xml	c:/securedrm/videorights2.xml
+../SecureDRM/data/small.wav	   		c:/securedrm/small.wav
+../SecureDRM/data/xvidonly.avi		c:/securedrm/xvidonly.avi

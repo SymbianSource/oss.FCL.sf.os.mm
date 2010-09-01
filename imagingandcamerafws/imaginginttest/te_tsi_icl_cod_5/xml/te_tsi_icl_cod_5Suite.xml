@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSuite>
+  <name>te_tsi_icl_cod_5Suite</name>
+  <testItems>
+    <test>te_tsi_icl_cod_5Test</test>
+  </testItems>
+  <testExecuteServers>
+    <server>te_tsi_icl_cod_5Suite</server>
+  </testExecuteServers>
+</testSuite>
+

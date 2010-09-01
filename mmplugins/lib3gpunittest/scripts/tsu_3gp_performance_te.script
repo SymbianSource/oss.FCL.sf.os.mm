@@ -38,6 +38,6 @@ START_TESTCASE MM-3GP-PERFORMANCE-U-0102-CP
 //! @SYMTestPriority 3
 //! @SYMTestActions Parse all files contained in the specified directory.  
 //! @SYMTestExpectedResults Parser returns error while retrieving data from the files.
-RUN_TEST_STEP -1 tsu_3gplibrary 3GPParseComposeFile C:\mm\tsu_3gp_performance_te.ini MM-3GP-PERFORMANCE-U-0102-CP
+RUN_TEST_STEP !Heap=0xC00000 -1 tsu_3gplibrary 3GPParseComposeFile C:\mm\tsu_3gp_performance_te.ini MM-3GP-PERFORMANCE-U-0102-CP
 END_TESTCASE MM-3GP-PERFORMANCE-U-0102-CP
 

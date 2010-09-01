@@ -18,21 +18,18 @@
 PRJ_PLATFORMS
 DEFAULT
 
-PRJ_TESTMMPFILES
+PRJ_MMPFILES
 
 // DEVSOUND
 ../mmpfiles/tsi_a3f_devsound.mmp
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 
 // test scripts
 ../scripts/tsi_a3f_devsound_pcm_record.script		c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_record.script
 ../scripts/tsi_a3f_devsound_pcm_long_record.script	c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_long_record.script
 
 ../scripts/tsi_a3f_devsound_pcm_play.script  		c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_play.script
-../scripts/tsi_a3f_devsound_pcm_play2.script  		c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_play2.script
-../scripts/tsi_a3f_devsound_pcm_play3.script  		c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_play3.script
-../scripts/tsi_a3f_devsound_pcm_play4.script  		c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_play4.script
 // To be uncommented if long playback script required
 ../scripts/tsi_a3f_devsound_pcm_long_play.script	c:/tsi_a3f_devsound/tsi_a3f_devsound_pcm_long_play.script
 

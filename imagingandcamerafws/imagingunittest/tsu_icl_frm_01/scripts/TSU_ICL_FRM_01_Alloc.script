@@ -1,0 +1,294 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Creation Date 29/07/2002
+// ICL Alloc Unit Testing script 17/09/2002
+// 
+//
+
+PRINT Run all the ICL Alloc unit tests 
+PRINT 
+
+//
+LOAD_SUITE TSU_ICL_FRM_01.dll
+
+// CImageTypeDescription Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4017-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4017-HP
+TEST_COMPLETE
+
+// CFileExtensionMIMEType Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4019-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4019-HP
+TEST_COMPLETE
+
+// CImplementationInformationType Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4021-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4021-HP
+TEST_COMPLETE
+
+// CFrameImageData Basic Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4023-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4023-HP
+TEST_COMPLETE
+
+// CFrameImageData::AppendImageBuffer() Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4025-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4025-HP
+TEST_COMPLETE
+
+// CFrameImageData::AllocL() Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4027-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4027-HP
+TEST_COMPLETE
+
+// CFrameInfoStrings Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-4029-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4029-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageDecoderPriv Construction Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5002-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5002-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::ReadDataL() File Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5008-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5008-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::ReadDataL() Descriptor Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5010-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5010-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageDecoderPriv SetFileL() Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5101-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5101-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv SetFileL() Mask Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5103-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5103-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv SetDataL() Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5105-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5105-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv SetDataL() Mask Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5107-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5107-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageEncoderPriv SetFileL() Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5201-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5201-HP
+TEST_COMPLETE
+
+// CImageEncoderPriv SetDataL() Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5203-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5203-HP
+TEST_COMPLETE
+
+// Test for DEF040758
+// CImageEncoderPriv WriteDataL() Append+Replace Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5204-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5204-HP
+TEST_COMPLETE
+
+
+//=====================================================
+// CImageDecoder FileNewL() Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5301-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5301-HP
+TEST_COMPLETE
+
+// CImageDecoder FileNewL() Mask Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5303-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5303-HP
+TEST_COMPLETE
+
+// CImageDecoder DataNewL() MIME Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5305-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5305-HP
+TEST_COMPLETE
+
+// CImageDecoder DataNewL() Mask Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5307-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5307-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetImageTypesL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5321-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5321-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetImageSubTypesL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5323-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5323-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetFileTypesL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5325-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5325-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetMimeTypeFileL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5327-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5327-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetMimeTypeDataL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5329-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5329-HP
+TEST_COMPLETE
+
+// CImageDecoder::FileNewL() Plugin Resolving
+//! @SYMTestCaseID MM-ICL-FRM-U-5331-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5331-HP
+TEST_COMPLETE
+
+// CImageDecoder::DataNewL() Plugin Resolving
+//! @SYMTestCaseID MM-ICL-FRM-U-5333-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5333-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetPluginPropertiesL() Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5343-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5343-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL() with a RUidDadaArray
+//! @SYMTestCaseID MM-ICL-FRM-U-5345-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5345-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL() with a TUid*
+//! @SYMTestCaseID MM-ICL-FRM-U-5347-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5347-HP
+TEST_COMPLETE
+
+
+//=====================================================
+// CImageEncoder FileNewL() Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5401-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5401-HP
+TEST_COMPLETE
+
+// CImageEncoder FileNewL() Mime Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5403-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5403-HP
+TEST_COMPLETE
+
+// CImageEncoder DataNewL() Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5405-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5405-HP
+TEST_COMPLETE
+
+// CImageEncoder DataNewL() Mime Encode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5407-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5407-HP
+TEST_COMPLETE
+
+// CImageEncoder::GetImageTypesL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5421-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5421-HP
+TEST_COMPLETE
+
+// CImageEncoder::GetImageSubTypesL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5423-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5423-HP
+TEST_COMPLETE
+ 
+// CImageEncoder::GetFileTypesL() Alloc 
+//! @SYMTestCaseID MM-ICL-FRM-U-5425-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5425-HP
+TEST_COMPLETE
+
+//=====================================================
+// CBufferedImageDecoder Mime Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5501-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5501-HP
+TEST_COMPLETE
+
+// CBufferedImageDecoder Mask Decode Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5503-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5503-HP
+TEST_COMPLETE
+
+// CBufferedImageDecoder ImageComment() FrameComment() Alloc
+//! @SYMTestCaseID MM-ICL-FRM-U-5511-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5511-HP
+TEST_COMPLETE
+
+//=====================================================
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations
+// async decoder plugin alloc test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5623-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5623-HP
+TEST_COMPLETE
+
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations
+// async encoder plugin alloc test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5626-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5626-HP
+TEST_COMPLETE
+

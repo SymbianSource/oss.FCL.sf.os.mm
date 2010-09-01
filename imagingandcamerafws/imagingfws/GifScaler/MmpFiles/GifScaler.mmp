@@ -1,0 +1,59 @@
+// Copyright (c) 2003-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Gifscaler.dll GIF scaling utility
+// 
+//
+
+/**
+ @file
+*/
+
+
+TARGET		gifscaler.dll
+CAPABILITY ALL -TCB
+TARGETTYPE	DLL
+
+UID	0x10000008   0x101F7C20
+VENDORID 0x70000001
+
+SOURCEPATH ../src
+SOURCE ColorQuantizer.cpp
+SOURCE NQColorQuantizer.cpp
+SOURCE FastColorQuantizer.cpp
+
+SOURCE GifScaler.cpp
+SOURCE GifScalerBody.cpp
+SOURCE GifScalerMain.cpp
+
+USERINCLUDE ../inc
+USERINCLUDE ../src
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY	euser.lib
+LIBRARY	fbscli.lib gdi.lib hal.lib
+LIBRARY	bitmaptransforms.lib 
+
+#ifdef EABI
+DEFFILE GifScaler.def
+#endif
+
+#ifdef WINSCW
+DEFFILE GIFSCALER.DEF
+#endif
+
+START	WINS
+BASEADDRESS	0x4F700000
+END
+
+SMPSAFE

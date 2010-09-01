@@ -1,0 +1,257 @@
+//
+// Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0" 
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+//
+PRINT Run all te_tsi_icl_cod_5_mng_2 script Tests
+
+LOAD_SUITE te_tsi_icl_cod_5Suite
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0061 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0061
+//!@SYMTestCaseDesc		Decode all frames of a multiple frame source image into a separate, single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and a separate mask, then verify each frame against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x10273738 (MNG decoder).
+//!						2. Create a bitmap based on the size of the source frame.
+//!						3. Create a mask bitmap (EGray256) based on the size of the source file.
+//!						4. Decode the frame of the source file into a 16M/16MU/16MA destination CFbsBitmap plus the mask bitmap.
+//!						5. Compare the decoded frame and mask to the reference files.
+//!						6. Repeat 2. through to 5. until all frames and masks have been decoded and verified.
+//!						7. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_53Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_24BPP_ALPHA_MULTIFRAME_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0061 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0062
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0062
+//!@SYMTestCaseDesc		Decode all frames of a multiple frame source image into a separate, single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify each frame against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x10273738 (MNG decoder).
+//!						2. Create a bitmap based on the size of the source frame.
+//!						3. Decode the frame of the source file into a 16M/16MU/16MA destination CFbsBitmap.
+//!						4. Compare the decoded frame to the reference file.
+//!						5. Repeat 2. through to 4. until all frames have been decoded and verified.
+//!						6. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmap containing the decoded data matches the reference file.
+ 
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_52Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_MULTIFRAME_NOALPHA_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0062 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0098 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0098
+//!@SYMTestCaseDesc		Positive: Using the Image Display API, decode all frames in a given file into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDisplay::NewL
+//!@SYMAPI				CImageDisplay::SetPluginUid
+//!@SYMAPI				CImageDisplay::SetDisplayMode
+//!@SYMAPI				CImageDisplay::SetImageSource
+//!@SYMAPI				CImageDisplay::SetOptions
+//!@SYMAPI				CImageDisplay::SetupL
+//!@SYMAPI				CImageDisplay::RecommendedImageSizes
+//!@SYMAPI				CImageDisplay::SetSizeInPixels
+//!@SYMAPI				CImageDisplay::Play
+//!@SYMAPI				CImageDisplay::Reset
+//!@SYMAPI				MIclImageDisplayObserver::MiidoImageReady
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image display object using the implementation UID 0x101F7C52 (MNG decoder).
+//!						2. Setup the image display object and call Play()
+//!						3. Upon callback, compare the bitmap (and mask if present) to the reference file.
+//!						4. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_58Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_IMAGEDISPLAY_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0098 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0099
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0099
+//!@SYMTestCaseDesc		Positive: Using the Image Display API, decode all frames in a given file into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDisplay::NewL
+//!@SYMAPI				CImageDisplay::SetPluginUid
+//!@SYMAPI				CImageDisplay::SetDisplayMode
+//!@SYMAPI				CImageDisplay::SetImageSource
+//!@SYMAPI				CImageDisplay::SetOptions
+//!@SYMAPI				CImageDisplay::SetupL
+//!@SYMAPI				CImageDisplay::RecommendedImageSizes
+//!@SYMAPI				CImageDisplay::SetSizeInPixels
+//!@SYMAPI				CImageDisplay::Play
+//!@SYMAPI				CImageDisplay::Reset
+//!@SYMAPI				MIclImageDisplayObserver::MiidoImageReady
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image display object using the implementation UID 0x101F7C52 (MNG decoder).
+//!						2. Setup the image display object and call Play()
+//!						3. Upon callback, compare the bitmap (and mask if present) to the reference file.
+//!						4. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+ 
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_58Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_IMAGEDISPLAY_BCKGD_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0099 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0100 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0100
+//!@SYMTestCaseDesc		Positive: Using the Image Display API, decode all frames in a given file into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDisplay::NewL
+//!@SYMAPI				CImageDisplay::SetPluginUid
+//!@SYMAPI				CImageDisplay::SetDisplayMode
+//!@SYMAPI				CImageDisplay::SetImageSource
+//!@SYMAPI				CImageDisplay::SetOptions
+//!@SYMAPI				CImageDisplay::SetupL
+//!@SYMAPI				CImageDisplay::RecommendedImageSizes
+//!@SYMAPI				CImageDisplay::SetSizeInPixels
+//!@SYMAPI				CImageDisplay::Play
+//!@SYMAPI				CImageDisplay::Reset
+//!@SYMAPI				MIclImageDisplayObserver::MiidoImageReady
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image display object using the implementation UID 0x101F7C52 (MNG decoder).
+//!						2. Setup the image display object and call Play()
+//!						3. Upon callback, compare the bitmap (and mask if present) to the reference file.
+//!						4. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_58Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_IMAGEDISPLAY_ANIMATED_NO_ALPHA_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0100 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0101 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0101
+//!@SYMTestCaseDesc		Positive: Using the Image Display API, decode all frames in a given file into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDisplay::NewL
+//!@SYMAPI				CImageDisplay::SetPluginUid
+//!@SYMAPI				CImageDisplay::SetDisplayMode
+//!@SYMAPI				CImageDisplay::SetImageSource
+//!@SYMAPI				CImageDisplay::SetOptions
+//!@SYMAPI				CImageDisplay::SetupL
+//!@SYMAPI				CImageDisplay::RecommendedImageSizes
+//!@SYMAPI				CImageDisplay::SetSizeInPixels
+//!@SYMAPI				CImageDisplay::Play
+//!@SYMAPI				CImageDisplay::Reset
+//!@SYMAPI				MIclImageDisplayObserver::MiidoImageReady
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image display object using the implementation UID 0x101F7C52 (MNG decoder).
+//!						2. Setup the image display object and call Play()
+//!						3. Upon callback, compare the bitmap (and mask if present) to the reference file.
+//!						4. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_58Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_IMAGEDISPLAY_MULTIFRAME_NO_ALPHA_NOMASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0101 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0102 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0102
+//!@SYMTestCaseDesc		Positive: Using the Image Display API, decode all frames in a given file into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDisplay::NewL
+//!@SYMAPI				CImageDisplay::SetPluginUid
+//!@SYMAPI				CImageDisplay::SetDisplayMode
+//!@SYMAPI				CImageDisplay::SetImageSource
+//!@SYMAPI				CImageDisplay::SetOptions
+//!@SYMAPI				CImageDisplay::SetupL
+//!@SYMAPI				CImageDisplay::RecommendedImageSizes
+//!@SYMAPI				CImageDisplay::SetSizeInPixels
+//!@SYMAPI				CImageDisplay::Play
+//!@SYMAPI				CImageDisplay::Reset
+//!@SYMAPI				MIclImageDisplayObserver::MiidoImageReady
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image display object using the implementation UID 0x101F7C52 (MNG decoder).
+//!						2. Setup the image display object and call Play()
+//!						3. Upon callback, compare the bitmap (and mask if present) to the reference file.
+//!						4. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_58Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_IMAGEDISPLAY_ANIMATED_NOBCKGD_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0102 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0103
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0103
+//!@SYMTestCaseDesc		Positive: Using the Image Display API, decode all frames in a given file into a single CFbsBitmap (with display mode of 16M, 16MU and 16MA) and verify against a reference file.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDisplay::NewL
+//!@SYMAPI				CImageDisplay::SetPluginUid
+//!@SYMAPI				CImageDisplay::SetDisplayMode
+//!@SYMAPI				CImageDisplay::SetImageSource
+//!@SYMAPI				CImageDisplay::SetOptions
+//!@SYMAPI				CImageDisplay::SetupL
+//!@SYMAPI				CImageDisplay::RecommendedImageSizes
+//!@SYMAPI				CImageDisplay::SetSizeInPixels
+//!@SYMAPI				CImageDisplay::Play
+//!@SYMAPI				CImageDisplay::Reset
+//!@SYMAPI				MIclImageDisplayObserver::MiidoImageReady
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image display object using the implementation UID 0x101F7C52 (MNG decoder).
+//!						2. Setup the image display object and call Play()
+//!						3. Upon callback, compare the bitmap (and mask if present) to the reference file.
+//!						4. Performance timing figures are also included, but these are not checked in the test.
+//!@SYMTestExpectedResults	The bitmaps containing the decoded data matches the reference files.
+ 
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_58Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_IMAGEDISPLAY_ANIMATED_ALPHA_MASKDECODE
+END_TESTCASE  MM-TSI-ICL-COD-05-0103 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-0104 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-0104
+//!@SYMTestCaseDesc		Positive: Decode a multiframe MNG image, with the option CImageDecoder::EOptionMngSubframesNoLoops, and verify the coordinates of all frames with the reference.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ			Not Applicable
+//!@SYMREQ			DEF118843
+//!@SYMAPI			CImageDecoder::FileNewL
+//!@SYMAPI			CImageDecoder::FrameInfo
+//!@SYMAPI			CFbsBitmap::Create
+//!@SYMAPI			CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x10273738 (MNG decoder).
+//!					2. Get the frame information. Check the frame coordinates with the reference
+//!					3. Decode the current frame so that frame information of next frame is available.
+//!					4. Repeat steps 2 and 3 for all frames.
+//!@SYMTestExpectedResults	The frame coordinates of all frames should match with the reference values.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5Suite tsi_icl_cod_59Step c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_MULTIFRAME_NOSUBFRAMESLOOPS_FRAMEINFO
+END_TESTCASE  MM-TSI-ICL-COD-05-0104 
+
+PRINT Complate_te_tsi_icl_cod_5_mng_Tests

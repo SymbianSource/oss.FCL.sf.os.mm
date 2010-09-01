@@ -1,0 +1,115 @@
+// Copyright (c) 1997-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+/**
+ @file
+ @publishedAll 
+*/
+
+#ifndef ICL_UIDS_HRH
+#define ICL_UIDS_HRH
+
+#ifndef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+/**
+@publishedAll
+@released
+Class UID for a set of decoders which support the Exchangeable Image File Format. 
+
+When loading plugins by class UID, the first valid plugin from the list 
+of available plugins with the specified class UID will be loaded. Loading 
+the plugin in this way always allow a cast to the derived decoder or 
+encoder class to be made. 
+@see CJPEGExifDecoder
+*/
+#define KUidICLJpegEXIFInterface 	0x101F7C4F
+
+/**
+@publishedAll
+@released
+Image Transform Plugin Extension UID for Squeeze transformations.
+*/
+#define KUidSqueezeTransformExtension	0x10285BD6
+
+/**
+@publishedAll
+@released
+Image Transform Plugin Extension UID for Orientation transformations.
+*/
+#define KUidOrientationTransformExtension	0x10285C33 
+
+/**
+@publishedAll
+@released
+Image Transform Plugin Extension UID for Overlay transformations.
+*/
+#define KUidOverlayTransformExtension	0x10285C34
+
+/**
+@publishedAll
+@released
+Class UID for the set of decoders which support operations through the CImageFrame. 
+
+When loading plugins by class UID, the first valid plugin from the list 
+of available plugins with the specified class UID will be loaded. Loading 
+the plugin in this way always allow a cast to the derived decoder or 
+encoder class to be made. 
+@see CJPEGImageFrameDecoder
+*/
+#define KUidICLJpegImageFrameInterface 	0x101F7C60
+
+/**
+@publishedAll
+@released
+
+Extension interface uid for TImageConvOperation
+*/
+#define KUidImageConvExtOperationValue	0x102833DF
+
+/**
+@publishedAll
+@released
+
+Extension interface uid for TImageConvScaler
+*/
+#define KUidImageConvExtScalerValue		0x102833E0 	
+
+/**
+@publishedAll
+@released
+
+Extension interface uid for TImageConvStreamedDecode
+*/
+#define KUidImageConvExtStreamedDecodeValue	0x102833E1 	
+
+/**
+@publishedAll
+@released
+
+Extension interface uid for TImageConvPrepare
+*/
+#define KUidImageConvExtPrepareValue 0x1028346D 
+
+/**
+@publishedAll
+@released
+
+Uid that identifies encoders that maintain the alpha channel of the EColor16MA source CFbsBitmap.
+*/
+#define KUidAlphaChannelEncodeSupported 0x10285D1B
+
+#endif // ICL_UIDS_HRH

@@ -187,7 +187,7 @@ TVerdict CTestStepActrlPlay::DoTestStepL( void )
 	
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -287,7 +287,7 @@ TVerdict CTestStepPlayT::DoTestStepL()
 	
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -436,7 +436,7 @@ TVerdict CTestStepPause::DoTestStepL()
 
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -600,7 +600,7 @@ TVerdict CTestStepStop::DoTestStepL()
 	
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -768,7 +768,7 @@ TVerdict CTestStepConvertFormat::DoTestStepL( void )
 		
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();
@@ -1041,7 +1041,7 @@ TVerdict CTestStepRampVolume::DoTestStepL()
 		
 	//[ ensure the controller is unloaded so that it does 
 	// not interfere with the following test ]
-	// There is error in this code and the stop followed by reset
+	// There is a bug in this code and the stop followed by reset
 	// ensure the controller resources are released.
 	iController.Stop();
 	iController.Reset();

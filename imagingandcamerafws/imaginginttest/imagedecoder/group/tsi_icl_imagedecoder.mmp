@@ -1,0 +1,66 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageDecoder.xls
+// 
+//
+
+
+TARGET          tsi_icl_imagedecoder.dll
+CAPABILITY      ALL -TCB
+TARGETTYPE      dll
+
+
+UID             0x1000008d 0x102833DD
+VENDORID        0x70000001
+
+
+SOURCEPATH      ../src
+SOURCE          tsi_icl_decode_stepbase.cpp
+SOURCE          tsi_icl_decode_suite.cpp
+SOURCE          tsi_icl_decode_perf.cpp
+SOURCE          tsi_icl_decode_crop.cpp
+SOURCE          tsi_icl_decode_scale.cpp
+SOURCE          tsi_icl_decode_stream.cpp
+SOURCE          tsi_icl_decode_rotation.cpp
+SOURCE          tsi_icl_decode_multipleop.cpp
+SOURCE          tsi_icl_decode_extinterface.cpp
+
+
+USERINCLUDE     ../src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+LIBRARY         hal.lib
+LIBRARY         ecom.lib
+LIBRARY         euser.lib
+LIBRARY         efsrv.lib
+LIBRARY         dptest.lib
+LIBRARY         fbscli.lib
+LIBRARY         charconv.lib
+LIBRARY         jpegexifplugin.lib
+LIBRARY         imageconversion.lib
+LIBRARY         bitmaptransforms.lib
+LIBRARY         jpegimageframeplugin.lib
+LIBRARY         testframeworkclient.lib 
+LIBRARY         mmcommon.lib
+
+#ifdef EABI
+NOEXPORTLIBRARY
+#endif
+
+
+DEFFILE         tsi_icl_imagedecoder.def
+
+SMPSAFE

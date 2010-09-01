@@ -1,0 +1,36 @@
+EXPORTS
+	??0COmxILGenericILIF@@IAE@XZ @ 1 NONAME ; COmxILGenericILIF::COmxILGenericILIF(void)
+	??1COmxILGenericILIF@@UAE@XZ @ 2 NONAME ; COmxILGenericILIF::~COmxILGenericILIF(void)
+	?ComponentRoleEnum@COmxILGenericILIF@@UBEHAAVTPtr8@@K@Z @ 3 NONAME ; int COmxILGenericILIF::ComponentRoleEnum(class TPtr8 &, unsigned long) const
+	?CreateComponentL@COmxILGenericILIF@@UAEXABVTDesC8@@AAVMILIfObserver@@@Z @ 4 NONAME ; void COmxILGenericILIF::CreateComponentL(class TDesC8 const &, class MILIfObserver &)
+	?CreateComponentL@COmxILGenericILIF@@UAEXABVTUid@@AAVMILIfObserver@@@Z @ 5 NONAME ; void COmxILGenericILIF::CreateComponentL(class TUid const &, class MILIfObserver &)
+	?CustomInterface@COmxILGenericILIF@@UAEPAXVTUid@@@Z @ 6 NONAME ; void * COmxILGenericILIF::CustomInterface(class TUid)
+	?EmptyBufferDone@COmxILGenericILIF@@UAEHPBVCMMFBuffer@@H@Z @ 7 NONAME ; int COmxILGenericILIF::EmptyBufferDone(class CMMFBuffer const *, int)
+	?EventHandler@COmxILGenericILIF@@UAEHW4OMX_EVENTTYPE@@KKPAX@Z @ 8 NONAME ; int COmxILGenericILIF::EventHandler(enum OMX_EVENTTYPE, unsigned long, unsigned long, void *)
+	?Execute@COmxILGenericILIF@@UAEHXZ @ 9 NONAME ; int COmxILGenericILIF::Execute(void)
+	?FillBufferDone@COmxILGenericILIF@@UAEHPAVCMMFBuffer@@H@Z @ 10 NONAME ; int COmxILGenericILIF::FillBufferDone(class CMMFBuffer *, int)
+	?FlushAllPorts@COmxILGenericILIF@@UAEHXZ @ 11 NONAME ; int COmxILGenericILIF::FlushAllPorts(void)
+	?GetComponentIfRole@COmxILGenericILIF@@UBEHAAVTDes8@@@Z @ 12 NONAME ; int COmxILGenericILIF::GetComponentIfRole(class TDes8 &) const
+	?GetComponentIfRole@COmxILGenericILIF@@UBEHAAVTUid@@@Z @ 13 NONAME ; int COmxILGenericILIF::GetComponentIfRole(class TUid &) const
+	?GetComponentInputPorts@COmxILGenericILIF@@UBEHAAV?$RPointerArray@VMILComponentPortIf@@@@@Z @ 14 NONAME ; int COmxILGenericILIF::GetComponentInputPorts(class RPointerArray<class MILComponentPortIf> &) const
+	?GetComponentOutputPorts@COmxILGenericILIF@@UBEHAAV?$RPointerArray@VMILComponentPortIf@@@@@Z @ 15 NONAME ; int COmxILGenericILIF::GetComponentOutputPorts(class RPointerArray<class MILComponentPortIf> &) const
+	?GetComponentVersion@COmxILGenericILIF@@UBEHAAVTILComponentVersion@@@Z @ 16 NONAME ; int COmxILGenericILIF::GetComponentVersion(class TILComponentVersion &) const
+	?GetConfig@COmxILGenericILIF@@UBEHAAVTILStruct@@PBVMILComponentPortIf@@@Z @ 17 NONAME ; int COmxILGenericILIF::GetConfig(class TILStruct &, class MILComponentPortIf const *) const
+	?GetExtConfig@COmxILGenericILIF@@UBEHABVTDesC8@@AAVTILStruct@@PBVMILComponentPortIf@@@Z @ 18 NONAME ; int COmxILGenericILIF::GetExtConfig(class TDesC8 const &, class TILStruct &, class MILComponentPortIf const *) const
+	?GetState@COmxILGenericILIF@@UBEHAAW4TILComponentState@@@Z @ 19 NONAME ; int COmxILGenericILIF::GetState(enum TILComponentState &) const
+	?Initialize@COmxILGenericILIF@@UAEHXZ @ 20 NONAME ; int COmxILGenericILIF::Initialize(void)
+	?OmxGetConfig@COmxILGenericILIF@@IBEHW4OMX_INDEXTYPE@@PAX@Z @ 21 NONAME ; int COmxILGenericILIF::OmxGetConfig(enum OMX_INDEXTYPE, void *) const
+	?OmxGetExtensionIndex@COmxILGenericILIF@@IBEHABVTDesC8@@PAW4OMX_INDEXTYPE@@@Z @ 22 NONAME ; int COmxILGenericILIF::OmxGetExtensionIndex(class TDesC8 const &, enum OMX_INDEXTYPE *) const
+	?OmxGetParameter@COmxILGenericILIF@@IBEHW4OMX_INDEXTYPE@@PAX@Z @ 23 NONAME ; int COmxILGenericILIF::OmxGetParameter(enum OMX_INDEXTYPE, void *) const
+	?OmxSetConfig@COmxILGenericILIF@@IAEHW4OMX_INDEXTYPE@@PAX@Z @ 24 NONAME ; int COmxILGenericILIF::OmxSetConfig(enum OMX_INDEXTYPE, void *)
+	?OmxSetParameter@COmxILGenericILIF@@IAEHW4OMX_INDEXTYPE@@PAX@Z @ 25 NONAME ; int COmxILGenericILIF::OmxSetParameter(enum OMX_INDEXTYPE, void *)
+	?Pause@COmxILGenericILIF@@UAEHXZ @ 26 NONAME ; int COmxILGenericILIF::Pause(void)
+	?ReleaseComponent@COmxILGenericILIF@@UAEXXZ @ 27 NONAME ; void COmxILGenericILIF::ReleaseComponent(void)
+	?SendCommand@COmxILGenericILIF@@UAEHABVTILCommand@@@Z @ 28 NONAME ; int COmxILGenericILIF::SendCommand(class TILCommand const &)
+	?SetComponentIfRole@COmxILGenericILIF@@UAEHABVTDesC8@@@Z @ 29 NONAME ; int COmxILGenericILIF::SetComponentIfRole(class TDesC8 const &)
+	?SetComponentIfRole@COmxILGenericILIF@@UAEHABVTUid@@@Z @ 30 NONAME ; int COmxILGenericILIF::SetComponentIfRole(class TUid const &)
+	?SetConfig@COmxILGenericILIF@@UAEHABVTILStruct@@PBVMILComponentPortIf@@@Z @ 31 NONAME ; int COmxILGenericILIF::SetConfig(class TILStruct const &, class MILComponentPortIf const *)
+	?SetExtConfig@COmxILGenericILIF@@UAEHABVTDesC8@@ABVTILStruct@@PBVMILComponentPortIf@@@Z @ 32 NONAME ; int COmxILGenericILIF::SetExtConfig(class TDesC8 const &, class TILStruct const &, class MILComponentPortIf const *)
+	?Stop@COmxILGenericILIF@@UAEHXZ @ 33 NONAME ; int COmxILGenericILIF::Stop(void)
+	?UnInitialize@COmxILGenericILIF@@UAEHXZ @ 34 NONAME ; int COmxILGenericILIF::UnInitialize(void)
+

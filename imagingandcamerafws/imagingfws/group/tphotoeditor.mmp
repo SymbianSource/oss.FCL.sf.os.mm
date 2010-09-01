@@ -1,0 +1,69 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// using relative paths for sourcepath and user includes
+// 
+//
+
+TARGET			tphotoeditor.exe
+TARGETTYPE 		exe
+TARGETPATH		/sys/bin
+UID           		0x100039CE 0x10285E58 
+VENDORID		0x70000001
+CAPABILITY 		DRM
+EPOCSTACKSIZE 		0x5000
+EPOCHEAPSIZE 		0x1000 0x2000000
+
+USERINCLUDE		../ImageProcessor/test/tphotoeditor/inc
+APP_LAYER_SYSTEMINCLUDE_SYMBIAN // For Techview headers
+
+LIBRARY			euser.lib efsrv.lib gdi.lib fbscli.lib hal.lib
+LIBRARY			apparc.lib ws32.lib cone.lib eikcdlg.lib bafl.lib 
+LIBRARY			eikcore.lib eikdlg.lib eikfile.lib eikcoctl.lib eikctl.lib bitgdi.lib
+LIBRARY			caf.lib cafutils.lib mmcommon.lib
+LIBRARY			imageprocessor.lib
+LIBRARY			panorama.lib
+
+SOURCEPATH		../ImageProcessor/test/tphotoeditor/src
+SOURCE			tphotoeditor.cpp
+SOURCE			tphotoeditordialogs.cpp
+SOURCE			tpreviewdata.cpp
+SOURCE			cappview.cpp
+SOURCE			cgalleryview.cpp
+SOURCE			cfileview.cpp
+RESOURCE		tphotoeditor.rss
+
+START RESOURCE tphotoeditor_reg.rss
+	TARGETPATH /private/10003a3f/apps
+	LANG SC
+END
+
+START RESOURCE tphotoeditor_loc.rss
+	TARGETPATH /resource/apps
+	LANG SC
+END
+
+START RESOURCE tphotoeditor.rss
+	HEADER
+	TARGETPATH /resource/apps
+	LANG SC
+END
+
+START BITMAP tphotoeditoricon.mbm
+	HEADER
+	SOURCEPATH ../ImageProcessor/test/tphotoeditor/bmp
+	TARGETPATH /resource/apps
+	SOURCE C8 tpe24.bmp tpe24m.bmp tpe32.bmp tpe32m.bmp tpe48.bmp tpe48m.bmp
+END
+
+SMPSAFE

@@ -1,0 +1,32 @@
+@file TSI_ICL_FRM_DRM.script
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Integration tests for PREQ777.
+// 
+//
+
+LOAD_SUITE TSI_ICL_FRM_00.dll
+
+### Positive Testing ###
+// Test for enabling agent's user interface for errors and confirmation requests property.
+//!@SYMTestCaseID             MM-ICL-FRM-I-0761-HP
+//!@SYMTestCaseDesc           Enable agent's user interface for errors and confirmation requests property. Read and decode a protected image, a JPEG,
+//! from a file for VIEW intent and specifying MIME type.
+//!@SYMPREQ                   PREQ777
+//!@SYMTestPriority           2
+//!@SYMTestActions            1. Open a JPEG image for VIEW intent specifying MIME type. 2. Enable the agents's user interface. 3. Decode the image. 4.
+//! Verify errors / confirmations are displayed. 5. Check it matches reference bitmap.
+//!@SYMTestExpectedResults    KErrNone error code should be returned. Errors / confirmations should be displayed.
+RUN_TEST_STEP -1 TSI_ICL_FRM_00	MM-ICL-FRM-I-0761-HP	\ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE

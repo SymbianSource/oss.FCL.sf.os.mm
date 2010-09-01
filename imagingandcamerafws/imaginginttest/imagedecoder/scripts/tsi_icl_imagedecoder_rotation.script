@@ -1,0 +1,397 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageDecoder.xls
+// 
+//
+
+
+PRINT Test result log for tsi_icl_imagedecoder_rotation.script
+LOAD_SUITE tsi_icl_imagedecoder.dll
+
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0030-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0030-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0040-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0040-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0045-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0045-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0050-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0050-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0060-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0060-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0070-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0070-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0080-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0080-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0090-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0090-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0100-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0100-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0110-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0110-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0120-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0120-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0130-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0130-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0140-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0140-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0150-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0150-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0160-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0160-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0162-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0162-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0163-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0163-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0170-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0170-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0180-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0180-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0190-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0190-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0200-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0200-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0210-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0210-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0220-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0220-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0230-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0230-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0240-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0240-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0250-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0250-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0260-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0260-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0270-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0270-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0280-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0280-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0290-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0290-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0300-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0300-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0310-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0310-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0320-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0320-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0330-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0330-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0350-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0350-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0360-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0360-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0370-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0370-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0380-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0380-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0390-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0390-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0400-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0400-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0410-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0410-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0420-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0420-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0430-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0430-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0440-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0440-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0450-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0450-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0460-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0460-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0470-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0470-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0480-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0480-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0490-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0490-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0500-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0500-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0510-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0510-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0520-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0520-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0530-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0530-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0540-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0540-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0550-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0550-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0590-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0590-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0600-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0600-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0620-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0620-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0630-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0630-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0640-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0640-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0650-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0650-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0660-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0660-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0670-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0670-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0680-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0680-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0690-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0690-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0700-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0700-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0710-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0710-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0720-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0720-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0730-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0730-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0740-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0740-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0750-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0750-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0760-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0760-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0770-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0770-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0780-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0780-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-DEC-RTMR-I-0790-HP
+
+RUN_TEST_STEP -1 tsi_icl_imagedecoder MM-ICL-DEC-RTMR-I-0790-HP c:\icl\imagedecoder\tsi_icl_imagedecoder_rotation.ini
+TEST_COMPLETE

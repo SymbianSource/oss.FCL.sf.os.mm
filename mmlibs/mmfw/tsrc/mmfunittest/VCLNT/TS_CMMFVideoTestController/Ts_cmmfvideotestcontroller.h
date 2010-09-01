@@ -124,7 +124,7 @@ public:
 	virtual void RemoveDataSourceL(MDataSource& aDataSource);
 	virtual void RemoveDataSinkL(MDataSink& aDataSink);
 	virtual void RemoveSourceSinkL();
-	virtual void ResetL();//XXX - replacement for RemoveSourceSink()
+	virtual void ResetL();//FIXME - replacement for RemoveSourceSink()
 	virtual void PrimeL();
 	virtual void PlayL();
 	virtual void PauseL();

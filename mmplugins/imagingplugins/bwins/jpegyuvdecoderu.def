@@ -1,0 +1,4 @@
+EXPORTS
+	?ConvertYuv@CJpegYuvDecoder@@QAEXPAVTRequestStatus@@AAVCFbsBitmap@@1H@Z @ 1 NONAME ; void CJpegYuvDecoder::ConvertYuv(class TRequestStatus *, class CFbsBitmap &, class CFbsBitmap &, int)
+	?ConvertYuv@CJpegYuvDecoder@@QAEXPAVTRequestStatus@@AAVCFbsBitmap@@H@Z @ 2 NONAME ; void CJpegYuvDecoder::ConvertYuv(class TRequestStatus *, class CFbsBitmap &, int)
+

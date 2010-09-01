@@ -1,0 +1,29 @@
+// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Just puts TImageDisplay in rom without all the silly test files
+// 
+//
+
+#ifndef __TImageDisplay_IBY__
+#define __TImageDisplay_IBY__
+
+file=ABI_DIR\BUILD_DIR\TImageDisplay.exe	Sys\bin\TImageDisplay.exe
+
+data=EPOCROOT##epoc32\data\Z\resource\Apps\TImageDisplayicon.mbm	resource\Apps\TImageDisplayicon.mbm
+data=EPOCROOT##epoc32\data\Z\resource\Apps\TImageDisplay.rsc		resource\Apps\TImageDisplay.rsc
+data=EPOCROOT##epoc32\data\Z\resource\Apps\TImageDisplay_loc.rsc	resource\Apps\TImageDisplay_loc.rsc
+data=EPOCROOT##epoc32\data\Z\private\10003a3f\apps\TImageDisplay_reg.rsc  	private\10003a3f\apps\TImageDisplay_reg.rsc
+
+
+#endif

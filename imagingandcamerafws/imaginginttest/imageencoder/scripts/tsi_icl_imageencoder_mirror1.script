@@ -1,0 +1,276 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Test Design: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Design/ICL_IntTestDesign_ImageDecoder.doc
+// Test Spec: //EPOC/DV3/team/2005/Multimedia/WorkingDocumentation/Test_Specs/ICL_IntTestSpec_ImageEncoder.xls
+// 
+//
+
+
+PRINT Test result log for tsi_icl_imageencoder_mirror1.script
+LOAD_SUITE tsi_icl_imageencoder.dll
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0120-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0120-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0130-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0130-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0140-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0140-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0150-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0150-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0160-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0160-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0165-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0165-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0170-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0170-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0180-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0180-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0190-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0190-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0200-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0200-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0210-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0210-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0220-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0220-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0230-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0230-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0240-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0240-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0250-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0250-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0260-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0260-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0270-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0270-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0280-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0280-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0290-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0290-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0300-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0300-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0310-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0310-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0320-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0320-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0330-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0330-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0340-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0340-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0350-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0350-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0360-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0360-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0370-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0370-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0380-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0380-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0390-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0390-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0410-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0410-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0480-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0480-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0490-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0490-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0540-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0540-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0550-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0550-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0560-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0560-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0570-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0570-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0580-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0580-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0590-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0590-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0600-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0600-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0610-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0610-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0620-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0620-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0625-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0625-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0630-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0630-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0640-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0640-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0650-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0650-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0655-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0655-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0656-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0656-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0657-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0657-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0660-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0660-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0670-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0670-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-ENC-RTMR-I-0680-HP
+
+RUN_TEST_STEP -1 tsi_icl_imageencoder MM-ICL-ENC-RTMR-I-0680-HP c:\icl\imageencoder\tsi_icl_imageencoder_mirror.ini
+TEST_COMPLETE

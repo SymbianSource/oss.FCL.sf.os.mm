@@ -233,7 +233,6 @@ void CMMFImaAdPcmPcm16Codec::ConfigureL(TUid aConfigType, const TDesC8& aConfigD
 			User::Leave(KErrArgument);
 		}
 	
-	
 	// SamplesPerBlock = [(BlockAlign - 4 * Channels) * 8] / (BitsPerSample * Channels) + 1
 	iSamplesPerBlock = (iBlockAlign - 4 * iChannels) * 8 / (KImaAdpcmBitsPerSample * iChannels) + 1;
 	}

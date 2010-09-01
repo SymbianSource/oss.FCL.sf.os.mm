@@ -17,15 +17,10 @@ PRJ_PLATFORMS
 DEFAULT
 
 PRJ_MMPFILES
-
-PRJ_EXPORTS
-
-PRJ_TESTMMPFILES
 ../mmpfiles/tsu_3gplibrary.mmp
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 ../group/tsu_3gplibrary.iby 					/epoc32/rom/include/tsu_3gplibrary.iby
-../group/tsu_3gplibrary_excl_test.iby 			/epoc32/rom/include/tsu_3gplibrary_excl_test.iby
 
 ../scripts/tsu_3gp_compose_oom_te.script		c:/mm/tsu_3gp_compose_oom_te.script
 ../scripts/tsu_3gp_compose_api_te.script		c:/mm/tsu_3gp_compose_api_te.script
@@ -51,3 +46,6 @@ PRJ_TESTEXPORTS
 #include "interopfiles.inf"
 #include "performancefiles.inf"
 
+PRJ_TESTMMPFILES
+
+PRJ_TESTEXPORTS

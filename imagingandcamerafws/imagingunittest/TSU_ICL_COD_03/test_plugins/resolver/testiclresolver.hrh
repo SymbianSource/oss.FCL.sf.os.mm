@@ -1,0 +1,26 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef TESTICLRESOLVER_HRH
+#define TESTICLRESOLVER_HRH
+
+#define KUidTestIclResolverDll 0x10285E6F
+#define KUidTestIclResolverPlugin1 0x10285E70
+#define KUidTestIclResolverPlugin2 0x10285E71
+#define KUidTestIclResolverPlugin3 0x10285E72
+#define KUidTestIclResolverPlugin4 0x10285E73
+
+#endif //TESTICLRESOLVER_HRH
+

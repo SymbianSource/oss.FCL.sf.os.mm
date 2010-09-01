@@ -1,0 +1,70 @@
+@file TSI_ICL_FRM_YUV_ALLOC.script
+// Copyright (c) 2005-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT ALLOC Testing for YUV Image Encoder
+//
+PRINT 
+
+//MULTITHREAD
+
+//
+LOAD_SUITE TSI_ICL_FRM_00.dll
+
+
+//PREQ 747 - YUV Encoder Alloc tests
+//Alloc tests to Encode a YUV RChunk to a JPEG descriptor.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1008-HP
+//!@SYMTestCaseDesc           Alloc tests to Decode a  JPEG file to YUV RChunk and again encode the YUV RChunk to a JPEG descriptor.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           2
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Rchunk 3. Encode the YUV RChunk to JPEG descriptor specifying UID 4. Verify if resultant
+//! JPEG descriptor matches the  original JPEG file.
+//!@SYMTestExpectedResults    The API is able to handle alloc failures.
+RUN_TEST_STEP 850000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1008-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Alloc tests to Encode a YUV RChunk to a JPEG file.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1009-HP
+//!@SYMTestCaseDesc           Alloc tests to Decode a  JPEG file to YUV RChunk and again encode the YUV RChunk to a JPEG file.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           2
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Rchunk 3. Encode the YUV Rchunk to JPEG File 4. Verify if resultant JPEG File matches
+//! the original JPEG File
+//!@SYMTestExpectedResults    The API is able to handle alloc failures.
+RUN_TEST_STEP 850000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1009-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Alloc tests to Encode a YUV Descriptor to a JPEG descriptor.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1010-HP
+//!@SYMTestCaseDesc           Alloc tests to Decode a JPEG file to YUV Descriptor and  encode the YUV Descriptor to a JPEG descriptor.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           2
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Descriptor 3. Encode the YUV Descriptor to JPEG descriptor specifying UID 4. Verify
+//! if resultant JPEG descriptor matches the  original JPEG file.
+//!@SYMTestExpectedResults    The API is able to handle alloc failures.
+RUN_TEST_STEP 850000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1010-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE
+
+//Alloc tests to Encode a YUV Descriptor to a JPEG file.
+//!@SYMTestCaseID             MM-ICL-FRM-I-1011-HP
+//!@SYMTestCaseDesc           Alloc tests to Decode a JPEG file to YUV Descriptor and  encode the YUV Descriptor to a JPEG file.
+//!@SYMPREQ                   PREQ747
+//!@SYMTestPriority           2
+//!@SYMTestActions            1. Open a JPEG File. 2. Decode to YUV Desciptor 3. Encode the YUV Descriptor to JPEG file specifying UID 4. Verify if resultant
+//! JPEG file matches the  original JPEG file.
+//!@SYMTestExpectedResults    The API is able to handle alloc failures.
+RUN_TEST_STEP 850000 TSI_ICL_FRM_00 MM-ICL-FRM-I-1011-HP \ICL\TSI_ICL_FRM_00.ini
+TEST_COMPLETE

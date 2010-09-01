@@ -1,0 +1,443 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the Test codec
+// 
+//
+
+#include <icl/icl_uids.hrh>
+#include <ecom/registryinfo.rh>
+#include "TestUids.hrh"
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+
+#define CR 0x0D
+
+#define KBadVer 3 // should be just higher than that currently legally supported
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = 0x101F7BF5;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDecoderImplementationUidValue;
+					version_no = 2;
+					display_name = "TST";
+					default_data = {0x54, 0x53, 0x3F}; // "TS?"
+					opaque_data = {0, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, CR, 2, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x73, 0x74, CR, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x101F7BF8 1 .tst 2 image/tst image/test
+					},
+
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KFailTestDecoderImplementationUidValue;
+					version_no = 2;
+					display_name = "TST";
+					default_data = {0x54, 0x53, 0x54}; // "TST"
+					opaque_data = {0, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, CR, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x101F7BF8 1 .tst 1 image/test
+					}
+				};
+			},
+
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45B4;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestEncoderImplementationUidValue;
+					version_no = 2;
+					display_name = "TST";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {0, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, CR, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x101F7BF8 1 .tst 1 image/test
+					}
+				};
+			},
+
+		// Bad version - has resource version no. beyond limit, and should be invisible
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KBadVerTestDecoderImplementationUidValue;
+					version_no = 2;
+					display_name = "BadVer TST";
+					default_data = {0x54, 0x54, 0x3F}; // "TT?"
+					opaque_data = {KBadVer, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, CR, 2, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x73, 0x74, CR, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// KBadVer 0x101F7BF7 0x101F7BF8 1 .tst 2 image/tst image/test
+					}
+				};
+			},
+
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45B4;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KBadVerTestEncoderImplementationUidValue;
+					version_no = 2;
+					display_name = "BadVer TST";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {KBadVer, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, CR, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// KBadVer 0x101F7BF7 0x101F7BF8 1 .tst 1 image/test
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestAsyncDecoderImplementationUidValue;
+					version_no = 2;
+					display_name = "TSTA";
+					default_data = {0x54, 0x53, 0x3F}; // "TS?"
+					opaque_data = {0, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, 0x61, CR, 2, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x73, 0x74, CR, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x101F7BF8 1 .tsta 2 image/tst image/test
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45B4;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestAsyncEncoderImplementationUidValue;
+					version_no = 2;
+					display_name = "TSTA";
+					default_data = {0x54, 0x53, 0x3F}; // "TS?"
+					opaque_data = {0, 0x10, 0x1F, 0x7B, 0xF7, 0x10, 0x1F, 0x7B, 0xF8, 1, 0x2E, 0x74, 0x73, 0x74, 0x61, CR, 2, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x73, 0x74, CR, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x101F7BF8 1 .tsta 2 image/tst image/test
+					}
+				};
+			},
+//
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestExifDummyDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "dTst";
+					default_data = {0x3F}; // "?"
+					opaque_data = {2, 0, 0, 0x10, 0x20, 0x70, 0xC2, 0, 0, 0, 0, 0x10, 0x20, 0x70, 0xC2, 1, 0x2E, 0x64, 0x54, 0x73, 0x54, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x54, 0x73, 0x54, 0x0D};
+					// 0 0x102070C2 0x00000000 1 .dTsT 1 image/dTsT
+					}
+				};
+			},
+
+		INTERFACE_INFO
+			{
+			interface_uid = KEncoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestExifDummyEncoderImplementationUidValue;
+					version_no = 1;
+					display_name = "dTst";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {0, 0x10, 0x20, 0x70, 0xC3, 0, 0, 0, 0, 1, 0x2E, 0x64, 0x54, 0x73, 0x54, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x54, 0x73, 0x54, 0x0D};
+					// 0 0x102070C2 0x00000000 1 .dTsT 1 image/dTsT
+					}
+				};
+			},
+//
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderImplementationHWUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					opaque_data = {2, 0, 0, 0x10, 0x1F, 0x45, 0xD8, 0, 0, 0, 0, 0x10, 0x27, 0x38, 0x02, 1, 0x2E, 0x64, 0x70, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D, 4, 0x10, 0x1F, 0x7C, 0x60, 0x10, 0x27, 0x37, 0x69, 0x10, 0x27, 0x37, 0xFF, 0x10, 0x27, 0x37, 0xFB};
+					// 2 0x102070C2 0x00000000 1 .jpg 1 image/jpeg 4 KUidICLJpegImageFrameInterface KFormatYUV422InterleavedUidValue KUidExifSupport KuidHwCodec
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderImplementationSWUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					opaque_data = {2, 0, 0, 0x10, 0x1F, 0x45, 0xD8, 0, 0, 0, 0, 0x10, 0x27, 0x38, 0x02, 1, 0x2E, 0x64, 0x70, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D, 5, 0x10, 0x1F, 0x7C, 0x60, 0x10, 0x27, 0x37, 0x69, 0x10, 0x27, 0x37, 0xFF, 0x10, 0x27, 0x37, 0xFA, 0x10, 0x27, 0x37, 0xFC};
+					// 2 0x102070C2 0x00000000 1 .jpg 1 image/jpeg 5 KUidICLJpegImageFrameInterface KFormatYUV422InterleavedUidValue KUidExifSupport KuidSwCodec KUidDefaultCodec
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyZeroPropCountDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					opaque_data = {2, 0, 0, 0x10, 0x1F, 0x45, 0xD8, 0, 0, 0, 0, 0x10, 0x27, 0x38, 0x02, 1, 0x2E, 0x64, 0x70, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D, 0, 0x10, 0x27, 0x37, 0xFA};
+					// 2 0x102070C2 0x00000000 1 .jpg 1 image/jpeg 0 KuidSwCodec
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyOnlyPropDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					opaque_data = {2, 0, 0, 0x10, 0x1F, 0x45, 0xD8, 0, 0, 0, 0, 0x10, 0x27, 0x38, 0x02, 0, 0, 1, 0x10, 0x27, 0x37, 0xFA};
+					// 2 0x102070C2 0x00000000 0 0 1 KuidSwCodec
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = 0x101F45AD;
+			implementations =
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderExtCropUidValue;
+					version_no = 1;
+					display_name = "DummyDecoderCropExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									2,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x01, 0x00};	// CImageDecoder::EOptionExtCrop
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderExtStreamUidValue;
+					version_no = 1;
+					display_name = "DummyDecoderStreamExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									2,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x02, 0x00};	// CImageDecoder::EOptionExtStream
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderExtRotationUidValue;
+					version_no = 1;
+					display_name = "DummyDecoderRotationExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									3,
+									0x10, 0x27, 0x37, 0x63,		// KFormatYUVMonochromeUid
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x04, 0x00};	// CImageDecoder::EOptionExtRotation
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderExtMirrorHorizontalVerticalAxisUidValue;
+					version_no = 1;
+					display_name = "DummyDecoderMirrorHorizontalVerticalAxisExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									6,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x08, 0x00,		// CImageDecoder::EOptionExtMirrorHorizontalAxis
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x10, 0x00,		// CImageDecoder::EOptionExtMirrorVerticalAxis
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x18, 0x00};	// EOptionExtMirrorHorizontalAxis | EOptionExtMirrorVerticalAxis
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyDecoderExtScalingUidValue;
+					version_no = 1;
+					display_name = "DummyDecoderScalingExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									2,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x20, 0x00};	// CImageDecoder::EOptionExtScaling
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = KEncoderInterfaceUidValue;
+			implementations =
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyEncoderExtStreamUidValue;
+					version_no = 1;
+					display_name = "DummyEncoderStreamExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									2,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x01, 0x00};	// CImageEncoder::EOptionExtStream
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyEncoderExtRotationUidValue;
+					version_no = 1;
+					display_name = "DummyEncoderRotationExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									2,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x02, 0x00};	// CImageEncoder::EOptionExtRotation
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestDummyEncoderExtUseWithSetThumbnailUidValue;
+					version_no = 1;
+					display_name = "DummyEncoderUseWithSetThumbnailExt";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									2,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x10, 0x00};	// CImageEncoder::EOptionExtUseWithSetThumbnail
+					},
+				BINARY_IMPLEMENTATION_INFO
+					{
+					// A test encoder that supports mirroring horizontally, vertically or both simultaneously.
+					implementation_uid = KTestDummyEncoderExtMirrorHorizontalVerticalAxisUidValue;
+					version_no = 1;
+					display_name = "DummyEncoderExtMirrorHorizontalVerticalUidValue";
+					default_data = {0x64, 0x75, 0x6D, 0x6D, 0x79}; // "dummy"
+					opaque_data = {	2,
+									0, 0,
+									0x10, 0x28, 0x34, 0x0C,		// KDummyImageType
+									0, 0, 0, 0,
+									0, 0, 0, 0,
+									1,							// ".dummy"
+									0x2E, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x0D,
+									1,							// "image/dummy"
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x64, 0x75, 0x6D, 0x6D, 0x79,0x0D,
+									6,
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x04, 0x00,		// CImageEncoder::EOptionExtMirrorHorizontalAxis
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x08, 0x00,		// CImageEncoder::EOptionExtMirrorVerticalAxis
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x0C, 0x00};	// EOptionMirrorVertical | EOptionMirrorHorizontal
+					}
+				};
+
+			}
+		};
+	}
+
+

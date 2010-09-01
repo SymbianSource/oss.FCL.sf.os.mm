@@ -1,0 +1,667 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Creation Date 29/07/2002
+// ICL Unit Testing script 29/07/2002
+// 
+//
+
+PRINT Run all the ICL unit tests 
+PRINT 
+
+//
+LOAD_SUITE TSU_ICL_FRM_01.dll
+
+// TImageParameterData
+//! @SYMTestCaseID MM-ICL-FRM-U-4001-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4001-HP
+TEST_COMPLETE
+
+// TBufPtr8
+//! @SYMTestCaseID MM-ICL-FRM-U-4002-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4002-HP
+TEST_COMPLETE
+
+// TBmpImageData
+//! @SYMTestCaseID MM-ICL-FRM-U-4003-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4003-HP
+TEST_COMPLETE
+
+// TBmpCompression
+//! @SYMTestCaseID MM-ICL-FRM-U-4004-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4004-HP
+TEST_COMPLETE
+
+// TJpegImageData
+//! @SYMTestCaseID MM-ICL-FRM-U-4005-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4005-HP
+TEST_COMPLETE
+
+// TJpegQTable
+//! @SYMTestCaseID MM-ICL-FRM-U-4006-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4006-HP
+TEST_COMPLETE
+
+// TJpegComment
+//! @SYMTestCaseID MM-ICL-FRM-U-4007-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4007-HP
+TEST_COMPLETE
+
+// TGifBackgroundColor
+//! @SYMTestCaseID MM-ICL-FRM-U-4008-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4008-HP
+TEST_COMPLETE
+
+// TGifImageDescriptor
+//! @SYMTestCaseID MM-ICL-FRM-U-4009-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4009-HP
+TEST_COMPLETE
+
+// TGifColorTable
+//! @SYMTestCaseID MM-ICL-FRM-U-4032-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4032-HP
+TEST_COMPLETE
+
+// TGifLZWInfo
+//! @SYMTestCaseID MM-ICL-FRM-U-4010-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4010-HP
+TEST_COMPLETE
+
+// TGifImageControl
+//! @SYMTestCaseID MM-ICL-FRM-U-4011-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4011-HP
+TEST_COMPLETE
+
+// TGifComment
+//! @SYMTestCaseID MM-ICL-FRM-U-4012-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4012-HP
+TEST_COMPLETE
+
+// TMbmDecodeData
+//! @SYMTestCaseID MM-ICL-FRM-U-4013-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4013-HP
+TEST_COMPLETE
+
+// TMbmEncodeData
+//! @SYMTestCaseID MM-ICL-FRM-U-4014-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4014-HP
+TEST_COMPLETE
+
+// TTiffImageData
+//! @SYMTestCaseID MM-ICL-FRM-U-4015-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4015-HP
+TEST_COMPLETE
+
+// CImageTypeDescription Basic
+//! @SYMTestCaseID MM-ICL-FRM-U-4016-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4016-HP
+TEST_COMPLETE
+
+// CFileExtensionMIMEType Basic
+//! @SYMTestCaseID MM-ICL-FRM-U-4018-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4018-HP
+TEST_COMPLETE
+
+// CImplementationInformationType Basic
+//! @SYMTestCaseID MM-ICL-FRM-U-4020-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4020-HP
+TEST_COMPLETE
+
+// CFrameImageData Basic
+//! @SYMTestCaseID MM-ICL-FRM-U-4022-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4022-HP
+TEST_COMPLETE
+
+// CFrameImageData::AppendImageBuffer()
+//! @SYMTestCaseID MM-ICL-FRM-U-4024-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4024-HP
+TEST_COMPLETE
+
+// CFrameImageData::AllocL() Basic
+//! @SYMTestCaseID MM-ICL-FRM-U-4026-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4026-HP
+TEST_COMPLETE
+
+// CFrameInfoStrings
+//! @SYMTestCaseID MM-ICL-FRM-U-4028-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4028-HP
+TEST_COMPLETE
+
+// TFrameInfo
+//! @SYMTestCaseID MM-ICL-FRM-U-4030-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4030-HP
+TEST_COMPLETE
+
+// CImageProcessor
+//! @SYMTestCaseID MM-ICL-FRM-U-4034-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-4034-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageDecoderPriv Construction
+//! @SYMTestCaseID MM-ICL-FRM-U-5001-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5001-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::SetFileL() 
+//! @SYMTestCaseID MM-ICL-FRM-U-5003-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5003-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::SetDataL() 
+//! @SYMTestCaseID MM-ICL-FRM-U-5004-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5004-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::HandleNewlyOpenedImageL() 
+//! @SYMTestCaseID MM-ICL-FRM-U-5005-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5005-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::ContinueProcessingHeaderL() 
+//! @SYMTestCaseID MM-ICL-FRM-U-5006-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5006-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::ReadDataL() File 
+//! @SYMTestCaseID MM-ICL-FRM-U-5007-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5007-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::ReadDataL() Descriptor 
+//! @SYMTestCaseID MM-ICL-FRM-U-5009-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5009-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv::FrameInfoStringsLC() 
+//! @SYMTestCaseID MM-ICL-FRM-U-5011-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5011-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageDecoderPriv SetFileL() Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5100-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5100-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv SetFileL() Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5102-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5102-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv SetDataL() Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5104-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5104-HP
+TEST_COMPLETE
+
+// CImageDecoderPriv SetDataL() Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5106-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5106-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageDecoderPriv Custom Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5110-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5110-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageEncoderPriv SetFileL() Encode
+//! @SYMTestCaseID MM-ICL-FRM-U-5200-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5200-HP
+TEST_COMPLETE
+
+// CImageEncoderPriv SetDataL() Encode
+//! @SYMTestCaseID MM-ICL-FRM-U-5202-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5202-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageEncoderPriv SetFileL() Encode Custom Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5210-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5210-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageDecoder FileNewL() Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5300-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5300-HP
+TEST_COMPLETE
+
+// CImageDecoder FileNewL() Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5302-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5302-HP
+TEST_COMPLETE
+
+// CImageDecoder DataNewL() MIME Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5304-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5304-HP
+TEST_COMPLETE
+
+// CImageDecoder DataNewL() Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5306-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5306-HP
+TEST_COMPLETE
+
+// CImageDecoder FileNewL() Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5310-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5310-HP
+TEST_COMPLETE
+
+// CImageDecoder FileNewL() Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5311-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5311-HP
+TEST_COMPLETE
+
+// CImageDecoder DataNewL() MIME Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5304-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5304-HP
+TEST_COMPLETE
+
+
+// CImageDecoder::GetImageTypesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5320-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5320-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetImageSubTypesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5322-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5322-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetFileTypesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5324-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5324-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetMimeTypeFileL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5326-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5326-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetMimeTypeDataL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5328-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5328-HP
+TEST_COMPLETE
+
+// CImageDecoder::FileNewL() Plugin Resolving
+//! @SYMTestCaseID MM-ICL-FRM-U-5330-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5330-HP
+TEST_COMPLETE
+
+// CImageDecoder::DataNewL() Plugin Resolving
+//! @SYMTestCaseID MM-ICL-FRM-U-5332-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5332-HP
+TEST_COMPLETE
+
+// CImageDecoder::Convert() Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5334-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5334-HP
+TEST_COMPLETE
+
+// CImageDecoder::Convert() Alpha Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5336-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5336-HP
+TEST_COMPLETE
+
+// Threaded Decode Cancel()
+//! @SYMTestCaseID MM-ICL-FRM-U-5338-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5338-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetPluginPrepertiesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5342-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5342-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL() with a RUidDadaArray
+//! @SYMTestCaseID MM-ICL-FRM-U-5344-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5344-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL() with a TUid*
+//! @SYMTestCaseID MM-ICL-FRM-U-5346-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5346-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5348-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5348-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5356-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5356-HP
+TEST_COMPLETE
+
+// CImageDecoder::GetInterfaceImoplementationsL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5358-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5358-HP
+TEST_COMPLETE
+
+// Test call to CImageDecoder::GetPluginPropertiesL() on a dummy plugin with no mime types and extns but with properties
+//! @SYMTestCaseID MM-ICL-FRM-U-5360-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5360-HP
+TEST_COMPLETE
+
+// Test call to CImageDecoder::GetPluginPropertiesL() on a dummy plugin with a properties count equals to 0
+//! @SYMTestCaseID MM-ICL-FRM-U-5362-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5362-HP
+TEST_COMPLETE
+
+// Test to Test call to CImageDecoder::GetPluginPropertiesL() on a  dummy plugin with an invalid version number 
+//! @SYMTestCaseID MM-ICL-FRM-U-5364-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5364-HP
+TEST_COMPLETE
+
+//=====================================================
+// CImageEncoder FileNewL() Encode
+//! @SYMTestCaseID MM-ICL-FRM-U-5400-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5400-HP
+TEST_COMPLETE
+
+// CImageEncoder FileNewL() Mime Encode
+//! @SYMTestCaseID MM-ICL-FRM-U-5402-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5402-HP
+TEST_COMPLETE
+
+// CImageEncoder DataNewL() Encode
+//! @SYMTestCaseID MM-ICL-FRM-U-5404-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5404-HP
+TEST_COMPLETE
+
+// CImageEncoder DataNewL() Mime Encode
+//! @SYMTestCaseID MM-ICL-FRM-U-5406-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5406-HP
+TEST_COMPLETE
+
+// CImageEncoder::GetImageTypesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5420-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5420-HP
+TEST_COMPLETE
+
+// CImageEncoder::GetImageSubTypesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5422-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5422-HP
+TEST_COMPLETE
+
+// CImageEncoder::GetFileTypesL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5424-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5424-HP
+TEST_COMPLETE
+
+// Threaded Encode Cancel()
+//! @SYMTestCaseID MM-ICL-FRM-U-5426-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5426-HP
+TEST_COMPLETE
+
+// CImageEncoder::GetPluginPropertiesL() and CImageEncoder::GetInterfaceImplementationsL()
+//! @SYMTestCaseID MM-ICL-FRM-U-5428-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-5428-HP
+TEST_COMPLETE
+
+
+//=====================================================
+// CBufferedImageDecoder Mime Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5500-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5500-HP
+TEST_COMPLETE
+
+// CBufferedImageDecoder Mask Decode
+//! @SYMTestCaseID MM-ICL-FRM-U-5502-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5502-HP
+TEST_COMPLETE
+
+// CBufferedImageDecoder ImageComment() FrameComment()
+//! @SYMTestCaseID MM-ICL-FRM-U-5510-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5510-HP
+TEST_COMPLETE
+
+//=====================================================
+//CImageDecoder Custom Command Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5600-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5600-HP
+TEST_COMPLETE
+
+//CImageEncoder Custom Command Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5601-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5601-HP
+TEST_COMPLETE
+
+//CImageDecoder Threaded Custom Command Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5602-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5602-HP
+TEST_COMPLETE
+
+//CImageEncoder Threaded Custom Command Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5603-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5603-HP
+TEST_COMPLETE
+
+
+//CJpegDecoder Custom Command Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5604-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5604-HP
+TEST_COMPLETE
+
+//CJpegDecoder Threaded Custom Command Test
+//! @SYMTestCaseID MM-ICL-FRM-U-5605-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5605-HP
+TEST_COMPLETE
+
+
+// CImageDecoder FileNewL() Decode cancel & continue (new)
+//! @SYMTestCaseID MM-ICL-FRM-U-5340-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5340-HP
+TEST_COMPLETE
+
+//=====================================================
+//Decoder/Encoder Bad Resource Version Tests
+//! @SYMTestCaseID MM-ICL-FRM-U-5610-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5610-HP
+TEST_COMPLETE
+//! @SYMTestCaseID MM-ICL-FRM-U-5611-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5611-HP
+TEST_COMPLETE
+
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations 
+// async decoder unit test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5620-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5620-HP
+TEST_COMPLETE
+
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations
+// async decoder plugin normal test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5621-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5621-HP
+TEST_COMPLETE
+
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations
+// async decoder plugin cancel test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5622-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5622-HP
+TEST_COMPLETE
+
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations
+// async encoder plugin normal test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5624-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5624-HP
+TEST_COMPLETE
+
+// DEF039215 - ICL framework cannot handle properly asynchronous conversion operations
+// async encoder plugin cancel test 
+//! @SYMTestCaseID MM-ICL-FRM-U-5625-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-5625-HP
+TEST_COMPLETE
+
+//INC068804 - Test for opening an OTB file
+//! @SYMTestCaseID MM-ICL-FRM-U-7015-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-7015-HP
+TEST_COMPLETE
+
+//DEF079163
+//! @SYMTestCaseID MM-ICL-FRM-U-7021-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-7021-HP
+TEST_COMPLETE
+
+//CR0711
+//! @SYMTestCaseID MM-ICL-FRM-U-7022-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-7022-HP
+TEST_COMPLETE
+
+// Negative testing for CImageDecoder::GetPluginPrepertiesL() called on a plugin with no properties
+//! @SYMTestCaseID MM-ICL-FRM-U-7025-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-7025-HP
+TEST_COMPLETE
+
+// Negative testing when calling CImageDecoder::GetInterfaceImplementationsL() with an invalid required uids
+//! @SYMTestCaseID MM-ICL-FRM-U-7026-HP
+
+RUN_TEST_STEP 60000, TSU_ICL_FRM_01, MM-ICL-FRM-U-7026-HP
+TEST_COMPLETE
+
+// Negative testing when calling CImageDecoder::MimeTypeGetDecoderListL() with a zero length MimeType
+//! @SYMTestCaseID MM-ICL-FRM-U-7027-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-7027-HP
+TEST_COMPLETE
+
+// Negative testing when calling CImageEncoder::MimeTypeGetEncoderListL() with a zero length MimeType
+//! @SYMTestCaseID MM-ICL-FRM-U-7028-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-7028-HP
+TEST_COMPLETE
+
+//CR0793
+//! @SYMTestCaseID MM-ICL-FRM-U-7035-HP
+
+RUN_TEST_STEP 5000000, TSU_ICL_FRM_01, MM-ICL-FRM-U-7035-HP
+TEST_COMPLETE
+
+//DEF119087 Threaded File Encode Cancel()
+//! @SYMTestCaseID MM-ICL-FRM-U-9005-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-9005-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-9006-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-9006-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-9007-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-9007-HP
+TEST_COMPLETE
+
+//! @SYMTestCaseID MM-ICL-FRM-U-9008-HP
+
+RUN_TEST_STEP -1, TSU_ICL_FRM_01, MM-ICL-FRM-U-9008-HP
+TEST_COMPLETE

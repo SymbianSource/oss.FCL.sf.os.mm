@@ -1,0 +1,65 @@
+<ModuleName>
+TestFramework project
+</ModuleName>
+
+<Description>
+</Description>
+
+<Status>
+- This is release note for release of TestFramework to Symbian.
+
+- Release Date (planned):
+- Release Date (actual): 
+</Status>
+
+<Author>
+</Author>
+
+<Platform>
+ - WINS
+</Platform>
+
+<CurrentSize>
+</CurrentSize>
+
+<Estimated size>  
+</Estimated size>
+
+<Changes>
+- First draft.
+</Changes>
+
+<Features>
+</Features>
+
+<APINewChanged>
+- none
+</APINewChanged>
+
+<APIRemoved>
+- none
+</APIRemoved>
+
+<NewLocalizedStrings>
+- none
+</NewLocalizedStrings>
+
+<RemovedLocalizedStrings>
+- none
+</RemovedLocalizedStrings>
+
+<KnownErrors>
+- None
+</KnownErrors>
+
+<CorrectedErrors>
+</CorrectedErrors>
+
+<BuildSequence>
+bldmake bldfiles
+abld build wins udeb
+</BuildSequence>
+
+<Comments>
+- builds successfully without errors/warnings.
+</Comments>

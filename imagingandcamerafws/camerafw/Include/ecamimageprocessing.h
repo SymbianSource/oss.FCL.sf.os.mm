@@ -677,9 +677,9 @@ public:
 		TRelativeRotation aRelativeRotation, TRelativeMirror aRelativeMirror, TRelativeFlipping aRelativeFlipping);
 	
 private:
-	IMPORT_C CCameraImageProcessing(CCamera& aOwner);
-	IMPORT_C void ConstructL();
-	IMPORT_C void ConstructL(const MImplementationFactory& aImplFactory);
+	CCameraImageProcessing(CCamera& aOwner);
+	void ConstructL();
+	void ConstructL(const MImplementationFactory& aImplFactory);
 	
 private:
 	CCamera& iOwner;

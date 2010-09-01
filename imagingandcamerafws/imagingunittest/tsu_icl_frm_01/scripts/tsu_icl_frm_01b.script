@@ -1,0 +1,301 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT Run all the ICL Framework Extension unit tests 
+PRINT 
+
+LOAD_SUITE TSU_ICL_FRM_01.dll
+
+// PREQ1630: Call CImageDecoder OperationL() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8001-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8001-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder OperationL() on the PNG plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8002-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8002-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder ScalerL() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8003-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8003-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder ScalerL() on the PNG plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8004-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8004-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8005-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8005-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the PNG plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8006-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8006-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder GetDestinationSize() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8007-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8007-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder GetDestinationSize() on the PNG plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8008-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8008-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder SetClippingRectL() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8009-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8009-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder SetClippingRectL() on the PNG plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8010-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8010-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder OperationL() on the FwExtTest plugin in client thread.
+// Call all functions on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8011-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8011-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder OperationL() on the FwExtTest plugin in separate thread.
+// Call all functions on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8012-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8012-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder ScalerL() on the FwExtTest plugin in client thread.
+// Call all functions on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8013-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8013-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder ScalerL() on the FwExtTest plugin in separate thread.
+// Call all functions on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8014-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8014-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the FwExtTest plugin in client thread.
+// Call all synchronous functions on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8015-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8015-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the FwExtTest plugin in separate thread.
+// Call all synchronous functions on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8016-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8016-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the FwExtTest plugin in client thread.
+// Call asynchronous GetBlocks() function on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8017-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8017-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the FwExtTest plugin in separate thread.
+// Call asynchronous GetBlocks() function on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8018-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8018-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the FwExtTest plugin in client thread.
+// Call asynchronous GetNextBlocks() function on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8019-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8019-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder BlockStreamerL() on the FwExtTest plugin in separate thread.
+// Call asynchronous GetNextBlocks() function on the extension.
+//! @SYMTestCaseID MM-ICL-FRM-U-8020-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8020-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder GetDestinationSize() on the FwExtTest plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8021-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8021-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder GetDestinationSize() on the FwExtTest plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8022-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8022-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder SetClippingRectL() on the FwExtTest plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8023-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8023-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageDecoder SetClippingRectL() on the FwExtTest plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8024-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8024-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder OperationL() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8025-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8025-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder OperationL() on the PNG plugin in separate thread			
+//! @SYMTestCaseID MM-ICL-FRM-U-8026-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8026-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the PNG plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8027-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8027-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the PNG plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8028-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8028-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder OperationL() on the FwExtTest plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8029-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8029-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder OperationL() on the FwExtTest plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8030-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8030-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the FwExtTest plugin in client thread
+// Test setup calls for encode streamer
+//! @SYMTestCaseID MM-ICL-FRM-U-8031-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8031-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the FwExtTest plugin in separate thread
+// Test setup calls for encode streamer
+//! @SYMTestCaseID MM-ICL-FRM-U-8032-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8032-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the FwExtTest plugin in client thread
+// Test async call AppendBlocks()
+//! @SYMTestCaseID MM-ICL-FRM-U-8033-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8033-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the FwExtTest plugin in separate thread
+// Test async call AppendBlocks()
+//! @SYMTestCaseID MM-ICL-FRM-U-8034-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8034-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the FwExtTest plugin in client thread
+// Test async call AddBlocks()
+//! @SYMTestCaseID MM-ICL-FRM-U-8035-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8035-HP
+TEST_COMPLETE
+
+// PREQ1630: Call CImageEncoder BlockStreamerL() on the FwExtTest plugin in separate thread
+// Test async call AddBlocks()
+//! @SYMTestCaseID MM-ICL-FRM-U-8036-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8036-HP
+TEST_COMPLETE
+
+// PREQ1630: Call asynch CImageDecoder PrepareL() on the FwExtTest plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8037-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8037-HP
+TEST_COMPLETE
+    
+// PREQ1630: Call asynch CImageDecoder PrepareL() on the FwExtTest plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8038-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8038-HP
+TEST_COMPLETE
+
+// PREQ1630: Call asynch CImageEncoder PrepareL() on the FwExtTest plugin in client thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8039-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8039-HP
+TEST_COMPLETE
+    
+// PREQ1630: Call asynch CImageEncoder PrepareL() on the FwExtTest plugin in separate thread
+//! @SYMTestCaseID MM-ICL-FRM-U-8040-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-8040-HP
+TEST_COMPLETE
+
+// PREQ1630: Unit tests for TPosition Processor Rotate Transform
+//! @SYMTestCaseID MM-ICL-FRM-U-9001-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-9001-HP
+TEST_COMPLETE
+
+// PREQ1630: Unit tests for TPosition Processor Vertical Flip Transform
+//! @SYMTestCaseID MM-ICL-FRM-U-9002-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-9002-HP
+TEST_COMPLETE
+
+// PREQ1630: Unit tests for TPosition Processor Horizontal Flip Transform
+//! @SYMTestCaseID MM-ICL-FRM-U-9003-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-9003-HP
+TEST_COMPLETE
+
+// PREQ1630: Unit tests for TPosition Processor Rotate vertical & Horizontal Flip Transform
+//! @SYMTestCaseID MM-ICL-FRM-U-9004-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_FRM_01, MM-ICL-FRM-U-9004-HP
+TEST_COMPLETE
+
+

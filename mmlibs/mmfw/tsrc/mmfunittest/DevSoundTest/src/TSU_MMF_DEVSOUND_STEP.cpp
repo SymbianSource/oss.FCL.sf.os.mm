@@ -1,4 +1,4 @@
-    // Copyright (c) 2002-2010 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -285,7 +285,7 @@ TVerdict CTestStepDevSound::TestInitialize(TMMFState aMode)
 	{
 	iCallbackError = KErrNone;
 	iExpectedValue = KErrNone;
-	INFO_PRINTF2(_L("Initializing DevSound aMode=%d"), aMode);
+	INFO_PRINTF1(_L("Initializing DevSound"));
 
 	ResetCallbacks();
 	// Initialize
@@ -324,8 +324,8 @@ TVerdict CTestStepDevSound::TestInitialize(TMMFState aMode)
 TVerdict CTestStepDevSound::TestInitialize(TUid aHwDeviceUid, TMMFState aMode)
 	{
 	iCallbackError = KErrNone;
-
-	INFO_PRINTF3(_L("Initializing DevSound aHwDeviceUid=0x%x aMode=%d"), aHwDeviceUid, aMode);
+	iExpectedValue = KErrNone;
+	INFO_PRINTF1(_L("Initializing DevSound"));
 
 	ResetCallbacks();
 	// Initialize
@@ -375,8 +375,8 @@ TVerdict CTestStepDevSound::TestInitialize(TUid aHwDeviceUid, TMMFState aMode)
 TVerdict CTestStepDevSound::TestInitialize(TFourCC& aDataType, TMMFState aMode)
 	{
 	iCallbackError = KErrNone;
-
-	INFO_PRINTF3(_L("Initializing DevSound aDataType=0x%x aMode=%d"), aDataType.FourCC(), aMode);
+	iExpectedValue = KErrNone;
+	INFO_PRINTF1(_L("Initializing DevSound"));
 
 	ResetCallbacks();
 	// Initialize
@@ -492,7 +492,7 @@ TVerdict CTestStepDevSound::TestPlayTone(TInt aFreq, TTimeIntervalMicroSeconds a
 
 	ResetCallbacks();
 
-	INFO_PRINTF3(_L("Playing Simple Tone aFreq=%d aDur=%d"), aFreq, aDur.Int64());
+	INFO_PRINTF1(_L("Playing Simple Tone"));
 	TRAPD(err, iMMFDevSound->PlayToneL(aFreq, aDur));
 	if (err)
 		{
@@ -542,7 +542,7 @@ TVerdict CTestStepDevSound::TestPlayDTMFString(TPtrC aDTMFString)
 
 	// Set request active
 	iAL->InitialiseActiveListener();
-	INFO_PRINTF2(_L("Playing DTMF String %S"), &aDTMFString);
+	INFO_PRINTF1(_L("Playing DTMF String"));
 	TRAPD(err, iMMFDevSound->PlayDTMFStringL(aDTMFString));
 	// Start the active scheduler and catch the callback
  	CActiveScheduler::Start();
@@ -935,8 +935,6 @@ TVerdict CTestStepDevSound::TestDigitalPlayback(TInt aNumSamples, TDesC& aFilena
  */
 TVerdict CTestStepDevSound::TestDigitalPlayback(TInt aNumSamples, TDesC& aFilename, TFourCC& aDataType)
 	{
-	INFO_PRINTF4(_L("TestDigitalPlayback aNumSamples=%d aFilename=%S aDataType=0x%x"), aNumSamples, &aFilename, aDataType.FourCC());
-
 	//Initialize
 	TVerdict initOK = TestInitialize(aDataType, EMMFStatePlaying);
 	if (initOK != EPass)
@@ -1056,8 +1054,6 @@ TVerdict CTestStepDevSound::TestDigitalRecord(TInt aNumSamples, TDesC& aFilename
  */
 TVerdict CTestStepDevSound::TestDigitalRecord(TInt aNumSamples, TDesC& aFilename, TFourCC& aDataType)
 	{
-	INFO_PRINTF4(_L("TestDigitalRecord aNumSamples=%d aFilename=%S aDataType=0x%x"), aNumSamples, &aFilename, aDataType.FourCC());
-
 	//Initialize
 	TVerdict initOK = TestInitialize(aDataType, EMMFStateRecording);
 	if (initOK != EPass)
@@ -1609,8 +1605,8 @@ CTestStepDevSoundInitializeFourCCPlay::CTestStepDevSoundInitializeFourCCPlay()
 TVerdict CTestStepDevSoundInitializeFourCCPlay::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing Initialize with fourCC code Play"));
-	TFourCC pcm(' ','P','1','6'); //use pcm16 fourcc code
-	return TestInitialize(pcm, EMMFStatePlaying);
+	TFourCC pcm8(' ','P','U','8'); //use unsigned pcm8 fourcc code
+	return TestInitialize(pcm8, EMMFStatePlaying);
 	}
 
 /**
@@ -1682,8 +1678,8 @@ CTestStepDevSoundInitializeFourCCRecord::CTestStepDevSoundInitializeFourCCRecord
 TVerdict CTestStepDevSoundInitializeFourCCRecord::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing Initialize with fourCC code Record"));
-	TFourCC pcm(' ', 'P', '1', '6'); //use pcm16 fourcc code
-	return TestInitialize(pcm, EMMFStateRecording);
+	TFourCC pcm8(' ','P','U','8'); //use unsigned pcm8 fourcc code
+	return TestInitialize(pcm8, EMMFStateRecording);
 	}
 
 /**
@@ -1918,9 +1914,9 @@ TVerdict CTestStepDevSoundDTMFTonesInvalidStrings::DoTestStepL(void)
 		{
 		return EInconclusive;
 		}
-	//iExpectedValue = KErrCorrupt; //Return KErrUnderFlow by Nokia adaption
+	iExpectedValue = KErrCorrupt;
 	TestPlayDTMFString(dtmfString);
-	if (iCallbackError == KErrNone)
+	if (iCallbackError != iExpectedValue)
 		{
 		return EFail;
 		}
@@ -1956,9 +1952,9 @@ TVerdict CTestStepDevSoundSimpleToneInvalidFreq::DoTestStepL(void)
 		return EInconclusive;
 		}
 	TestSetVolume(iMMFDevSound->MaxVolume());
-	//iExpectedValue = KErrArgument; //Return KErrUnderFlow by Nokia adaption 
+	iExpectedValue = KErrArgument;
 	TestPlayTone(freq, dur);
-	if (iCallbackError != KErrNone)
+	if (iCallbackError == iExpectedValue)
 		{
 		return EPass;
 		}
@@ -1995,9 +1991,9 @@ TVerdict CTestStepDevSoundSimpleToneInvalidDuration::DoTestStepL(void)
 		}
 
 	TestSetVolume(iMMFDevSound->MaxVolume());
-    //iExpectedValue = KErrArgument; //Return KErrUnderFlow by Nokia adaption 
+	iExpectedValue = KErrArgument;
 	TestPlayTone(freq, dur);
-	if (iCallbackError != KErrNone)
+	if (iCallbackError == iExpectedValue)
 		{
 		return EPass;
 		}
@@ -3939,8 +3935,7 @@ CTestStepDevSoundPlayEOFPCM8::CTestStepDevSoundPlayEOFPCM8()
  */
 TVerdict CTestStepDevSoundPlayEOFPCM8::DoTestStepL(void)
 	{
-	INFO_PRINTF1(_L("Testing DevSound Digital Audio Playback with PU8 to EOF"));
-	iExpectedValue = KErrNone;
+	INFO_PRINTF1(_L("Testing DevSound Digital Audio Playback to EOF"));
 	iCallbackError = KErrNone;
 
 	TFileName filename(KInputTestFileNamePCM8);
@@ -3969,7 +3964,7 @@ TVerdict CTestStepDevSoundPlayGarbageEOF::DoTestStepL(void)
 	INFO_PRINTF1(_L("Testing DevSound Digital Audio Playback to EOF"));
 	iCallbackError = KErrNone;
 
-	TFileName filename = _L("Z:\\TSU_MMF_DEVSOUND_SUITE\\Input\\garbage.raw");
+	TFileName filename = _L("C:\\TSU_MMF_DEVSOUND_SUITE\\Input\\garbage.raw");
 	return TestDigitalPlayback (-1, filename);
 	}
 
@@ -4191,7 +4186,7 @@ CTestStepDevSoundRecord10BuffersPCM16::CTestStepDevSoundRecord10BuffersPCM16()
  */
 TVerdict CTestStepDevSoundRecord10BuffersPCM16::DoTestStepL(void)
 	{
-	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record (10 buffer)"));
+	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record (1 buffer)"));
 	iCallbackError = KErrNone;
 
 	TFileName filename(KOutputTestFileName10BufPCM16);
@@ -4217,7 +4212,6 @@ CTestStepDevSoundRecord1BufferPCM8::CTestStepDevSoundRecord1BufferPCM8()
 TVerdict CTestStepDevSoundRecord1BufferPCM8::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record pcm8(1 buffer)"));
-	iExpectedValue = KErrNone;
 	iCallbackError = KErrNone;
 
 	TFileName filename(KOutputTestFileName1BufPCM8);
@@ -4244,7 +4238,6 @@ CTestStepDevSoundRecord10BuffersPCM8::CTestStepDevSoundRecord10BuffersPCM8()
 TVerdict CTestStepDevSoundRecord10BuffersPCM8::DoTestStepL(void)
 	{
 	INFO_PRINTF1(_L("Testing DevSound Digital Audio Record pcm8(10 buffer)"));
-	iExpectedValue = KErrNone;
 	iCallbackError = KErrNone;
 
 	TFileName filename(KOutputTestFileName10BufPCM8);
@@ -5199,6 +5192,7 @@ CTestStepDevSoundEmptyBuffersNeg1::CTestStepDevSoundEmptyBuffersNeg1()
  */
 TVerdict CTestStepDevSoundEmptyBuffersNeg1::DoTestStepL(void)
 	{
+
 	iTestStepResult = EFail;
 
 	INFO_PRINTF1(_L("Testing EmptyBuffers in record mode"));
@@ -9074,16 +9068,11 @@ void RA3FDevSoundTestRecord::Fsm(TMmfDevSoundEvent aDevSoundEvent, TInt aError)
 				{
 				if(iGainBalanceClause)
 					{
-                    if (iGain > iMMFDevSound->MaxGain()) 
-                           { 
-                           iGain = iMMFDevSound->MaxGain(); 
-                           } 
-
 					INFO_PRINTF2(_L("Setting DevSound gain = %d"), iGain);
 					iMMFDevSound->SetGain(iGain);
 					if (iGain != iMMFDevSound->Gain())
 						{
-						ERR_PRINTF3(_L("CMMFDevSound::Gain returned different set value = %d, expected value = %d"), iGain, iMMFDevSound->Gain());
+						ERR_PRINTF2(_L("CMMFDevSound::Gain returned different set value = %d"), iGain);
 						StopTest (KErrGeneral);
 						break;
 						}
@@ -11193,7 +11182,7 @@ void RA3FDevSoundPlayPauseFlushResumeTest::Fsm(TMmfDevSoundEvent aDevSoundEvent,
 					{
 					iBuffer->SetLastBuffer (ETrue);
 					}
-				INFO_PRINTF1(_L("CMMFDevSound::PlayData")); //XXX tidy up
+				INFO_PRINTF1(_L("CMMFDevSound::PlayData")); //todo tidy up
 				iMMFDevSound->PlayData();
 				}
 			else if ((aDevSoundEvent == EEventTimerComplete) && (aError == KErrNone))

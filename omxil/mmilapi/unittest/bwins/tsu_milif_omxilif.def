@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuiteL@CTestSuiteMILIF@@SAPAV1@XZ @ 1 NONAME ; class CTestSuiteMILIF * CTestSuiteMILIF::NewTestSuiteL(void)
+

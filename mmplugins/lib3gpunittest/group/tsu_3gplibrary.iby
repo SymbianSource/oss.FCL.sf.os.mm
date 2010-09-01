@@ -16,8 +16,10 @@
 #ifndef TSU_3GPLIBRARY_IBY
 #define TSU_3GPLIBRARY_IBY
 
-// test binary
-#include <tsu_3gplibrary_excl_test.iby>
+#include <testexecute.iby>
+
+// 3GP\MP4 File Format Library unit tests
+file=ABI_DIR\BUILD_DIR\tsu_3gplibrary.exe				System\Libs\tsu_3gplibrary.exe
 
 // script files
 data=EPOCROOT##epoc32\data\c\mm\tsu_3gp_parse_api_te.script	\mm\tsu_3gp_parse_api_te.script	

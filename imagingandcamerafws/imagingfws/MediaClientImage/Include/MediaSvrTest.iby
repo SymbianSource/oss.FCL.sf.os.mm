@@ -1,0 +1,118 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __MEDIASVRTEST_IBY__
+#define __MEDIASVRTEST_IBY__
+
+file=ABI_DIR\DEBUG_DIR\TMdaVid.exe             TMdaVid.exe
+file=ABI_DIR\DEBUG_DIR\TMdaFailVid.exe         TMdaFailVid.exe
+file=ABI_DIR\DEBUG_DIR\TMdaStress.exe          TMdaStress.exe
+
+file=ABI_DIR\BUILD_DIR\TVideo.app              System\Apps\TVideo\TVideo.app
+data=ZSYSTEM\Apps\TVideo\TVideo.rsc            System\Apps\TVideo\TVideo.rsc
+data=ZSYSTEM\Apps\TVideo\TVideo.aif            System\Apps\TVideo\TVideo.aif
+
+data=EPOCROOT##epoc32\data\c\TMdaVid\bmp1bpp.bmp        \TMdaVid\bmp1bpp.bmp
+data=EPOCROOT##epoc32\data\c\TMdaVid\bmp24bpp.bmp       \TMdaVid\bmp24bpp.bmp
+data=EPOCROOT##epoc32\data\c\TMdaVid\bmp4bpp.bmp        \TMdaVid\bmp4bpp.bmp
+data=EPOCROOT##epoc32\data\c\TMdaVid\bmp8bpp.bmp        \TMdaVid\bmp8bpp.bmp
+data=EPOCROOT##epoc32\data\c\TMdaVid\bmprle4.bmp        \TMdaVid\bmprle4.bmp
+data=EPOCROOT##epoc32\data\c\TMdaVid\bmprle8.bmp        \TMdaVid\bmprle8.bmp
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif10.jpg         \TMdaVid\jfif10.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif100.jpg        \TMdaVid\jfif100.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif30.jpg         \TMdaVid\jfif30.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif420.jpg        \TMdaVid\jfif420.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif422.jpg        \TMdaVid\jfif422.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif444.jpg        \TMdaVid\jfif444.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfif60.jpg         \TMdaVid\jfif60.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfifMono.jpg       \TMdaVid\jfifMono.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\jfifProg.jpg       \TMdaVid\jfifProg.jpg
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm12bpp.mbm       \TMdaVid\mbm12bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm16bpp.mbm       \TMdaVid\mbm16bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm1bpp.mbm        \TMdaVid\mbm1bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm24bpp.mbm       \TMdaVid\mbm24bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm2bpp.mbm        \TMdaVid\mbm2bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm4bppc.mbm       \TMdaVid\mbm4bppc.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm4bppm.mbm       \TMdaVid\mbm4bppm.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm8bppc.mbm       \TMdaVid\mbm8bppc.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\mbm8bppm.mbm       \TMdaVid\mbm8bppm.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\png1.png           \TMdaVid\png1.png
+data=EPOCROOT##epoc32\data\c\TMdaVid\png2.png           \TMdaVid\png2.png
+data=EPOCROOT##epoc32\data\c\TMdaVid\png3.png           \TMdaVid\png3.png
+data=EPOCROOT##epoc32\data\c\TMdaVid\png4.png           \TMdaVid\png4.png
+data=EPOCROOT##epoc32\data\c\TMdaVid\tif1.tif           \TMdaVid\tif1.tif
+data=EPOCROOT##epoc32\data\c\TMdaVid\tif2.tif           \TMdaVid\tif2.tif
+data=EPOCROOT##epoc32\data\c\TMdaVid\tif3.tif           \TMdaVid\tif3.tif
+data=EPOCROOT##epoc32\data\c\TMdaVid\tmdavid.mbm        \TMdaVid\tmdavid.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\trans.gif          \TMdaVid\trans.gif
+data=EPOCROOT##epoc32\data\c\TMdaVid\wmf1.wmf           \TMdaVid\wmf1.wmf
+data=EPOCROOT##epoc32\data\c\TMdaVid\wmf2.wmf           \TMdaVid\wmf2.wmf
+data=EPOCROOT##epoc32\data\c\TMdaVid\wmf3.wmf           \TMdaVid\wmf3.wmf
+data=EPOCROOT##epoc32\data\c\TMdaVid\wmf4.wmf           \TMdaVid\wmf4.wmf
+data=EPOCROOT##epoc32\data\c\TMdaVid\wmf5.wmf           \TMdaVid\wmf5.wmf
+data=EPOCROOT##epoc32\data\c\TMdaVid\wmf6.wmf           \TMdaVid\wmf6.wmf
+
+data=EPOCROOT##epoc32\data\c\TMdaVid\Anon\otabitmap     	\TMdaVid\Anon\otabitmap
+data=EPOCROOT##epoc32\data\c\TMdaVid\Anon\otabitmap.mbm         \TMdaVid\Anon\otabitmap.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Anon\wirelessbitmap        \TMdaVid\Anon\wirelessbitmap
+data=EPOCROOT##epoc32\data\c\TMdaVid\Anon\wirelessbitmap.mbm    \TMdaVid\Anon\wirelessbitmap.mbm
+
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\bmp1bpp.mbm    \TMdaVid\Ref\bmp1bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\bmp4bpp.mbm    \TMdaVid\Ref\bmp4bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\bmp8bpp.mbm    \TMdaVid\Ref\bmp8bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\bmp24bpp.mbm   \TMdaVid\Ref\bmp24bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\bmprle4.mbm    \TMdaVid\Ref\bmprle4.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\bmprle8.mbm    \TMdaVid\Ref\bmprle8.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif10.mbm     \TMdaVid\Ref\jfif10.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif100.mbm    \TMdaVid\Ref\jfif100.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif30.mbm     \TMdaVid\Ref\jfif30.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif420.mbm    \TMdaVid\Ref\jfif420.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif422.mbm    \TMdaVid\Ref\jfif422.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif444.mbm    \TMdaVid\Ref\jfif444.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfif60.mbm     \TMdaVid\Ref\jfif60.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfifMono.mbm   \TMdaVid\Ref\jfifMono.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\jfifProg.mbm   \TMdaVid\Ref\jfifProg.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm12bpp.mbm   \TMdaVid\Ref\mbm12bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm16bpp.mbm   \TMdaVid\Ref\mbm16bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm1bpp.mbm    \TMdaVid\Ref\mbm1bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm24bpp.mbm   \TMdaVid\Ref\mbm24bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm2bpp.mbm    \TMdaVid\Ref\mbm2bpp.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm4bppc.mbm   \TMdaVid\Ref\mbm4bppc.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm4bppm.mbm   \TMdaVid\Ref\mbm4bppm.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm8bppc.mbm   \TMdaVid\Ref\mbm8bppc.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\mbm8bppm.mbm   \TMdaVid\Ref\mbm8bppm.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\png1.mbm       \TMdaVid\Ref\png1.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\png2.mbm       \TMdaVid\Ref\png2.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\png3.mbm       \TMdaVid\Ref\png3.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\png4.mbm       \TMdaVid\Ref\png4.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\scaled0.mbm    \TMdaVid\Ref\scaled0.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\scaled1.mbm    \TMdaVid\Ref\scaled1.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\scaled2.mbm    \TMdaVid\Ref\scaled2.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\scaled3.mbm    \TMdaVid\Ref\scaled3.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\scaled4.mbm    \TMdaVid\Ref\scaled4.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\scaled5.mbm    \TMdaVid\Ref\scaled5.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\tif1.mbm       \TMdaVid\Ref\tif1.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\tif2.mbm       \TMdaVid\Ref\tif2.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\tif3.mbm       \TMdaVid\Ref\tif3.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\tmdavid.mbm    \TMdaVid\Ref\tmdavid.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\trans.mbm      \TMdaVid\Ref\trans.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\wmf1.mbm       \TMdaVid\Ref\wmf1.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\wmf2.mbm       \TMdaVid\Ref\wmf2.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\wmf3.mbm       \TMdaVid\Ref\wmf3.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\wmf4.mbm       \TMdaVid\Ref\wmf4.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\wmf5.mbm       \TMdaVid\Ref\wmf5.mbm
+data=EPOCROOT##epoc32\data\c\TMdaVid\Ref\wmf6.mbm       \TMdaVid\Ref\wmf6.mbm
+
+#endif

@@ -1,0 +1,47 @@
+EXPORTS
+	_Z22NewTestSuiteGifScalerLv @ 1 NONAME
+	_ZTI15CActiveListener @ 2 NONAME ; #<TI>#
+	_ZTI15CTestStepScale1 @ 3 NONAME ; #<TI>#
+	_ZTI15CTestStepScale2 @ 4 NONAME ; #<TI>#
+	_ZTI15CTestStepScale3 @ 5 NONAME ; #<TI>#
+	_ZTI15CTestStepScale4 @ 6 NONAME ; #<TI>#
+	_ZTI15CTestStepScale5 @ 7 NONAME ; #<TI>#
+	_ZTI15CTestStepScale6 @ 8 NONAME ; #<TI>#
+	_ZTI15CTestStepScale7 @ 9 NONAME ; #<TI>#
+	_ZTI15CTestStepScale8 @ 10 NONAME ; #<TI>#
+	_ZTI15CTestStepScale9 @ 11 NONAME ; #<TI>#
+	_ZTI16CTestStepScale10 @ 12 NONAME ; #<TI>#
+	_ZTI16CTestStepScale11 @ 13 NONAME ; #<TI>#
+	_ZTI16CTestStepScale12 @ 14 NONAME ; #<TI>#
+	_ZTI16CTestStepScale13 @ 15 NONAME ; #<TI>#
+	_ZTI16CTestStepScale14 @ 16 NONAME ; #<TI>#
+	_ZTI18CTestStepGifScaler @ 17 NONAME ; #<TI>#
+	_ZTI19CTestSuiteGifScaler @ 18 NONAME ; #<TI>#
+	_ZTI20CAllocTestStepScale1 @ 19 NONAME ; #<TI>#
+	_ZTI20CAllocTestStepScale2 @ 20 NONAME ; #<TI>#
+	_ZTI20CAllocTestStepScale3 @ 21 NONAME ; #<TI>#
+	_ZTI20CAllocTestStepScale4 @ 22 NONAME ; #<TI>#
+	_ZTV15CActiveListener @ 23 NONAME ; #<VT>#
+	_ZTV15CTestStepScale1 @ 24 NONAME ; #<VT>#
+	_ZTV15CTestStepScale2 @ 25 NONAME ; #<VT>#
+	_ZTV15CTestStepScale3 @ 26 NONAME ; #<VT>#
+	_ZTV15CTestStepScale4 @ 27 NONAME ; #<VT>#
+	_ZTV15CTestStepScale5 @ 28 NONAME ; #<VT>#
+	_ZTV15CTestStepScale6 @ 29 NONAME ; #<VT>#
+	_ZTV15CTestStepScale7 @ 30 NONAME ; #<VT>#
+	_ZTV15CTestStepScale8 @ 31 NONAME ; #<VT>#
+	_ZTV15CTestStepScale9 @ 32 NONAME ; #<VT>#
+	_ZTV16CTestStepScale10 @ 33 NONAME ; #<VT>#
+	_ZTV16CTestStepScale11 @ 34 NONAME ; #<VT>#
+	_ZTV16CTestStepScale12 @ 35 NONAME ; #<VT>#
+	_ZTV16CTestStepScale13 @ 36 NONAME ; #<VT>#
+	_ZTV16CTestStepScale14 @ 37 NONAME ; #<VT>#
+	_ZTV18CTestStepGifScaler @ 38 NONAME ; #<VT>#
+	_ZTV19CTestSuiteGifScaler @ 39 NONAME ; #<VT>#
+	_ZTV20CAllocTestStepScale1 @ 40 NONAME ; #<VT>#
+	_ZTV20CAllocTestStepScale2 @ 41 NONAME ; #<VT>#
+	_ZTV20CAllocTestStepScale3 @ 42 NONAME ; #<VT>#
+	_ZTV20CAllocTestStepScale4 @ 43 NONAME ; #<VT>#
+	_ZTI16CTestStepScale15 @ 44 NONAME
+	_ZTV16CTestStepScale15 @ 45 NONAME
+

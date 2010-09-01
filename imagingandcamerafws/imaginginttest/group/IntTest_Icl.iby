@@ -1,0 +1,90 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+#ifndef __INTTEST_ICL_IBY__
+#define __INTTEST_ICL_IBY__
+
+#include <multimediatestimageiagent.iby>
+#include <capsadaptation.iby>
+
+file=ABI_DIR\BUILD_DIR\TSI_ICL_FRM_00.DLL 	System\Libs\TSI_ICL_FRM_00.DLL
+
+//file=ABI_DIR\BUILD_DIR\TestCodec.dll  	System\Libs\Plugins\TestCodec.dll
+
+
+// scripts
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_00.script        	TSI_ICL_FRM_00.script
+
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_FS.script        	TSI_ICL_FRM_FS.script
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_DRM.script		TSI_ICL_FRM_DRM.script
+
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_RF.script        	TSI_ICL_FRM_RF.script
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_RF_ALLOC.script        	TSI_ICL_FRM_RF_ALLOC.script
+
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_YUV.script        	TSI_ICL_FRM_YUV.script
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_YUV_ALLOC.script        	TSI_ICL_FRM_YUV_ALLOC.script
+
+data=EPOCROOT##epoc32\data\c\ICL\TSI_ICL_FRM_00.ini        	TSI_ICL_FRM_00.ini
+
+// data
+
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\jfif444_8.jpg	\ICL\TestImages\jfif444_8.jpg
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\jfif444_8.mbm	\ICL\RefImages\jfif444_8.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\jfif444.jpg		\ICL\TestImages\jfif444.jpg
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\jfif444.mbm		\ICL\RefImages\jfif444.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\trans_1.gif		\ICL\TestImages\trans_1.gif
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\trans_8.gif		\ICL\TestImages\trans_8.gif
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\trans_1.mbm		\ICL\RefImages\trans_1.mbm
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\trans_8.mbm		\ICL\RefImages\trans_8.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\bmp8bpp_8.bmp	\ICL\TestImages\bmp8bpp_8.bmp
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\bmp8bpp_8.mbm	\ICL\RefImages\bmp8bpp_8.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\operator.ota	\ICL\TestImages\operator.ota
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\operator.mbm		\ICL\RefImages\operator.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\sun.wbmp		\ICL\TestImages\sun.wbmp
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\sun.mbm		\ICL\RefImages\sun.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\png4_8.png		\ICL\TestImages\png4_8.png
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\png4_8.mbm		\ICL\RefImages\png4_8.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\tif3_4.tif		\ICL\TestImages\tif3_4.tif
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\tif3_4.mbm		\ICL\RefImages\tif3_4.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\wmf3_8.wmf		\ICL\TestImages\wmf3_8.wmf
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\wmf3_9.wmf		\ICL\TestImages\wmf3_9.wmf
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\wmf3_8.mbm		\ICL\RefImages\wmf3_8.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\icoepoc.ico		\ICL\TestImages\icoepoc.ico
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\icoepoc.mbm		\ICL\RefImages\icoepoc.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\jfif444_8_cropped.jpg	\ICL\TestImages\jfif444_8_cropped.jpg
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\mbm24bpp_4.mbm	\ICL\RefImages\mbm24bpp_4.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\mbm24bpp_4.mbm	\ICL\TestImages\mbm24bpp_4.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\back.gif		\ICL\TestImages\back.gif
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\clock.gif		\ICL\TestImages\clock.gif
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\jfif444_8.bmp	\ICL\TestImages\jfif444_8.bmp
+
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\textfile.jpg	\ICL\TestImages\textfile.jpg
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\textfile.mbm		\ICL\RefImages\textfile.mbm
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\img_1705.jpg	\ICL\TestImages\img_1705.jpg
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\img_1705.mbm		\ICL\RefImages\img_1705.mbm
+
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\mbm_datanewl_0300.uic	\ICL\TestImages\mbm_datanewl_0300.uic
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\mbm_datanewl_0300.mbm	\ICL\RefImages\mbm_datanewl_0300.mbm
+
+// SYMBIAN_CAF_V2
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\Image.contentrights		\ICL\TestImages\Image.contentrights
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\Image.content			\ICL\TestImages\Image.content
+
+// YUV Conversion
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\jfif420_2.jpg	\ICL\TestImages\jfif422_4.jpg
+data=EPOCROOT##epoc32\data\c\ICL\RefImages\jfif420_2.jpg		\ICL\RefImages\jfif422_4.jpg
+data=EPOCROOT##epoc32\data\c\ICL\TestImages\jfif422_4_Corrupt.jpg	\ICL\TestImages\jfif422_4_Corrupt.jpg
+
+#endif

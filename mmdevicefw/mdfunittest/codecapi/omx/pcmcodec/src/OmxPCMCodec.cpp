@@ -448,6 +448,7 @@ void CCodecProcessor::RunThreadL()
 			// request notification of further queue events
 			iQueueStatus = KRequestPending;
 			iMessageQueue.NotifyDataAvailable(iQueueStatus);
+			//TBool lastBuffer=EFalse;  TODO UNUSED!
 			}
 		}
 
@@ -611,6 +612,7 @@ void CCodecProcessor::ProcessAvailableBuffers()
 			iCurrentCodec->Convert(&srcBuffer->pBuffer[iInputBufferPos], &destBuffer->pBuffer[destBufferPos], samplesToConvert);
 			iInputBufferPos = 0; // finished buffer - so reset
 			inputSamplesRequired -= availableSamples;
+//			TInt filled = availableSamples;  TODO UNUSED
 			destBuffer->nFilledLen = (TInt)((TReal)availableSamples * iOutputSamplesPerInputSample);
 			srcBuffer->nFilledLen = 0;
 			iBuffersToEmpty.Remove(0);

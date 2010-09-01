@@ -1,0 +1,27 @@
+EXPORTS
+	_ZN13CBitmapScaler13CustomCommandE4TUidPv @ 1 NONAME
+	_ZN13CBitmapScaler4NewLEv @ 2 NONAME
+	_ZN13CBitmapScaler5ScaleEP14TRequestStatusR10CFbsBitmapRK5TSizei @ 3 NONAME
+	_ZN13CBitmapScaler5ScaleEP14TRequestStatusR10CFbsBitmapS3_i @ 4 NONAME
+	_ZN13CBitmapScaler6CancelEv @ 5 NONAME
+	_ZN13CBitmapScalerD0Ev @ 6 NONAME
+	_ZN13CBitmapScalerD1Ev @ 7 NONAME
+	_ZN13CBitmapScalerD2Ev @ 8 NONAME
+	_ZN14CBitmapRotator4NewLEv @ 9 NONAME
+	_ZN14CBitmapRotator6CancelEv @ 10 NONAME
+	_ZN14CBitmapRotator6RotateEP14TRequestStatusR10CFbsBitmapNS_14TRotationAngleE @ 11 NONAME
+	_ZN14CBitmapRotator6RotateEP14TRequestStatusR10CFbsBitmapS3_NS_14TRotationAngleE @ 12 NONAME
+	_ZN14CBitmapRotatorD0Ev @ 13 NONAME
+	_ZN14CBitmapRotatorD1Ev @ 14 NONAME
+	_ZN14CBitmapRotatorD2Ev @ 15 NONAME
+	_ZN16CBitmapConverter4NewLEv @ 16 NONAME
+	_ZN16CBitmapConverter6CancelEv @ 17 NONAME
+	_ZN16CBitmapConverter7ConvertEP14TRequestStatusR10CFbsBitmapS3_ @ 18 NONAME
+	_ZN16CBitmapConverterD0Ev @ 19 NONAME
+	_ZN16CBitmapConverterD1Ev @ 20 NONAME
+	_ZN16CBitmapConverterD2Ev @ 21 NONAME
+	_ZTI13CBitmapScaler @ 22 NONAME ; #<TI>#
+	_ZTI14CBitmapRotator @ 23 NONAME ; #<TI>#
+	_ZTV13CBitmapScaler @ 24 NONAME ; #<VT>#
+	_ZTV14CBitmapRotator @ 25 NONAME ; #<VT>#
+	_ZN14CBitmapRotator13CustomCommandE4TUidPv @ 26 NONAME

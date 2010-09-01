@@ -101,7 +101,7 @@ void CMMFTestController::ConstructL (void)
 	AddCustomCommandParserL(*audConParser);
 	CleanupStack::Pop();//audConParser
 
-/*XXX - need to put this back in when the video custom commands have stabilised.
+/*FIXME - need to put this back in when the video custom commands have stabilised.
 	CMMFVideoControllerCustomCommandParser* vidConParser = CMMFVideoControllerCustomCommandParser::NewL(*this);
 	CleanupStack::PushL(vidConParser);
 	AddCustomCommandParserL(*vidConParser);
@@ -215,7 +215,7 @@ void CMMFTestController::RemoveSourceSinkL()
 	iMemFunctionText = KFuncText;
 	}
 
-void CMMFTestController::ResetL() //XXX - replacement for RemoveSourceSink()
+void CMMFTestController::ResetL() //FIXME - replacement for RemoveSourceSink()
 	{
 	_LIT8(KFuncText, "ResetL Called");
 	iMemFunctionText = KFuncText;
@@ -370,7 +370,7 @@ TInt CMMFTestController::MtccSetAudioQuality(TInt aQuality)
 
 	if (aQuality == 1)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 
 	return 1;
@@ -398,7 +398,7 @@ void CMMFTestController::MapdSetVolumeL(TInt aVolume)
 
 	if (aVolume == 1)
 		{
-		//XXX, check it's the correct value
+		//FIXME, check it's the correct value
 		}
 	}
 
@@ -426,7 +426,7 @@ void CMMFTestController::MapdSetVolumeRampL(const TTimeIntervalMicroSeconds& aRa
 
 	if (aRampDuration.Int64() == 10)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		} 
 	}
 
@@ -437,7 +437,7 @@ void CMMFTestController::MapdSetBalanceL(TInt aBalance)
 
 	if (aBalance == 10)
 		{
-		//XXX, check it's the correct value
+		//FIXME, check it's the correct value
 		}
 	}
 
@@ -461,7 +461,7 @@ void CMMFTestController::MardSetGainL(TInt aGain)
 
 	if (aGain == 1)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -488,7 +488,7 @@ void CMMFTestController::MardSetBalanceL(TInt aBalance)
 
 	if (aBalance == 8)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -511,7 +511,7 @@ void CMMFTestController::MapcSetPlaybackWindowL(const TTimeIntervalMicroSeconds&
 
 	if ((aStart.Int64() == 1) || (aEnd.Int64() == 10))
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 	
@@ -546,7 +546,7 @@ void CMMFTestController::MarcSetMaxDurationL(const TTimeIntervalMicroSeconds& aM
 
 	if (aMaxDuration.Int64() == 10)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -557,7 +557,7 @@ void CMMFTestController::MarcSetMaxFileSizeL(TInt aMaxSize)
 
 	if (aMaxSize == 10)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -568,7 +568,7 @@ void CMMFTestController::MarcCropL(TBool aToEnd)
 
 	if (aToEnd)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -580,7 +580,7 @@ void CMMFTestController::MarcAddMetaDataEntryL(const CMMFMetaDataEntry& aNewEntr
 	_LIT(KName, "A ENTRY");
 	if (aNewEntry.Name() == KName)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -591,7 +591,7 @@ void CMMFTestController::MarcRemoveMetaDataEntryL(TInt aIndex)
 
 	if (aIndex == 8)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 	}
 
@@ -601,13 +601,13 @@ void CMMFTestController::MarcReplaceMetaDataEntryL(TInt aIndex, const CMMFMetaDa
 	iMemFunctionText = KFuncText;
 	if (aIndex == 8)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 
 	_LIT(KName, "A New ENTRY");
 	if (aNewEntry.Name() == KName)
 		{
-		// XXX, check it's the correct value
+		// FIXME, check it's the correct value
 		}
 
 	}
@@ -935,7 +935,7 @@ void CMMFTestController::MvcSetFrameRateL(TReal32 aFramesPerSecond)
 
 	if (aFramesPerSecond == 5.00)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 
@@ -946,7 +946,7 @@ void CMMFTestController::MvcGetFrameRateL(TReal32& aFramesPerSecond)
 
 	if (aFramesPerSecond == 5.00)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 
@@ -957,7 +957,7 @@ void CMMFTestController::MvcGetFrameL(TInt aFrameNumber)
 
 	if (aFrameNumber == 5)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 
@@ -968,7 +968,7 @@ void CMMFTestController::MvcGetVideoDimensionL(TRect& aVideoDimension)
 
 	if (aVideoDimension.Width() == 10)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 
@@ -979,7 +979,7 @@ void CMMFTestController::MvcSetDisplayWindowL(RWindow& /*aWindow*/, const TRect&
 
 	if (aWindowRect.Width() == 10)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 
 	}
@@ -992,7 +992,7 @@ void CMMFTestController::MvcAddMetaDataEntryL(const CMMFMetaDataEntry& aNewEntry
 	_LIT(KName, "A New Entry");
 	if (aNewEntry.Name() == KName)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 
@@ -1003,7 +1003,7 @@ void CMMFTestController::MvcRemoveMetaDataEntryL(TInt aIndex)
 
 	if (aIndex == 2)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 
@@ -1014,13 +1014,13 @@ void CMMFTestController::MvcReplaceMetaDataEntryL(TInt aIndex, const CMMFMetaDat
 
 	if (aIndex == 2)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 
 	_LIT(KName, "A New Entry");
 	if (aNewEntry.Name() == KName)
 		{
-		// XXX, Check it's the correct value.
+		// FIXME, Check it's the correct value.
 		}
 	}
 

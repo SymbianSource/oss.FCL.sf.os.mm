@@ -1303,7 +1303,7 @@ TVerdict CTestMmfAclntRecDes::DoTestStepL( void )
 			TUint sampleRate = recUtil->DestinationSampleRateL();
 			TUint bitRate = recUtil->DestinationBitRateL();
 
-			//xxx work around for GSM which returns zero as the bit rate because internally
+			// hack for GSM which returns zero as the bit rate because internally
 			// BitsPerSample is zero
 			if (bitRate==0)
 				{
@@ -5698,7 +5698,7 @@ TVerdict CTestStepAudOutStreamPosition::DoTestStepL()
 		}
 		
 
-	//xxx try cotinuing playing and get positions while playing if there is more time.
+	//try cotinuing playing and get positions while playing if there is more time. TBD
 
 	INFO_PRINTF1(_L("finished with this test step"));
 	// test steps return a result

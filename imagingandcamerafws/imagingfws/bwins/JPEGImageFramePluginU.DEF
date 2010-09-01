@@ -1,0 +1,31 @@
+EXPORTS
+	??0CJPEGImageFrameDecoder@@IAE@XZ @ 1 NONAME ; CJPEGImageFrameDecoder::CJPEGImageFrameDecoder(void)
+	??0CJPEGImageFrameDecoderPlugin@@IAE@XZ @ 2 NONAME ; CJPEGImageFrameDecoderPlugin::CJPEGImageFrameDecoderPlugin(void)
+	??0CJPEGImageFrameEncoder@@IAE@XZ @ 3 NONAME ; CJPEGImageFrameEncoder::CJPEGImageFrameEncoder(void)
+	??0CJPEGImageFrameEncoderPlugin@@IAE@XZ @ 4 NONAME ; CJPEGImageFrameEncoderPlugin::CJPEGImageFrameEncoderPlugin(void)
+	??1CJPEGImageFrameDecoder@@UAE@XZ @ 5 NONAME ; CJPEGImageFrameDecoder::~CJPEGImageFrameDecoder(void)
+	??1CJPEGImageFrameDecoderPlugin@@UAE@XZ @ 6 NONAME ; CJPEGImageFrameDecoderPlugin::~CJPEGImageFrameDecoderPlugin(void)
+	??1CJPEGImageFrameEncoder@@UAE@XZ @ 7 NONAME ; CJPEGImageFrameEncoder::~CJPEGImageFrameEncoder(void)
+	??1CJPEGImageFrameEncoderPlugin@@UAE@XZ @ 8 NONAME ; CJPEGImageFrameEncoderPlugin::~CJPEGImageFrameEncoderPlugin(void)
+	?ConvertFrame@CJPEGImageFrameDecoder@@QAEXPAVTRequestStatus@@AAVCImageFrame@@@Z @ 9 NONAME ; void CJPEGImageFrameDecoder::ConvertFrame(class TRequestStatus *, class CImageFrame &)
+	?ConvertFrame@CJPEGImageFrameDecoder@@QAEXPAVTRequestStatus@@AAVCImageFrame@@H@Z @ 10 NONAME ; void CJPEGImageFrameDecoder::ConvertFrame(class TRequestStatus *, class CImageFrame &, int)
+	?ConvertFrame@CJPEGImageFrameEncoder@@QAEXPAVTRequestStatus@@ABVCImageFrame@@@Z @ 11 NONAME ; void CJPEGImageFrameEncoder::ConvertFrame(class TRequestStatus *, class CImageFrame const &)
+	?ConvertFrame@CJPEGImageFrameEncoder@@QAEXPAVTRequestStatus@@ABVCImageFrame@@PBVCFrameImageData@@@Z @ 12 NONAME ; void CJPEGImageFrameEncoder::ConvertFrame(class TRequestStatus *, class CImageFrame const &, class CFrameImageData const *)
+	?DstImageFrame@CJPEGImageFrameDecoderPlugin@@QAEAAVCImageFrame@@XZ @ 13 NONAME ; class CImageFrame & CJPEGImageFrameDecoderPlugin::DstImageFrame(void)
+	?FormatCode@CJPEGImageFrameDecoderPlugin@@QBE?AVTUid@@XZ @ 14 NONAME ; class TUid CJPEGImageFrameDecoderPlugin::FormatCode(void) const
+	?FrameImageData@CJPEGImageFrameEncoderPlugin@@QBEABVCFrameImageData@@XZ @ 15 NONAME ; class CFrameImageData const & CJPEGImageFrameEncoderPlugin::FrameImageData(void) const
+	?FrameNumber@CJPEGImageFrameDecoderPlugin@@QBEHXZ @ 16 NONAME ; int CJPEGImageFrameDecoderPlugin::FrameNumber(void) const
+	?NewL@CJPEGImageFrameDecoder@@SAPAV1@XZ @ 17 NONAME ; class CJPEGImageFrameDecoder * CJPEGImageFrameDecoder::NewL(void)
+	?NewL@CJPEGImageFrameEncoder@@SAPAV1@XZ @ 18 NONAME ; class CJPEGImageFrameEncoder * CJPEGImageFrameEncoder::NewL(void)
+	?RecommendedBufferSize@CJPEGImageFrameDecoder@@QAEHAAH@Z @ 19 NONAME ; int CJPEGImageFrameDecoder::RecommendedBufferSize(int &)
+	?RecommendedBufferSize@CJPEGImageFrameDecoder@@QAEHVTUid@@AAH@Z @ 20 NONAME ; int CJPEGImageFrameDecoder::RecommendedBufferSize(class TUid, int &)
+	?Reserved1@CJPEGImageFrameDecoderPlugin@@EAEXXZ @ 21 NONAME ; void CJPEGImageFrameDecoderPlugin::Reserved1(void)
+	?Reserved1@CJPEGImageFrameEncoderPlugin@@EAEXXZ @ 22 NONAME ; void CJPEGImageFrameEncoderPlugin::Reserved1(void)
+	?Reserved2@CJPEGImageFrameDecoderPlugin@@EAEXXZ @ 23 NONAME ; void CJPEGImageFrameDecoderPlugin::Reserved2(void)
+	?Reserved2@CJPEGImageFrameEncoderPlugin@@EAEXXZ @ 24 NONAME ; void CJPEGImageFrameEncoderPlugin::Reserved2(void)
+	?Reserved3@CJPEGImageFrameDecoderPlugin@@EAEXXZ @ 25 NONAME ; void CJPEGImageFrameDecoderPlugin::Reserved3(void)
+	?Reserved3@CJPEGImageFrameEncoderPlugin@@EAEXXZ @ 26 NONAME ; void CJPEGImageFrameEncoderPlugin::Reserved3(void)
+	?SetRecommendedBufferSize@CJPEGImageFrameDecoderPlugin@@QAEXH@Z @ 27 NONAME ; void CJPEGImageFrameDecoderPlugin::SetRecommendedBufferSize(int)
+	?SrcImageFrame@CJPEGImageFrameEncoderPlugin@@QBEABVCImageFrame@@XZ @ 28 NONAME ; class CImageFrame const & CJPEGImageFrameEncoderPlugin::SrcImageFrame(void) const
+	?ContinueConvertFrame@CJPEGImageFrameDecoder@@QAEXPAVTRequestStatus@@@Z @ 29 NONAME ; void CJPEGImageFrameDecoder::ContinueConvertFrame(class TRequestStatus *)
+

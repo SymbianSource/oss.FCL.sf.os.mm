@@ -1,0 +1,3 @@
+EXPORTS
+	?NewL@CICLCodecDefectTestSuite@@SAPAV1@XZ @ 1 NONAME ; public: static class CICLCodecDefectTestSuite * __cdecl CICLCodecDefectTestSuite::NewL(void)
+

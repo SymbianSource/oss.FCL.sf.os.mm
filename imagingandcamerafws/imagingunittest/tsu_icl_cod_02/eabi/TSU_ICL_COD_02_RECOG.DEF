@@ -1,0 +1,86 @@
+EXPORTS
+	_Z13NewTestSuiteLv @ 1 NONAME
+	_ZTI11CPngDecoder @ 2 NONAME ; #<TI>#
+	_ZTI11CPngEncoder @ 3 NONAME ; #<TI>#
+	_ZTI13CPngReadCodec @ 4 NONAME ; #<TI>#
+	_ZTI13CRecogWrapper @ 5 NONAME ; #<TI>#
+	_ZTI13RRecogNegTest @ 6 NONAME ; #<TI>#
+	_ZTI14CICLCodecSuite @ 7 NONAME ; #<TI>#
+	_ZTI14CPngWriteCodec @ 8 NONAME ; #<TI>#
+	_ZTI14RCodecDataTest @ 9 NONAME ; #<TI>#
+	_ZTI15RRecogAllocTest @ 10 NONAME ; #<TI>#
+	_ZTI16CPngReadSubCodec @ 11 NONAME ; #<TI>#
+	_ZTI17CBitDepth1Decoder @ 12 NONAME ; #<TI>#
+	_ZTI17CBitDepth1Encoder @ 13 NONAME ; #<TI>#
+	_ZTI17CBitDepth2Decoder @ 14 NONAME ; #<TI>#
+	_ZTI17CBitDepth2Encoder @ 15 NONAME ; #<TI>#
+	_ZTI17CBitDepth4Decoder @ 16 NONAME ; #<TI>#
+	_ZTI17CBitDepth4Encoder @ 17 NONAME ; #<TI>#
+	_ZTI17CBitDepth8Decoder @ 18 NONAME ; #<TI>#
+	_ZTI17CBitDepth8Encoder @ 19 NONAME ; #<TI>#
+	_ZTI17CPngWriteSubCodec @ 20 NONAME ; #<TI>#
+	_ZTI18RPngWriteCodecTest @ 21 NONAME ; #<TI>#
+	_ZTI21RPngWriteSubCodecTest @ 22 NONAME ; #<TI>#
+	_ZTI27CBitDepth8ColorType2Decoder @ 23 NONAME ; #<TI>#
+	_ZTI27CBitDepth8ColorType2Encoder @ 24 NONAME ; #<TI>#
+	_ZTI27CBitDepth8ColorType4Decoder @ 25 NONAME ; #<TI>#
+	_ZTI27CBitDepth8ColorType6Decoder @ 26 NONAME ; #<TI>#
+	_ZTI28CBitDepth16ColorType0Decoder @ 27 NONAME ; #<TI>#
+	_ZTI28CBitDepth16ColorType2Decoder @ 28 NONAME ; #<TI>#
+	_ZTI28CBitDepth16ColorType4Decoder @ 29 NONAME ; #<TI>#
+	_ZTI28CBitDepth16ColorType6Decoder @ 30 NONAME ; #<TI>#
+	_ZTV11CPngDecoder @ 31 NONAME ; #<VT>#
+	_ZTV11CPngEncoder @ 32 NONAME ; #<VT>#
+	_ZTV13CPngReadCodec @ 33 NONAME ; #<VT>#
+	_ZTV13CRecogWrapper @ 34 NONAME ; #<VT>#
+	_ZTV13RRecogNegTest @ 35 NONAME ; #<VT>#
+	_ZTV14CICLCodecSuite @ 36 NONAME ; #<VT>#
+	_ZTV14CPngWriteCodec @ 37 NONAME ; #<VT>#
+	_ZTV14RCodecDataTest @ 38 NONAME ; #<VT>#
+	_ZTV15RRecogAllocTest @ 39 NONAME ; #<VT>#
+	_ZTV16CPngReadSubCodec @ 40 NONAME ; #<VT>#
+	_ZTV17CBitDepth1Decoder @ 41 NONAME ; #<VT>#
+	_ZTV17CBitDepth1Encoder @ 42 NONAME ; #<VT>#
+	_ZTV17CBitDepth2Decoder @ 43 NONAME ; #<VT>#
+	_ZTV17CBitDepth2Encoder @ 44 NONAME ; #<VT>#
+	_ZTV17CBitDepth4Decoder @ 45 NONAME ; #<VT>#
+	_ZTV17CBitDepth4Encoder @ 46 NONAME ; #<VT>#
+	_ZTV17CBitDepth8Decoder @ 47 NONAME ; #<VT>#
+	_ZTV17CBitDepth8Encoder @ 48 NONAME ; #<VT>#
+	_ZTV17CPngWriteSubCodec @ 49 NONAME ; #<VT>#
+	_ZTV18RPngWriteCodecTest @ 50 NONAME ; #<VT>#
+	_ZTV21RPngWriteSubCodecTest @ 51 NONAME ; #<VT>#
+	_ZTV27CBitDepth8ColorType2Decoder @ 52 NONAME ; #<VT>#
+	_ZTV27CBitDepth8ColorType2Encoder @ 53 NONAME ; #<VT>#
+	_ZTV27CBitDepth8ColorType4Decoder @ 54 NONAME ; #<VT>#
+	_ZTV27CBitDepth8ColorType6Decoder @ 55 NONAME ; #<VT>#
+	_ZTV28CBitDepth16ColorType0Decoder @ 56 NONAME ; #<VT>#
+	_ZTV28CBitDepth16ColorType2Decoder @ 57 NONAME ; #<VT>#
+	_ZTV28CBitDepth16ColorType4Decoder @ 58 NONAME ; #<VT>#
+	_ZTV28CBitDepth16ColorType6Decoder @ 59 NONAME ; #<VT>#
+	_ZTI14MApaAppStarter @ 60 NONAME ; #<TI>#
+	_ZTV14MApaAppStarter @ 61 NONAME ; #<VT>#
+	_ZN14MApaAppStarter24MApaAppStarter_Reserved1Ev @ 62 NONAME
+	_ZN14MApaAppStarter24MApaAppStarter_Reserved2Ev @ 63 NONAME
+	_ZN14MApaAppStarterC2Ev @ 64 NONAME
+	_ZTI25RRecogNonStandardMimeTest @ 65 NONAME ; #<TI>#
+	_ZTV25RRecogNonStandardMimeTest @ 66 NONAME ; #<VT>#
+	_ZTI14CFastProcessor @ 67 NONAME
+	_ZTI22CFastProcessor16Mto16M @ 68 NONAME
+	_ZTI23CFastProcessor16Mto16MA @ 69 NONAME
+	_ZTI24CFastProcessor16MAto16MA @ 70 NONAME
+	_ZTI25CFastProcessor16MAto16MAP @ 71 NONAME
+	_ZTV14CFastProcessor @ 72 NONAME
+	_ZTV22CFastProcessor16Mto16M @ 73 NONAME
+	_ZTV23CFastProcessor16Mto16MA @ 74 NONAME
+	_ZTV24CFastProcessor16MAto16MA @ 75 NONAME
+	_ZTV25CFastProcessor16MAto16MAP @ 76 NONAME
+	_ZTI24RRecogNonStandardWMFTest @ 77 NONAME
+	_ZTV24RRecogNonStandardWMFTest @ 78 NONAME
+	_ZTI24RRecogNonStandardWBMTest @ 79 NONAME
+	_ZTV24RRecogNonStandardWBMTest @ 80 NONAME
+	_ZTI24CFastProcessor16MAto16MU @ 81 NONAME
+	_ZTI33CFastProcessor32bitTo32bitAndMask @ 82 NONAME
+	_ZTV24CFastProcessor16MAto16MU @ 83 NONAME
+	_ZTV33CFastProcessor32bitTo32bitAndMask @ 84 NONAME
+

@@ -6,7 +6,7 @@ MultimediaFrameWork project
 </Description>
 
 <Status>
-- This is release note for release of MultimediaFramework to Symbian.
+- This is release note for release of MultimediaFramework from Nile to Symbian.
 
 - Release Date (planned):
 - Release Date (actual): 
@@ -31,7 +31,7 @@ added tests for WINS testing of audio policy.
 
 Files which have been added to Continuus and files which
 have been deleted:
-New Files added by Dallas:
+New Files added by Nokia Dallas:
 
 \Include\
 	MdaAudioOutputStream.h

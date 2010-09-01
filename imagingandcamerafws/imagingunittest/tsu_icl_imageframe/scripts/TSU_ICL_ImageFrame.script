@@ -1,0 +1,111 @@
+//
+// Copyright (c) 2005 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT Run all the ImageFrame tests 
+PRINT 
+#PAUSE_AT_END
+
+//
+LOAD_SUITE TSU_ICL_ImageFrame.dll
+
+PRINT Run Image Frame Access Functionality (TDesc & RChunk) Decoder
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0001-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0001-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0002-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0002-HP
+TEST_COMPLETE 
+
+PRINT Run Image Frame Creation  (TDesc & RChunk) Encoder
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0003-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0003-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0004-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0004-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0005-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0005-HP
+TEST_COMPLETE 
+
+PRINT Run ImageProcessor functional tests with different settings  (TDesc & RChunk)
+PRINT Cover all four types JpgImageFrameProcessor implementations
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0010-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0010-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0011-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0011-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0012-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0012-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0013-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0013-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0014-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0014-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0015-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0015-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0016-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0016-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0017-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0017-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0018-HP
+
+RUN_TEST_STEP 1000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0018-HP
+TEST_COMPLETE 
+
+PRINT Run Multiframe tests
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0040-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0040-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGFRM-U-0041-HP
+
+RUN_TEST_STEP 10000, TSU_ICL_ImageFrame, MM-ICL-IMGFRM-U-0041-HP
+TEST_COMPLETE 

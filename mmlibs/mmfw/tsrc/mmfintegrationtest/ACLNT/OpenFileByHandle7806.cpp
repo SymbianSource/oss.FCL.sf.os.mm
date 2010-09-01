@@ -57,7 +57,7 @@ TVerdict CTestMmfAclntOpenFile7806::DoTestL(CMdaAudioPlayerUtility* aPlayer)
 	
 	TInt failCount = 1;
 	TBool completed = EFalse;
-	iAllocTestStepResult = EPass; // XXX check?? assume pass
+	iAllocTestStepResult = EPass; // TODO check?? assume pass
 	TBool reachedEnd = EFalse; // Note: declare outside loop to help with debugging
 	for(;;)	
 		{

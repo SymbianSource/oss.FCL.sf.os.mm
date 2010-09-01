@@ -1,4 +1,4 @@
-// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -16,15 +16,9 @@
 PRJ_PLATFORMS
 DEFAULT
 
-PRJ_TESTMMPFILES
-../mmpfiles/tsu_mmf_subtitledecoder.mmp
-
-PRJ_TESTEXPORTS
-
-// test scripts
-../scripts/tsu_mmf_subtitledecoder.script 	c:/mm/tsu_mmf_subtitledecoder.script
-
-// test data files
+PRJ_EXPORTS
+../scripts/tsu_mmf_subtitledecoder.script c:/mm/tsu_mmf_subtitledecoder.script
+../inc/tsu_mmf_subtitledecoder.iby /epoc32/rom/include/tsu_mmf_subtitledecoder.iby
 ../data/subtitle1.srt	    c:/mm/subtitle1.srt
 ../data/subtitle2.srt	    c:/mm/subtitle2.srt
 ../data/subtitlebmp0.mbm     c:/mm/subtitlebmp0.mbm
@@ -38,8 +32,6 @@ PRJ_TESTEXPORTS
 ../data/subtitlebmp8.mbm     c:/mm/subtitlebmp8.mbm
 ../data/subtitlebmp9.mbm     c:/mm/subtitlebmp9.mbm
 
-//iby files
-../group/tsu_mmf_subtitledecoder.iby 			/epoc32/rom/include/tsu_mmf_subtitledecoder.iby
-../group/tsu_mmf_subtitledecoder_excl_test.iby 		/epoc32/rom/include/tsu_mmf_subtitledecoder_excl_test.iby
-
+PRJ_MMPFILES
+../mmpfiles/tsu_mmf_subtitledecoder.mmp
 

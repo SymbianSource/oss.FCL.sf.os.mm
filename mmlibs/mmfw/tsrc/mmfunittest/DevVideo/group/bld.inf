@@ -1,4 +1,4 @@
-// Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2003-2009 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -17,7 +17,7 @@
 PRJ_PLATFORMS
 DEFAULT
 
-PRJ_TESTMMPFILES
+PRJ_MMPFILES
 
 // DEVVIDEO
 ../mmpfiles/TSU_MMF_DEVVIDEO_01.mmp
@@ -26,7 +26,7 @@ PRJ_TESTMMPFILES
 ../mmpfiles/testdevvideociuplugins.mmp
 
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 
 // test scripts
 ../scripts/TSU_MMF_DEVVIDEO_01.script c:/tsu_mmf_devvideo_01.script
@@ -39,7 +39,6 @@ PRJ_TESTEXPORTS
 #endif
 
 //iby files
-../group/TSU_MMF_DEVVIDEO_01.iby		/epoc32/rom/include/tsu_mmf_devvideo_01.iby
-../group/tsu_mmf_devvideo_01_excl_test.iby	/epoc32/rom/include/tsu_mmf_devvideo_01_excl_test.iby
-../group/tsu_mmf_devvideo_ciu_01.iby		/epoc32/rom/include/tsu_mmf_devvideo_ciu_01.iby
-../group/tsu_mmf_devvideo_ciu_01_excl_test.iby	/epoc32/rom/include/tsu_mmf_devvideo_ciu_01_excl_test.iby
+../group/TSU_MMF_DEVVIDEO_01.iby	/epoc32/rom/include/tsu_mmf_devvideo_01.iby
+../group/tsu_mmf_devvideo_ciu_01.iby	/epoc32/rom/include/tsu_mmf_devvideo_ciu_01.iby
+

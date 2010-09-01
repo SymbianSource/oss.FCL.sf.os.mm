@@ -117,6 +117,5 @@ void CTestSuiteDevSoundNotification::InitialiseL(void)
 	AddTestStepL(new(ELeave) CTestStepDevSound0048());
 	AddTestStepL(new(ELeave) CTestStepDevSound0049());
 	AddTestStepL(new(ELeave) CTestStepDevSound0050());
-	AddTestStepL(new(ELeave) CTestStepDevSound0051());
 	}
 	

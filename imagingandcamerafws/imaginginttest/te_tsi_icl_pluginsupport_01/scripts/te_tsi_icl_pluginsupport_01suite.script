@@ -1,0 +1,75 @@
+//
+// Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+PRINT Run all te_tsi_icl_pluginsupport_01 Suite Tests
+
+LOAD_SUITE te_tsi_icl_pluginsupport_01Suite
+
+
+START_TESTCASE MM-TSI-ICL-PLUGINSUPPORT-01-0001
+//!@SYMTestCaseID		MM-TSI-ICL-PLUGINSUPPORT-01-0001
+//!@SYMTestCaseDesc		Positive: 
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMAPI				CImgProcessor::NewL
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Attempt to instantiate a CImgProcessor
+//!@SYMTestExpectedResults	PASS - If the ADAPTATION_PLUGINS_PRESENT macro is defined (and implementation IS present) - CImgProcessor instantiated.
+//!				PASS - If the ADAPTATION_PLUGINS_PRESENT macro is NOT defined (and implementation NOT present) - CImgProcessor NOT instantiated.
+//!				FAIL - If the ADAPTATION_PLUGINS_PRESENT macro is defined (and implementation NOT present) - CImgProcessor NOT instantiated.
+//!				FAIL - If the ADAPTATION_PLUGINS_PRESENT macro is NOT defined (and implementation IS present) - CImgProcessor instantiated.
+RUN_TEST_STEP 100 te_tsi_icl_pluginsupport_01Suite tsi_icl_pluginsupport_010Step
+END_TESTCASE MM-TSI-ICL-PLUGINSUPPORT-01-0001
+
+START_TESTCASE MM-TSI-ICL-PLUGINSUPPORT-01-0002
+//!@SYMTestCaseID		MM-TSI-ICL-PLUGINSUPPORT-01-0002
+//!@SYMTestCaseDesc		Positive: 
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMAPI				CImagePanorama::NewL
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Attempt to instantiate a CImagePanorama
+//!@SYMTestExpectedResults	PASS - If the ADAPTATION_PLUGINS_PRESENT macro is defined (and implementation IS present) - CImgProcessor instantiated.
+//!				PASS - If the ADAPTATION_PLUGINS_PRESENT macro is NOT defined (and implementation NOT present) - CImgProcessor NOT instantiated.
+//!				FAIL - If the ADAPTATION_PLUGINS_PRESENT macro is defined (and implementation NOT present) - CImgProcessor NOT instantiated.
+//!				FAIL - If the ADAPTATION_PLUGINS_PRESENT macro is NOT defined (and implementation IS present) - CImgProcessor instantiated.
+RUN_TEST_STEP 100 te_tsi_icl_pluginsupport_01Suite tsi_icl_pluginsupport_011Step
+END_TESTCASE MM-TSI-ICL-PLUGINSUPPORT-01-0002
+
+START_TESTCASE MM-TSI-ICL-PLUGINSUPPORT-01-0003
+//!@SYMTestCaseID		MM-TSI-ICL-PLUGINSUPPORT-01-0003
+//!@SYMTestCaseDesc		Positive: 
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMAPI				CImageTransform::NewL
+//!@SYMAPI				CImageTransform::SetSourceFilenameL
+//!@SYMAPI				CImageTransform::SetDestFilenameL
+//!@SYMAPI				CImageTransform::SetTransformationsL
+//!@SYMAPI				CImageTransform::SetupL
+//!@SYMAPI				CImageTransform::Extension
+//!@SYMAPI				CImageTransform::Reset
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Attempt to instantiate a CImageTransform
+//!@SYMTestActions		2. Initialise and set up the CImageTransform
+//!@SYMTestActions		3. Attempt to get three extension types: ESqueeze, EOrientation and EOverlay
+//!@SYMTestExpectedResults	PASS - If the ADAPTATION_PLUGINS_PRESENT macro is defined (and plugin extension IS present) - plugin extension instantiated.
+//!				PASS - If the ADAPTATION_PLUGINS_PRESENT macro is NOT defined (and plugin extension NOT present) - plugin extension NOT instantiated.
+//!				FAIL - If the ADAPTATION_PLUGINS_PRESENT macro is defined (and plugin extension NOT present) - plugin extension NOT instantiated.
+//!				FAIL - If the ADAPTATION_PLUGINS_PRESENT macro is NOT defined (and plugin extension IS present) - plugin extension instantiated.
+RUN_TEST_STEP 100 te_tsi_icl_pluginsupport_01Suite tsi_icl_pluginsupport_012Step
+END_TESTCASE MM-TSI-ICL-PLUGINSUPPORT-01-0003
+
+PRINT Complete_te_tsi_icl_pluginsupport_01_Tests

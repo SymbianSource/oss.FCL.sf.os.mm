@@ -222,6 +222,9 @@ void CTestFrameworkServer::OpenLogL(const TDesC& aLogName, TInt aLogMode)
 			
 			if (aLogMode & ELogConsoleFull)
 				iLogMode |= ELogConsoleFull;
+
+			iConsole->Read(*this);
+
 			}
 		}
 
@@ -353,6 +356,42 @@ TInt CTestFrameworkServer::LogStatus() const
 	return iLogMode;
 	}
 
+
+/**
+ *
+ * process key input from console.
+ *
+ * @param "TKeyCode aKeystroke"
+ *			The keystroke
+ * 
+ * @xxxx
+ *
+ */
+void CTestFrameworkServer::InputReceived(TKeyCode aKeystroke)
+	{
+	// store it
+	iInputKey = STATIC_CAST(TInt, aKeystroke);
+
+	// key not processed as yet - pending implementation of async request from client
+		
+	//read from console again
+	iConsole->Read(*this);
+	}
+
+/**
+ *
+ * Display general error.
+ *
+ * @param "TInt aError"
+ *			The error code
+ * 
+ * @xxxx
+ *
+ */
+void CTestFrameworkServer::Error(TInt)
+	{
+	// stubbed; undefined input keys can be safely discarded
+	}
 
 /**
  *

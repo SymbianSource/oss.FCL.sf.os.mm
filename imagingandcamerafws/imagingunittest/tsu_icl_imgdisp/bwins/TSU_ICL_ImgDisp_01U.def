@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuiteImageDisplayL@@YAPAVCTestSuiteImageDisplay@@XZ @ 1 NONAME ; class CTestSuiteImageDisplay * NewTestSuiteImageDisplayL(void)
+

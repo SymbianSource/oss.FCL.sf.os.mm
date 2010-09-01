@@ -1,0 +1,106 @@
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// using relative paths for sourcepath and user includes
+// 
+//
+
+// GetMimeTypeFileL() and GetMimeTypeDataL() are thorough
+// ie they don't just match on header data, they attempt to create a decoder
+MACRO	__GET_MIME_TYPE_THOROUGH
+
+// enables ansynchronous writing of encoder buffers
+// that would increase encoding performance by about 30% when writing 
+// to a high latency media such as MMC card
+// NOTE: this macro value shall be in sync with one in the ImageConversion.mmp
+MACRO SYMBIAN_ENABLE_ENCODER_ASYNC_WRITES
+
+TARGET        	tsu_icl_frm_01.dll
+CAPABILITY      ALL -TCB
+TARGETTYPE    	dll
+//UID to be renamed 
+UID           	0x1000008d 0x101F45FB  
+VENDORID        0x70000001
+
+SOURCEPATH	../src
+SOURCE		ICLFrameWorkTestStep.cpp
+SOURCE		ICLFrameworkTestSuite.cpp
+SOURCE		ImageEncoderPrivTest.cpp
+SOURCE		ImageDecoderTest.cpp
+SOURCE		ImageEncoderTest.cpp
+SOURCE		BufferedImageDecoderTest.cpp
+SOURCE		ExtendedDecoderTest.cpp
+SOURCE		ExtendedEncoderTest.cpp
+SOURCE		extendedjpegdecoderteststep.cpp
+SOURCE		ImageProcessorTest.cpp
+
+SOURCE		ImageDecoderDRM.cpp
+
+SOURCEPATH	../../../imagingfws/src
+SOURCE		ImageClientMain.cpp
+SOURCE		ImageClientApi.cpp
+SOURCE		ImageConvResolvrUtils.cpp
+SOURCE		ImageResolverAPI.cpp
+SOURCE		ImageConversionPriv.cpp
+SOURCE		ImageCodecBody.cpp
+SOURCE		ImageRelay.cpp
+SOURCE		ImageStraightRelay.cpp
+SOURCE		GenThreadRelay.cpp
+SOURCE		ThreadRelay.cpp
+SOURCE		Reciclutil.cpp
+SOURCE		Reciclutilbody.cpp
+SOURCE		asyncfilewriter.cpp
+SOURCE		imageconversionextension.cpp
+SOURCE		iclextproxystubutil.cpp
+SOURCE		fwextensionparams.cpp
+
+SOURCEPATH	../../../../mmplugins/imagingplugins/codecs/JPEGCodec
+SOURCE		imgpositionprocessor.cpp
+
+USERINCLUDE	../../../../mmplugins/imagingplugins/codecs/JPEGCodec
+
+USERINCLUDE	../inc
+USERINCLUDE	../../../imagingfws/inc
+USERINCLUDE	../../../imagingfws/src
+USERINCLUDE	../../testcodec/inc
+USERINCLUDE	../../../imaginginttest/Codecs/PPM1
+
+MW_LAYER_SYSTEMINCLUDE_SYMBIAN  // MW Layer macro required to link against AppArc Middleware headers
+
+LIBRARY	euser.lib
+LIBRARY efsrv.lib
+LIBRARY bafl.lib
+LIBRARY fbscli.lib
+LIBRARY estor.lib
+LIBRARY ecom.lib
+LIBRARY	testframeworkclient.lib
+LIBRARY imageconversion.lib
+LIBRARY extendedplugin.lib
+LIBRARY caf.lib
+LIBRARY apgrfx.lib
+LIBRARY apmime.lib
+
+LIBRARY mmcommon.lib
+LIBRARY jpegimageframeplugin.lib
+
+#ifdef EABI
+DEFFILE TSU_ICL_FRM_01.def
+#endif
+
+#ifdef WINSCW
+DEFFILE TSU_ICL_FRM_01.DEF
+#endif
+
+NOSTRICTDEF
+
+SMPSAFE

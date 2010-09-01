@@ -1,0 +1,68 @@
+// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the Framework Extension Test Plugin
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include "TestUids.hrh"
+#include <icl/icl_uids.hrh>		// for KDecoderInterfaceUidValue, etc
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+
+#define CR 0x0D
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KTestFwExtDllValue;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestFwExtDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "FWTST";
+					default_data = {0x46, 0x57, 0x54, 0x53, 0x54}; // "FWTST"
+					opaque_data = {0x00, 0x10, 0x1F, 0x7B, 0xF7, 0, 0, 0, 0, 1, 0x2E, 0x66, 0x77, 0x74, 0x73, 0x74, CR, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x66, 0x77, 0x65, 0x78, 0x74, 0x2D, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x00000000 1 .fwtst 1 image/fwext-test
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = KEncoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTestFwExtEncoderImplementationUidValue;
+					version_no = 1;
+					display_name = "FWTST";
+					default_data = {0x46, 0x57, 0x54, 0x53, 0x54}; // "FWTST"
+					opaque_data = {0x00, 0x10, 0x1F, 0x7B, 0xF7, 0, 0, 0, 0, 1, 0x2E, 0x66, 0x77, 0x74, 0x73, 0x74, CR, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x66, 0x77, 0x65, 0x78, 0x74, 0x2D, 0x74, 0x65, 0x73, 0x74, CR};
+					// 0 0x101F7BF7 0x00000000 1 .fwtst 1 image/fwext-test
+					}
+				};
+			}
+		};
+	}
+
+

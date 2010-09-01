@@ -17,14 +17,14 @@
 PRJ_PLATFORMS
 DEFAULT
 
-PRJ_TESTMMPFILES
+PRJ_MMPFILES
 
 // ASR TEst 
 ../MmpFiles/TSU_MMF_ASRCL.mmp
 ../MmpFiles/CustomMmfASRController.mmp
 
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 
 // test scripts
 ../scripts/TSU_MMF_ASRCL.script 		c:/tsu_mmf_asrcl.script

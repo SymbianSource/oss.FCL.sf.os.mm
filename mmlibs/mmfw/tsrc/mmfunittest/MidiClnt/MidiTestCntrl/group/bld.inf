@@ -18,6 +18,6 @@
 
 PRJ_PLATFORMS
 
-PRJ_TESTMMPFILES
+PRJ_MMPFILES
 //MIDI
 ../MmpFiles/miditstcntrl.mmp

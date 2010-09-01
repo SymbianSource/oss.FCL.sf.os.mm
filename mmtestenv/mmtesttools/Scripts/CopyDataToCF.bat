@@ -617,7 +617,6 @@ copy %EPOCROOT%epoc32\data\c\AclntITestData\test2.raw 		%1\inttest\MMF\AclntITes
 copy %EPOCROOT%epoc32\data\c\AclntITestData\test3.raw 		%1\inttest\MMF\AclntITestData\test3.raw
 
 copy %EPOCROOT%epoc32\data\c\audio.ini	     		  %1\inttest\MMF\AclntITestData\audio.ini
-copy %EPOCROOT%epoc32\data\c\sdevsound_audio.ini	     		  %1\inttest\MMF\AclntITestData\sdevsound_audio.ini
 copy %EPOCROOT%epoc32\data\c\AclntITestData\Audio.content		%1\inttest\mmf\aclnt\Audio.content
 copy %EPOCROOT%epoc32\data\c\AclntITestData\Audio.contentrights	%1\inttest\mmf\aclnt\Audio.contentrights
 copy %EPOCROOT%epoc32\data\c\AclntITestData\AudioContentNoRights.content	%1\inttest\mmf\aclnt\AudioContentNoRights.content
@@ -859,6 +858,23 @@ copy %EPOCROOT%epoc32\data\c\mm\mdf\truepause\testingOut2.raw	%1\mm\mdf\truepaus
 copy %EPOCROOT%epoc32\data\c\mm\mdf\truepause\testingOut3.raw	%1\mm\mdf\truepause\testingOut3.raw
 REM #################################  END HWDEV TRUEPAUSE DATA  #########################################
 
+REM ################################# START OMXIL DATA ##################################
+mkdir %1\unittest\omxil\
+mkdir %1\unittest\omxil\testfiles\
+
+copy %EPOCROOT%epoc32\data\c\omxil\testfiles\*.*	                                        %1\unittest\omxil\testfiles\*.*
+
+mkdir %1\unittest\omxil\test\
+mkdir %1\unittest\omxil\aacdecoder\
+mkdir %1\unittest\omxil\common\
+mkdir %1\unittest\omxil\pcmrenderer\
+
+copy %EPOCROOT%epoc32\data\c\omxil\test\*.*		                                            %1\unittest\omxil\test\*.*
+copy %EPOCROOT%epoc32\data\c\omxil\aacdecoder\*.*		                                    %1\unittest\omxil\aacdecoder\*.*
+copy %EPOCROOT%epoc32\data\c\omxil\common\*.*		                                        %1\unittest\omxil\common\*.*
+copy %EPOCROOT%epoc32\data\c\omxil\pcmrenderer\*.*		                                    %1\unittest\omxil\pcmrenderer\*.*
+
+REM ################################ END OMXIL DATA ############################
 
 REM ################################ DevSubtitle data ##########################
 

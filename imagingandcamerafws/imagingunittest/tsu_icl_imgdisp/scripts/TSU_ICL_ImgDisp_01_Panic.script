@@ -1,0 +1,49 @@
+// Copyright (c) 2003-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Creation Date 23/12/2003
+// TSU_ICL_IMGDISP_01_PANIC 27/10/2004
+// 
+//
+
+PRINT Run all the ImageDisplay panic tests 
+PRINT 
+//PAUSE_AT_END
+
+//
+LOAD_SUITE TSU_ICL_ImgDisp_01.dll
+
+//! @SYMTestCaseID MM-ICL-IMGDISP-U-0001-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_ImgDisp_01, MM-ICL-IMGDISP-U-0001-HP ,ImageDisplay, 1
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGDISP-U-0002-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_ImgDisp_01, MM-ICL-IMGDISP-U-0002-HP ,ImageDisplay, 2
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGDISP-U-0003-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_ImgDisp_01, MM-ICL-IMGDISP-U-0003-HP ,ImageDisplay, 3
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGDISP-U-0004-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_ImgDisp_01, MM-ICL-IMGDISP-U-0004-HP ,ImageDisplay, 4
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-IMGDISP-U-0006-HP
+
+RUN_PANIC_STEP 5000000, TSU_ICL_ImgDisp_01, MM-ICL-IMGDISP-U-0006-HP ,ImageDisplay, 6
+TEST_COMPLETE 

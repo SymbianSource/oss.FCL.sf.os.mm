@@ -1,0 +1,101 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// bld.inf for TSU_ICL_MngImgDisp_01 - Mng ImageDisplay plug-in tests
+// 
+//
+
+PRJ_MMPFILES
+../mmpfiles/tsu_icl_MngImgDisp_01.mmp
+
+PRJ_EXPORTS
+
+// test scripts
+../scripts/TSU_ICL_MngImgDisp_01.script			c:/tsu_icl_mngimgdisp_01.script
+../scripts/TSU_ICL_MngImgDisp_01_ALLOC.script		c:/tsu_icl_mngimgdisp_01_alloc.script
+../scripts/TSU_ICL_MngImgDisp_01_Panic.script		c:/tsu_icl_mngimgdisp_01_panic.script
+../scripts/TSU_ICL_MngIclDecoder_01.script		c:/tsu_icl_mngicldecoder_01.script
+../scripts/TSU_ICL_MngIclDecoder_NoLoop.script		c:/tsu_icl_mngicldecoder_noloop.script
+../scripts/TSU_ICL_MngIclDecoder_01_Alloc.script	c:/tsu_icl_mngicldecoder_01_alloc.script
+
+../TestFiles/ref/digit_0.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_0.mbm
+../TestFiles/ref/digit_1.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_1.mbm
+../TestFiles/ref/digit_2.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_2.mbm
+../TestFiles/ref/digit_3.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_3.mbm
+../TestFiles/ref/digit_4.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_4.mbm
+../TestFiles/ref/digit_5.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_5.mbm
+../TestFiles/ref/digit_6.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_6.mbm
+../TestFiles/ref/digit_7.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_7.mbm
+../TestFiles/ref/digit_8.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_8.mbm
+../TestFiles/ref/digit_9.mbm  				c:/tsu_icl_mngimgdisp_01/ref/digit_9.mbm
+
+../TestFiles/ref/fram1_1.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_1.mbm
+../TestFiles/ref/fram1_2.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_2.mbm
+../TestFiles/ref/fram1_3.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_3.mbm
+../TestFiles/ref/fram1_4.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_4.mbm
+../TestFiles/ref/fram1_5.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_5.mbm
+../TestFiles/ref/fram1_6.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_6.mbm
+../TestFiles/ref/fram1_7.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_7.mbm
+../TestFiles/ref/fram1_8.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_8.mbm
+../TestFiles/ref/fram1_9.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram1_9.mbm
+
+../TestFiles/ref/fram3_black.mbm  			c:/tsu_icl_mngimgdisp_01/ref/fram3_black.mbm
+../TestFiles/ref/fram3_3.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_3.mbm
+../TestFiles/ref/fram3_4.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_4.mbm
+../TestFiles/ref/fram3_6.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_6.mbm
+../TestFiles/ref/fram3_7.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_7.mbm
+../TestFiles/ref/fram3_8.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_8.mbm
+../TestFiles/ref/fram3_10.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_10.mbm
+../TestFiles/ref/fram3_11.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_11.mbm
+../TestFiles/ref/fram3_12.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram3_12.mbm
+../TestFiles/ref/fram4_4.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram4_4.mbm
+../TestFiles/ref/fram4_6.mbm  				c:/tsu_icl_mngimgdisp_01/ref/fram4_6.mbm
+../TestFiles/ref/no_any_bg_frame_1.mbm 			c:/tsu_icl_mngimgdisp_01/ref/no_any_bg_frame_1.mbm
+../TestFiles/ref/no_any_bg_mask_1.mbm 			c:/tsu_icl_mngimgdisp_01/ref/no_any_bg_mask_1.mbm
+../TestFiles/ref/no_any_bg_frame_2.mbm 			c:/tsu_icl_mngimgdisp_01/ref/no_any_bg_frame_2.mbm
+../TestFiles/ref/no_any_bg_mask_2.mbm 			c:/tsu_icl_mngimgdisp_01/ref/no_any_bg_mask_2.mbm
+../TestFiles/ref/no_any_bg_frame_3.mbm 			c:/tsu_icl_mngimgdisp_01/ref/no_any_bg_frame_3.mbm
+../TestFiles/ref/no_any_bg_mask_3.mbm 			c:/tsu_icl_mngimgdisp_01/ref/no_any_bg_mask_3.mbm
+../TestFiles/ref/advisory_bg_frame_1.mbm 		c:/tsu_icl_mngimgdisp_01/ref/advisory_bg_frame_1.mbm
+../TestFiles/ref/advisory_bg_mask_1.mbm 		c:/tsu_icl_mngimgdisp_01/ref/advisory_bg_mask_1.mbm
+../TestFiles/ref/advisory_bg_frame_2.mbm 		c:/tsu_icl_mngimgdisp_01/ref/advisory_bg_frame_2.mbm
+../TestFiles/ref/advisory_bg_mask_2.mbm 		c:/tsu_icl_mngimgdisp_01/ref/advisory_bg_mask_2.mbm
+../TestFiles/ref/advisory_bg_frame_3.mbm 		c:/tsu_icl_mngimgdisp_01/ref/advisory_bg_frame_3.mbm
+../TestFiles/ref/advisory_bg_mask_3.mbm 		c:/tsu_icl_mngimgdisp_01/ref/advisory_bg_mask_3.mbm
+
+../TestFiles/ref/subframes_frame_1.mbm                  c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_1.mbm
+../TestFiles/ref/subframes_mask_1.mbm			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_1.mbm
+
+../TestFiles/ref/subframes_frame_2.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_2.mbm
+../TestFiles/ref/subframes_mask_2.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_2.mbm
+
+../TestFiles/ref/subframes_frame_3.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_3.mbm
+../TestFiles/ref/subframes_mask_3.mbm			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_3.mbm
+
+../TestFiles/ref/subframes_frame_4.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_4.mbm
+../TestFiles/ref/subframes_mask_4.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_4.mbm
+
+../TestFiles/ref/subframes_frame_5.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_5.mbm
+../TestFiles/ref/subframes_mask_5.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_5.mbm
+
+../TestFiles/ref/subframes_frame_6.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_6.mbm
+../TestFiles/ref/subframes_mask_6.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_6.mbm
+
+../TestFiles/ref/subframes_frame_7.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_frame_7.mbm
+../TestFiles/ref/subframes_mask_7.mbm 			c:/tsu_icl_mngimgdisp_01/ref/subframes_mask_7.mbm
+
+../TestFiles/ref/flag3col.mbm            		c:/tsu_icl_mngimgdisp_01/ref/flag3col.mbm
+// .iby
+../inc/tsu_icl_MngImgDisp_01.iby	/epoc32/rom/include/tsu_icl_mngimgdisp_01.iby
+
+

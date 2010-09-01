@@ -1,0 +1,257 @@
+//
+// Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0" 
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+//
+PRINT Run all te_tsi_icl_cod_5a Suite Tests
+
+LOAD_SUITE te_tsi_icl_cod_5aSuite
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0001 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0001
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45CB (MBM decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MBM_SINGLEFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0001 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0002 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0002
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45B2 (GIF decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini GIF_SINGLEFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0002 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0003 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0003
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45C8 (PNG decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini PNG_SINGLEFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0003 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0004 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0004
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45B6 (WMF decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini WMF_SINGLEFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0004 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0005 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0005
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45D4 (ICO decoder).
+//!						2. Create a bitmap based on the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini ICO_SINGLEFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0005 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0006 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0006
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single scaled EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45D4 (ICO decoder).
+//!						2. Create a bitmap based on the half the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini ICO_SINGLEFRAME_TRANSPARENCY_SCALE_1_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0006 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0007 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0007
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single scaled EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45D4 (ICO decoder).
+//!						2. Create a bitmap based on quarter the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini ICO_SINGLEFRAME_TRANSPARENCY_SCALE_2_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0007 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0008 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0008
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode a single frame source image into a single scaled EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45D4 (ICO decoder).
+//!						2. Create a bitmap based on eighth the size of the source file.
+//!						3. Decode the source file into a 16MA destination CFbsBitmap.
+//!						4. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_50aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini ICO_SINGLEFRAME_TRANSPARENCY_SCALE_3_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0008 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0009 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0009
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode all frames of a multiple frame source image into a separate, single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45B2 (GIF decoder).
+//!						2. Create a bitmap based on the size of the source frame.
+//!						3. Decode the frame of the source file into a 16MA destination CFbsBitmap.
+//!						4. The test decodes frame 0, then frame 0 and 1, then frame 0, 1 and 2 until all frames are decoded.
+//!						5. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_51aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini GIF_MULTIFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0009 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0010 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0010
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode all frames of a multiple frame source image into a separate, single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x101F45D4 (ICO decoder).
+//!						2. Create a bitmap based on the size of the source frame.
+//!						3. Decode the frame of the source file into a 16MA destination CFbsBitmap.
+//!						4. The test decodes frame 0, then frame 0 and 1, then frame 0, 1 and 2 until all frames are decoded.
+//!						5. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_51aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini ICO_MULTIFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0010 
+
+START_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0011 
+//!@SYMTestCaseID		MM-TSI-ICL-COD-05-ALLOC-0011
+//!@SYMTestCaseDesc		Positive: Alloc test - Decode all frames of a multiple frame source image into a separate, single EColor16MA CFbsBitmap.
+//!@SYMTestType			CIT
+//!@SYMTestPriority		Critical
+//!@SYMPREQ				1928
+//!@SYMREQ				10266, 10265, 10264, 10263, 10261, 10260, 10259
+//!@SYMAPI				CImageDecoder::FileNewL
+//!@SYMAPI				CImageDecoder::FrameInfo
+//!@SYMAPI				CFbsBitmap::Create
+//!@SYMAPI				CImageDecoder::Convert
+//!@SYMTestStatus		Implemented
+//!@SYMTestActions		1. Create an image decoder using the implementation UID 0x10273738 (MNG decoder).
+//!						2. Create a bitmap based on the size of the source frame.
+//!						3. Decode the frame of the source file into a 16MA destination CFbsBitmap.
+//!						4. The test decodes frame 0, then frame 0 and 1, then frame 0, 1 and 2 until all frames are decoded.
+//!						5. The above operations are carried out on an incremental heap cell allocation failure basis.
+//!@SYMTestExpectedResults	The test should complete with no alloc panics.
+
+RUN_TEST_STEP 200 te_tsi_icl_cod_5aSuite tsi_icl_cod_51aStep c:\testdata\configs\te_tsi_icl_cod_5Suite.ini MNG_MULTIFRAME_TRANSPARENCY_ALLOC_TEST
+END_TESTCASE  MM-TSI-ICL-COD-05-ALLOC-0011 
+
+PRINT Complate_te_tsi_icl_cod_5a_Tests
+

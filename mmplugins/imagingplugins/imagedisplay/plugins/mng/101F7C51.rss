@@ -1,0 +1,67 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the image display MNG plugin
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include <icl/icl_uids.hrh>
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+#include <icl/imagedisplay.hrh>
+#include <icl/mngimagedisplay.hrh>
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KUidImageDisplayMngPluginDll;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KUidDisplayInterface;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidImageDisplayMngPluginImplUid;
+					version_no = 1;
+					display_name = "Mng";
+					default_data = {0x8a,  0x4d,  0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a}; // "\212MNG\r\n\032\n"
+					//           version, flags,     ImageTypeUid ImageSubTypeUid FileSuffixNum, FileSuffix, MimeTypeNum, MimeType
+  					//             1,       0002,    0x101F7C53 (KImageTypeMNGUid) 0x00000000 1 .mng 1 image/mng
+  					opaque_data = {1,    0x00, 0x02, 0x10, 0x1F, 0x7c, 0x53, 0, 0, 0, 0, 1, 0x2E, 0x6d, 0x6e, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6d, 0x6e, 0x67, 0x0D};
+					}
+				};
+			},
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidIclMngPluginImplUid;
+					version_no = 1;
+					display_name = "Mng";
+					default_data = {0x8a,  0x4d,  0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a}; // "\212MNG\r\n\032\n"
+					opaque_data = {2, 0, 0, 0x10, 0x1F, 0x7c, 0x53, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0x2E, 0x6d, 0x6e, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6d, 0x6e, 0x67, 0x0D, 1, 0x10, 0x27, 0x37, 0xFB};
+					// 2 0x0000 0x101F7C53 (KImageTypeMNGUid) 0x00000000 0x00000000 1 .mng 1 image/mng 1 KSwCodecUidValue
+					}
+				};
+			}
+		};
+	}
+

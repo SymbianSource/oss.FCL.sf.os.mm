@@ -29,10 +29,6 @@ enum TSoundAdapterPanicCodes
 	{
 	EDeviceNotOpened,
 	EPanicPartialBufferConverterNotSupported,
-	EBadState,
-	ENoClientPlayRequest,
-	EFifoEmpty,
-	EFifoFull
 	};
 	
 //Structure used to map samples per second to the corresponding enums in RSoundSc
@@ -325,28 +321,23 @@ const TLinearToDbTable KLinerToDbConstantLookup[] =
 							{255,254}
 						};
 
-// Total Number of sample rates
-const TUint KNumSampleRates = 9;
-// Number of shared chunk buffers used for playing
-// Each buffer is permanently mapped, via an index number, to a particular buffer in the chunk
-// The esoundsc.ldd can only handle a max of 8 pending play requests, therefore no point in having
-// more than 8 play buffers...
-const TUint KPlaySharedChunkBuffers = 8;
-// Size of RSoundSc play buffers
-const TUint KPlaySharedChunkBufferSize = 4096;
-
+//Total Number of sample rates
+const TInt KNumSampleRates = 9;
+//Number of shared chunk buffers used for playing
+const TInt KPlayMaxSharedChunkBuffers = 2;
+const TInt KPlayMaxSharedChunkBuffersMask = KPlayMaxSharedChunkBuffers-1; // use for % KPlayMaxSharedChunkBuffers
 //Number of shared chunk buffers used for recording
-const TUint KRecordMaxSharedChunkBuffers = 8;
-// Size of RSoundSc record buffers
-const TUint KRecordSharedChunkBufferSize = 4096;
-
+const TInt KRecordMaxSharedChunkBuffers = 3;
+//we need to two players for playing and one is sufficient for recording
+const TInt KNumPlayers = 2;
+const TInt KNumPlayersMask = KNumPlayers-1; // & KNumPlayersMask is equiv to % KNumPlayers
 //Shared chunk driver does not support max. buffer size. 16K is given in order to simulate the old driver behavior.
-const TUint KMaxBufferSize = 0x4000;
+const TInt KMaxBufferSize = 0x4000;
 
 class TPlaySharedChunkBufConfig : public TSharedChunkBufConfigBase
 	{
 public:
-	TInt iBufferOffsetList[KPlaySharedChunkBuffers];
+	TInt iBufferOffsetList[KPlayMaxSharedChunkBuffers];
 	};
 
 class TRecordSharedChunkBufConfig : public TSharedChunkBufConfigBase
@@ -356,83 +347,6 @@ public:
 	};
 	
 class CChannelAndSampleRateConverter; // forward dec
-
-GLDEF_C void Panic(TSoundAdapterPanicCodes aPanicCode);//forward declaration
-
-// RFifo class which manages a fifo of up to COUNT items of type T
-template<typename T, TUint32 COUNT> class RFifo
-	{
-public:
-	RFifo()
-		: iWriteIndex(0), iReadIndex(0)
-		{}
-	TBool IsEmpty() const
-		{
-		return iWriteIndex == iReadIndex;
-		}
-	TBool IsFull() const
-		{
-		// Full if writing one more item would make iWriteIndex equal to iReadIndex
-		TUint32 next = NextIndex(iWriteIndex);
-		return next == iReadIndex;
-		}
-	/// Push item into FIFO. Does not take ownership. Will PANIC with EFifoFull if full.
-	void Push(const T &aItem)
-		{
-		if(IsFull())
-			{
-			Panic(EFifoFull);
-			}
-		iFifo[iWriteIndex] = aItem;
-		iWriteIndex = NextIndex(iWriteIndex);
-		}
-    /// Pop item from FIFO. Will PANIC with EFifoEmpty if empty 
-	T Pop()
-		{
-		if(IsEmpty())
-			{
-			Panic(EFifoEmpty);
-			}
-		TUint32 tmp = iReadIndex;
-		iReadIndex = NextIndex(iReadIndex);
-		return iFifo[tmp];
-		}
-
-    /// Peek first item from FIFO. Will PANIC with EFifoEmpty if empty 
-	T Peek()
-		{
-		if(IsEmpty())
-			{
-			Panic(EFifoEmpty);
-			}
-		return iFifo[iReadIndex];
-		}
-	TUint Length() const
-		{
-		TUint len;
-		if(iWriteIndex >= iReadIndex)
-			{
-			len = iWriteIndex - iReadIndex;
-			}
-		else
-			{
-			len =  COUNT+1 - (iReadIndex - iWriteIndex);
-			}
-		return len;
-		}
-private:
-	TUint32 NextIndex(TUint32 aIndex) const
-		{
-		++aIndex;
-		aIndex %= (COUNT+1);
-		return aIndex;
-		}
-	T iFifo[COUNT+1];
-	TUint32 iWriteIndex;
-	TUint32 iReadIndex;
-	};
-
-
 
 //Body class for the adapter
 NONSHARABLE_CLASS( RMdaDevSound::CBody ): public CBase
@@ -447,58 +361,27 @@ public:
 		void RunL();
 		TInt RunError(TInt aError);
 		void DoCancel();
-		void PlayData(TUint aChunkOffset, TInt aLength);
-
-		TUint GetPlayerIndex() const;
-
-	private:		
-		RMdaDevSound::CBody& iParent;
-		const TUint iIndex; // index of this object in parent
-		
-		TInt iBufferOffset;
-		TInt iBufferLength;
-		};
-
-	
-	NONSHARABLE_CLASS( CRecorder ) : public CActive
-		{
-	public:
-		explicit CRecorder(TInt aPriority, RMdaDevSound::CBody& aParent);
-		~CRecorder();
-		void RunL();
-		TInt RunError(TInt aError);
-		void DoCancel();
 		void RecordData(TInt& aLength);
-
-	private:		
+		void PlayData(TInt aBufferOffset, TInt aBufferLength);
+		void Stop();
+		void ResetPlayer();
+		void PlaySoundDevice();
+	private:
 		RMdaDevSound::CBody& iParent;
-
+		const TInt iIndex; // index of this object in parent
+		TBool iRequestPending;
 		TInt iBufferOffset;
 		TInt iBufferLength;
 		};
 	
-	enum TStateEnum
+	enum TState
 		{
 		ENotReady,
-		EStopped,
-		ERecording,
-		ERecordingPausedInHw,
-		ERecordingPausedInSw,
+		EOpened,
 		EPlaying,
-		EPlayingPausedInHw, // ie. Play request pending on h/w and paused
-		EPlayingPausedInSw, // ie. Driver not playing or paused
-		EPlayingUnderrun
-		};
-
-	NONSHARABLE_CLASS( TState )
-		{
-		public:
-			TState(TStateEnum aState) : iState(aState) {}
-			const TText8 *Name() const;
-			TState &operator=(TStateEnum aNewState);
-			operator TStateEnum() const { return iState; }
-		private:
-			TStateEnum iState;
+		ERecording,
+		EPlayBuffersFlushed,
+		EPaused
 		};
 		
 	class TFormatData
@@ -559,55 +442,40 @@ public:
 	
 	//for players
 	void SoundDeviceError(TInt aError);
+	void SoundDeviceError(TInt aError, TInt aPlayerIndex);
 	RSoundSc& PlaySoundDevice();
 	RSoundSc& RecordSoundDevice();
-	const TState &State() const;
+	TState State();
 	void BufferFilled(TInt aError);
-
-	// Called whenever a player becomes inactive.
-	// This includes driver request ok, driver request failed, CPlayer:::RunError invoked.
-	void PlayRequestHasCompleted(CPlayer *aPlayer, TInt aStatus, TBool aDueToCancelCommand);
+	void BufferEmptied();
+	void PlayCancelled();
+	void UpdateTimeAndBytesPlayed();
+	TBool TimerActive();
+	TBool FlushCalledDuringPause();
 
 private:
 	CBody();
 	void ConstructL();
 	
 	TInt NegotiateFormat(const TCurrentSoundFormatBuf& aFormat, RSoundSc& aDevice, TFormatData &aFormatData);
-
-	void StartPlayersAndUpdateState();
-	void StartRecordRequest();
-
-	const char *StateName() const;
-
-	TBool InRecordMode() const;
-	TBool InPlayMode() const;
-
-	TUint32 CurrentTimeInMsec() const;
-	TUint64 BytesPlayed64();
-
 private:
 	RSoundSc iPlaySoundDevice;
-	RChunk iPlayChunk;//handle to the shared chunk
 	RSoundSc iRecordSoundDevice;
-	RChunk iRecordChunk;//handle to the shared chunk
+	RChunk iChunk;//handle to the shared chunk
 	TState iState;
-
+	CPlayer* iPlayers[KNumPlayers];//we need atleast two players for playing and one for recording
+	
 	//Playing Properties
-	TPlaySharedChunkBufConfig iPlayBufferConfig;
+	TPlaySharedChunkBufConfig iBufferConfig;
+	TInt iBufferIndex;
+	TInt iCurrentPlayer;
 	TInt iDeviceBufferLength;
-	
 	//Stores the status of CDataPathPlayer
-	TRequestStatus* iClientPlayStatus;
-	TPtrC8 iClientPlayData;
+	TRequestStatus* iPlayerStatus;
 	//Stores the status of CSoundDevPlayErrorReceiver
-	TRequestStatus* iClientPlayErrorStatus;
-	RBuf8 iConvertedPlayData;
-	RBuf8 iSavedTrailingData;
-
-	CPlayer* iPlayers[KPlaySharedChunkBuffers];
-	RFifo<CPlayer *, KPlaySharedChunkBuffers> iFreePlayers;
-	RFifo<TUint32, KPlaySharedChunkBuffers> iActivePlayRequestSizes;
-	
+	TRequestStatus* iPlayErrorStatus;
+	RBuf8 iBufferRemaining;
+	TBool iHaveSecondPhaseData;
 	TInt iRequestMinSize;
 	TUint iRequestMinMask;
 	
@@ -615,25 +483,23 @@ private:
 	TRecordSharedChunkBufConfig iRecordBufferConfig;
 	TInt iBufferOffset;
 	TInt iBufferLength;
-
+	TPtrC8 iSecondPhaseData;
 	//Stores the status of CDataPathRecorder
-	TRequestStatus* iClientRecordStatus;
+	TRequestStatus* iRecorderStatus;
 	//Stores the status of CSoundDevRecordErrorReceiver
-	TRequestStatus* iClientRecordErrorStatus;
-	TDes8* iClientRecordData;//stores the data pointer from datapath recorder
-	RBuf8 iBufferedRecordData; // Used if RSoundSc returns more data than current client request requires.
+	TRequestStatus* iRecordErrorStatus;
+	TDes8* iData;//stores the data pointer from datapath recorder
+	TInt iBytesPlayed;
+#ifdef SYMBIAN_SOUNDADAPTER_BYTESPLAYED
+	TInt iFCFrequency;
+#endif
+	TUint32 iStartTime;
+	TBool iTimerActive;
+	TBool iFlushCalledDuringPause;
+	TBool iPauseDeviceDriverOnNewData;
 
-	CRecorder* iRecorder; // We only need one recorder. The driver will buffer data for us.
-
-	TBool iUnderFlowReportedSinceLastPlayOrRecordRequest;
-	
-	TUint64 iBytesPlayed;
-	TUint32 iNTickPeriodInUsec;
-	TUint32 iStartTime; // Time when previous driver PlayData completed (or first was issued) in msec
-	TUint32 iPauseTime; // Time when pause started in msec
-	TUint64 iPausedBytesPlayed;
-
-	TFormatData iPlayFormatData;
-	TFormatData iRecordFormatData;
+	TFormatData iPlayData;
+	TFormatData iRecordData;
 	};
+GLDEF_C void Panic(TSoundAdapterPanicCodes aPanicCode);//forward declaration
 #endif

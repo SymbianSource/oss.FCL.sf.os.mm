@@ -2332,6 +2332,7 @@ TInt CNGAPostProcHwDevice::AddHints()
    err = iSurfaceHandler->AddSurfaceHint(iSurfaceId,iHint);
    if(err == KErrAlreadyExists)
    {
+		err = KErrNone;
 		err = iSurfaceHandler->SetSurfaceHint(iSurfaceId,iHint);
    }
    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AddHints. err = %d --"), this,err);
@@ -2341,21 +2342,10 @@ TInt CNGAPostProcHwDevice::AddHints()
    err = iSurfaceHandler->AddSurfaceHint(iSurfaceId,iHint);
    if(err == KErrAlreadyExists)
    {
+		err = KErrNone;
 		err = iSurfaceHandler->SetSurfaceHint(iSurfaceId,iHint);
    }
    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AddHints. err = %d --"), this,err);
-   if(iUsingExternalSurface)
-   {
-   		iHint.iKey.iUid = surfaceHints::KSurfaceCharacteristics;
-   		iHint.iValue = surfaceHints::ENotPersistable;
-   		iHint.iMutable = ETrue;
-	    err = iSurfaceHandler->AddSurfaceHint(iSurfaceId,iHint);
-	    if(err == KErrAlreadyExists)
-	    {
-			err = iSurfaceHandler->SetSurfaceHint(iSurfaceId,iHint);
-	    }
-	    PP_DEBUG(_L("CNGAPostProcHwDevice[%x]:AddHints. err = %d --"), this,err);
-	}
    return err;
 }
 

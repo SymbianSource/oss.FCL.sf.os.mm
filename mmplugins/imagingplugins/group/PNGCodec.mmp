@@ -1,0 +1,71 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// pngcodec.dll PNG codec plugin
+// 
+//
+
+/**
+ @file
+*/
+
+target pngcodec.dll
+CAPABILITY ALL -TCB
+targettype plugin
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID	0x10009D8D 0x101F45C7
+VENDORID 0x70000001
+
+USERINCLUDE	../codecs/PNGCodec
+USERINCLUDE	../../../imagingandcamerafws/imagingfws/inc
+USERINCLUDE	../../../imagingandcamerafws/imagingfws/src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	../codecs/PNGCodec
+SOURCE		PNGCodec.cpp
+SOURCE		PNGConvert.cpp
+SOURCE		PngScanlineDecoder.cpp
+SOURCE		PngScanlineEncoder.cpp
+SOURCE		PNGProxy.cpp
+SOURCE		PngDecoderFactory.cpp 
+
+start resource 101F45C7.rss
+target pngcodec.rsc
+end
+
+START RESOURCE 101F45C7_extra.rss
+targetpath resource/icl
+header
+END
+
+LIBRARY	euser.lib
+LIBRARY	gdi.lib
+LIBRARY	fbscli.lib
+LIBRARY	ezlib.lib
+LIBRARY bafl.lib
+LIBRARY	imageconversion.lib
+LIBRARY	ecom.lib
+
+START	WINS
+//BASEADDRESS	0x4F620000
+END
+#ifdef EABI
+// this is used to ensure "best perfomance" compilation options
+ALWAYS_BUILD_AS_ARM
+OPTION ARMCC -Otime
+OPTION_REPLACE ARMCC -O2 -O3
+#endif
+
+SMPSAFE

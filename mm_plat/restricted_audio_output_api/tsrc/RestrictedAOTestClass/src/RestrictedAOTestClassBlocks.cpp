@@ -21,7 +21,6 @@
 #include <e32svr.h>
 #include <StifParser.h>
 #include <Stiftestinterface.h>
-#include <RestrictedAudioOutputProxy.h>
 #include "RestrictedAOTestClass.h"
 #include "debug.h"
 
@@ -104,6 +103,12 @@ void CRestrictedAOTestClass::Delete()
         delete iDevSound;
         iDevSound = NULL;
         }
+
+    if (iFactory)
+   	{
+			delete iFactory;
+ iFactory = NULL;
+		}
 REComSession::FinalClose();
 
 }
@@ -123,8 +128,8 @@ TInt CRestrictedAOTestClass::RunMethodL(
         // First string is the function name used in TestScripter script file.
         // Second is the actual implementation member function.
 
-		ENTRY( "CreateFactory", CRestrictedAOTestClass::CreateFactory ),
-		ENTRY( "CreateRestrictedAO", CRestrictedAOTestClass::CreateRestrictedAO ),
+				ENTRY( "CreateFactory", CRestrictedAOTestClass::CreateFactory ),
+				ENTRY( "CreateRestrictedAO", CRestrictedAOTestClass::CreateRestrictedAO ),
         ENTRY( "AppendAllowedOutput", CRestrictedAOTestClass::AppendAllowedOutput ),
         ENTRY( "RemoveAllowedOutput", CRestrictedAOTestClass::RemoveAllowedOutput ),
         ENTRY( "GetAllowedOutputCount", CRestrictedAOTestClass::GetAllowedOutputCount ),
@@ -764,7 +769,10 @@ TInt CRestrictedAOTestClass::CreateFactory( CStifItemParser& /*aItem */)
 	iLog->Log(_L("CRestrictedAOTestClass::CreateFactory"));
 	TInt error = KErrNone;
 
-	TRAP(error, iDevSound = CMMFDevSound::NewL()) ;
+	error = CConfigurationComponentsFactory::CreateFactoryL(iFactory);
+
+	if (error == KErrNone)
+		TRAP(error, iDevSound = CMMFDevSound::NewL()) ;
 //	AddExpectedEvent(EInitializeComplete, KMediumTimeout);
 
 	return error;
@@ -781,9 +789,9 @@ TInt CRestrictedAOTestClass::CreateRestrictedAO( CStifItemParser& /*aItem */)
 	iLog->Log(_L("CRestrictedAOTestClass::CreateRestrictedAO"));
 	TInt error = KErrNone;
 
-	if (iDevSound != NULL)
+	if (iFactory != NULL && iDevSound != NULL)
 	{
-            TRAP(error, iRestrictedAudioOutput = CRestrictedAudioOutputProxy::NewL(*iDevSound));
+			error = iFactory->CreateRestrictedAudioOutput(*iDevSound, iRestrictedAudioOutput);
 	}
 	else
 	{

@@ -1,0 +1,70 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the TIFF Bitmap Decoder Implementation
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include <icl/icl_uids.hrh>
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KTIFFCodecDllUidValue;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTIFFDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "TIFF";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {2, 0x00, 0x00, 0x10, 0x1F, 0x45, 0xC4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0x2E, 0x74, 0x69, 0x66, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F,0x74, 0x69, 0x66, 0x66, 0x0D, 2, 0x10, 0x27, 0x37, 0xFB, 0x10, 0x27, 0x38, 0x10};
+					// 2 0x0000 0x101F45C4 0x00000000 0x00000000 1 .tif 1 image/tiff 2 KSwCodecUidValue KDecodeToReducedSizeSupportUidValue
+					},
+
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTIFFDecoderLittleEndianImplementationUidValue;
+					version_no = 1;
+					display_name = "TIFF Little Endian";
+					default_data = {0x49, 0x49, 0x2A, 0x00};
+					opaque_data = {2, 0x00, 0x01, 0x10, 0x1F, 0x45, 0xC4, 0x10, 0x1F, 0x45, 0xC5, 0, 0, 0, 0, 1, 0x2E, 0x74, 0x69, 0x66, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F,0x74, 0x69, 0x66, 0x66, 0x0D, 2, 0x10, 0x27, 0x37, 0xFB, 0x10, 0x27, 0x38, 0x10};
+					// 2 0x0001 0x101F45C4 0x101F45C5 0x00000000 1 .tif 1 image/tiff 2 KSwCodecUidValue KDecodeToReducedSizeSupportUidValue
+					},
+
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KTIFFDecoderBigEndianImplementationUidValue;
+					version_no = 1;
+					display_name = "TIFF Big Endian";
+					default_data = {0x4D, 0x4D, 0x00, 0x2A};
+					opaque_data = {2, 0x00, 0x01, 0x10, 0x1F, 0x45, 0xC4, 0x10, 0x1F, 0x45, 0xC6, 0, 0, 0, 0, 1, 0x2E, 0x74, 0x69, 0x66, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F,0x74, 0x69, 0x66, 0x66, 0x0D, 2, 0x10, 0x27, 0x37, 0xFB, 0x10, 0x27, 0x38, 0x10};
+					// 2 0x0001 0x101F45C4 0x101F45C6 0x00000000 1 .tif 1 image/tiff 2 KSwCodecUidValue KDecodeToReducedSizeSupportUidValue
+					}
+
+
+				};
+			}
+		};
+	}
+

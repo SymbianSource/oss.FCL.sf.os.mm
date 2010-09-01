@@ -41,21 +41,10 @@
 class MAudioSettingsObserver
     {
 public:
-    enum TGASEventId
-        {
-          EGASWarningTones,
-          EGASMessageTones,
-          EGASSilentProfile,
-          EGASVibra,
-          EGASMessageToneName,
-          EGASEmailToneName,
-          EGASRingingType,
-          EGASVideoCallToneName,
-          EGASRingingTone1Name,
-          EGASRingingTone2Name,
-          EGASKeyPadVolume,
-          EGASSilenceMode
-        };
+    static const TUint KWarningTones = 1;
+    static const TUint KMessageTones = 2;
+    static const TUint KSilentProfile = 3;
+    static const TUint KVibra = 4;
 
 public:
     /**
@@ -66,7 +55,7 @@ public:
     *   which invoked the callback.
     * @param aSetting Specific id of the audio setting that changed.
     */
-    virtual void SettingsChanged(CGlobalAudioSettings& aGlobalAudioSettings, TGASEventId aSetting) = 0;
+    virtual void SettingsChanged(CGlobalAudioSettings& aGlobalAudioSettings, TUint aSetting) = 0;
     };
 
 #endif      // MGLOBALAUDIOSETTINGSOBSERVER_H

@@ -40,6 +40,10 @@ runMMFGefUnitTests.bat
 runMMFAclntDRMUnitTests.bat
 runMMFSrsSnkUnitTests.bat
 runMMFOggctrlUnitTests.bat
+runmilifunittests.bat
+runomxilcomppcmrendererunittests.bat
+runomxilcontentpipeunittests.bat
+runomxilcoreconftests.bat
 runMMFSecureDrmUnitTests.bat
 runmmfaclntsecuredrmunittests.bat
 REM run runmmfvideorendererunittests.bat if SYMBIAN_GRAPHICS_USE_GCE is enabled

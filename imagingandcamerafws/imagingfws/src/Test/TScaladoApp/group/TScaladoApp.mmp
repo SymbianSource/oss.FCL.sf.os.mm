@@ -1,0 +1,41 @@
+// Copyright (c) 2008-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Name		: TScaladoApp.mmp
+// Author	  : 
+// This is the project specification file for TScaladoApp.
+// 
+//
+
+TARGET		  TScaladoApp.exe
+TARGETTYPE	  exe
+UID			 0 0xEDF100C8
+
+USERINCLUDE	 ..\inc
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	  ..\src
+SOURCE		  TScaladoApp.cpp
+
+LIBRARY		euser.lib
+LIBRARY		ecom.lib
+LIBRARY		efsrv.lib
+LIBRARY		capsimageprocessorextension.lib
+LIBRARY		imageprocessor.lib
+
+#ifdef ENABLE_ABIV2_MODE
+  DEBUGGABLE
+#endif
+
+SMPSAFE

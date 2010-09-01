@@ -1,0 +1,61 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// icocodec.dll ICO codec plugin
+// 
+//
+
+/**
+ @file
+*/
+
+target icocodec.dll
+CAPABILITY ALL -TCB
+targettype plugin
+
+// ECom Dll recognition UID followed by the unique UID for this dll
+UID	0x10009D8D 0x101F45D3
+VENDORID 0x70000001
+
+USERINCLUDE	../codecs/ICOCodec
+USERINCLUDE	../../../imagingandcamerafws/imagingfws/inc
+USERINCLUDE	../../../imagingandcamerafws/imagingfws/src
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+SOURCEPATH	../codecs/ICOCodec
+SOURCE		ICOCodec.cpp
+SOURCE		ICOConvert.cpp
+SOURCE		ICOProxy.cpp
+SOURCE		icomaskprocessor.cpp
+
+start resource 101F45D3.rss
+target icocodec.rsc
+end
+
+START RESOURCE 101F45D3_extra.rss
+targetpath resource/icl
+header
+END
+
+LIBRARY	euser.lib
+LIBRARY bafl.lib
+LIBRARY	imageconversion.lib
+LIBRARY	fbscli.lib
+LIBRARY gdi.lib
+
+START	WINS
+//BASEADDRESS	0x4F640000
+END
+
+SMPSAFE

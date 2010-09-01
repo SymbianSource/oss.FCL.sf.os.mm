@@ -1,0 +1,3 @@
+EXPORTS
+	?NewTestSuiteMngImageDisplay@@YAPAVCTestSuiteMngImageDisplay@@XZ @ 1 NONAME ; class CTestSuiteMngImageDisplay * __cdecl NewTestSuiteMngImageDisplay(void)
+

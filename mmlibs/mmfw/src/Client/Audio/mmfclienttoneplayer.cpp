@@ -860,7 +860,7 @@ void CMMFMdaAudioToneUtility::PrepareToPlayFixedSequence(TInt aSequenceNumber)
 
 void CMMFMdaAudioToneUtility::CancelPrepare()
 	{
-	// xxx - do we need to cancel the callback?  What if the callback is actually calling back another error?  Probably best not to cancel...
+	// FIXME - do we need to cancel the callback?  What if the callback is actually calling back another error?  Probably best not to cancel...
 	delete iToneConfig;
 	iToneConfig = NULL;
 
@@ -1037,7 +1037,10 @@ void CMMFMdaAudioToneUtility::PlayAfterInitialized()
 		}
 	else
 		{
-		iAsyncCallback->MatoPlayStarted(KErrNone);
+        if(iPlayStartObserver)
+            {
+            iAsyncCallback->MatoPlayStarted(KErrNone);
+            }
 		}
 	}
 	
@@ -1139,12 +1142,15 @@ void CMMFMdaAudioToneObserverCallback::MatoPrepareComplete(TInt aError)
 
 void CMMFMdaAudioToneObserverCallback::MatoPlayComplete(TInt aError)
 	{
-	iAction = EPlayComplete;
-	iErrorCode = aError;
-
-	TRequestStatus* s = &iStatus;
-	SetActive();
-	User::RequestComplete(s, KErrNone);
+    if(!IsActive())
+        {
+        iAction = EPlayComplete;
+        iErrorCode = aError;
+        
+        TRequestStatus* s = &iStatus;
+        SetActive();
+        User::RequestComplete(s, KErrNone);
+        }
 	}
 
 void CMMFMdaAudioToneObserverCallback::MatoPlayStarted(TInt aError)

@@ -1,0 +1,44 @@
+// Copyright (c) 2003-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Creation Date 23/12/2003
+// TSU_MMF_GSCAL_01 23/12/2003
+// 
+//
+
+PRINT Run all the GifScaler alloc tests 
+PRINT 
+//PAUSE_AT_END
+
+//
+LOAD_SUITE TSU_ICL_GSCAL_01.dll
+
+//! @SYMTestCaseID MM-ICL-GSCAL-U-101-HP
+
+RUN_TEST_STEP 20000, TSU_ICL_GSCAL_01, MM-ICL-GSCAL-U-101-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-GSCAL-U-102-HP
+
+RUN_TEST_STEP 20000, TSU_ICL_GSCAL_01, MM-ICL-GSCAL-U-102-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-GSCAL-U-103-HP
+
+RUN_TEST_STEP 20000, TSU_ICL_GSCAL_01, MM-ICL-GSCAL-U-103-HP
+TEST_COMPLETE 
+
+//! @SYMTestCaseID MM-ICL-GSCAL-U-104-HP
+
+RUN_TEST_STEP 50000, TSU_ICL_GSCAL_01, MM-ICL-GSCAL-U-104-HP
+TEST_COMPLETE 

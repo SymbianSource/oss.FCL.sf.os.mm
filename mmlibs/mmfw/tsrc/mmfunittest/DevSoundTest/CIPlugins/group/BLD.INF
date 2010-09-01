@@ -15,7 +15,7 @@
 // 
 //
 
-PRJ_TESTMMPFILES
+PRJ_MMPFILES
 ../mmpfiles/devsoundciutestdevices.mmp
 ../mmpfiles/tsu_mmf_devsound_ciu.mmp
 
@@ -25,7 +25,7 @@ PRJ_TESTMMPFILES
 #endif
 
 
-PRJ_TESTEXPORTS
+PRJ_EXPORTS
 // test scripts
 ../scripts/tsu_mmf_devsound_ciu.script	c:/tsu_mmf_devsound_ciu.script
 

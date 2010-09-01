@@ -956,9 +956,9 @@ TVerdict CTestStep_MMF_BASECL_U_0121::DoTestStepL( void )
 	 delete mmfTransferBuffer;
 
  
-	 /*XXX This test does not use the full heap count test
+	 /* This test does not use the full heap count test
 	 * this should not matter as a CMMFTransferBuffer NewL() only makes a single heap allocation
-	 * I could not get the full test working - see commented below
+	 * I could not get the full test working - see commented out below
 	 * but the problem was with the transfer buffer tester client/server  -not
 	 * with the CMMFTransfeBuffer alloction - which I could not get to work */
 

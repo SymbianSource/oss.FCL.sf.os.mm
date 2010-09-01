@@ -1,0 +1,9 @@
+EXPORTS
+	_ZN25CTestTransformerExtension4NewLEP20CTestTransformerBase @ 1 NONAME
+	_ZN25CTestTransformerExtensionC1EP20CTestTransformerBase @ 2 NONAME
+	_ZN25CTestTransformerExtensionC2EP20CTestTransformerBase @ 3 NONAME
+	_ZNK25CTestTransformerExtension17PreserveImageDataEv @ 4 NONAME
+	_ZNK25CTestTransformerExtension3UidEv @ 5 NONAME
+	_ZTI25CTestTransformerExtension @ 6 NONAME ; #<TI>#
+	_ZTV25CTestTransformerExtension @ 7 NONAME ; #<VT>#
+

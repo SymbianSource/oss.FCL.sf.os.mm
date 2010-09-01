@@ -1,0 +1,4 @@
+EXPORTS
+	_ZN15CJpegYuvDecoder10ConvertYuvEP14TRequestStatusR10CFbsBitmapS3_i @ 1 NONAME
+	_ZN15CJpegYuvDecoder10ConvertYuvEP14TRequestStatusR10CFbsBitmapi @ 2 NONAME
+

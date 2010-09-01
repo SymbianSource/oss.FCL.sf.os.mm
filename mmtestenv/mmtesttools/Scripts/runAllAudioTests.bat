@@ -18,4 +18,5 @@ runa3fdevsoundcompliancetests.bat
 runMDFUnitTests.bat
 RunMMFAudioIntTests.bat
 RunMMFAudioUnitTests.bat
+runmmpacketvideotests.bat
 runMMFOptUnitTests.bat

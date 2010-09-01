@@ -46,6 +46,9 @@ PRJ_MMPFILES
 ../mmpfiles/server/MmfAudioPolicyProxy.mmp
 ../mmpfiles/platsec/server/mmfaudiopolicy.mmp
 #endif 
+
+//Audio Tone Controller
+../mmpfiles/controller/MmfAudioToneController.mmp
 	
 //Sw Codec Wrapper
 ../mmpfiles/swcodecwrapper/mmfswaudiodevice.mmp
@@ -57,11 +60,3 @@ PRJ_MMPFILES
 //audio 'software' hw device plugins
 ../mmpfiles/plugin/mmfAudioHwDevices.mmp
 ../mmpfiles/plugin/Gsm610HwDevices.mmp
-
-PRJ_TESTMMPFILES
-
-//Audio Test Tone Controller
-../mmpfiles/controller/MmfAudioToneController.mmp
-
-PRJ_TESTEXPORTS
-mmfaudiotonetestcontroller.iby 			/epoc32/rom/include/

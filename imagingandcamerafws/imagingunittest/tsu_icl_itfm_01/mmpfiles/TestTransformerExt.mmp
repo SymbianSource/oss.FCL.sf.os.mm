@@ -1,0 +1,43 @@
+// Copyright (c) 2004-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+TARGET testtransformerext.dll
+CAPABILITY ALL -TCB
+TARGETTYPE dll
+
+// MAGIC Dll recognition UID followed by the unique UID for this dll
+UID 0x1000008d 0x101F7C43
+VENDORID 0x70000001
+
+OS_LAYER_SYSTEMINCLUDE_SYMBIAN
+
+USERINCLUDE		../src/TestPlugin
+
+SOURCEPATH		../src/TestPlugin
+SOURCE		TestTransformerExt.cpp
+
+LIBRARY		euser.lib
+LIBRARY		imagetransform.lib
+
+#ifdef EABI
+DEFFILE TestTransformerExt.def
+#endif
+
+#ifdef WINSCW
+DEFFILE TESTTRANSFORMEREXT.DEF
+#endif
+
+
+SMPSAFE

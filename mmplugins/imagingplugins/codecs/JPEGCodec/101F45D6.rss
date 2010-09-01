@@ -1,0 +1,176 @@
+// Copyright (c) 2001-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// Registry file for the JPEG Bitmap Decoder Implementation
+// 
+//
+
+#include <ecom/registryinfo.rh>
+#include <icl/icl_uids.hrh>
+#ifdef SYMBIAN_ENABLE_SPLIT_HEADERS
+#include <icl/icl_uids_const.hrh>
+#include <icl/icl_uids_def.hrh>
+#endif
+#include <icl/imagetransform.hrh>
+
+RESOURCE REGISTRY_INFO theInfo
+	{
+	dll_uid = KJPGCodecDllUidValue;
+	interfaces = 
+		{
+		INTERFACE_INFO
+			{
+			interface_uid = KDecoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KJPGDecoderImplementationUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					opaque_data = {	2, 0, 0,
+							0x10, 0x1F, 0x45, 0xD8,
+							0x00, 0x00, 0x00, 0x00,
+							0x10, 0x1F, 0x7C, 0x4F,
+							1,
+							0x2E, 0x6A, 0x70, 0x67, 0x0D,	// ".jpg"
+							2,
+							0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D,	// "image/jpeg"
+							0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x67, 0x0D,		// "image/jpg"
+							11,
+							0x10, 0x27, 0x37, 0xFB,		// KSwCodecUidValue
+							0x10, 0x27, 0x37, 0xFF,		// KUidExifSupport
+                                                        0x10, 0x28, 0x70, 0x49,		// KUidJpgAutoRotationSupport
+							0x10, 0x27, 0x38, 0x0E,		// KThumbnailSupportUidValue
+							0x10, 0x27, 0x38, 0x10,		// KDecodeToReducedSizeSupportUidValue
+							0x10, 0x27, 0x38, 0x03,		// KUidJPGSequential
+							0x10, 0x27, 0x38, 0x04,		// KUidJPGProgressive
+							0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+							0x00, 0x00, 0x3D, 0x00,		// Extensions: Crop | Rotation | MirrorHA | MirrorVA | Scaling
+							0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+							0x00, 0x00, 0x02, 0x00		// Extensions: Stream
+							};
+					},
+
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KJPGDecoderImplementation2UidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					opaque_data = {	2, 0, 0,
+							0x10, 0x1F, 0x45, 0xD8,
+							0x00, 0x00, 0x00, 0x00,
+							0x10, 0x1F, 0x7C, 0x60,		// KUidICLJpegImageFrameInterface
+							1,
+							0x2E, 0x6A, 0x70, 0x67, 0x0D,	// ".jpg"
+							1,
+							0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D,	// "image/jpeg"
+							9,
+							0x10, 0x27, 0x37, 0x63,		// KFormatYUVMonochromeUid
+							0x10, 0x27, 0x37, 0x68,		// KFormatYUV420PlanarUid
+							0x10, 0x27, 0x37, 0x69,		// KFormatYUV422InterleavedUid
+							0x10, 0x27, 0x37, 0x6D,		// KUidFormatYUV420PlanarReversed
+							0x10, 0x27, 0x37, 0xFF,		// KUidExifSupport
+							0x10, 0x27, 0x38, 0x03,		// KUidJPGSequential
+							0x10, 0x27, 0x37, 0xFB,		// KSwCodecUidValue
+							0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+							0x00, 0x00, 0x02, 0x00		// Extensions: Stream
+							};
+					}
+				};
+			},
+
+		INTERFACE_INFO
+			{
+			interface_uid = KEncoderInterfaceUidValue;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KJPGEncoderImplementationUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {	2, 
+									0, 0, 
+									0x10, 0x1F, 0x45, 0xD8, 
+									0, 0, 0, 0, 
+									0x10, 0x1F, 0x7C, 0x60, 	// KUidICLJpegImageFrameInterface
+									1, 
+									0x2E, 0x6A, 0x70, 0x67, 0x0D, // .jpg
+									1, 
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D, // image/jpeg
+									8, 
+									0x10, 0x27, 0x37, 0xFB, 	// KSwCodecUidValue
+									0x10, 0x27, 0x37, 0xFF, 	// KUidExifSupport
+									0x10, 0x27, 0x38, 0x0E, 	// KThumbnailSupportUidValue
+									0x10, 0x27, 0x38, 0x0F,		// KThumbnailAutogenerationUidValue
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x1E, 0x00,		// Extensions: Rotation | MirrorHA | MirrorVA | UseWithSetThumbnail
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x01, 0x00		// Extensions: Stream
+									};
+					},
+
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KJPGEncoderImplementation2UidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0x3F}; // "?" - Won't match
+					opaque_data = {	2, 
+									0, 0, 
+									0x10, 0x1F, 0x45, 0xD8, 
+									0, 0, 0, 0, 
+									0x10, 0x1F, 0x7C, 0x60, 	// KUidICLJpegImageFrameInterface
+									1, 
+									0x2E, 0x6A, 0x70, 0x67, 0x0D, // .jpg
+									1, 
+									0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D, // image/jpeg
+									10, 
+									0x10, 0x27, 0x37, 0x63, 	// KFormatYUVMonochromeUid
+									0x10, 0x27, 0x37, 0x68, 	// KFormatYUV420PlanarUid
+									0x10, 0x27, 0x37, 0x69, 	// KFormatYUV422InterleavedUid
+									0x10, 0x27, 0x37, 0x6D, 	// KUidFormatYUV420PlanarReversed
+									0x10, 0x27, 0x37, 0xFB, 	// KSwCodecUidValue
+									0x10, 0x27, 0x37, 0xFF, 	// KUidExifSupport
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x0E, 0x00,		// Extensions: Rotation | MirrorHA | MirrorVA
+									0x10, 0x28, 0x33, 0xD8,		// KUidICLExtension
+									0x00, 0x00, 0x01, 0x00		// Extensions: Stream
+									};
+					}
+				};
+			},
+
+		INTERFACE_INFO
+			{
+			interface_uid = KUidTransformInterface;
+			implementations = 
+				{
+				BINARY_IMPLEMENTATION_INFO
+					{
+					implementation_uid = KUidTransformJpegPluginUidValue;
+					version_no = 1;
+					display_name = "JPEG";
+					default_data = {0xFF, 0xD8};
+					// version, flags, ImageTypeUid ImageSubTypeUid FileSuffixNum, FileSuffix, MimeTypeNum, MimeType
+					opaque_data = {1, 0x00, 0x00, 0x10, 0x1F, 0x45, 0xD8, 0, 0, 0, 0, 1, 0x2E, 0x6A, 0x70, 0x67, 0x0D, 1, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x6A, 0x70, 0x65, 0x67, 0x0D};					
+					}
+				};
+			}
+		};
+	}
+

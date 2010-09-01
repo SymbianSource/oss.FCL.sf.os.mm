@@ -1,0 +1,53 @@
+
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+// bld.inf for TSU_ICL_FRM_01 - ICL Framework Test harness
+// 
+//
+
+PRJ_MMPFILES
+  ../mmpfiles/TSU_ICL_FRM_01.mmp
+
+PRJ_EXPORTS
+
+// Test scripts
+../scripts/TSU_ICL_FRM_01.script	c:/tsu_icl_frm_01.script
+../scripts/TSU_ICL_FRM_01_Alloc.script	c:/tsu_icl_frm_01_alloc.script
+../scripts/TSU_ICL_FRM_FH.script	c:/tsu_icl_frm_fh.script
+../scripts/TSU_ICL_FRM_FH_ALLOC.script	c:/tsu_icl_frm_fh_alloc.script
+
+../scripts/TSU_ICL_FRM_DRM_DEBUG.script		c:/tsu_icl_frm_drm_debug.script
+../scripts/TSU_ICL_FRM_DRM_ALLOC.script	c:/tsu_icl_frm_drm_alloc.script
+../scripts/tsu_icl_frm_01b.script	c:/tsu_icl_frm_01b.script
+
+// IBY file
+TSU_ICL_FRM_01.IBY			/epoc32/rom/include/tsu_icl_frm_01.iby
+
+// Test images
+../testfiles/tif2.mbm			c:/tsu_icl_frm_01/tif2.mbm
+../testfiles/trans_1.mbm		c:/tsu_icl_frm_01/trans_1.mbm
+../testfiles/Gif87a.mbm			c:/tsu_icl_frm_01/gif87a.mbm
+../testfiles/Test.tst			c:/tsu_icl_frm_01/test.tst
+
+// SYMBIAN_CAF_V2
+../testfiles/jfif444.mbm			c:/tsu_icl_frm_01/jfif444.mbm
+../testfiles/png4_8.mbm			c:/tsu_icl_frm_01/png4_8.mbm
+../testfiles/trans_8.mbm			c:/tsu_icl_frm_01/trans_8.mbm
+../testfiles/Image.content			c:/tsu_icl_frm_01/image.content
+../testfiles/Image.contentrights		c:/tsu_icl_frm_01/image.contentrights
+../testfiles/ImageContentNoRights.content	c:/tsu_icl_frm_01/imagecontentnorights.content
+../testfiles/SingleImage.content		c:/tsu_icl_frm_01/singleimage.content
+../testfiles/SingleImage.contentrights		c:/tsu_icl_frm_01/singleimage.contentrights
+../testfiles/operator.otb			c:/tsu_icl_frm_01/operator.otb
+../testfiles/operator.mbm			c:/tsu_icl_frm_01/operator.mbm

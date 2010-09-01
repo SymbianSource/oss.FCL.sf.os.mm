@@ -1,0 +1,13 @@
+del E:\unittest\omxil\test\*_coreconftestoutput.txt
+del E:\unittest\omxil\aacdecoder\*_coreconfvendoroutput.txt
+del E:\unittest\omxil\common\*_coreconfvendoroutput.txt
+del E:\unittest\omxil\pcmrenderer\*_coreconfvendoroutput.txt
+
+
+copy c:\omxil\test\*_coreconftestoutput.txt           E:\unittest\omxil\test\
+copy c:\omxil\aacdecoder\*_coreconfvendoroutput.txt   E:\unittest\omxil\aacdecoder\
+copy c:\omxil\common\*_coreconfvendoroutput.txt       E:\unittest\omxil\common\
+copy c:\omxil\pcmrenderer\*_coreconfvendoroutput.txt  E:\unittest\omxil\pcmrenderer\
+
+
+del c:\omxil\*.*

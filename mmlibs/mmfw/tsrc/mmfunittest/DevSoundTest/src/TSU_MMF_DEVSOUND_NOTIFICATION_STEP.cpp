@@ -4743,34 +4743,6 @@ TVerdict CTestStepDevSound0050::DoTestStepL(void)
 
 /**
  *
- * CTestStepDevSound0051
- *
- */
-CTestStepDevSound0051::CTestStepDevSound0051()
-	{
-	iTestStepName = _L("MM-MMF-DEVSOUNDNOTIFICATION-U-0051-HP");
-	}
-
-/**
- *
- * DoTestStepL
- * @result TVerdict
- *
- */
-TVerdict CTestStepDevSound0051::DoTestStepL(void)
-	{
-	INFO_PRINTF1(_L("Testing Register for notification on Nokia adaption, KErrNotSupported will be returned"));
-	TVerdict result = EFail;
-	result = iDevSoundClient1->TestRegisterAsClient(KMMFEventCategoryAudioResourceAvailable);
-	if (result == EPass)
-		{
-		return EFail;
-		}
-	return EPass;
-	}
-
-/**
- *
  * NewL
  * CEventNotification*
  *

@@ -1,0 +1,66 @@
+
+// Copyright (c) 2002-2009 Nokia Corporation and/or its subsidiary(-ies).
+// All rights reserved.
+// This component and the accompanying materials are made available
+// under the terms of "Eclipse Public License v1.0"
+// which accompanies this distribution, and is available
+// at the URL "http://www.eclipse.org/legal/epl-v10.html".
+//
+// Initial Contributors:
+// Nokia Corporation - initial contribution.
+//
+// Contributors:
+//
+// Description:
+//
+
+TARGET        	tsu_icl_cod_02.dll
+CAPABILITY ALL -TCB
+TARGETTYPE    	dll
+UID           	0x1000008d 0x101F460B
+VENDORID 0x70000001
+
+SOURCEPATH    ../src
+SOURCE        ICLCodecTestSuite.cpp
+SOURCE        ICLCodecTestStep.cpp
+SOURCE        TestExtra.cpp
+
+SOURCEPATH		../../../../mmplugins/imagingplugins/codecs/PNGCodec
+SOURCE			PNGCodec.cpp
+SOURCE			PNGConvert.cpp
+SOURCE			PngScanlineEncoder.cpp
+SOURCE			PngScanlineDecoder.cpp
+
+
+USERINCLUDE		../src	
+USERINCLUDE		../../inc
+USERINCLUDE		../../../../mmplugins/imagingplugins/codecs/PNGCodec
+USERINCLUDE		../../../imagingfws/inc
+USERINCLUDE		../../../imagingfws/src
+USERINCLUDE 		../../../imagingfws/src/Recognizer
+
+MW_LAYER_SYSTEMINCLUDE_SYMBIAN  // MW Layer macro required to link against AppArc Middleware headers
+
+LIBRARY	      euser.lib  
+LIBRARY		  testframeworkclient.lib 
+LIBRARY       imageconversion.lib  
+LIBRARY		  efsrv.lib
+LIBRARY		  fbscli.lib
+LIBRARY		bitgdi.lib
+LIBRARY		  ezlib.lib
+LIBRARY		  gdi.lib
+LIBRARY         apfile.lib apgrfx.lib apserv.lib apmime.lib
+LIBRARY		bafl.lib
+LIBRARY		ecom.lib
+
+#ifdef EABI
+DEFFILE TSU_ICL_COD_02.DEF
+#endif
+
+#ifdef WINSCW
+DEFFILE TSU_ICL_COD_02.def
+#endif
+
+NOSTRICTDEF
+
+SMPSAFE
