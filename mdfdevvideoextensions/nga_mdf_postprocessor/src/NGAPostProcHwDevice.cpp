@@ -1550,7 +1550,17 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface -- Creating %d x %d surface"), this, iPicSize.iWidth, iPicSize.iHeight);
 
    	TInt err = KErrNone;
-	SetSurfaceAttributes(iPicSize, 1); 
+	TSize evenSize(iPicSize);
+	if (evenSize.iWidth % 2 != 0)
+		{
+		++evenSize.iWidth;
+		}
+	if (evenSize.iHeight % 2 != 0)
+		{
+		++evenSize.iHeight;
+		}
+
+	SetSurfaceAttributes(evenSize, 1); 
 	
   	err = iSurfaceHandler->CreateSurface(iAttributes, iSurfaceId);
   	if (err != KErrNone)
@@ -1614,7 +1624,20 @@ void CNGAPostProcHwDevice::MmvshcRedrawBufferToSurface(TPtrC8& aRedrawBuffer)
     PP_DEBUG(_L("CNGAPostProcHwDevice[%x]::MmvshcRedrawBufferToSurface offset = %d"), this, offset);
 
 	lPtr = reinterpret_cast<TUint8*>(iChunk.Base() + offset);
-	memcpy((TAny *)lPtr, (TAny *)aRedrawBuffer.Ptr(), redrawBufferSize);
+
+	if (evenSize.iWidth > iPicSize.iWidth)
+		{
+		TInt redrawLineWidth = redrawBufferSize / iPicSize.iHeight;
+
+		for (TInt i = 0; i < iPicSize.iHeight; ++i)
+			{
+			memcpy((TAny*)(lPtr + (i * iInfo().iStride)), (TAny*)(aRedrawBuffer.Ptr() + (i * redrawLineWidth)), redrawLineWidth);
+			}
+		}
+	else
+		{
+		memcpy((TAny *)lPtr, (TAny *)aRedrawBuffer.Ptr(), redrawBufferSize);
+		}
 
 	iRedrawSurfaceInUse = ETrue;
 
