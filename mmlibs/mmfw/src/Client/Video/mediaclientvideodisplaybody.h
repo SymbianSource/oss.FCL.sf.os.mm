@@ -104,6 +104,9 @@ public:
 	void AddDisplayWindowL(const RWindowBase* aWindow, const TRect& aClipRect, const TRect& aCropRegion, const TRect& aVideoExtent,
 							TReal32 aScaleWidth, TReal32 aScaleHeight, TVideoRotation aRotation,
 							TAutoScaleType aAutoScaleType, TInt aHorizPos, TInt aVertPos, RWindow* aWindow2);
+	void UpdateDisplayWindowL(const RWindowBase* aWindow, const TRect& aClipRect, const TRect& aCropRegion, const TRect& aVideoExtent, 
+                            TReal32 aScaleWidth, TReal32 aScaleHeight, TVideoRotation aRotation, 
+                            TAutoScaleType aAutoScaleType, TInt aHorizPos, TInt aVertPos, RWindow* aWindow2);
 	void RemoveDisplay();
 	TInt RemoveDisplayWindow(const RWindowBase& aWindow);
 	

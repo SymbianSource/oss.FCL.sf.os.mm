@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2009 Nokia Corporation and/or its subsidiary(-ies).
+// Copyright (c) 2007-2010 Nokia Corporation and/or its subsidiary(-ies).
 // All rights reserved.
 // This component and the accompanying materials are made available
 // under the terms of "Eclipse Public License v1.0"
@@ -119,8 +119,11 @@ EXPORT_C void CVideoPlayerUtility2::AddDisplayWindowL(RWsSession& aWs, CWsScreen
 	}
 
 /**
-Removes a window that is currently being used to display the video picture. The window must 
+Removes a window that is currently being used to display the video picture. The window must
 have previously been added with AddDisplayWindowL(). 
+
+Note Depending on underlying implementation it may also remove any graphics resources associated
+with video playback on this window. 
 
 This method cannot fail. If the window has not been added with AddDisplayWindowL(), the 
 method call will be ignored. 

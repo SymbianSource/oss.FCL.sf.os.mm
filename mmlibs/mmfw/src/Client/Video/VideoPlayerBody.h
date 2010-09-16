@@ -229,6 +229,8 @@ private:
 	TBool RectContains(const TRect& aLeft, const TRect& aRight);
 	void DoAddDisplayWindowL(RWsSession& aWs, TInt aDisplay, RWindowBase& aWindow,
 								const TRect& aClipRect, const TRect& aVideoExtent, RWindow* aWindow2);
+	void DoUpdateDisplayWindowL(RWsSession& aWs, RWindowBase& aWindow,
+	              const TRect& aClipRect, const TRect& aVideoExtent, RWindow* aWindow2);
 	TInt SurfaceCreated();
 	TInt SurfaceParametersChanged();
 	TInt RemoveSurface(TBool aControllerEvent);
