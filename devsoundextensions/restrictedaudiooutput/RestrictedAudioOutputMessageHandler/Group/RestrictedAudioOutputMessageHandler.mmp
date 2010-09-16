@@ -40,7 +40,7 @@ SYSTEMINCLUDE   /epoc32/include/mmf/server
 
 
 LIBRARY         euser.lib 
-LIBRARY			MmfControllerFramework.lib
+LIBRARY			mmfcontrollerframework.lib
 LIBRARY			RestrictedAudioOutput.lib
 
 

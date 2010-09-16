@@ -93,7 +93,8 @@ void CFileReader::Reset()
 		{
 		// We need to seek to the start and fill the buffer.
 		iFilePos = 0;
-		TInt err = iFile->Seek(ESeekStart, iFilePos);
+		TInt filepos = 0;
+		TInt err = iFile->Seek(ESeekStart, filepos);
 		if (err == KErrNone)
 			{
 			err = iFile->Read(iFileBuffer);
@@ -135,18 +136,31 @@ void CFileReader::SeekL(TInt aOffset)
 //
 void CFileReader::SeekL(TInt64 aOffset)
 	{
-	if (aOffset < (TInt64)KMinTInt)
+	if (aOffset < KMinTInt64)
 		{
 		User::Leave(KErrNotSupported);
 		}
 		
-	if (aOffset > (TInt64)KMaxTInt)
+	if (aOffset > KMaxTInt64)
 		{
 		User::Leave(KErrNotSupported);
 		}
-		
-	TInt low = (TInt)I64LOW(aOffset);
-	SeekL(low);
+	
+	if (aOffset < (TInt64)KMaxTInt)
+	    {
+        TInt low = (TInt)I64LOW(aOffset);
+        SeekL(low);
+	    }
+	else
+	    {
+        TInt err = CReader::Seek(aOffset);
+        if (err == KErrUnderflow)
+            {
+            TInt64 bufPos = CBufferReader::Position();
+            aOffset += bufPos - iFileBuffer.Length();
+            User::LeaveIfError(PhysicallySeekAndRead(aOffset));
+            }
+	    }
 	}
 	
 //
@@ -161,7 +175,31 @@ TInt CFileReader::PhysicallySeekAndRead(TInt aOffset)
 	CBufferReader::Reset();
 	
 	iFilePos = aOffset;
-	err = iFile->Seek(ESeekCurrent, iFilePos);
+	err = iFile->Seek(ESeekCurrent, aOffset);
+	
+	if (err != KErrNone)
+		{
+		return err;
+		}
+
+	err = iFile->Read(iFileBuffer);
+	if (err != KErrNone)
+		{
+		return err;
+		}
+	return (iFileBuffer.Length() == 0 ? KErrEof : KErrNone);
+	}
+TInt CFileReader::PhysicallySeekAndRead(TInt64 aOffset)
+    {
+    TInt err;
+    // New buffer contents so read from the start of it.
+    CBufferReader::Reset();
+    
+    iFilePos = aOffset;
+    RFile64* tempfile;
+    tempfile = static_cast<RFile64*> (iFile);
+ 
+    err = tempfile->Seek(ESeekCurrent, iFilePos);
 	if (err != KErrNone)
 		{
 		return err;

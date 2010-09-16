@@ -18,6 +18,13 @@
 "\epoc32\data\c\mm\TSU_MMF_VCLNT_01.ini" - "c:\mm\TSU_MMF_VCLNT_01.ini"
 "\epoc32\data\c\mm\TSU_MMF_VCLNT_01_gce_unavailable.ini" - "c:\mm\TSU_MMF_VCLNT_01_gce_unavailable.ini"
 
+// Scripts for SecureDRM
+"\epoc32\data\c\rta\rta.ini" - "c:\rta\rta.ini"
+"\epoc32\data\c\rta\rta.script" - "c:\rta.script",testexecute.exe
+"\epoc32\data\c\securedrm_video_testdata.ini" - "c:\securedrm_video_testdata.ini"
+"\epoc32\data\c\securedrm_video.ini" - "c:\securedrm_video.ini"
+"\epoc32\data\c\tsi_mmf_securedrm_video_testdata.script" - "c:\tsi_mmf_securedrm_video_testdata.script",testexecute.exe
+
 "\epoc32\data\c\mm\TSU_MMF_VCLNT_01_WM_CAF_V2.script" - "c:\TSU_MMF_VCLNT_01_WM_CAF_V2.script"
 "\epoc32\data\c\mm\TSU_MMF_VCLNT_01_WM_CAF_V2_priority.script" - "c:\TSU_MMF_VCLNT_01_WM_CAF_V2_priority.script"
 "\epoc32\data\c\mm\TSU_MMF_VCLNT_01_Alloc_WM.script" - "c:\TSU_MMF_VCLNT_01_Alloc_WM.script"
@@ -40,17 +47,21 @@
 // For winscw use only
 // "\epoc32\data\c\mm\TSU_MMF_vclnt_u_01_subtitle_gce_on_urel.script" - "c:\TSU_MMF_vclnt_u_01_subtitle_gce_on_urel.script"
 
+// SecureDRM test data
+"\epoc32\data\c\rta\videocontentnorights.xml" - "c:\rta\videocontentnorights.xml"
+"\epoc32\data\c\rta\videocontent.xml" - "c:\rta\videocontent.xml"
+"\epoc32\data\c\rta\videorights.xml" - "c:\rta\videorights.xml"
+"\epoc32\data\c\securedrm\videocontent2.xml" - "c:\securedrm\videocontent2.xml"
+"\epoc32\data\c\securedrm\videorights2.xml" - "c:\securedrm\videorights2.xml"
+"\epoc32\data\c\securedrm\xvidonly.avi" - "c:\securedrm\xvidonly.avi"
+
 // data files
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\small2.wav" - "c:\mm\mmf\testfiles\vclnt\small2.wav"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\smallv.wav" - "c:\mm\mmf\testfiles\vclnt\smallv.wav"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\clock.dummy" - "c:\mm\mmf\testfiles\vclnt\clock.dummy"
-"\epoc32\data\c\mm\mmf\testfiles\vclnt\Video.content" - "c:\mm\mmf\testfiles\vclnt\Video.content"
-"\epoc32\data\c\mm\mmf\testfiles\vclnt\VideoContentNoRights.content" - "c:\mm\mmf\testfiles\vclnt\VideoContentNoRights.content"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\LongVideo.dummy" - "c:\mm\mmf\testfiles\vclnt\LongVideo.dummy"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\ShortVideo.dummy" - "c:\mm\mmf\testfiles\vclnt\ShortVideo.dummy"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\AudVid.avi" - "c:\mm\mmf\testfiles\vclnt\AudVid.avi"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\Vid.avi" - "c:\mm\mmf\testfiles\vclnt\Vid.avi"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\xvidonly.avi" - "c:\mm\mmf\testfiles\vclnt\xvidonly.avi"
 "\epoc32\data\c\mm\mmf\testfiles\vclnt\clock2.dummy" - "c:\mm\mmf\testfiles\vclnt\clock2.dummy"
-
-

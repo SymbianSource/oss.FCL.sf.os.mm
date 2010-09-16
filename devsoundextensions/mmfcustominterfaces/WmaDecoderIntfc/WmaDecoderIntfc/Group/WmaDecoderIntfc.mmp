@@ -40,6 +40,6 @@ SYSTEMINCLUDE   /epoc32/include/mmf/server
 LIBRARY         euser.lib
 LIBRARY         mediaclientaudioinputstream.lib
 LIBRARY         mediaclientaudiostream.lib
-LIBRARY         MMFDevSound.lib
+LIBRARY         mmfdevsound.lib
 
 //  End of File

@@ -304,9 +304,8 @@ void CAudioRoutingTestClass::MvpuoOpenComplete(TInt aError)
 		iLog->Log(_L("Ready!"));
 		}
 	if (isInput != EFalse)
-		{
-
-		}
+		{}
+	CActiveScheduler::Stop();
 	}
 
 void CAudioRoutingTestClass::MvpuoPrepareComplete(TInt aError)

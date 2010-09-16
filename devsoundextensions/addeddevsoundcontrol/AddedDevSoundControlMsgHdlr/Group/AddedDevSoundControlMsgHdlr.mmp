@@ -38,6 +38,6 @@ OS_LAYER_SYSTEMINCLUDE
 SYSTEMINCLUDE   /epoc32/include/mmf/common
 
 LIBRARY         euser.lib
-LIBRARY         MmfControllerFramework.lib
+LIBRARY         mmfcontrollerframework.lib
 
 // End of File

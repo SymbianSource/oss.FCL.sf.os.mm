@@ -39,8 +39,8 @@ SYSTEMINCLUDE   /epoc32/include/libc
 
 SOURCE          OrientationBase.cpp
 
-LIBRARY         Euser.lib
+LIBRARY     euser.lib
 LIBRARY		EffectBase.lib
-LIBRARY		MmfControllerFramework.lib
-LIBRARY      estlib.lib
+LIBRARY		mmfcontrollerframework.lib
+LIBRARY     estlib.lib
 

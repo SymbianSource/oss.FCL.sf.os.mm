@@ -209,7 +209,7 @@ void CTelephonyAudioRoutingServer::DoSetOutputL (
    	iShowNoteMode = showNotePkg();	
 	TELAUDRTNG_RDEBUG1(_L("[TELAUDRTNG]\t CTelephonyAudioRoutingServer::DoSetOutputL ShowNoteMode Value Sent to server = %d"), iShowNoteMode);    	
    	
-	iSetOutputRequests.Append(aSessionId);
+	iSetOutputRequests.AppendL(aSessionId);
 	
 	// Verify requested audio change exists in available outputs (unless is ENone or ENotActive)	
 	if ( (response != CTelephonyAudioRouting::ENone) && (response != CTelephonyAudioRouting::ENotActive))

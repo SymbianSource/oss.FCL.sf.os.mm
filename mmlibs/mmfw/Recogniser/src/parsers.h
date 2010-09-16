@@ -122,6 +122,7 @@ private:
 	TInt iBrandIndex;
 	TBool iIsFinished;
 	TInt64 iSize; 			// The current box's size.
+	TBool iSizeIn32bit;
 	CReader& iReader;
 	TFlags& iFlags;
 	TBool iVideoAssumed;

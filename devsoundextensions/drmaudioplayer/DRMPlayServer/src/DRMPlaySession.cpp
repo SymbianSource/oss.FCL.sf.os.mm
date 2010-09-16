@@ -905,7 +905,7 @@ void CDRMPlayServerSession::CustomCommandAsyncStep2L( const RMessage2& aMessage 
         }
 
     // Add custCmdAsyncAO object to array of async custom command objects
-    iActiveAsyncCustomCommands.Append( iCDRMCustomCommandAsyncAO2Phase );
+    iActiveAsyncCustomCommands.AppendL( iCDRMCustomCommandAsyncAO2Phase );
 
     // aMessage ownership is transferred to custCmdAsyncAO.
     // After succesful transfer, aMessage should not be completed

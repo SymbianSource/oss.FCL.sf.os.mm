@@ -150,7 +150,7 @@ void CSpeechEncoderConfigProxy::GetSupportedBitratesL(
     CleanupClosePushL(stream); // stream on cleanup
    	for (TInt i=0; i<numberOfBitratesPckg(); i++)
       	{
-   		aSupportedBitrates.Append(stream.ReadUint32L());
+   		aSupportedBitrates.AppendL(stream.ReadUint32L());
    		}
    	CleanupStack::PopAndDestroy(&stream);
    	CleanupStack::PopAndDestroy(buf);

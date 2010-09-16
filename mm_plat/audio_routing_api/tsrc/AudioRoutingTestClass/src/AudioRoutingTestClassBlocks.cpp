@@ -566,21 +566,16 @@ TInt CAudioRoutingTestClass::CreateObject( CStifItemParser& aItem )
 	else if (object == KTagVideoPlayer)
 		{
 		aItem.GetNextString ( object );
-		if(object==_L("Input"))
-			{
-			isInput = ETrue;
-			}
-		else if(object==_L("Output"))
-			{
-			isInput = EFalse;
-			}
 		error = KErrNone;
 		TRAP(error, CreateSessionAndScreen());
 		TRAP(error, CreateWindowGroup());
 		TRAP(error, CreateVideoWindow());
-		TRAP(error, CreateVideoObject(aItem));
-
+		TRAP(error, CreateVideoObject());	    
 		}
+	else if(object == KTagVideoRecord)
+	    {
+        TRAP(error, CreateVideoRecorderObject());        
+	    }
 	if (error == KErrNone)
 		{
 	    AddExpectedEvent(EInitializeComplete, KMediumTimeout);
@@ -606,8 +601,7 @@ TInt CAudioRoutingTestClass::CreateAudioInput( CStifItemParser& aItem )
 	if ( object == KTagVideoRecord )
 		{
 		FTRACE(FPrint(_L("CAudioRoutingTest::CAudioInput")));
-		iLog->Log(_L("CAudioRoutingTest::CAudioInput"));
-		iVideoRecord = NULL;
+		iLog->Log(_L("CAudioRoutingTest::CAudioInput"));		
 		TRAP(error, iAudioInput = CAudioInput::NewL(*iVideoRecord));
 		if (error == KErrNone)
 			{
@@ -768,7 +762,7 @@ TInt CAudioRoutingTestClass::CreateAudioInput( CStifItemParser& aItem )
 		}
 	if (error != KErrNone)
 	    {
-	     iLog->Log(_L("CAudioRoutingTestClass::CreateAudioInput ERROR [%d]"),error);
+	     iLog->Log(_L("CAudioRoutingTestClass::CreateAudioInput ERROR [%d] for [%s]"),error,&object);
 	    }
 	return error;
 }
@@ -866,36 +860,46 @@ TInt CAudioRoutingTestClass::CreateSessionAndScreen()
     return error;
 	}
 
-TInt CAudioRoutingTestClass::CreateVideoObject( CStifItemParser& aItem )
+TInt CAudioRoutingTestClass::CreateVideoObject( )
 	{
-	TInt error = KErrNone;
-	TPtrC object;
-	aItem.GetNextString ( object );
-	TRAP(error, iVideoPlayerUtility = CVideoPlayerUtility::NewL ( *this,
-            EMdaPriorityNormal,
-            EMdaPriorityPreferenceNone,
-            iWindowSession,
-			*iScreenDevice,
-			iWindow,
-			iRect,
-			iRect));
-	if (error == KErrNone)
-		{
-		TRAP(error, iVideoPlayerUtility->OpenFileL(K3gpTestFile));
-		if (error == KErrNone)
-			{
-			if (!(isInput))
-				{
-				TRAP(error, iVideoRecord = CVideoRecorderUtility::NewL(*this));
-				}
-			}
-		}
+    TInt error = KErrNone;
+
+
+    TRAP(error, iVideoPlayerUtility = CVideoPlayerUtility::NewL ( *this,
+                    EMdaPriorityNormal,
+                    EMdaPriorityPreferenceNone,
+                    iWindowSession,
+                    *iScreenDevice,
+                    iWindow,
+                    iRect,
+                    iRect));
     if (error == KErrNone)
-    	{
-    	EndDrawing();
-    	iWindow.Close();
-    	iWindowGroup.Close();
-    	}
+        {
+        TRAP(error, iVideoPlayerUtility->OpenFileL(K3gpTestFile));
+        //		AddExpectedEvent(EInitializeComplete, 6000);	
+        CActiveScheduler::Start();
+        }
+    if (error == KErrNone)
+        {
+        EndDrawing();
+        iWindow.Close();
+        iWindowGroup.Close();
+        }
+    return error;
+
+    }
+TInt CAudioRoutingTestClass::CreateVideoRecorderObject()
+    {
+    TInt error = KErrNone;
+    TRAP(error, iVideoRecord = CVideoRecorderUtility::NewL(*this));
+
+            if (error == KErrNone)
+                {
+//                const TUid KVidTstControllerUid = {0x101F8503};
+                TUid NULLUid ={0};
+                
+                TRAP(error,iVideoRecord->OpenFileL(K3gpTestFile, NULL, NULLUid, NULLUid));                
+                }
 
     return error;
 	}
@@ -1010,12 +1014,21 @@ TInt CAudioRoutingTestClass::SetAudioOutputL()
 
 TInt CAudioRoutingTestClass::SetSecureOutputL()
    {
+        TInt err;
 	if(iAudioOutput)
-		{
-		iAudioOutput->SetSecureOutputL(EFalse);
-		}
-	iLog->Log(_L("iAudioOutput - SetSecureOutputL "));
-	return KErrNone;
+	   {
+	    TRAP(err,iAudioOutput->SetSecureOutputL(EFalse));
+	   }
+	if(err == KErrNotSupported)
+	   {
+	   iLog->Log(_L("SetsecureoutputL is deprecated,so not supported"));
+	   return KErrNone;
+	   }
+	else
+	   {
+	   return KErrGeneral;
+	   }
+	
    }
 
 TInt CAudioRoutingTestClass::UnregisterObserver()

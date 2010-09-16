@@ -36,5 +36,5 @@ USERINCLUDE	    ../../../../../inc
 OS_LAYER_SYSTEMINCLUDE
 
 
-LIBRARY         euser.lib MMFDevSound.lib CustomInterfaceUtility.lib CustomCommandUtility.lib MediaClientAudioInputStream.lib
+LIBRARY         euser.lib mmfdevsound.lib CustomInterfaceUtility.lib CustomCommandUtility.lib mediaclientaudioinputstream.lib
 LIBRARY         mediaclientvideo.lib

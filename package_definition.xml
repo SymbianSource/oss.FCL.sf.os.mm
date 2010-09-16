@@ -385,6 +385,9 @@
    <component id="nga_mdf_postprocessor" name="NGA MDF Postprocessor" filter="s60">
     <unit bldFile="mdfdevvideoextensions/nga_mdf_postprocessor/group"/>
    </component>
+   <component id="nga_mdf_postprocessor_shai" name="NGA MDF Postprocessor shai" filter="s60">
+    <unit bldFile="mdfdevvideoextensions/nga_mdf_postprocessor_shai/group"/>
+   </component>
   </collection>
   <collection id="frametable_stub" name="Frametable Stub" level="device-fw">
 	<!-- collection is really a component. Needs to move down a directory -->

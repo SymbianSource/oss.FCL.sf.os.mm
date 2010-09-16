@@ -42,6 +42,6 @@ SYSTEMINCLUDE   /epoc32/include/mmf/server
 
 LIBRARY         euser.lib
 LIBRARY         CustomCommandUtility.lib
-LIBRARY         MMFDevSound.lib
+LIBRARY         mmfdevsound.lib
 
 // End of file

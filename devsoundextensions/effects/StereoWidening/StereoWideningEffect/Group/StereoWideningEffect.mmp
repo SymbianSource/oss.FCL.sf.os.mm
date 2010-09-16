@@ -35,15 +35,15 @@ OS_LAYER_SYSTEMINCLUDE
 
 SOURCE          StereoWideningBase.cpp
 
-LIBRARY         Euser.lib  
+LIBRARY         euser.lib  
 LIBRARY         EffectBase.lib
 LIBRARY         CustomInterfaceUtility.lib
-LIBRARY         DRMAudioPlayUtility.lib
+LIBRARY         DrmAudioPlayUtility.lib
 LIBRARY         mediaclientaudio.lib
 LIBRARY         mediaclientaudioinputstream.lib
 LIBRARY         mediaclientaudiostream.lib 
 LIBRARY         mmfdevsound.lib 
-LIBRARY         MediaClientVideo.lib
+LIBRARY         mediaclientvideo.lib
 
 // End of file
 

@@ -15,13 +15,18 @@
 *
 */
 
+#include <feature_settings.hrh>
+
 PRJ_PLATFORMS
 DEFAULT
 
 PRJ_EXPORTS
 
 PRJ_MMPFILES
+#ifdef NCP_COMMON_OMXIL_SHAI_SUPPORT_ENABLED
+#include "../nga_mdf_postprocessor_shai/group/bld.inf"
+#else
 #include "../nga_mdf_postprocessor/group/bld.inf"
-
+#endif
 //  End of File  
 

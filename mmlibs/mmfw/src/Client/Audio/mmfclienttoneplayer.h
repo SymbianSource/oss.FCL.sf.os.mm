@@ -57,6 +57,8 @@ private:
 	MMdaAudioTonePlayStartObserver& iPlayStartCallback; 
 	TMMFAudioToneObserverCallbackAction iAction;
 	TInt iErrorCode;
+	RArray <TInt> iCallBackQueue;
+	RArray <TInt> iCallBackQueueError;
 	};
 
 class CMMFToneConfig;

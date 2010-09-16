@@ -172,6 +172,20 @@ TInt CReader::Seek(TInt aOffset)
 	return KErrNone;
 	}
 	
-
-
+//
+// Skips forwards or backwards aOffset number of bytes.
+//
+TInt CReader::Seek(TInt64 aOffset)
+    {
+    TInt64 newBufPos = iBufPos + aOffset;
+    
+    if ((newBufPos < 0) || (newBufPos >= iBuffer.Length()))
+        {
+        // Trying to seek past the bounds of the buffer.
+        return KErrUnderflow;
+        }
+        
+    iBufPos += aOffset;
+    return KErrNone;
+    }
 

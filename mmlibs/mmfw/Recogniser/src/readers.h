@@ -105,6 +105,7 @@ protected:
 	// Non-leaving Seek
 	//
 	TInt Seek(TInt aOffset);
+	TInt Seek(TInt64 aOffset);
 	
 private:
 	const TDesC8& iBuffer;		// The buffer that contains the source data.
@@ -163,10 +164,10 @@ protected:
 	// Seeks to a new file location and fills the buffer from there.
 	//
 	TInt PhysicallySeekAndRead(TInt aAmount);
-	
+	TInt PhysicallySeekAndRead(TInt64 aOffset);
 private:
 	RFile* iFile;
-	TInt iFilePos;
+	TInt64 iFilePos;
 	TBuf8<KBufSize> iFileBuffer;
 	};
 	

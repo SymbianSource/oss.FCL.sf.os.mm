@@ -831,7 +831,7 @@ TInt CWmaDecoderIntfcProxy::GetSupportedFormatsL(RArray<TFormat>& aSupportedForm
     CleanupClosePushL(stream); // stream on cleanup
    	for (TInt i=0; i<supportedFormatsPkg(); i++)
     	{
-   		aSupportedFormats.Append(static_cast<TFormat>(stream.ReadUint32L()));
+   		aSupportedFormats.AppendL(static_cast<TFormat>(stream.ReadUint32L()));
    		}
    	CleanupStack::PopAndDestroy(&stream);
    	CleanupStack::PopAndDestroy(buf);    			
@@ -874,7 +874,7 @@ TInt CWmaDecoderIntfcProxy::GetSupportedToolsL(RArray<TTool>& aSupportedTools)
 	CleanupClosePushL(stream); // stream on cleanup
 	for (TInt i=0; i<supportedToolsPkg(); i++)
 		{
-		aSupportedTools.Append(static_cast<TTool>(stream.ReadUint32L()));
+		aSupportedTools.AppendL(static_cast<TTool>(stream.ReadUint32L()));
 		}
 	CleanupStack::PopAndDestroy(&stream);
 	CleanupStack::PopAndDestroy(buf);
@@ -918,7 +918,7 @@ TInt CWmaDecoderIntfcProxy::GetControllableToolsL(RArray<TTool>& aControllableTo
     CleanupClosePushL(stream); // stream on cleanup
    	for (TInt i=0; i < numPckg(); i++)
     	{
-   		aControllableTools.Append(static_cast<TTool>(stream.ReadUint32L()));
+   		aControllableTools.AppendL(static_cast<TTool>(stream.ReadUint32L()));
    		}
    	CleanupStack::PopAndDestroy(&stream);
    	CleanupStack::PopAndDestroy(buf);
