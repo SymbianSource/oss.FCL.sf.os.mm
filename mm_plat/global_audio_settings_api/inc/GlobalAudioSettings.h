@@ -63,6 +63,7 @@ class CGlobalAudioSettings : public CBase
             */
             EGASRingingTypeBeepOnce     = 3,
             /** The phone is silent.
+            * This Ringing type is set when the phone is in silence mode.
             */
             EGASRingingTypeSilent       = 4
             };
@@ -309,6 +310,7 @@ class CGlobalAudioSettings : public CBase
         *
         * 
         * @return TBool aEnable. ETrue if the silent mode is enabled else EFalse.
+        * Ringingtype is set to EGASRingingTypeSilent when silence mode is enabled
         */
         
         IMPORT_C TBool IsSilenceModeEnabled();

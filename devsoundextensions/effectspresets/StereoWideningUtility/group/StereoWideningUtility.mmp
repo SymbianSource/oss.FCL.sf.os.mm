@@ -45,14 +45,14 @@ SYSTEMINCLUDE   /epoc32/include/libc
 SYSTEMINCLUDE   /epoc32/include/kernel
 SYSTEMINCLUDE   /epoc32/include/mmf/common
 
-LIBRARY         EUser.lib
-LIBRARY         Estlib.lib
+LIBRARY         euser.lib
+LIBRARY         estlib.lib
 LIBRARY         centralrepository.lib
 LIBRARY         StereoWideningEffect.lib
 LIBRARY         EffectBase.lib
-LIBRARY         MmfControllerFramework.lib
-LIBRARY         DRMAudioPlayUtility.lib
-LIBRARY         MediaClientVideo.lib
+LIBRARY         mmfcontrollerframework.lib
+LIBRARY         DrmAudioPlayUtility.lib
+LIBRARY         mediaclientvideo.lib
 
 //-----------------------------------------------------------------------------
 //  End of File

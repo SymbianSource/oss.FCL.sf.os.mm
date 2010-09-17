@@ -88,7 +88,8 @@ TBool CMediaClientPolicyServerClient::IgnoreProcess(TSecureId aId)
     TBool ignore = (
             (aId == 0x10281EF2) ||  // aknnfysrv
             (aId == 0x10207218) ||  // akncapserver
-            (aId == 0x10003a4a)     // eiksrvs
+            (aId == 0x10003a4a) ||  // eiksrvs
+			(aId == 0x20022FC5)     // Hbdevicedialogappserver
             );
     
     DEBUG_PRINTF2("CMediaClientPolicyServerClient::IgnoreProcess --- return %d", ignore);

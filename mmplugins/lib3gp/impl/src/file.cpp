@@ -185,9 +185,77 @@ mp4_i32 initFileWrite(MP4FileName filename, MP4HandleImp handle)
     return -1;
   }
 
+  TBuf8<16> buf;
+  buf.Copy(fp.Drive());
+  buf.LowerCase();
+  TInt drvNum = (*buf.Ptr()) - 'a';
+  PRINT((_L("drvNum = %d"), drvNum));
+  
+  TVolumeInfo volInfo;
+  error = fs->Volume(volInfo, drvNum);
+  if (error != KErrNone) 
+      {
+      return -1;
+      }
+  
+  PRINT((_L("volInfo.iFree = %Ld"), volInfo.iFree));
+  PRINT((_L("volInfo.iSize = %Ld"), volInfo.iSize));    
+
+  TVolumeIOParamInfo ioInfo;
+  error = fs->VolumeIOParam(drvNum, ioInfo);
+  if (error != KErrNone) 
+      {
+      return -1;
+      }
+  
+  PRINT((_L("ioInfo.iBlockSize = %d"), ioInfo.iBlockSize));
+  PRINT((_L("ioInfo.iClusterSize = %d"), ioInfo.iClusterSize));
+  
+  if (ioInfo.iClusterSize <= 0 || (ioInfo.iClusterSize & 0x1)) // if for some reason we got wrong value for the cluster - ignore it 
+     {
+     PRINT(_L("Wrong cluster size, set 0x8000"));
+     ioInfo.iClusterSize = 0x8000;
+     }
+  
+  // We want to have size of writing buffer to be a multiple of cluster size. Small buffer should be 1 cluster, large buffer should be 8 clusters.
+  TInt writeBufferSizeSmall = ioInfo.iClusterSize;
+  TInt writeBufferSizeLarge = ioInfo.iClusterSize * 8;
+  
+  // Now need to make sure that writeBufferSizeLarge is not too small (<128K) or too big (>256K) whilst keeping it a multiple of cluster size
+  if (writeBufferSizeLarge < KFileWriterBufferSizeLarge/2)
+      {
+      writeBufferSizeLarge = KFileWriterBufferSizeLarge/2;
+      }
+    
+  if (writeBufferSizeLarge > KFileWriterBufferSizeLarge)
+	  {
+	  writeBufferSizeLarge = (KFileWriterBufferSizeLarge / ioInfo.iClusterSize) * ioInfo.iClusterSize;
+  	  }
+
+  if (writeBufferSizeLarge < ioInfo.iClusterSize) 
+      {
+      writeBufferSizeLarge = ioInfo.iClusterSize;
+      }
+    
+  PRINT((_L("writeBufferSizeLarge = %d"), writeBufferSizeLarge));
+
+  TInt incSetSize = writeBufferSizeLarge * (KFileWriterHardBufLimit >> 1); // 2Mb if cluster size if 32767
+  TInt initSetSize = incSetSize * 1; // set initial set size for 2Mb
+  
+  if (initSetSize > volInfo.iFree) 
+      {
+      initSetSize = (volInfo.iFree / incSetSize) * incSetSize;
+      }
+
+  PRINT((_L("initSetSize = %d"), initSetSize));
+    
+  PRINT((_L("e_SetSize 1")));  
+  file->SetSize(initSetSize);
+  PRINT((_L("e_SetSize 0")));  
+
   handle->file = handle->rfile;
 
-  TRAP(error, handle->filewriter = CFileWriter::NewL( *file ));
+  TRAP(error, handle->filewriter = CFileWriter::NewL( *file, initSetSize, writeBufferSizeSmall, writeBufferSizeLarge));
   if ( error != KErrNone )
   {
     return -1;    
@@ -266,7 +334,11 @@ mp4_i32 closeFile(MP4HandleImp handle)
       PRINT((_L("e_closefile_flush_filewriter 1")));        
       (handle->filewriter)->Flush(KNullDesC8);
       PRINT((_L("e_closefile_flush_filewriter 0")));        
-      delete handle->filewriter;
+      PRINT((_L("e_SetSize 1")));  
+      ((RFile64 *)(handle->file))->SetSize((handle->filewriter)->OutputFileSize());
+      PRINT((_L("e_SetSize 0: iOutputFileSize = %Ld"), (handle->filewriter)->OutputFileSize()));  
+	  
+	  delete handle->filewriter;
       handle->filewriter = NULL;
     }
   }
@@ -1316,26 +1388,54 @@ mp4_i32 initMetaDataFiles(MP4HandleImp handle)
   TFileName path;
   TInt error;
 
-  // Create a directory for the files
-  if ( handle->fileName )
-    {
-    filename = (TText *)handle->fileName;
+  TDriveList driveList;
+  TBool pathSet = EFalse;
+  
+  // As ram drive access is faster, try to set temp file directory to available ram drive.
+  if (((RFs *)(handle->fs))->DriveList(driveList) == KErrNone)
+	{
+	for ( TInt i = 0; i < driveList.Length(); i++ )
+		{
+		TDriveInfo driveInfo;
+		if (((RFs *)(handle->fs))->Drive(driveInfo, i) == KErrNone)
+			{
+			if (driveInfo.iType == EMediaRam)
+				{
+				TChar driveLetter;
+				((RFs *)(handle->fs))->DriveToChar(i, driveLetter);
+				path.Append(driveLetter);
+				path.Append(_L(":"));
+				path.Append(KTmpDirectoryName);
+				pathSet = ETrue;
+				break;
+				}
+			}
+		}
+	}
+	  
+  // If no ram drive was found create a directory for the files on current drive
+  if (!pathSet)
+	{
+	if ( handle->fileName )
+		{
+		filename = (TText *)handle->fileName;
     
-    TParse fp;
-    path = KTmpDirectoryName;
-    if (((RFs *)(handle->fs))->Parse(filename, fp) != KErrNone)
-        return -1;
-    path.Insert(0, fp.Drive());
-    }
-  else
-    {
-    TChar drive;
-    if (((RFs *)(handle->fs))->DriveToChar(handle->fileHandleDrive, drive ) != KErrNone )
-        return -1;
-    path.Append( drive );
-    path.Append( _L(":") );
-    path.Append( KTmpDirectoryName );
-    }
+		TParse fp;
+		path = KTmpDirectoryName;
+		if (((RFs *)(handle->fs))->Parse(filename, fp) != KErrNone)
+			return -1;
+		path.Insert(0, fp.Drive());
+		}
+	else
+		{
+		TChar drive;
+		if (((RFs *)(handle->fs))->DriveToChar(handle->fileHandleDrive, drive ) != KErrNone )
+			return -1;
+		path.Append( drive );
+		path.Append( _L(":") );
+		path.Append( KTmpDirectoryName );
+		}
+	}
     
   // Try to delete the temp folder from leftovers
   // If other instance is using it then delete will just fail

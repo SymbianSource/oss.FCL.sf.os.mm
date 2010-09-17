@@ -18,6 +18,14 @@
 "\epoc32\data\c\vclntavi\video_avi.ini" - "c:\vclntavi\video_avi.ini"
 "\epoc32\data\c\vclntavi\video_avi_bc.ini" - "c:\vclntavi\video_avi_bc.ini"
 
+// Scripts for SecureDRM
+"\epoc32\data\c\rta\rta.ini" - "c:\rta\rta.ini"
+"\epoc32\data\c\rta\rta.script" - "c:\rta.script",testexecute.exe
+"\epoc32\data\c\securedrm_video_testdata.ini" - "c:\securedrm_video_testdata.ini"
+"\epoc32\data\c\securedrm_video.ini" - "c:\securedrm_video.ini"
+"\epoc32\data\c\tsi_mmf_securedrm_video_testdata.script" - "c:\tsi_mmf_securedrm_video_testdata.script",testexecute.exe
+"\epoc32\data\c\tsi_mmf_securedrm_video_mmddcap.script" - "c:\tsi_mmf_securedrm_video_mmddcap.script"
+
 //scripts
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play.script" - "c:\tsi_mmf_vclntavi_play.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_rec.script" - "c:\tsi_mmf_vclntavi_rec.script"
@@ -31,8 +39,8 @@
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr.script" - "c:\tsi_mmf_vclntavi_apr.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_apr_alloc.script" - "c:\tsi_mmf_vclntavi_apr_alloc.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_play_secdisp.script" - "c:\tsi_mmf_vclntavi_play_secdisp.script"
-"\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_par_audio.script" - "c:\tsi_mmf_vclntavi_par_audio.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_dummy_controller.script" - "c:\tsi_mmf_vclntavi_dummy_controller.script"
+"\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_par_audio.script" - "c:\tsi_mmf_vclntavi_par_audio.script"
 
 // Graphics surface tests
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_surf.script" - "c:\tsi_mmf_vclntavi_surf.script"
@@ -52,13 +60,10 @@
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_urel.script" - "c:\tsi_mmf_vclntavi_subtitles_urel.script"
 "\epoc32\data\c\vclntavi\tsi_mmf_vclntavi_subtitles_alloc.script" - "c:\tsi_mmf_vclntavi_subtitles_alloc.script"
 
-// Scripts for SecureDRM
-"\epoc32\data\c\securedrm_video_testdata.ini" - "c:\securedrm_video_testdata.ini"
-"\epoc32\data\c\securedrm_video.ini" - "c:\securedrm_video.ini"
-"\epoc32\data\c\tsi_mmf_securedrm_video_testdata.script" - "c:\tsi_mmf_securedrm_video_testdata.script"
-"\epoc32\data\c\tsi_mmf_securedrm_video_mmddcap.script" - "c:\tsi_mmf_securedrm_video_mmddcap.script"
-
 // SecureDRM test data
+"\epoc32\data\c\rta\videocontentnorights.xml" - "c:\rta\videocontentnorights.xml"
+"\epoc32\data\c\rta\videocontent.xml" - "c:\rta\videocontent.xml"
+"\epoc32\data\c\rta\videorights.xml" - "c:\rta\videorights.xml"
 "\epoc32\data\c\securedrm\videocontent2.xml" - "c:\securedrm\videocontent2.xml"
 "\epoc32\data\c\securedrm\videorights2.xml" - "c:\securedrm\videorights2.xml"
 "\epoc32\data\c\securedrm\xvidonly.avi" - "c:\securedrm\xvidonly.avi"
@@ -83,3 +88,7 @@
 "\epoc32\data\c\vclntavi\xvid_subtitle_corrupt.srt"-"c:\vclntavi\xvid_subtitle_corrupt.srt"
 "\epoc32\data\c\vclntavi\xvid_subtitle.avi"-"c:\vclntavi\xvid_subtitle.avi"
 "\epoc32\data\c\vclntavi\xvid_subtitle.srt"-"c:\vclntavi\xvid_subtitle.srt"
+
+//record tests require txt file for testcameraapp
+"\epoc32\data\c\102070CC.txt"-"c:\102070CC.txt"
+

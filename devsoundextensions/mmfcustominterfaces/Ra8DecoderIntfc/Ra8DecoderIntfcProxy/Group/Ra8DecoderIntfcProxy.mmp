@@ -38,6 +38,6 @@ SYSTEMINCLUDE   /epoc32/include/mmf/server
 
 LIBRARY         euser.lib
 LIBRARY         estor.lib
-LIBRARY         MMFDevSound.lib
+LIBRARY         mmfdevsound.lib
 
 // End of File

@@ -83,10 +83,7 @@ void CEAacPlusUtil::ConstructL()
 
     {
 
-	    iInitialized = EFalse;
-
-    iGetFrameLenParam = new(ELeave)CEAacpAudioFrameInfo;
-
+	   
     }
 
 

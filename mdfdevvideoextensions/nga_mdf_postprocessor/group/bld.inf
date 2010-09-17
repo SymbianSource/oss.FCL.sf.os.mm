@@ -17,15 +17,19 @@
 
 
 #include <platform_paths.hrh>
+#include <feature_settings.hrh>
 
 PRJ_PLATFORMS
 WINSCW ARMV5
 
 PRJ_MMPFILES
+#ifndef NCP_COMMON_OMXIL_SHAI_SUPPORT_ENABLED
 NGAPostProcHwDevice.mmp
+#endif
 
 PRJ_EXPORTS
-
+#ifndef NCP_COMMON_OMXIL_SHAI_SUPPORT_ENABLED
 ../rom/NGA_MDF_Postprocessor.iby     CORE_OS_LAYER_IBY_EXPORT_PATH(NGA_MDF_Postprocessor.iby)
 ../data/nga_mdf_postprocessor_stub.sis   /epoc32/data/z/system/install/nga_mdf_postprocessor_stub.sis
+#endif
 

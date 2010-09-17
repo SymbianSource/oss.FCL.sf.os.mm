@@ -1037,7 +1037,10 @@ void CMMFMdaAudioToneUtility::PlayAfterInitialized()
 		}
 	else
 		{
-		iAsyncCallback->MatoPlayStarted(KErrNone);
+        if(iPlayStartObserver)
+            {
+            iAsyncCallback->MatoPlayStarted(KErrNone);
+            }
 		}
 	}
 	
@@ -1129,32 +1132,57 @@ CMMFMdaAudioToneObserverCallback::~CMMFMdaAudioToneObserverCallback()
 
 void CMMFMdaAudioToneObserverCallback::MatoPrepareComplete(TInt aError)
 	{
-	iAction = EPrepareComplete;
-	iErrorCode = aError;
-
-	TRequestStatus* s = &iStatus;
-	SetActive();
-	User::RequestComplete(s, KErrNone);
+	if(!IsActive())
+	    {
+        iAction = EPrepareComplete;
+        iErrorCode = aError;
+        
+        TRequestStatus* s = &iStatus;
+        SetActive();
+        User::RequestComplete(s, KErrNone);
+	    }
+	else
+	    {
+		// Since the default granularity is 8, failing of Append() is unusual, hence ignoring the return err.
+	    iCallBackQueue.Append(EPrepareComplete);
+	    iCallBackQueueError.Append(aError);
+	    }
 	}
 
 void CMMFMdaAudioToneObserverCallback::MatoPlayComplete(TInt aError)
 	{
-	iAction = EPlayComplete;
-	iErrorCode = aError;
-
-	TRequestStatus* s = &iStatus;
-	SetActive();
-	User::RequestComplete(s, KErrNone);
+    if(!IsActive())
+        {
+        iAction = EPlayComplete;
+        iErrorCode = aError;
+        
+        TRequestStatus* s = &iStatus;
+        SetActive();
+        User::RequestComplete(s, KErrNone);
+        }
+    else
+        {
+        iCallBackQueue.Append(EPlayComplete);
+        iCallBackQueueError.Append(aError);
+        }
 	}
 
 void CMMFMdaAudioToneObserverCallback::MatoPlayStarted(TInt aError)
 	{
-	iAction = EPlayStarted;
-	iErrorCode = aError;
-
-	TRequestStatus* s = &iStatus;
-	SetActive();
-	User::RequestComplete(s, KErrNone);
+    if(!IsActive())
+        {
+        iAction = EPlayStarted;
+        iErrorCode = aError;
+    
+        TRequestStatus* s = &iStatus;
+        SetActive();
+        User::RequestComplete(s, KErrNone);
+        }
+    else
+        {
+        iCallBackQueue.Append(EPlayStarted);
+        iCallBackQueueError.Append(aError);
+        }
 	}
 
 void CMMFMdaAudioToneObserverCallback::RunL()
@@ -1175,6 +1203,17 @@ void CMMFMdaAudioToneObserverCallback::RunL()
 			iPlayStartCallback.MatoPlayStarted(iErrorCode);
 			break;
 		}
+	if(iCallBackQueue.Count() > 0 & !IsActive() )
+	    {
+        iAction = TMMFAudioToneObserverCallbackAction(iCallBackQueue[0]);
+        iCallBackQueue.Remove(0);
+        iErrorCode = iCallBackQueueError[0];
+        iCallBackQueueError.Remove(0);
+        
+        TRequestStatus* s = &iStatus;
+        User::RequestComplete(s, KErrNone);
+        SetActive();
+	    }
 	}
 
 void CMMFMdaAudioToneObserverCallback::DoCancel()

@@ -135,6 +135,7 @@ protected:
 	TBool iGetTimePlayedSupported;
 	TBool iIsResumeSupported;
 	TBool iIsUsingResumeSupport;
+	TBool iPauseCalledInsilence;
 	}; 
 
 #endif

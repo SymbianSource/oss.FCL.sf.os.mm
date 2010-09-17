@@ -36,11 +36,11 @@ OS_LAYER_SYSTEMINCLUDE
 
 SOURCE          ListenerLocationBase.cpp
 
-LIBRARY         Euser.lib  
+LIBRARY         euser.lib  
 LIBRARY         EffectBase.lib
 LIBRARY         LocationBase.lib
 LIBRARY         CustomInterfaceUtility.lib
-LIBRARY         DRMAudioPlayUtility.lib
+LIBRARY         DrmAudioPlayUtility.lib
 LIBRARY         mediaclientaudio.lib
 LIBRARY         mediaclientaudioinputstream.lib
 LIBRARY         mediaclientaudiostream.lib 

@@ -39,8 +39,8 @@ SOURCE          AudioClientsListManagerAO.cpp
 deffile         GlobalAudioSettings.def
 nostrictdef
 
-LIBRARY         EUser.lib
-LIBRARY         Estlib.lib
+LIBRARY         euser.lib
+LIBRARY         estlib.lib
 LIBRARY         centralrepository.lib
 
 //-----------------------------------------------------------------------------

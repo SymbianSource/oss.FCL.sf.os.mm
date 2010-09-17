@@ -39,8 +39,8 @@ USERINCLUDE	    ../../../../../inc
 OS_LAYER_SYSTEMINCLUDE
 
 
-LIBRARY         Euser.lib 
-LIBRARY		MmfControllerFramework.lib 
-LIBRARY		MMFDevSound.lib
+LIBRARY     euser.lib 
+LIBRARY		mmfcontrollerframework.lib 
+LIBRARY		mmfdevsound.lib
 LIBRARY		EffectBase.lib
 LIBRARY		EnvironmentalReverbEffect.lib

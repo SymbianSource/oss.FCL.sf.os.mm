@@ -71,6 +71,7 @@ static const TInt KMPEG4FlagsToConfidence[] =
 #define KMPEG4VideoBit			KBit2	// 00000100
 
 static const TInt KMPEG4BoxIntroLen = 8;
+static const TInt KMPEG4Box64BitIntroLen = 16;
 
 //
 // In order to find out the type of MPEG4 file it is
@@ -284,8 +285,14 @@ void TMPEG4Parser::SkipCurrentBoxL()
 		iIsFinished = ETrue;
 		return;
 		}
-	
-	iReader.SeekL(iSize - KMPEG4BoxIntroLen);
+	if(iSizeIn32bit)
+	    {
+        iReader.SeekL(iSize - KMPEG4BoxIntroLen);
+	    }
+	else
+	    {
+        iReader.SeekL(iSize - KMPEG4Box64BitIntroLen);
+	    }
 	}
 
 
@@ -522,11 +529,13 @@ void TMPEG4Parser::ReadBoxHeaderL()
 			
 		case 1:
 			// Size is specified in a 64-bit field.
+		    iSizeIn32bit = EFalse;
 			iReader.Read64L(iSize);
 			break;
 			
 		default:
 			// It's an actual 32-bit size.
+		    iSizeIn32bit = ETrue;
 			iSize = MAKE_TINT64(0, word1);
 		}
 		

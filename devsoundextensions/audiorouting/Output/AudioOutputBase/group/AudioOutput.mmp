@@ -44,7 +44,7 @@ LIBRARY         CustomInterfaceUtility.lib
 LIBRARY         CustomCommandUtility.lib
 LIBRARY	        mediaclientaudio.lib
 LIBRARY         mediaclientaudiostream.lib
-LIBRARY         MMFDevSound.lib
+LIBRARY         mmfdevsound.lib
 LIBRARY         DrmAudioPlayUtility.lib
 LIBRARY         mediaclientvideo.lib
 

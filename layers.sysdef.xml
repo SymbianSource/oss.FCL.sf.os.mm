@@ -52,7 +52,7 @@
 			
   	<layer name="os_mm_mdfdevvideoextensions_layer">
 			<module name="mm_mdfdevvideoextensions">
-				<unit unitID="mm_mdfdevvideoextensions" mrp="" bldFile="&layer_real_source_path;/mdfdevvideoextensions/nga_mdf_postprocessor/group" name="mm_mdfdevvideoextensions" />
+				<unit unitID="mm_mdfdevvideoextensions" mrp="" bldFile="&layer_real_source_path;/mdfdevvideoextensions/group" name="mm_mdfdevvideoextensions" />
 			</module>
    	 </layer>    
   </systemModel>

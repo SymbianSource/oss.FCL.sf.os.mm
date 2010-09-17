@@ -1534,6 +1534,22 @@ private: // Functions
 	*/
 	void BufferErrorEvent();
 
+	/*
+	 Removes all entries from iQueuedRequests except for
+	 disconnect requests.
+	 */
+	void FlushQueuedRequests();
+	
+	/*
+	 Helper functions, used to guard against accessing the equivalent
+	 functions on bad message handles during a disconnection. These
+	 methods should be used whenever a Read or Write is made outside the 
+	 context of DoServiceRequestL().
+	 */
+	TInt MessageRead(const RMmfIpcMessage& aMessage, TInt aParam, TDes8& aResult);
+	TInt MessageRead(const RMmfIpcMessage& aMessage, TInt aParam, TDes16& aResult);
+	TInt MessageWrite(const RMmfIpcMessage& aMessage, TInt aParam, const TDesC8& aValue);
+
 protected:
 
 	/**
@@ -1614,6 +1630,7 @@ private:	// Data
 	TInt iSeqNum;
 	TBool iPreemptionClash;
 	TInt iNotifiedError;
+	TBool iDisconnecting;
 
 	};
 

@@ -37,8 +37,8 @@ SYSTEMINCLUDE   /epoc32/include/mmf/common
 SYSTEMINCLUDE   /epoc32/include/mmf/server
 
 LIBRARY         euser.lib
-LIBRARY         MediaClientAudioStream.lib
-LIBRARY         MMFDevSound.lib
+LIBRARY         mediaclientaudiostream.lib
+LIBRARY         mmfdevsound.lib
 
 // End of File
 

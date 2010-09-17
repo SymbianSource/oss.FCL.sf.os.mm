@@ -205,7 +205,7 @@ void CSbcEncoderIntfcProxy::GetSupportedChannelModesL(
 
    	for (TInt i = 0; i < pckgBuf(); i++)
       	{
-   		aSupportedChannelModes.Append(
+   		aSupportedChannelModes.AppendL(
    		    static_cast<TSbcChannelMode>(stream.ReadUint32L()));
    		}
 
@@ -376,7 +376,7 @@ void CSbcEncoderIntfcProxy::GetSupportedAllocationMethodsL(
 
    	for (TInt i = 0; i < pckgBuf(); i++)
       	{
-   		aSupportedAllocationMethods.Append(
+   		aSupportedAllocationMethods.AppendL(
    		            static_cast<TSbcAllocationMethod>(stream.ReadUint32L()));
    		}
 
@@ -697,7 +697,7 @@ void CSbcEncoderIntfcProxy::PopulateArrayL(RArray<TUint>& aArray,
 
    	for (TInt i = 0; i < aCount; i++)
       	{
-   		aArray.Append(stream.ReadUint32L());
+   		aArray.AppendL(stream.ReadUint32L());
    		}
 
    	CleanupStack::PopAndDestroy(&stream);

@@ -13,7 +13,7 @@
 *
 * Description:   Project file for DRM Utility
 *
-*  Version     : %version: bh1mmcf#12 %
+*  Version     : %version: bh1sosd2#13 %
 */
 
 
@@ -57,4 +57,4 @@ LIBRARY         	estor.lib
 LIBRARY			ecom.lib
 #endif
 
-LIBRARY		MediaClientAudio.lib
+LIBRARY		mediaclientaudio.lib

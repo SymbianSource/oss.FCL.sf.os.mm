@@ -490,7 +490,14 @@ void CMMFDataPath2::BufferFilledL(CMMFBuffer* aBuffer)
 	if (!iSourceBuffer->BufferSize() || iSourceBuffer->LastBuffer() ||
 		(((iState == EConverting) || (iState == EPlaying)) && (iPlayWindowEndPosition < iCachedSourceDuration) && ( InputPosition() >= iPlayWindowEndPosition ))) 
 		{
-		iNumberOfTimesPlayed++;
+		//When it resumes in silence , position of the buffer is in end so we need to skip the increament.
+		if(!iPauseCalledInsilence) 
+		{    
+			iNumberOfTimesPlayed++;
+		}else
+		{
+			iPauseCalledInsilence=EFalse;
+		}
 		if ((iNumberOfTimesPlayed <= iNumberOfTimesToRepeat) || iNumberOfTimesToRepeat == KMdaRepeatForever)
 			{
 			iSourceBuffer->SetLastBuffer(EFalse);
@@ -899,6 +906,10 @@ void CMMFDataPath2::DoPauseL()
 			// should be updated, MDataSource position should be changed
 			iStartPosition = Position();
 			iIsUsingResumeSupport = ETrue;
+			if(iRepeatTrailingSilenceTimer->IsActive())
+			{   
+				iPauseCalledInsilence=ETrue;
+			}   
 			// If we wait for the sink to complete play, then we do not proceed with supplying the buffers to the sink
 			// In this case we need to reset the buffers so that InitializeSinkL won't attempt bringing in new ones
 			if (iTransferState == EWaitSink)
@@ -964,6 +975,7 @@ void CMMFDataPath2::PrimeL()
 		iGetTimePlayedSupported = devSound.IsGetTimePlayedSupported();
 		iIsResumeSupported = devSound.IsResumeSupported();
 		iIsUsingResumeSupport = EFalse;
+		iPauseCalledInsilence = EFalse;
 		}
 	}
 
@@ -990,7 +1002,11 @@ void CMMFDataPath2::PlayL()
 
 		if(iPauseCalled) //sink and source will have been stopped, and we will not have been re-primed
 			{
-			iDataSink->SinkPrimeL(); //propagate change down to sink
+			//When pause is called silence,we need to send the buffer while resume so icansendbuffer should enabled
+			if(!iPauseCalledInsilence)
+			{
+				iDataSink->SinkPrimeL(); //propagate change down to sink
+			}
 			iPauseCalled = EFalse;
 			}
 

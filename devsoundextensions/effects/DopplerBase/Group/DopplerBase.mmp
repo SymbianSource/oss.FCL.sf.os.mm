@@ -39,7 +39,7 @@ SYSTEMINCLUDE   /epoc32/include/libc
 
 SOURCE          DopplerBase.cpp
 
-LIBRARY         Euser.lib  
+LIBRARY     euser.lib  
 LIBRARY		EffectBase.lib
 LIBRARY		CustomInterfaceUtility.lib
 LIBRARY      estlib.lib

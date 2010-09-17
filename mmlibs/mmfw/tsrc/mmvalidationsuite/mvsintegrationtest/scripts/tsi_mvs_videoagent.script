@@ -35,8 +35,8 @@ LOAD_SUITE tsi_mvs_agents.dll
 //!@SYMTestActions            1. Open an AVI (Xvid) file. 2. Set position 3. Play 4. Pause after 1 second, check if KErrNotSupported is returned. 5. Get
 //! Position 6. Set to some other position (before the current position) 7. Play till end.
 //!@SYMTestExpectedResults    Video file, opened and played successfully, without any errors
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0001-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0001-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0002-HP
@@ -47,8 +47,8 @@ TEST_COMPLETE
 //!@SYMTestActions            1. Open an AVI (Xvid) file, without giving the Video Controller UID. 2. Set Rotation 3. Play 4. Set Rotation 5. Get the
 //! rotation value and check 6. Stop Playback. 6. Play again till end.
 //!@SYMTestExpectedResults    Video file, opened and played successfully, without any errors
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0002-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0002-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0003-HP
@@ -84,8 +84,8 @@ TEST_COMPLETE
 //! rate 5. Set Audio Enabled 6. Set Video / Audio Type 7. Record, Stop after 5 seconds. 8. Play using play agent 9. After Playing, get the various settings
 //! and compare with the actuals.
 //!@SYMTestExpectedResults    Record completes with KErrNone. The recorded file is played and all callbacks received
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0005-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0005-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0006-HP
@@ -120,8 +120,8 @@ TEST_COMPLETE
 //!@SYMTestActions            1. Empty the contents of the log file 2. Create a new AVI File 3. Record for 2 seconds 4. Compare the log file with the
 //! reference log file.
 //!@SYMTestExpectedResults    The Log file is checked for modification dates, and the existance of a sample string.
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0010-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0010-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0011-HP
@@ -132,8 +132,8 @@ TEST_COMPLETE
 //!@SYMTestActions            1. Empty the contents of the log file 2. Open the recorded AVI File 3. Play using the Video Play Agent 4. Compare the log
 //! file with the reference log file.
 //!@SYMTestExpectedResults    The Log file is checked for modification dates, and the existance of a sample string.
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0011-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0011-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0021-HP
@@ -142,8 +142,8 @@ TEST_COMPLETE
 //!@SYMTestPriority           2
 //!@SYMTestActions            1. Open the AVI File 2. Set & get the crop region 3. Play using the Video Play Agent 
 //!@SYMTestExpectedResults    The video plays with the newly set crop region
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0021-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0021-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// VIDEO CLIENT AGENTS :: Negative Testing ////////////////////////
@@ -168,8 +168,8 @@ TEST_COMPLETE
 //!@SYMTestPriority           2
 //!@SYMTestActions            Attempt to load and initilise a file that has an unsupported codec.
 //!@SYMTestExpectedResults    Any of the predefined error codes.
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0013-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0013-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0014-HP
@@ -179,8 +179,8 @@ TEST_COMPLETE
 //!@SYMTestPriority           2
 //!@SYMTestActions            Attempt to load a file containing text data without giving the controller UID
 //!@SYMTestExpectedResults    Invalid File.
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0014-HP \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0014-HP \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 
 
 // 
 //!@SYMTestCaseID             MM-MVS-VIDEOAGENT-I-0015-HP
@@ -211,5 +211,5 @@ TEST_COMPLETE
 //!@SYMTestActions            1. Open an AVI (Xvid) file. 2. Record                                           3. Pause after 1 second, check if KErrNone
 //! is returned. 4. Start Recording again.               5. Record till end.
 //!@SYMTestExpectedResults    Video file, opened and recorded successfully, without any errors
-RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0017 \mvs\tsi_mvs_agents.ini
-TEST_COMPLETE 
+//RUN_TEST_STEP 600000 TSI_MVS_AGENTS MM-MVS-VIDEOAGENT-I-0017 \mvs\tsi_mvs_agents.ini
+//TEST_COMPLETE 

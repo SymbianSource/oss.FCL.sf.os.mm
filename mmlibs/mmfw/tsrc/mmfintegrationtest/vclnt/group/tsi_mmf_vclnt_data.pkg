@@ -17,10 +17,25 @@
 //ini
 "\epoc32\data\c\video.ini" - "c:\video.ini"
 
+// Scripts for SecureDRM
+"\epoc32\data\c\rta\rta.ini" - "c:\rta\rta.ini"
+"\epoc32\data\c\rta\rta.script" - "c:\rta.script",testexecute.exe
+"\epoc32\data\c\securedrm_video_testdata.ini" - "c:\securedrm_video_testdata.ini"
+"\epoc32\data\c\securedrm_video.ini" - "c:\securedrm_video.ini"
+"\epoc32\data\c\tsi_mmf_securedrm_video_testdata.script" - "c:\tsi_mmf_securedrm_video_testdata.script",testexecute.exe
+
 // scripts
 "\epoc32\data\c\TSI_MMF_VCLNT_WM.script" - "c:\TSI_MMF_VCLNT_WM.script"
 "\epoc32\data\c\TSI_MMF_VCLNT_OF.script" - "c:\TSI_MMF_VCLNT_OF.script"
 "\epoc32\data\c\TSI_MMF_VCLNT_OF_ALLOC.script" - "c:\TSI_MMF_VCLNT_OF_ALLOC.script"
+
+// SecureDRM test data
+"\epoc32\data\c\rta\videocontentnorights.xml" - "c:\rta\videocontentnorights.xml"
+"\epoc32\data\c\rta\videocontent.xml" - "c:\rta\videocontent.xml"
+"\epoc32\data\c\rta\videorights.xml" - "c:\rta\videorights.xml"
+"\epoc32\data\c\securedrm\videocontent2.xml" - "c:\securedrm\videocontent2.xml"
+"\epoc32\data\c\securedrm\videorights2.xml" - "c:\securedrm\videorights2.xml"
+"\epoc32\data\c\securedrm\xvidonly.avi" - "c:\securedrm\xvidonly.avi"
 
 // data files
 "\epoc32\data\c\VclntITestData\longvideo.dummy" - "c:\VclntITestData\longvideo.dummy"

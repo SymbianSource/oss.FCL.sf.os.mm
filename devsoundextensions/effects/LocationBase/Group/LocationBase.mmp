@@ -38,8 +38,8 @@ SYSTEMINCLUDE   /epoc32/include/libc
 
 SOURCE          LocationBase.cpp
 
-LIBRARY      estlib.lib
-LIBRARY         Euser.lib
+LIBRARY     estlib.lib
+LIBRARY     euser.lib
 LIBRARY		EffectBase.lib
-LIBRARY		MmfControllerFramework.lib
+LIBRARY		mmfcontrollerframework.lib
 

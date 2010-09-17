@@ -399,10 +399,10 @@ NONSHARABLE_CLASS(CAudioRoutingTestClass) : public CScriptBase,
 		TInt CreateVideoWindow();
 		TInt DeleteVideoWindow();
 		TInt CreateSessionAndScreen();
-		TInt CreateVideoObject( CStifItemParser& aItem );
+		TInt CreateVideoObject();
 		TInt CreateWindowGroup();
 		TInt EndDrawing();
-
+		TInt CreateVideoRecorderObject();
 		TInt AudioInput();
 		TInt SetAudioInputL();
 		TInt AudioOutput();

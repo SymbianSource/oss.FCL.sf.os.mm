@@ -655,6 +655,9 @@ TInt CAudioStream::ChangeState(TAudioState aPreviousState, TAudioState aDesiredS
 	iCurrentStreamState = aPreviousState;
 	iDesiredStreamState = aDesiredState;
 
+	// Ensure that there is no dereference of a NULL pointer
+	ASSERT(iDesiredStreamState < EInitialized || iDesiredStreamState > EActive || iCodec);
+	
 	switch (iDesiredStreamState)
 		{
 		case EInitialized:
