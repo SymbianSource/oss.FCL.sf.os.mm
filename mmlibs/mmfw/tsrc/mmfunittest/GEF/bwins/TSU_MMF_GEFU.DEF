@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite_MMF_GEF@@XZ @ 1 NONAME ; class CTestSuite_MMF_GEF * NewTestSuiteL(void)
-

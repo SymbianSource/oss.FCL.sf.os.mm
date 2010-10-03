@@ -18,7 +18,7 @@
 #include <fbs.h>
 #include "videorecordfile_cov.h"
 #include "../../PU/video/src/Plugin/VideoTestEncoderPU/videotestencoderpu.hrh"
-#include "../../../../mdf/inc/codecapi/mdfoutputport.h"
+#include <mdf/mdfoutputport.h>
 
 
 const TInt KTBufSize = 256;

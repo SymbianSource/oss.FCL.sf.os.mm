@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite_MMF_DRMPlugin@@XZ @ 1 NONAME ; class CTestSuite_MMF_DRMPlugin * NewTestSuiteL(void)
-

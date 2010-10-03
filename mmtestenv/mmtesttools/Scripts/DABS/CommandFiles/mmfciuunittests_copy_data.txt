@@ -1,2 +1,0 @@
-md e:\Logs
-md e:\Logs\TestResults

@@ -1,5 +1,0 @@
-del E:\Logs\TestResults\TSU_MMF_OGGCTRL*.*
-md E:\Logs\
-md E:\Logs\TestResults\
-copy c:\Logs\TestResults\*.htm e:\Logs\TestResults\
-del c:\mm\mmf\testfiles\oggctrl\*.*

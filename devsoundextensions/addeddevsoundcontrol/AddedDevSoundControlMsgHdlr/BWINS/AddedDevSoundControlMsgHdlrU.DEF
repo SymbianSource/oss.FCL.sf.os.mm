@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CAddedDevSoundControlMsgHdlr@@SAPAV1@PAX@Z @ 1 NONAME ; class CAddedDevSoundControlMsgHdlr * CAddedDevSoundControlMsgHdlr::NewL(void *)
-

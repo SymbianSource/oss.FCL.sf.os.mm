@@ -1,3 +1,0 @@
-md c:\tsu_mmrcfw\
-
-copy z:\tsu_mmrcfw\*.* c:\tsu_mmrcfw\

@@ -100,7 +100,6 @@
 				<unit name="speechrecogsupporttest" unitID="sos.speechrecogsupporttest" bldFile="&layer_real_source_path;/mmdevicefw/speechrecogsupport/tsrc/ASR/group" mrp=""/>
 				<unit name="mmfintgdevsound" unitID="sos.mmfintgdevsound" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmfintegrationtest/devsound/group" mrp=""/>
 				<unit name="acod" unitID="sos.acod" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmfunittest/ACOD/group" mrp=""/>
-				<unit name="DevSoundTestCIPlugins" unitID="sos.DevSoundTestCIPlugins" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmfunittest/DevSoundTest/CIPlugins/group" mrp=""/>
 				<unit name="DevSoundTest" unitID="sos.DevSoundTest" bldFile="&layer_real_source_path;/mmlibs\mmfw\tsrc\mmfunittest\DevSoundTest\group" mrp=""/>
 				<unit name="SbcCodec" unitID="sos.SbcCodec" bldFile="&layer_real_source_path;/mmlibs/mmfw/tsrc/mmfunittest/SbcCodec/group" mrp=""/>
 				<unit name="mmtestfwunittest" unitID="sos.mmtestfwunittest" bldFile="&layer_real_source_path;/mmtestenv/mmtestfwunittest/group" mrp=""/>

@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CSourceLocationMessageHandler@@SAPAV1@PAX@Z @ 1 NONAME ; class CSourceLocationMessageHandler * CSourceLocationMessageHandler::NewL(void *)
-

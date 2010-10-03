@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuiteCharAudioRec@@XZ @ 1 NONAME ; class CTestSuiteCharAudioRec * NewTestSuiteL(void)
-

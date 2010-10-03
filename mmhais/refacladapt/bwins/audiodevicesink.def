@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CAudioDeviceSink@@SAPAV1@XZ @ 1 NONAME ; class CAudioDeviceSink * CAudioDeviceSink::NewL(void)
-

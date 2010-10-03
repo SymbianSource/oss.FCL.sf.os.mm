@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite_MMF_CTLFRM_SDRM@@XZ @ 1 NONAME ; class CTestSuite_MMF_CTLFRM_SDRM * NewTestSuiteL(void)
-

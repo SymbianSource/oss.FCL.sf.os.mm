@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CRoomLevelMessageHandler@@SAPAV1@PAX@Z @ 1 NONAME ; class CRoomLevelMessageHandler * CRoomLevelMessageHandler::NewL(void *)
-

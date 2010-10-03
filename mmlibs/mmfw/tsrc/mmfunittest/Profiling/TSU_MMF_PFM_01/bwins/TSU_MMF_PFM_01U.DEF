@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CTestSuiteMmfPerformance@@SAPAV1@XZ @ 1 NONAME ; public: static class CTestSuiteMmfPerformance * __cdecl CTestSuiteMmfPerformance::NewL(void)
-

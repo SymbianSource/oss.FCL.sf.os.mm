@@ -1,2 +1,0 @@
-move C:\Logs\TestResults\*.htm E:\Logs\TestResults\
-del c:\char\mmf\data\*.*

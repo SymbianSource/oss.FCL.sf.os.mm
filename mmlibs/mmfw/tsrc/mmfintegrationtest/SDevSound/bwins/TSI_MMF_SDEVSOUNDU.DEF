@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuiteSDevSound@@XZ @ 1 NONAME ; class CTestSuiteSDevSound * __cdecl NewTestSuiteL(void)
-

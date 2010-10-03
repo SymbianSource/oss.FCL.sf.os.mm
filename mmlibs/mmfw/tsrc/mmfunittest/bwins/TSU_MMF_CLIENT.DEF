@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite_MMF_CLIENT@@XZ @ 1 NONAME ; class CTestSuite_MMF_CLIENT * __cdecl NewTestSuiteL(void)
-

@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuiteCharVideoPlay@@XZ @ 1 NONAME ; class CTestSuiteCharVideoPlay * NewTestSuiteL(void)
-

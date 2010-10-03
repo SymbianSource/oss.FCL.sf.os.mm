@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CSourceDopplerMessageHandler@@SAPAV1@PAX@Z @ 1 NONAME ; class CSourceDopplerMessageHandler * CSourceDopplerMessageHandler::NewL(void *)
-

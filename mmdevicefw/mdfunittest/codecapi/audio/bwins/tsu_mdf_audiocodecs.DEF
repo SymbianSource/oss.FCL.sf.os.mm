@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuiteAudioCodecs@@XZ @ 1 NONAME ; class CTestSuiteAudioCodecs * NewTestSuiteL(void)
-

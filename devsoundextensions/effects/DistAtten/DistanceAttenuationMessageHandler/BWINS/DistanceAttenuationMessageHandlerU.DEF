@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CDistanceAttenuationMessageHandler@@SAPAV1@PAX@Z @ 1 NONAME ; class CDistanceAttenuationMessageHandler * CDistanceAttenuationMessageHandler::NewL(void *)
-

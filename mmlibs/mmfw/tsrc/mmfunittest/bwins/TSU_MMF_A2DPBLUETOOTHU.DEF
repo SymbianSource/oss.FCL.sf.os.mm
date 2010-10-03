@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite_MMF_A2DPBLUETOOTH@@XZ @ 1 NONAME ; class CTestSuite_MMF_A2DPBLUETOOTH * NewTestSuiteL(void)
-

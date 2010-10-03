@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CSourceOrientationMessageHandler@@SAPAV1@PAX@Z @ 1 NONAME ; class CSourceOrientationMessageHandler * CSourceOrientationMessageHandler::NewL(void *)
-

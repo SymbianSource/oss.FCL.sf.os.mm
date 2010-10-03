@@ -1,3 +1,0 @@
-EXPORTS
-	?NewL@CBassBoostMessageHandler@@SAPAV1@PAX@Z @ 1 NONAME ; class CBassBoostMessageHandler * CBassBoostMessageHandler::NewL(void *)
-

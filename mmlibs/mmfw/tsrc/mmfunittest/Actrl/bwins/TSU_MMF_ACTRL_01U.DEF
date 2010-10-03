@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteActrlL@@YAPAVCTestSuiteActrl@@XZ @ 1 NONAME ; class CTestSuiteActrl * __cdecl NewTestSuiteActrlL(void)
-

@@ -1,3 +1,0 @@
-EXPORTS
-	?NewTestSuiteL@@YAPAVCTestSuite_MMF_SWCDWRAP@@XZ @ 1 NONAME ; class CTestSuite_MMF_SWCDWRAP * __cdecl NewTestSuiteL(void)
-
