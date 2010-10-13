@@ -269,8 +269,25 @@ void CMMFDevSoundSession::DoServiceRequestL(const RMmfIpcMessage& aMessage)
 	iAsyncQueueStart->Cancel(); // just in case.
     ResetNotifiedError();
 
+    if (aMessage.Function() == RMessage2::EDisConnect)
+        {
+        TBool complete = iAdapter->CloseDevSound();
+        if(!complete)
+            {
+            iRequestBeingServiced.SetMessage(aMessage);
+            iOperationCompletePending = ETrue;
+            ResetNotifiedError();
+            }
+        else
+            {
+            // if we get here, iClosing wait will have been started and we'd be waiting
+            iClosingWait->AsyncStop();
+            }
+        return;
+        }
+    
     TMMFMessageDestinationPckg destinationPckg;
-	MmfMessageUtil::ReadL(aMessage, 0, destinationPckg);
+	User::LeaveIfError(MessageRead(aMessage, 0, destinationPckg));
 	SYMBIAN_DEBPRN2(_L("CMMFDevSoundSession[0x%x]::DoServiceRequestL - DestinationHandle [%d] InterfaceId [%d] "), destinationPckg().DestinationHandle(), destinationPckg().InterfaceId());
 	if ((destinationPckg().DestinationHandle() == KMMFObjectHandleDevSound) &&
 	    (destinationPckg().InterfaceId() == KUidInterfaceMMFDevSound))
@@ -459,21 +476,6 @@ void CMMFDevSoundSession::DoServiceRequestL(const RMmfIpcMessage& aMessage)
 				}
 			}
 		}
-	else if (aMessage.Function() == RMessage2::EDisConnect)
-	    {
-        TBool complete = iAdapter->CloseDevSound();
-        if(!complete)
-            {
-            iRequestBeingServiced.SetMessage(aMessage);
-            iOperationCompletePending = ETrue;
-            ResetNotifiedError();
-            }
-        else
-            {
-            // if we get here, iClosing wait will have been started and we'd be waiting
-            iClosingWait->AsyncStop();
-            }
-	    }
 	else
 		{
 		// If there's a CI extension, see if that handles this request
@@ -578,12 +580,14 @@ void CMMFDevSoundSession::HandleAlreadyCompletedRequest()
 
 void CMMFDevSoundSession::EnqueueRequest(const RMmfIpcMessage& aMessage)
 	{
+    SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::EnqueueRequest - Enter"));
 	// Encapsule the request
 	TMMFDevSoundRequest request;
 	request.SetMessage(aMessage);
 	// Append
 	TInt error = iQueuedRequests.Append(request);
-	__ASSERT_DEBUG(error == KErrNone, Panic(EQueueRequestsFailedToAppend)); 
+	__ASSERT_DEBUG(error == KErrNone, Panic(EQueueRequestsFailedToAppend));
+	SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::EnqueueRequest - Exit"));
 	}
 
 //
@@ -607,7 +611,7 @@ TBool CMMFDevSoundSession::DoInitialize1L(const RMmfIpcMessage& aMessage)
 	User::LeaveIfError(err);
 	DoSetClientConfigL();// added here instead of the CreateL()
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	MmfMessageUtil::ReadL(aMessage,1,devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,1,devSoundBuf));
 	iCachedClientData = devSoundBuf;
 	TMMFState mode = devSoundBuf().iMode;
 	iAdapter->InitializeL(mode);
@@ -644,7 +648,7 @@ TBool CMMFDevSoundSession::DoInitialize2L(const RMmfIpcMessage& aMessage)
 	User::LeaveIfError(err);
 	DoSetClientConfigL();// added here instead of the CreateL()
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	MmfMessageUtil::ReadL(aMessage,1,devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,1,devSoundBuf));
 	iCachedClientData = devSoundBuf;
 	TUid HWDev = devSoundBuf().iHWDev;
 	TMMFState mode = devSoundBuf().iMode;
@@ -678,7 +682,7 @@ TBool CMMFDevSoundSession::DoInitialize4L(const RMmfIpcMessage& aMessage)
 	User::LeaveIfError(err);
 	DoSetClientConfigL();// added here instead of the CreateL()
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage, TInt(1), devSoundBuf));
 	iCachedClientData = devSoundBuf;
 	TFourCC desiredFourCC = devSoundBuf().iDesiredFourCC;
 	TMMFState mode = devSoundBuf().iMode;
@@ -718,7 +722,6 @@ TBool CMMFDevSoundSession::DoCancelInitializeL(const RMmfIpcMessage& aMessage)
 		{
 		aMessage.Complete(err);
 		iOperationCompletePending = EFalse;
-		return ETrue;
 		}
 	else
 		{
@@ -755,7 +758,7 @@ TBool CMMFDevSoundSession::DoConfigL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	devSoundSet.iConfig = iAdapter->Config();
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -766,7 +769,7 @@ TBool CMMFDevSoundSession::DoConfigL(const RMmfIpcMessage& aMessage)
 TBool CMMFDevSoundSession::DoSetConfigL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	TMMFCapabilities config = devSoundBuf().iConfig;
 	iAdapter->SetConfigL(config);
 	iOperationCompletePending = ETrue;
@@ -782,7 +785,7 @@ TBool CMMFDevSoundSession::DoMaxVolumeL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	devSoundSet.iMaxVolume = iAdapter->MaxVolume();
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -795,7 +798,7 @@ TBool CMMFDevSoundSession::DoVolumeL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	devSoundSet.iVolume = iAdapter->Volume();
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -806,7 +809,7 @@ TBool CMMFDevSoundSession::DoVolumeL(const RMmfIpcMessage& aMessage)
 TBool CMMFDevSoundSession::DoSetVolumeL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage, TInt(1),devSoundBuf));
 	TInt volume = devSoundBuf().iVolume;
 	TBool asyncOperation;
 	User::LeaveIfError(iAdapter->SetVolume(volume, asyncOperation));
@@ -823,7 +826,7 @@ TBool CMMFDevSoundSession::DoMaxGainL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	devSoundSet.iMaxGain = iAdapter->MaxGain();
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -836,7 +839,7 @@ TBool CMMFDevSoundSession::DoGainL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	devSoundSet.iGain = iAdapter->Gain();
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -847,7 +850,7 @@ TBool CMMFDevSoundSession::DoGainL(const RMmfIpcMessage& aMessage)
 TBool CMMFDevSoundSession::DoSetGainL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	TInt gain = devSoundBuf().iGain;
 	TBool asyncOperation;
 	User::LeaveIfError(iAdapter->SetGain(gain, asyncOperation));
@@ -864,7 +867,7 @@ TBool CMMFDevSoundSession::DoGetPlayBalanceL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	iAdapter->GetPlayBalanceL(devSoundSet.iLeftPercentage, devSoundSet.iRightPercentage);
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -875,7 +878,7 @@ TBool CMMFDevSoundSession::DoGetPlayBalanceL(const RMmfIpcMessage& aMessage)
 TBool CMMFDevSoundSession::DoSetPlayBalanceL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+    User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	TInt leftPercentage = devSoundBuf().iLeftPercentage;
 	TInt rightPercentage = devSoundBuf().iRightPercentage;
 	TBool asyncOperation;
@@ -893,7 +896,7 @@ TBool CMMFDevSoundSession::DoGetRecordBalanceL(const RMmfIpcMessage& aMessage)
 	TMMFDevSoundProxySettings devSoundSet;
 	iAdapter->GetRecordBalanceL(devSoundSet.iLeftPercentage, devSoundSet.iRightPercentage);
 	TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -904,7 +907,7 @@ TBool CMMFDevSoundSession::DoGetRecordBalanceL(const RMmfIpcMessage& aMessage)
 TBool CMMFDevSoundSession::DoSetRecordBalanceL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	TInt leftPercentage = devSoundBuf().iLeftPercentage;
 	TInt rightPercentage = devSoundBuf().iRightPercentage;
 	TBool asyncOperation;
@@ -970,7 +973,7 @@ TBool CMMFDevSoundSession::DoPlayDataL(const RMmfIpcMessage& aMessage)
 		}
 
 	TMMFDevSoundProxyHwBufPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	iBufferPlay->SetLastBuffer(devSoundBuf().iLastBuffer);
 
 	TPtr8 dataPtr(iChunk.Base(), devSoundBuf().iBufferSize, devSoundBuf().iBufferSize);
@@ -1002,7 +1005,7 @@ TBool CMMFDevSoundSession::DoStopL(const RMmfIpcMessage& /*aMessage*/)
 	TBool completed = iAdapter->Stop();
 	if (completed)
 		{
-		iQueuedRequests.Reset();
+        FlushQueuedRequests();
 		FlushEventQueue(); // completed returned here means we were idle to start with. TODO could possibly skip this flush
 		iChunk.Close();
 		}
@@ -1030,7 +1033,7 @@ TBool CMMFDevSoundSession::DoPlayToneL(const RMmfIpcMessage& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::DoPlayToneL - Enter"));
     TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	iCachedClientData = devSoundBuf;
 	TInt frequency = devSoundBuf().iFrequencyOne;
 	TTimeIntervalMicroSeconds duration(devSoundBuf().iDuration);
@@ -1060,7 +1063,7 @@ TBool CMMFDevSoundSession::DoPlayDualToneL(const RMmfIpcMessage& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::DoPlayDualToneL - Enter"));
     TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	iCachedClientData = devSoundBuf;
 	TInt frequencyOne = devSoundBuf().iFrequencyOne;
 	TInt frequencyTwo = devSoundBuf().iFrequencyTwo;
@@ -1101,8 +1104,7 @@ TBool CMMFDevSoundSession::DoPlayDTMFStringL(const RMmfIpcMessage& aMessage)
 
 	iDtmfString = HBufC::NewL(dtmfLength);
 	TPtr dtmfPtr = iDtmfString->Des();
-	aMessage.ReadL(TInt(2), dtmfPtr);
-
+    User::LeaveIfError(MessageRead(aMessage, TInt(2), dtmfPtr));
 	iAdapter->PlayDTMFStringL(*iDtmfString);
 	iOperationCompletePending = ETrue;
 	SYMBIAN_DEBPRN1(_L("CMMFDevSoundSession[0x%x]::DoPlayDTMFStringL - Exit. Return value is [%d]"), ETrue);
@@ -1136,7 +1138,7 @@ TBool CMMFDevSoundSession::DoPlayToneSequenceL(const RMmfIpcMessage& aMessage)
 
 	iToneSeqBuf = HBufC8::NewL(toneLength);
 	TPtr8 toneSeqPtr = iToneSeqBuf->Des();
-	aMessage.ReadL(TInt(1), toneSeqPtr);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1), toneSeqPtr));
 
 	iAdapter->PlayToneSequenceL(*iToneSeqBuf);
 	iOperationCompletePending = ETrue;
@@ -1162,7 +1164,7 @@ TBool CMMFDevSoundSession::DoPlayFixedSequenceL(const RMmfIpcMessage& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::DoPlayFixedSequenceL - Enter"));
     TPckgBuf<TInt> buf;
-	aMessage.ReadL(TInt(1),buf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),buf));
 	TInt seqNum = buf();
 	iSeqNum = seqNum;
 	iAdapter->PlayFixedSequenceL(seqNum);
@@ -1189,7 +1191,7 @@ TBool CMMFDevSoundSession::DoSetDTMFLengthsL(const RMmfIpcMessage& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::DoSetDTMFLengthsL - Enter"));
     TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	TTimeIntervalMicroSeconds32 toneOnLength = devSoundBuf().iToneOnLength;
 	TTimeIntervalMicroSeconds32 toneOffLength = devSoundBuf().iToneOffLength;
 	TTimeIntervalMicroSeconds32 pauseLength = devSoundBuf().iPauseLength;
@@ -1206,7 +1208,7 @@ TBool CMMFDevSoundSession::DoSetVolumeRampL(const RMmfIpcMessage& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::DoSetVolumeRampL - Enter"));
     TMMFDevSoundProxySettingsPckg devSoundBuf;
-	aMessage.ReadL(TInt(1),devSoundBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),devSoundBuf));
 	TTimeIntervalMicroSeconds duration = devSoundBuf().iDuration;
 	User::LeaveIfError(iAdapter->SetVolumeRamp(duration));
 	iOperationCompletePending = EFalse; // Volume ramp doesn't result on commit
@@ -1224,14 +1226,14 @@ TBool CMMFDevSoundSession::DoGetSupportedInputDataTypesL(
 	iArray.Reset();
 
 	TMMFPrioritySettingsPckg prioritySetBuf;
-	aMessage.ReadL(TInt(1),prioritySetBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),prioritySetBuf));
 	TMMFPrioritySettings prioritySet = prioritySetBuf();
 
 	iAdapter->GetSupportedInputDataTypesL(iArray, prioritySet);
 
 	TPckgBuf<TInt> pckg;
 	pckg() = iArray.Count();
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 
 	return ETrue;
 	}
@@ -1246,14 +1248,14 @@ TBool CMMFDevSoundSession::DoGetSupportedOutputDataTypesL(
 	iArray.Reset();
 
 	TMMFPrioritySettingsPckg prioritySetBuf;
-	aMessage.ReadL(TInt(1),prioritySetBuf);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),prioritySetBuf));
 	TMMFPrioritySettings prioritySet = prioritySetBuf();
 
 	iAdapter->GetSupportedOutputDataTypesL(iArray, prioritySet);
 
 	TPckgBuf<TInt> pckg;
 	pckg() = iArray.Count();
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 
 	return ETrue;
 	}
@@ -1266,7 +1268,7 @@ TBool CMMFDevSoundSession::DoSamplesRecordedL(const RMmfIpcMessage& aMessage)
 	{
 	TPckgBuf<TInt> pckg;
 	pckg() = iAdapter->SamplesRecorded();
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -1278,7 +1280,7 @@ TBool CMMFDevSoundSession::DoSamplesPlayedL(const RMmfIpcMessage& aMessage)
 	{
 	TPckgBuf<TInt> pckg;
 	pckg() = iAdapter->SamplesPlayed();
-	aMessage.WriteL(TInt(2),pckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),pckg));
 	return ETrue;
 	}
 
@@ -1290,10 +1292,10 @@ TBool CMMFDevSoundSession::DoSetToneRepeatsL(const RMmfIpcMessage& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::DoSetToneRepeatsL - Enter"));
     TPckgBuf<TInt> countRepeat;
-	aMessage.ReadL(TInt(1),countRepeat);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),countRepeat));
 
 	TPckgBuf<TTimeIntervalMicroSeconds> repeatTS;
-	aMessage.ReadL(TInt(2),repeatTS);
+	User::LeaveIfError(MessageRead(aMessage,TInt(2),repeatTS));
 	User::LeaveIfError(iAdapter->SetToneRepeats(countRepeat(), repeatTS()));
     SYMBIAN_DEBPRN1(_L("CMMFDevSoundSession[0x%x]::DoSetToneRepeatsL - Exit. Return value is [%d]"), ETrue);
 	return ETrue;
@@ -1307,7 +1309,7 @@ TBool CMMFDevSoundSession::DoSetPrioritySettingsL(
 						const RMmfIpcMessage& aMessage)
 	{
 	TPckgBuf<TMMFPrioritySettings> prioritySet;
-	aMessage.ReadL(TInt(1),prioritySet);
+	User::LeaveIfError(MessageRead(aMessage,TInt(1),prioritySet));
 
 	User::LeaveIfError(iAdapter->SetPrioritySettings(prioritySet()));
 	iOperationCompletePending = EFalse;
@@ -1326,7 +1328,7 @@ TBool CMMFDevSoundSession::DoFixedSequenceCountL(
 	TInt fixSeqCount = iAdapter->FixedSequenceCount();
 	fixSeqCountPckg = fixSeqCount;
 
-	aMessage.WriteL(TInt(2),fixSeqCountPckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),fixSeqCountPckg));
     SYMBIAN_DEBPRN1(_L("CMMFDevSoundSession[0x%x]::DoFixedSequenceCountL - Exit. Return value is [%d]"), ETrue);
 	return ETrue;
 	}
@@ -1354,7 +1356,7 @@ TBool CMMFDevSoundSession::DoCopyFourCCArrayDataL(
 		stream.WriteInt32L(iArray[i].FourCC());
 		i++;
 		}
-	aMessage.WriteL(TInt(2), dataCopyBuffer->Ptr(0));
+	User::LeaveIfError(MessageWrite(aMessage, TInt(2), dataCopyBuffer->Ptr(0)));
 	stream.Close();
 	CleanupStack::PopAndDestroy(&stream);
 	CleanupStack::PopAndDestroy(dataCopyBuffer);
@@ -1377,14 +1379,14 @@ TBool CMMFDevSoundSession::DoBufferToBeFilledDataL(
 		return EFalse;	
 		}
 	TPckgBuf<TInt> requestChunkBuf;
-	MmfMessageUtil::Read(aMessage, TInt(1), requestChunkBuf);
+	User::LeaveIfError(MessageRead(aMessage, TInt(1), requestChunkBuf));
 	TBool requestChunk = requestChunkBuf();
 	if (requestChunk)
 		{
 		// if the client requests, always do EOpen
 		iHwBufPckgFill().iChunkOp = EOpen;
 		}
-	TInt err = MmfMessageUtil::Write(aMessage, TInt(2), iHwBufPckgFill);
+	TInt err = MessageWrite(aMessage, TInt(2), iHwBufPckgFill);
 	if ( (err == KErrNone) && (iHwBufPckgFill().iChunkOp == EOpen) )
 		{
 		aMessage.Complete(iChunk);
@@ -1410,7 +1412,7 @@ TBool CMMFDevSoundSession::DoBufferToBeEmptiedDataL(
 		return EFalse;	
 		}
 	
-	TInt err = MmfMessageUtil::Write(aMessage, TInt(2), iHwBufPckgEmpty);
+	TInt err = MessageWrite(aMessage, TInt(2), iHwBufPckgEmpty);
 	if ( (err == KErrNone) && (iHwBufPckgEmpty().iChunkOp == EOpen) )
 		{
 		aMessage.Complete(iChunk);
@@ -1456,7 +1458,7 @@ TBool CMMFDevSoundSession::DoGetTimePlayedL(const RMmfIpcMessage& aMessage)
 		aMessage.Complete(err);
 		return EFalse;		
 		}
-	aMessage.WriteL(TInt(2),timePckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),timePckg));
 	return ETrue;
 	}
 
@@ -1465,7 +1467,7 @@ TBool CMMFDevSoundSession::DoQueryResumeSupportedL(const RMmfIpcMessage& aMessag
 	TBool isSupported = EFalse;
 	TPckgBuf<TBool> isSupportedPckg(isSupported);
 	isSupportedPckg() = iAdapter->IsResumeSupported();
-	aMessage.WriteL(TInt(2),isSupportedPckg);
+	User::LeaveIfError(MessageWrite(aMessage,TInt(2),isSupportedPckg));
 	return ETrue;
 	}
 
@@ -1522,7 +1524,8 @@ TBool CMMFDevSoundSession::DoCustomCommandL(const RMmfIpcMessage& aMessage)
 // (other items were commented in a header).
 //
 CMMFDevSoundSession::CMMFDevSoundSession() :
-	iSetClientConfigApplied (EFalse)
+	iSetClientConfigApplied (EFalse),
+	iDisconnecting (EFalse)
 	{
 	}
 
@@ -1640,6 +1643,8 @@ void CMMFDevSoundSession::FilterQueueEvent(TMMFDevSoundProxyRequest aRequest)
 void CMMFDevSoundSession::Disconnect(const RMessage2& aMessage)
 	{
     SYMBIAN_DEBPRN0(_L("CMMFDevSoundSession[0x%x]::Disconnect - Enter"));
+    iDisconnecting = ETrue;
+	
     if (NeedToQueue())
         {
         // if we are in the middle of something, enqueue and wait
@@ -2106,7 +2111,7 @@ void CMMFDevSoundSession::AsynchronousOperationComplete(TInt aError, TBool aCanS
 				if (iRequestBeingServiced.Function()==EMMFDevSoundProxyStop)
 					{
 					// flush the queue - will have removed any stale items added between initial call and MMRC's reaction
-					iQueuedRequests.Reset();
+                    FlushQueuedRequests();
 					FlushEventQueue();
 					iChunk.Close();
 					}
@@ -2116,7 +2121,7 @@ void CMMFDevSoundSession::AsynchronousOperationComplete(TInt aError, TBool aCanS
 					TMMFDevSoundProxySettings devSoundSet;
 					devSoundSet.iCaps = iDevSoundCapabilities;
 					TMMFDevSoundProxySettingsPckg pckg(devSoundSet);
-					iRequestBeingServiced.Message().Write(TInt(2),pckg);
+					MessageWrite(iRequestBeingServiced.Message(),TInt(2),pckg);
 					}
 				
 				if(iRequestBeingServiced.Function()==EMMFDevSoundProxyCancelInitialize)
@@ -2541,11 +2546,11 @@ void CMMFDevSoundSession::DoSendSlaveAsyncCommandResultL(const RMmfIpcMessage& a
 TBool CMMFDevSoundSession::DoRegisterAsClientL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg buf;
-	aMessage.ReadL(0,buf);
+	User::LeaveIfError(MessageRead(aMessage,0,buf));
 	HBufC8* notificationRegistrationData = NULL;
 	notificationRegistrationData = HBufC8::NewLC(User::LeaveIfError(aMessage.GetDesLengthL(1)));
 	TPtr8 dataPtr(notificationRegistrationData->Des());  	
-	aMessage.ReadL(1,dataPtr);
+	User::LeaveIfError(MessageRead(aMessage,1,dataPtr));
 	DoSetClientConfigL();// added here instead of the CreateL()
 	TInt err = KErrNone;
 	err = iAdapter->RegisterAsClient(buf().iNotificationEventUid,dataPtr);
@@ -2561,7 +2566,7 @@ TBool CMMFDevSoundSession::DoRegisterAsClientL(const RMmfIpcMessage& aMessage)
 TBool CMMFDevSoundSession::DoCancelRegisterAsClientL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg buf;
-	aMessage.ReadL(0,buf);
+	User::LeaveIfError(MessageRead(aMessage,0,buf));
 	TInt err = KErrNone;
 	err = iAdapter->CancelRegisterAsClient(buf().iNotificationEventUid);
 	if (err != KErrNone)
@@ -2575,14 +2580,14 @@ TBool CMMFDevSoundSession::DoCancelRegisterAsClientL(const RMmfIpcMessage& aMess
 TBool CMMFDevSoundSession::DoGetResourceNotificationDataL(const RMmfIpcMessage& aMessage)
 	{
 	TMMFDevSoundProxySettingsPckg buf;
-	aMessage.ReadL(0,buf);
+	User::LeaveIfError(MessageRead(aMessage,0,buf));
 	HBufC8* notificationData = NULL;
 	notificationData = HBufC8::NewLC(User::LeaveIfError(aMessage.GetDesMaxLengthL(2)));
 	TPtr8 dataPtr(notificationData->Des());  	
-	aMessage.ReadL(2,dataPtr);
+	User::LeaveIfError(MessageRead(aMessage,2,dataPtr));
 	TInt err = KErrNone;
 	err = iAdapter->GetResourceNotificationData(buf().iNotificationEventUid,dataPtr);
-	aMessage.WriteL(2,*notificationData);
+	User::LeaveIfError(MessageWrite(aMessage,2,*notificationData));
 	CleanupStack::PopAndDestroy(1); // Notification data
 	if (err != KErrNone)
 		{
@@ -2611,7 +2616,7 @@ TBool CMMFDevSoundSession::DoSetClientThreadInfoL(const RMmfIpcMessage& aMessage
 		if (aMessage.HasCapability(ECapabilityMultimediaDD) && aMessage.HasCapability(ECapabilityUserEnvironment))
 			{
 			TPckgBuf<TThreadId> threadId;
-			aMessage.ReadL(1, threadId);
+			User::LeaveIfError(MessageRead(aMessage, 1, threadId));
 			
 			CMMFDevSoundServer* server = 
 				const_cast<CMMFDevSoundServer*>(static_cast<const CMMFDevSoundServer*>(Server()));
@@ -2639,6 +2644,46 @@ void CMMFDevSoundSession::BufferErrorEvent()
 	// this will generate an processing error event and callback
 	iAdapter->BufferErrorEvent();
 	}
+
+void CMMFDevSoundSession::FlushQueuedRequests()
+    {
+    for (TInt queueIndex = (iQueuedRequests.Count() - 1); queueIndex >= 0; --queueIndex)
+        {
+        if ((iQueuedRequests[queueIndex].Type() == TMMFDevSoundRequest::ESessionEvents) && 
+                (iQueuedRequests[queueIndex].Function() == RMessage2::EDisConnect))
+            {
+            continue;
+            }
+        iQueuedRequests.Remove(queueIndex);
+        }    
+    }
+
+TInt CMMFDevSoundSession::MessageRead(const RMmfIpcMessage& aMessage, TInt aParam, TDes8& aResult)
+    {
+    if (!iDisconnecting)
+        {
+        return MmfMessageUtil::Read(aMessage, aParam, aResult);    
+        }
+    return KErrBadHandle;
+    }
+
+TInt CMMFDevSoundSession::MessageRead(const RMmfIpcMessage& aMessage, TInt aParam, TDes16& aResult)
+    {
+    if (!iDisconnecting)
+        {
+        return aMessage.Read(aParam, aResult);    
+        }
+    return KErrBadHandle;
+    }
+
+TInt CMMFDevSoundSession::MessageWrite(const RMmfIpcMessage& aMessage, TInt aParam, const TDesC8& aValue)
+    {
+    if (!iDisconnecting)
+        {
+        return MmfMessageUtil::Write(aMessage, aParam, aValue);
+        }
+    return KErrBadHandle;
+    }
 
 void CMMFDevSoundSession::ResetNotifiedError()
 // called at beginning of commit cycle, so any error will be from callbacks

@@ -384,7 +384,6 @@ private:
 
 	// From MDevSoundObserver
 	virtual void PlayError(TInt aError);
-	virtual void InitializeComplete(TInt aError);
 
 private:
 	TInt iRepeatCount;

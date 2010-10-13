@@ -334,10 +334,8 @@ TEST_COMPLETE
 //! @SYMTestActions				1. Configure DevSound to play PCM16 raw audio data in mono mode with sampling rate of 8 kHz.
 //!								2. Start playing and read recorded data from file.
 //!								3. Stop playback once EOF is reached.
-//!								4. Initialize again
-//!								5. Check that time played is 0
-//!								6. Restart playback again
-//!								7. Stop test when EOF is reached again
+//!								4. Restart playback again
+//!								5. Stop test when EOF is reached again
 //! @SYMTestExpectedResults		Devsound to successfully play PCM16 audio data in mono mode with sampling rate of 8 KHz twice with all the DevSound callback 
 //!								functions being executed as required throughout the test.
 
