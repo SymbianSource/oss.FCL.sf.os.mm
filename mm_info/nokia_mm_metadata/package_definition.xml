@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SystemDefinition xmlns:sf="http://www.symbian.org/system-definition" schema="3.0.0" id-namespace="http://www.nokia.com/schema/drd/system-definition">
+ <package id="sf:mm" name="Multimedia" levels="adaptation hw-if device-fw devices middleware app-if">
+    <collection id="sf:video" name="Video Codecs" level="middleware">
+      <component id="arm_mdf_decoders" filter="s60" name="ARM MDF Decoders">
+        <unit bldFile="../../video/ARM_MDF_Decoders/group"/>
+      </component>
+    </collection>
+    <collection id="sf:mmplugins" name="Multimedia Plugins" level="middleware">
+     <component id="capsadaptation" name="CAPS Adaptation" introduced="^3" purpose="optional" before="sf:imagingplugins">
+          <unit bldFile="../../mmplugins/CAPSAdaptation/group" mrp="../../mmplugins/CAPSAdaptation/group/multimedia_icl_capsadaptation.mrp"/>
+     </component>
+    </collection>
+    <collection id="mmpacketvideo" name="Multimedia PacketVideo" level="middleware" before="sf:mmapitest">
+     <component id="mmpvcodecs" name="PacketVideo Codecs" introduced="^3" purpose="development" class="plugin">
+      <unit bldFile="../../mmpacketvideo/mmpvcodecs/group" mrp="../../mmpacketvideo/mmpvcodecs/group/multimedia_pv_aac.mrp"/>
+     </component>
+     <component id="omxilpvcomps" name="OpenMAX IL PacketVideo Components" introduced="^3" purpose="development">
+      <unit bldFile="../../mmpacketvideo/omxilpvcomps/group" mrp="../../mmpacketvideo/omxilpvcomps/group/multimedia_omx_il_pv_comps.mrp"/>
+     </component>
+     <component id="mmilapipv" name="Multimedia Integration Layer API PacketVideo" introduced="^3" purpose="development">
+      <unit bldFile="../../mmpacketvideo/mmilapipv/group" mrp="../../mmpacketvideo/mmilapipv/group/multimedia_il_api_pv.mrp"/>
+     </component>
+     <component id="a3fpvintegrationtest" name="A3F PacketVideo Integration Tests" introduced="^3" purpose="development" filter="test">
+      <unit mrp="../../mmpacketvideo/a3fpvintegrationtest/group/multimedia_inttest_pv_a3f_devsound_source.mrp" bldFile="../../mmpacketvideo/a3fpvintegrationtest/group"/>
+     </component>
+    </collection>
+   <collection id="sf:mm_info" name="Multimedia Info" level="app-if">
+   <component id="nokia_mm_metadata" name="Nokia Multimedia Metadata" class="config" introduced="^2" purpose="development" target="desktop">
+    <unit mrp="nokia_mm_metadata.mrp"/>
+   </component>
+  </collection>
+ </package>
+</SystemDefinition>

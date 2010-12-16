@@ -1,0 +1,46 @@
+**************Running MultiMedia Tests On ASSABET and LUBBOCK Platforms**************
+
+This directory contains three .iby files, each of which should be copied to
+M:\EPOC32\ROM\INCLUDE\  (Where M:\ is your Epoc drive letter). They are listed below:
+
+MmfIntTests.iby - includes all dlls and scripts required for the MMF integration tests.
+IclIntTests.iby - includes all dlls and scripts required for the ICL integration tests.
+MmfUnitTests.iby - includes all dlls and scripts required for the MMF and testframework unit tests.
+IclUnitTests.iby - includes all dlls and scripts required for the ICL unit tests.
+
+(These are automatically copied using "bldmake bldfiles; abld export" from the source folder)
+
+---------------------------------------------------------------------------------
+
+The following batch files should be copied to M:\EPOC32\DATA\C\
+(Where M:\ is your Epoc drive letter)
+
+RunMMFIntTests.bat
+RunICLIntTests.bat
+RunICLUnitTests.bat
+RunMMFUnitTests.bat
+
+These batch files are intended for running on the target platform and will be integrated
+into target ROM builds by specifying the corresponding .iby file when building the ROM.
+
+(These are automatically copied using "bldmake bldfiles; abld export" from the source folder)
+
+----------------------------------------------------------------------------------
+
+Finally the file CopyDataToCf.bat should be used to copy all the files required for all tests onto a CF card, which can then be inserted into the target device in order to provide all test data. From the command prompt (PC), usage is:
+
+CopyDataToCF F:  (where F: is the CF card drive letter)
+
+Copying all the data onto the CF card takes several minutes. Note that the data is copied from DATA\C\ subdirectories. A chkdsk operation will automatically be performed at the end of the copy process for your convenience.
+
+----------------------------------------------------------------------------------
+
+Now, from the EPOC32\ROM\ directory, build a ROM for your selected target device as normal,  specifying ONE of the .iby files above as an additional include. The tests have been split over several iby files so as to fit onto a ROM (max size ~18MB). Boot the target device as normal and insert the CF card containing data files into the E: drive slot on the target device. (note: on Lubbock E:\ drive is the CF card slot, 
+not the PC card one).
+
+The batch file required to run your selected tests can now be found on the Root of the Z: drive and can be run from EShell.
+
+from Z:\, type RunMmfIntTests, RunIclIntTests, RunIclUnitTests or RunMmfUnitTests accordingly.
+
+The test result html files will be stored in C:\logs\testresults\ as normal.
+

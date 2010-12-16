@@ -29,6 +29,7 @@ static const TUint32 K3G2Brand = MAKE_INT32('3', 'g', '2', 0);
 static const TUint32 K3GSBrand = MAKE_INT32('3', 'g', 's', 0);	// Streaming servers.
 static const TUint32 K3GRBrand = MAKE_INT32('3', 'g', 'r', 0);	// Progresive download and MMS.
 static const TUint32 KQTBrand  = MAKE_INT32('q', 't', ' ', ' '); // for quicktime
+static const TUint32 KDBYBrand = MAKE_INT32('d', 'b', 'y', 0);
 //
 // Box identifiers.
 //
@@ -97,6 +98,7 @@ TMPEG4File;
 //
 static const TMPEG4File KMPEG4Files[] =
 	{
+
 		{KExtMP4,	KMP4Brand,	KMimeMP4_A,	KMimeMP4_V},
 		{KExt3GP,	K3GPBrand,	KMime3GP_A,	KMime3GP_V},
 		{KExtM4A,	KMP4Brand,	KMimeMP4_A,	NULL},
@@ -104,7 +106,9 @@ static const TMPEG4File KMPEG4Files[] =
 		{KExt3GP,	K3GSBrand,	KMime3GP_A,	KMime3GP_V},
 		{KExt3GP,	K3GRBrand,	KMime3GP_A,	KMime3GP_V},
 		{KExt3GA,	K3GPBrand,	KMime3GA,	NULL},
-		{KExtMOV,   KQTBrand,   NULL, KMimeQuickV} // this entry is for .mov files
+		{KExtMOV,   KQTBrand,   NULL, KMimeQuickV},// this entry is for .mov files
+		{KExtMP4,   KDBYBrand,  KMimeDolby, KMimeMP4_V}//this entry for Dolby Digital audio content
+		
 	};
 
 static const TInt KMPEG4FileTypeCount = sizeof(KMPEG4Files) / sizeof(TMPEG4File);
@@ -159,22 +163,55 @@ const TText8* TMPEG4Parser::MatchFileType(const TDesC& aExt)
 			{
 			TPtrC ext(KMPEG4Files[i].iExt);
 			if (aExt.MatchF(ext) != KErrNotFound)
+                // Extension match. If the extension is for an audio-only format
+                // we must make sure there is no video content in the file. If
+                // video content is present then ignore the extension match.
 				{
-				// Extension match. If the extension is for an audio-only format
-				// we must make sure there is no video content in the file. If
-				// video content is present then ignore the extension match.
-				if (KMPEG4Files[i].iVideoMime == NULL)
-					{
-					if (videoFound)
-						{
-						// Try to match another extension.
-						continue;
-						}
-					
-					return KMPEG4Files[i].iAudioMime;
-					}
-				
-				return (video ? KMPEG4Files[i].iVideoMime : KMPEG4Files[i].iAudioMime);
+				if(KMPEG4Files[i].iBrand == KMPEG4Files[iBrandIndex].iBrand )
+				  {
+				    //this check is required since the mime types and brands of the files having the same extension are different.
+	                //For example, files having the extension .mp4 may be audio only dolby files and also be video files.
+                   if (KMPEG4Files[i].iVideoMime == NULL)
+                        {
+                        if (videoFound)
+                            {
+                            // Try to match another extension.
+                            continue;
+                            }
+                        
+                        return KMPEG4Files[i].iAudioMime;
+                        }
+                    
+                    return (video ? KMPEG4Files[i].iVideoMime : KMPEG4Files[i].iAudioMime);
+				  }
+				}
+			}
+			//the loop needs to be run again because there are cases where the brand doesnt match but the extension matches.
+			//For those cases, we need to run through the array once again to make sure the correct mime type is returned.
+        for (TInt i = 0; i < KMPEG4FileTypeCount; i++)
+            {
+            TPtrC ext1(KMPEG4Files[i].iExt);
+            if (aExt.MatchF(ext1) != KErrNotFound)
+                // Extension match. If the extension is for an audio-only format
+                // we must make sure there is no video content in the file. If
+                // video content is present then ignore the extension match.
+                {
+				    //extension match has happened but brand is not recognised for some reason.
+				    //So carry out the same process again. 
+				    if (KMPEG4Files[i].iVideoMime == NULL)
+                        {
+                        if (videoFound)
+                            {
+                            // Try to match another extension.
+                            continue;
+                            }
+                        
+                        return KMPEG4Files[i].iAudioMime;
+                        }
+                    
+                    return (video ? KMPEG4Files[i].iVideoMime : KMPEG4Files[i].iAudioMime);   
+				   
+				  
 				}
 			}
 		}
@@ -454,7 +491,7 @@ void TMPEG4Parser::ReadTrackHeaderL()
 	
 //
 // Parses the 'ftyp' box.
-// Records the first recognised brand that helps to
+// Records the recognised brand that helps to
 // identify the mime-type.
 //
 void TMPEG4Parser::ReadFileTypeL()
@@ -462,9 +499,7 @@ void TMPEG4Parser::ReadFileTypeL()
 	// Intro = [size][title][majorBrand] = 12 bytes.
 	const TInt KMPEG4FtypIntroLen = 12;
 	TUint32 brand;
-	
-	// If the majorBrand isn't recognised we should also
-	// search the compatible brand list.
+	TInt compatibleBrandIndex;
 	TInt64 bytesRemaining = iSize - KMPEG4FtypIntroLen;
 	//here there should be bytes remaining. Otherwise we cant read.
 	if( bytesRemaining <0 )
@@ -473,30 +508,28 @@ void TMPEG4Parser::ReadFileTypeL()
 	}
 	
 	iReader.Read32L(brand);
-	iBrandIndex = TMPEG4Parser::IsCompatibleBrand(brand);
-	if (iBrandIndex != KErrNotFound)
-		{
-		// The major brand was recognised.
-		// Skip to the end of the ftyp box.
-		iReader.SeekL(bytesRemaining);
-		return;
-		}
-		
-	// The major brand wasn't recognised.
-	// Skip over the version info (32 bit) to the start of the
-	// compatible brands list.
-	TInt skip = sizeof(TUint32);
-	iReader.SeekL(skip);
-	bytesRemaining -= skip;
-	
-	while ((iBrandIndex == KErrNotFound) && (bytesRemaining > 0))
-		{
-		iReader.Read32L(brand);
-		bytesRemaining -= skip;
-		iBrandIndex = TMPEG4Parser::IsCompatibleBrand(brand);
-		}
-
-	iReader.SeekL(bytesRemaining);
+	//major brand index is found here.
+	TInt majorBrandIndex = TMPEG4Parser::IsCompatibleBrand(brand);
+	iBrandIndex = majorBrandIndex; 
+	//even if major brand is found, go through the compatible brands to identify the dby type.
+	// Skip over the version info (32 bit) to the start of the compatible brands list.
+    TInt skip = sizeof(TUint32);
+    iReader.SeekL(skip);
+    bytesRemaining -= skip;
+        
+    while (bytesRemaining > 0)
+        {
+        iReader.Read32L(brand);
+        bytesRemaining -= skip;
+        compatibleBrandIndex = TMPEG4Parser::IsCompatibleBrand(brand);
+        	//if dby brand is found, then update the iBrandIndex
+        	//else keep the major brand.
+        if(compatibleBrandIndex != KErrNotFound && KMPEG4Files[compatibleBrandIndex].iBrand == KDBYBrand)
+            {
+            iBrandIndex = compatibleBrandIndex;
+            break;
+            }
+        }        
 	}
 
 

@@ -130,7 +130,10 @@ CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody()
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::~CMediaClientVideoDisplayBody +++");
 
 	// remove for whichever array is current
-	RemoveBackgroundSurface(ETrue);
+	if(iClientWindowIsInFocus)
+	    {
+	    RemoveBackgroundSurface(ETrue);
+	    }
 
 #ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
     if(iSwitchedToExternalDisplay)
@@ -231,7 +234,7 @@ void CMediaClientVideoDisplayBody::AddDisplayWindowL(const RWindowBase* aWindow,
                 }
             }
         
-        if(!iSwitchedToExternalDisplay)
+        if(!iSwitchedToExternalDisplay && iClientWindowIsInFocus)
             {
             User::LeaveIfError(SetBackgroundSurface(winData, aCropRegion));
             }
@@ -273,7 +276,7 @@ void CMediaClientVideoDisplayBody::UpdateDisplayWindowL(const RWindowBase* aWind
     TRect prevCropRegion = iCropRegion;
     iCropRegion = aCropRegion;
     
-    if (IsSurfaceCreated())
+    if (IsSurfaceCreated() && iClientWindowIsInFocus)
         {
         if(ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect))
             {
@@ -308,9 +311,9 @@ TInt CMediaClientVideoDisplayBody::RemoveDisplayWindow(const RWindowBase& aWindo
 	if (pos >= 0)
 	    {
 #ifdef MEDIA_CLIENT_SURFACE_NOT_REMOVED_FROM_CLIENT_WINDOW
-        if(IsSurfaceCreated())
+        if(IsSurfaceCreated() && iClientWindowIsInFocus)
 #else
-	    if(IsSurfaceCreated() && !iSwitchedToExternalDisplay)
+	    if(IsSurfaceCreated() && !iSwitchedToExternalDisplay && iClientWindowIsInFocus)
 #endif
 	        {
             iClientWindows[pos].iWindow->RemoveBackgroundSurface(ETrue);
@@ -334,7 +337,6 @@ TInt CMediaClientVideoDisplayBody::RemoveDisplayWindow(const RWindowBase& aWindo
             RemoveBackgroundSurface(ETrue);
             SetWindowArrayPtr2Client();
             RemoveExtDisplayHandler();
-            RedrawWindows(iCropRegion);
             }
 		}
 	
@@ -388,7 +390,7 @@ TInt CMediaClientVideoDisplayBody::SurfaceCreated(const TSurfaceId& aSurfaceId, 
                 }
             }
         }
-    
+
     err = RedrawWindows(aCropRegion);
     
     DEBUG_PRINTF2("CMediaClientVideoDisplayBody::SurfaceCreated --- Return error %d", err);
@@ -426,7 +428,10 @@ void CMediaClientVideoDisplayBody::RemoveSurface(TBool aControllerEvent)
 
     if (IsSurfaceCreated())
         {
-        RemoveBackgroundSurface(ETrue);
+        if(iClientWindowIsInFocus)
+            {
+            RemoveBackgroundSurface(ETrue);
+            }
 
         if (iEventHandler  && aControllerEvent)
             {
@@ -456,7 +461,7 @@ TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aS
 
     if (!IsSurfaceCreated())
 		{
-		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged --- Return error KErrNotSupproted");
+		DEBUG_PRINTF("CMediaClientVideoDisplayBody::SurfaceParametersChanged --- Return error KErrNotSupported");
 		return KErrNotSupported;
 		}
 
@@ -470,7 +475,7 @@ TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aS
 		{
 		iEventHandler->MmsehSurfaceParametersChanged(iSurfaceId, aCropRect, aAspectRatio);
 		}
-
+	
 	TInt error = KErrNone;
 	if (iCropRect != aCropRect || iAspectRatio != aAspectRatio)
 		{
@@ -500,30 +505,30 @@ TInt CMediaClientVideoDisplayBody::SurfaceParametersChanged(const TSurfaceId& aS
 	}
 	
 TInt CMediaClientVideoDisplayBody::RedrawWindows(const TRect& aCropRegion)
-	{
-	DEBUG_PRINTF("CMediaClientVideoDisplayBody::RedrawWindows +++");
-	TInt err = KErrNone;	
+    {
+    DEBUG_PRINTF("CMediaClientVideoDisplayBody::RedrawWindows +++");
+    TInt err = KErrNone;    
 
-	iCropRegion = aCropRegion;
-	
-	if(IsSurfaceCreated())
-		{
-		TInt count = iWindowsArrayPtr->Count();
-	
-		for (TInt i = 0; i < count; ++i)
-			{
-			err = SetBackgroundSurface((*iWindowsArrayPtr)[i], aCropRegion);
-		
-			if (err != KErrNone)
-				{
-				break;
-				}
-			}
-		}
-		
-	DEBUG_PRINTF2("CMediaClientVideoDisplayBody::RedrawWindows --- return with %d", err);
-	return err;
-	}
+    iCropRegion = aCropRegion;
+    
+    if(IsSurfaceCreated() && iClientWindowIsInFocus)
+        {
+        TInt count = iWindowsArrayPtr->Count();
+    
+        for (TInt i = 0; i < count; ++i)
+            {
+            err = SetBackgroundSurface((*iWindowsArrayPtr)[i], aCropRegion);
+        
+            if (err != KErrNone)
+                {
+                break;
+                }
+            }
+        }
+        
+    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::RedrawWindows --- return with %d", err);
+    return err;
+    }
 
 void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, TInt aPos, TBool aRedrawIndividualWindow)
     {
@@ -532,7 +537,7 @@ void CMediaClientVideoDisplayBody::UpdateCropRegionL(const TRect& aCropRegion, T
     TRect prevCropRegion(iCropRegion);
     iCropRegion = aCropRegion;
     
-    if (IsSurfaceCreated())
+    if (IsSurfaceCreated() && iClientWindowIsInFocus)
         {
         if(prevCropRegion == aCropRegion)
             {
@@ -711,7 +716,7 @@ void CMediaClientVideoDisplayBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt
 
 		// We only need to redraw if the scale parameters have changed, or the area of the video
 		// to display (i.e the intersection of client crop region and surface crop rectangle) has changed.
-		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
+		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && iClientWindowIsInFocus && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
@@ -723,6 +728,7 @@ void CMediaClientVideoDisplayBody::SetAutoScaleL(TAutoScaleType aScaleType, TInt
         {
         User::LeaveIfError(RedrawWindows(aCropRegion));
         }
+	
 	DEBUG_PRINTF("CMediaClientVideoDisplayBody::SetAutoScaleL ---");
 	}
 
@@ -759,7 +765,7 @@ void CMediaClientVideoDisplayBody::SetRotationL(TVideoRotation aRotation, const 
 
 		// We only need to redraw if the scale parameters have changed, or the area of the video
 		// to display (i.e the intersection of client crop region and surface crop rectangle) has changed.
-		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
+		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && iClientWindowIsInFocus && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
@@ -812,7 +818,7 @@ void CMediaClientVideoDisplayBody::SetScaleFactorL(TReal32 aWidthPercentage, TRe
 
 		// We only need to redraw if the scale parameters have changed, or the area of the video to
 		// display (i.e the intersection of client crop region and surface crop rectangle) has changed.
-		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
+		if (IsSurfaceCreated() && !iSwitchedToExternalDisplay && iClientWindowIsInFocus && (parameterChanged || ClientCropRegionChangeRequiresRedraw(prevCropRegion, aCropRegion, iCropRect)))
 			{
 			User::LeaveIfError(SetBackgroundSurface(iClientWindows[i], aCropRegion));
 			}
@@ -1313,20 +1319,23 @@ void CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected(TExtDisplayCo
             // HDMI is preferred over AV Out.
         
             // update external display window data
-            iExtDisplayHandler->UpdateWindow();
-            TRect externalDisplayRect(TPoint(0, 0), iExtDisplayHandler->DisplaySizeInPixels());
-            (*iWindowsArrayPtr)[0].iClipRect = externalDisplayRect;
-            (*iWindowsArrayPtr)[0].iVideoExtent = externalDisplayRect;
-            TRAPD(err, (*iWindowsArrayPtr)[0].iAutoScaleType = ExtDisplayAutoScaleTypeL());
-            if(err == KErrNone)
+            if(iClientWindowIsInFocus && iExtDisplayHandler)
                 {
-                RemoveBackgroundSurface(ETrue);
-                RedrawWindows(iCropRegion);
-                }
-            else
-                {
-                // Not a lot we can do. Just keep as it is but external display output will be incorrect. 
-                DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected ExtDisplayAutoScaleTypeL failed %d", err);
+                iExtDisplayHandler->UpdateWindow();
+                TRect externalDisplayRect(TPoint(0, 0), iExtDisplayHandler->DisplaySizeInPixels());
+                (*iWindowsArrayPtr)[0].iClipRect = externalDisplayRect;
+                (*iWindowsArrayPtr)[0].iVideoExtent = externalDisplayRect;
+                TRAPD(err, (*iWindowsArrayPtr)[0].iAutoScaleType = ExtDisplayAutoScaleTypeL());
+                if(err == KErrNone)
+                    {
+                    RemoveBackgroundSurface(ETrue);
+                    RedrawWindows(iCropRegion);
+                    }
+                else
+                    {
+                    // Not a lot we can do. Just keep as it is but external display output will be incorrect. 
+                    DEBUG_PRINTF2("CMediaClientVideoDisplayBody::MedcpcExtDisplayNotifyConnected ExtDisplayAutoScaleTypeL failed %d", err);
+                    }
                 }
             }
 	    }
@@ -1534,15 +1543,41 @@ void CMediaClientVideoDisplayBody::SwitchSurface()
         }
     else if(iSwitchedToExternalDisplay)
         {
-        // Set background surface for clientwindows before removing from external display window.
-        SetWindowArrayPtr2Client();
-        // RedrawWindows handles both the case where the surface was removed from client window and 
-        // also the case where the surface was hidden from client window
-        RedrawWindows(iCropRegion);
-        SetWindowArrayPtr2Ext();
+        // previously viewing on external display prior to SwitchSurface() being called. Must now
+        // switch back to client window but only if in focus.
+        if(iClientWindowIsInFocus)
+            {
+            DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface Switching from ext display, redraw on client window");
+            // Set background surface for client windows before removing from external display window.
+            SetWindowArrayPtr2Client();
+            // RedrawWindows handles both the case where the surface was removed from client window and 
+            // also the case where the surface was hidden from client window
+            RedrawWindows(iCropRegion);
+            SetWindowArrayPtr2Ext();
+            }
+
+        // must always remove from external display
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface Switching from ext display, removing from ext window");
         RemoveBackgroundSurface(ETrue);
         RemoveExtDisplayHandler();
         SetWindowArrayPtr2Client();
+        
+        // remove hidden surface from client window if not in focus.
+        if(!iClientWindowIsInFocus)
+            {
+            DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface Switching from ext display, removing hidden surface from client window");
+            RemoveBackgroundSurface(ETrue);
+            }
+        }
+    else if(!iClientWindowIsInFocus)
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface Client window no longer in focus, removing client window");
+        RemoveBackgroundSurface(ETrue);     
+        }
+    else
+        {
+        DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface Client window now in focus, redraw client window");
+        RedrawWindows(iCropRegion);
         }
 
     DEBUG_PRINTF("CMediaClientVideoDisplayBody::SwitchSurface ---");

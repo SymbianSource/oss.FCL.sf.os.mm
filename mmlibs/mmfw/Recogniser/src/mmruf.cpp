@@ -219,6 +219,8 @@ void CMMRUF::DoRecognizeL(const TDesC& aFileName, const TDesC8& aBuffer)
 	TMatch match;
 	RArray<TMatch> matches;
 	CleanupClosePushL(matches);
+	RFs fileServerSession;
+	RFile file;
 
 	// If a handle to the file is available, AppArc prepends "::" to the
 	// aFileName parameter for some reason. This causes TParse to fail
@@ -232,9 +234,33 @@ void CMMRUF::DoRecognizeL(const TDesC& aFileName, const TDesC8& aBuffer)
  	TParse parse;
 	User::LeaveIfError(parse.Set(fName, NULL, NULL));
 	const TPtrC& ext = parse.Ext();
+	CReader* pReader = NULL;
 
 	RFile* pFile = FilePassedByHandleL();
-	CReader* pReader = (pFile ? CFileReader::NewLC(pFile) : CBufferReader::NewLC(aBuffer));
+	
+	if(pFile == NULL)
+	    {
+	    //not passed by filehandle. So try opening the file using the filename.
+	    User::LeaveIfError(fileServerSession.Connect( ) );
+	    TInt err = file.Open(fileServerSession,aFileName,EFileRead | EFileShareReadersOnly);
+	    
+	    if(err != KErrNone)
+	        {
+	        //File Open failed. So revert back to sending through the descriptor buffer.
+	        pReader = CBufferReader::NewLC(aBuffer);
+	        }
+	    else
+	        {
+	        //File Open is successful. So call CFileReader with the new FileHandle.
+	        pReader = CFileReader::NewLC(&file);
+	        }
+	    
+	    }
+	else
+	    {
+	    //FileHandle is passed. So call CFileReader with the FileHandle.
+	    pReader = CFileReader::NewLC(pFile);
+	    }
 	
 	// The main recognition loop.
 	TBool certainMatch = EFalse;
@@ -303,6 +329,11 @@ void CMMRUF::DoRecognizeL(const TDesC& aFileName, const TDesC8& aBuffer)
 
 	CleanupStack::PopAndDestroy(pReader);
 	CleanupStack::PopAndDestroy(&matches);
+
+    file.Close();
+
+    fileServerSession.Close();
+
 	}
 
 

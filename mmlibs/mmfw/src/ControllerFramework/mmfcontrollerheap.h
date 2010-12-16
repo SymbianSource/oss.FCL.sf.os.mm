@@ -35,7 +35,7 @@ When the refcount is zero (no controller threads left) the client deletes
 this class.
 */
 
-const TInt KMMFControllerSharedHeapMaxSize = 0x1000000;//16MB
+const TInt KMMFControllerSharedHeapMaxSize = 0x2000000;//32MB
 
 NONSHARABLE_CLASS(CMMFControllerHeap) : public CBase
 	{

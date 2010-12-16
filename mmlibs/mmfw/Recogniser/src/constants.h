@@ -122,6 +122,7 @@
 #define KMimeXPS		_S8("application/x-ext-packetsrc")
 #define KMimeBeatnikRMF _S8("audio/x-beatnik-rmf")
 #define KMimeQuickV     _S8("video/quicktime")  // for .mov extension
+#define KMimeDolby      _S8("audio/x-dolby-mp4")
 
 //
 // Recognised header signatures.

@@ -41,7 +41,7 @@ class CLogonMonitor;
 /**
 @internalComponent
 */
-const TInt KMMFControllerProxyMaxHeapSize = 0x1000000;//16MB
+const TInt KMMFControllerProxyMaxHeapSize = 0x2000000;//32MB
 
 /**
 @internalComponent
